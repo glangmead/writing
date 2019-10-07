@@ -664,12 +664,14 @@ TX)\cong    \formsij{*}{X} \).  Furthermore, there is a natural
 operator \( Q=\sum_{i}\theta^{i}\partial_{x^{i}}\in C^{\infty}(\Pi TX)
 \) and under the isomorphism we have \( Q\cong d. \)
 \end{lemma}
-\proof Let \( (x^1,\ldots,x^n) \) be coordinates in a patch on \( X
+\begin{proof} Let \( (x^1,\ldots,x^n) \) be coordinates in a patch on \( X
 \).  Let \( (\theta^1, \ldots, \theta^n) \) be the induced
 coordinates in the odd \( \partial/\partial x^1, \ldots,
 \partial/\partial x^n \) directions of \( \Pi TX \).  Then the isomorphism is simply
 given by
 \[ \theta^i\mapsto dx^i. \]
+\end{proof}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Super Euclidean space}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -795,7 +797,7 @@ given by \( \eldl{a}{b} = \eil{a}\otimes\eilb{b}. \)
 \begin{lemma}
     \( \ip{}{}:V\otimes V\to \CC \) is real and positive definite.
 \end{lemma}
-\proof Define the following basis of \( V_{\CC} = \spd\otimes\smd \):
+\begin{proof} Define the following basis of \( V_{\CC} = \spd\otimes\smd \):
 \begin{eqnarray}
     v_{1} & = & \eldl{1}{1} + \eldl{2}{2}
     \nonumber  \\
@@ -808,6 +810,7 @@ given by \( \eldl{a}{b} = \eil{a}\otimes\eilb{b}. \)
 \end{eqnarray}
 Direct computation shows that this basis is real, and that in this basis \ip{}{} is the identity
 matrix.
+\end{proof}
 
 \begin{definition}
     \( \rrij{4}{4} \) is the subspace \(
@@ -850,7 +853,7 @@ gives multiplication by \( -\|v\|^{2}. \)
     \end{align*}
 \end{lemma}
 
-\proof The first isomorphism is given explicitly by
+\begin{proof} The first isomorphism is given explicitly by
 \begin{equation}
     \label{eq:vtohom}
     \tighten{
@@ -919,6 +922,7 @@ Noting that \( \mathrm{Hom}(\spl,\spl)
     \end{array}}
  \end{equation}
 The second isomorphism is now clear. This completes the proof.
+\end{proof}
 
 The spaces \( V_{\CC} \) and \( \CC\oplus\wedge^{2}_{+}V_{\CC} \) have
 obvious real subrepresentations, a fact that will be important when
@@ -1097,10 +1101,12 @@ nonvanishing scalar curvatures on the odd distribution of
     connections on \rrij{4}{8}.
 \end{theorem}
 
-\proof
+\begin{proof}
 It is easiest to use proper coordinates and vector fields from
 \rrij{6}{8}, so we give a brief run-down of this.  Details can be
 found in \susols.
+\end{proof}
+
 We will use the name \( y^{ab} \) and \( \theta^{ai} \) for the
 coordinate system on \rrij{6}{8}, and \( \di{ab} \) and \(
 \di{ai} \) for the corresponding vector fields.  Here, \( a, b \)
@@ -1569,7 +1575,7 @@ dx^{i} - M \) and
 \end{align*}
 \end{prop}
 
-\proof First a bit of motivation.  The vector fields
+\begin{proof} First a bit of motivation.  The vector fields
 \dul{a}{b} and \upperlowerabc{\bar{D}}{a}{\dot{b}} are made of two
 terms:  a partial derivative
 in an odd direction and an odd coordinate function times an even
@@ -1642,6 +1648,7 @@ Adding this all up gives
 \tudu{2}{1}\pldl{2}{1} + \tudu{2}{2}\pldl{2}{2} = \qul{1}{1} +
 \qul{2}{2}, \]
 as required.
+\end{proof}
 
 We also define \( Q \) analogues of \( D_0 \), \( D_1 \) and \( D_2
 \), but with plus signs instead of minus signs. Explicitly we have
@@ -1762,7 +1769,7 @@ where the mapping \( C \) is given on a fiber by
 \end{equation}
 \end{prop}
 
-\proof To prove \propref{mapsforw} we need to show that the bottom arrow
+\begin{proof} To prove \propref{mapsforw} we need to show that the bottom arrow
 in \eqref{mapsforw} is indeed given by
 the obvious projection.
 We use \eqref{euclbasis} and \eqref{wedgetohomlower} to compute
@@ -1793,6 +1800,7 @@ with similar formulas for \( v_{2}\otimes v_{1} \) etc.  We also get
 with identical formulas for \( v_{i}\otimes v_{i} \), \( i=2, 3, 4.
 \) This completes the proof of \propref{mapsforw}.
 \propref{mapsforwbar} is proved with a similar computation.
+\end{proof}
 
 The \( X\times\RR \) component of the space on the bottom of
 \eqref{mapsforw} is just the
@@ -1848,7 +1856,7 @@ Next define
     \( \phi \) is the twisted version of \( \bar{\sigma} \) and \(
     \bar{\phi} \) is the twisted version of \( \sigma \).
 \end{prop}
-\proof We compute that
+\begin{proof} We compute that
 \begin{align*}
     \Phi &= -[\dzc,\dzc]\\
     &=-[\mathcal{D}^{1}_{1}+\mathcal{D}^{2}_{2},
@@ -1882,6 +1890,7 @@ then we see that it is also very natural to form the object
 \[ -[\dzc,\dzc]-[\dtc,\dtc], \]
 which agrees with the sum of \eqref{sigma3} and \eqref{sigma4}.
 However, we do not adopt this alternate definition of \( \Phi \).
+\end{proof}
 
 We now proceed to discuss the fact that in flat space there are three
 auxiliary fields.  The natural guess is to find some self-dual
@@ -1893,7 +1902,7 @@ E_{2} \) then we claim
     \( E_{2} = i^{*}\frac{1}{2}\epsilon_{2}(\doc[\dzc,\nab]) \)
 is the twisted version of the auxiliary fields \( E \) and \( F \).
 \end{prop}
-\proof We rewrite \( E_{2} \) as
+\begin{proof} We rewrite \( E_{2} \) as
 \begin{align*}
     E_{2} &= i^{*}\frac{1}{2}\epsilon_{2}(\doc([\dzc,\nab])) \\
           &= -i^{*}\epsilon_{2}(\doc W_{1}) \\
@@ -1917,6 +1926,7 @@ the three components of \( \epsilon_{2}\doc\doc\Phi \) is \(
 D_{1}^{1}D_{1}^{3}-D_{1}^{2}D_{1}^{4}, \) is \(
 F+\bar{F} \) and the third, \( D_{1}^{1}D_{1}^{4}+D_{1}^{2}D_{1}^{3},
 \) gives \( E \), which completes the proof.
+\end{proof}
 
 In summary we have proved the following key result.
 \begin{theorem}
@@ -1933,9 +1943,10 @@ SX
     \psi_{2} \in \Gamma(\Pi\wedge^{2}_{+}TX\otimes\adp)
     \), and \( E_{2}\in \Gamma(\wedge^{2}_{+}TX\otimes\adp). \)
 \end{theorem}
-\proof It suffices to work in a coordinate patch, where by the
+\begin{proof} It suffices to work in a coordinate patch, where by the
 preceding discussion the theorem reduces to its \( N=2 \) flat space
 counterpart \thmref{semiconstrained}.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The action of \mytexorpdfstring{$Q_{0}$}{Q0}}
@@ -2167,7 +2178,7 @@ It remains to twist the fermionic terms.  First we examine
         + \ip{\psi_{2}}{d_{A}^{+}\psi_{1}}
     \end{equation}
 \end{lemma}
-\proof We express the right hand side in spinorial coordinates to
+\begin{proof} We express the right hand side in spinorial coordinates to
 prove the lemma.  By way of motivation, examine \eqref{diracpairing}.
 The element being hit with the two epsilon tensors is an element of \[
 \spd\otimes\spl\otimes \spd\otimes\smd\otimes\smd\otimes \spl \] and
@@ -2245,6 +2256,7 @@ Computing \( \ip{\psi_{0}}{d_{A}^{*}\psi_{1}} +
 \ip{\psi_{2}}{d_{A}^{+}\psi_{1}} \) is now a matter of combining
 these expressions and cancelling half of the terms, leaving us with
 the desired quantity.
+\end{proof}
 
 Next we work with the terms involving brackets of spinors.  Something
 surprising will result --- a term that will not play a role in the
@@ -2259,7 +2271,7 @@ geometrical picture that emerges in the next section.
         \epsilon_{0}[\psi_{1},\psi_{1}].
     \end{align}
 \end{lemma}
-\proof We compute
+\begin{proof} We compute
 \begin{align*}
     \epsilon_{0}[\psi_{1},\psi_{1}] =&
     -\frac{1}{4}([-\cbi{1}+\lbi{2}, -\cbi{1}+\lbi{2}] +
@@ -2280,7 +2292,9 @@ zero except against themselves, we obtain
     [\lambda_{1} + \chi_{2}, \lambda_{1} + \chi_{2}]) \\
     =& [\lambda_{1},\chi_{2}]-[\lambda_{2},\chi_{1}].
 \end{align*}
-This completes the proof and thus we have computed
+This completes the proof.
+\end{proof}
+Thus we have computed
 \begin{align}
     \int_{\sa} %DA\,D\psi_1\,D\phi\,D\psi_2\,DE_2
   %\,D\psi_2\,D\bar{\phi}\,D\psi_0\,
@@ -2565,7 +2579,7 @@ T_{v_{j}}V
     action of the Cartan differential.
     \label{prop:qinducescartan}
 \end{prop}
-\proof We have already discussed in \lemmaref{functionsforms} how \(
+\begin{proof} We have already discussed in \lemmaref{functionsforms} how \(
 C^{\infty}(\Pi TV)\cong \formsij{*}{V} \) and so taking the
 space of polynomial functions on \g, we have \(
 S^{*}(\g^{*})\otimes \formsij{*}{V}\subset C^{\infty}(\g\times\Pi
@@ -2582,6 +2596,7 @@ on \( \g\times\Pi TV \) is
 \[ \hat{\omega} = \phi^{\alpha}\cdot
 \sum_{i_{1}<\cdots<i_{k}}a_{i_{1}\cdots i_{k}}(v)
 \lambda_{i_{1}}\cdots \lambda_{i_{n}}. \]
+\end{proof}
 
 Let us compute the action of \( Q \) on \( \hat{\omega}. \)  We have
 \begin{align}
@@ -2866,7 +2881,7 @@ which lies in \( S^{*}(\g^{*})\otimes\formsij{*}{A}. \)
     \)-action. Then
     \( \int_{\g} d\phi\, \omega\wedge U' = w(\omega)_{\mathrm{horiz}} \)
 \end{prop}
-\proof For a more detailed treatment of \( U' \), see Section~14.3.3
+\begin{proof} For a more detailed treatment of \( U' \), see Section~14.3.3
 of \cite{cordes}.  The Berezinian integral over \( \bar{\psi} \)
 picks off the piece of maximal degree in \( \bar{\psi} \).  If \( \dim
 G = m \) then this yields an \( m \)-form built from the \( m \)-fold
@@ -2902,6 +2917,7 @@ to give
 \[ C(C^{*}C)^{-1}C^{*} \]
 which clarifies that this is a projection.  This completes the proof
 of the Lemma which implies the Proposition.
+\end{proof}
 
 Now let us examine the analogous objects over \aa\ and again compare
 with \eqref{twistedaction}. We need to do a couple of computations
@@ -3196,7 +3212,7 @@ universal connection \f\ on the $SO(3)$-principle bundle
 \[ \aa^*\times_{\gg}P\to \bb^*\times X. \]
 \end{theorem}
 
-\proof We need to show that \FF\ maps to the curvature of the
+\begin{proof} We need to show that \FF\ maps to the curvature of the
 universal connection \( \f \) on \( \aa^*\times P, \) under the
 Weil homomorphism.  Let us decompose \( \f \) into its
 bigraded pieces \( \f_{i, j} \) where the \( i \) denotes the
@@ -3212,6 +3228,7 @@ where \( t \) is a tangent vector at a point
 of \( P \) and \( \tau \) is a tangent vector at a point of \aa.
 The proof will be completed by showing that this is what \plpsi\ does
 to these two vectors as well.
+\end{proof}
 \gc{Also, I need to provide proof that the 1, 1 piece of \f\ does
 this.  It's poorly discussed in one Atiyah paper.}
 
