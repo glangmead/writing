@@ -1,4 +1,4 @@
-\documentclass[14pt]{extarticle}
+\documentclass[12pt]{extarticle}
 \usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{comment}
 
 %\usepackage{mathptmx}
 
@@ -111,7 +112,7 @@
 Random real numbers satisfy the following hand-waving characterizations.
 \begin{enumerate}
 \item They cannot be obtained constructively.
-\item They obey almost-everywhere properties quantified over classes of functions.
+\item They obey almost-everywhere properties.
 \item They appear tied to the foundations of mathematics.
 \end{enumerate}
 For a survey of these and other properties, see Rute \cite{rute}. I will argue that defining random points in terms of locales is well suited to capturing or even explaining all three of these properties.
@@ -127,31 +128,29 @@ In the Stanford Encyclopedia of Philosophy's article on Chance and Randomness \c
 As the authors say, ``This corresponds to transforming the unit square to a rectangle twice as wide and half the height, chopping off the right half, and stacking it back on top to fill the unit square again.'' So, needlessly more violent than folding, but close. If we represent $p$ and $q$ in their binary expansion, we have \[ \phi (0.p_1 p_2\ldots, 0.q_1 q_2\ldots) = (0.p_2 p_3\ldots , 0.p_1 q_1 q_2\ldots).\]
 In the article this example is intended to convey a paradox. On the one hand, the system is ergodic and behaves like a random process. Points will wander throughout the space without any pattern. But on the other hand the system is deterministic. The bit shift formula shows how it works: this is an engine that uses the next bit of the binary expansion to determine where the point moves next.
 
-The resolution of the paradox, I believe, is to worry more about whether you can get your hands on $p$ and $q$ in the first place. Sure, once you have them, the machine behaves deterministically. But you can't have them! They require an infinite amount of information to specify, so if you have them you have just recapitulated the future history of the machine. The problem with the paradox is therefore in one of its assumptions. The process is deterministic, but the randomness is in the input data.
+The resolution of the paradox, I believe, is to worry more about whether you can get your hands on $p$ and $q$ in the first place. Sure, once you have them, the machine behaves deterministically. But you can't have them! They require an infinite amount of information to specify, and to have one is to provide its path through the process. The problem with the paradox is therefore in one of its assumptions. The process is deterministic, but the randomness is in the input data.
 
 Indeed, the most important property of random numbers appears to be their infinite nature, which prevents us from ever having one fully specified for us, either in a machine, in our minds, or in our theories. They are not computable, and they are not constructible.
 
 However, there are several different definitions of algorithmic randomness. In fact there is a whole family (or if you're in a teasing mood, a zoo) of them. They go by names such as Martin-Löf randomness, Schnorr randomness, weak-$n$-randomness, and computable randomness. They are not equivalent but they form a simple chain of inclusions, and the differences can be logically explained and outsourced to a family of choices or parameters that connect them. What I will present here is a consideration that is orthogonal to the flavor of randomness, and this is the \emph{packaging} of the random numbers inside the reals. The main ingredient is a shift from \emph{set theory} to \emph{locale theory}. A locale is a generalization of a topological space, and I will argue that it is very well suited to a philosophical interpretation of randomness.
 
-In \cite{simpson}, Alex Simpson has formulated a measure theory for locales and provided a new definition of randomness in this setting. We will describe this work, emphasizing the \emph{point-free} interpretation. The beautiful punch line will be that the sublocale of randoms has no points! This is a wonderful result that feels tailor-made for discussing randomness. Locales are a generalization of spaces with just  where we can define continuity, computability (after passing to toposes of sheaves, which naturally live over locales). 
-
-The beauty of the locale formulation of measure theory is that it can construct an environment for discussing randomness that highlights the inability to access individual random numbers. It does this because it \emph{restricts} us from constructing certain measurable sets?? We will adopt the point of view of \emph{pointless topology}. In a locale, we frame our theory not in terms of the points of a set, but in terms of the open subsets of a space. It is then extra data to produce a point of a locale. The central result of this paper is that the random sub-locale of a locale has no points.
+In \cite{simpson}, Alex Simpson has formulated a measure theory for locales and provided a new definition of randomness in this setting. We will describe this work, emphasizing the \emph{point-free} interpretation. The beautiful punch line will be that the sublocale of random real numbers has no points! This is a wonderful result that feels tailor-made for discussing randomness. 
 
 \section{Frames and Locales}
 
-Locale theory is point-free topology. See \cite{johnstone1983} for an accessible survey, or Chapter IX of Mac Lane and Moerdijk \cite{maclane} for a pleasantly breezy but more thorough introduction. It is \emph{synthetic} in that it takes open sets as basic, undefined objects, instead of defining them as collections of points. Instead it is points that will become derived. Topological spaces with their actual open sets of actual points are special cases of locales, but the enlarged category of locales has a few advantages. First of all it lets us argue constructively. Secondly it isolates just the axioms we need to prove many theorems from topology. Thirdly it will give us a unique point of view on randomness.
+Locale theory is point-free topology. See \cite{johnstone1983} for an accessible survey, or Chapter IX of Mac Lane and Moerdijk \cite{maclane} for a pleasantly breezy but more thorough introduction, or Johnstone \cite{sketches} chapter C1 for a detailed treatment. It is \emph{synthetic} topology in that it takes open sets as basic, undefined objects, instead of defining them as collections of points. Instead it is points that will become derived. Topological spaces with their actual open sets of actual points are special cases of locales, but the enlarged category of locales isolates just the axioms we need to prove many theorems from topology. This will give us a unique point of view on randomness.
 
-A \emph{frame} is a partially ordered set with finite meets $\wedge$ and arbitrary joins $\vee$, with a maximal element $\top$ and minimal element $\bottom$, and where the infinite distributive law holds: $$x \wedge (\bigvee_i y_i)=\bigvee_i (x\wedge y_i).$$ These are clearly snagged from the axioms for a topology. If there are only countable joins then it is called a $\sigma$-frame. The open sets of a topological space form a frame. A frame map is a function that preserves finite meets and arbitrary joins. A $\sigma$-frame map preserves countable joins. We collect this data into the category \Frm\ of frames and \sFrm\ of $\sigma$-frames.
+A \emph{frame} is a partially ordered set with finite meets $\wedge$ and arbitrary joins $\vee$, with a maximal element $\top$ and minimal element $\bottom$, and where the infinite distributive law holds: $$x \wedge (\bigvee_i y_i)=\bigvee_i (x\wedge y_i).$$ These are clearly abstracted from the axioms for a topology. If we require only countable joins then it is called a $\sigma$-frame. The open sets of a topological space form a frame (or a $\sigma$-frame). A frame map is a function that preserves finite meets and arbitrary joins. A $\sigma$-frame map preserves countable joins. We collect this data into the category \Frm\ of frames and \sFrm\ of $\sigma$-frames.
 
-A continuous map between topological spaces induces a frame map on the frames of open sets, but in the opposite direction because the \emph{inverse} image of an open is open. This motivates the definition of the category \Locale\ of locales to be simply $\op{\Frm}$ and $\slocale=\op{\sFrm}$. (Recall that the opposite of a category is a category with all the same objects and morphisms, but with the direction of all the morphism arrows reversed.) We can define a functor $\o:\Topcat\to\Locale$ on objects by mapping a space $X$ to its frame of open sets $\o(X)$, and on morphisms by mapping a function $f:X\to Y$ to the opposite arrow of the induced morphism on frames, so that's two inversions giving us an arrow $\o(f):\o(X)\to \o(Y)$. This functor has an important right adjoint which we will discuss next.
+A continuous map between topological spaces induces a frame map on the frames of open sets, but in the opposite direction because the \emph{inverse} image of an open is open. This motivates the definition of the category \Locale\ of locales to be simply $\op{\Frm}$ and $\slocale=\op{\sFrm}$. (Recall that the opposite of a category is a category with all the same objects and morphisms, but with the direction of all the morphism arrows reversed.) We can define a functor $L:\Topcat\to\Locale$ on objects by mapping a space $X$ to its frame of open sets $\o(X)$ (so on objects, $L=\o$), and on morphisms by mapping a function $f:X\to Y$ to the opposite arrow of the induced morphism on frames, so that's two inversions giving us an arrow $L(f):L(X)\to L(Y)$. 
 
-For the topological space $\star$ consisting of a single point, its topology is just $\{\bot \leq \top\}$. To convert points into a derived concept then, we can note that a point in a space $X$ is equivalent to a map $\mathrm{pt}:\star\to X$, which at the level of frames is a map $\o(X)\to\{\top, \bot\}$. The inverse image of $\top$ is the collection of all open sets that contain the point $\mathrm{pt}(\star)$. It forms what is known as a \emph{completely prime filter} in the frame, which is a collection $P$ of opens such that if $x\vee y\in P$ then $x\in P$ or $y\in P$. (This is analogous to a prime ideal, or the ideal generated by a prime number.) We can then move forward with locales and completely prime filters instead of spaces and points. 
+\section{Points}
 
-Given a locale $L$, the set of completely prime filters constitutes the \emph{spatial part} of $L$, and this set inherits a topology from the structure of $L$. Locale maps create an association between the completely prime filters, and so we obtain a set function between the spatial parts of the locales. This is a functor $S:\Locale\to\Topcat$ and is right adjoint to $\o$. If we go back and forth with $S\circ \o$, starting from an honest topological space, then we get back an equivalent space with an equivalent topology so long as the original space is \emph{sober}, which is a definition that was new to me, but is almost circularly defined to meet this condition. Hausdorff spaces are sober. This is the categorical situation whereby locales are generalized spaces, and being spatial, and having points, are derived special properties.
+For the topological space $\star$ consisting of a single point, its topology is just the poset $\{\bot \leq \top\}$. To convert points into a derived concept then, we can note that a point in a space $X$ is equivalent to a map $\mathrm{pt}:\star\to X$, which at the level of frames is a map $\o(X)\to\{\top, \bot\}$. The inverse image of $\top$ is the collection of all open sets that contain the point $\mathrm{pt}(\star)$. It forms what is known as a \emph{completely prime filter} in the frame, which is a collection $P$ of opens such that if $x\vee y\in P$ then $x\in P$ or $y\in P$. (This is analogous to a prime ideal, or the ideal generated by a prime number.) We can then move forward with locales and completely prime filters instead of spaces and points!
+
+Given a locale $L$, the set of completely prime filters constitutes the \emph{spatial part} of $L$, and this set inherits a topology from the structure of $L$. Locale maps create an association between the completely prime filters, and so we obtain a set function between the spatial parts of the locales. This is a functor $S:\Locale\to\Topcat$ and is right adjoint to $L$. If we go back and forth with $S\circ L$, starting from an honest topological space, then we get back an equivalent space with an equivalent topology so long as the original space is \emph{sober}, which is a definition that is almost circularly defined to meet this condition. Hausdorff spaces are sober. This is the categorical situation whereby locales are generalized spaces, and being spatial, and having points, are derived special properties.
 
 Note how compatible this is with a constructive point of view. To supply a point you must supply a function $\star\to X$. The points aren't given, you have to do work to produce one.
-
-So given an arbitrary locale, it may or may not have points. And given some underlying set such as the real interval $[0,1]$, there may be a locale structure other than the standard topology, and this locale structure may have fewer points than the set $[0,1]$! To give a hint of how this may work, imagine deleting some of the open sets, so that the prime filters are not complete anymore. That's the approach we will take when we define certain \emph{sublocales}.
 
 \section{Sublocales}
 
@@ -176,19 +175,33 @@ j(U\wedge V)&=j(U)\wedge j(V)
 \end{align}
 The intuition is that $j$ takes an open set to some largest version of itself satisfying some property, which is why the first condition has the containment, and why the second condition is idempotence -- doing the operation twice yields the same largest open. The third condition is that forming the ``largest version'' preserves finite intersection.
 
-Denote the fixed points of $j$ by $\o_j(X)$ and the dual object, i.e. its locale, by $X_j$. The map $j$ is a surjective frame map onto the set of fixed points, and so gives an embedding $i:X_j\hookrightarrow X$.
+Denote the fixed points of $j$ by $\o_j(X)$ and the dual object, i.e. its locale, by $X_j$. The map $j$ is a surjective frame map onto the set of fixed points, and so gives an embedding $i:X_j\hookrightarrow X$. This is basically performing the quotient from the previous definition.
 
-\subsection{Warmup example: a sublocale with no points}
-Here's something that warrants some reflection: let's define a sublocale with no points. Let $X$ be a Hausdorff topological space without isolated points and let $\o(X)$ be the locale of its open sets. Consider the double-negation operation $\neg\neg:\o(X)\to\o(X)$. This defines a nucleus hence an embedding $nn:X_{\neg\neg}\hookrightarrow X$.
+\subsection{The collection of sublocales}
+The collection of all sublocales of a fixed locale $X$ is partially ordered by inclusion, just as we have in any category where we can define subobjects. It's worth mentioning that even more is true: the collection of sublocales forms a \emph{coframe}, which is a poset with finite joins and arbitrary meets, and where the joins distribute over the meets. This collection is nowhere near as straightforward to contemplate as the collection of subsets of a set, but we will keep thinking through the consequences to find how it connects with randomness.
 
-This sublocale $\neg\neg X$ has no points! For suppose $p:\star\to X_{\neg\neg}$ is a point. The composition $nn\circ p$ is a point of $X$ itself. Consider the open set given by deleting this point from $X$, i.e. $X-\{nn(p(\star))\}$. Mapping this open set backwards to $X_{\neg\neg}$ and then to $\star$, we have that $p^{-1}(\neg\neg(X-\{nn(p(\star))\}) = \bot$. It equals $\bot$ because only opens that contain the image of $\star$ give $\top$. But $X$ has no isolated points and so $\neg\neg(X-\{nn(p(\star))\} = X$, so the above expression $p^{-1}(\neg\neg(X-\{nn(p(\star))\})$ becomes $p^{-1}(X)$ which is $\top$, a contradiction.
+Let's define a sublocale with no points. Let $X$ be a Hausdorff topological space without isolated points and let $\o(X)$ be the frame of its open sets. Consider the double-negation operation $\neg\neg:\o(X)\to\o(X)$. What does this do? The negation of an open $U$ is the largest open disjoint from $U$. In $X$ this is the same as the interior of the complement. $\neg\neg U$ is thus the largest open disjoint from the largest open disjoint from $U$. For any $p\in X$ we have that $\neg\neg(X-\{p\}) = \emptyset$. 
 
-\section{$\sigma$-versions}
+$\neg\neg$ is idempotent, and in fact defines a nucleus hence an embedding $nn:X_{\neg\neg}\hookrightarrow X$, where $nn^{-1}U=\neg\neg U$. This sublocale $\neg\neg X$ has no points! For suppose $p:\star\to X_{\neg\neg}$ is a point. The composition $nn\circ p$ is thus a point of $X$. Consider the open set given by deleting this point from $X$, i.e. $X-\{nn(p(\star))\}$. Taking the inverse image we have $p^{-1}(\neg\neg(X-\{nn(p(\star)\})) = \bot$ because only opens that contain the image of $\star$ give $\top$. But as we saw in the previous paragraph $\neg\neg(X-\{nn(p(\star)\}) = X$, so the above expression $p^{-1}(\neg\neg(X-\{nn(p(\star))\})$ becomes $p^{-1}(X)$ which is $\top$, a contradiction.
+
+Furthermore, $\neg\neg X$ is dense in $X$. For a sublocale $A\to X$ to be dense means that $A$ intersects every open sublocale. (An open sublocale is one of the original open sets in $X$, promoted to a sublocale by embedding it in $X$.) This follows from being a nucleus (which we did not prove): $\neg\neg A \supseteq A$. 
+
+What makes the category of locales different from the category of spaces is that there is a \emph{largest dense sublocale} of any locale $X$ and it is exactly $\neg\neg X$. And by largest I mean in terms of the inclusion relation on sublocales. One consequence of having a largest dense sublocale is that any two dense sublocales must intersect! This is absolutely not the case with topological spaces such as $\mathbb{R}$ which can be decomposed into disjoint dense sub\emph{sets} such as $\mathbb{Q}$ and $\mathbb{R}\backslash\mathbb{Q}$. If we promote these two subsets to sublocales, they will intersect!
+
+\subsection{Locale morphisms}
+
+Embedding a locale as a sublocale of another locale is a more exotic operation than set injection. We can directly compare these morphisms by starting with an embedding of topological spaces $f:X\hookrightarrow Y$ and asking what the corresponding sublocale morphism is. The answer is given by a frame map called the push-forward $f_*:\o(X)\to\o(Y)$, which is right adjoint to the frame map $f^{-1}:\o(Y)\to\o(X)$. It is defined as follows: $$f_*(U)=\bigcup_{f^{-1}(V)\subseteq U}V.$$ In other words, an open set $U\subseteq X$ maps under $f_*$ to the \emph{largest} open set in $Y$ that pulls back to some subset of $U$.
+
+This is an unusual operation to contemplate. Here's an example that helps me: imagine $f:[0,1]\to\mathbb{R}^2$ is some smooth curve in the plane. Given an open interval $U\subseteq[0,1]$, its image in the plane is a one-dimensional subset, so won't itself be open. Instead to compute $f_*(U)$ we have to find the largest open set in the plane whose inverse image is $U$, which will look like \emph{all of $\mathbb{R}^2$} minus two skinny pieces of the curve that aren't in the image of $U$.
+
+Let's consider the inclusion $i:\mathbb{Q}\hookrightarrow\mathbb{R}$. The  push-forward map $i_*$ sends the open set ``all of $\mathbb{Q}$'' to the largest open in $\mathbb{R}$ whose inverse image is contained in $\mathbb{Q}$. But $\mathbb{Q}$ is dense so this is all of $\mathbb{R}$, there's no smaller open that contains the rationals! The requirement that this push-forward be an open set is forbidding us from carving out these pathological dense subsets in the category of locales.
+
+The requirement that $f_*$ give the \emph{largest} open set such that some condition holds should remind us of a nucleus. In fact $f_*$ is a nucleus that defines the sublocale $f:\mathrm{Loc}(X)\to \mathrm{Loc}(Y)$, the ``promotion'' of the subspace inclusion to a sublocale.
 
 \section{Measures thereon}
-The collection of all sublocales of a fixed locale $X$ are ordered by inclusion and form a frame of their own which we denote by $\mathcal{S}(X)$. This is one level up so to speak, since $X$ itself is (the opposite of) a frame of open sets, and the sublocales are formed from the whole of this frame by way of a quotient operation.
+We have prepared all the abstract background. We have a new setting for topology called locale theory, which has broken away from the concept of a point. We have seen that the monomorphisms are different than in the category of topological spaces, and we have examples of sublocales that have no points. Let's bring measure theory into the mix and define randomness in this setting.
 
-We will define a measure on a locale/frame and then extend it to the frame of sublocales of the frame.
+We will define a measure on a locale/frame and then extend it to all the sublocales of the frame.
 
 A measure on a frame is a function $\mu:F\to [0,\infty]$ satisfying
 $$\mu(\bot)=0$$
@@ -199,27 +212,27 @@ We say $\mu$ is a probability measure if $\mu(\top)=1$. We will also call $\mu$ 
 
 To bring the concept of measure to sublocales we will generalize the concept of outer measure. We say a locale is \emph{fitted} if for every sublocale $Y\subseteq X$ it holds that $Y=\cap\mathcal{N}(Y)$ where $\mathcal{N}(Y)=\{U\in\o(X)|Y\subseteq U\}$. We extend the measure $\mu$ to a measure $\mu^*$ on any sublocale by $\mu^*(Y)=\inf_{U\in\mathcal{N}(Y)}\mu(U)$, i.e. the limit of the measure of the open sets that intersect to $Y$. There is work to show that spaces we care about are fitted, and that this definition really defines a measure (see section 5 of \cite{simpson}), but I will skip all that.
 
-\section{The random sublocale}
+Before we get to randomness let's stop to mention a huge payoff we can now reap. Simpson \cite{simpson} proves in Example 4.7 that the standard measure on open subsets of $\mathbb{R}^n$, which extends to a measure on sublocales in the way we just defined, is preserved under Euclidean translations. This measure agrees with Lebesgue measure whenever the sublocale agrees with a measurable set. In standard measure theory there is no translation invariant measure on arbitrary subsets of $\mathbb{R}^n$ due to pathological examples that are automatically avoided in locale theory. We have traded the initial awkwardness of working with locales and sublocales for a rather compelling cleanup of measure theory.
+
+\subsection{The random sublocale}
 We are ready to define the random sublocale $\ran_X$ of an arbitrary locale $X$ equipped with a probability measure $\mu$. We'll do it three times, once for each definition of sublocale.
 
-The spatial definition of $\ran_X$ is the largest sublocale of measure 1, or equivalently the union of all sublocales of measure 1. This tracks exactly with the definition of Kurtz randomness seen elsewhere in the literature.
+The spatial definition of $\ran_X$ is the smallest sublocale of measure 1, or equivalently the intersection of all sublocales of measure 1. This tracks exactly with the definition of Kurtz randomness seen elsewhere in the literature. It's morally similar to $\neg\neg X$ but making use of measure. $\neg\neg X$ is the smallest dense sublocale of $X$, whereas $\ran_X$ is the smallest measure-1 sublocale.
 
 The quotient definition of $\ran_X$ is the equivalence relation $=_{\ran_X}$ given by $U=_{\ran_X} V \iff \mu(U)=\mu(U\cap V)=\mu(V)$. Opens are equivalent if they cover the same amount of measure.
 
-The nucleus definition is that $j_{\ran_X}(U) = \bigcup_{V\supseteq U, \mu(U)=\mu(V)}V.$ In other words, the maximal open that contains $U$ and with the same measure as $U$. This is my educated guess, I haven't seen this in Simpson's writings or elsewhere as of yet. \gc{So prove it, wimp.}
+The nucleus definition is that $j_{\ran_X}(U) = \bigcup_{V\supseteq U, \mu(U)=\mu(V)}V.$ In other words, the maximal open that contains $U$ and with the same measure as $U$.
 
-This sublocale has no points.
+This sublocale has no points. Given a point $p\in X$, the set $X-\{p\}$ has measure 1 and so $\ran_X\subset X-\{p\}$ and so $p$ is not present in the random sublocale.
 
-\section{Kurtz randoms are not so bad}
+\section{Conclusion: open sets vs randomness}
 How Kurtz randomness fails the LLN (see \cite{NiesAndre2009CaR}, Section 3.5). 
 
 The prospect for importing all the various randomness notions into this framework. The $\mathcal{S}$ functor.
 
-\section{But actually we can have the other kinds of randoms in locales too}
-This doesn't appear to be thought through carefully yet in published work but it appears in sketch form in slides by Simpson \cite{simpson2}. He defines the Borel hierarchy in the context of locales, giving him definitions for $\Sigma^0_n$ and $\Pi^0_n$. Using these you can proceed with the definition of pointless sublocales of randoms. If every definition of randomness can be imported into this setting then we have a clean story where locales are a lens through which to look at the entire landscape of computable randomness. If, however, there are limitations to what can be expressed in locale theory, then the picture will get cloudy, but perhaps being compatible with locale theory can join the other popular metrics when assessing the tradeoffs between members of the randomness family.
-
-\begin{commentout}
+\begin{comment}
 Paper: locale theory
+- Is the relationship between nucleus and quotient always just that each set gets mapped to its value under the nucleus? The nucleus map is the quotient map?
 - Ran, the sublocale of random points
 - presumably we can say some class of functions are smooth on this sublocale?
 - Porter provides some justification for the locale approach since it's "all measure 1 properties"
@@ -232,7 +245,7 @@ Paper: locale theory
 - the a.e. results like "if f is nondecreasing then it is smooth at every computable random" feel like statements about cohesion, and this feels natural in the locale interpretation
 - she is saying that Birkhoff Ergodicity theorem, suitably effectivized, holds at ML randoms, i.e. the same set that functions of bounded variation are smooth at -- making them "equally strong". But in another sense these are different topologies on R and so we can also say that given this topology these are the classes of functions.
 - Church's thesis that there are no non-computable reals -- has a natural home here.
-\end{commentout}
+\end{comment}
 \bibliographystyle{unsrt}
 \bibliography{locales}
 \end{document}
