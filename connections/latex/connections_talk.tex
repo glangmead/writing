@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{tipa}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{parskip} % removes paragraph indent, adds vertical space
+
+\bibliographystyle{IEEEtran} % shows URL
+\setcitestyle{square,numbers}
+
+%%% Common categories
+\newcommand{\tp}{\;\mathrm{type}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\G}{\Gamma}
+\newcommand{\pit}[1]{\prod_{(#1)}} % pi-type
+\newcommand{\pitxa}{\pit{x:A}}
+\newcommand{\sit}[1]{\sum_{(#1)}} % sigma-type
+\newcommand{\ent}{\vdash}
+\newcommand{\adj}{\dashv}
+\newcommand{\refl}{\ensuremath{\textsf{refl}}}
+\newcommand{\ap}{\ensuremath{\textsf{ap}}}
+\newcommand{\ind}{\ensuremath{\textsf{ind}}}
+\newcommand{\lift}{\ensuremath{\textsf{lift}}}
+\newcommand{\inv}{\ensuremath{\textsf{inv}}}
+\newcommand{\concat}{\ensuremath{\textsf{concat}}}
+\newcommand{\transport}{\ensuremath{\textsf{transport}}}
+\renewcommand{\sec}{\ensuremath{\textsf{sec}}}
+\newcommand{\retr}{\ensuremath{\textsf{retr}}}
+\newcommand{\total}{\ensuremath{\textsf{total}}}
+\newcommand{\isequiv}{\ensuremath{\textsf{is\_equiv}}}
+\newcommand{\fib}{\ensuremath{\textsf{fib}}}
+\newcommand{\id}{\ensuremath{\text{id}}}
+\newcommand{\judgeq}{\ensuremath{:\equiv}}
+\newcommand{\reflfx}{\ensuremath{\refl_{f(x)}}}
+
+\newcommand{\rr}{\ensuremath{\mathbb{R}}}
+\newcommand{\rrn}{\ensuremath{\mathbb{R}^n}}
+\newcommand{\rrm}{\ensuremath{\mathbb{R}^m}}
+\newcommand{\rrx}{\ensuremath{\mathbb{R}[x]/x^2}}
+\newcommand{\rry}{\ensuremath{\mathbb{R}[y]/y^2}}
+\newcommand{\cc}{\ensuremath{\mathbb{C}}}
+\newcommand{\nn}{\ensuremath{\mathbb{N}}}
+\newcommand{\dd}{\ensuremath{\mathbb{D}}}
+\newcommand{\vv}{\ensuremath{\mathbb{V}}}
+\newcommand{\cinfty}{\ensuremath{C^{\infty}}}
+\newcommand{\smfd}{\textsf{SmoothMfd}}
+\newcommand{\calg}{\textsf{CAlg}_{\rr}}
+\newcommand{\cart}{\textsf{CartSp}}
+\newcommand{\formalcart}{\textsf{FormalCartSp}}
+\newcommand{\formalsmoothset}{\textsf{FormalSmoothSet}}
+\newcommand{\smoothset}{\textsf{SmoothSet}}
+\newcommand{\setcat}{\textsf{Set}}
+\newcommand{\psh}[1]{\textsf{Psh}(#1)}
+\newcommand{\sh}[1]{\textsf{Sh}(#1)}
+\newcommand{\pshcart}{\psh{\cart}}
+\newcommand{\rmodal}{\Re}
+\newcommand{\imodal}{\Im}
+\newcommand{\shape}{\ensuremath{\text{\textesh}}}
+\newcommand{\op}[1]{#1^{\textsf{op}}}
+\newcommand{\pt}{\mathrm{pt}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\BAut}{\mathrm{BAut}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\Fin}{\mathrm{Fin}}
+\newcommand{\Type}{\mathrm{Type}}
+\newcommand{\pinv}{p^{-1}}
+\newcommand{\aut}{\mathrm{Aut}}
+
+\newcommand{\bg}{\ensuremath{\textbf{B}G}}
+\newcommand{\bgconn}{\ensuremath{\textbf{B}G_{\textsf{conn}}}}
+\newcommand{\bgdiff}{\ensuremath{\textbf{B}G_{\textsf{diff}}}}
+
+\newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
+\newcommand{\comment}[1]{}
+%\newcommand{\gc}[1]{}
+
+\newtheorem{mydef}{Definition}
+\newtheorem{mythm}{Theorem}
+\newtheorem{mylemma}{Lemma}
+\newtheorem{myprop}{Proposition}
+\newtheorem{myclaim}{Claim}
+
+\title{Connections on principal bundles}
+\author{Greg Langmead}
+\begin{document}
+\maketitle
+\begin{abstract}
+These notes are intended as a didactic presentation of connections on principal bundles. I assume the reader knows some toplogy, such as the definition of compactness, and the preliminaries of differential geometry such as the definition of smooth manifolds and Lie groups. The goal is to define connections and Chern-Weil theory and then go through the paper by Freed and Hopkins \cite{freed2013chernweil} and finally sketch how we can import all of these ideas into type theory.
+\end{abstract}
+\tableofcontents
+\section{Introduction}
+If you are interested in these notes but worry about whether you have the prerequisites, let me offer two of my favorite resources. First is the book by John Baez and Javier Muniain \cite{baez1994gauge} which is a compact and beautiful introduction to manifolds, connections, and the physics that uses these concepts. I'm still not sure why fate did not put this book in front of me in graduate school, when I was voraciously hunting on an almost daily basis for books just like it.
+
+If, like me, you do even better with recorded lectures, I strongly recommend the playlist of lectures by Frederic Schuller \cite{schullerYoutube2015}. His course is efficient but very precise, and he is a great teacher who offers helpful intuition along the way. The scope is similar to the book by Baez and Muniain: he begins with topology and manifolds, defines connections and curvature, and then gets into physics.
+
+\section{Example of transport}
+Start with picture of S2 embedded in R3 and draw intuitive transport pictures.
+
+Draw a triangle from N to Brazil to DRCongo back to N.
+
+Perform transport of a Brazil-pointing vector. Result will point to DRCongo.
+
+The embedding has selected a metric on S2, pulled back from R3 by this embedding. A metric is more strictly structure than a connection. A connection captures this notion of transport without a full metric.
+
+\section{Splitting}
+The central intuition is below, the splitting thing.
+
+\section{In principal bundles}
+Principal bundle version: equivariance.
+
+Composition with maps to/from Lie algebra.
+
+\section{Derived ideas}
+Covariant derivative.
+
+Transport.
+
+Ambrose and Singer -- maybe explanatory as to why principal bundles matter.
+
+\section{Flatness}
+
+
+\bibliography{connections}
+
+\end{document}

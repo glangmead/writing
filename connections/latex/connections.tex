@@ -69,12 +69,15 @@
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\Fin}{\mathrm{Fin}}
 \newcommand{\Type}{\mathrm{Type}}
+\newcommand{\pinv}{p^{-1}}
+\newcommand{\aut}{\mathrm{Aut}}
 
 \newcommand{\bg}{\ensuremath{\textbf{B}G}}
 \newcommand{\bgconn}{\ensuremath{\textbf{B}G_{\textsf{conn}}}}
 \newcommand{\bgdiff}{\ensuremath{\textbf{B}G_{\textsf{diff}}}}
 
 \newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
+\newcommand{\comment}[1]{}
 %\newcommand{\gc}[1]{}
 
 \newtheorem{mydef}{Definition}
@@ -96,8 +99,101 @@ If you are interested in these notes but worry about whether you have the prereq
 
 If, like me, you do even better with recorded lectures, I strongly recommend the playlist of lectures by Frederic Schuller \cite{schullerYoutube2015}. His course is efficient but very precise, and he is a great teacher who offers helpful intuition along the way. The scope is similar to the book by Baez and Muniain: he begins with topology and manifolds, defines connections and curvature, and then gets into physics.
 
+\section{Lecture 1 outline}
+Start with picture of S2 embedded in R3 and draw intuitive transport pictures.
+
+The central intuition is below, the splitting thing.
+
+Formulas: change-of-chart transformation for connection.
+
+Principal bundle version: equivariance.
+
+Composition with maps to/from Lie algebra.
+
+Covariant derivative.
+
+\section{Motivation and Plan}
+Why study connections? I have two answers. The first is to tell you a little about the Chern-Weil theory of characteristic classes. Just as we strive to construct topological invariants of manifolds that are functorial, we may strive to construct topological invariants of \emph{bundles} over manifolds. The theory of characteristic classes provides cohomology classes on the base that depend only on the isomorphism classes of the bundle. This is global stuff -- dependent on the way the maniofold twists or has holes, and the way the bundle twists over that space. But Chern-Weil theory gives us a way to compute characteristic classes making use of a connection (in fact, just the curvature of the connection) which is a local construction! This theory generalizes the Gauss-Bonnet theorem which states that if $M$ is a compact 2-dimensional manifold without boundary and with Euler characteristic $\chi(M)$, then we have $$\chi(M) = \frac{1}{2\pi}\int_M K dA$$ where $K:M\to\rr$ is the \emph{scalar curvature}, which is where the connections come in, and $dA$ is a measure on the manifold compatible with the connection.
+
+For example, the standard 2-sphere embedded in $\rr^2$ has constant curvature and so we'll get some positive number when we integrate that everywhere, which is consistent with the euler characteristic being positive. Meanwhile a torus embedded donut-style in $\rr^3$ has regions of positive curvature (along the outside ring where you bite), and regions of negative curvature (along the inside ring where it's saddle-shaped) and it will all cancel out to zero. Performing the integral passes from local to global, and curvature is the thing to integrate to compute a topological invariant. That's Chern-Weil theory in a nutshell.
+
+The second motivation is from physics. The force-carrying fields such as photons for electromagnetism, or gluons for the strong force, are as usual not point particles, but fields. They are not plain old functions though, like you meet in a first course on quantum mechanics where you consider $\psi:\rr^4\to \rr$. Rather, these quantum fields are connections. In EM theory the connection's 1950s name was the "electric potential", and the curvature, which is the differential of the connection, contains all six components of the electric and magnetic fields.
+
+The beautiful thing that happens next is to look at the space of all connections, or the space of all bundles plus a connection. This is known as \emph{gauge theory}, and leads in turn to a quantum version of Chern-Weil theory where invariants can be defined by integrating formulas over this whole space. We'll be interested eventually in figuring out how to define this space as a groupoid or other higher type. That's the entirety of the plan!
+
+\section{Fiber bundles}
+We start in the category of smooth manifolds and smooth maps. A fiber bundle consists of a surjective map $p:E\to M$ and a space $F$ such that for every $x\in M$ there is a neighborhood $U$ of $x$ diffeomorphic to the product $U\times F$ in a way that respects the fibers.
+
+\[\begin{tikzcd}
+	{p^{-1}U} && {U\times F} \\
+	& U
+	\arrow["p", from=1-1, to=2-2]
+	\arrow["\phi", from=1-1, to=1-3]
+	\arrow["{\mathrm{pr}_1}"', from=1-3, to=2-2]
+\end{tikzcd}\]
+So $E$ is a type family over $M$, plus this local product condition. We can also write $E|U$ for $p^{-1}U$. The maps $\phi$ go out of the bundle, into the product. The overlaps have a group structure. Fix a cover of $M$ consisting of sets $U_\alpha$ and product maps $\phi_\alpha:p^{-1}U_\alpha \to U_\alpha\times F$. Then $\phi_\beta\circ\phi_\alpha^{-1}: U_\alpha\times F\to U_\beta\times F$, fixing the first factor, and so give a map $\phi_{\alpha\beta}(x): F\to F$ for each $x\in U_\alpha\cap U_\beta = U_{\alpha\beta}$, hence $\phi_{\alpha\beta}:U_{\alpha\beta}\to \mathrm{Diffeo}(F)$. 
+
+A vector bundle is where $F$ is a vector space and the overlap functions land in $GL(F)\subset\mathrm{Diffeo}(F)$. A principal bundle is where $F$ is a Lie group and the overlap functions land in $\aut(G)\subset \mathrm{Diffeo}(F)$, plus another condition we'll get to shortly.
+
+Brief aside on how I talk about vector bundles. Given two bundles over the same base, say $p:E\to M$ and $q:F\to M$, we can form $r:E\otimes F\to M$ by taking the tensor product fiberwise. This gives vector bundles with a fixed base a monoidal structure. When we talk about sections of such tensor products, we sometimes use language like ``a section of $E$ with values in $F$." In the special case where $E$ is $T^*M$, the dual of the tangent bundle, such a section is called ``a 1-form with values in $F$."
+
+Defining a connection requires looking at tangent bundles. It might be helpful to think of the tangent bundle as an endofunctor in the category of smooth manifolds, where on objects it forms the tangent bundle of the manifold, which is a new manifold, and on maps it takes the derivative of the map. The projection maps of the tangent bundles down to their bases is a functor in the other direction. Thus we have $$Tp:TE\to TM.$$ \gc{expand a bit}
+
+The map $Tp$ has as kernel the vertical-pointing tangent vectors, i.e. those that point along the fiber, a $\dim F$-dimensional subspace of $TE$ at each point. This kernel is a sub-bundle of $TE$ we call $VE$.
+
+There's enough structure here to form the following short exact sequence, which is a central object of our study: $$0\to VE\to TE \to p^* TM\to 0.$$
+\comment{https://mathoverflow.net/questions/245525/geometric-interpretation-of-horizontal-and-vertical-lift-of-vector-field/245576#245576}
+\comment{Atiyah Sequences: Biswas paper and https://mathoverflow.net/questions/330797/atiyah-sequence-and-connections-on-a-principal-bundle}
+
+A connection is a splitting of this exact sequence that varies smoothly. We can formulate that three ways:
+
+\begin{enumerate}
+\item A connection is a choice of complementary horizontal subspace of $TE$ at every point, i.e. a bundle $HE$ such that $TE=VE\oplus HE$. The horizontal subspace is isomorphic to $p^* TM$ by dimension-counting.
+
+\item A connection is a projection $TE\to VE$. The kernel of this operator is the horizontal subspace. This operator is called a 1-form because it takes as input tangent vectors. We usually denote a connection 1-form with $\omega\in\Omega^1(E, VE)$.
+
+\item A connection lifts some of the structure of $TM$ up to $TE$. Given a tangent vector $v_x$ in $T_x M$ and a point $e$ over $x$, we get a point in $p^* TM$. A splitting is then a map into $TE$, which embeds $p^* TM$ as a horizontal subspace of $TE$.
+\end{enumerate}
+
+Example on trivial bundle.
+
+Prove existence of connections on any bundle.
+
+Special case: $TM$.
+
+Background on distributions.
+
+Let's denote the lift by $L$, so $L_x v_x\in H_e E$ (and $pe=x$). If we have two vector fields $X$ and $Y$ on $M$ then we can lift them both. Once we lift them both we can do something interesting: we can form $[LX, LY]$ upstairs, and see if it has any vertical component, i.e. we can form $\omega[LX, LY]$. What if this is always zero? What if the bracket upstairs of two horizontal vector fields are always themselves horizontal? Then the sub-bundle $HE$ is what we call "integrable", and there exists a \emph{foliation} of $E$, which is a structure of local slices compatible with $HE$. This is called a \emph{flat} connection, and in this case we could run with the foliation and drop the use of tangent bundles.
+
+A flat connection on $E$ is a foliation by $\dim M$-dimensional submanifolds.
+
+Imagine now lifting a whole loop in $M$, but let's say it's contractible. If the connection is flat, then the lift is also a loop, because the whole loop lives in one leaf the foliation and so returns to its base point. In a general connection the loop may return to another point in the fiber above the base point in $M$. This gap is called \emph{holonomy}. 
+
 \section{Principal bundles}
-Let $M$ be an $n$-dimensional smooth manifold and let $G$ be a Lie group. A principal $G$-bundle over $M$ is locally a product, and has a global faithful $G$-action.
+A principal bundle is a fiber bundle whose fiber is a Lie group $G$ and where there is a transitive and free right-action of $G$ on $E$ so that $M = E/G$. So each fiber is diffeomorphic to $G$ but in an affine sort of way without identity point. The canonical example of this is to take a vector bundle and form its bundle of frames, i.e. bases. The collection of bases of a vector space $V$ is such an affine copy of $GL(V)$. Fixing one basis $b$ then gives an identification with $GL(V)$ by mapping a frame $f$ to the transformation that takes $b$ to $f$.
+
+At the level of descent data, where overlaps of neighborhoods of $M$ are mapped into a group, there is no difference between a principal bundle and a bundle of spaces on which the group is acting. Given an action of the group $a:G\times F\to F$ and a principal fiber bundle $P$, the fiber bundle with fiber $F$ that uses the descent data plus the action $a$ is called an \emph{associated bundle}.
+
+A \emph{gauge transformation} is a $G$-equivariant diffeomorphism $f:P\to P$ covering the identity, so that $p\circ f = p$ and $f(u\cdot g) = f(u)\cdot g$. It's a group action on each fiber, but varying smoothly from fiber to fiber. In physics, observables are invariant under such transformations, just like they are invariant under Lorentz transformations.
+
+A \emph{principal connection} on a principal bundle is a connection in the general sense of fiber bundles, plus the extra condition that the connection be $G$-equivariant. 
+
+The vertical bundle is trivial, and in fact we have that $VE\cong E\times\mathfrak{g}$ by simply differentiating the $G$-action on $E$. Specifically, given $X\in \mathfrak{g}$, choose a curve in $G$ whose derivative at the identity is $X$, then take a point $u\in E$ and act on it with the curve, and take the derivative at the identity. This will be some vertical vector which we associate bijectively with $X$. This is handy and lets us talk about what's going on inside $TP$ by using the fact that the vertical part is made of $\mathfrak{g}$.
+
+
+
+\section{Connections}
+Vertical bundle. Connection as horizontal bundle. adP. Sequence being split, local version and integrated version.
+
+Vertical bundle: Given $p:P\to B$, consider $TP$ and $p_*:TP\to TM$. Consider the kernel of $p_*$, which are all the vertically-pointing vectors. We define $T_F P = \ker p_*$. To define an appropriate complementary subspace to play the role of horizontal tangent vectors is to define a connection! 
+
+Imagine we had such a decomposition $TP=T_FP \oplus T_HP$. Then imagine we have a tangent vector in the base to some point $x$ and some point $e$ in the fiber over $x$. Then we can uniquely lift that tangent vector to a horizontal tangent vector at $e$!. Next imagine we have a whole curve in the base $c:[0,1]\to B$ and a point $e$ in the fiber over $c$. We can lift all the tangent vectors and integrate them in $P$ to get a horizontal path??
+
+Now let's fully define the horizontal sub-bundle.
+
+Pullback of connections.
+\section{Holonomy and HoTT}
+
 \bibliography{connections}
 
 \end{document}
