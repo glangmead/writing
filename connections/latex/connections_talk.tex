@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage[numbers]{natbib}
 \usepackage{parskip} % removes paragraph indent, adds vertical space
+\usepackage{quiver}
 
 \bibliographystyle{IEEEtran} % shows URL
 \setcitestyle{square,numbers}
@@ -72,6 +73,7 @@
 \newcommand{\Type}{\mathrm{Type}}
 \newcommand{\pinv}{p^{-1}}
 \newcommand{\aut}{\mathrm{Aut}}
+\newcommand{\diffeo}{\mathrm{Diffeo}}
 
 \newcommand{\bg}{\ensuremath{\textbf{B}G}}
 \newcommand{\bgconn}{\ensuremath{\textbf{B}G_{\textsf{conn}}}}
@@ -79,6 +81,7 @@
 
 \newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
 \newcommand{\comment}[1]{}
+\newcommand{\image}{\mathrm{Image}}
 %\newcommand{\gc}[1]{}
 
 \newtheorem{mydef}{Definition}
@@ -89,6 +92,7 @@
 
 \title{Connections on principal bundles}
 \author{Greg Langmead}
+
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -100,7 +104,22 @@ If you are interested in these notes but worry about whether you have the prereq
 
 If, like me, you do even better with recorded lectures, I strongly recommend the playlist of lectures by Frederic Schuller \cite{schullerYoutube2015}. His course is efficient but very precise, and he is a great teacher who offers helpful intuition along the way. The scope is similar to the book by Baez and Muniain: he begins with topology and manifolds, defines connections and curvature, and then gets into physics.
 
-\section{Example of transport}
+The most complete treatment, with the most proofs, is found in Kobayashi and Nomizu's text \cite{kobayashinomizu}, Volume 1.
+
+We will make a beeline for gauge theory, passing through terrorities that you may need to go deeper into to understand the beeline. Those are:
+\begin{enumerate}
+    \item Smooth manifolds
+    \item Tangent bundles and differential forms
+    \item Fiber bundles
+    \item Lie groups
+    \item Principal bundles
+    \item Connections
+    \item Holonomy
+    \item Curvature
+    \item And finally, gauge theory
+\end{enumerate}
+
+\section{Geometric intuition}
 Start with picture of S2 embedded in R3 and draw intuitive transport pictures.
 
 Draw a triangle from N to Brazil to DRCongo back to N.
@@ -109,23 +128,276 @@ Perform transport of a Brazil-pointing vector. Result will point to DRCongo.
 
 The embedding has selected a metric on S2, pulled back from R3 by this embedding. A metric is more strictly structure than a connection. A connection captures this notion of transport without a full metric.
 
-\section{Splitting}
-The central intuition is below, the splitting thing.
+The Rubik's Cube is a discrete version of the sphere, and a discrete version of curvature arises. You can cause pieces to rotate by sending them away by a certain path and bringing them back by another.
+
+\section{Infinitesimal trivialization}
+A fiber bundle is a quadruple $(E, p, M, F)$ such that
+\begin{enumerate}
+    \item $E, M, F$ are smooth manifolds
+    \item $p:E\to M$ is a smooth surjective map
+    \item $E$ is locally a product with the standard fiber $F$. i.e. there is an atlas of open sets $\{U_i\}$ on $M$ such that we have this commutative diagram
+    \[\begin{tikzcd}
+        {p^{-1}U_i} && {U_i\times F} \\
+        & {U_i}
+        \arrow["p", from=1-1, to=2-2]
+        \arrow["{\phi_i}", from=1-1, to=1-3]
+        \arrow["\cong"', from=1-1, to=1-3]
+        \arrow["{\mathrm{pr}_1}"', from=1-3, to=2-2]
+    \end{tikzcd}\]
+\end{enumerate}
+We can look at the \emph{descent data} of a fiber bundle, and this will serve as a lingua franca between principal bundles, vector bundles, and fiber bundles. On intersections $U_{ij} = U_i \cap U_j$ the above data gives us a map $\phi_{ij}:U_{ij}\to\diffeo(F)$, satisfying the cocycle condition $\phi_{ij} = \phi_{jk}\circ\phi_{ij}$.
+
+A fast way to say what a vector bundle is is to say $F$ is a vector space and the descent maps factor through $GL(V)$.
+
+The setting for connections is $TE$, the tangent bundle of the total space. Since $E$ sort-of factorizes into $F$ and $M$, the tangent bundle sort-of factorizes into $TF$ and $TM$. Let's examine this short exact sequence:
+\begin{equation}\label{seq}
+    0\to VE\to TE \to p^* TM\to 0\quad\mathrm{(on\ }E)
+\end{equation}
+where
+\begin{enumerate}
+    \item $VE$ is the kernel of $Tp$, i.e. a copy of $TF$ at each point of $E$. They stick out vertically hence the $V$. It has the dimension of $F$.
+    \item $TE$ is the full tangent space of $E$. It has the dimension of $F$ plus the dimension of $M$.
+    \item $p^* TM$ is the pullback of $TM$ into the upstairs. It has the dimension of $M$. There's no single natural way to arrange it so as to be complementary to $VE$. It could tilt in various ways and still be complementary. (We have no metric so there's no actual tiling or angles available to us, that's just intuition.)
+\end{enumerate}
+A connection in a fiber bundle is a splitting of this sequence, a choice of decomposition at each point of $E$ of $TE$ as the direct sum of $VE$ and $p^* TM$. That's our first waypoint.
+
+We can talk about this splitting in three ways.
+
+\begin{enumerate}
+    \item A connection is a choice of complementary horizontal subspace of $TE$ at every point, i.e. a bundle $HE$ such that $TE=VE\oplus HE$. The horizontal subspace is isomorphic to $p^* TM$ by dimension-counting.
+    
+    \item A connection is a projection $TE\to VE$. The kernel of this operator is the horizontal subspace. This operator is in fact a 1-form because it takes as input tangent vectors (vector-valued, in fact with values in $VE$). We usually denote a connection 1-form with $\omega\in\Omega^1(E, VE)$. It's a 1-form \emph{upstairs}.
+    
+    \item A connection lifts some of the structure of $TM$ up to $TE$. Given a tangent vector $v_x$ in $T_x M$ and a point $e$ over $x$, we get a point in $p^* TM$. A splitting is then a map into $TE$, which embeds $p^* TM$ as a horizontal subspace of $TE$. We package this as a lifting map $C:TM\times_M E \to TE$. We have $\omega\circ C = 0$ because we lift vectors to horizontal ones.
+\end{enumerate}
+
+Connections exist. You prove this using the basic theory of differential equations, similar to various theorems about vector fields and their integral curves.
+
+We can parlay the lifting of tangent vectors into the lifting of curves. Given the tangent vector field along a curve in $M$, we can lift that field and then integrate it to get a horizontal curve upstairs. A proof is needed that this lifting is well-defined and can be integrated. We'll prove it elegantly in a moment.
+
+\section{Holonomy}
+We can parlay the lifting of tangent vectors into the lifting of curves. This is strictly 1-dimensional stuff! Given a curve in $M$, say $c:(-1, 1)=:I \to M$ where $c(0)=:x$, we can pull back $E$ and its connection to $I$, called $c^*E$. The horizontal distribution must be integrable here since the Lie bracket vanishes on vectors pointing along the same linear subspace. So this connection is flat and we can form the vector field $X$ along $c$ in the base, lift $X$ to a horizontal vector field, then integrate it. Then we can push it back into $E$. This is the lift of $c$ to a horizontal curve (i.e. its tangent vectors are horizontal).
+
+Lifting requires a connection and a curve in the base. It produces a map between fibers.
+
+$$\lift: (\omega : \Omega_1(E; VE)) \to (c: [0,1] \to M) \to E_{c(0)} \to E_{c(1)}$$
+
+This is another waypoint for us. This is now ``parallel transport,'' because we have gone from the infinitesimal to the local, and can flow to nearby fibers.
+
+Some results
+\begin{enumerate}
+    \item Reversing the curve provides an inverse map. Transport gives an isomorphism on fibers. $$\lift (\omega, c_{\leftarrow}) = \lift (\omega, c_{\rightarrow})^{-1}$$
+	\item Given $c:[0,1]\to M$ and $d:[0,1]\to M$ with $c(1) = d(0)$, we can compose the curves and form $c\cdot d$. We have $$\lift (\omega, c\cdot d) = \lift (\omega, d)\circ\lift (\omega, c).$$
+    \item Reparameterizing the curve with any piecewise-smooth function $f:[0, 1]\to [0, 1]$ such that $f(0)=0$ and $f(1)=1$ preserves the holonomy map. $$\lift : (\omega : \Omega_1(E; VE)) \to \mathcal{P}_1(M) \to E_{c(0)} \to E_{c(1)}$$ where $\mathcal{P}_1(M)$ is the \emph{path groupoid} of $M$, whose objects are the points of $M$ and morphisms are piecewise-smooth paths under concatenation (and rescaling to fit back into $[0, 1]$). Or curves that come to rest at the endpoints and so we can change ``piecewise smooth'' to ``with sitting instants''. At dimension 2 we have the thin homotopies between paths, which are the reparameterizations.
+    
+	Remember the sphere, where a contractible loop still gives nontrivial holonomy.
+    \item In the case of a loop $f(0)=f(1)=x$, we get a subgroup of $\Aut(E_x)$ called the holonomy group, denoted $\Phi(x)$. $$\Phi(x)=\image(\lift(\omega) )\subset \Aut(E_x).$$
+    \item Restricting to contractible loops gives the \emph{restricted holonomy} group denoted $\Phi_0(x)$.
+\end{enumerate}
+
+Bring in pictures from Rupert Way paper.
 
 \section{In principal bundles}
-Principal bundle version: equivariance.
+A principal bundle is a fiber bundle where $F$ is a Lie group, plus more conditions:
+\begin{enumerate}
+    \item The local trivializations respect the left action of $G$ on itself (equivariant).
+    \item $G$ acts freely and transitively on $E$ on the right and $M$ is the quotient of this action: $M=E/G$.
+\end{enumerate}
 
-Composition with maps to/from Lie algebra.
+A connection is a horizontal distribution like before, plus the condition that the horizontal subspaces be equivariant under the action of $G$. So the splitting is equivariant. The elements of $G$ push points up and down vertically, and the derivative of these maps push the tangent spaces around. These derivatives must preserve the splitting.
 
-\section{Derived ideas}
-Covariant derivative.
+\[\begin{tikzcd}
+	{VE\oplus HE} & {VE\oplus HE} \\
+	TE & TE \\
+	E & E \\
+	M & M
+	\arrow["{R_g}", from=3-1, to=3-2]
+	\arrow["{TR_g}", from=2-1, to=2-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow["{TR_g}", from=1-1, to=1-2]
+	\arrow["\pi"', from=2-1, to=3-1]
+	\arrow["\pi", from=2-2, to=3-2]
+	\arrow["p"', from=3-1, to=4-1]
+	\arrow["p", from=3-2, to=4-2]
+	\arrow["{\mathrm{id}}", from=4-1, to=4-2]
+\end{tikzcd}\]
 
-Transport.
+\[\begin{tikzcd}
+	0 & VE & TE & {p^* TM} & 0 \\
+	0 & VE & TE & {p^* TM} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow["{TR_g}", from=1-2, to=2-2]
+	\arrow["{\mathrm{id}}", from=1-4, to=2-4]
+	\arrow["{TR_g}", from=1-3, to=2-3]
+\end{tikzcd}\]
 
-Ambrose and Singer -- maybe explanatory as to why principal bundles matter.
+This is the usual setting for a connection. The detour with fiber bundles allowed us to talk about it without the equivariance complication. Connections are very often confusing when first introduced because there is too much going on. You're welcome. (Actually, thank Kolar et al \cite{kolar_natural_1993}).
 
-\section{Flatness}
+More results:
+\begin{enumerate}
+    \item $G$ acts on horizontal curves: composing a horizontal curve with the right group action produces another horizontal curve.
+    \item Take $u\in E_x$ in the principal bundle $E$ and again consider all horizontal loops. This gives a subgroup of $G$, denoted similarly $\Phi(u)$ with restricted version $\Phi_0(u)$. The type of $u:E$ versus $x:M$ determines the type of the holonomy group we're referring to. $$\Phi(u) = \image(\lift(\omega)(u)).$$
+    
+	For example, imagine on the sphere if $P$ was the frame bundle. Imagine the connection is the one we implicitly used, which preserves length and angles. Then this image would in fact be contained in $O(2)$ instead of $GL(2)$.
+    \item If $M$ is connected, all $\Phi_u$ are conjugate and hence isomorphic.
+    \item If $M$ is connected and paracompact, $\Phi_0(u)$ is a connected subgroup of $G$ and a normal subgroup of $\Phi(u)$ and $\Phi(u)/\Phi_0(u)$ is countable. 
+    \item If $M$ is connected and paracompact, we can form the subset $E(u)$ of all points joinable to $u$ by horizontal curves. This is a principal bundle with structure group $\Phi(u)$ and there is an induced connection. This is a reduction of the original bundle, licensed by the connection. In the earlier example this would form the $O(2)$ bundle.
+    \item Ambrose-Singer Theorem: The Lie algebra of $\Phi_0(u)$ is the span of all elements of $\mathfrak{g}$ of the form $\Omega_v(X, Y)$ for $v\in P(u)$ with $X, Y$ horizontal. Slogan: curvature is infinitesimal holonomy.
+\end{enumerate}
 
+There's another moving part now that we can bring in which is the Lie algebra $\mathfrak{g}$ of $G$. This soups up what's going on vertically.
+\begin{enumerate}
+    \item There is a bijection between $\mathfrak{g}$ and equivariant vertical vector fields over a point $x$. The bijection is given by \gc{do it}
+    \item Starting with a vector $v\in T_e E$ at some point, whether vertical, horizontal, or mixture, we can push it all up and down the fiber to extend that to a vector field, by the derivative of the action of $G$, i.e. with $\mathfrak{g}$.
+    \item The vertical bundle is trivial.
+    \item How $\mathrm{ad}(P)$ appears.\gc{Prop 1.1 Kob-Nom p. 64}
+\end{enumerate}
+
+We can move the exact sequence to the base (Atiyah-Bott p.547). Because the base is a quotient by the $G$-action, and because the upstairs constructions are $G$-invariant, there is an equivalent exact sequence on the base that we are splitting. $$0\to \mathrm{ad}(P)\to E/G\to TM\to 0$$
+
+Connections can be pulled back and pushed forward!
+
+\section{Curvature}
+
+On to curvature. In the general context of smooth manifolds, we have the Lie bracket of vector fields, which gives another vector field. The space of vector fields is hence a Lie algebra.
+
+Draw an infinitesimal picture of the bracket at a point. The tips can meet or not meet.
+
+Suppose we have what's called a \emph{distribution}, i.e. a sub-bundle of the tangent bundle. This is an infinitesimal thingie, a subspace at each point. Now suppose we have vector fields that live in the sub-bundle. Will their Lie bracket live there? Let's give some names.
+\begin{enumerate}
+    \item Let $M$ be a manifold and $p:TM\to M$ its tangent bundle. Let $m=\dim M$.
+    \item Let $D\subset TM$ be a distribution, i.e. $D$ is a vector bundle over $M$ and $D_x\subset T_x M$ is a smoothly varying sub-vector space at each point. Let $d=\dim D$.
+    \item Let $X$ and $Y$ be two vector fields, i.e. smooth sections of $p$. Suppose $X$ and $Y$ are in vact sections of $D$.
+    \item Consider $[X, Y]$. 
+\end{enumerate}
+
+A question we ask about distributions is whether they are \emph{integrable} i.e. whether there is a \emph{foliation}, which is like a vector field flow but in the dimension of $D$. A local product structure of $M$ as a product of $\rr^{d} \times \rr^{m-d}$ such that $D$ is the tangent bundle of the $d$-dimensional part at every point.
+
+Whether a distribution can be integrated is a purely local question! Whether we can move from infinitesimal to local. These foliations don't need to extend to anything global such as an embedding. Imagine a line of irrational slope in the torus.
+
+If $D$ \emph{could} be integrated, then our hypothetical vector fields would have to satisfy $[X,Y]\subset D$, since there's a manifold structure and bracketing is closed. So being ``closed under bracket'' is necessary for a distribution to be integrable. It's also sufficient (19th c, see the Wikipedia page for Frobenius' theorem).
+
+Draw a picture where the parallelogram doesn't connect up at the far corner.
+
+In this language, a connection is a horizontal foliation. If we have two horizontal vector fields, will their bracket be horizontal? If so, the horizontal bundle is integrable and you can slide around in there locally and stay horizontal. The connection is said to be \emph{flat}.
+
+More facts:
+\begin{enumerate}
+\item $\Phi_0(u)=\{u\}$. Contractible loops must live in one leaf of the foliation and return to the same point $u$ in the fiber.
+\item Two curves respresenting the same class of $\pi_1(M, x)$ lift to the same holonomy element.
+\item Thus we get a map $\pi_1(M, x) \to \Phi(u)\subset G$. 
+\item The restricted bundle $P(u)$ is connected and so is a cover of $M$. 
+\item If $M$ is simply connected and the connection is flat, then $E$ is trivializable.
+\end{enumerate}
+
+\section{Morphisms}
+Given $f:P'(M', G') \to P(M, G)$ and a corresponding morphism $G'\to G$ and which is a diffeo on the base, we can push connections forward with the derivative of $f$.
+% https://q.uiver.app/?q=WzAsOCxbMCwxLCJQJyJdLFswLDIsIk0nIl0sWzEsMSwiUCJdLFsxLDIsIk0iXSxbMCwwLCJHJyJdLFsxLDAsIkciXSxbMCwzLCJcXEdhbW1hJyJdLFsxLDMsIlxcR2FtbWEiXSxbMCwyXSxbMSwzLCJcXGNvbmciXSxbMCwxXSxbMiwzXSxbNCwwXSxbNSwyXSxbNCw1XSxbNiw3XV0=
+\[\begin{tikzcd}
+	{G'} & G \\
+	{P'} & P \\
+	{M'} & M \\
+	{\Gamma'} & \Gamma
+	\arrow[from=2-1, to=2-2]
+	\arrow["\cong", from=3-1, to=3-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=4-1, to=4-2]
+\end{tikzcd}\]
+
+Given $f:P'(M', G') \to P(M, G)$ and a corresponding \emph{isomorphism} $G'\to G$ and which is a smooth map on the base, we can pull connections back by pulling back the 1-form.
+% https://q.uiver.app/?q=WzAsOCxbMCwxLCJQJyJdLFswLDIsIk0nIl0sWzEsMSwiUCJdLFsxLDIsIk0iXSxbMCwwLCJHJyJdLFsxLDAsIkciXSxbMCwzLCJcXEdhbW1hJyJdLFsxLDMsIlxcR2FtbWEiXSxbMCwyXSxbMSwzXSxbMCwxXSxbMiwzXSxbNCwwXSxbNSwyXSxbNCw1LCJcXGNvbmciXSxbNyw2XV0=
+\[\begin{tikzcd}
+	{G'} & G \\
+	{P'} & P \\
+	{M'} & M \\
+	{\Gamma'} & \Gamma
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\cong", from=1-1, to=1-2]
+	\arrow[from=4-2, to=4-1]
+\end{tikzcd}\]
+
+% https://q.uiver.app/?q=WzAsMTksWzQsMywiRSJdLFs1LDMsIkUiXSxbNCw0LCJNIl0sWzUsNCwiTSJdLFszLDMsIkciXSxbMywxLCJcXG1hdGhmcmFre2d9Il0sWzMsMiwiVEciXSxbNCwyLCJURSJdLFs1LDIsIlxcY29sb3J7cmVkfVRFIl0sWzIsMiwiXFxjb2xvcntibHVlfVxcR2FtbWEgVEVeRyJdLFsyLDEsIlxcY29sb3J7Ymx1ZX1cXEdhbW1hIFZFXkciXSxbMSwyLCJcXGNvbG9ye2JsdWV9XFxHYW1tYSBIRV5HIl0sWzAsMiwiXFxjb2xvcntibHVlfTAiXSxbMiwwLCJcXGNvbG9ye2JsdWV9MCJdLFs1LDAsIlxcY29sb3J7cmVkfTAiXSxbNSwxLCJcXGNvbG9ye3JlZH1WRSJdLFs2LDIsIlxcY29sb3J7cmVkfUhFIl0sWzcsMiwiXFxjb2xvcntyZWR9MCJdLFs0LDEsIkVcXHRpbWVzXFxtYXRoZnJha3tnfSJdLFswLDEsInQiXSxbMiwzLCJcXG1hdGhybXtpZH0iXSxbMCwyLCJwIiwyXSxbMSwzLCJwIl0sWzQsMCwiXFx0cmlhbmdsZWxlZnRcXCAgXFx0ZXh0e1xcdGV4dHVuZGVyc2NvcmV9Il0sWzYsNF0sWzUsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywwXSxbOCwxXSxbMTAsOSwiIiwwLHsiY29sb3VyIjpbMjQwLDg2LDYwXX1dLFs5LDExLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzEzLDEwLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzExLDEyLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzE0LDE1LCIiLDAseyJjb2xvdXIiOlszNjAsOTYsNDZdfV0sWzE1LDgsIiIsMCx7ImNvbG91ciI6WzM2MCw5Niw0Nl19XSxbOCwxNiwiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFsxNiwxNywiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFs1LDEwLCJcXGNvbmciLDJdLFs2LDddLFs3LDhdLFsxNSwxOCwiXFxjb25nIiwyXSxbMTgsNSwiXFxtYXRocm17cHJ9XzIiLDJdLFs4LDE1LCJcXG9tZWdhIiwyLHsiY3VydmUiOjEsImNvbG91ciI6WzM2MCw5Niw0Nl19LFszNjAsOTYsNDYsMV1dLFszLDgsIlg6XFxHYW1tYSBURSIsMix7ImN1cnZlIjoyLCJjb2xvdXIiOlsyNDAsODYsNjBdfSxbMjQwLDg2LDYwLDFdXV0=
+\[\begin{tikzcd}
+	&& {\color{blue}0} &&& {\color{red}0} \\
+	&& {\color{blue}\Gamma VE^G} & {\mathfrak{g}} & {E\times\mathfrak{g}} & {\color{red}VE} \\
+	{\color{blue}0} & {\color{blue}\Gamma HE^G} & {\color{blue}\Gamma TE^G} & TG & TE & {\color{red}TE} & {\color{red}HE} & {\color{red}0} \\
+	&&& G & E & E \\
+	&&&& M & M
+	\arrow["t", from=4-5, to=4-6]
+	\arrow["{\mathrm{id}}", from=5-5, to=5-6]
+	\arrow["p"', from=4-5, to=5-5]
+	\arrow["p", from=4-6, to=5-6]
+	\arrow["{\triangleleft\  \text{\textunderscore}}", from=4-4, to=4-5]
+	\arrow[from=3-4, to=4-4]
+	\arrow[hook, from=2-4, to=3-4]
+	\arrow[from=3-5, to=4-5]
+	\arrow[from=3-6, to=4-6]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=2-3, to=3-3]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-3, to=3-2]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=1-3, to=2-3]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-2, to=3-1]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=1-6, to=2-6]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=2-6, to=3-6]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-6, to=3-7]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-7, to=3-8]
+	\arrow["\cong"', from=2-4, to=2-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-5, to=3-6]
+	\arrow["\cong"', from=2-6, to=2-5]
+	\arrow["{\mathrm{pr}_2}"', from=2-5, to=2-4]
+	\arrow["\omega"', color={rgb,255:red,230;green,5;blue,5}, curve={height=6pt}, from=3-6, to=2-6]
+	\arrow["{X:\Gamma TE}"', color={rgb,255:red,65;green,65;blue,241}, curve={height=12pt}, from=5-6, to=3-6]
+\end{tikzcd}\]
+
+\section{In terms of downstairs bundles}
+
+
+\section{Gauge transformations}
+Gauge transformations. A gauge transformation is a $G$-equivariant diffeomorphism $P\to P$ that is the identity on $M$. So these act on each fiber separately in a smooth way. You can also see it as a smooth choice of element of $G$ acting on each fiber, but the association with $G$ can only be chosen locally of course.
+
+We can think of GTs as analogous to changes of coordinate chart. Physicists seek theories that are gauge-invariant, i.e. invariant under the group of gauge transformations. This is a giagintic infinite-dimensional space, whose type is morally similar to $M\to G$.
+
+GTs act on connections. At a point they slide the horizontal subspaces up and down, and because they vary point to point, they may add some tilt.
+
+GTs conjugate the curvature by a variable element of $G$. They cannot make a non-flat bundle flat.
+
+The type of connections mod gauge is of paramount importance in physics and in fancy high-powered physics-derived invariants of $M$, such as in Donaldson theory on a 4-manifold, which starts with an $SU(2)$ bundle over $M$ and looks at $\mathcal{A}/\mathcal{G}$.
+
+
+
+
+One last thing you can do with horizontal lifts of vectors is precompose lifting with exterior differentiation upstairs.
+
+$$h:\Gamma(TM)\to \Gamma(HE)$$
+$$d:\Omega^\bullet(T^*E)\to \Omega^{\bullet+1}(T^*E)$$
+$$d\circ h: \Omega^\bullet(T^*M)\to \Omega^{\bullet+1}(T^*M)$$
+
+$g^{-1}dg$ and such.
+
+Affine. Lie algebra-valued 1-forms.
+
+Classifying space.
+
+Theorems from gauge theory!
+
+Quantum gauge theory.
 
 \bibliography{connections}
 
