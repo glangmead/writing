@@ -12,6 +12,10 @@
 \usepackage[numbers]{natbib}
 \usepackage{parskip} % removes paragraph indent, adds vertical space
 \usepackage{quiver}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+
+\graphicspath{ {./img/} }
 
 \bibliographystyle{IEEEtran} % shows URL
 \setcitestyle{square,numbers}
@@ -40,6 +44,8 @@
 \newcommand{\id}{\ensuremath{\text{id}}}
 \newcommand{\judgeq}{\ensuremath{:\equiv}}
 \newcommand{\reflfx}{\ensuremath{\refl_{f(x)}}}
+\newcommand{\pathm}{\ensuremath{\mathcal{P}_1 (M)}}
+\newcommand{\pp}{\ensuremath{\mathcal{P}_1}}
 
 \newcommand{\rr}{\ensuremath{\mathbb{R}}}
 \newcommand{\rrn}{\ensuremath{\mathbb{R}^n}}
@@ -80,8 +86,9 @@
 \newcommand{\bgdiff}{\ensuremath{\textbf{B}G_{\textsf{diff}}}}
 
 \newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
-\newcommand{\comment}[1]{}
+\newcommand{\commentout}[1]{}
 \newcommand{\image}{\mathrm{Image}}
+\newcommand{\myfig}[2]{\begin{figure}[h]\caption{#1}\centering\includegraphics[width=0.6\textwidth]{#2}\end{figure}}
 %\newcommand{\gc}[1]{}
 
 \newtheorem{mydef}{Definition}
@@ -98,7 +105,7 @@
 \begin{abstract}
 These notes are intended as a didactic presentation of connections on principal bundles. I assume the reader knows some toplogy, such as the definition of compactness, and the preliminaries of differential geometry such as the definition of smooth manifolds and Lie groups. The goal is to define connections and Chern-Weil theory and then go through the paper by Freed and Hopkins \cite{freed2013chernweil} and finally sketch how we can import all of these ideas into type theory.
 \end{abstract}
-\tableofcontents
+%\tableofcontents
 \section{Introduction}
 If you are interested in these notes but worry about whether you have the prerequisites, let me offer two of my favorite resources. First is the book by John Baez and Javier Muniain \cite{baez1994gauge} which is a compact and beautiful introduction to manifolds, connections, and the physics that uses these concepts. I'm still not sure why fate did not put this book in front of me in graduate school, when I was voraciously hunting on an almost daily basis for books just like it.
 
@@ -120,15 +127,13 @@ We will make a beeline for gauge theory, passing through terrorities that you ma
 \end{enumerate}
 
 \section{Geometric intuition}
-Start with picture of S2 embedded in R3 and draw intuitive transport pictures.
+The 20th century method of capturing curvature is in the following figure, where we slide a tangent vector around a loop on a curved surface.
 
-Draw a triangle from N to Brazil to DRCongo back to N.
+\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2015}{scorpan_sphere}
 
-Perform transport of a Brazil-pointing vector. Result will point to DRCongo.
+The embedding has selected a metric on S2, pulled back from R3. A metric is more strictly structure than a connection. A connection captures this notion of transport without a full metric.
 
-The embedding has selected a metric on S2, pulled back from R3 by this embedding. A metric is more strictly structure than a connection. A connection captures this notion of transport without a full metric.
-
-The Rubik's Cube is a discrete version of the sphere, and a discrete version of curvature arises. You can cause pieces to rotate by sending them away by a certain path and bringing them back by another.
+A Rubik's Cube is a discrete version of the sphere, and a discrete version of curvature arises. You can cause pieces to rotate by sending them away by a certain path and bringing them back by another.
 
 \section{Infinitesimal trivialization}
 A fiber bundle is a quadruple $(E, p, M, F)$ such that
@@ -144,58 +149,79 @@ A fiber bundle is a quadruple $(E, p, M, F)$ such that
         \arrow["\cong"', from=1-1, to=1-3]
         \arrow["{\mathrm{pr}_1}"', from=1-3, to=2-2]
     \end{tikzcd}\]
+	\item On intersections $U_{ij} = U_i \cap U_j$ the above data gives us a map $\phi_{ij}:U_{ij}\to\diffeo(F)$, satisfying the cocycle condition $\phi_{ij} = \phi_{jk}\circ\phi_{ij}$.
+	\item A fast way to say what a vector bundle is is to say $F$ is a vector space and the descent maps factor through $GL(V)$.
 \end{enumerate}
-We can look at the \emph{descent data} of a fiber bundle, and this will serve as a lingua franca between principal bundles, vector bundles, and fiber bundles. On intersections $U_{ij} = U_i \cap U_j$ the above data gives us a map $\phi_{ij}:U_{ij}\to\diffeo(F)$, satisfying the cocycle condition $\phi_{ij} = \phi_{jk}\circ\phi_{ij}$.
 
-A fast way to say what a vector bundle is is to say $F$ is a vector space and the descent maps factor through $GL(V)$.
+The setting for connections is $TE$, the tangent bundle of the total space. Since $E$ sort-of factorizes into $F$ and $M$, the tangent bundle sort-of factorizes into $TF$ and $TM$. 
 
-The setting for connections is $TE$, the tangent bundle of the total space. Since $E$ sort-of factorizes into $F$ and $M$, the tangent bundle sort-of factorizes into $TF$ and $TM$. Let's examine this short exact sequence:
+Consider $Tp$, the derivative of the projection map. What is the kernel? It consists of vectors we can justifiably describe as ``vertical-pointing'', i.e. along the fiber. If that makes intuitive sense to you, you are well on your way to understanding connections.
+
+Let's examine this short exact sequence:
 \begin{equation}\label{seq}
-    0\to VE\to TE \to p^* TM\to 0\quad\mathrm{(on\ }E)
+    0\to VE\hookrightarrow TE \xrightarrow{Tp} TM\to 0\quad\mathrm{(on\ }E)
 \end{equation}
 where
-\begin{enumerate}
-    \item $VE$ is the kernel of $Tp$, i.e. a copy of $TF$ at each point of $E$. They stick out vertically hence the $V$. It has the dimension of $F$.
-    \item $TE$ is the full tangent space of $E$. It has the dimension of $F$ plus the dimension of $M$.
-    \item $p^* TM$ is the pullback of $TM$ into the upstairs. It has the dimension of $M$. There's no single natural way to arrange it so as to be complementary to $VE$. It could tilt in various ways and still be complementary. (We have no metric so there's no actual tiling or angles available to us, that's just intuition.)
-\end{enumerate}
-A connection in a fiber bundle is a splitting of this sequence, a choice of decomposition at each point of $E$ of $TE$ as the direct sum of $VE$ and $p^* TM$. That's our first waypoint.
+
+A connection in a fiber bundle is a splitting of this sequence, a choice of decomposition at each point of $E$ of $TE$ as the direct sum of $VE$ and $TM$. That's our first waypoint.
 
 We can talk about this splitting in three ways.
 
 \begin{enumerate}
-    \item A connection is a choice of complementary horizontal subspace of $TE$ at every point, i.e. a bundle $HE$ such that $TE=VE\oplus HE$. The horizontal subspace is isomorphic to $p^* TM$ by dimension-counting.
+    \item A choice of complementary horizontal subspace of $TE$ at every point, i.e. a bundle $HE$ such that $TE=VE\oplus HE$. The horizontal subspace is isomorphic to $p^* TM$ by dimension-counting.
     
-    \item A connection is a projection $TE\to VE$. The kernel of this operator is the horizontal subspace. This operator is in fact a 1-form because it takes as input tangent vectors (vector-valued, in fact with values in $VE$). We usually denote a connection 1-form with $\omega\in\Omega^1(E, VE)$. It's a 1-form \emph{upstairs}.
+    \item A projection $TE\to VE$. The kernel of this operator is the horizontal subspace. This operator is in fact a 1-form because it takes as input tangent vectors (vector-valued, in fact with values in $VE$). We usually denote a connection 1-form with $\omega\in\Omega^1(E, VE)$. It's a 1-form \emph{upstairs}.
     
-    \item A connection lifts some of the structure of $TM$ up to $TE$. Given a tangent vector $v_x$ in $T_x M$ and a point $e$ over $x$, we get a point in $p^* TM$. A splitting is then a map into $TE$, which embeds $p^* TM$ as a horizontal subspace of $TE$. We package this as a lifting map $C:TM\times_M E \to TE$. We have $\omega\circ C = 0$ because we lift vectors to horizontal ones.
+    \item A lift. Given $HE$ we can form a lifting map $C:TM\times_M E \to TE$ by using the isomorphism between $H_u E$ and $T_{m} M$. We have $\omega\circ C = 0$ because we lift vectors to horizontal ones.
 \end{enumerate}
 
-Connections exist. You prove this using the basic theory of differential equations, similar to various theorems about vector fields and their integral curves.
+\myfig{From Rupert Way, ``Introduction to connections on principal fibre bundles'', 2010}{way_horiz_field}
 
-We can parlay the lifting of tangent vectors into the lifting of curves. Given the tangent vector field along a curve in $M$, we can lift that field and then integrate it to get a horizontal curve upstairs. A proof is needed that this lifting is well-defined and can be integrated. We'll prove it elegantly in a moment.
+Here's another good picture of the splitting.
 
-\section{Holonomy}
-We can parlay the lifting of tangent vectors into the lifting of curves. This is strictly 1-dimensional stuff! Given a curve in $M$, say $c:(-1, 1)=:I \to M$ where $c(0)=:x$, we can pull back $E$ and its connection to $I$, called $c^*E$. The horizontal distribution must be integrable here since the Lie bracket vanishes on vectors pointing along the same linear subspace. So this connection is flat and we can form the vector field $X$ along $c$ in the base, lift $X$ to a horizontal vector field, then integrate it. Then we can push it back into $E$. This is the lift of $c$ to a horizontal curve (i.e. its tangent vectors are horizontal).
+\myfig{ibid.}{way_upstairs}
 
-Lifting requires a connection and a curve in the base. It produces a map between fibers.
+Connections exist. For example on a paracompact manifold we can 
+\begin{enumerate}
+	\item Create a smooth inner product using a partition of unity
+	\item split $HE$ usign orthogonal complement
+\end{enumerate}
 
-$$\lift: (\omega : \Omega_1(E; VE)) \to (c: [0,1] \to M) \to E_{c(0)} \to E_{c(1)}$$
 
-This is another waypoint for us. This is now ``parallel transport,'' because we have gone from the infinitesimal to the local, and can flow to nearby fibers.
+\section{Transport}
+We can parlay the lifting of tangent vectors into the lifting of curves. This is strictly 1-dimensional stuff!
+
+Given a smooth curve $c:[0, 1]\to M$:
+\begin{enumerate}
+	\item Lift all the tangent vectors of $c$ upstairs, giving a vector field on $p^{-1}(c([0,1]))$
+	\item Choose a point $u$ over $c(0)$.
+	\item Flow along the vector field (requires a little proof that we can solve this differential equation).
+\end{enumerate}
+
+\begin{tcolorbox}
+Simple proof using curvature and connection pullbacks: Given a curve in $M$, say $c:(-1, 1)=:I \to M$ where $c(0)=:x$, we can pull back $E$ and its connection to $I$, called $c^*E$. The horizontal distribution must be integrable here since the Lie bracket vanishes on vectors pointing along the same linear subspace. So this connection is flat and we can form the vector field $X$ along $c$ in the base, lift $X$ to a horizontal vector field, then integrate it. Then we can push it back into $E$. This is the lift of $c$ to a horizontal curve (i.e. its tangent vectors are horizontal).
+\end{tcolorbox}
+
+Lifting curves provides a map between fibers: parallel transport!
+
+\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2005}{scorpan_transport}
+
+Let \pathm\ be the set of piecewise-smooth curves $[0, 1]\to M$. Let $\pp(M, x, y)$ be paths from $x$ to $y$.
+
+\pathm\ is a groupoid under concatenation of paths (and rescaling back into $[0, 1]$).
+
+$$\transport: (\omega : \Omega_1(E; VE))\to (c: \pp(M,x,y)) \to E_{x} \to E_{y}$$
 
 Some results
 \begin{enumerate}
-    \item Reversing the curve provides an inverse map. Transport gives an isomorphism on fibers. $$\lift (\omega, c_{\leftarrow}) = \lift (\omega, c_{\rightarrow})^{-1}$$
-	\item Given $c:[0,1]\to M$ and $d:[0,1]\to M$ with $c(1) = d(0)$, we can compose the curves and form $c\cdot d$. We have $$\lift (\omega, c\cdot d) = \lift (\omega, d)\circ\lift (\omega, c).$$
-    \item Reparameterizing the curve with any piecewise-smooth function $f:[0, 1]\to [0, 1]$ such that $f(0)=0$ and $f(1)=1$ preserves the holonomy map. $$\lift : (\omega : \Omega_1(E; VE)) \to \mathcal{P}_1(M) \to E_{c(0)} \to E_{c(1)}$$ where $\mathcal{P}_1(M)$ is the \emph{path groupoid} of $M$, whose objects are the points of $M$ and morphisms are piecewise-smooth paths under concatenation (and rescaling to fit back into $[0, 1]$). Or curves that come to rest at the endpoints and so we can change ``piecewise smooth'' to ``with sitting instants''. At dimension 2 we have the thin homotopies between paths, which are the reparameterizations.
-    
-	Remember the sphere, where a contractible loop still gives nontrivial holonomy.
-    \item In the case of a loop $f(0)=f(1)=x$, we get a subgroup of $\Aut(E_x)$ called the holonomy group, denoted $\Phi(x)$. $$\Phi(x)=\image(\lift(\omega) )\subset \Aut(E_x).$$
-    \item Restricting to contractible loops gives the \emph{restricted holonomy} group denoted $\Phi_0(x)$.
+    \item Reversing the curve provides an inverse map. Transport gives an isomorphism on fibers. $$\transport (\omega, c_{\leftarrow}) = \lift (\omega, c_{\rightarrow})^{-1}$$
+	\item Given $c:[0,1]\to M$ and $d:[0,1]\to M$ with $c(1) = d(0)$, we can compose the curves and form $c\cdot d$. We have $$\transport (\omega, c\cdot d) = \transport (\omega, d)\circ\transport (\omega, c).$$
+    \item Reparameterizing the curve with any piecewise-smooth function $f:[0, 1]\to [0, 1]$ such that $f(0)=0$ and $f(1)=1$ preserves the holonomy map. So we can quotient \pathm\ by such reparameterizations. Baez and Schreiber use paths that slow down near the endpoints instead of piecewise-smooth and reparameterizations called thin homotopies, which sweep out no area (singular differential).
+    \item In the case of a loop $f(0)=f(1)=x$, we carve out a subgroup of $\Aut(E_x)$ called the holonomy group, denoted $\Phi(x)$. $$\Phi(x)=\image(\lift(\omega, \{\mathrm{loops}\}) )\subset \Aut(E_x).$$
+    \item Restricting to contractible loops gives the \emph{restricted holonomy} group denoted $\Phi_0(x)$. $$\Phi_0(x)=\image(\lift(\omega, \{\mathrm{contractible\ loops}\}) )\subset \Aut(E_x).$$
 \end{enumerate}
 
-Bring in pictures from Rupert Way paper.
+If we require that holonomy preserve additional structure on $F$ such as a linear structure, or a metric, or a metric + orientation, then we prescribe a subgroup of $\Aut(F)$. Putting the group at the center of the discussion segues us to principal bundles.
 
 \section{In principal bundles}
 A principal bundle is a fiber bundle where $F$ is a Lie group, plus more conditions:
@@ -204,7 +230,54 @@ A principal bundle is a fiber bundle where $F$ is a Lie group, plus more conditi
     \item $G$ acts freely and transitively on $E$ on the right and $M$ is the quotient of this action: $M=E/G$.
 \end{enumerate}
 
-A connection is a horizontal distribution like before, plus the condition that the horizontal subspaces be equivariant under the action of $G$. So the splitting is equivariant. The elements of $G$ push points up and down vertically, and the derivative of these maps push the tangent spaces around. These derivatives must preserve the splitting.
+The fibers of $E$ are affine versions of $G$. They lack an identity point. The main example is the set of bases of a vector space. Choosing one basis and associating that to $e\in GL(V)$, we get a diffeomorphism between the bases and $GL(V)$.
+
+The action of an element $g\in G$ on $E$ is to rotate or move each fiber by the same amount.
+
+\myfig{Rupert Way again}{way_gaction}
+
+There is a variable version: imagine choosing a different $g$ at each point, smoothly varying. Morally like a smooth map $M\to G$. These are called \emph{gauge transformations}. This is the group $\Aut(E)$, as any $G$-equivariant automorphism of $E$ that is the identity on $M$ is given by such a transformation.
+
+Given $g$ acting on $E$ via $R_g$ we can take the derivative $TR_g:TE\to TE$. This can push any tangent structures around.
+
+Given a single tangent vector in $E$, we can push it all along its riber with $TR_g$ for all $g\in G$ and get a $G$-invariant vector field on that fiber.
+
+A connection is a horizontal distribution like before, plus the condition that all the $TR_g$ respect the splitting. The horizontal distribution is $G$-invariant.
+
+Not sure what diagram I want yet, here's a crack at it:
+
+% https://q.uiver.app/?q=WzAsMTksWzQsMywiRSJdLFs1LDMsIkUiXSxbNCw0LCJNIl0sWzUsNCwiTSJdLFszLDMsIkciXSxbMywxLCJcXG1hdGhmcmFre2d9Il0sWzMsMiwiVEciXSxbNCwyLCJURSJdLFs1LDIsIlxcY29sb3J7cmVkfVRFIl0sWzIsMiwiXFxjb2xvcntibHVlfVxcR2FtbWEgVEVeRyJdLFsyLDEsIlxcY29sb3J7Ymx1ZX1cXEdhbW1hIFZFXkciXSxbMSwyLCJcXGNvbG9ye2JsdWV9XFxHYW1tYSBIRV5HIl0sWzAsMiwiXFxjb2xvcntibHVlfTAiXSxbMiwwLCJcXGNvbG9ye2JsdWV9MCJdLFs1LDAsIlxcY29sb3J7cmVkfTAiXSxbNSwxLCJcXGNvbG9ye3JlZH1WRSJdLFs2LDIsIlxcY29sb3J7cmVkfUhFIl0sWzcsMiwiXFxjb2xvcntyZWR9MCJdLFs0LDEsIkVcXHRpbWVzXFxtYXRoZnJha3tnfSJdLFswLDEsInQiXSxbMiwzLCJcXG1hdGhybXtpZH0iXSxbMCwyLCJwIiwyXSxbMSwzLCJwIl0sWzQsMCwiXFx0cmlhbmdsZWxlZnRcXCAgXFx0ZXh0e1xcdGV4dHVuZGVyc2NvcmV9Il0sWzYsNF0sWzUsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywwXSxbOCwxXSxbMTAsOSwiIiwwLHsiY29sb3VyIjpbMjQwLDg2LDYwXX1dLFs5LDExLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzEzLDEwLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzExLDEyLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzE0LDE1LCIiLDAseyJjb2xvdXIiOlszNjAsOTYsNDZdfV0sWzE1LDgsIiIsMCx7ImNvbG91ciI6WzM2MCw5Niw0Nl19XSxbOCwxNiwiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFsxNiwxNywiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFs1LDEwLCJcXGNvbmciLDJdLFs2LDddLFs3LDhdLFsxNSwxOCwiXFxjb25nIiwyXSxbMTgsNSwiXFxtYXRocm17cHJ9XzIiLDJdLFs4LDE1LCJcXG9tZWdhIiwyLHsiY3VydmUiOjEsImNvbG91ciI6WzM2MCw5Niw0Nl19LFszNjAsOTYsNDYsMV1dLFszLDgsIlg6XFxHYW1tYSBURSIsMix7ImN1cnZlIjoyLCJjb2xvdXIiOlsyNDAsODYsNjBdfSxbMjQwLDg2LDYwLDFdXV0=
+\[\begin{tikzcd}
+	&& {\color{blue}0} &&& {\color{red}0} \\
+	&& {\color{blue}\Gamma VE^G} & {\mathfrak{g}} & {E\times\mathfrak{g}} & {\color{red}VE} \\
+	{\color{blue}0} & {\color{blue}\Gamma HE^G} & {\color{blue}\Gamma TE^G} & TG & TE & {\color{red}TE} & {\color{red}HE} & {\color{red}0} \\
+	&&& G & E & E \\
+	&&&& M & M
+	\arrow["t", from=4-5, to=4-6]
+	\arrow["{\mathrm{id}}", from=5-5, to=5-6]
+	\arrow["p"', from=4-5, to=5-5]
+	\arrow["p", from=4-6, to=5-6]
+	\arrow["{\triangleleft\  \text{\textunderscore}}", from=4-4, to=4-5]
+	\arrow[from=3-4, to=4-4]
+	\arrow[hook, from=2-4, to=3-4]
+	\arrow[from=3-5, to=4-5]
+	\arrow[from=3-6, to=4-6]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=2-3, to=3-3]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-3, to=3-2]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=1-3, to=2-3]
+	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-2, to=3-1]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=1-6, to=2-6]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=2-6, to=3-6]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-6, to=3-7]
+	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-7, to=3-8]
+	\arrow["\cong"', from=2-4, to=2-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-5, to=3-6]
+	\arrow["\cong"', from=2-6, to=2-5]
+	\arrow["{\mathrm{pr}_2}"', from=2-5, to=2-4]
+	\arrow["\omega"', color={rgb,255:red,230;green,5;blue,5}, curve={height=6pt}, from=3-6, to=2-6]
+	\arrow["{X:\Gamma TE}"', color={rgb,255:red,65;green,65;blue,241}, curve={height=12pt}, from=5-6, to=3-6]
+\end{tikzcd}\]
 
 \[\begin{tikzcd}
 	{VE\oplus HE} & {VE\oplus HE} \\
@@ -222,24 +295,6 @@ A connection is a horizontal distribution like before, plus the condition that t
 	\arrow["p", from=3-2, to=4-2]
 	\arrow["{\mathrm{id}}", from=4-1, to=4-2]
 \end{tikzcd}\]
-
-\[\begin{tikzcd}
-	0 & VE & TE & {p^* TM} & 0 \\
-	0 & VE & TE & {p^* TM} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-	\arrow[from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-	\arrow["{TR_g}", from=1-2, to=2-2]
-	\arrow["{\mathrm{id}}", from=1-4, to=2-4]
-	\arrow["{TR_g}", from=1-3, to=2-3]
-\end{tikzcd}\]
-
-This is the usual setting for a connection. The detour with fiber bundles allowed us to talk about it without the equivariance complication. Connections are very often confusing when first introduced because there is too much going on. You're welcome. (Actually, thank Kolar et al \cite{kolar_natural_1993}).
 
 More results:
 \begin{enumerate}
@@ -283,6 +338,8 @@ A question we ask about distributions is whether they are \emph{integrable} i.e.
 
 Whether a distribution can be integrated is a purely local question! Whether we can move from infinitesimal to local. These foliations don't need to extend to anything global such as an embedding. Imagine a line of irrational slope in the torus.
 
+\myfig{Scorpan again}{scorpan_nonflat_loop}
+
 If $D$ \emph{could} be integrated, then our hypothetical vector fields would have to satisfy $[X,Y]\subset D$, since there's a manifold structure and bracketing is closed. So being ``closed under bracket'' is necessary for a distribution to be integrable. It's also sufficient (19th c, see the Wikipedia page for Frobenius' theorem).
 
 Draw a picture where the parallelogram doesn't connect up at the far corner.
@@ -297,6 +354,14 @@ More facts:
 \item The restricted bundle $P(u)$ is connected and so is a cover of $M$. 
 \item If $M$ is simply connected and the connection is flat, then $E$ is trivializable.
 \end{enumerate}
+
+
+Formulas:
+
+$$F(X, Y) = \omega(\lift(X), \lift(Y))$$
+$$R^*_g(\omega)$$
+Bianchi identity.
+
 
 \section{Morphisms}
 Given $f:P'(M', G') \to P(M, G)$ and a corresponding morphism $G'\to G$ and which is a diffeo on the base, we can push connections forward with the derivative of $f$.
@@ -333,38 +398,6 @@ Given $f:P'(M', G') \to P(M, G)$ and a corresponding \emph{isomorphism} $G'\to G
 	\arrow[from=4-2, to=4-1]
 \end{tikzcd}\]
 
-% https://q.uiver.app/?q=WzAsMTksWzQsMywiRSJdLFs1LDMsIkUiXSxbNCw0LCJNIl0sWzUsNCwiTSJdLFszLDMsIkciXSxbMywxLCJcXG1hdGhmcmFre2d9Il0sWzMsMiwiVEciXSxbNCwyLCJURSJdLFs1LDIsIlxcY29sb3J7cmVkfVRFIl0sWzIsMiwiXFxjb2xvcntibHVlfVxcR2FtbWEgVEVeRyJdLFsyLDEsIlxcY29sb3J7Ymx1ZX1cXEdhbW1hIFZFXkciXSxbMSwyLCJcXGNvbG9ye2JsdWV9XFxHYW1tYSBIRV5HIl0sWzAsMiwiXFxjb2xvcntibHVlfTAiXSxbMiwwLCJcXGNvbG9ye2JsdWV9MCJdLFs1LDAsIlxcY29sb3J7cmVkfTAiXSxbNSwxLCJcXGNvbG9ye3JlZH1WRSJdLFs2LDIsIlxcY29sb3J7cmVkfUhFIl0sWzcsMiwiXFxjb2xvcntyZWR9MCJdLFs0LDEsIkVcXHRpbWVzXFxtYXRoZnJha3tnfSJdLFswLDEsInQiXSxbMiwzLCJcXG1hdGhybXtpZH0iXSxbMCwyLCJwIiwyXSxbMSwzLCJwIl0sWzQsMCwiXFx0cmlhbmdsZWxlZnRcXCAgXFx0ZXh0e1xcdGV4dHVuZGVyc2NvcmV9Il0sWzYsNF0sWzUsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywwXSxbOCwxXSxbMTAsOSwiIiwwLHsiY29sb3VyIjpbMjQwLDg2LDYwXX1dLFs5LDExLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzEzLDEwLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzExLDEyLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzE0LDE1LCIiLDAseyJjb2xvdXIiOlszNjAsOTYsNDZdfV0sWzE1LDgsIiIsMCx7ImNvbG91ciI6WzM2MCw5Niw0Nl19XSxbOCwxNiwiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFsxNiwxNywiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFs1LDEwLCJcXGNvbmciLDJdLFs2LDddLFs3LDhdLFsxNSwxOCwiXFxjb25nIiwyXSxbMTgsNSwiXFxtYXRocm17cHJ9XzIiLDJdLFs4LDE1LCJcXG9tZWdhIiwyLHsiY3VydmUiOjEsImNvbG91ciI6WzM2MCw5Niw0Nl19LFszNjAsOTYsNDYsMV1dLFszLDgsIlg6XFxHYW1tYSBURSIsMix7ImN1cnZlIjoyLCJjb2xvdXIiOlsyNDAsODYsNjBdfSxbMjQwLDg2LDYwLDFdXV0=
-\[\begin{tikzcd}
-	&& {\color{blue}0} &&& {\color{red}0} \\
-	&& {\color{blue}\Gamma VE^G} & {\mathfrak{g}} & {E\times\mathfrak{g}} & {\color{red}VE} \\
-	{\color{blue}0} & {\color{blue}\Gamma HE^G} & {\color{blue}\Gamma TE^G} & TG & TE & {\color{red}TE} & {\color{red}HE} & {\color{red}0} \\
-	&&& G & E & E \\
-	&&&& M & M
-	\arrow["t", from=4-5, to=4-6]
-	\arrow["{\mathrm{id}}", from=5-5, to=5-6]
-	\arrow["p"', from=4-5, to=5-5]
-	\arrow["p", from=4-6, to=5-6]
-	\arrow["{\triangleleft\  \text{\textunderscore}}", from=4-4, to=4-5]
-	\arrow[from=3-4, to=4-4]
-	\arrow[hook, from=2-4, to=3-4]
-	\arrow[from=3-5, to=4-5]
-	\arrow[from=3-6, to=4-6]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=2-3, to=3-3]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-3, to=3-2]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=1-3, to=2-3]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-2, to=3-1]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=1-6, to=2-6]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=2-6, to=3-6]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-6, to=3-7]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-7, to=3-8]
-	\arrow["\cong"', from=2-4, to=2-3]
-	\arrow[from=3-4, to=3-5]
-	\arrow[from=3-5, to=3-6]
-	\arrow["\cong"', from=2-6, to=2-5]
-	\arrow["{\mathrm{pr}_2}"', from=2-5, to=2-4]
-	\arrow["\omega"', color={rgb,255:red,230;green,5;blue,5}, curve={height=6pt}, from=3-6, to=2-6]
-	\arrow["{X:\Gamma TE}"', color={rgb,255:red,65;green,65;blue,241}, curve={height=12pt}, from=5-6, to=3-6]
-\end{tikzcd}\]
 
 \section{In terms of downstairs bundles}
 
