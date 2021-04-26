@@ -80,6 +80,8 @@
 \newcommand{\pinv}{p^{-1}}
 \newcommand{\aut}{\mathrm{Aut}}
 \newcommand{\diffeo}{\mathrm{Diffeo}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\Ad}{\mathrm{Ad}}
 
 \newcommand{\bg}{\ensuremath{\textbf{B}G}}
 \newcommand{\bgconn}{\ensuremath{\textbf{B}G_{\textsf{conn}}}}
@@ -129,7 +131,7 @@ We will make a beeline for gauge theory, passing through terrorities that you ma
 \section{Geometric intuition}
 The 20th century method of capturing curvature is in the following figure, where we slide a tangent vector around a loop on a curved surface.
 
-\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2015}{scorpan_sphere}
+\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2015 \cite{scorpan_wild_2005}}{scorpan_sphere}
 
 The embedding has selected a metric on S2, pulled back from R3. A metric is more strictly structure than a connection. A connection captures this notion of transport without a full metric.
 
@@ -181,7 +183,7 @@ Here's another good picture of the splitting.
 
 \myfig{ibid.}{way_upstairs}
 
-Connections exist. For example on a paracompact manifold we can 
+Connections exist if $M$ is nice enough. For example on a paracompact manifold we can 
 \begin{enumerate}
 	\item Create a smooth inner product using a partition of unity
 	\item split $HE$ usign orthogonal complement
@@ -193,9 +195,9 @@ We can parlay the lifting of tangent vectors into the lifting of curves. This is
 
 Given a smooth curve $c:[0, 1]\to M$:
 \begin{enumerate}
-	\item Lift all the tangent vectors of $c$ upstairs, giving a vector field on $p^{-1}(c([0,1]))$
+	\item Lift all the tangent vectors of $c$ upstairs, giving a horizontal vector field above $p^{-1}(c([0,1]))$
 	\item Choose a point $u$ over $c(0)$.
-	\item Flow along the vector field (requires a little proof that we can solve this differential equation).
+	\item Flow along the vector field (requires a little proof that we can solve this differential equation -- straightforward in a local triv).
 \end{enumerate}
 
 \begin{tcolorbox}
@@ -204,7 +206,7 @@ Simple proof using curvature and connection pullbacks: Given a curve in $M$, say
 
 Lifting curves provides a map between fibers: parallel transport!
 
-\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2005}{scorpan_transport}
+\myfig{Alexandru Scorpan, ``The Wild World of Four-Manifolds'', 2005 \cite{scorpan_wild_2005}}{scorpan_transport}
 
 Let \pathm\ be the set of piecewise-smooth curves $[0, 1]\to M$. Let $\pp(M, x, y)$ be paths from $x$ to $y$.
 
@@ -223,83 +225,80 @@ Some results
 
 If we require that holonomy preserve additional structure on $F$ such as a linear structure, or a metric, or a metric + orientation, then we prescribe a subgroup of $\Aut(F)$. Putting the group at the center of the discussion segues us to principal bundles.
 
+\section{Curvature}
+On to curvature.
+
+In the general context of smooth manifolds, we have the Lie bracket of vector fields, which gives another vector field. The space of vector fields is hence a Lie algebra.
+
+\myfig{Vector fields don't commute but the bracket is a new vector field}{lie_bracket_nonzero}
+
+But given a sub-bundle like $VE$ or $HE$, will vector fields in that infinitesimal object be closed under Lie bracket?
+
+If the sub-bundle can be integrated -- if it comes from a system of local sub-manifolds, i.e. a \emph{foliation}, then sure, because the vector fields live on a manifold where bracket is closed.
+
+\myfig{Foliation of $E$ by $M$-dimensional slices}{foliation}
+
+The implication goes the other way too -- closure under Lie bracket of all vector fields implies the distribution arises from a foliation. (Frobenius theorem, 19th c.)
+
+For us the obstruction to integrability is the verticality of the bracket of two horizontal fields, and we have a formula for that! $$\omega([X, Y]), \mathrm{for\ }X, Y\mathrm{\ horizontal}$$
+
+The function $\omega([\lift X, \lift Y])$ on pairs of tangent vectors in $TM$ is called the curvature.
+
+If we have two horizontal vector fields, will their bracket be horizontal? If so, the horizontal bundle is integrable and you can slide around in there locally and stay horizontal. The connection is said to be \emph{flat}.
+
+This is an entirely local condition, or obstruction.
+
+Note that bundles are locally a product, but not locally a foliation. This is because the foliation is a coordinate-invariant notion. Even adding the connection, which is an infinitesimal product structure, may not integrate to a foliation.
+
+Let's talk about how flatness relates to the fundamental groupoid.
+
+More facts:
+\begin{enumerate}
+\item If $M$ is simply connected and the connection is flat, then $E$ is trivializable.
+\item Ambrose-Singer Theorem: Define $E(u)$ upstairs as the image of $\transport(\omega, \{loops\})$ and $\Phi(u)$ as the corresponding image in $G$. Then the Lie algebra of $\Phi(u)$ is the image of curvature, all elements of the form $\omega([X, Y])$ for $X, Y\in T_uE$.
+\item If $c$ is a small loop in $M$, $\lift c$ must live in one leaf of the foliation hence is a loop. Same for any contractible loop. Needs lemmas, such as 
+\item Two curves respresenting the same class of $\pi_1(M, x)$ lift to the same holonomy element.
+\item So $\transport$ factors through the fundamental groupoid. $$\transport: (\omega : \Omega_1(E; VE))\to (c: \Pi_1(M, x, y)) \to E_{x} \to E_{y}$$
+\end{enumerate}
+
+
+Formulas:
+
+$$F(X, Y) = \omega(\lift(X), \lift(Y))$$
+$$d\omega(X, Y) = -\frac{1}{2}[\omega(X), \omega(Y)] + F(X, Y)$$
+$$dF(X, Y, Z) = 0 \mathrm{\ (if\ }X, Y, Z\mathrm{\ horizontal)}$$
+$$R^*_g(\omega)$$
+
 \section{In principal bundles}
 A principal bundle is a fiber bundle where $F$ is a Lie group, plus more conditions:
 \begin{enumerate}
-    \item The local trivializations respect the left action of $G$ on itself (equivariant).
-    \item $G$ acts freely and transitively on $E$ on the right and $M$ is the quotient of this action: $M=E/G$.
+    \item $G$ acts freely and transitively on $E$ on the right
+	\item $M$ is the quotient of this action: $M=E/G$.
+    \item The local trivializations respect the action: $\phi(e) = (m, g)\iff \phi(eh) = (m, gh)$.
 \end{enumerate}
 
-The fibers of $E$ are affine versions of $G$. They lack an identity point. The main example is the set of bases of a vector space. Choosing one basis and associating that to $e\in GL(V)$, we get a diffeomorphism between the bases and $GL(V)$.
+The fibers of $E$ are affine versions of $G$. They lack an identity point. The main example is the set of bases of a vector space. Choosing one basis and associating that to $e\in GL(V)$, we get a diffeomorphism between the bases and $GL(V)$ given by the transformation that maps the selected basis there.
 
-The action of an element $g\in G$ on $E$ is to rotate or move each fiber by the same amount.
+$G$ adds a lot of structure to the proceedings.
 
-\myfig{Rupert Way again}{way_gaction}
+There exists $\gamma:M\times\mathfrak{g}\cong VE$ because $TG\cong\mathfrak{g}$ and so each chart has trivialization of $VE$ that glues because the gluing is $G$-invariant.
 
-There is a variable version: imagine choosing a different $g$ at each point, smoothly varying. Morally like a smooth map $M\to G$. These are called \emph{gauge transformations}. This is the group $\Aut(E)$, as any $G$-equivariant automorphism of $E$ that is the identity on $M$ is given by such a transformation.
+$E\times G \to G$, and the orbit of $u\in E$ is a diffeo with $G$.
 
-Given $g$ acting on $E$ via $R_g$ we can take the derivative $TR_g:TE\to TE$. This can push any tangent structures around.
+Given $X\in\mathfrak{g}$ we get a left-invariant vector field on $E_m$. This also gives the trivialization $VE\cong M\times\mathfrak{g}$.
 
-Given a single tangent vector in $E$, we can push it all along its riber with $TR_g$ for all $g\in G$ and get a $G$-invariant vector field on that fiber.
+The Maurer-Cartin form $\theta\in\Omega^w(G;\mathfrak{g})$ is given by $\theta(X)=X$ and then extended by left-translation. It sends a tangent vector to its translate at $e$.
 
-A connection is a horizontal distribution like before, plus the condition that all the $TR_g$ respect the splitting. The horizontal distribution is $G$-invariant.
-
-Not sure what diagram I want yet, here's a crack at it:
-
-% https://q.uiver.app/?q=WzAsMTksWzQsMywiRSJdLFs1LDMsIkUiXSxbNCw0LCJNIl0sWzUsNCwiTSJdLFszLDMsIkciXSxbMywxLCJcXG1hdGhmcmFre2d9Il0sWzMsMiwiVEciXSxbNCwyLCJURSJdLFs1LDIsIlxcY29sb3J7cmVkfVRFIl0sWzIsMiwiXFxjb2xvcntibHVlfVxcR2FtbWEgVEVeRyJdLFsyLDEsIlxcY29sb3J7Ymx1ZX1cXEdhbW1hIFZFXkciXSxbMSwyLCJcXGNvbG9ye2JsdWV9XFxHYW1tYSBIRV5HIl0sWzAsMiwiXFxjb2xvcntibHVlfTAiXSxbMiwwLCJcXGNvbG9ye2JsdWV9MCJdLFs1LDAsIlxcY29sb3J7cmVkfTAiXSxbNSwxLCJcXGNvbG9ye3JlZH1WRSJdLFs2LDIsIlxcY29sb3J7cmVkfUhFIl0sWzcsMiwiXFxjb2xvcntyZWR9MCJdLFs0LDEsIkVcXHRpbWVzXFxtYXRoZnJha3tnfSJdLFswLDEsInQiXSxbMiwzLCJcXG1hdGhybXtpZH0iXSxbMCwyLCJwIiwyXSxbMSwzLCJwIl0sWzQsMCwiXFx0cmlhbmdsZWxlZnRcXCAgXFx0ZXh0e1xcdGV4dHVuZGVyc2NvcmV9Il0sWzYsNF0sWzUsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywwXSxbOCwxXSxbMTAsOSwiIiwwLHsiY29sb3VyIjpbMjQwLDg2LDYwXX1dLFs5LDExLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzEzLDEwLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzExLDEyLCIiLDAseyJjb2xvdXIiOlsyNDAsODYsNjBdfV0sWzE0LDE1LCIiLDAseyJjb2xvdXIiOlszNjAsOTYsNDZdfV0sWzE1LDgsIiIsMCx7ImNvbG91ciI6WzM2MCw5Niw0Nl19XSxbOCwxNiwiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFsxNiwxNywiIiwwLHsiY29sb3VyIjpbMzYwLDk2LDQ2XX1dLFs1LDEwLCJcXGNvbmciLDJdLFs2LDddLFs3LDhdLFsxNSwxOCwiXFxjb25nIiwyXSxbMTgsNSwiXFxtYXRocm17cHJ9XzIiLDJdLFs4LDE1LCJcXG9tZWdhIiwyLHsiY3VydmUiOjEsImNvbG91ciI6WzM2MCw5Niw0Nl19LFszNjAsOTYsNDYsMV1dLFszLDgsIlg6XFxHYW1tYSBURSIsMix7ImN1cnZlIjoyLCJjb2xvdXIiOlsyNDAsODYsNjBdfSxbMjQwLDg2LDYwLDFdXV0=
-\[\begin{tikzcd}
-	&& {\color{blue}0} &&& {\color{red}0} \\
-	&& {\color{blue}\Gamma VE^G} & {\mathfrak{g}} & {E\times\mathfrak{g}} & {\color{red}VE} \\
-	{\color{blue}0} & {\color{blue}\Gamma HE^G} & {\color{blue}\Gamma TE^G} & TG & TE & {\color{red}TE} & {\color{red}HE} & {\color{red}0} \\
-	&&& G & E & E \\
-	&&&& M & M
-	\arrow["t", from=4-5, to=4-6]
-	\arrow["{\mathrm{id}}", from=5-5, to=5-6]
-	\arrow["p"', from=4-5, to=5-5]
-	\arrow["p", from=4-6, to=5-6]
-	\arrow["{\triangleleft\  \text{\textunderscore}}", from=4-4, to=4-5]
-	\arrow[from=3-4, to=4-4]
-	\arrow[hook, from=2-4, to=3-4]
-	\arrow[from=3-5, to=4-5]
-	\arrow[from=3-6, to=4-6]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=2-3, to=3-3]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-3, to=3-2]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=1-3, to=2-3]
-	\arrow[color={rgb,255:red,65;green,65;blue,241}, from=3-2, to=3-1]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=1-6, to=2-6]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=2-6, to=3-6]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-6, to=3-7]
-	\arrow[color={rgb,255:red,230;green,5;blue,5}, from=3-7, to=3-8]
-	\arrow["\cong"', from=2-4, to=2-3]
-	\arrow[from=3-4, to=3-5]
-	\arrow[from=3-5, to=3-6]
-	\arrow["\cong"', from=2-6, to=2-5]
-	\arrow["{\mathrm{pr}_2}"', from=2-5, to=2-4]
-	\arrow["\omega"', color={rgb,255:red,230;green,5;blue,5}, curve={height=6pt}, from=3-6, to=2-6]
-	\arrow["{X:\Gamma TE}"', color={rgb,255:red,65;green,65;blue,241}, curve={height=12pt}, from=5-6, to=3-6]
-\end{tikzcd}\]
-
-\[\begin{tikzcd}
-	{VE\oplus HE} & {VE\oplus HE} \\
-	TE & TE \\
-	E & E \\
-	M & M
-	\arrow["{R_g}", from=3-1, to=3-2]
-	\arrow["{TR_g}", from=2-1, to=2-2]
-	\arrow["\cong"', from=1-1, to=2-1]
-	\arrow["\cong", from=1-2, to=2-2]
-	\arrow["{TR_g}", from=1-1, to=1-2]
-	\arrow["\pi"', from=2-1, to=3-1]
-	\arrow["\pi", from=2-2, to=3-2]
-	\arrow["p"', from=3-1, to=4-1]
-	\arrow["p", from=3-2, to=4-2]
-	\arrow["{\mathrm{id}}", from=4-1, to=4-2]
-\end{tikzcd}\]
+Connections in this setting are required to satisfy:
+\begin{enumerate}
+	\item The distribution $HE$ is $G$-invariant.
+	\item Therefore $\gamma^{-1}\omega(\gamma(m, X)) = X$. i.e. $\omega$ is the identity on $G$-invariant vertical vector fields.
+\end{enumerate}
 
 More results:
 \begin{enumerate}
     \item $G$ acts on horizontal curves: composing a horizontal curve with the right group action produces another horizontal curve.
-    \item Take $u\in E_x$ in the principal bundle $E$ and again consider all horizontal loops. This gives a subgroup of $G$, denoted similarly $\Phi(u)$ with restricted version $\Phi_0(u)$. The type of $u:E$ versus $x:M$ determines the type of the holonomy group we're referring to. $$\Phi(u) = \image(\lift(\omega)(u)).$$
+    \item Take $u\in E_x$ in the principal bundle $E$ and again consider all horizontal loops. This gives a subgroup of $G$, denoted similarly $\Phi(u)$ with restricted version $\Phi_0(u)$. The type of $u:E$ versus $x:M$ determines the type of the holonomy group we're referring to. $$\Phi(u) = \image(\transport(\omega)(\cdot)(u)).$$
     
 	For example, imagine on the sphere if $P$ was the frame bundle. Imagine the connection is the one we implicitly used, which preserves length and angles. Then this image would in fact be contained in $O(2)$ instead of $GL(2)$.
     \item If $M$ is connected, all $\Phi_u$ are conjugate and hence isomorphic.
@@ -308,60 +307,41 @@ More results:
     \item Ambrose-Singer Theorem: The Lie algebra of $\Phi_0(u)$ is the span of all elements of $\mathfrak{g}$ of the form $\Omega_v(X, Y)$ for $v\in P(u)$ with $X, Y$ horizontal. Slogan: curvature is infinitesimal holonomy.
 \end{enumerate}
 
-There's another moving part now that we can bring in which is the Lie algebra $\mathfrak{g}$ of $G$. This soups up what's going on vertically.
-\begin{enumerate}
-    \item There is a bijection between $\mathfrak{g}$ and equivariant vertical vector fields over a point $x$. The bijection is given by \gc{do it}
-    \item Starting with a vector $v\in T_e E$ at some point, whether vertical, horizontal, or mixture, we can push it all up and down the fiber to extend that to a vector field, by the derivative of the action of $G$, i.e. with $\mathfrak{g}$.
-    \item The vertical bundle is trivial.
-    \item How $\mathrm{ad}(P)$ appears.\gc{Prop 1.1 Kob-Nom p. 64}
-\end{enumerate}
+\section{Covariant derivative}
+Precomposing with $\lift$ lets us define a souped-up differential operator called covariant derivative. We can differentiate sections of $E$ in the direction of tangent vector of $M$.
+\section{Gauge transformations}
+The action of an element $g\in G$ on $E$ is to rotate or move each fiber by the same amount.
 
-We can move the exact sequence to the base (Atiyah-Bott p.547). Because the base is a quotient by the $G$-action, and because the upstairs constructions are $G$-invariant, there is an equivalent exact sequence on the base that we are splitting. $$0\to \mathrm{ad}(P)\to E/G\to TM\to 0$$
+There is a variable version: imagine choosing a different $g$ at each point, smoothly varying. Morally like a smooth map $M\to G$. These are called \emph{gauge transformations}. This is the group $\Aut(E)$, as any $G$-equivariant automorphism of $E$ that is the identity on $M$ is given by such a transformation.
 
-Connections can be pulled back and pushed forward!
+Gauge transformations. A gauge transformation is a $G$-equivariant diffeomorphism $P\to P$ that is the identity on $M$. So these act on each fiber separately in a smooth way. You can also see it as a smooth choice of element of $G$ acting on each fiber, but the association with $G$ can only be chosen locally of course.
 
-\section{Curvature}
+We can think of GTs as analogous to changes of coordinate chart. Physicists seek theories that are gauge-invariant, i.e. invariant under the group of gauge transformations. This is a giagintic infinite-dimensional space, whose type is morally similar to $M\to G$.
 
-On to curvature. In the general context of smooth manifolds, we have the Lie bracket of vector fields, which gives another vector field. The space of vector fields is hence a Lie algebra.
+GTs act on connections. At a point they slide the horizontal subspaces up and down, and because they vary point to point, they may add some tilt.
 
-Draw an infinitesimal picture of the bracket at a point. The tips can meet or not meet.
+GTs conjugate the curvature by a variable element of $G$. They cannot make a non-flat bundle flat.
 
-Suppose we have what's called a \emph{distribution}, i.e. a sub-bundle of the tangent bundle. This is an infinitesimal thingie, a subspace at each point. Now suppose we have vector fields that live in the sub-bundle. Will their Lie bracket live there? Let's give some names.
-\begin{enumerate}
-    \item Let $M$ be a manifold and $p:TM\to M$ its tangent bundle. Let $m=\dim M$.
-    \item Let $D\subset TM$ be a distribution, i.e. $D$ is a vector bundle over $M$ and $D_x\subset T_x M$ is a smoothly varying sub-vector space at each point. Let $d=\dim D$.
-    \item Let $X$ and $Y$ be two vector fields, i.e. smooth sections of $p$. Suppose $X$ and $Y$ are in vact sections of $D$.
-    \item Consider $[X, Y]$. 
-\end{enumerate}
-
-A question we ask about distributions is whether they are \emph{integrable} i.e. whether there is a \emph{foliation}, which is like a vector field flow but in the dimension of $D$. A local product structure of $M$ as a product of $\rr^{d} \times \rr^{m-d}$ such that $D$ is the tangent bundle of the $d$-dimensional part at every point.
-
-Whether a distribution can be integrated is a purely local question! Whether we can move from infinitesimal to local. These foliations don't need to extend to anything global such as an embedding. Imagine a line of irrational slope in the torus.
-
-\myfig{Scorpan again}{scorpan_nonflat_loop}
-
-If $D$ \emph{could} be integrated, then our hypothetical vector fields would have to satisfy $[X,Y]\subset D$, since there's a manifold structure and bracketing is closed. So being ``closed under bracket'' is necessary for a distribution to be integrable. It's also sufficient (19th c, see the Wikipedia page for Frobenius' theorem).
-
-Draw a picture where the parallelogram doesn't connect up at the far corner.
-
-In this language, a connection is a horizontal foliation. If we have two horizontal vector fields, will their bracket be horizontal? If so, the horizontal bundle is integrable and you can slide around in there locally and stay horizontal. The connection is said to be \emph{flat}.
-
-More facts:
-\begin{enumerate}
-\item $\Phi_0(u)=\{u\}$. Contractible loops must live in one leaf of the foliation and return to the same point $u$ in the fiber.
-\item Two curves respresenting the same class of $\pi_1(M, x)$ lift to the same holonomy element.
-\item Thus we get a map $\pi_1(M, x) \to \Phi(u)\subset G$. 
-\item The restricted bundle $P(u)$ is connected and so is a cover of $M$. 
-\item If $M$ is simply connected and the connection is flat, then $E$ is trivializable.
-\end{enumerate}
+The type of connections mod gauge is of paramount importance in physics and in fancy high-powered physics-derived invariants of $M$, such as in Donaldson theory on a 4-manifold, which starts with an $SU(2)$ bundle over $M$ and looks at $\mathcal{A}/\mathcal{G}$.
 
 
-Formulas:
 
-$$F(X, Y) = \omega(\lift(X), \lift(Y))$$
-$$R^*_g(\omega)$$
-Bianchi identity.
 
+One last thing you can do with horizontal lifts of vectors is precompose lifting with exterior differentiation upstairs.
+
+$$h:\Gamma(TM)\to \Gamma(HE)$$
+$$d:\Omega^\bullet(T^*E)\to \Omega^{\bullet+1}(T^*E)$$
+$$d\circ h: \Omega^\bullet(T^*M)\to \Omega^{\bullet+1}(T^*M)$$
+
+$g^{-1}dg$ and such.
+
+Affine. Lie algebra-valued 1-forms.
+
+Classifying space.
+
+Theorems from gauge theory!
+
+Quantum gauge theory.
 
 \section{Morphisms}
 Given $f:P'(M', G') \to P(M, G)$ and a corresponding morphism $G'\to G$ and which is a diffeo on the base, we can push connections forward with the derivative of $f$.
@@ -400,38 +380,23 @@ Given $f:P'(M', G') \to P(M, G)$ and a corresponding \emph{isomorphism} $G'\to G
 
 
 \section{In terms of downstairs bundles}
+The sequence $$VE\to TE\to p^*TM$$ are bundles over $E$, but $M$ is the quotient $E/G$ so can all these structures be modded out by $G$ and become vector bundles directly on $M$? Yes!
 
+First let's replace $VE$ with an isomorphic vector bundle that's constructed directly from a representation of $G$. Actually $VE$ is trivial, for a similar reason to the well-known fact that $TG$ is trivial for a Lie group.
 
-\section{Gauge transformations}
-Gauge transformations. A gauge transformation is a $G$-equivariant diffeomorphism $P\to P$ that is the identity on $M$. So these act on each fiber separately in a smooth way. You can also see it as a smooth choice of element of $G$ acting on each fiber, but the association with $G$ can only be chosen locally of course.
+Given any smooth right action of $G$ on any manifold, which we'll suggestively call $E$, we can differentiate it to get an infinitesimal version of the action. If the action is $$R:G\times E \to E$$ then differentiating with respect to the $G$ component gives $$TR:\mathfrak{g}\times E \to TE.$$ We can interpret this as follows: given an element of the Lie algebra $X:\mathfrak{g}$ and a point $u:E$, we get a vector $TR(X, u):T_u E$ by differentiating the $G$-action in the direction of $X$. In other words, take a smooth curve in $G$ through the identity, $c:(-1, 1)\to G$ such that $c(0)=e$ and $c'(0)=X$. Then examine the curve $R\circ c$ which is a curve in $E$ and take its derivative at 0 (with respect), yielding a tangent vector at $u$. This is the infinitesimal action of $X$ on $E$ at $u$. Then $TR(X, \cdot)$ is a vector field on $E$ which is an infinitesimal transformation of all of $E$ by $X$. This vector field is sometimes denoted $X^*$ and is known as the \emph{fundamental vector field} of $X$.
 
-We can think of GTs as analogous to changes of coordinate chart. Physicists seek theories that are gauge-invariant, i.e. invariant under the group of gauge transformations. This is a giagintic infinite-dimensional space, whose type is morally similar to $M\to G$.
+If we curry $R$ a little bit to get $R:G\to (E \to E),$ i.e. $$R:G\to \Aut(E)$$ then $TR:\mathfrak{g}\to T\Aut(E)=\Gamma TE$, meaning each Lie algebra element gives us an infinitesimal diffeomorphism of $E$ which is a vector field. This is another way of saying that the fundamental vector field of $X:\mathfrak{g}$ is an infinitesimal diffeomorphism of $E$.
 
-GTs act on connections. At a point they slide the horizontal subspaces up and down, and because they vary point to point, they may add some tilt.
+We need to ask the question: what is $TR\circ TR$? How does $G$ act on fundamental vector fields? 
+\begin{mylemma}
+If $R:G\times E \to E$ is a smooth right action of $G$ on $E$, and if $X^*$ is the fundamental vector field of $X:\mathfrak{g}$, then $TR(g)(X^*)=(\ad(g^{-1})X)^*$.
+\end{mylemma}
+This is saying that pushing $X^*$ forward with $TR$ gives a new fundamental vector field that comes from a possibly different Lie algebra element determined by $\ad$. After all, $\ad$ is the derivative of the conjugation action of $G$ on itself, and conjugation is how we can move tangent structures from $e$ to some other element $g$: go back to $e$, build the structure, then move it back to $g$ (i.e., conjugate by $g$). In detail, if $c:(-1,1)\to G$ is a curve with $c(0)=e$ and $c'(0)=X$, and if $u:E$, then $X^*(u)=(TR\circ c)'(0)$. Therefore $TR(g)(X^*)$ maps $X^*(u)$ to a vector attached to $u\cdot g$ which is some translated point elsewhere in $E$. 
 
-GTs conjugate the curvature by a variable element of $G$. They cannot make a non-flat bundle flat.
+Note that although $TR:\mathfrak{g}\times E\to TE$, the image lies in $VE$, and in fact $TR:\mathfrak{g}\times E \xrightarrow{\cong} VE$ because at each point $(X, u)$, the image of $TR$ exhausts the whole vertical vector space at $u$. So $TR$ is a trivialization of $VE$.
 
-The type of connections mod gauge is of paramount importance in physics and in fancy high-powered physics-derived invariants of $M$, such as in Donaldson theory on a 4-manifold, which starts with an $SU(2)$ bundle over $M$ and looks at $\mathcal{A}/\mathcal{G}$.
-
-
-
-
-One last thing you can do with horizontal lifts of vectors is precompose lifting with exterior differentiation upstairs.
-
-$$h:\Gamma(TM)\to \Gamma(HE)$$
-$$d:\Omega^\bullet(T^*E)\to \Omega^{\bullet+1}(T^*E)$$
-$$d\circ h: \Omega^\bullet(T^*M)\to \Omega^{\bullet+1}(T^*M)$$
-
-$g^{-1}dg$ and such.
-
-Affine. Lie algebra-valued 1-forms.
-
-Classifying space.
-
-Theorems from gauge theory!
-
-Quantum gauge theory.
+Leading up to the Atiyah sequence (\cite{atiyah1983yang} p. 547).
 
 \bibliography{connections}
-
 \end{document}
