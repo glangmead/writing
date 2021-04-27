@@ -392,11 +392,13 @@ We need to ask the question: what is $TR\circ TR$? How does $G$ act on fundament
 \begin{mylemma}
 If $R:G\times E \to E$ is a smooth right action of $G$ on $E$, and if $X^*$ is the fundamental vector field of $X:\mathfrak{g}$, then $TR(g)(X^*)=(\ad(g^{-1})X)^*$.
 \end{mylemma}
+\begin{proof}
 This is saying that pushing $X^*$ forward with $TR$ gives a new fundamental vector field that comes from a possibly different Lie algebra element determined by $\ad$. After all, $\ad$ is the derivative of the conjugation action of $G$ on itself, and conjugation is how we can move tangent structures from $e$ to some other element $g$: go back to $e$, build the structure, then move it back to $g$ (i.e., conjugate by $g$). In detail, if $c:(-1,1)\to G$ is a curve with $c(0)=e$ and $c'(0)=X$, and if $u:E$, then $X^*(u)=(TR\circ c)'(0)$. Therefore $TR(g)(X^*)$ maps $X^*(u)$ to a vector attached to $u\cdot g$ which is some translated point elsewhere in $E$. 
+\end{proof}
 
-Note that although $TR:\mathfrak{g}\times E\to TE$, the image lies in $VE$, and in fact $TR:\mathfrak{g}\times E \xrightarrow{\cong} VE$ because at each point $(X, u)$, the image of $TR$ exhausts the whole vertical vector space at $u$. So $TR$ is a trivialization of $VE$.
+Note that although $TR:\mathfrak{g}\times E\to TE$, the image lies in $VE$, and in fact $TR:\mathfrak{g}\times E \xrightarrow{\cong} VE$ because at each point $(X, u)$, the image of $TR$ exhausts the whole vertical vector space at $u$. So $TR$ is a trivialization of $VE$! But by the Lemma, this isomorphism transports the action of $G$ from $VE$ to the action on $E\times \mathfrak{g}$ given by $(u, X)\cdot g = (u\cdot g, ad(g^-1)(X))$. And so the quotient of this action is the associated bundle $E\times_G \mathfrak{g}$ known as the \emph{adjoint bundle} $\ad E$, which is a $\mathfrak{g}$-vector bundle associated to the adjoint representation of $G$ on $\mathfrak{g}$.
 
-Leading up to the Atiyah sequence (\cite{atiyah1983yang} p. 547).
+All this is to say that after quotienting by the action of $G$, we obtain the sequence $$\ad E\to TE/G \to TM$$ of vector bundles over $M$. This is known as the \emph{Atiyah sequence} and is defined in Atiyah-Bott (\cite{atiyah1983yang} p. 547).
 
 \bibliography{connections}
 \end{document}
