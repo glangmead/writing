@@ -1,11 +1,18 @@
 \documentclass[12pt]{article}
+
 \usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{tikz-cd}
-\usepackage{tipa}
+% tipa is redefining the semicolon and bang
+\let\semicolon\;
+\let\bang\!
+\usepackage{tipa} % IPA symbols for shape modality \textesh
+% tipa is redefining the semicolon and bang
+\let\;\semicolon
+\let\!\bang
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
@@ -14,6 +21,7 @@
 \usepackage{quiver}
 \usepackage{mathtools}
 \usepackage{tcolorbox}
+
 
 \graphicspath{ {./img/} }
 
@@ -86,11 +94,29 @@
 \newcommand{\bg}{\ensuremath{\textbf{B}G}}
 \newcommand{\bgconn}{\ensuremath{\textbf{B}G_{\textsf{conn}}}}
 \newcommand{\bgdiff}{\ensuremath{\textbf{B}G_{\textsf{diff}}}}
+\makeatletter
+\newcommand*{\doublerightarrow}[2]{\mathrel{
+  \settowidth{\@tempdima}{$\scriptstyle#1$}
+  \settowidth{\@tempdimb}{$\scriptstyle#2$}
+  \ifdim\@tempdimb>\@tempdima \@tempdima=\@tempdimb\fi
+  \mathop{\vcenter{
+    \offinterlineskip\ialign{\hbox to\dimexpr\@tempdima+1em{##}\cr
+    \rightarrowfill\cr\noalign{\kern.5ex}
+    \rightarrowfill\cr}}}\limits^{#1}_{#2}}}
+\newcommand*{\triplerightarrow}[1]{\mathrel{
+  \settowidth{\@tempdima}{$\scriptstyle#1$}
+  \mathop{\vcenter{
+    \offinterlineskip\ialign{\hbox to\dimexpr\@tempdima+1em{##}\cr
+    \rightarrowfill\cr\noalign{\kern.5ex}
+    \rightarrowfill\cr\noalign{\kern.5ex}
+    \rightarrowfill\cr}}}\limits^{#1}}}
+\makeatother
+\newcommand{\doublearrow}{\rightrightarrows}
 
 \newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
 \newcommand{\commentout}[1]{}
 \newcommand{\image}{\mathrm{Image}}
-\newcommand{\myfig}[2]{\begin{figure}[h]\caption{#1}\centering\includegraphics[width=0.6\textwidth]{#2}\end{figure}}
+\newcommand{\myfig}[2]{\begin{figure}[ht]\caption{#1}\centering\includegraphics[width=0.6\textwidth]{#2}\end{figure}}
 %\newcommand{\gc}[1]{}
 
 \newtheorem{mydef}{Definition}
@@ -113,7 +139,7 @@ If you are interested in these notes but worry about whether you have the prereq
 
 If, like me, you do even better with recorded lectures, I strongly recommend the playlist of lectures by Frederic Schuller \cite{schullerYoutube2015}. His course is efficient but very precise, and he is a great teacher who offers helpful intuition along the way. The scope is similar to the book by Baez and Muniain: he begins with topology and manifolds, defines connections and curvature, and then gets into physics.
 
-The most complete treatment, with the most proofs, is found in Kobayashi and Nomizu's text \cite{kobayashinomizu}, Volume 1.
+The most complete treatment, with the most proofs, is found in Kobayashi and Nomizu's text \cite{kobayashinomizu}, Volume 1. I'm cautiously optimistict that much of Kobayashi-Nomizu is treated a little more clearly and cleanly in a more recent book by Hamilton \cite{hamilton2017}.
 
 We will make a beeline for gauge theory, passing through terrorities that you may need to go deeper into to understand the beeline. Those are:
 \begin{enumerate}
@@ -398,7 +424,48 @@ This is saying that pushing $X^*$ forward with $TR$ gives a new fundamental vect
 
 Note that although $TR:\mathfrak{g}\times E\to TE$, the image lies in $VE$, and in fact $TR:\mathfrak{g}\times E \xrightarrow{\cong} VE$ because at each point $(X, u)$, the image of $TR$ exhausts the whole vertical vector space at $u$. So $TR$ is a trivialization of $VE$! But by the Lemma, this isomorphism transports the action of $G$ from $VE$ to the action on $E\times \mathfrak{g}$ given by $(u, X)\cdot g = (u\cdot g, ad(g^-1)(X))$. And so the quotient of this action is the associated bundle $E\times_G \mathfrak{g}$ known as the \emph{adjoint bundle} $\ad E$, which is a $\mathfrak{g}$-vector bundle associated to the adjoint representation of $G$ on $\mathfrak{g}$.
 
-All this is to say that after quotienting by the action of $G$, we obtain the sequence $$\ad E\to TE/G \to TM$$ of vector bundles over $M$. This is known as the \emph{Atiyah sequence} and is defined in Atiyah-Bott (\cite{atiyah1983yang} p. 547).
+So we have a $G$-action and equivariant maps $$E\times \mathfrak{g}\xrightarrow{\cong} VE\to TE\to p^*TM$$ and we want to quotient this by the $G$-action. We will skip $VE$ and obtain the sequence $$\ad E\to TE/G \to TM$$ of vector bundles over $M$. This is known as the \emph{Atiyah sequence} and is defined in Atiyah-Bott (\cite{atiyah1983yang} p. 547). This remains an exact sequence, and since we defined a connection to be $G$-invariant, a connection is the same as a splitting of this downstairs sequence.
+
+The total picture is thus
+% https://q.uiver.app/?q=WzAsMTYsWzEsMSwiXFxtYXRocm17YWR9RSJdLFswLDEsIjAiXSxbMywxLCJURS9HIl0sWzUsMSwiVE0iXSxbNywxLCIwIl0sWzEsMCwiMCJdLFs3LDAsIjAiXSxbNiwwLCJwXiogVE0iXSxbNCwwLCJURSJdLFsyLDAsIkVcXHRpbWVzXFxtYXRoZnJha3tnfVxceHJpZ2h0YXJyb3dbXFxjb25nXXtUUn1WRSJdLFsxLDMsIk0iXSxbMywzLCJNIl0sWzUsMywiTSJdLFsyLDIsIkVcXHF1YWRcXHF1YWQiXSxbNCwyLCJFIl0sWzYsMiwiRSJdLFs1LDldLFs4LDddLFs3LDZdLFs5LDAsIi8gRyIsMl0sWzgsMiwiLyBHIiwyXSxbNywzLCIvIEciLDJdLFsxLDBdLFswLDJdLFsyLDNdLFszLDRdLFsyLDAsIlxcb21lZ2FfTSIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MCwiY3VydmUiOjEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs5LDEzLCIiLDIseyJvZmZzZXQiOjR9XSxbOCwxNF0sWzcsMTVdLFswLDEwXSxbMiwxMV0sWzMsMTJdLFsxNCwxMSwicCJdLFsxNSwxMiwicCJdLFs5LDhdLFs4LDksIlxcb21lZ2FfRSIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMTMsMTAsInAiLDAseyJvZmZzZXQiOjF9XV0=
+\[\begin{tikzcd}
+	& 0 & {E\times\mathfrak{g}\xrightarrow[\cong]{TR}VE} && TE && {p^* TM} & 0 \\
+	0 & {\mathrm{ad}E} && {TE/G} && TM && 0 \\
+	&& E\quad\quad && E && E \\
+	& M && M && M
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-5, to=1-7]
+	\arrow[from=1-7, to=1-8]
+	\arrow["{/ G}"', from=1-3, to=2-2]
+	\arrow["{/ G}"', from=1-5, to=2-4]
+	\arrow["{/ G}"', from=1-7, to=2-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-4]
+	\arrow[from=2-4, to=2-6]
+	\arrow[from=2-6, to=2-8]
+	\arrow["{\omega_M}"'{pos=0.4}, curve={height=6pt}, dashed, from=2-4, to=2-2]
+	\arrow[shift right=4, from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-7, to=3-7]
+	\arrow[from=2-2, to=4-2]
+	\arrow[from=2-4, to=4-4]
+	\arrow[from=2-6, to=4-6]
+	\arrow["p", from=3-5, to=4-4]
+	\arrow["p", from=3-7, to=4-6]
+	\arrow[from=1-3, to=1-5]
+	\arrow["{\omega_E}"', curve={height=6pt}, dashed, from=1-5, to=1-3]
+	\arrow["p", shift right=1, from=3-3, to=4-2]
+\end{tikzcd}\]
+
+As we said, a connection gives a decomposition $TE/G=\ad E\oplus TM$. Consider two connections, say $\omega$ and $\omega'$. These are required to agree on vertical vectors by hypothesis, and so $\omega(a, b) = \omega'(a, b)$ which implies that $\omega-\omega'$ is independent of $a$ and so gives a function $TM\to \ad E$. Therefore $\omega-\omega':\Omega^1(M;\ad E)$. This is a concrete description of the space of connections: it's an infinite-dimensional affine space modeled on this space of 1-forms with values in $\ad E$.
+
+So connections are not themselves directly 1-forms on $M$ due to the dependency on the vertical components of $TE/G$. But the curvature is directly a 2-form because it takes horizontal input. We can define curvature downstairs by $$F_\omega(X, Y) = \omega([\lift X, \lift Y])$$ for vector fields $X,Y:\Gamma TM$. 
+
+In fact it's illuminating to look at sections of all the bundles in the sequence $$\Gamma\ad E\to \Gamma TE/G\to \Gamma TM$$ and note that this is an exact sequence of Lie algebras, and that nonvanishing curvature implies this sequence does \emph{not} split in general. Curvature measures the failure to split.
+
+\section{In local coordinates}
+
+
 
 \bibliography{connections}
 \end{document}
