@@ -463,9 +463,20 @@ So connections are not themselves directly 1-forms on $M$ due to the dependency 
 
 In fact it's illuminating to look at sections of all the bundles in the sequence $$\Gamma\ad E\to \Gamma TE/G\to \Gamma TM$$ and note that this is an exact sequence of Lie algebras, and that nonvanishing curvature implies this sequence does \emph{not} split in general. Curvature measures the failure to split.
 
-\section{In local coordinates}
+\section{Gluing, and local coordinates}
+A sheaf is a functorial assignment of an object to each open subset of a manifold, such that if the assignment agrees on overlaps, then it can be extended to the union.
 
+Do connections satisfy this property? What about equivalence classes of connections? What is the equivalence relation on connections that I mean when I ask that?
 
+Consider a connection with zero curvature, and let's examine the gluing question. KN Theorem 9.1 states that a connection on $P(M, G)$ is flat iff the curvature vanishes identically. Let's prove the direction where the curvature is 0. Fix a point $x:M$ and a simply connected neighborhood $x:U$. Consider the induced connection on $P|U$. 
+
+KN Theorem 4.2: Assume $M$ is connected and paracompact. Let $u:P$ and let $\Gamma$ be an arbitrary connection. The reduced holonomy $\Phi_0(u)$ is a connected Lie subgroup of $G$, $\Phi_0(u)$ is normal in $\Phi(u)$, and $\Phi(u)/\Phi_0(u)$ is countable. In particular, $\Phi(u)$ is a Lie subgroup of $G$ and $\Phi_0(u)$ is its identity component.
+
+KN Theorem 8.1: Under the same hypotheses as Theorem 4.2, let $\Omega$ be the curvature of $\Gamma$. Let $P(u)$ be the holonomy subbundle through $u$. Then the Lie algebra of $\Phi(u)$ is the sub-Lie algebra of the Lie algebra of $G$ spanned by elements of the form $\Omega_v(X, Y)$ for $v:P(u)$, and $X, Y$ horizontal at $v$.
+
+KN Theorem 7.1 (Reduction theorem): Under the same hypotheses as Theorem 8.1, $P(u)$ is a reduced bundle with structure group $\Phi(u)$, and the connection is reducible to a connection in $P(u)$.
+
+KN Lemma during the proof of Theorem 7.1: Let $Q$ be a subset of $P(M, G)$ and $H$ a Lie subgroup of $G$. Assume: (1) the projection $p: P \to M$ maps $Q$ onto $M$; (2) $Q$ is stable by $H$, i.e., $R_a(Q) = Q$ for each $a\in H$; (3) if $u,v\in Q$ and $p(u) = p(v)$, then there is an element $a\in H$ such that $v = ua$; and (4) every point $x$ of $M$ has a neighborhood $U$ and a cross section $\sigma: U \to P$. such that $\sigma(U) \subset Q$. Then $Q(M, H)$ ts a reduced subbundle of $P(M, G)$.
 
 \bibliography{connections}
 \end{document}
