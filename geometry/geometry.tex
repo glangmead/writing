@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage{greg}
+
+\title{Towards Differential Geometry in Homotopy Type Theory}
+\author{Greg Langmead}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This thesis will show how to formalize parts of differential geometry in homotopy type theory.\cite{freed2013chernweil} \cite{kobayashinomizu} \cite{hamilton2017} \cite{scorpan_wild_2005} \cite{baez1994gauge} \cite{atiyah1983yang}
+\end{abstract}
+%\tableofcontents
+\section{Introduction}
+\section{Notes from 6/23/2021 meeting}
+Effective epis. An effective epi is intuitively a map that preserves all the information. Every point goes somewhere, every morphism goes somewhere, every 2-morphism etc. This is apparently what a homotopy colimit is too, and so that's why we say the map is the colimit of its simplicial diagram. When a groupoid acts it can be non-effective if it discards some of the equivalences and maps points to the same point without also preserving the arrow as a self-arrow. Conservation of mass. In HoTT, all the higher structure is always preserved, and so the only reason a map can fail to be an effective epi is if it fails to be surjective, i.e. fails to hit some point, i.e. the fiber over some point is empty. Since a surjection is defined as a map with all nonempty fibers, all surjectives are effective epi in HoTT.
+
+Local trivializations: One definition of locally trivial map we are proposing is: $E\to X$ is locally trivial there exists an effective epi $Y\to X$ such that the pullback of the bundle is trivial, i.e. isomorphic to a product. 
+% https://q.uiver.app/?q=WzAsNCxbMSwwLCJFIl0sWzEsMSwiWCJdLFswLDEsIlkiXSxbMCwwLCJZXFx0aW1lcyBGIl0sWzAsMSwicCJdLFszLDIsIlxcbWF0aHJte3ByfV8xIiwyXSxbMiwxLCJmIiwyXSxbMywwLCJcXGNvbmciXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+\[\begin{tikzcd}
+	{Y\times F} & E \\
+	Y & X
+	\arrow["p", from=1-2, to=2-2]
+	\arrow["{\mathrm{pr}_1}"', from=1-1, to=2-1]
+	\arrow["f"', from=2-1, to=2-2]
+	\arrow["\cong", from=1-1, to=1-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+\end{tikzcd}\]
+
+Every HoTT principal bundle is locally trivial in this sense via the map... $p$ itself?? 
+
+Given an effective epi then we want to eventually interpret this in 0-types that behave like smooth manifolds and show the link with classical local triviality. We will use
+\begin{mylemma} If $X$ has an open cover (in a sense TBD) and $p:X'\to X$ is effective epi, then the cover lifts:
+% https://q.uiver.app/?q=WzAsMyxbMSwwLCJYJyJdLFsxLDEsIlgiXSxbMCwxLCJcXGNvcHJvZCBVX2kiXSxbMCwxLCJcXGZvcmFsbCBcXG1hdGhybXtlZmZcXCBlcGl9Il0sWzIsMSwiXFxtYXRocm17b3BlblxcIGNvdmVyfSIsMl0sWzIsMCwiXFxleGlzdHMgXFxzaWdtYSJdXQ==
+\[\begin{tikzcd}
+	& {X'} \\
+	{\coprod U_i} & X
+	\arrow["{\forall \mathrm{eff\ epi}}", from=1-2, to=2-2]
+	\arrow["{\mathrm{open\ cover}}"', from=2-1, to=2-2]
+	\arrow["{\exists \sigma}", from=2-1, to=1-2]
+\end{tikzcd}\]    
+\end{mylemma}
+
+Candidates for the definition of ``open cover''.
+
+1. A subset of effective epis that are a) stable under composition (a cover of a cover is a cover, which is apparently called a $\Sigma$-condition) because
+% https://q.uiver.app/?q=WzAsNCxbMCwxLCJVIl0sWzEsMSwiWCJdLFswLDAsIlYiXSxbMSwwLCJcXHN1bV9VIFZfVSJdLFswLDEsIlxcbWF0aHJte2NvdmVyfSIsMl0sWzIsMCwiXFxtYXRocm17Y292ZXJ9IiwyXSxbMiwzLCJcXHNpbWVxIl0sWzMsMSwiXFxtYXRocm17XFx1bmRlcmxpbmV7XFx1bmRlcmxpbmV7Y292ZXJ9fX0iXV0=
+\[\begin{tikzcd}
+	V & {\sum_U V_U} \\
+	U & X
+	\arrow["{\mathrm{cover}}"', from=2-1, to=2-2]
+	\arrow["{\mathrm{cover}}"', from=1-1, to=2-1]
+	\arrow["\simeq", from=1-1, to=1-2]
+	\arrow["{\mathrm{\underline{\underline{cover}}}}", from=1-2, to=2-2]
+\end{tikzcd}\]
+and b) stable under base change (which we will get for free in HoTT?).
+
+2. A subset of opens inside the object classifier $\Omega$. Also a definition of an open map. We might call the special collection of opens ``blocks''. We would interpret them onto the $\rr^n$s. We call a type $X$ \emph{geometric} with respect to these opens if there is an \emph{open} map $\coprod_i U_i \to X$. These are the spaces that can be built by gluing together the blocks. In the interpretation it will sit in a chain of inclusions $$\mathrm{Manifolds}\subset \mathrm{Geometric} \subset \mathrm{Diffeological} \subset \mathrm{Sh}(\rr^n)$$
+
+One of the non-manifolds that are geometric would be two copies of $\rr$ glued everywhere but at the origin, so a real line with two origins. This is geometric. But what is not geometric is the union of the $x$ and $y$ axes in $\rr^2$. Here the maps from $\rr$ are not open maps.
+
+Submersions: These are smooth maps that locally look like projections from $\rr^{n+k}\to \rr^n$. A Morse function is not a submersion. A bundle map is a submersion. The map $x^3-y^2:\rr^2\to \rr$ is not a submersion because the fibers change topology due to singularities.
+
+Principal bundles in HoTT, a review. A dependent type $p:E\to B$ is given by a classifying map $E:B\to \mathrm{Type}$, and a principal bundle is one where $E$ factors through $BG$, so $E:B\to BG$. One way to define $BG$ is by $$\sum_{E:\mathrm{Type}^G}||E\simeq_{\mathrm{Type}^G} G||_{-1}$$, where $\mathrm{Type}^G$ is the universe of types equipped with a $G$-action. The action of $G$ on itself is via translation, i.e. left or right multiplication. I've been saying to myself that ``$BG$ is everything equal to $G$'' but this is more precise.
+
+We have a surjection followed by a mono
+% https://q.uiver.app/?q=WzAsNSxbMCwwLCIxIl0sWzEsMCwiQkciXSxbMiwwLCJcXG1hdGhybXtUeXBlfV5HIl0sWzMsMCwiXFxtYXRocm17VHlwZX0iXSxbMSwxLCJcXHN1bV97RTpcXG1hdGhybXtUeXBlfV5HfXx8RVxcc2ltZXFfe1xcbWF0aHJte1R5cGV9Xkd9IEd8fF97LTF9Il0sWzAsMSwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFsyLDNdLFsxLDQsIiIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}
+	1 & BG & {\mathrm{Type}^G} & {\mathrm{Type}} \\
+	& {\sum_{E:\mathrm{Type}^G}||E\simeq_{\mathrm{Type}^G} G||_{-1}}
+	\arrow[two heads, from=1-1, to=1-2]
+	\arrow[tail, from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[Rightarrow, no head, from=1-2, to=2-2]
+\end{tikzcd}\]
+
+Trivializing principal bundles. What are the fibers of $p$? 
+% https://q.uiver.app/?q=WzAsNyxbMywxLCJCR1xcc3Vic2V0XFxtYXRocm17VHlwZX0iXSxbMywwLCJCIl0sWzQsMCwiMSJdLFsyLDEsIjEiXSxbMiwwLCJcXHN1bV9iXFxtYXRocm17SWR9KEYsRV9iKSJdLFsxLDAsIlAiXSxbMCwwLCJcXHN1bV9iXFxtYXRocm17SWR9KEcsRV9iKSJdLFs0LDNdLFszLDAsIkYiXSxbNCwxXSxbMSwwXSxbNCwwLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMSwyXSxbNiw1LCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDQsIiIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsMV0sWzEsNCwiIiwyLHsib2Zmc2V0IjoyLCJjdXJ2ZSI6Miwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{\sum_b\mathrm{Id}(G,E_b)} & P & {\sum_b\mathrm{Id}(F,E_b)} & B & 1 \\
+	&& 1 & {BG\subset\mathrm{Type}}
+	\arrow[from=1-3, to=2-3]
+	\arrow["F", from=2-3, to=2-4]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=2-4]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-3, to=2-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[Rightarrow, no head, from=1-1, to=1-2]
+	\arrow[Rightarrow, no head, from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[shift right=2, curve={height=12pt}, dashed, from=1-4, to=1-3]
+\end{tikzcd}\]
+where the dotted arrow is a putative section, i.e. a trivialization of the bundle.
+
+Adopt the point of view: are the fibers of the bundle all equivalent? What type is the type of the fibers? If we know the typical fiber is $F$, then we can look at the total space of identifications between $F$ and the fiber. This is a dependent type over the base $B$. A section of this is a global choice of such an identification. I was surprised to learn that this is the same as a section of the bundle, a trivialization! But of course that tracks with the classical story: the fibers are only identifiable with $G$ once you choose a basepoint. To do that globally is exactly a section. So this is just recapitulating that idea, plus the fact that in HoTT sections are continuous.
+
+Consider that $\sum_b\mathrm{Id}(G,E_b)$ is the type of all points $b:B$ in the base and identifications between $G$ and the fiber $E_b$. Identifications of the fiber with $G$, in the case where $G$ is the correct group, i.e. this type is inhabited, is exactly a copy of $E_b$ because the identification is the same as a choice of basepoint.
+
+\bibliography{connections}
+\end{document}
