@@ -14,6 +14,12 @@ This thesis will show how to formalize parts of differential geometry in homotop
 \section{Notes from 6/23/2021 meeting}
 Effective epis. An effective epi is intuitively a map that preserves all the information. Every point goes somewhere, every morphism goes somewhere, every 2-morphism etc. This is apparently what a homotopy colimit is too, and so that's why we say the map is the colimit of its simplicial diagram. When a groupoid acts it can be non-effective if it discards some of the equivalences and maps points to the same point without also preserving the arrow as a self-arrow. Conservation of mass. In HoTT, all the higher structure is always preserved, and so the only reason a map can fail to be an effective epi is if it fails to be surjective, i.e. fails to hit some point, i.e. the fiber over some point is empty. Since a surjection is defined as a map with all nonempty fibers, all surjectives are effective epi in HoTT.
 
+Submersions. In Diff, the category of smooth manifolds, pullbacks do not exist, but a pullback ``along a submersion'' does. Surjective submersions are regular epis. Ehresmann's theorem: a proper submersion is a locally trivial fibration. (Proper: sends compact subsets to compact subsets.) Surjective submersions form a ``singleton Grothendieck pretopology'' on Diff. These generate a G-topology. Coverages are a weaker notion that also generate a G-topology. A G-topology is a coverage satisfying: being stable under pullback, stable under composition, and that isomorphisms form a cover. The term ``singleton'' in this context simply means that the covering families each contain a single map.
+
+Aside: good open covers pull back just to open covers, and so are not G-topology.
+
+Claim: effective epis in HoTT will interpret to surjective submersions in the case where the codomain is a smooth manifold. Note that a surjective submersion is precisly a map with local sections, as surjectivity of the derivative can be extended locally to a map in the reverse direction.
+
 Local trivializations: One definition of locally trivial map we are proposing is: $E\to X$ is locally trivial there exists an effective epi $Y\to X$ such that the pullback of the bundle is trivial, i.e. isomorphic to a product. 
 % https://q.uiver.app/?q=WzAsNCxbMSwwLCJFIl0sWzEsMSwiWCJdLFswLDEsIlkiXSxbMCwwLCJZXFx0aW1lcyBGIl0sWzAsMSwicCJdLFszLDIsIlxcbWF0aHJte3ByfV8xIiwyXSxbMiwxLCJmIiwyXSxbMywwLCJcXGNvbmciXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
 \[\begin{tikzcd}
@@ -26,19 +32,20 @@ Local trivializations: One definition of locally trivial map we are proposing is
 	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 \end{tikzcd}\]
 
-Every HoTT principal bundle is locally trivial in this sense via the map... $p$ itself?? 
-
-Given an effective epi then we want to eventually interpret this in 0-types that behave like smooth manifolds and show the link with classical local triviality. We will use
-\begin{mylemma} If $X$ has an open cover (in a sense TBD) and $p:X'\to X$ is effective epi, then the cover lifts:
+Given a trivializing effective epi (LEE) then we want to eventually interpret this in 0-types that behave like smooth manifolds and show the link with classical local triviality. We will use
+\begin{mylemma} If $X$ is a manifold object in the topos of SmoothSet, and $p:X'\to X$ is an effective epi, then the map has local sections (via the inverse/implicit function theorem):
 % https://q.uiver.app/?q=WzAsMyxbMSwwLCJYJyJdLFsxLDEsIlgiXSxbMCwxLCJcXGNvcHJvZCBVX2kiXSxbMCwxLCJcXGZvcmFsbCBcXG1hdGhybXtlZmZcXCBlcGl9Il0sWzIsMSwiXFxtYXRocm17b3BlblxcIGNvdmVyfSIsMl0sWzIsMCwiXFxleGlzdHMgXFxzaWdtYSJdXQ==
 \[\begin{tikzcd}
 	& {X'} \\
-	{\coprod U_i} & X
+	{\coprod U_i} & X:\mathsf{Diff}
 	\arrow["{\forall \mathrm{eff\ epi}}", from=1-2, to=2-2]
 	\arrow["{\mathrm{open\ cover}}"', from=2-1, to=2-2]
 	\arrow["{\exists \sigma}", from=2-1, to=1-2]
-\end{tikzcd}\]    
+\end{tikzcd}\]
 \end{mylemma}
+\begin{proof}
+    We need to step down from sheaves to manifolds. Why do effective epis in the topos context specialize to surjective submersions on a representable?
+\end{proof}
 
 Candidates for the definition of ``open cover''.
 
