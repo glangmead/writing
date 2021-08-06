@@ -9,8 +9,33 @@
 \begin{abstract}
 This thesis will show how to formalize parts of differential geometry in homotopy type theory.\cite{freed2013chernweil} \cite{kobayashinomizu} \cite{hamilton2017} \cite{scorpan_wild_2005} \cite{baez1994gauge} \cite{atiyah1983yang}
 \end{abstract}
-%\tableofcontents
+\tableofcontents
 \section{Introduction}
+This thesis is very much in the spirit of Freed and Hopkins \cite{freed2013chernweil}, where the authors adopt the point of view of a classicial differential geometer and teach us how much we may gain by generalizing the standard constructions towards sheaves, towards groupoids, and towards simplicial sets. Homotopy Type Theory offers a formalism for working with these advanced objects, as do $\infty$-toposes. A community of folks have represented this higher point of view for many years, explaining how we might use it to work with geometry and physics. I have managed to devote some time to following up on their suggestions.
+\section{Manifolds to $\infty$-topos}
+\section{HoTT to prove theorems in the topos}
+\section{Finding the manifolds inside HoTT}
+\section{Higher groups and actions}
+Second delooping of a higher group is abelian: Lemma 2.1.6 in the HoTT book \cite{hottbook}.
+\section{Effective epimorphisms}
+\section{Back to manifolds: local triviality and freeness for free}
+If we decide to interpret HoTT in \formalsmoothset, then how can we locate, or define, the types that will interpret onto the actual smooth manifolds? Remember that we enlarged the category tremendously along two dimensions: first we moved to sheaves, then we added higher structure.
+
+So for one thing, smooth manifolds lack higher structure and so will be among the 0-types. It remains therefore to find the non-exotic, or manifoldy, 0-types.
+
+Let's recall the original definition of a smooth manifold. A modern and category-theory-aware textbook for differential geometry is \cite{kolar_natural_1993}, so this might be a good place to start. I'll paraphrase their definition a little:
+
+\begin{mydef}
+A topological manifold is a separable Hausdorff space $M$ which is locally homeomorphic to $\rr^n$. So for any $x\in M$ there is an open neighborhood $U$ of $x$ and a map $u:U\to \rr^n$ that is a homeomorphism onto its image which is an open subset of $\rr^n.$ Such maps are called coordinate charts.A covering family $\{U_\alpha, u_\alpha\}$ of coordinate charts is called an atlas. An atlas is called a smooth atlas if the compositions that can be formed between $\rr^n$ are smooth (that is, $C^\infty$). Finally, a smooth manifold is a topological manifold with a smooth atlas.
+\end{mydef}
+``The compositions that can be formed'' means the usual business of composing charts and the inverse of charts whenever the charts overlap on $M$, forming homeomorphisms between open sets in $\rr^n$.
+
+I remember reading definitions like this and glossing over the words ``separable'', ``Hausdorff'', and the fine print about the charts being homeomorphic to an open subset of $\rr^n$. I could tell that $n$ was being chosen to match the dimension of the manifold, and secretly I was probably also assuming $M$ is connected so that $n$ could be constant rather than just locally constant. But this intellectual debt is about to be paid, because these are precisely the restrictions that we need to define internally in HoTT to find the manifolds, and so we will need to understand them a bit better.
+
+Let's look next at the definition of smooth manifold that's in use in the mathlib library of Lean. Here, manifolds are defined to be instances of \texttt{charted\_space}\cite{charted_space} which is the same as an atlas: every point is contained in an open neighborhood that is the domain of a \texttt{local\_homeomorph}, i.e. a homeomorphism to an open subset of a fixed vector space over a fixed field.
+ 
+\section{You will see if we gained anything}
+
 \section{Notes from 6/23/2021 meeting}
 Effective epis. An effective epi is intuitively a map that preserves all the information. Every point goes somewhere, every morphism goes somewhere, every 2-morphism etc. This is apparently what a homotopy colimit is too, and so that's why we say the map is the colimit of its simplicial diagram. When a groupoid acts it can be non-effective if it discards some of the equivalences and maps points to the same point without also preserving the arrow as a self-arrow. Conservation of mass. In HoTT, all the higher structure is always preserved, and so the only reason a map can fail to be an effective epi is if it fails to be surjective, i.e. fails to hit some point, i.e. the fiber over some point is empty. Since a surjection is defined as a map with all nonempty fibers, all surjectives are effective epi in HoTT.
 
