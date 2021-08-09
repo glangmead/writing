@@ -16,6 +16,65 @@ This thesis is very much in the spirit of Freed and Hopkins \cite{freed2013chern
 \section{HoTT to prove theorems in the topos}
 \section{Finding the manifolds inside HoTT}
 \section{Higher groups and actions}
+Background on connectedness from HoTT book 7.5: A type $A$ is $n$-connected if the unique function $A\to 1$ is $n$-connected (for all $b : 1$ we have $||\mathrm{fib}_f(b)||_n$ is contractible), i.e. if $||A||_n$ is contractible. If $A$ is -1-connected we say it is \emph{merely inhabited}. If it is 0-connected we say it is \emph{connected}, and if it is 1-connected we say it is \emph{simply connected}.
+
+(Section 2) The type of pointed types is $\mathrm{Type}_\mathrm{pt}$. The homotopy groups of a pointed type are $\pi_k(A) = ||{\Omega_k(A)}||_0$ i.e. the zero-truncation (so, a set, a standard group) of the loop space.
+
+(Section 3) The 1-loop map establishes an isomorphism between higher groups and pointed, connected types. Why connected? What is connected? Answer: connectedness is the truncation of contractibility: $\sum_{a:A}\prod_{x:A}||x=a||_{-1}$.
+
+Being $n$-truncated means you have no nontrivial identities at level $n$ or above. $-2$-truncated means you are contractible. Being $n$-connected means you have no nontrivial identities below $n$, and so means your $n$-truncation $||A||_n$ is contractible. This is a generalization of the term ``simply connected''.
+
+If $A$ is a pointed type (with designated point pt), its loop space is a higher group: $\Omega A := (\pt =_A \pt)$. There is something special happening with this. We are fully leveraging the infrastructure of the identity type, which obeys group laws up to coherences, in an infinite tower. We are designating this infrastructure to \emph{be} a group. So this is synthetic, using the identity types.
+
+If $G$ is a group, then we write $BG$ for ``the'' type satisfying $G=\Omega BG$. We call $BG$ the delooping of $G$. The identification of $G$ and $BG$ connects groups to groupoids.
+
+(Section 4) Given a type $A$ and $a : A$, we have $\Aut\ a := (a = a)$. Importantly, $\BAut\ a$ is the connected component of $a$, expressed as $\im(a : 1 \to A) = (x : A) \times ||a = x||_{-1}$. This product notation is Agda style for a dependent sum.
+
+For example, consider $S_n$, the permutation group of $\Fin\ n$, which is a specific set with $n$ elements. Then $BS_n$ is the type of all $n$-element sets. This was rather mind-blowing to me at first. We started by installing the group as the automorphisms of just a single point, but along the way we obtained every equivalent object as well.
+
+A group homomorphism is a pointed map $f: G \to H$ of groups and a pointed map $Bf: BG \to BH$ of the delooping, such that $\Omega Bf \sim f$.
+
+There's a terse comment that if $h, k : G \to H$ are homorphisms between set-level groups, then they are conjugate (which I'm taking to mean that $hg = x(kg)x^{-1}$ for some $x\in H$) if the pointed maps $Bh, Bk: BG \to BH$ are freely homotopic, i.e. equal as unpointed maps $BG \to BH$. What I'm struggling with is that surely $Bh$ and $Bk$ must be pointed because $h$ and $k$ are maps between the same groups. Here is a picture from stackoverflow \gc{https://math.stackexchange.com/questions/2458349/base-point-homotopy-vs-free-homotopy-example} where two elements of the fundamental group are conjugate (by the green loop) and freely homotopic (where you are allowed to move the base point around the hole I guess?) but not homotopic.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.2]{conjugating_loops.png}
+\end{figure}
+
+If we have a family of pointed types over a pointed type, i.e. $X:\Type_{\pt}$ and $Y : X \to_{\pt} \Type_{\pt}$, then the type of \emph{pointed sections} is a section $s$ such that $s\ \pt = \pt$, i.e. we only specify this extra data at $\pt : X$. One canonical such section is the constant section $x \mapsto \pt : Y(x)$ and so this is itself a pointed type with the constant section as base point.
+
+There are some lemmas about the levels of connectivity that hold for a space of pointed sections, given data about the connectivity of the base and fibers.
+
+The action of a group $G$ on an object $a : A$ is a map $X: BG \to A$ with $X(pt) = a$. ``Clearly'' this is the same as a homomorphism $G \to \Aut_A a$. (Because a homomorphism is defined as a deloopable map and we just defined the action in terms of the delooping.)
+
+A ``$G$-type'' is a type in the context of $BG$, i.e. a map $X : BG \to \Type$. A map of $G$-types is a function $\alpha : (z : BG) \to X(z) \to Y(z)$. This is a map for each point of $BG$. So we are calling $X$ the $G$-type, not the type $X(pt)$.
+
+Egbert: A higher group $G$ is defined to be a pointed connected type $BG$. The underlying type of the higher group $G$ is then just the loop space of $BG$. This loop space is what $G$ really is, and its group structure comes from it being the loop space of $BG$. A $G$-type should then be a type equipped with a $G$-action. We just define it as a fibration over $BG$, so that the $G$-action comes canonically from the lifting property. So, if $X : BG \to Type$, then we have
+
+\begin{enumerate}
+\item a type $X(*)$ at the base point
+\item a G-action $X(*) \to X(*)$ for every loop of $BG$
+\end{enumerate}
+
+If $X$ would be a $G$-set, then the type of fixed points would be
+
+$$\sum (x : X(*)), \prod (p : * = *), tr(p,x) = x$$
+
+where tr is transport/lift. With a bit of abstract nonsense it follows that this is the type
+
+$$\prod (y : BG), X(y).$$
+
+However, if $X$ is not a $G$-set but a $G$-type, then that first type of fixed points isn't quite right, because it misses the higher coherences. It turns out that the Pi-type is the right thing :)
+
+Greg, later. Given a type family $X$ over a base $BG$, there are two God-given constructions that together produce exactly this fixed-point story. The first is transport: given an equality in the base $x = y$, we get a \emph{function} between fibers $X(x)\to X(y)$. Since the group is the loop space at a point, the transport function is the group action. The second operation is action on paths. Given a \emph{section} $s$  of the type family and an equality $p : x = y$ in the base, we get an equality $tr(p, s(x)) = s(y)$. The narrative with this is that we can't directly compare $s(x)$ and $s(y)$ since they live in different fibers, so first we transport $s(x)$ using $p$ then compare, and we get an equality. In the special case $p : x = x$, i.e. $p \in G$, this is a fixed point for the group action. To recap, given only the group, we only get a function on the fiber (or between fibers if the equality is not a loop). But given also a section, we also get fixed points for the function. This bears further reflection.
+
+So why do we define $X/G := \sum (y : BG), X(y)$? Quotients should have a quotient map: Here the quotient map is just the inclusion of the fiber $X(*)$. The quotient map is surjective: This follows from the fact that $BG$ is connected. The quotient map should be effective: in other words, in $X/G$ we should have
+
+$$q(x)=q(y) \simeq \sum (g:G), gx=y$$
+
+This identity type is a $\Sigma$-type. That's already the first hint that the quotient should be a $\Sigma$-type. And indeed a quick calculation will reveal that effectiveness indeed holds.
+
+Greg, later: ``$gx$'' is the action of $g$, so again transport. So given $p:*=*$ we have $tr_p:X(*) \to X(*)$...
+
 Second delooping of a higher group is abelian: Lemma 2.1.6 in the HoTT book \cite{hottbook}.
 \section{Effective epimorphisms}
 \section{Back to manifolds: local triviality and freeness for free}
