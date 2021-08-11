@@ -16,6 +16,8 @@ This thesis is very much in the spirit of Freed and Hopkins \cite{freed2013chern
 \section{HoTT to prove theorems in the topos}
 \section{Finding the manifolds inside HoTT}
 \section{Higher groups and actions}
+
+\subsection{Buchholtz, van Doorn, Rijke}
 Background on connectedness from HoTT book 7.5: A type $A$ is $n$-connected if the unique function $A\to 1$ is $n$-connected (for all $b : 1$ we have $||\mathrm{fib}_f(b)||_n$ is contractible), i.e. if $||A||_n$ is contractible. If $A$ is -1-connected we say it is \emph{merely inhabited}. If it is 0-connected we say it is \emph{connected}, and if it is 1-connected we say it is \emph{simply connected}.
 
 (Section 2) The type of pointed types is $\mathrm{Type}_\mathrm{pt}$. The homotopy groups of a pointed type are $\pi_k(A) = ||{\Omega_k(A)}||_0$ i.e. the zero-truncation (so, a set, a standard group) of the loop space.
@@ -48,7 +50,8 @@ The action of a group $G$ on an object $a : A$ is a map $X: BG \to A$ with $X(pt
 
 A ``$G$-type'' is a type in the context of $BG$, i.e. a map $X : BG \to \Type$. A map of $G$-types is a function $\alpha : (z : BG) \to X(z) \to Y(z)$. This is a map for each point of $BG$. So we are calling $X$ the $G$-type, not the type $X(pt)$.
 
-Egbert: A higher group $G$ is defined to be a pointed connected type $BG$. The underlying type of the higher group $G$ is then just the loop space of $BG$. This loop space is what $G$ really is, and its group structure comes from it being the loop space of $BG$. A $G$-type should then be a type equipped with a $G$-action. We just define it as a fibration over $BG$, so that the $G$-action comes canonically from the lifting property. So, if $X : BG \to Type$, then we have
+\subsection{Egbert on fixed points}
+A higher group $G$ is defined to be a pointed connected type $BG$. The underlying type of the higher group $G$ is then just the loop space of $BG$. This loop space is what $G$ really is, and its group structure comes from it being the loop space of $BG$. A $G$-type should then be a type equipped with a $G$-action. We just define it as a fibration over $BG$, so that the $G$-action comes canonically from the lifting property. So, if $X : BG \to Type$, then we have
 
 \begin{enumerate}
 \item a type $X(*)$ at the base point
@@ -65,19 +68,34 @@ $$\prod (y : BG), X(y).$$
 
 However, if $X$ is not a $G$-set but a $G$-type, then that first type of fixed points isn't quite right, because it misses the higher coherences. It turns out that the Pi-type is the right thing :)
 
-Greg, later. Given a type family $X$ over a base $BG$, there are two God-given constructions that together produce exactly this fixed-point story. The first is transport: given an equality in the base $x = y$, we get a \emph{function} between fibers $X(x)\to X(y)$. Since the group is the loop space at a point, the transport function is the group action. The second operation is action on paths. Given a \emph{section} $s$  of the type family and an equality $p : x = y$ in the base, we get an equality $tr(p, s(x)) = s(y)$. The narrative with this is that we can't directly compare $s(x)$ and $s(y)$ since they live in different fibers, so first we transport $s(x)$ using $p$ then compare, and we get an equality. In the special case $p : x = x$, i.e. $p \in G$, this is a fixed point for the group action. To recap, given only the group, we only get a function on the fiber (or between fibers if the equality is not a loop). But given also a section, we also get fixed points for the function. This bears further reflection.
-
+\subsection{Egbert on quotients by group actions}
 So why do we define $X/G := \sum (y : BG), X(y)$? Quotients should have a quotient map: Here the quotient map is just the inclusion of the fiber $X(*)$. The quotient map is surjective: This follows from the fact that $BG$ is connected. The quotient map should be effective: in other words, in $X/G$ we should have
 
 $$q(x)=q(y) \simeq \sum (g:G), gx=y$$
 
 This identity type is a $\Sigma$-type. That's already the first hint that the quotient should be a $\Sigma$-type. And indeed a quick calculation will reveal that effectiveness indeed holds.
 
-Greg, later: ``$gx$'' is the action of $g$, so again transport. So given $p:*=*$ we have $tr_p:X(*) \to X(*)$...
+\subsection{My digestion of the above}
+\emph{Types $X$ over $BG$ are group actions.} We have the pointed connected type $BG$ with $\pt : BG$. Above $\pt$ we have $X(\pt)$, on which $G$ acts by transport: if $p : \pt=\pt$ then $tr(p): X(\pt) \to X(\pt)$, and this is a group action.
 
+\emph{The dependent sum $(\alpha:BG)\times X(z)$ deserves to be called $X//G$.} I go back to my textbook and see that identities in any dependent sum, say between $(g, x)$ and $(h, y)$ are given by a pair: an equality $p:g=h$ in the base, and an equality in the fiber over $h$, $q:y=tr(p, x)$. In the group context such an equality means $x$ and $y$ are in the same orbit of the $G$-action, and so we have recorded the orbits with equalities, a groupoidification of the action.
+
+\emph{The dependent product $(\alpha:BG)\to X(z)$ deserves to be called the space of fixed points of the action.} 
+
+\subsection{Multiple delooping shenanigans}
 Second delooping of a higher group is abelian: Lemma 2.1.6 in the HoTT book \cite{hottbook}.
+
 \section{Effective epimorphisms}
+Classically, effective means information is not lost. If two points get glued together we retain that there were two points by having a self-arrow. One of points turned into an arrow. There is conservation of mass (if points and arrows have equal mass).
+
+In HoTT, functions are automatically mass-conserving, so a function can only fail to be an effective epi if it fails to be an epi. The only way to fail to be an epi is to miss a point. In HoTT, we define surjections as points with merely inhabited fibers, so these don't miss any points. Putting this all together, in HoTT all surjections are effective epis. They will interpret to effective epis in the categorical semantics.
+
 \section{Back to manifolds: local triviality and freeness for free}
+\begin{mythm}
+	Let $(\alpha:BG): P(\alpha)$ be a type family over the delooping of a higher group $G$. If we interpret this type family in $\formalsmoothset$ such that $P$ and $G$ are 0-types and honest manifolds, then we obtain a classical smooth principal bundle $G\to P \to P/G$. In particular, $G$ acts freely on $P$ and the bundle is locally trivial.
+\end{mythm}
+
+\subsection{Honest manifolds}
 If we decide to interpret HoTT in \formalsmoothset, then how can we locate, or define, the types that will interpret onto the actual smooth manifolds? Remember that we enlarged the category tremendously along two dimensions: first we moved to sheaves, then we added higher structure.
 
 So for one thing, smooth manifolds lack higher structure and so will be among the 0-types. It remains therefore to find the non-exotic, or manifoldy, 0-types.
@@ -92,7 +110,13 @@ A topological manifold is a separable Hausdorff space $M$ which is locally homeo
 I remember reading definitions like this and glossing over the words ``separable'', ``Hausdorff'', and the fine print about the charts being homeomorphic to an open subset of $\rr^n$. I could tell that $n$ was being chosen to match the dimension of the manifold, and secretly I was probably also assuming $M$ is connected so that $n$ could be constant rather than just locally constant. But this intellectual debt is about to be paid, because these are precisely the restrictions that we need to define internally in HoTT to find the manifolds, and so we will need to understand them a bit better.
 
 Let's look next at the definition of smooth manifold that's in use in the mathlib library of Lean. Here, manifolds are defined to be instances of \texttt{charted\_space}\cite{charted_space} which is the same as an atlas: every point is contained in an open neighborhood that is the domain of a \texttt{local\_homeomorph}, i.e. a homeomorphism to an open subset of a fixed vector space over a fixed field.
- 
+
+\subsection{Local triviality is absorbed}
+
+\subsection{Freeness is absorbed}
+
+\subsection{Structures requiring groupoids are absorbed, e.g. connections}
+
 \section{You will see if we gained anything}
 
 \section{Notes from 6/23/2021 meeting}
