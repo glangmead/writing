@@ -1,12 +1,6 @@
-Frege's Begriffsschrift (concept-script).
+# Frege's Begriffsschrift (concept-script)
 
 Here, Frege introduces a notation for logical expressions, including what we now call universal and existential quantifiers.
-
-The notation.
-
-Function-argument analysis.
-
-Universal quantification. The unification of "syllogistic logic" and "propositional logic". 
 
 The domain of discourse is what Frege calls "scientific truth." In particular he wants to enhance our ability to discuss purely logical arguments without being confused or entangled with language. For example, "A killed B" and "B was killed by A" have different subjects and predicates linguistically, but contain the same logical content. Frege wants to develop a symbolic language for expressing this purely logical content.
 
@@ -18,13 +12,13 @@ Frege provides a roadmap for future enhancements to his script. This is very ana
 
 The script:
 
-- A : the proposition that A
-|- A : the judgment (assertion) that A holds
+    --A : the proposition that A
+    |-A : the judgment (assertion) that A holds
 
 It is syntactically valid only to put propositions in the position of A. And these are to be distilled from ordinary language by representing only the "conceptual content", i.e. the content that does not depend on whether it is expressed in active or passive voice, or other linguistic choices.
 
-|---A
-  L_B : The judgment that B -> A
+    |---A
+      L_B : The judgment that B -> A
 
 Note that Frege uses truth tables to define B -> A, so it doesn't have the modern fullnes of meaning that we place on the modern notation.
 
@@ -32,57 +26,57 @@ Frege assigns meaning to parts of these lines. The vertical at left is the "judg
 
 The horizontal lines form a hierarchical group around what lies to the right. Decorating these lines allows the decoration to have _scope_.
 
-|-----A
-   ∟--B
-    ∟-C : (C -> B) -> A
+    |-----A
+       ∟--B
+        ∟-C : (C -> B) -> A
 
 We can build conclusions with a horizontal line, as in natural deduction:
 
-|-----A
-  ∟--B
-
-  |-B
---------
-   A
+    |-----A
+      ∟--B
+    
+      |-B
+    --------
+       A
 
 A notch along a horizontal line denotes the negation of that sub-proposition:
 
-|-⫟-A
+    |-⫟-A
 
 I see an echo of this in the modern "not" operator ¬.
 
 It can be placed on any horizontal line, e.g.
 
 
-|---⫟-A
-  ∟---B
+    |---⫟-A
+      ∟---B
 
 or
 
-|-----A
- ∟-⫟-B
+    |-----A
+     ∟-⫟-B
 
 Frege spends some time deciding whether he wants "or" or "exclusive or" and decides on the former. The notation for "A or B" is the just-given judgment:
 
-|-----A
- ∟-⫟-B
+    |-----A
+     ∟-⫟-B
 
 And so the notation so far can express "or".
 
 He shows some more complex examples such as
 
-----⫟-----A
- |     |
- |     ∟⫟-B
- ∟------⫟-A
-     |
-     ∟----B
+    ----⫟-----A
+     |     |
+     |     ∟⫟-B
+     ∟------⫟-A
+         |
+         ∟----B
 
 Frege then discusses identity. I can best summarize this by attributing to him the distinction between definitional equality and judgmental equality. Judgmental equality is syntactic, for when we can tell "from the beginning" before a judgment is obtained that A and B are two names for the same content, a priori. The latter occurs as the result of a judgment. He gives an example of a moving chord of a circle, where the two endpoints of the chord are named A and B. As the chord becomes more vertical, B approaches A until they coincide. A theorem that A = B would then constitute the second kind of equality. 
 
 He introduces this notation for expressing definitional equality:
 
-|--(A ≡ B)
+    |--(A ≡ B)
 
 (with a triple equals sign). This judgment has the consequence that A and B can be substituted for each other in all expressions. His words for this are "A can always be replaced by B and vice versa".
 
@@ -94,29 +88,23 @@ He further notes that the function itself may be treated as indeterminate, allow
 
 Finally, Frege introduces a "for all" decoration for horizontal lines:
 
--𝄑-f(•)
+    -𝄑-f(•)
 
 meaning "for all values, f(•)". I'm using a musical fremata symbol with a dot inside, but Frege has a Gothic "a" in that place. He then indicates that he means the Gothic font to represent such quantified variables. Good idea!
 
 He mentions that we can derive instances from these general propositions by substituting "something definite" for the dot:
 
-|-𝄑-f(•)
---------
-|---f(x)
+    |-𝄑-f(•)
+    --------
+    |---f(x)
 
 Combining with negation we obtain the existential quantifier as well:
 
-|-⫟-𝄑-⫟-f(•) : there exists a value x such that f(x)
+    |-⫟-𝄑-⫟-f(•) : there exists a value x such that f(x)
 
 The pattern "every X is a P" can be expressed
 
-|-𝄑---P(•)
-    ∟-X(•)
+    |-𝄑---P(•)
+        ∟-X(•)
 
 Frege works out various examples. My final comment here is that the "for all" is scoped to the items connected to the right of its line. This is apparently one of the major logical inventions of this work.
-
-
-
-
-
-
