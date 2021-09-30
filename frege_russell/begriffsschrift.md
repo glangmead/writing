@@ -10,7 +10,7 @@ Frege provides a roadmap for future enhancements to his script. This is very ana
 
 "freeing thought from the taint of ordinary linguistic means of expression"
 
-The script:
+## I. The script
 
     --A : the proposition that A
     |-A : the judgment (assertion) that A holds
@@ -74,7 +74,7 @@ He shows some more complex examples such as
          |
          ∟----B
 
-## Identity
+### Identity
 
 Frege then discusses identity. I can best summarize this by attributing to him the distinction between definitional equality and judgmental equality. Judgmental equality is syntactic, for when we can tell "from the beginning" before a judgment is obtained that A and B are two names for the same content, a priori. The latter occurs as the result of a judgment. He gives an example of a moving chord of a circle, where the two endpoints of the chord are named A and B. As the chord becomes more vertical, B approaches A until they coincide. A theorem that A = B would then constitute the second kind of equality. 
 
@@ -84,7 +84,7 @@ He introduces this notation for expressing definitional equality:
 
 (with a triple equals sign). This judgment has the consequence that A and B can be substituted for each other in all expressions. His words for this are "A can always be replaced by B and vice versa".
 
-## Functions
+### Functions
 
 Frege then describes the concept of turning a node in an expression into an argument, making it "indeterminate". This generates a function whose argument goes in that slot. This can be repeated, building a function with multiple arguments. Sometimes Frege mentions that if you make some nodes indeterminate, you must specify whether some of those slots need to be filled with the same argument when you provide arguments.
 
@@ -118,3 +118,52 @@ The pattern "every X is a P" can be expressed
 Frege works out various examples.
 
 My final comment here is that the "for all" is scoped to the items connected to the right of its line. This is apparently one of the major logical inventions of this work.
+
+## II. The axioms
+
+Frege has nine "core propositions". Are they axioms? These are his numbers 1, 2, 8, 28, 31, 41, 52, 54, and 58. Here they are in modern notation:
+
+    |- a -> (b -> a)
+
+    |- (c -> (b -> a)) -> (c -> b) -> (c -> a)
+
+    |- (d -> (b -> a)) -> b -> (d -> a)
+
+    |- (b -> a) -> (¬a -> ¬b)
+
+    |- ¬¬a -> a
+
+    |- a -> ¬¬a
+
+    |- (c ≣ d) -> f(c) -> f(d)
+
+    |- c ≣ c
+
+    |- ∀a.f(a) -> f(c)
+
+The fifth axiom is the law of the excluded middle (LEM). 
+
+Frege uses these to derive some older syllogistic arguments: felapton, fesapo, and barbara.
+
+Take felapton as an example. See https://en.wikipedia.org/wiki/Syllogism#Felapton_(EAO-3) for a description. This pattern goes like this:
+
+  No flowers are animals.
+  All flowers are plants.
+  Some plants are not animals.
+
+Frege's ninth axiom can convert "No flowers are animals" to "Some flower is not an animal", viz
+
+    |- ∀a.flower(a) -> flower(x)
+
+He can encode "All flowers are plants" with 
+
+    |- ∀a.(flower(a) -> plant(a))
+
+and so he can conclude
+
+    |- plant(x)
+
+
+## III. Sequences (pre-arithmetic)
+
+Just one note here that his definition of properties that are preserved after application of a function involves using his "for all" quantifier over functions, not just over variables.
