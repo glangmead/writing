@@ -40,7 +40,35 @@ He compares the actual Moon to a reference, the image it makes in the optics of 
 
 An assertion, or proposition, has as its reference a truth value. So every True assertion has the same reference!
 
+Frege requires his theories to pass the test that the reference of a sentence must remain unchanged when we replace part of the sentence with a new part that has the same reference as the original part. 
 
+Since a proposition has only True or False as its reference, obliteration all the information, we must be interested not just in the reference but also in the sense. But we are also interested in the reference!
 
+Frege goes on a bit of a grammatical tangent, and this is what confuses me. He spends time on subordinate sentences, since this is a nested structure.
 
+Other cases he considers:
+
+1. An abstract noun clause introduced by "that", prefixed by "say", "hear", "be of the opinion", "be convinced", "conclude", "and similar words". In this case, it is not equivalent to replace the sub-sentence by one of equivalent reference, but rather only of equivalent sense. Perhaps it is because this sub-sentence has as its reference "the thought that this sentence is true." rather than referring directly to True.
+2. Subordinate clauses that do have references (but not truth values), e.g. "Whoever discovered the elliptic form of the planetary orbits died in misery." Here the "whoever" clause has Kepler as reference.
+3. What if the term "Kepler" fails to refer to anything? Language allows this. This is an imperfection of language.
+
+> It is therefore by no means unimportant to eliminate the source of these mistakes, at least in science, once and for all.
+
+4. Subordinate clauses beginning with "although".
+
+I want to pause on this one. He says 
+
+> This conjunction actually has no senseand does not change the sense of the clause but only illuminates it in a peculiar fashion. 
+
+I'm distressed that his notion of "sense" does not allow the word "although" to do more. It was this eliding of "although" that led me to wonder if the superior framing to Frege's goals is not a dichotomy but rather a spectrum. If we are allowed to nest sense inside larger senses, then the "although" could be a box that wraps the rest of the clause and adds... whatever we decide "although" is adding.
+
+Similarly, his brief attempt to grapple with all the subtleties and implications of 
+
+    'Napoleon, who recognized the danger to his right flank, himself led his guards against the enemy position.'
+
+seems not to worry him, even though he is clearly opening a can of worms here. I don't doubt that everything can be mapped to his framework, but he doesn't seem to acknowledge that language is very complex, and that we can have modes such as sarcasm, various kinds of incorrectness, mixed messages, contradictory thoughts, and so on.
+
+His moral is
+
+> ...the sense of the sentence, viz., the thought expressed by it, is no less relevant than its _Bedeutung_, i.e. its truth-value.
 
