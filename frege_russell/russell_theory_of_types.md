@@ -60,5 +60,38 @@ In modern terminology, Russell is using the introduction and elimination rules f
 
 > Note that there cannot be a real variable in any proposition; for what contains a real variable is a propositional function, not a proposition.
 
+I raised my eyebrow and felt honest suspense when Russell says:
+
+> How are we to interpret the word _all_ in such propositions as "all men are mortal?"
+
+The piece he wants to emphasize is that there's a variable being implicitly quantified over in this proposition. We can rephrase it as "(x).if x is a man, x is mortal". So what does x range over? He uses the term _range of significance_ to describe the possible inputs to a given propositional function. It can't be too large of a collection, because we want to avoid the paradoxes. He says of the range:
+
+> [the range] falls short of all imaginable values of x, though it exceeds the values which are men
+
+But the range of significance must also be _implicit_. If it was explicit, as in "(x).if x is an i, then if x is a man x is mortal", then what is the new range of significance of this proposition that includes the clause about "being an i"? This particular move on his part seems to really point towards types, with their atomic identity which is not carved from something larger.
+
+> We thus reach the conclusion that "all men are mortal" means "if x is a man, x is mortal, always," where always means "for all values of the function 'if x is a man, x is mortal.'"
+
+## IV. The Hierarchy of Types
+
+> A type is defined as the range of significance of a propositional function, i.e., as the collection of arguments for which the said function has values.
+
+We will solve the paradoxes by placing some of the objects under discussion into a higher type. What's the lowest type? He says we don't need to have our hands on that, we just need relative types. Perhaps we only need them mid-argument when the self-reference gets heated. He says:
+
+> It is unnecessary, in practice, to know what objects belong to the lowest type, or even whether the lowest type of variable occurring in a given context is that of individuals or some other. For in practice only the relative types of variables are relevant; thus the lowest type occurring in a given context may be called that of individuals so far as that context is concerned.
+
+So we can use "individuals" to describe the lowest level we have around mid-argument. 
+
+Propositions that contain only individuals as apparent variables are called _first-order propositions_. 
+
+The totality of first order propositions is a type. Propositions in which first-order propositions, but no higher order, occur as apparent variables are second-order propositions. These can be used in third-order propositions, etc.
+
+Resolving the paradoxes takes differing amounts of work. But we can resolve the Epimenides paradox by restating it as
+
+    E': all first-order propositions affirmed by me are false
+
+which is a second-order proposition, and so can't be plugged back into E'.
+
+So far we have a hierarchy of types of propositions. He also points out that we can convert propositions into functions by substituting a variable x whenever some constituent, say a, occurs. I suppose we'd call this lambda abstraction these days.
 
 
