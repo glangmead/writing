@@ -9,25 +9,44 @@ In the 1890s Gottlob Frege expanded the power and scope of logic. His stated nar
 * logic is a tool for doing math
 * he may extend it to other sciences
 
-Frege contextualizes his work by using the phrase "scientific truth."[^1] 
+Frege's first big document, the _Begriffsschrift_, begins its preface with the sentence "The recognition of a scientific truth generally passes through several stages of certainty."[^1] The rest of the document, and indeed Frege's entire body of work, is devoted to upgrading the _certainty_ of _scientific truth_. He is interested in methodology. He does not level any criticisms at the agenda of mathematics or science generally. It's true that he argues for what we would call a positivist take on science and mathematics, i.e. the position that mathematical objects are real objects in a real abstract and platonic realm of ideas. It's also true that he argues against a psychological frame for such objects. But the arc of scientific inquiry, and of mathematical research, is a fixed background object that he seems to approve of and wants to enhance.
+
+The enhancement he wants to offer is epistemological: more airtight arguments, more grounded in logic. This work has two parts. He will add constructions to logic itself, notably universal quantifiers and a primitive system of types, so that it can express a broader class of ideas. Indeed, he includes a roadmap of future goals for logic to support more scientific areas, such as geometry, analysis, and physics.
+
+With his suite of logical tools, Frege can offer his second idea, which is the Begriffsschrift, or concept script, itself. This is a notational tool for a human author to apply the laws of logic to some starting expressions that have been suitably encoded, working down the page applying laws of inference from the small permitted library, until a conclusion is reached. It is crucial that the concept script is a new notation, with little in common with spoken and written human languages except the use of letters for variables (he cites "the inadequacy of language"). Here is an example that in modern notation would be "p ∧ (p → q) → q" or in words "if p holds, and p implies q, then q holds":
+
+![Modus ponens in the concept script](modus_ponens.png)
+
+and here is his diagram showing that his expressions can subsume the "square of opposition", a sort of ad-hoc logical tool used over the preceding centuries[^wiki_square]:
+
+![Square of opposition](opposition_square.png)
+
+He wants the concept script and logical framework to be adopted. The sales pitch has words like "firm" and  "free of gaps":
 
 > The firmest proof is obviously the purely logical, which, prescinding from the particularity of things, is based solely on the laws on which all knowledge rests.
 
-A complete logical proof has no "gaps":
-
 > So that nothing intuitive could intrude here unnoticed, everything had to depend on the chain of inference being free of gaps.
 
-One cause of gaps is "the inadequacy of language". So Frege invented the concept script as a notation language for gap-free logical proof. His comparison of the concept script to a microscope is very fruitful. First of all, it is a tool which we use for the purpose of examining the true subject matter at hand, namely scientific truth. But it is "useless for all others" (purposes, that is). It is a scientific instrument and like all scientific instruments it has two natures. First, it is itself a product of science and worthy of study and refinement by scientists and engineers. But secondly it empowers scientists to use it to make more powerful observations and extend the domain of science.
+His comparison of the concept script to a microscope is very fruitful. First of all, it is a tool which we use for the purpose of examining the true subject matter at hand, namely scientific truth. But it is "useless for all others" (purposes, that is). It is a scientific instrument and like all scientific instruments it has two natures. First, it is itself a product of science and worthy of study and refinement by scientists (or engineers). But secondly it empowers scientists to use it to make more powerful observations and extend the domain of science.
 
 > Everything that is necessary for a valid inference is fully expressed; but what is not necessary is mostly not even indicated; _nothing is left to guessing_.
 
-Frege is proud that his definition of _function_ is more powerful than the popular mathematical definition of his day:
-
-> One sees here particularly concept of function in Analysis, which in general I have followed, is far more restricted than that developed here.
-
-Frege uses the word "science" but in fact he is focused entirely on mathematical applications of his logical foundations. He views mathematics as a particular science, as evidenced by remarks such as this one about the natural numbers:
+I will be less interested in the application for which Frege applied his new tools, but let me briefly describe it. Frege wanted to define the natural numbers (positive whole numbers) and the laws of arithmetic entirely inside logic. This would upgrade numbers with more certainty and Kantian analyticicty. It would also dovetail with other work going on in the field, as there was a mathematical community contemporaneous with Frege, and of which he was very aware, who were working diligently to re-define the real numbers to avoid some confusion that had come about in the field of analysis and calculus. The real numbers are built on the rational numbers, which are built on the integers, which are in turn built on the natural numbers. But the natural numbers did not have a satisfactory mathematical definition:
 
 > Yet is it not shameful that a science should be so unclear about its most prominent object, which is apparently so simple?
+
+He spends many pages trying to define concepts and objects, so that numbers can then be real objects in a platonic realm. He captures his definition using something similar to set theory, which for him takes the form of extensions of propositional functions, meaning all the objects that yield the value True when plugged into a function that takes objects as input and emits either True or False. Once he has 0 and 1 and a successor function, he uses the concept script to prove theorems about arithmetic.
+
+The parts of this overall project that I want to highlight then are these:
+
+1. Science and mathematics have value.
+2. They derive their value in part from their rigor and certainty.
+3. To enhance the rigor and certainty is to enhance the power and the value of these activities.
+4. The enhancement is therefore to expand logic, and create tools for people to perform gap-free inference, so that these foundations can be deployed whenever they are needed to ground science in positifist logical reality.
+
+Goals 1-3 were widely shared by the mathematicians I just mentioned, such as Dedekind, who were working to provide a sharper and more careful set of definitions of real numbers, continuity, functions and so on. But Frege wanted even sharper and stronger tools. He wanted to focus on the piece we call logic, and make it an explicit partner of mathematics, able to express the mathematical objects, and the mathematical arguments.
+
+For a modern person aware of computers, there is a tendency perhaps to view the concept script as a mindless tool appropriate for a computer to implement. It's certainly clear right away that the size of the deductions is going to be very large when proving any nontrivial theorem. To tediously scribble many pages of concept script, applying rules in formulaic ways, might appear to be a mindless activity or a degrading one, or one best suited to a machine. But there is no evidence in his writings that Frege felt this way at all, and it's clearer than ever today that this sort of activity is deeply creative. But it does benefit from having a machine partner, as we will see.
 
 ## Frege's project
 ### The _Begriffsschrift_ and the analyticity of numbers
@@ -65,9 +84,9 @@ In 1899 Hilbert published _Foundations of Geometry_, which we recognize now as a
 
 The second part of the theory is to take the axioms and _interpret_ them in some specific mathematical setting. We could interpret all the objects in the usual Euclidean way in the plane, for example. But we could also work on a two-dimensional sphere and interpret "point" to mean "pair of antipodal points on the sphere" and "line" to mean "great circle". We then get a second consistent theory except for postulate 5, which fails to hold because instead of there existing one such line, there are none!
 
-There are at least three things going on here! First of all, it neatly packages a story about geometry and the status of the fifth postulate that took our ancestors hundreds of years to figure out. Secondly it empowers us to split our arguments into two parts as well. One part can focus on all the deductions we can make simply based on the axioms, without referring to the interpretation. Some results, such as the content of postulate 5, will not be provable that way. We have to pass to the interpretation that lives on the flat plane before we can prove it, and so it's more contingent, or even _synthetic_ to use Kant's term. The results that stem strictly from the axioms would then count as _analytic_. I like to think of these analytic theorems as supplying answers to "why" questions. Why do the interior angles of a triangle add up to two right angles? Because _anything_ that obeys postulates 1-4 also obeys this rule.
+There are at least three things going on here! First of all, it condenses geometry, both Euclidean and non-Euclidean, into a concise logical package. Secondly it empowers us to split our arguments into two parts. One part can focus on all the deductions we can make simply based on the axioms, without referring to the interpretation. Some results, such as the content of postulate 5, will not be provable that way. We have to pass to the interpretation that lives on the flat plane before we can prove it, and so it's more contingent, or even _synthetic_ to use Kant's term. The results that stem strictly from the axioms would then count as _analytic_. I like to think of these analytic theorems as supplying answers to "why" questions. Why do [TODO: better example]? Because _anything_ that obeys postulates 1-4 also obeys this rule.
 
-But Hilbert's method also gives us one more capability. We can use it to study the axiom systems themselves and ask questions about the consistency of the axioms, including whether some of the axioms are independent. Since there are two interpretations of 1-4 one of which obeys postulate 5 and one of which does not, we can conclude that postulate 5 does not follow from 1-4. That's the result that took 2,000 years to discover.
+But Hilbert's method also gives us one more capability. We can use it to study the axiom systems themselves and ask questions about the consistency of the axioms, including whether some of the axioms are independent. Since there are two interpretations of 1-4 one of which obeys postulate 5 and one of which does not, we can conclude that postulate 5 does not follow from 1-4. That's the result that took 2,000 years to discover. By moving back and forth between the axioms and some clever special models, we can conclude things just about the axioms. The independence of axiom 5 follows from an argument that uses a model. This is standard metamathematical stuff these days, which is why this was a major development.
 
 When I learned that Frege responded strongly _against_ this idea of Hilbert's, I was truly surprised. What were his objections?
 
@@ -129,3 +148,5 @@ Humans have always had a complex relationship with our tools. We use them for ce
 [^wolfram]: https://mathworld.wolfram.com/ParallelPostulate.html
 
 [^hilbert]: https://en.wikipedia.org/wiki/David_Hilbert#cite_note-44
+
+[^wiki_square]: Read more at https://en.wikipedia.org/wiki/Square_of_opposition
