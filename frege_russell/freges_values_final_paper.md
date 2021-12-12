@@ -7,7 +7,7 @@ Frege's first big document, the _Begriffsschrift_, begins its preface with the s
 
 The enhancement he wants to offer is epistemological: more airtight arguments, more grounded in logic. This work has two parts. First he will add constructions to logic itself, notably universal quantifiers and a primitive system of types, so that it can express a broader class of ideas. He even includes a roadmap of future goals for logic, to support even more scientific areas such as geometry, analysis, and physics.
 
-With his suite of logical tools, Frege can offer his second idea, which is the Begriffsschrift, or concept script, itself. This is a notational tool for a mathematician to apply the laws of logic to some starting expressions that have been suitably encoded, working down the page applying laws of inference from the small permitted library, until a conclusion is reached. It is crucial that the concept script is a new notation, with little in common with spoken and written human languages except the use of letters for variables (he cites "the inadequacy of language"). Here is an example that in modern notation would be "p ∧ (p → q) → q" or in words "if p holds, and p implies q, then q holds":
+With his suite of logical tools, Frege can offer his second idea, which is the Begriffsschrift, or concept script, itself. This is a notational tool for a mathematician to apply the laws of logic to some starting expressions that have been suitably encoded, working down the page applying laws of inference from the small permitted library, until a conclusion is reached. It is crucial that the concept script is a new notation, with little in common with spoken and written human languages except the use of letters for variables (he cites "the inadequacy of language"). Here is an example that in modern notation would be "B ∧ (B → A) → A" or in words "if B holds, and B implies A, then A holds":
 
 ![Modus ponens in the concept script](modus_ponens.png)
 
@@ -113,19 +113,75 @@ Frege acknowledged that there may be imperfections in his logical axioms and inf
 
 The particular foundation offered by Martin-Löf's intuitionistic type theory[^ttwiki][^ttphil] is especially noteworthy in this context, since it so perfectly incorporates the Hilbert picture into the foundations, while also capturing all three of Frege's most important contributions that I am highlighting: logic, a system of types, and two kinds of equality. In intuitionistic type theory the types are "Hilbertian", meaning they are abstract objects that are meant to eventually be interpreted into more concrete mathematical objects. And the interpretation process is completely formal and mathematical! For example if a mathematician has some objects of interest to which they wish to apply type theory (such as sets, or sheaves of sets over a topological space, or many other examples), they simply have to arrange for those objects to live inside a category with a few special properties and the type theory will automatically be interpretable on these objects. Proofs expressed in type theory become proofs about those objects. Different versions of type theory with more or fewer features will require different features to be present in the category. That covers the Hilbert side of things.
 
-On the Frege side, intuitionistic type theory has his notion of function objects and his distinction between free and bound variables, and about variables having types. In type theory the logical framework is actually emergent from the type system! This is in some sense the greatest validation of Frege of all. Just by having function types, product types, and coproduct types, and assigning universal properties to these, we do not need to separately impose a logic. The behavior of the function types automatically establishes that p ∧ (p → q) → q. The behavior of the product types satisfies the need to have conjunction, and the coproduct types do the same for disjunction. Type theorists call this emergent logic "internal" since it uses the material of the types to state and prove results. Whereas Frege's goal was to absorb the natural numbers, and hence part of mathematics, into logic, the modern perspective is to couple them in the opposite way: logic emerges from mathematics!
+On the Frege side, intuitionistic type theory has his notion of function objects and his distinction between free and bound variables, and about variables having types. In type theory the logical framework is actually emergent from the type system! This is in some sense the greatest validation of Frege of all. Just by having function types, product types, and coproduct types, and assigning universal properties to these, we do not need to separately impose a logic. The behavior of the function types automatically establishes that B ∧ (B → A) → A. The behavior of the product types satisfies the need to have conjunction, and the coproduct types do the same for disjunction. Type theorists call this emergent logic "internal" since it uses the material of the types to state and prove results. Whereas Frege's goal was to absorb the natural numbers, and hence part of mathematics, into logic, the modern perspective is to couple them in the opposite way: logic emerges from mathematics!
 
 Finally we come to Frege's distinction between "a = a" and "a + b = b + a". This has been the most recent and perhaps unexpected vindication of Frege's priorities. Intuitionistic type theory indeed includes exactly the two kinds of equality Frege distinguished. One of them, dubbed "judgmental equality", operates at the level of sense while the other, named "propositional equality", which is a _type_, corresponds to reference. Having equality of sense gives you equality of reference automatically, but not vice versa. The exploration of propositional equality types has led to the discovery of homotopy type theory and its infinite tower of equality types. Since equality is a type, there can be equalities between equalities and so on. This then turns out to generate an even more powerful theory for proving mathematical results. Come to think of it, perhaps this is the most impactful validation of Frege's vision!
 
 ## Proof assistants
 ### And their communities
-1. Wonderful working example of Frege's vision. Moving very rapidly. Symbiosis alive and well.
-2. But they are a little too welcoming to Szegedy and DeepMind.
+Frege's vision was for mathematicians to use logic and gap-free formal methods to strengthen the research they were already doing, i.e. the seeking of scientific truth. Nowhere is this goal more visibly realized than in the community projects that have grown up around specific proof assistants. Two prominent examples are Mathematical Components[^mathcomp], which uses the Coq proof assistant, and Mathlib[^mathlib] which uses the newer Lean proof assistant. There are mathematical communities around each of the other proof assistants as well, such as Isabelle, HOL Light, Agda, and so on. Each community is growing, and I imagine new languages will come along every few years as well. The mathematical communities are distinct (but overlapping) communities compared to the ones that implement and support the proof assistant software. The goal is to formalize some body of mathematics, eventually all of it, _using_ the proof assistant. The math libraries are therefore a combination of a software project and a mathematical project. It will help to tease out what parts the computer is currently helping with, because then we can spot the area where the crisis has begun.
+
+By way of example I used the Lean proof assistant myself, both to assess the Mathlib library's support for smooth manifolds and differential geometry and to learn to contribute to the Mathlib project. I ended up proving a proposition that the collection of smooth functions from a fixed smooth manifold M to the real numbers form a real algebra, with multiplication and addition given by the corresponding pointwise operations[^algebra]. Lean has a small "trusted kernel" where the core logic is implemented, and this corresponds to Frege's logic, albeit expanded into the more powerful logic of dependent type theory. In Lean proofs can be built up incrementally with tactics that advance the state of the proof by applying various transformations and lemmas. Sometimes it's more intuitive to apply a transormation to the chain of steps that started with the assumptions, or sometimes you want to transform the chain that leads to the goal, eventually meeting in the middle and forming an unbroken chain. The software permits you to think of one step as a possibly large sub-problem, which becomes the current lemma to prove. What the computer is doing among other things is to bring focus and a linear ordering to the process. Someone directly using Frege's concept script would have to organize the flow of information as an extra task on top of the strategic and tactical challenges that the logic itself requires.
+
+In summary, to formalize a proof you must:
+
+1. Formalize all the definitions.
+2. Plan the strategy, i.e. the method of proof. In my case the strategy was to prove that the collection of smooth real-valued functions satisfied each of the half-dozen requirements to be an algebra.
+3. Perform many iterations of the small-scale tactical piece: select a rule or lemma from the library, and apply it somewhere on the frontier of the proof.
+4. Choose an order to perform the actions in 3.
+
+The computer helps with 3 and 4, and I want to come back and focus on 3 shortly. The community manages the storage of definitions and existing theorems in the digital library (such as the Mathlib Github repository), which helps with 1. The mathematical content exists mainly in 2. Often an existing known proof is what you need to formalize, but in other situations you might have reason to prove the result with a different method in order to fit the logic being used. For example, some type theories do not offer classical logic such as the law of the excluded middle, requiring constructive proofs. Often these are not available in the literature.
+
+Lean's tactics engine is one way to implement 4, but other systems like Agda lack this explicitly incremental paradigm (i.e. where you write each step into the source code and it gets saved there for others to see), but offer interactive tools to probe the state of the proof, or leave holds to come back to later, but where the contortions the user went to are not saved with the file.
+
+So what about 3? If you are in the middle of a proof, and you believe that elsewhere in the library is a lemma that the pointwise product of two smooth functions is smooth, how do you find it so that you can type its name? What if you don't know whether that lemma is available or not? This portion of the task is not apparent in Frege's description but turns out to dominate the work. This is also the least mathematical part of the process! And it is here where mathematicians began to envision a role for artificial intelligence. What if I was in the middle of this proof and I could ask the proof assistant to _search_ for an appropriate lemma? It could use any combination of brute-force search through all the definitions in the library, or some naming hints, or even some patterns learned from a database of example proofs. Such general-purpose tools are sometimes called "hammers" because of the name of an early example. The community is eager for new hammers to help with such searches. One recent example in Coq was worthy of publication[^coqhammer]. The expertise required is a quite orthogonal to the content of smooth manifolds, and so it makes sense for a different sort of specialist to help tackle it.
+
+But once the AI community became aware of how much progress the formalization community had made, something began to change. Some of the AI researchers and some of the mathematicians started to move away from Frege's vision, and began to fixate on the computer itself. Here is an analogy. Imagine the songwriter Paul McCartney sitting with his guitar trying to write a new song under a deadline. He decides to strum quickly, moving between a few chords while humming some notes. The sound of his guitar and his own humming come back into his ears and he listens to the proto-music and reacts to it, extending the melodic line and tweaking the chords. After about a minute, he is humming the melody of the song "Get Back" and the act of creativity is complete[^getback]. In this story, Paul is the mathematician, and mathematics is music. The guitar is the proof assistant. He both plays the guitar, and listens to the guitar. The guitar makes noises he could never make with his own body, but he must operate it. In some sense when you strum the guitar, you don't know exactly what it will sound like. The guitar lets you know. Now imagine that a journalist observes Paul's songwriting session and writes an article in the Arts section of a newspaper with the headline "Guitar finally writes music".
 
 ## Silicon Reckoner
 ### Grappling with what mathematical activity is, in a defensive posture wrought by recent capitalist history.
+In the 2020 Quanta Magazine article "How Close are Computers to Automating Mathematical Reasoning"[^quanta] we get a good status report on where we stand with Frege's program, for good and ill. Many researchers are quoted in the article, but their viewpoints do not gel into a single coherent narrative. The picture becomes much clearer if you examine each quote and ask "is this person focused on helping _people_ do math, or computers?"
 
-Formalizing mathematics with computers is clearly a direct descendent of the activity Frege was proposing. The computer helps streamline the application of thousands of logical rules, which solves the problem Frege noticed with the verbosity of the concept script. But the goal, the activity being undertaken, is standard mathematical activity. Lots of undergraduate mathematics, some graduate mathematics, and some research-level mathematics have been formalized. The database of formalized results follows the database of results published in standard journals to the extent it is aligned with the capabilities of the software and the staffing. It is a healthy activity, and a human one. It is used to teach and to learn, and it has corrected errors and discovered new ones. It really is providing long sought-after upgrades to mathematical rigor.
+Michael Harris wants to do math and worries the computer makes it harder: "By the time I’ve reframed my question into a form that could fit into this technology, I would have solved the problem myself."
+
+Kevin Buzzard wants computers to do the math and claims that mainstream mathematians want the same: "Computers have done amazing calculations for us, but they have never solved a hard problem on their own," he said. "Until they do, mathematicians aren’t going to be buying into this stuff."
+
+Emily Riehl wants to do math and wants her students to do it too: "It’s not necessarily something you have to use all the time, and will never substitute for scribbling on a piece of paper," she said, "but using a proof assistant has changed the way I think about writing proofs."
+
+But Christian Szegedy (at Google) and Josef Urban (at the Czech Institute of Informatics, Robotics and Cybernetics) want to teach computers do both propose and prove theorems:
+
+> Urban was partially inspired by Andrej Karpathy, who a few years ago trained a neural network to generate mathematical-looking nonsense that looked legitimate to nonexperts. Urban didn’t want nonsense, though — he and his group instead designed their own tool to find new proofs after training on millions of theorems. Then they used the network to generate new conjectures and checked the validity of those conjectures using an ATP called E.
+> 
+> The network proposed more than 50,000 new formulas, though tens of thousands were duplicates. “It seems that we are not yet capable of proving the more interesting conjectures,” Urban said.
+
+
+> [Szegedy's] group at Google Research recently described a way to use language models — which often use neural networks — to generate new proofs. After training the model to recognize a kind of treelike structure in theorems that are known to be true, they ran a kind of free-form experiment, simply asking the network to generate and prove a theorem without any further guidance. Of the thousands of generated conjectures, about 13% were both provable and new (meaning they didn’t duplicate other theorems in the database). The experiment, he said, suggests that the neural net could teach itself a kind of understanding of what a proof looks like.
+> 
+> "Neural networks are able to develop an artificial style of intuition," Szegedy said.
+
+Timothy Gowers says computers will literall replace mathematicians (without saying whether he thinks this is good): 
+
+> mathematicians will enjoy a kind of golden age, "when mathematicians do all the fun parts and computers do all the boring parts. But I think it will last a very short time."
+
+Michael Harris has some pushback on this: "Even if computers understand, they don’t understand in a human way."
+
+Suppose you are a mathematician who finishes reading this article and feels a sense of disgust and dread, as I did. Where is it coming from? I would offer a final consultation with Frege to get to the bottom of it. Frege wanted to derive arithmetic from logic in order to give it the firmest epistemological status of all: _analytic truth_. Facts that do not require checking any data at all, but simply emerge from the logical bedrock. Frege compares it in the _Begriffsschrift_ to condensation of moisture from the air into visible droplets. It's not very likely that Frege succeeded in this project, since he had to introduce functions and sets and other ideas in order to eventually state what the natural numbers are. Analytic truths may be entirely too trivial to generate anything of interest to a person, or a mathematician for that matter.
+
+Computers are analytic machines. They contain only logic gates and storage. If we feed a neural network a corpus of photographs paired with English text captions, we can build a tool that lets users type "banana" and see some hallucination of a banana built from... what? Its inputs:
+
+1. Photographs taken by people, paired with captions written by people.
+2. The specification of a neural network input by people.
+3. The specification of a learning objective such as an error rate matching captions to images, input by a person.
+
+The output after typing "banana" is determined by these inputs. Every iota of agency is human. None is the computer's. Szegedy and Urban must fundamentally disagree, since the software they are busy building would be software that takes responsibility for composing new photographs and captions. The analytic engine, that still contains only inputs 1, 2, and 3, would gain respondibility for performing action 1. The misunderstanding is so complete that it can generate horror. Szegedy's confusion can be traced to a misreading of Frege:
+
+> Mathematics is the discipline of pure reasoning. Mathematical reasoning is not about mathematics per se, it is about reasoning in general.
+
+This is taken from Szegedy's 2020 article[^szegedy] as cited by Harris[^harris], who grapples with this horror in his writing.
+
+I hope that our discussion of Frege's vision, and of the living embodiment of his vision in the community of formal mathematics, makes this statement appear as wrong as wrong can be. The good news is that it is fully explanatory of why someone would pursue so tautological a project as building a machine to emit theorems and proofs and call it mathematics.
+
+If you worry as I do that mathematics is nowhere to be found in Szegedy's vision, but that Google may coopt the power to define mathematics as it sees fit and starve traditional mathematical activity of resources, human and capital, then we can start also wondering what to do about it.
 
 Besides proving and re-proving theorems, the activity of formalization has the side effect of digitizing mathematical results and their proofs. The structured files are tautologically machine-readable, and so can be mined for other purposes if posted on the public internet without restricted licenses. Whenever data is being moved from the context in which it was created into a new context, we need to be on the lookout for ethical lapses, both intended and accidental.
 
@@ -135,20 +191,13 @@ Digital mathematical repositories are under investigation by various teams with 
 
 [Mathfoldr](https://topos.site/blog/2021/07/introducing-the-mathfoldr-project/). This project has more humanistic goals: "MathFoldr will provide search and literature curation tools that will make mathematics more accessible, with the ultimate goal of transforming the way mathematics is created and navigated". 
 
-Christian Szegedy. 
-https://siliconreckoner.substack.com/p/intelligent-computer-mathematics
-https://link.springer.com/chapter/10.1007/978-3-030-53518-6_1
-https://www.quantamagazine.org/how-close-are-computers-to-automating-mathematical-reasoning-20200827/
-
-DeepMind. 
-
-TODO: document what the ML groups have done, notably train algorithms on corpora of human proofs.
-
 ## Conclusion
 ### Stick with Frege. Protect math.
 Frege thought he saw phantoms when he was introduced to formalism. What would he make of the images emitted by deep learning networks that are tuned on millions of images and textual captions, then inverted to generate images from text? These networks are just logical systems that digest data and update themselves in a way that minimizes a calculated value. When we type "banana" and examine the resulting image, we face a test. One common response is to marvel that the computer can generate an image of a banana, and to compare the psychedelic patterns of noise to human art. These are the people who see phantoms but believe they are seeing people. The computer cannot generate new material, it is truly an analytic machine and can only permute the human input according to human-programmed rules. They project human intent and human creativity onto the machine, and it's hard to imagine a more confused and degrading response. This fearful situation is not some cherry-picked analogy. Literally the same engineers who built these tools are looking at mathematical theorems and proofs as another corpus to ingest. They plan to build machines that emit pictures of mathematical bananas, and hope that we keep projecting ourselves onto their work. We are the instruments who will launder their tautologies and call it mathematics.
 
 Humans have always had a complex relationship with our tools. We use them for certain purposes, but we also improve them. Sometimes the tool is at the center, sometimes at the periphery. Tools that have had especially wide-ranging impacts include writing and its sequels: the printing press and the digital computer. In the 21st century the computer has proven especially effective at drawing our attention away from the problems it is solving and directing them inward, into the computer. The field of mathematics has its own parallel narrative of interactions with these technologies. Consider for example the growing turmoil around the mathematical publishing industry. It's not very unfair to stipulate that there are rapacious commercial entities who mine mathematical writing for profit and adopt exploitative practices entirely divorced from the goals of the community itself. Who see mathematics not as value-laden directly, but who see the value it holds for us and to leverage it, to trade it for money and power, rather than enhance it. I would further stipulate that this sort of antagonistic system is an outgrowth of even more general systems of culture and capital. The logical inference is that we should be constantly assessing our alignment with such entities, to try to preserve what we value. If we value the human activity of generating beautiful mathematical theories with high standards of rigor, as Frege did, then we have a simple test we can perform. We can ask whether the other entity shares that goal or not.
+
+TODO: analytic, as good, but as bad.
 
 [^1]: _Begriffsschrift_, p. 1
 [^wolfram]: https://mathworld.wolfram.com/ParallelPostulate.html
@@ -170,3 +219,19 @@ Humans have always had a complex relationship with our tools. We use them for ce
 [^ttphil]: https://plato.stanford.edu/entries/type-theory-intuitionistic/
 
 [^ttwiki]: https://en.wikipedia.org/wiki/Intuitionistic_type_theory
+
+[^quanta]: https://www.quantamagazine.org/how-close-are-computers-to-automating-mathematical-reasoning-20200827/
+
+[^mathcomp]: https://math-comp.github.io
+
+[^mathlib]: https://leanprover-community.github.io
+
+[^algebra]: https://github.com/glangmead/geometry/blob/ab8cbeab722eb3df8d77885f812af8063b1f5906/src/algebra_of_smooth_functions.lean
+
+[^coqhammer]: Czajka, Ł., Kaliszyk, C. Hammer for Coq: Automation for Dependent Type Theory. J Autom Reasoning 61, 423–453 (2018). https://doi.org/10.1007/s10817-018-9458-4
+
+[^getback]: https://www.youtube.com/watch?v=9kOQ5sgzhRA
+
+[^szegedy]: Szegedy C. (2020) A Promising Path Towards Autoformalization and General Artificial Intelligence. In: Benzmüller C., Miller B. (eds) Intelligent Computer Mathematics. CICM 2020. Lecture Notes in Computer Science, vol 12236. Springer, Cham. https://doi.org/10.1007/978-3-030-53518-6_1
+
+[^harris]: https://siliconreckoner.substack.com/p/intelligent-computer-mathematics
