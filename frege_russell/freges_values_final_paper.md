@@ -174,19 +174,25 @@ So what about 3? If you are in the middle of a proof, and you believe that elsew
 
 But at the same time, once the AI community became aware of how much progress the formalization community had made, something else began to take place.
 
-## 6. Silicon Reckoner
+## 6. The privilege to do math
 
-**Grappling with what mathematical activity is, in a defensive posture wrought by recent capitalist history.**
+For fear of obfuscating what I want to say, let me start by simply stating it: I think limiting the definition of "doing mathematics" to people would be healthy and might even be a tautology that none of us can doing anything about. I think we should close ranks to defend this position because it is being attacked under the cloak of AI research. But I also think that computers are amazing tools and I have devoted my own career to making them smarter. Many mathematicians feel the same way, especially those in the formalization community that I have described. This makes it seem that I am trying to split hairs, and I worry that this appearance will make it even more difficult to mount a humanist defense against AI. My goal for the rest of this section is to convince you that:
 
-In the 2020 Quanta Magazine article "How Close are Computers to Automating Mathematical Reasoning"[^quanta] we get a good status report on where we stand with Frege's program, for good and ill. Many researchers are quoted in the article, but their viewpoints do not gel into a single coherent narrative. The picture becomes much clearer if we examine each quote and ask "is this person focused on helping _people_ do math, or computers?"
+1. Some prominent AI researchers want to redefine art, music, the playing of games, and even mathematics to include computers as the doers.
+2. Some mathematicians want to yield this.
+3. Frege offers a vision for compartmentalizing the use of computers in math.
 
-Michael Harris wants to do math and worries the computer makes it harder: "By the time I’ve reframed my question into a form that could fit into this technology, I would have solved the problem myself."
+Frege maintained a separation between the epistemological certainty of logic and the human project to create mathematics, physics, and other sciences. But there was no pressing reason to establish demarcations lines around the act of doing science. There were academic gatekeepers and power structures that implicitly defined what was legitimate research, and those structures look similar in many ways today. It is more than likely that these systems of power are corrupt and unjust. But they are also relatively _mindless_. There is no governing body that mediates the perpetuation of academic privilege, it just brings benefits to those it benefits, and often those benefits snowball into the kind of power and clout that allows the beneficiaries to control the future and preserve the system. Confronting unfair systems is a fantastic project that I believe our society is embarking on, and it will bring tremendous benefits to many people and unlock more of our potential. The future can be better, but we must also insist that the future be humanist. We have to assert a few tautologies, such as "art is something people do", "music is something people do", and "mathematics is something people do".
 
-Kevin Buzzard wants computers to do the math and claims that mainstream mathematians want the same: "Computers have done amazing calculations for us, but they have never solved a hard problem on their own," he said. "Until they do, mathematicians aren’t going to be buying into this stuff."
+In the 2020 Quanta Magazine article "How Close are Computers to Automating Mathematical Reasoning"[^quanta] we get a good status report on where we stand with the humanist part of Frege's program, for good and ill. Several researchers are quoted in the article, but their viewpoints do not gel into a single coherent narrative. The picture becomes much clearer if we examine each quote and ask "is this person focused on helping _people_ do math, or computers?"
 
-Emily Riehl wants to do math and wants her students to do it too: "It’s not necessarily something you have to use all the time, and will never substitute for scribbling on a piece of paper," she said, "but using a proof assistant has changed the way I think about writing proofs."
+Michael Harris wants people such as himself to do math and he worries that a proof assistant would make it harder: "By the time I’ve reframed my question into a form that could fit into this technology, I would have solved the problem myself."
 
-But Christian Szegedy (at Google) and Josef Urban (at the Czech Institute of Informatics, Robotics and Cybernetics) want to teach computers do both propose and prove theorems:
+Kevin Buzzard wants computers to do the math and claims that mainstream mathematians want the same: "Computers have done amazing calculations for us, but they have never solved a hard problem on their own," he said. "Until they do, mathematicians aren’t going to be buying into this stuff." I want to especially note the circular salesmanship in this sentiment: we want computers to get better at doing math because we want to sell the project to mathematicians, presumably so that computers can continue to do more math _for them_.
+
+Emily Riehl wants learn to do math with a proof assistant and wants her students to do it too: "It’s not necessarily something you have to use all the time, and will never substitute for scribbling on a piece of paper," she said, "but using a proof assistant has changed the way I think about writing proofs."
+
+But two computer scientists, Christian Szegedy (at Google) and Josef Urban (at the Czech Institute of Informatics, Robotics and Cybernetics) want to teach computers to do math without any human involvement:
 
 > Urban was partially inspired by Andrej Karpathy, who a few years ago trained a neural network to generate mathematical-looking nonsense that looked legitimate to nonexperts. Urban didn’t want nonsense, though — he and his group instead designed their own tool to find new proofs after training on millions of theorems. Then they used the network to generate new conjectures and checked the validity of those conjectures using an ATP called E.
 > 
@@ -197,11 +203,19 @@ But Christian Szegedy (at Google) and Josef Urban (at the Czech Institute of Inf
 > 
 > "Neural networks are able to develop an artificial style of intuition," Szegedy said.
 
-Timothy Gowers says computers will literall replace mathematicians (without saying whether he thinks this is good): 
+We will come back to Szegedy and the idea of computers generating theorems shortly. Timothy Gowers says computers will literally replace mathematicians (without saying whether he thinks this is good): 
 
 > mathematicians will enjoy a kind of golden age, "when mathematicians do all the fun parts and computers do all the boring parts. But I think it will last a very short time."
 
 Michael Harris has some pushback on this: "Even if computers understand, they don’t understand in a human way."
+
+Szegedy's confusion can be traced to a misreading of Frege. Here is Szegedy's definition of mathematics:
+
+> Mathematics is the discipline of pure reasoning. Mathematical reasoning is not about mathematics per se, it is about reasoning in general.
+
+This is taken from Szegedy's 2020 article[^szegedy] as cited by Harris[^harris], who grapples in public with this particular use of AI.
+
+Clearly there is a group of 
 
 Suppose you are a mathematician who finishes reading this article and feels a sense of disgust and dread, as I did. Where is it coming from? I would offer a final consultation with Frege to get to the bottom of it. Frege wanted to derive arithmetic from logic in order to give it the firmest epistemological status of all: _analytic truth_. Facts that do not require checking any data at all, but simply emerge from the logical bedrock. Frege compares it in the _Begriffsschrift_ to condensation of moisture from the air into visible droplets. It's not very likely that Frege succeeded in this project, since he had to introduce functions and sets and other ideas in order to eventually state what the natural numbers are. Analytic truths may be entirely too trivial to generate anything of interest to a person, or a mathematician for that matter.
 
@@ -211,11 +225,7 @@ Computers are analytic machines. They contain only logic gates and storage. If w
 2. The specification of a neural network input by people.
 3. The specification of a learning objective such as an error rate matching captions to images, input by a person.
 
-The output after typing "banana" is determined by these inputs. Every iota of agency is human. None is the computer's. Szegedy and Urban must fundamentally disagree, since the software they are busy building would be software that takes responsibility for composing new photographs and captions. The analytic engine, that still contains only inputs 1, 2, and 3, would gain respondibility for performing action 1. The misunderstanding is so complete that it can generate horror. Szegedy's confusion can be traced to a misreading of Frege:
-
-> Mathematics is the discipline of pure reasoning. Mathematical reasoning is not about mathematics per se, it is about reasoning in general.
-
-This is taken from Szegedy's 2020 article[^szegedy] as cited by Harris[^harris], who grapples with this horror in his writing.
+The output after typing "banana" is determined by these inputs. Every iota of agency is human. None is the computer's. Szegedy and Urban must fundamentally disagree, since the software they are busy building would be software that takes responsibility for composing new photographs and captions. The analytic engine, that still contains only inputs 1, 2, and 3, would gain respondibility for performing action 1. The misunderstanding is so complete that it can generate horror. 
 
 Here's another analogy that I find helpful. Imagine the songwriter Paul McCartney sitting with his guitar trying to write a new song under a deadline[^getback]. He decides to strum in a fast rhythm, moving between a few chords while humming some notes. The sound of his guitar and his own humming come back into his ears and he listens to the proto-music and reacts to it, extending the melodic line and tweaking the chords. After about a minute, he is humming the melody of the song "Get Back" and the act of creativity is complete. In this story Paul is the mathematician and mathematics is the music. The guitar is the proof assistant! He both plays the guitar, and listens to the guitar. The guitar makes noises he could never make with his own body, but he must operate it. In some sense when you strum the guitar, you don't know exactly what it will sound like. The guitar lets you know. Now imagine that a journalist from Quanta observes Paul's songwriting session and writes an article with the headline "Guitar finally writes music".
 
