@@ -1,0 +1,1 @@
+https://www.reddit.com/r/LaTeX/comments/8ht4im/tengwar_in_latex/
