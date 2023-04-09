@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --cohesion #-}
+{-# OPTIONS --without-K --rewriting --cohesion --flat-split #-}
 
 module Flat where
   open import lib.Basics
