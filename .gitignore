@@ -15,6 +15,7 @@ MAlonzo/**
 *.cb
 *.cb2
 .*.lb
+*.ptb
 
 ## Intermediate documents:
 *.dvi

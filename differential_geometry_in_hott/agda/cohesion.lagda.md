@@ -36,6 +36,9 @@ _↓♯ : {@♭ ℓ : Level} {@♭ A : UU ℓ} (@♭ xs : ♯ A) → A
 (z ↑♯) ↓♯ = z
 ```
 
+-- _foo_ : (some type)
+-- x foo y = 
+
 The computation rule which states that putting something in $\sharp A$ and then taking it out leaves it the same.
 
 ```agda
