@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/Users/glangmead/proj/writing/randomness"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <bibliography citestyle="numbers" xml:id="bib">
+    <title/>
+    <biblist>
+      <bibentry key="johnstone2" type="book" xml:id="bib.bib1">
+        <bib-name role="author">
+          <surname>Johnstone</surname>
+          <givenname>Peter</givenname>
+        </bib-name>
+        <bib-name role="editor">
+          <surname>Aull</surname>
+          <givenname>C. E.</givenname>
+        </bib-name>
+        <bib-name role="editor">
+          <surname>Lowen</surname>
+          <givenname>R.</givenname>
+        </bib-name>
+        <bib-title>Elements of the history of locale theory</bib-title>
+        <bib-data role="booktitle">Handbook of the History of General Topology</bib-data>
+        <bib-date role="publication">2001</bib-date>
+        <bib-publisher>Springer Netherlands</bib-publisher>
+        <bib-place>Dordrecht</bib-place>
+        <bib-part role="pages">835–851</bib-part>
+        <bib-identifier id="978-94-017-0470-0" scheme="isbn">ISBN 978-94-017-0470-0</bib-identifier>
+        <bib-identifier href="https://dx.doi.org/10.1007/978-94-017-0470-0%5F2" id="10.1007/978-94-017-0470-0_2" scheme="doi">Document</bib-identifier>
+        <bib-url href="https://doi.org/10.1007/978-94-017-0470-0_2">Link</bib-url>
+        <bib-data role="self" type="BibTeX">@book{johnstone2,
+    author = {Johnstone, Peter},
+    editor = {Aull, C. E. and Lowen, R.},
+     title = {Elements of the History of Locale Theory},
+ booktitle = {Handbook of the History of General Topology},
+      year = {2001},
+ publisher = {Springer Netherlands},
+   address = {Dordrecht},
+     pages = {835–851},
+      isbn = {978-94-017-0470-0},
+       doi = {10.1007/978-94-017-0470-0_2},
+       url = {https://doi.org/10.1007/978-94-017-0470-0_2}}
+</bib-data>
+      </bibentry>
+      <bibentry key="sketches" type="book" xml:id="bib.bib2">
+        <bib-name role="author">
+          <surname>Johnstone</surname>
+          <givenname>Peter T</givenname>
+        </bib-name>
+        <bib-title>Sketches of an elephant: a topos theory compendium</bib-title>
+        <bib-publisher>Oxford Univ. Press</bib-publisher>
+        <bib-place>New York, NY</bib-place>
+        <bib-part role="series">Oxford logic guides</bib-part>
+        <bib-date role="publication">2002</bib-date>
+        <bib-data role="self" type="BibTeX">@book{sketches,
+    author = {Johnstone, Peter T},
+     title = {Sketches of an elephant: a Topos theory compendium},
+ publisher = {Oxford Univ. Press},
+   address = {New York, NY},
+    series = {Oxford logic guides},
+      year = {2002}}
+</bib-data>
+      </bibentry>
+      <bibentry key="maclane" type="book" xml:id="bib.bib3">
+        <bib-name role="author">
+          <surname>MacLane</surname>
+          <givenname>Saunders</givenname>
+        </bib-name>
+        <bib-name role="author">
+          <surname>Moerdijk</surname>
+          <givenname>Ieke</givenname>
+        </bib-name>
+        <bib-title>Sheaves in geometry and logic: a first introduction to topos theory</bib-title>
+        <bib-publisher>Springer</bib-publisher>
+        <bib-place>Berlin</bib-place>
+        <bib-part role="series">Universitext</bib-part>
+        <bib-date role="publication">1992</bib-date>
+        <bib-identifier href="https://dx.doi.org/10.1007/978-1-4612-0927-0" id="10.1007/978-1-4612-0927-0" scheme="doi">Document</bib-identifier>
+        <bib-data role="self" type="BibTeX">@book{maclane,
+    author = {MacLane, Saunders and Moerdijk, Ieke},
+     title = {Sheaves in geometry and logic: a first introduction to topos theory},
+ publisher = {Springer},
+   address = {Berlin},
+    series = {Universitext},
+      year = {1992},
+       doi = {10.1007/978-1-4612-0927-0}}
+</bib-data>
+      </bibentry>
+      <bibentry key="rute" type="misc" xml:id="bib.bib4">
+        <bib-title>On the close interaction between algorithmic randomness and constructive/computable measure theory</bib-title>
+        <bib-name role="author">
+          <surname>Rute</surname>
+          <givenname>Jason</givenname>
+        </bib-name>
+        <bib-date role="publication">2019</bib-date>
+        <bib-links>1812.03375</bib-links>
+        <bib-data role="archiveprefix">arXiv</bib-data>
+        <bib-data role="primaryclass">math.LO</bib-data>
+        <bib-data role="self" type="BibTeX">@misc{rute,
+     title = {On the close interaction between algorithmic randomness and constructive/computable measure theory},
+    author = {Jason Rute},
+      year = {2019},
+    eprint = {1812.03375},
+ archiveprefix = {arXiv},
+ primaryclass = {math.LO}}
+</bib-data>
+      </bibentry>
+      <bibentry key="johnstone1983" type="article" xml:id="bib.bib5">
+        <bib-name role="author">
+          <surname>Johnstone</surname>
+          <givenname>Peter T.</givenname>
+        </bib-name>
+        <bib-data role="fjournal">Bulletin (New Series) of the American Mathematical Society</bib-data>
+        <bib-related role="host" type="journal">
+          <bib-title>Bull. Amer. Math. Soc. (N.S.)</bib-title>
+        </bib-related>
+        <bib-data role="month">01</bib-data>
+        <bib-part role="number">1</bib-part>
+        <bib-part role="pages">41–53</bib-part>
+        <bib-publisher>American Mathematical Society</bib-publisher>
+        <bib-title>The point of pointless topology</bib-title>
+        <bib-url href="https://projecteuclid.org:443/euclid.bams/1183550014">Link</bib-url>
+        <bib-part role="volume">8</bib-part>
+        <bib-date role="publication">1983-01</bib-date>
+        <bib-data role="self" type="BibTeX">@article{johnstone1983,
+    author = {Johnstone, Peter T.},
+  fjournal = {Bulletin (New Series) of the American Mathematical Society},
+   journal = {Bull. Amer. Math. Soc. (N.S.)},
+     month = {01},
+    number = {1},
+     pages = {41–53},
+ publisher = {American Mathematical Society},
+     title = {The point of pointless topology},
+       url = {https://projecteuclid.org:443/euclid.bams/1183550014},
+    volume = {8},
+      year = {1983}}
+</bib-data>
+      </bibentry>
+      <bibentry key="simpson" type="article" xml:id="bib.bib6">
+        <bib-title>Measure, randomness and sublocales</bib-title>
+        <bib-related role="host" type="journal">
+          <bib-title>Annals of Pure and Applied Logic</bib-title>
+        </bib-related>
+        <bib-part role="volume">163</bib-part>
+        <bib-part role="number">11</bib-part>
+        <bib-part role="pages">1642 – 1659</bib-part>
+        <bib-date role="publication">2012</bib-date>
+        <bib-note role="annotation">Kurt Goedel Research Prize Fellowships 2010</bib-note>
+        <bib-identifier id="0168-0072" scheme="issn">ISSN 0168-0072</bib-identifier>
+        <bib-identifier href="https://dx.doi.org/https%3A//doi.org/10.1016/j.apal.2011.12.014" id="https://doi.org/10.1016/j.apal.2011.12.014" scheme="doi">Document</bib-identifier>
+        <bib-url href="http://www.sciencedirect.com/science/article/pii/S0168007211001874">Link</bib-url>
+        <bib-name role="author">
+          <surname>Simpson</surname>
+          <givenname>Alex</givenname>
+        </bib-name>
+        <bib-extract role="keywords">Locale theory, Foundations of measure theory, Foundations of probability theory</bib-extract>
+        <bib-data role="self" type="BibTeX">@article{simpson,
+     title = {Measure, randomness and sublocales},
+   journal = {Annals of Pure and Applied Logic},
+    volume = {163},
+    number = {11},
+     pages = {1642 - 1659},
+      year = {2012},
+      note = {Kurt Goedel Research Prize Fellowships 2010},
+      issn = {0168-0072},
+       doi = {https://doi.org/10.1016/j.apal.2011.12.014},
+       url = {http://www.sciencedirect.com/science/article/pii/S0168007211001874},
+    author = {Alex Simpson},
+  keywords = {Locale theory, Foundations of measure theory, Foundations of probability theory}}
+</bib-data>
+      </bibentry>
+      <bibentry key="NiesAndre2009CaR" type="book" xml:id="bib.bib7">
+        <bib-publisher>Oxford University Press</bib-publisher>
+        <bib-part role="series">Oxford Logic Guides</bib-part>
+        <bib-title>Computability and randomness</bib-title>
+        <bib-name role="author">
+          <surname>Nies</surname>
+          <givenname>André</givenname>
+        </bib-name>
+        <bib-place>Oxford</bib-place>
+        <bib-data role="booktitle">Computability and Randomness</bib-data>
+        <bib-identifier id="9780199230761" scheme="isbn">ISBN 9780199230761</bib-identifier>
+        <bib-extract role="keywords">Logic</bib-extract>
+        <bib-language>eng</bib-language>
+        <bib-date role="publication">2009</bib-date>
+        <bib-data role="self" type="BibTeX">@book{NiesAndre2009CaR,
+ publisher = {Oxford University Press},
+    series = {Oxford Logic Guides},
+     title = {Computability and Randomness},
+    author = {Nies, André},
+   address = {Oxford},
+ booktitle = {Computability and Randomness},
+      isbn = {9780199230761},
+  keywords = {Logic},
+  language = {eng},
+      year = {2009}}
+</bib-data>
+      </bibentry>
+      <bibentry key="sep-chance-randomness" type="incollection" xml:id="bib.bib8">
+        <bib-name role="author">
+          <surname>Eagle</surname>
+          <givenname>Antony</givenname>
+        </bib-name>
+        <bib-title>Chance versus Randomness</bib-title>
+        <bib-related role="host" type="book">
+          <bib-title>The Stanford Encyclopedia of Philosophy</bib-title>
+          <bib-name role="editor">
+            <surname>Zalta</surname>
+            <givenname>Edward N.</givenname>
+          </bib-name>
+          <bib-edition>Spring 2019</bib-edition>
+          <bib-publisher>Metaphysics Research Lab, Stanford University</bib-publisher>
+        </bib-related>
+        <bib-url href="https://plato.stanford.edu/archives/spr2019/entries/chance-randomness">Link</bib-url>
+        <bib-date role="publication">2019</bib-date>
+        <bib-data role="self" type="BibTeX">@incollection{sep-chance-randomness,
+    author = {Eagle, Antony},
+     title = {{Chance versus Randomness}},
+ booktitle = {The {Stanford} Encyclopedia of Philosophy},
+    editor = {Edward N. Zalta},
+       url = {https://plato.stanford.edu/archives/spr2019/entries/chance-randomness},
+      year = {2019},
+   edition = {Spring 2019},
+ publisher = {Metaphysics Research Lab, Stanford University}}
+</bib-data>
+      </bibentry>
+    </biblist>
+  </bibliography>
+</document>
