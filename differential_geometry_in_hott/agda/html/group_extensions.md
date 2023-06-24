@@ -26,6 +26,18 @@ bibliography: connections.bib
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
+$\newcommand{\ff}{\mathbb{F}}$
+$\newcommand{\rr}{\mathbb{R}}$
+$\newcommand{\zz}{\mathbb{Z}}$
+$\newcommand{\BAut}{\mathsf{BAut}}$
+$\newcommand{\Aut}{\mathsf{Aut}}$
+$\newcommand{\C}{\mathscr{C}}$
+$\newcommand{\E}{\mathscr{E}}$
+$\newcommand{\G}{\mathscr{G}}$
+$\newcommand{\uni}{\mathcal{U}}$
+$\newcommand{\gauge}{\mathcal{G}}$
+$\newcommand{\ad}{\mathrm{ad}}$
+$\newcommand{\Ad}{\mathrm{Ad}}$
 
 # Abstract
 
@@ -148,26 +160,26 @@ Given a group $G$ (meaning, a 0-type) with identity $G.1g$ and multiplication $G
 
 ## Group extensions
 
-<pre class="Agda"><a id="11926" class="Symbol">{-#</a> <a id="11930" class="Keyword">OPTIONS</a> <a id="11938" class="Pragma">--without-K</a> <a id="11950" class="Pragma">--exact-split</a> <a id="11964" class="Symbol">#-}</a>
+<pre class="Agda"><a id="12314" class="Symbol">{-#</a> <a id="12318" class="Keyword">OPTIONS</a> <a id="12326" class="Pragma">--without-K</a> <a id="12338" class="Pragma">--exact-split</a> <a id="12352" class="Symbol">#-}</a>
 
-<a id="11969" class="Keyword">module</a> <a id="11976" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="11993" class="Keyword">where</a>
+<a id="12357" class="Keyword">module</a> <a id="12364" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="12381" class="Keyword">where</a>
 
-<a id="12000" class="Keyword">open</a> <a id="12005" class="Keyword">import</a> <a id="12012" href="foundation-core.universe-levels.html" class="Module">foundation-core.universe-levels</a>
-<a id="12044" class="Keyword">open</a> <a id="12049" class="Keyword">import</a> <a id="12056" href="foundation-core.functions.html" class="Module">foundation-core.functions</a>
-<a id="12082" class="Keyword">open</a> <a id="12087" class="Keyword">import</a> <a id="12094" href="foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
+<a id="12388" class="Keyword">open</a> <a id="12393" class="Keyword">import</a> <a id="12400" href="foundation-core.universe-levels.html" class="Module">foundation-core.universe-levels</a>
+<a id="12432" class="Keyword">open</a> <a id="12437" class="Keyword">import</a> <a id="12444" href="foundation-core.functions.html" class="Module">foundation-core.functions</a>
+<a id="12470" class="Keyword">open</a> <a id="12475" class="Keyword">import</a> <a id="12482" href="foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
 
-<a id="12126" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
-<a id="12226" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
-<a id="12329" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
-<a id="12443" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
-<a id="12563" class="Comment">-- AUT(G).</a>
-<a id="12574" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
-<a id="12662" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
-<a id="12755" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
-<a id="12848" class="Comment">-- apd-hom :</a>
-<a id="12861" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
-<a id="12938" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
-<a id="13016" class="Comment">-- apd-hom f refl q = ?</a>
+<a id="12514" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
+<a id="12614" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
+<a id="12717" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
+<a id="12831" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
+<a id="12951" class="Comment">-- AUT(G).</a>
+<a id="12962" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
+<a id="13050" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
+<a id="13143" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
+<a id="13236" class="Comment">-- apd-hom :</a>
+<a id="13249" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
+<a id="13326" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
+<a id="13404" class="Comment">-- apd-hom f refl q = ?</a>
 
 </pre>
 # Cohomology and characteristic classes

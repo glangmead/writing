@@ -26,6 +26,18 @@ bibliography: connections.bib
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
+$\newcommand{\ff}{\mathbb{F}}$
+$\newcommand{\rr}{\mathbb{R}}$
+$\newcommand{\zz}{\mathbb{Z}}$
+$\newcommand{\BAut}{\mathsf{BAut}}$
+$\newcommand{\Aut}{\mathsf{Aut}}$
+$\newcommand{\C}{\mathscr{C}}$
+$\newcommand{\E}{\mathscr{E}}$
+$\newcommand{\G}{\mathscr{G}}$
+$\newcommand{\uni}{\mathcal{U}}$
+$\newcommand{\gauge}{\mathcal{G}}$
+$\newcommand{\ad}{\mathrm{ad}}$
+$\newcommand{\Ad}{\mathrm{Ad}}$
 
 # Abstract
 
