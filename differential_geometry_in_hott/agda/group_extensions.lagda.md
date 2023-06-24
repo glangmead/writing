@@ -1,11 +1,16 @@
 ---
 header-includes: |
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Belanosima">
   <style>
+  body {
+    font-family: 'Libre Baskerville', serif;
+  }
   h2 {
-    font-family: Quadrat Serial, sans-serif;
+    font-family: Belanosima, sans-serif;
   }
   </style>
 ---
+[//]: # "https://pandoc.org/MANUAL.html"
 
 \newcommand{\ff}{\mathbb{F}}
 \newcommand{\rr}{\mathbb{R}}
@@ -28,7 +33,15 @@ Test diagram
 	\arrow["{\mathrm{pr}_1}"', from=1-1, to=2-1]
 \end{tikzcd}
 
+The background on group extensions are [^baez_schreier], [^myers_schreier], [^nlab_group_ext].
 
+[^baez_schreier]: John Baez, "Week 223": https://math.ucr.edu/home/baez/week223.html
+[^myers_schreier]: David Jaz Myers, Dissertation: https://jscholarship.library.jhu.edu/handle/1774.2/67618
+[^nlab_group_ext]: https://ncatlab.org/nlab/show/group+extension
+
+One way of thinking about bringing smooth manifolds into this group theoretic picture is in a post by Schreiber [^schreiber_atiyah]
+
+[^schreiber_atiyah]: Urs Schreiber, "n-Transport and Higher Schreier Theory": https://golem.ph.utexas.edu/category/2006/09/nconnections_and_higher_schrei.html
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
