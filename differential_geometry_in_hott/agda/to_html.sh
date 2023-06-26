@@ -6,6 +6,6 @@ do
   agda --html --html-dir=html --html-highlight=code $i.lagda.md 
 
   # this combo looks good to me right now: -M document-css=true --css Agda.css --mathjax --standalone
-  pandoc --lua-filter tikz.lua --from markdown+footnotes+latex_macros -M document-css=true --css Agda.css --toc --mathml --standalone --citeproc html/$i.md -o html/$i.html
+  pandoc --lua-filter tikz.lua --from markdown+footnotes+latex_macros -M document-css=true --css Agda.css --toc --mathjax --standalone --citeproc html/$i.md -o html/$i.html
   open html/$i.html
 done

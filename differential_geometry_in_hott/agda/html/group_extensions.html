@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>group_extensions</title>
+  <title>Towards Gauge Theory in Homotopy Type Theory</title>
   <style>
     html {
       line-height: 1.5;
@@ -187,11 +187,17 @@
     font-family: Belanosima, sans-serif;
   }
   </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Towards Gauge Theory in Homotopy Type Theory</h1>
+</header>
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#abstract" id="toc-abstract">Abstract</a></li>
@@ -207,12 +213,13 @@ maps</a></li>
 bundles</a>
 <ul>
 <li><a href="#bundles-over-bg" id="toc-bundles-over-bg">Bundles over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math></a></li>
+<span class="math inline">\(BG\)</span></a></li>
 <li><a href="#mapping-into-bg" id="toc-mapping-into-bg">Mapping into
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math></a></li>
+<span class="math inline">\(BG\)</span></a></li>
 <li><a href="#bg-classifies-bundles-not-just-equivalence-classes"
-id="toc-bg-classifies-bundles-not-just-equivalence-classes"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-classifies bundles, not just equivalence classes</a></li>
+id="toc-bg-classifies-bundles-not-just-equivalence-classes"><span
+class="math inline">\(BG\)</span> classifies bundles, not just
+equivalence classes</a></li>
 <li><a href="#universes-versus-bundles"
 id="toc-universes-versus-bundles">Universes versus bundles</a></li>
 <li><a href="#eilenberg-mac-lane-spaces"
@@ -222,27 +229,16 @@ bundles</a></li>
 <li><a href="#group-extensions" id="toc-group-extensions">Group
 extensions</a></li>
 </ul></li>
-<li><a href="#cohomology-and-characteristic-classes"
-id="toc-cohomology-and-characteristic-classes">Cohomology and
-characteristic classes</a></li>
-<li><a href="#connections-and-chern-weil-theory"
-id="toc-connections-and-chern-weil-theory">Connections and Chern-Weil
-theory</a></li>
-<li><a href="#appendix" id="toc-appendix">Appendix</a></li>
+<li><a href="#group-extensions-1" id="toc-group-extensions-1">Group
+extensions</a>
+<ul>
+<li><a href="#group-extensions-in-category-theory"
+id="toc-group-extensions-in-category-theory">Group extensions in
+category theory</a></li>
+</ul></li>
 </ul>
 </nav>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathbb{F}}{\mathbb{F}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathbb{R}}{\mathbb{R}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathbb{Z}}{\mathbb{Z}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathsf{BAut}}{\mathsf{BAut}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathsf{Aut}}{\mathsf{Aut}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathscr{C}}{\mathscr{C}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathscr{E}}{\mathscr{E}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathscr{G}}{\mathscr{G}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathcal{U}}{\mathcal{U}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathcal{G}}{\mathcal{G}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathrm{ad}}{\mathrm{ad}}</annotation></semantics></math>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow></mrow><annotation encoding="application/x-tex">\newcommand{\mathrm{Ad}}{\mathrm{Ad}}</annotation></semantics></math></p>
+<!-- https://pandoc.org/MANUAL.html -->
 <h1 id="abstract">Abstract</h1>
 <p>We will show how to formalize parts of differential geometry, gauge
 theory, and Chern-Weil theory in homotopy type theory.</p>
@@ -304,257 +300,170 @@ is done in <em>Symmetry</em>. But in the case of higher groups we only
 have one definition: pointed connected types. This happens to be a
 lovely theory, and so we’ll be glad to run with that.</p>
 <p><strong>Definition</strong>. A (higher) group is a pointed 1-type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-with basepoint
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>*</mo><annotation encoding="application/x-tex">*</annotation></semantics></math>,
-which is connected, i.e. that we have a term of the type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>:</mo><mi>B</mi><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mrow><mo stretchy="true" form="prefix">|</mo><mo stretchy="true" form="postfix">|</mo></mrow><mo>*</mo><mo>=</mo><mi>a</mi><msub><mrow><mo stretchy="true" form="prefix">|</mo><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">(a:BG)\to||*=a||_{-1}</annotation></semantics></math>.
-We denote the type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">*=*</annotation></semantics></math>
-by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
-and so if we have a particular group in mind then we think of that group
-as being installed as the identity type of the basepoint in a type we
-call
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>.</p>
-<p>This notation is fairly confusing, since we have stated that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-is a group, but that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is the group we really mean. Let’s see how much trouble it ends up
-causing.</p>
-<p><strong>Lemma</strong> If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-is a pointed, connected 1-type with basepoint
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>*</mo><annotation encoding="application/x-tex">*</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">x:X</annotation></semantics></math>
-is any term, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>:</mo><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">p:*=x</annotation></semantics></math>
-any term, then the sets
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">*=*</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">*=x</annotation></semantics></math>
-are isomorphic. Furthermore,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">*=*</annotation></semantics></math>
-acts on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">*=x</annotation></semantics></math>
-freely and transitively, by concatenation.</p>
-<p><strong>Proof</strong> For the first statement, define
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mo>⋅</mo><mi>p</mi><mo>:</mo><mo>*</mo><mo>=</mo><mo>*</mo><mo>→</mo><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">-\cdot p:*=*\to *=x</annotation></semantics></math>,
-by concatenating with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.
-Then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mo>⋅</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>:</mo><mo>*</mo><mo>=</mo><mi>x</mi><mo>→</mo><mo>*</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">-\cdot p^{-1}:*=x\to *=*</annotation></semantics></math>
-is a two-sided inverse. For the second statement, if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>:</mo><mo>*</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">g:*=*</annotation></semantics></math>
-then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>⋅</mo><mi>p</mi><mo>:</mo><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">g\cdot p:*=x</annotation></semantics></math>,
-giving an action. Transitivity can be seen by solving the equation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>=</mo><mi>g</mi><mo>⋅</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">q = g\cdot p</annotation></semantics></math>
-for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
-by concatenating both sides by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">p^{-1}</annotation></semantics></math>
-on the right. Freeness can be seen by observing that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>⋅</mo><mi>p</mi><mo>=</mo><mi>h</mi><mo>⋅</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">g\cdot p = h\cdot p</annotation></semantics></math>
-implies that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>=</mo><mi>h</mi></mrow><annotation encoding="application/x-tex">g=h</annotation></semantics></math>.</p>
-<p>So identity types with unequal endpoints like
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">*=x</annotation></semantics></math>
-are torsors, and it’s noteworthy to find torsors appearing to close to
-the foundations of HoTT.</p>
+<span class="math inline">\(BG\)</span> with basepoint <span
+class="math inline">\(*\)</span>, which is connected, i.e. that we have
+a term of the type <span
+class="math inline">\((a:BG)\to||*=a||_{-1}\)</span>. We denote the type
+<span class="math inline">\(*=*\)</span> by <span
+class="math inline">\(G\)</span>, and so if we have a particular group
+in mind then we think of that group as being installed as the identity
+type of the basepoint in a type we call <span
+class="math inline">\(BG\)</span>.</p>
+<p>This notation is fairly confusing, since we have stated that <span
+class="math inline">\(BG\)</span> is a group, but that <span
+class="math inline">\(G\)</span> is the group we really mean. Let’s see
+how much trouble it ends up causing.</p>
+<p><strong>Lemma</strong> If <span class="math inline">\(X\)</span> is a
+pointed, connected 1-type with basepoint <span
+class="math inline">\(*\)</span>,<span
+class="math inline">\(x:X\)</span> is any term, and <span
+class="math inline">\(p:*=x\)</span> any term, then the sets <span
+class="math inline">\(*=*\)</span> and <span
+class="math inline">\(*=x\)</span> are isomorphic. Furthermore, <span
+class="math inline">\(*=*\)</span> acts on <span
+class="math inline">\(*=x\)</span> freely and transitively, by
+concatenation.</p>
+<p><strong>Proof</strong> For the first statement, define <span
+class="math inline">\(-\cdot p:*=*\to *=x\)</span>, by concatenating
+with <span class="math inline">\(p\)</span>. Then <span
+class="math inline">\(-\cdot p^{-1}:*=x\to *=*\)</span> is a two-sided
+inverse. For the second statement, if <span
+class="math inline">\(g:*=*\)</span> then <span
+class="math inline">\(g\cdot p:*=x\)</span>, giving an action.
+Transitivity can be seen by solving the equation <span
+class="math inline">\(q = g\cdot p\)</span> for <span
+class="math inline">\(g\)</span> by concatenating both sides by <span
+class="math inline">\(p^{-1}\)</span> on the right. Freeness can be seen
+by observing that <span class="math inline">\(g\cdot p = h\cdot
+p\)</span> implies that <span class="math inline">\(g=h\)</span>.</p>
+<p>So identity types with unequal endpoints like <span
+class="math inline">\(*=x\)</span> are torsors, and it’s noteworthy to
+find torsors appearing to close to the foundations of HoTT.</p>
 <h2 id="group-actions">Group actions</h2>
-<p>Given any pointed type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-with basepoint
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
-we can form the type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mstyle mathvariant="sans-serif"><mi>𝖡</mi><mi>𝖠</mi><mi>𝗎</mi><mi>𝗍</mi></mstyle><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathsf{BAut}_x(X)</annotation></semantics></math>
-by taking the connected component of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
-If we consider the terms of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-to be at type-theoretic level 0, then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mstyle mathvariant="sans-serif"><mi>𝖠</mi><mi>𝗎</mi><mi>𝗍</mi></mstyle><mi>x</mi></msub><annotation encoding="application/x-tex">\mathsf{Aut}_x</annotation></semantics></math>
-brings one of the identity types from level 1 down to level 0 to look at
-it on its own. Then the B can be thought of as reinstalling the identity
-type at level 1 of the new type, which contains only the connected
-component of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
-When we do this, though, we don’t forget the identity types of all the
-other terms in the connected component. That’s why there really isn’t a
-true B operator, just a notation that is meant to evoke the classical
-idea of a classifying space, since as we’ll see we really have captured
-that idea.</p>
-<p>A homomorphism of groups is a pointed map
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>B</mi><mi>G</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">f:BG\to X</annotation></semantics></math>.
-The rules of type theory will ensure that this map contains a map
-between the identity types inside the types, forming a group
-homomorphism in the usual sense. We can think of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-acting on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
-since the homomorphism is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mo>*</mo><mo>→</mo><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">*=*\to x=x</annotation></semantics></math>.
-If we take
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mstyle mathvariant="script"><mi>𝒰</mi></mstyle></mrow><annotation encoding="application/x-tex">X=\mathcal{U}</annotation></semantics></math>
-to be the universe, and if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>*</mo><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">f(*)=H</annotation></semantics></math>,
-then we can think of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-acting on the type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>.</p>
+<p>Given any pointed type <span class="math inline">\(X\)</span> with
+basepoint <span class="math inline">\(x\)</span> we can form the type
+<span class="math inline">\(\mathsf{BAut}_x(X)\)</span> by taking the
+connected component of <span class="math inline">\(x\)</span>. If we
+consider the terms of <span class="math inline">\(X\)</span> to be at
+type-theoretic level 0, then <span
+class="math inline">\(\mathsf{Aut}_x\)</span> brings one of the identity
+types from level 1 down to level 0 to look at it on its own. Then the B
+can be thought of as reinstalling the identity type at level 1 of the
+new type, which contains only the connected component of <span
+class="math inline">\(x\)</span>. When we do this, though, we don’t
+forget the identity types of all the other terms in the connected
+component. That’s why there really isn’t a true B operator, just a
+notation that is meant to evoke the classical idea of a classifying
+space, since as we’ll see we really have captured that idea.</p>
+<p>A homomorphism of groups is a pointed map <span
+class="math inline">\(f:BG\to X\)</span>. The rules of type theory will
+ensure that this map contains a map between the identity types inside
+the types, forming a group homomorphism in the usual sense. We can think
+of <span class="math inline">\(G\)</span> acting on <span
+class="math inline">\(x\)</span> since the homomorphism is <span
+class="math inline">\(*=*\to x=x\)</span>. If we take <span
+class="math inline">\(X=\mathcal{U}\)</span> to be the universe, and if
+<span class="math inline">\(f(*)=H\)</span>, then we can think of <span
+class="math inline">\(G\)</span> acting on the type <span
+class="math inline">\(H\)</span>.</p>
 <h2 id="equivariant-maps">Equivariant maps</h2>
-<p>If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi><munderover><mo>→</mo><mrow></mrow><msub><mi>r</mi><mi>X</mi></msub></munderover><msub><mstyle mathvariant="sans-serif"><mi>𝖡</mi><mi>𝖠</mi><mi>𝗎</mi><mi>𝗍</mi></mstyle><mi>x</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">BG\xrightarrow[]{r_X} \mathsf{BAut}_x X</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi><munderover><mo>→</mo><mrow></mrow><msub><mi>r</mi><mi>Y</mi></msub></munderover><msub><mstyle mathvariant="sans-serif"><mi>𝖡</mi><mi>𝖠</mi><mi>𝗎</mi><mi>𝗍</mi></mstyle><mi>y</mi></msub><mi>Y</mi></mrow><annotation encoding="application/x-tex">BG\xrightarrow[]{r_Y} \mathsf{BAut}_y Y</annotation></semantics></math>
-are two group actions</p>
+<p>If <span class="math inline">\(BG\xrightarrow[]{r_X} \mathsf{BAut}_x
+X\)</span> and <span class="math inline">\(BG\xrightarrow[]{r_Y}
+\mathsf{BAut}_y Y\)</span> are two group actions</p>
 <h1 id="principal-bundles">Principal bundles</h1>
-<h2 id="bundles-over-bg">Bundles over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math></h2>
-<p>Pointed connected types
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-come with three built-in type families by choosing identity types with
-different endpoints. There’s
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>G</mi><mo>:=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>:</mo><mi>B</mi><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mi>a</mi><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">LG:=(a:BG)\times a=a</annotation></semantics></math>
-which is at each point the group of self-identifications of that point.
-There’s
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi><mo>:=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>:</mo><mi>B</mi><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mo>*</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">EG:=(a:BG)\times *=a</annotation></semantics></math>
-which aren’t groups, but which are similar to the self-identifications,
-and in fact are torsors over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>!
-At each point
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>:</mo><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">a:BG</annotation></semantics></math>
-we can concatenate a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">EG(a)</annotation></semantics></math>
-with a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">LG(a)</annotation></semantics></math>
-by concatenating the latter to the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
-endpoint of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">EG(a)</annotation></semantics></math>.
-And lastly there’s the non-dependent type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi><mo>×</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">BG\times G</annotation></semantics></math>
-which I’m mentioning because we can also concatenate a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">EG(a)</annotation></semantics></math>
-with a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
-by attaching it to the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>*</mo><annotation encoding="application/x-tex">*</annotation></semantics></math>
-endpoint.</p>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>
-is contractible (Lemma 3.11.8 of The HoTT Book). It’s worth reflecting
-for a moment on the fact that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>
-is contractible but
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-is not. After all,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-is connected and so all its terms are equal to the base point via some
-path. But we don’t select any specific paths as part of the data.
-Forming
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>
-is simply to install all the solutions to this missing data as the
-fibers of a bundle over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>.</p>
-<p>Example: for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mstyle mathvariant="double-struck"><mi>ℤ</mi></mstyle><mo>,</mo><msup><mstyle mathvariant="double-struck"><mi>ℤ</mi></mstyle><mi>n</mi></msup><mo>,</mo><msub><mstyle mathvariant="double-struck"><mi>ℤ</mi></mstyle><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">G=\mathbb{Z}, \mathbb{Z}^n, \mathbb{Z}_2</annotation></semantics></math>
-provide
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">LG</annotation></semantics></math>.</p>
-<h2 id="mapping-into-bg">Mapping into
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math></h2>
-<p>Pulling back
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>
-via a map
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>→</mo><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">X\to BG</annotation></semantics></math>
-deserves to be called a principal
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>-bundle
-over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>,
-and pulling back
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">LG</annotation></semantics></math>
-via the same map deserves to be called a gauge transformation.</p>
-<p>In HoTT given a map
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A\to B</annotation></semantics></math>
-and a type family
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>:</mo><mi>B</mi><mo>→</mo><mstyle mathvariant="script"><mi>𝒰</mi></mstyle></mrow><annotation encoding="application/x-tex">P:B\to \mathcal{U}</annotation></semantics></math>
-we can form the following square and it will commute and be a
-pullback:</p>
+<h2 id="bundles-over-bg">Bundles over <span
+class="math inline">\(BG\)</span></h2>
+<p>Pointed connected types <span class="math inline">\(BG\)</span> come
+with three built-in type families by choosing identity types with
+different endpoints. There’s <span
+class="math inline">\(LG:=(a:BG)\times a=a\)</span> which is at each
+point the group of self-identifications of that point. There’s <span
+class="math inline">\(EG:=(a:BG)\times *=a\)</span> which aren’t groups,
+but which are similar to the self-identifications, and in fact are
+torsors over <span class="math inline">\(G\)</span>! At each point <span
+class="math inline">\(a:BG\)</span> we can concatenate a term of <span
+class="math inline">\(EG(a)\)</span> with a term of <span
+class="math inline">\(LG(a)\)</span> by concatenating the latter to the
+<span class="math inline">\(a\)</span> endpoint of <span
+class="math inline">\(EG(a)\)</span>. And lastly there’s the
+non-dependent type <span class="math inline">\(BG\times G\)</span> which
+I’m mentioning because we can also concatenate a term of <span
+class="math inline">\(EG(a)\)</span> with a term of <span
+class="math inline">\(G\)</span>, by attaching it to the <span
+class="math inline">\(*\)</span> endpoint.</p>
+<p><span class="math inline">\(EG\)</span> is contractible (Lemma 3.11.8
+of The HoTT Book). It’s worth reflecting for a moment on the fact that
+<span class="math inline">\(EG\)</span> is contractible but <span
+class="math inline">\(BG\)</span> is not. After all, <span
+class="math inline">\(BG\)</span> is connected and so all its terms are
+equal to the base point via some path. But we don’t select any specific
+paths as part of the data. Forming <span
+class="math inline">\(EG\)</span> is simply to install all the solutions
+to this missing data as the fibers of a bundle over <span
+class="math inline">\(BG\)</span>.</p>
+<p>Example: for <span class="math inline">\(G=\mathbb{Z}, \mathbb{Z}^n,
+\mathbb{Z}_2\)</span> provide <span class="math inline">\(BG\)</span>,
+<span class="math inline">\(EG\)</span>, and <span
+class="math inline">\(LG\)</span>.</p>
+<h2 id="mapping-into-bg">Mapping into <span
+class="math inline">\(BG\)</span></h2>
+<p>Pulling back <span class="math inline">\(EG\)</span> via a map <span
+class="math inline">\(X\to BG\)</span> deserves to be called a principal
+<span class="math inline">\(G\)</span>-bundle over <span
+class="math inline">\(X\)</span>, and pulling back <span
+class="math inline">\(LG\)</span> via the same map deserves to be called
+a gauge transformation.</p>
+<p>In HoTT given a map <span class="math inline">\(f:A\to B\)</span> and
+a type family <span class="math inline">\(P:B\to \mathcal{U}\)</span> we
+can form the following square and it will commute and be a pullback:</p>
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCKVxcdGltZXMgUChiKVxccXVhZFxccXVhZCJdLFsyLDEsIkIiXSxbMCwwLCIoYTpBKVxcdGltZXMgUChmKGEpKSJdLFswLDEsIkEiXSxbMCwxLCJcXG1hdGhybXtwcn1fMSJdLFsyLDAsIlxcbGFtYmRhKGEsIHApLihmKGEpLHApIl0sWzMsMSwiZiIsMl0sWzIsMywiXFxtYXRocm17cHJ9XzEiLDJdXQ== -->
 <p><img src="cd4a822b78ac014dc7a0ba88013e9ee36b829485.svg"
 style="display: block; margin-left: auto; margin-right: auto;" /></p>
-<p>If we have an arbitrary type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">f:X\to BG</annotation></semantics></math>
-then we can pull back
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG</annotation></semantics></math>
-this way:</p>
+<p>If we have an arbitrary type <span class="math inline">\(X\)</span>
+and <span class="math inline">\(f:X\to BG\)</span> then we can pull back
+<span class="math inline">\(EG\)</span> this way:</p>
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzICgqPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKCo9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0= -->
 <p><img src="f75842ad3a6cc62cfedd8471a367bfca12bc03b8.svg"
 style="display: block; margin-left: auto; margin-right: auto;" /></p>
-<p>or we can pull back
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">LG</annotation></semantics></math>:</p>
+<p>or we can pull back <span class="math inline">\(LG\)</span>:</p>
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzIChiPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKGYoeCk9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0= -->
 <p><img src="4d0d79624ee63ff6de3dee35483ee1170f02cdf0.svg"
 style="display: block; margin-left: auto; margin-right: auto;" /></p>
-<p>Let’s name these pullbacks
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">E_fX</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">L_fX</annotation></semantics></math>
-respectively. We include the classifying map
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
-in the notation but maybe we’ll leave it out sometimes. Terms of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">E_fX</annotation></semantics></math>
-are a pair
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, p)</annotation></semantics></math>:
-a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-and a term of the torsor
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>*</mo><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">*=f(x)</annotation></semantics></math>.
-Terms of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">L_fX</annotation></semantics></math>
-are also a pair
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, l)</annotation></semantics></math>:
-a term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-and a term of the loop space
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(x)=f(x)</annotation></semantics></math>.
-We can form
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>⋅</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, p\cdot l)</annotation></semantics></math>
-and in fact we can act on all of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">E_fX</annotation></semantics></math>
-with a section of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">L_fX</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathvariant="script"><mi>𝒢</mi></mstyle><mi>X</mi><mo>:=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>:</mo><msub><mi>L</mi><mi>f</mi></msub><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi><mo>→</mo><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{G}X:=((x,l):L_fX)\to E_fX\to E_fX</annotation></semantics></math>
-which acts fiberwise by concatenating
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
-to any torsor.</p>
-<p>The bundle
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">E_fX</annotation></semantics></math>
-would classically be called something like
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
-a principal bundle with gauge group
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
-The bundle
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>f</mi></msub><mi>X</mi></mrow><annotation encoding="application/x-tex">L_fX</annotation></semantics></math>
-would then be referred to as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathvariant="normal"><mi>A</mi><mi>d</mi></mstyle><mi>P</mi></mrow><annotation encoding="application/x-tex">\mathrm{Ad}P</annotation></semantics></math>.
-Why is that?</p>
+<p>Let’s name these pullbacks <span class="math inline">\(E_fX\)</span>
+and <span class="math inline">\(L_fX\)</span> respectively. We include
+the classifying map <span class="math inline">\(f\)</span> in the
+notation but maybe we’ll leave it out sometimes. Terms of <span
+class="math inline">\(E_fX\)</span> are a pair <span
+class="math inline">\((x, p)\)</span>: a term of <span
+class="math inline">\(X\)</span> and a term of the torsor <span
+class="math inline">\(*=f(x)\)</span>. Terms of <span
+class="math inline">\(L_fX\)</span> are also a pair <span
+class="math inline">\((x, l)\)</span>: a term of <span
+class="math inline">\(X\)</span> and a term of the loop space <span
+class="math inline">\(f(x)=f(x)\)</span>. We can form <span
+class="math inline">\((x, p\cdot l)\)</span> and in fact we can act on
+all of <span class="math inline">\(E_fX\)</span> with a section of <span
+class="math inline">\(L_fX\)</span>: <span
+class="math display">\[\mathcal{G}X:=((x,l):L_fX)\to E_fX\to
+E_fX\]</span> which acts fiberwise by concatenating <span
+class="math inline">\(l\)</span> to any torsor.</p>
+<p>The bundle <span class="math inline">\(E_fX\)</span> would
+classically be called something like <span
+class="math inline">\(P\)</span>, a principal bundle with gauge group
+<span class="math inline">\(G\)</span> over <span
+class="math inline">\(X\)</span>. The bundle <span
+class="math inline">\(L_fX\)</span> would then be referred to as <span
+class="math inline">\(\mathrm{Ad}P\)</span>. Why is that?</p>
 
-<h2
-id="bg-classifies-bundles-not-just-equivalence-classes"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">BG</annotation></semantics></math>
-classifies bundles, not just equivalence classes</h2>
-<p>The classical theorems take the form: taking the pullback of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>G</mi><mo>→</mo><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">EG\to BG</annotation></semantics></math>
-forms a bijection between homotopy classes of maps
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>B</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">f:X\to BG</annotation></semantics></math>
-and equivalence classes of principal
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>-bundles
-over
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+<h2 id="bg-classifies-bundles-not-just-equivalence-classes"><span
+class="math inline">\(BG\)</span> classifies bundles, not just
+equivalence classes</h2>
+<p>The classical theorems take the form: taking the pullback of <span
+class="math inline">\(EG\to BG\)</span> forms a bijection between
+homotopy classes of maps <span class="math inline">\(f:X\to BG\)</span>
+and equivalence classes of principal <span
+class="math inline">\(G\)</span>-bundles over <span
+class="math inline">\(X\)</span>.</p>
 <h2 id="universes-versus-bundles">Universes versus bundles</h2>
 <h2 id="eilenberg-mac-lane-spaces">Eilenberg-Mac Lane spaces</h2>
 <p><em>Inductive types</em> are collections of data and rules for
@@ -563,44 +472,120 @@ inductive type defining the natural numbers in Agda:</p>
 <p>This theory can be extended to support data having values in the
 identity types of data that was specified earlier in the definition.
 Here is the circle defined as a HIT in Cubical Agda:</p>
-<p>Given a group
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-(meaning, a 0-type) with identity
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mn>.1</mn><mi>g</mi></mrow><annotation encoding="application/x-tex">G.1g</annotation></semantics></math>
-and multiplication
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>.</mi><mi>m</mi><mi>u</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">G.mul</annotation></semantics></math>,
-we can form the Eilenberg-Mac Lane type
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">K(G, 1)</annotation></semantics></math>
+<p>Given a group <span class="math inline">\(G\)</span> (meaning, a
+0-type) with identity <span class="math inline">\(G.1g\)</span> and
+multiplication <span class="math inline">\(G.mul\)</span>, we can form
+the Eilenberg-Mac Lane type <span class="math inline">\(K(G, 1)\)</span>
 as the following HIT:</p>
 <h2 id="associated-bundles">Associated bundles</h2>
 <h2 id="group-extensions">Group extensions</h2>
-<pre class="Agda"><a id="12314" class="Symbol">{-#</a> <a id="12318" class="Keyword">OPTIONS</a> <a id="12326" class="Pragma">--without-K</a> <a id="12338" class="Pragma">--exact-split</a> <a id="12352" class="Symbol">#-}</a>
+<pre class="Agda"><a id="11974" class="Symbol">{-#</a> <a id="11978" class="Keyword">OPTIONS</a> <a id="11986" class="Pragma">--without-K</a> <a id="11998" class="Pragma">--exact-split</a> <a id="12012" class="Symbol">#-}</a>
 
-<a id="12357" class="Keyword">module</a> <a id="12364" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="12381" class="Keyword">where</a>
+<a id="12017" class="Keyword">module</a> <a id="12024" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="12041" class="Keyword">where</a>
 
-<a id="12388" class="Keyword">open</a> <a id="12393" class="Keyword">import</a> <a id="12400" href="foundation-core.universe-levels.html" class="Module">foundation-core.universe-levels</a>
-<a id="12432" class="Keyword">open</a> <a id="12437" class="Keyword">import</a> <a id="12444" href="foundation-core.functions.html" class="Module">foundation-core.functions</a>
-<a id="12470" class="Keyword">open</a> <a id="12475" class="Keyword">import</a> <a id="12482" href="foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
+<a id="12048" class="Keyword">open</a> <a id="12053" class="Keyword">import</a> <a id="12060" href="foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
+<a id="12087" class="Keyword">open</a> <a id="12092" class="Keyword">import</a> <a id="12099" href="foundation.function-types.html" class="Module">foundation.function-types</a>
+<a id="12125" class="Keyword">open</a> <a id="12130" class="Keyword">import</a> <a id="12137" href="foundation.identity-types.html" class="Module">foundation.identity-types</a>
 
-<a id="12514" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
-<a id="12614" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
-<a id="12717" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
-<a id="12831" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
-<a id="12951" class="Comment">-- AUT(G).</a>
-<a id="12962" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
-<a id="13050" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
-<a id="13143" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
-<a id="13236" class="Comment">-- apd-hom :</a>
-<a id="13249" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
-<a id="13326" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
-<a id="13404" class="Comment">-- apd-hom f refl q = ?</a>
+<a id="12164" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
+<a id="12264" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
+<a id="12367" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
+<a id="12481" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
+<a id="12601" class="Comment">-- AUT(G).</a>
+<a id="12612" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
+<a id="12700" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
+<a id="12793" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
+<a id="12886" class="Comment">-- apd-hom :</a>
+<a id="12899" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
+<a id="12976" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
+<a id="13054" class="Comment">-- apd-hom f refl q = ?</a>
 
 </pre>
-<h1 id="cohomology-and-characteristic-classes">Cohomology and
-characteristic classes</h1>
-<h1 id="connections-and-chern-weil-theory">Connections and Chern-Weil
-theory</h1>
-<h1 class="unnumbered" id="appendix">Appendix</h1>
+<h1 id="group-extensions-1">Group extensions</h1>
+<p>Extensions of <span class="math inline">\(X\)</span> by <span
+class="math inline">\(BG\)</span> are equivalent to maps <span
+class="math inline">\(\mathscr{C}:X\to \mathsf{BAut}BG\)</span>.</p>
+<p>Let’s look in detail at <span
+class="math inline">\(\mathsf{BAut}BG\)</span>. First of all it’s a
+2-type. Its terms are “<span class="math inline">\(BG\)</span> clones”.
+The identity types are equivalences between <span
+class="math inline">\(BG\)</span> clones. Those equivalences have
+identity types as well, which are homotopies between equivalences
+between <span class="math inline">\(BG\)</span> clones.</p>
+<p>Meanwhile each of the fibers <span
+class="math inline">\(\mathscr{C}(x)\)</span> is a <span
+class="math inline">\(BG\)</span>-clone. The union of all of these is
+the sigma-type <span class="math inline">\((x:X)\times
+\mathscr{C}(x)\)</span>. But the 2-type structure of <span
+class="math inline">\(\mathsf{BAut}BG\)</span> doesn’t apply inside a
+term of a <span class="math inline">\(BG\)</span>-clone, they are
+identity types between types, whereas inside <span
+class="math inline">\(BG\)</span> and its clones, we have terms, which
+are something like individual <span
+class="math inline">\(G\)</span>-torsors.</p>
+<p>Maybe we should look to the pi-type <span
+class="math inline">\((x:X)\to \mathscr{C}(x)\)</span>. This should be
+something like a principal bundle, sinc this type is a generalization of
+the type <span class="math inline">\(X\to BG\)</span>, which as we know
+is supposed to classify principal bundles. In the special case where
+<span class="math inline">\(\mathscr{C}\)</span> is the constant map to
+<span class="math inline">\(BG\)</span>, we indeed would have to
+consider the pi-type to have a type of principal bundles.</p>
+<p>In the literature on Schreier theory, we can look for clues about how
+to proceed. Let’s move away from HoTT for a moment and look at group
+extensions from the point of view of groupoids and 2-groupoids, in
+classical category theory.</p>
+<h2 id="group-extensions-in-category-theory">Group extensions in
+category theory</h2>
+<p>See Blanco.</p>
+<p>The study of group extensions is about constructing an equivalence
+between extensions of a group <span class="math inline">\(X\)</span> by
+<span class="math inline">\(G\)</span>, which is a surjection from the
+extension <span class="math inline">\(E\)</span> to <span
+class="math inline">\(X\)</span>, and a classifying map <em>out</em> of
+<span class="math inline">\(X\)</span>. Given the extension, which takes
+the form of an exact sequence <span class="math display">\[1\to
+G\xrightarrow[]{i} E\xrightarrow[]{p}X\to 1\]</span> how do we construct
+a classifying map out of <span class="math inline">\(X\)</span>.</p>
+<p>Baez sketch from <a href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>: since <span
+class="math inline">\(p\)</span> is a surjection, start by choosing a
+set function <span class="math inline">\(s:X\to E\)</span> that is a
+section of <span class="math inline">\(p\)</span>. This induces a
+function <span class="math inline">\(\alpha:X\to \mathsf{Aut}G\)</span>
+by taking <span class="math inline">\(\alpha(x)(g)=s(x)g
+s(x)^{-1}\)</span>. In general <span
+class="math inline">\(\alpha\)</span> is not a homomorphism, but it is
+up to a conjugation. If we view groups as 1-element categories and
+homomorphisms as functors, then <span
+class="math inline">\(\alpha\)</span> is a weak functor.</p>
+<p>What is weakness when we look at things in HoTT? What are
+conjugations? What is a map that isn’t a homorphism in HoTT but is a
+homomorphism up to a 2-morphism? Does this imply that <span
+class="math inline">\(E\)</span> ends up having a natural 2-type
+structure? It’s a union of <span class="math inline">\(BG\)</span>
+clones over the base <span class="math inline">\(X\)</span> and so by
+the usual calculations it is only a 1-type.</p>
+<p>Can we bring some of the 2-type structure from <span
+class="math inline">\(\mathsf{BAut}BG\)</span> into <span
+class="math inline">\(BG\)</span> itself? Some ideas:</p>
+<ul>
+<li>there is a map <span class="math inline">\(f:BG\to BG=BG\)</span>
+given by changing the basepoint from <span
+class="math inline">\(*\)</span> to <span
+class="math inline">\(f(a)\)</span>.</li>
+<li>a path <span class="math inline">\(p:*=_{BG}a\)</span> can be
+concatenated to any other path, providing an automorphism of the space
+of <span class="math inline">\(G\)</span>-torsors, sending the torsor
+<span class="math inline">\(*=b\)</span> to the torsor <span
+class="math inline">\(a=b\)</span> by concatenating all the paths in
+<span class="math inline">\(*=b\)</span> with <span
+class="math inline">\(p\)</span>. This may map the paths in <span
+class="math inline">\(BG\)</span> to <span
+class="math inline">\(BG=BG\)</span>.</li>
+<li>so having a map from <span class="math inline">\(BG\)</span> into
+<span class="math inline">\(BG=BG\)</span> may let us</li>
+</ul>
 <div id="refs" class="references csl-bib-body hanging-indent"
 role="doc-bibliography">
 <div id="ref-atiyah1983yang" class="csl-entry" role="doc-biblioentry">
@@ -667,6 +652,9 @@ href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Urs Schreiber, “n-Transport and Higher Schreier Theory”:
 https://golem.ph.utexas.edu/category/2006/09/nconnections_and_higher_schrei.html<a
 href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>John Baez, “Week 223”:
+https://math.ucr.edu/home/baez/week223.html<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </body>

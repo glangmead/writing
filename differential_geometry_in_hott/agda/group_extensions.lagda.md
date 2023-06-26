@@ -9,10 +9,11 @@ header-includes: |
     font-family: Belanosima, sans-serif;
   }
   </style>
+title: Towards Gauge Theory in Homotopy Type Theory
 bibliography: connections.bib
 ---
 
-[//]: # "https://pandoc.org/MANUAL.html"
+<!-- https://pandoc.org/MANUAL.html -->
 
 \newcommand{\ff}{\mathbb{F}}
 \newcommand{\rr}{\mathbb{R}}
@@ -26,18 +27,6 @@ bibliography: connections.bib
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
-$\newcommand{\ff}{\mathbb{F}}$
-$\newcommand{\rr}{\mathbb{R}}$
-$\newcommand{\zz}{\mathbb{Z}}$
-$\newcommand{\BAut}{\mathsf{BAut}}$
-$\newcommand{\Aut}{\mathsf{Aut}}$
-$\newcommand{\C}{\mathscr{C}}$
-$\newcommand{\E}{\mathscr{E}}$
-$\newcommand{\G}{\mathscr{G}}$
-$\newcommand{\uni}{\mathcal{U}}$
-$\newcommand{\gauge}{\mathcal{G}}$
-$\newcommand{\ad}{\mathrm{ad}}$
-$\newcommand{\Ad}{\mathrm{Ad}}$
 
 # Abstract
 
@@ -101,7 +90,7 @@ Pulling back $EG$ via a map $X\to BG$ deserves to be called a principal $G$-bund
 
 In HoTT given a map $f:A\to B$ and a type family $P:B\to \uni$ we can form the following square and it will commute and be a pullback:
 
-[//]: # "https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCKVxcdGltZXMgUChiKVxccXVhZFxccXVhZCJdLFsyLDEsIkIiXSxbMCwwLCIoYTpBKVxcdGltZXMgUChmKGEpKSJdLFswLDEsIkEiXSxbMCwxLCJcXG1hdGhybXtwcn1fMSJdLFsyLDAsIlxcbGFtYmRhKGEsIHApLihmKGEpLHApIl0sWzMsMSwiZiIsMl0sWzIsMywiXFxtYXRocm17cHJ9XzEiLDJdXQ=="
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCKVxcdGltZXMgUChiKVxccXVhZFxccXVhZCJdLFsyLDEsIkIiXSxbMCwwLCIoYTpBKVxcdGltZXMgUChmKGEpKSJdLFswLDEsIkEiXSxbMCwxLCJcXG1hdGhybXtwcn1fMSJdLFsyLDAsIlxcbGFtYmRhKGEsIHApLihmKGEpLHApIl0sWzMsMSwiZiIsMl0sWzIsMywiXFxtYXRocm17cHJ9XzEiLDJdXQ== -->
 \begin{tikzcd}
 	{(a:A)\times P(f(a))} && {(b:B)\times P(b)} \\
 	A && B
@@ -113,7 +102,7 @@ In HoTT given a map $f:A\to B$ and a type family $P:B\to \uni$ we can form the f
 
 If we have an arbitrary type $X$ and $f:X\to BG$ then we can pull back $EG$ this way:
 
-[//]: # "https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzICgqPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKCo9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0="
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzICgqPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKCo9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0= -->
 \begin{tikzcd}
 	{(x:X)\times (*=f(x))} && {(b:BG)\times (*=b)} \\
 	X && BG
@@ -125,7 +114,7 @@ If we have an arbitrary type $X$ and $f:X\to BG$ then we can pull back $EG$ this
 
 or we can pull back $LG$:
 
-[//]: # "https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzIChiPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKGYoeCk9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0="
+<!-- https://q.uiver.app/?q=WzAsNCxbMiwwLCIoYjpCRylcXHRpbWVzIChiPWIpIl0sWzIsMSwiQkciXSxbMCwwLCIoeDpYKVxcdGltZXMgKGYoeCk9Zih4KSkiXSxbMCwxLCJYIl0sWzAsMSwiXFxtYXRocm17cHJ9XzEiXSxbMiwwLCJcXGxhbWJkYSh4LCBwKS4oZih4KSxwKSJdLFszLDEsImYiLDJdLFsyLDMsIlxcbWF0aHJte3ByfV8xIiwyXV0= -->
 \begin{tikzcd}
 	{(x:X)\times (f(x)=f(x))} && {(b:BG)\times (b=b)} \\
 	X && BG
@@ -165,9 +154,9 @@ Given a group $G$ (meaning, a 0-type) with identity $G.1g$ and multiplication $G
 
 module group_extensions where
 
-open import foundation-core.universe-levels
-open import foundation-core.functions
-open import foundation-core.identity-types
+open import foundation.universe-levels
+open import foundation.function-types
+open import foundation.identity-types
 
 -- What is the analogue in HoTT of the fact from group extensions that we classify an extension by 
 -- taking a set-based section of the splitting, seeing that those elements act on the left hand group,
@@ -184,8 +173,30 @@ open import foundation-core.identity-types
 
 ```
 
-# Cohomology and characteristic classes
+# Group extensions
 
-# Connections and Chern-Weil theory
-    
-# Appendix
+Extensions of $X$ by $BG$ are equivalent to maps $\C:X\to \BAut BG$.
+
+Let's look in detail at $\BAut BG$. First of all it's a 2-type. Its terms are "$BG$ clones". The identity types are equivalences between $BG$ clones. Those equivalences have identity types as well, which are homotopies between equivalences between $BG$ clones.
+
+Meanwhile each of the fibers $\C(x)$ is a $BG$-clone. The union of all of these is the sigma-type $(x:X)\times \C(x)$. But the 2-type structure of $\BAut BG$ doesn't apply inside a term of a $BG$-clone, they are identity types between types, whereas inside $BG$ and its clones, we have terms, which are something like individual $G$-torsors.
+
+Maybe we should look to the pi-type $(x:X)\to \C(x)$. This should be something like a principal bundle, sinc this type is a generalization of the type $X\to BG$, which as we know is supposed to classify principal bundles. In the special case where $\C$ is the constant map to $BG$, we indeed would have to consider the pi-type to have a type of principal bundles.
+
+In the literature on Schreier theory, we can look for clues about how to proceed. Let's move away from HoTT for a moment and look at group extensions from the point of view of groupoids and 2-groupoids, in classical category theory.
+
+## Group extensions in category theory
+
+See Blanco.
+
+The study of group extensions is about constructing an equivalence between extensions of a group $X$ by $G$, which is a surjection from the extension $E$ to $X$, and a classifying map *out* of $X$. Given the extension, which takes the form of an exact sequence $$1\to G\xrightarrow[]{i} E\xrightarrow[]{p}X\to 1$$ how do we construct a classifying map out of $X$.
+
+Baez sketch from [^baez_schreier]: since $p$ is a surjection, start by choosing a set function $s:X\to E$ that is a section of $p$. This induces a function $\alpha:X\to \Aut G$ by taking $\alpha(x)(g)=s(x)g s(x)^{-1}$. In general $\alpha$ is not a homomorphism, but it is up to a conjugation. If we view groups as 1-element categories and homomorphisms as functors, then $\alpha$ is a weak functor.
+
+What is weakness when we look at things in HoTT? What are conjugations? What is a map that isn't a homorphism in HoTT but is a homomorphism up to a 2-morphism? Does this imply that $E$ ends up having a natural 2-type structure? It's a union of $BG$ clones over the base $X$ and so by the usual calculations it is only a 1-type.
+
+Can we bring some of the 2-type structure from $\BAut BG$ into $BG$ itself? Some ideas:
+
+* there is a map $f:BG\to BG=BG$ given by changing the basepoint from $*$ to $f(a)$. 
+* a path $p:*=_{BG}a$ can be concatenated to any other path, providing an automorphism of the space of $G$-torsors, sending the torsor $*=b$ to the torsor $a=b$ by concatenating all the paths in $*=b$ with $p$. This may map the paths in $BG$ to $BG=BG$.
+* so having a map from $BG$ into $BG=BG$ may let us 
