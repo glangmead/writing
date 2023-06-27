@@ -3,13 +3,15 @@ header-includes: |
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Belanosima">
   <style>
   body {
-    font-family: 'Libre Baskerville', serif;
+    font-family: Baskerville, 'Libre Baskerville', serif;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: Belanosima, sans-serif;
   }
   </style>
 title: Towards Gauge Theory in Homotopy Type Theory
+summary: In-progress masters thesis relating connections and curvature to group extensions, building on the Symmetry book of Bezem et. al.
+date: 2023-06-26
 bibliography: connections.bib
 ---
 
@@ -27,6 +29,7 @@ bibliography: connections.bib
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\id}{\mathrm{id}}
 
 # Abstract
 
@@ -193,10 +196,25 @@ The study of group extensions is about constructing an equivalence between exten
 
 Baez sketch from [^baez_schreier]: since $p$ is a surjection, start by choosing a set function $s:X\to E$ that is a section of $p$. This induces a function $\alpha:X\to \Aut G$ by taking $\alpha(x)(g)=s(x)g s(x)^{-1}$. In general $\alpha$ is not a homomorphism, but it is up to a conjugation. If we view groups as 1-element categories and homomorphisms as functors, then $\alpha$ is a weak functor.
 
-What is weakness when we look at things in HoTT? What are conjugations? What is a map that isn't a homorphism in HoTT but is a homomorphism up to a 2-morphism? Does this imply that $E$ ends up having a natural 2-type structure? It's a union of $BG$ clones over the base $X$ and so by the usual calculations it is only a 1-type.
+Let's compare $\alpha(xy)$ to $\alpha(x)\alpha(y)$. 
+$$\alpha(xy)(g) = s(xy)gs(xy)^{-1}$$ 
+whereas 
+$$\alpha(x)(\alpha(y)(g)) = s(x)[s(y)gs(y)^{-1}]s(x)^{-1}$$
+which are equal if $s$ is a homomorphism. But if $s$ is not, we need a "homomorphinator" to relate these two formulas. The obvious thing to do is to form $h(x, y) = s(xy)s(x)^{-1}s(y)^{-1}$. Conjugating by $h(x,y)$ cancels the $s(x)s(y)$ factors and replaces them with $s(xy)$. So a map that isn't a homomorphism can nonetheless behave like one if we have the freedom to introduce a homomorphinator.
+
+What is weakness when we look at things in HoTT? (My current candidate: an unpointed map. The homomorphinator would then be a choice of path that restores pointedness.) 
+
+What are conjugations? (My current candidate: changes of basepoint.)
+
+What is a map that isn't a homorphism in HoTT but is a homomorphism up to a 2-morphism? Does this imply that $E$ ends up having a natural 2-type structure? It's a union of $BG$ clones over the base $X$ and so by the usual calculations it is only a 1-type.
 
 Can we bring some of the 2-type structure from $\BAut BG$ into $BG$ itself? Some ideas:
 
-* there is a map $f:BG\to BG=BG$ given by changing the basepoint from $*$ to $f(a)$. 
+* there is a map $f:BG\to BG=BG$ where $f(a)$ is an equivalence that moves the basepoint from $*$ to $a$. 
 * a path $p:*=_{BG}a$ can be concatenated to any other path, providing an automorphism of the space of $G$-torsors, sending the torsor $*=b$ to the torsor $a=b$ by concatenating all the paths in $*=b$ with $p$. This may map the paths in $BG$ to $BG=BG$.
 * so having a map from $BG$ into $BG=BG$ may let us 
+
+Tying this together might be the intuition that higher paths are more and more microscopic structure inside $BG$, whereas the types $BG=_{\BAut BG}BG$ and then $\id=_{BG=BG}\id$ seem to go outward, or maybe more fruitfully, they go inward but inside $\BAut BG$. I seem to want to relate these in a way I haven't seen, where we can bring more structure inside $BG$ by looking in $\BAut BG$.
+
+I believe I can define maps $BG\to BG=BG$ and from $*=_{BG}a\to BG=BG$ which utilize the homogeneity of $BG$. Can this be clarified enough to see how we might introduce 2-paths in $BG$ which let us translate the Schreier story from 2-groups to 2-types?
+

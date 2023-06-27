@@ -3,7 +3,7 @@ header-includes: |
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Belanosima">
   <style>
   body {
-    font-family: 'Libre Baskerville', serif;
+    font-family: Baskerville, 'Libre Baskerville', serif;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: Belanosima, sans-serif;
@@ -27,6 +27,7 @@ bibliography: connections.bib
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\id}{\mathrm{id}}
 
 # Abstract
 
@@ -149,26 +150,26 @@ Given a group $G$ (meaning, a 0-type) with identity $G.1g$ and multiplication $G
 
 ## Group extensions
 
-<pre class="Agda"><a id="11974" class="Symbol">{-#</a> <a id="11978" class="Keyword">OPTIONS</a> <a id="11986" class="Pragma">--without-K</a> <a id="11998" class="Pragma">--exact-split</a> <a id="12012" class="Symbol">#-}</a>
+<pre class="Agda"><a id="12017" class="Symbol">{-#</a> <a id="12021" class="Keyword">OPTIONS</a> <a id="12029" class="Pragma">--without-K</a> <a id="12041" class="Pragma">--exact-split</a> <a id="12055" class="Symbol">#-}</a>
 
-<a id="12017" class="Keyword">module</a> <a id="12024" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="12041" class="Keyword">where</a>
+<a id="12060" class="Keyword">module</a> <a id="12067" href="group_extensions.html" class="Module Operator">group_extensions</a> <a id="12084" class="Keyword">where</a>
 
-<a id="12048" class="Keyword">open</a> <a id="12053" class="Keyword">import</a> <a id="12060" href="foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
-<a id="12087" class="Keyword">open</a> <a id="12092" class="Keyword">import</a> <a id="12099" href="foundation.function-types.html" class="Module">foundation.function-types</a>
-<a id="12125" class="Keyword">open</a> <a id="12130" class="Keyword">import</a> <a id="12137" href="foundation.identity-types.html" class="Module">foundation.identity-types</a>
+<a id="12091" class="Keyword">open</a> <a id="12096" class="Keyword">import</a> <a id="12103" href="foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
+<a id="12130" class="Keyword">open</a> <a id="12135" class="Keyword">import</a> <a id="12142" href="foundation.function-types.html" class="Module">foundation.function-types</a>
+<a id="12168" class="Keyword">open</a> <a id="12173" class="Keyword">import</a> <a id="12180" href="foundation.identity-types.html" class="Module">foundation.identity-types</a>
 
-<a id="12164" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
-<a id="12264" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
-<a id="12367" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
-<a id="12481" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
-<a id="12601" class="Comment">-- AUT(G).</a>
-<a id="12612" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
-<a id="12700" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
-<a id="12793" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
-<a id="12886" class="Comment">-- apd-hom :</a>
-<a id="12899" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
-<a id="12976" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
-<a id="13054" class="Comment">-- apd-hom f refl q = ?</a>
+<a id="12207" class="Comment">-- What is the analogue in HoTT of the fact from group extensions that we classify an extension by </a>
+<a id="12307" class="Comment">-- taking a set-based section of the splitting, seeing that those elements act on the left hand group,</a>
+<a id="12410" class="Comment">-- noting that this map into Aut G is not a homomorphism. There is a 2-cell that we can conjugate with that makes</a>
+<a id="12524" class="Comment">-- it a homomorphism. So together, the extension (plus the arbitrary choice of splitting) yeilds a 2-map to the 2-group</a>
+<a id="12644" class="Comment">-- AUT(G).</a>
+<a id="12655" class="Comment">-- For us, a splitting will be a section of a type family. This acts on loops with apd.</a>
+<a id="12743" class="Comment">-- So we want to prove some facts about apd and to what extent it&#39;s a homomorphism of loops.</a>
+<a id="12836" class="Comment">-- It doesn&#39;t send loops to loops, because it sends the loop p to a loop from fx to ap p fx.</a>
+<a id="12929" class="Comment">-- apd-hom :</a>
+<a id="12942" class="Comment">--   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (a : A) → B a) {x : A}</a>
+<a id="13019" class="Comment">--   (p q : x ＝ x) → (apd f (p ∙ q)) ＝ ((apd ((tr B p) ∘ f) q) ∙ (apd (f) p))</a>
+<a id="13097" class="Comment">-- apd-hom f refl q = ?</a>
 
 </pre>
 # Group extensions
@@ -191,10 +192,25 @@ The study of group extensions is about constructing an equivalence between exten
 
 Baez sketch from [^baez_schreier]: since $p$ is a surjection, start by choosing a set function $s:X\to E$ that is a section of $p$. This induces a function $\alpha:X\to \Aut G$ by taking $\alpha(x)(g)=s(x)g s(x)^{-1}$. In general $\alpha$ is not a homomorphism, but it is up to a conjugation. If we view groups as 1-element categories and homomorphisms as functors, then $\alpha$ is a weak functor.
 
-What is weakness when we look at things in HoTT? What are conjugations? What is a map that isn't a homorphism in HoTT but is a homomorphism up to a 2-morphism? Does this imply that $E$ ends up having a natural 2-type structure? It's a union of $BG$ clones over the base $X$ and so by the usual calculations it is only a 1-type.
+Let's compare $\alpha(xy)$ to $\alpha(x)\alpha(y)$. 
+$$\alpha(xy)(g) = s(xy)gs(xy)^{-1}$$ 
+whereas 
+$$\alpha(x)(\alpha(y)(g)) = s(x)[s(y)gs(y)^{-1}]s(x)^{-1}$$
+which are equal if $s$ is a homomorphism. But if $s$ is not, we need a "homomorphinator" to relate these two formulas. The obvious thing to do is to form $h(x, y) = s(xy)s(x)^{-1}s(y)^{-1}$. Conjugating by $h(x,y)$ cancels the $s(x)s(y)$ factors and replaces them with $s(xy)$. So a map that isn't a homomorphism can nonetheless behave like one if we have the freedom to introduce a homomorphinator.
+
+What is weakness when we look at things in HoTT? (My current candidate: an unpointed map. The homomorphinator would then be a choice of path that restores pointedness.) 
+
+What are conjugations? (My current candidate: changes of basepoint.)
+
+What is a map that isn't a homorphism in HoTT but is a homomorphism up to a 2-morphism? Does this imply that $E$ ends up having a natural 2-type structure? It's a union of $BG$ clones over the base $X$ and so by the usual calculations it is only a 1-type.
 
 Can we bring some of the 2-type structure from $\BAut BG$ into $BG$ itself? Some ideas:
 
-* there is a map $f:BG\to BG=BG$ given by changing the basepoint from $*$ to $f(a)$. 
+* there is a map $f:BG\to BG=BG$ where $f(a)$ is an equivalence that moves the basepoint from $*$ to $a$. 
 * a path $p:*=_{BG}a$ can be concatenated to any other path, providing an automorphism of the space of $G$-torsors, sending the torsor $*=b$ to the torsor $a=b$ by concatenating all the paths in $*=b$ with $p$. This may map the paths in $BG$ to $BG=BG$.
 * so having a map from $BG$ into $BG=BG$ may let us 
+
+Tying this together might be the intuition that higher paths are more and more microscopic structure inside $BG$, whereas the types $BG=_{\BAut BG}BG$ and then $\id=_{BG=BG}\id$ seem to go outward, or maybe more fruitfully, they go inward but inside $\BAut BG$. I seem to want to relate these in a way I haven't seen, where we can bring more structure inside $BG$ by looking in $\BAut BG$.
+
+I believe I can define maps $BG\to BG=BG$ and from $*=_{BG}a\to BG=BG$ which utilize the homogeneity of $BG$. Can this be clarified enough to see how we might introduce 2-paths in $BG$ which let us translate the Schreier story from 2-groups to 2-types?
+
