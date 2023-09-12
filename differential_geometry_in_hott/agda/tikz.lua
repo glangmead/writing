@@ -57,7 +57,7 @@ function RawBlock(el)
     if not file_exists(fname) then
       tikz2image(el.text, filetype, fname)
     end
-    local attr = pandoc.Attr('', {}, {style='display: block; margin-left: auto; margin-right: auto;'})
+    local attr = pandoc.Attr('', {}, {style='transform: scale(1.4); display: block; margin-left: auto; margin-right: auto;'})
     return pandoc.Para({pandoc.Image({}, fbasename, "", attr)})
   else
    return el

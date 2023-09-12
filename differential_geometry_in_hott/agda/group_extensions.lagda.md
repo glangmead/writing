@@ -1,15 +1,17 @@
 ---
 header-includes: |
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Belanosima">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Quattrocento:wght@700">
   <style>
   body {
     font-family: Baskerville, 'Libre Baskerville', serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: Belanosima, sans-serif;
+    font-family: Quattrocento, sans-serif;
+    font-weight: bold;
+    text-align: center;
   }
   </style>
-title: Towards Gauge Theory in Homotopy Type Theory
+title:
 summary: In-progress masters thesis relating connections and curvature to group extensions, building on the Symmetry book of Bezem et. al.
 date: 2023-06-26
 bibliography: connections.bib
@@ -31,7 +33,7 @@ bibliography: connections.bib
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\id}{\mathrm{id}}
 
-# Abstract
+## Abstract
 
 We will show how to formalize parts of differential geometry, gauge theory, and Chern-Weil theory in homotopy type theory.
 
@@ -45,13 +47,13 @@ One way of thinking about bringing smooth manifolds into this group theoretic pi
 
 [^schreiber_atiyah]: Urs Schreiber, "n-Transport and Higher Schreier Theory": https://golem.ph.utexas.edu/category/2006/09/nconnections_and_higher_schrei.html
 
-# Introduction
+## Introduction
 
 Differential geometry [@kobayashinomizu] [@baez1994gauge], gauge theory [@hamilton2017] [@atiyah1983yang], and Chern-Weil theory[@freed2013chernweil] lie at the intersection of mathematics and physics. The theory of general relativity is expressed as formulas relating the curvature of spacetime to the distribution of energy and matter. The standard model of particle physics is expressed as a collection of principal bundles and associated vector bundles, sections of which represent the fields of matter and forces. And in the latter decades of the 20th century the tools of the standard model were applied back into mathematics to make discoveries about the geometry of 3- and 4-dimensional manifolds[@scorpan_wild_2005].
 
 Homotopy type theory[@hottbook] seems at first like it's from a different universe entirely. It grew out of questions of a foundational nature inside mathematics and computer science. It brings a synthetic stance, where we are invited to stop thinking of mathematical objects as sets with structure, and instead to assemble the objects into higher categories with collective properties like being locally cartesian closed, or having homotopical model structures. Such categories have internal languages, which are syntactic structures much like programming languages, which allow us to reason about the objects in a generic way.
 
-# Groups
+## Groups
 
 Group theory including the theory of higher groups is built directly into HoTT, via the identity types. A thorough introductory treatment of group theory that adopts this philosophy can be found in the book *Symmetry* [@Symmetry]. We will build on this synthetic framework to explore gauge theory. But it's important to be clear that this is a choice, and there is an alternate approach. Namely we could define a group to be a type together with some extra structure: an identity, a multiplication operation, and an inverse operation, satisfying some properties. We would do the same for higher groups, and we'd prove an equivalence between the type of higher groups and the type of pointed, connected types. Such a project has been undertaken in the context of higher topos theory, but at the time of this writing it hasn't been done inside HoTT. We certainly can define the type of groups which are sets, and prove that this type of 0-groups is equivalent to connected 1-types, and this is done in *Symmetry*. But in the case of higher groups we only have one definition: pointed connected types. This happens to be a lovely theory, and so we'll be glad to run with that.
 
@@ -67,19 +69,19 @@ For the first statement, define $-\cdot p:*=*\to *=x$, by concatenating with $p$
 
 So identity types with unequal endpoints like $*=x$ are torsors, and it's noteworthy to find torsors appearing to close to the foundations of HoTT.
 
-## Group actions
+### Group actions
 
 Given any pointed type $X$ with basepoint $x$ we can form the type $\BAut_x(X)$ by taking the connected component of $x$. If we consider the terms of $X$ to be at type-theoretic level 0, then $\Aut_x$ brings one of the identity types from level 1 down to level 0 to look at it on its own. Then the B can be thought of as reinstalling the identity type at level 1 of the new type, which contains only the connected component of $x$. When we do this, though, we don't forget the identity types of all the other terms in the connected component. That's why there really isn't a true B operator, just a notation that is meant to evoke the classical idea of a classifying space, since as we'll see we really have captured that idea.
 
 A homomorphism of groups is a pointed map $f:BG\to X$. The rules of type theory will ensure that this map contains a map between the identity types inside the types, forming a group homomorphism in the usual sense. We can think of $G$ acting on $x$ since the homomorphism is $*=*\to x=x$. If we take $X=\uni$ to be the universe, and if $f(*)=H$, then we can think of $G$ acting on the type $H$.
 
-## Equivariant maps
+### Equivariant maps
 
 If $BG\xrightarrow[]{r_X} \BAut_x X$ and $BG\xrightarrow[]{r_Y} \BAut_y Y$ are two group actions
 
-# Principal bundles
+## Principal bundles
 
-## Bundles over $BG$
+### Bundles over $BG$
 
 Pointed connected types $BG$ come with three built-in type families by choosing identity types with different endpoints. There's $LG:=(a:BG)\times a=a$ which is at each point the group of self-identifications of that point. There's $EG:=(a:BG)\times *=a$ which aren't groups, but which are similar to the self-identifications, and in fact are torsors over $G$! At each point $a:BG$ we can concatenate a term of $EG(a)$ with a term of $LG(a)$ by concatenating the latter to the $a$ endpoint of $EG(a)$. And lastly there's the non-dependent type $BG\times G$ which I'm mentioning because we can also concatenate a term of $EG(a)$ with a term of $G$, by attaching it to the $*$ endpoint.
 
@@ -87,7 +89,7 @@ $EG$ is contractible (Lemma 3.11.8 of The HoTT Book\cite{hottbook}). It's worth 
 
 Example: for $G=\zz, \zz^n, \zz_2$ provide $BG$, $EG$, and $LG$.
 
-## Mapping into $BG$
+### Mapping into $BG$
 
 Pulling back $EG$ via a map $X\to BG$ deserves to be called a principal $G$-bundle over $X$, and pulling back $LG$ via the same map deserves to be called a gauge transformation.
 
@@ -134,13 +136,13 @@ The bundle $E_fX$ would classically be called something like $P$, a principal bu
 \includegraphics[height=3in,width=4.5in]{torsors_and_gauge}
 \caption{Torsors and gauge transformations over $X$. $p$ and $q$ are terms in the fibers of the total spaces $E_fX$ and $L_fX$ respectively. Similarly for $p'$ and $q'$. We can then form $p\cdot q$ and $p'\cdot q'$. If we had a whole section of such $q$ then we could use that to act on the whole of $E_fX$.}
 
-## $BG$ classifies bundles, not just equivalence classes
+### $BG$ classifies bundles, not just equivalence classes
 
 The classical theorems take the form: taking the pullback of $EG\to BG$ forms a bijection between homotopy classes of maps $f:X\to BG$ and equivalence classes of principal $G$-bundles over $X$. 
 
-## Universes versus bundles
+### Universes versus bundles
 
-## Eilenberg-Mac Lane spaces
+### Eilenberg-Mac Lane spaces
 
 *Inductive types* are collections of data and rules for mapping out of instances of the collection. For example here is an inductive type defining the natural numbers in Agda:
 
@@ -148,9 +150,9 @@ This theory can be extended to support data having values in the identity types 
 
 Given a group $G$ (meaning, a 0-type) with identity $G.1g$ and multiplication $G.mul$, we can form the Eilenberg-Mac Lane type $K(G, 1)$ as the following HIT:
 
-## Associated bundles
+### Associated bundles
 
-## Group extensions
+### Group extensions
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -176,7 +178,7 @@ open import foundation.identity-types
 
 ```
 
-# Group extensions
+## Group extensions
 
 Extensions of $X$ by $BG$ are equivalent to maps $\C:X\to \BAut BG$.
 
@@ -188,7 +190,7 @@ Maybe we should look to the pi-type $(x:X)\to \C(x)$. This should be something l
 
 In the literature on Schreier theory, we can look for clues about how to proceed. Let's move away from HoTT for a moment and look at group extensions from the point of view of groupoids and 2-groupoids, in classical category theory.
 
-## Group extensions in category theory
+### Group extensions in category theory
 
 See Blanco.
 
