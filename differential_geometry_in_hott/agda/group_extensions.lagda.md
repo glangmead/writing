@@ -33,6 +33,10 @@ bibliography: connections.bib
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\id}{\mathrm{id}}
 
+<center>
+![](geb-logo.png "Image of the book cover of Godel Escher Bach"){ width=500 }
+</center>
+
 ## Abstract
 
 We will show how to formalize parts of differential geometry, gauge theory, and Chern-Weil theory in homotopy type theory.
