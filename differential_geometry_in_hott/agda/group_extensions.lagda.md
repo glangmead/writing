@@ -106,7 +106,7 @@ All told then, we have this equivalent picture of the extension:$$E:=\sum_{x:B}f
 
 This setup is slightly enriched compared to the type $B\to \BG$ because the fibers $f(x)$ are 1-types, and hence have terms and paths on the "interior". But each $f(x)$ is also a term in $\BAut\BG$ and so has self-identifications on the "exterior", and even identifications between these at level 2.
 
-Continuing with the use of elementary tools of homotopy type theory, consider $\apd(s)$, the dependent action on paths. This function maps paths $p:x=_B y$ to paths in $E$. A path lying over $p$ has a few names in the literature: a _path over_, a _dependent identification_, and a _lift_. The `agda-unimath` library uses the term "dependent identification," for example. So in particular, $\apd(s)(p):\tr(p)(s(x))=s(y)$, which provides by univalence an equivalence from $s(x)$, through $\tr(p)$, through $\apd(s)(p)$, to $s(y)$. Thinking of $s(x)$ and $s(y)$ as two torsors, this equivalence is a connection on the principal bundle. So $s$ packages the bundle aspect at the level of terms, and a connection at level 1. This is as it should be: the resuse of the term "transport" in homotopy type theory was apparently inspired by this analogy that is more than an analogy.
+Continuing with the use of elementary tools of homotopy type theory, consider $\apd(s)$, the dependent action on paths. This function maps paths $p:x=_B y$ to paths in $E$. A path lying over $p$ has a few names in the literature: a _path over_, a _dependent identification_, and a _lift_. The `agda-unimath` library uses the term "dependent identification," for example. So in particular, $\apd(s)(p):\tr(p)(s(x))=s(y)$, which provides by univalence an equivalence from $s(x)$, through the function $\tr(p)$, then through the function $\apd(s)(p)$, to $s(y)$. Thinking of $s(x)$ and $s(y)$ as two torsors, this equivalence is a connection on the principal bundle. So $s$ packages the bundle aspect at the level of terms, and a connection at level 1. This is as it should be: the use of the term "transport" in homotopy type theory was apparently inspired by this analogy that is more than an analogy.
 
 If we have two paths $p,q:x=_B y$ and a 2-path $H:p=q$, then $s$ can also apply to $H$, giving us a path between dependent identifications. 
 
@@ -149,6 +149,7 @@ The fiber sequence is the relative point of view because it consists entirely of
 module group_extensions where
 
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -159,6 +160,7 @@ open import foundation.dependent-pair-types
 open import foundation.transport-along-higher-identifications
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.type-duality
 
 open import structured-types.pointed-types
 open import structured-types.pointed-maps
@@ -176,11 +178,14 @@ module _
   -- pointed-Π aka Π∗
   
   -- DJM lemma 2.5.4: pointed families over B are equivalent to pointed maps into B
-  -- map-pointed-map-pointed-fam :
-  --   {l : Level} {E B : Pointed-Type l} → (E →∗ B) → (Pointed-Fam l B)
-  -- map-pointed-map-pointed-fam p = {!   !}
+  map-pointed-map-pointed-fam :
+    {l : Level} (E B : Pointed-Type l) → (E →∗ B) → (Pointed-Fam l B)
+  pr1 (map-pointed-map-pointed-fam E B p) = fiber (map-pointed-map p)
+  pr2 (map-pointed-map-pointed-fam E B p) = {! (fiber (map-pointed-map p) )(point-Pointed-Type B) !}
 
   -- then prove is-equiv-map-pointed-map-pointed-fam
+  -- use fiber-Σ from type-duality to get the equivalence between the unpointed map and unpointed classifying map
+
   
 
 ```
