@@ -73,6 +73,9 @@ csl: ima.csl
 \newcommand{\uni}{\mathcal{U}}
 \newcommand{\gauge}{\mathcal{G}}
 \newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\Gg}{\mathscr{G}}
+\newcommand{\Aa}{\mathscr{A}}
+\newcommand{\Bb}{\mathscr{B}}
 
 <center>
 ![](geb-logo.png "Image of the book cover of Godel Escher Bach"){ width=500 }
@@ -107,5 +110,18 @@ Algebraic topology of course has always had a train of thought devoted to combin
 
 Such complexes are easy to define in homotopy type theory, as [higher inductive types](https://en.wikipedia.org/wiki/Homotopy_type_theory#The_univalence_axiom,_synthetic_homotopy_theory,_and_higher_inductive_types). We will see a lot of examples shortly. Can we define bundles, forms and connections on these?
 
-## 
+## Survey of classical results
+
+Here is a brief overview of the kinds of results we want to gain access to in HoTT. 
+
+* Freed-Hopkins
+* $B\Gg$
+* hairy ball theorem
+* characteristic classes
+
+## Not the fundamental groupoid, not the path groupoid
+
+There are other avenues one could pursue to treat the theory of connections in category theory or homotopy type theory.
+
+
 
