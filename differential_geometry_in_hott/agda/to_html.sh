@@ -1,7 +1,7 @@
 # from https://jesper.sikanda.be/posts/literate-agda.html
 
 # --html-highlight=code emits a markdown file, but --html-highlight=all emits an HTML file
-for i in group_extensions
+for i in discrete_gauge_theory
 do
   agda --html --html-dir=html --html-highlight=code $i.lagda.md 
 
