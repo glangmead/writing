@@ -18,9 +18,28 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="Agda.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Quattrocento:wght@700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Quattrocento:wght@400">
   <style>
   body {
     font-family: Baskerville, 'Libre Baskerville', serif;
@@ -41,15 +60,30 @@
 <body>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#outline" id="toc-outline">Outline</a></li>
 <li><a href="#abstract" id="toc-abstract">Abstract</a></li>
 <li><a href="#introduction" id="toc-introduction">Introduction</a></li>
-<li><a href="#survey-of-classical-results"
-id="toc-survey-of-classical-results">Survey of classical
-results</a></li>
 <li><a href="#not-the-fundamental-groupoid-not-the-path-groupoid"
 id="toc-not-the-fundamental-groupoid-not-the-path-groupoid">Not the
 fundamental groupoid, not the path groupoid</a></li>
+<li><a href="#combinatorial-manifolds"
+id="toc-combinatorial-manifolds">Combinatorial manifolds</a></li>
+<li><a href="#bundles-with-connection"
+id="toc-bundles-with-connection">Bundles with connection</a></li>
+<li><a href="#pathovers-as-horizontal-vertical"
+id="toc-pathovers-as-horizontal-vertical">Pathovers as horizontal
+vertical</a></li>
+<li><a href="#gauge-transformations"
+id="toc-gauge-transformations">Gauge transformations</a></li>
+<li><a href="#classical-theorems" id="toc-classical-theorems">Classical
+theorems</a></li>
+<li><a href="#chern-weil-theory" id="toc-chern-weil-theory">Chern-Weil
+theory</a></li>
+<li><a href="#cohomology-as-obstructions-to-lifts-obstruction-theory"
+id="toc-cohomology-as-obstructions-to-lifts-obstruction-theory">Cohomology
+as obstructions to lifts (obstruction theory)</a></li>
+<li><a href="#torus-groups" id="toc-torus-groups">Torus groups</a></li>
+<li><a href="#follow-ups" id="toc-follow-ups">Follow-ups</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </nav>
 <!-- https://pandoc.org/MANUAL.html -->
@@ -57,55 +91,37 @@ fundamental groupoid, not the path groupoid</a></li>
 <img src="geb-logo.png"
 title="Image of the book cover of Godel Escher Bach" width="500" />
 </center>
-<h2 id="outline">Outline</h2>
-<ol type="1">
-<li>Combinatorial topology
-<ol type="1">
-<li>Cech, PL, CW</li>
-<li>Contrast with the path groupoid narratives</li>
-</ol></li>
-<li>We’ll use the k-skeleton inclusions to control maps</li>
-<li>Torsors, deloopings, BAut</li>
-<li>Where is the principal bundle, where is the connection, where is the
-curvature?</li>
-<li>Arriving at the gauge group and its delooping without using the
-“space of connections for a fixed bundle”</li>
-<li>Using the homotopy type of the gauge group
-<ol type="1">
-<li>characteristic classes</li>
-<li>seeing Chern-Weil in characteristic classes</li>
-</ol></li>
-<li>Examples, including with maximal tori</li>
-</ol>
 <h2 id="abstract">Abstract</h2>
-<p>We introduce discrete gauge theory.</p>
+<p>We use combinatorial manifolds and torus groups to bring the study of
+connections on principal bundles into homotopy type theory.</p>
 <h2 id="introduction">Introduction</h2>
 <p><a href="https://en.wikipedia.org/wiki/Gauge_theory">Gauge theory</a>
-is a general methodology for defining invariants of spaces, whether
-those be invariants of the homotopy type, the homomorphism class, or the
+is a general methodology for defining invariants of spaces, including
+invariants of the homotopy type, the homomorphism class, or the
 diffeomorphism class. We make use of mediating objects such as principal
 bundles over the space, connections on the bundles, and morphisms of
 these. These additional objects provide access to information beyond the
 homology and homotopy groups of the space, but they are also of direct
-interest as well. In physics, the fields that model matter particles are
-sections of bundles, and those that model force fields are connections.
-The laws of nature are postulated to be invariant under automorphisms of
-all the underlying principal bundles, and so all the objects we need to
-study topology are relevant in physics as well!</p>
-<p>The standard introductions to differential geometry and gauge theory
+interest as well. In physics the fields that model force fields are
+connections, and the fields that model matter particles are sections of
+associated vector bundles. The laws of nature are postulated to be
+invariant under automorphisms of all the underlying principal bundles,
+and so all the objects we need to study topology are relevant in physics
+as well!</p>
+<p>The standard treatments of differential geometry and gauge theory
 work at the infinitesimal level. Connections are differential forms with
-values in the Lie algebra of a Lie group, forms are sections of a skew
-symmetric product of cotangent spaces. This fine local structure is so
-far inaccessible to homotopy type theory, even with modalities such as
-those offered by differential cohesion. These modalities are intriguing
-but very alien to classical intuitions. We won’t be saying more about
-that line of investigation.</p>
+values in the Lie algebra of a Lie group, rather than functions from
+finite-length paths directly into the Lie group. This fine local
+structure is so far inaccessible to homotopy type theory, even with
+modalities such as those offered by differential cohesion. These
+modalities are intriguing but very alien to classical intuitions. We
+won’t be saying more about that line of investigation.</p>
 <p>There is another approach, which is to draw inspiration from discrete
 and combinatorial methods. <a
 href="https://en.wikipedia.org/wiki/Discrete_differential_geometry">Discrete
 differential geometry</a> is an active field of applied mathematics and
-computer science, which has reused or created definitions of vector
-field, differential form, connection and curvature, that apply to a
+computer science which has combinatorial versions of vector fields,
+differential forms, connections and curvature, which apply to a
 triangulated surface embedded in 3-dimensional space (as might be used
 in a computer graphics engine).</p>
 <p>Algebraic topology of course has always had a train of thought
@@ -115,20 +131,417 @@ piecewise linear (PL) manifolds is another important example where a
 finite structure is used to capture important properties of a space.</p>
 <p>Such complexes are easy to define in homotopy type theory, as <a
 href="https://en.wikipedia.org/wiki/Homotopy_type_theory#The_univalence_axiom,_synthetic_homotopy_theory,_and_higher_inductive_types">higher
-inductive types</a>. We will see a lot of examples shortly. Can we
-define bundles, forms and connections on these?</p>
-<h2 id="survey-of-classical-results">Survey of classical results</h2>
-<p>Here is a brief overview of the kinds of results we want to gain
-access to in HoTT.</p>
-<ul>
-<li>Freed-Hopkins</li>
-<li><span class="math inline">\(B\mathscr{G}\)</span></li>
-<li>hairy ball theorem</li>
-<li>characteristic classes</li>
-</ul>
+inductive types</a>. We will see a lot of examples shortly. How much of
+gauge theory can we define with these?</p>
 <h2 id="not-the-fundamental-groupoid-not-the-path-groupoid">Not the
 fundamental groupoid, not the path groupoid</h2>
-<p>There are other avenues one could pursue to treat the theory of
-connections in category theory or homotopy type theory.</p>
+<p>There are a few avenues folks have pursued to treat the theory of
+connections in category theory or homotopy type theory. John Baez and
+collaborators <span class="citation"
+data-cites="baez_schreiber_higher_gauge">(<a
+href="#ref-baez_schreiber_higher_gauge" role="doc-biblioref">Baez &amp;
+Schreiber, 2006</a>)</span> <span class="citation"
+data-cites="baez_huerta_higher_gauge">(<a
+href="#ref-baez_huerta_higher_gauge" role="doc-biblioref">Baez &amp;
+Huerta, 2010</a>)</span> have emphasized the <em>path groupoid</em>
+<span class="math inline">\(\mathcal{P}_1(X)\)</span> of a manifold
+<span class="math inline">\(X\)</span>, which is a sort of infinitary
+higher inductive type whose points are the points of <span
+class="math inline">\(X\)</span>, whose morphisms are so-called <em>thin
+homotopy</em> classes of smooth paths (paths up to a homotopy that is
+1-dimensional, for example a reparameterization of the path that simply
+changes speed but has the same image and orientation), and where
+composition of paths is carefully defined so that compositions are
+always smooth. A connection is then simply a functor <span
+class="math inline">\(\mathcal{P}_1(X)\to BG\)</span> where <span
+class="math inline">\(BG\)</span> is a one-object groupoid whose
+morphisms form the group <span class="math inline">\(G\)</span>.</p>
+<p>The path groupoid construction has not been defined in HoTT, and it’s
+not clear that it can be done or whether it’s worthwhile to do so. A
+related object which has been defined in HoTT is the <em>fundamental
+groupoid</em> of <span class="math inline">\(X\)</span>, whose points
+are the points of <span class="math inline">\(X\)</span> and whose paths
+are homotopy classes of paths. This is the 1-truncation of the full
+<em>fundamental <span
+class="math inline">\(\infty\)</span>-groupoid</em> of <span
+class="math inline">\(X\)</span> which does not take equivalence classes
+but retains all the paths and adds higher equalities for the homotopies.
+Mike Shulman <span class="citation" data-cites="shulman_cohesion">(<a
+href="#ref-shulman_cohesion" role="doc-biblioref">Shulman,
+2017</a>)</span> and others have developed and extended a system of
+functions and higher inductive types that act as <em>modal
+operators</em> inside HoTT, with a corresponding topos-theoretic
+interpretation that extends ideas of Lawvere known as <em>cohesion</em>.
+One of the higher inductive types is called <a
+href="https://ncatlab.org/nlab/show/shape+modality"><em>shape</em></a>
+and when this operator is applied to a 0-type such as a manifold the
+output is its fundamental <span
+class="math inline">\(\infty\)</span>-groupoid as a higher type. This
+offers a pathway for classical objects to be imported into type theory,
+and for us to then define type-theoretic versions of classical
+constructions such as bundles and connections.</p>
+<p>But the fundamental <span
+class="math inline">\(\infty\)</span>-groupoid of a space is a
+relatively impoverished object, since paths that are homotopic are made
+equal. Connections that agree on homotopy-equivalent paths are called
+<em>flat</em> and are so special that we cannot build gauge theory just
+with them. We seek a fuller picture of connections.</p>
+<h2 id="combinatorial-manifolds">Combinatorial manifolds</h2>
+<p>Per Hatcher <span class="citation" data-cites="hatcher_at">(<a
+href="#ref-hatcher_at" role="doc-biblioref">Hatcher, 2002</a>)</span> a
+<em>CW complex</em> is a space <span class="math inline">\(X\)</span>
+constructed through the following recursive procedure. Start with a set
+<span class="math inline">\(X_0\)</span>, the 0-cells of <span
+class="math inline">\(X\)</span>. Then inductively form the <span
+class="math inline">\(n\)</span>-skeleton from the <span
+class="math inline">\(n-1\)</span>-skeleton by attaching a set of disks
+via attaching maps of the boundary spheres. If <span
+class="math inline">\(I_{n}\)</span> is the indexing set at stage <span
+class="math inline">\(n\)</span>, this means forming the pushout <span
+class="math display">\[\begin{CD}
+\coprod_{I_n} S^{n-1} @&gt;\mathrm{attach}&gt;&gt; X_{n-1} \\
+@V\mathrm{incl}VV @VVV \\
+\coprod_{I_n} D^{n} @&gt;\phi_{I_n}&gt;&gt; X_{n}
+\end{CD}
+\]</span> We require each map in the set <span
+class="math inline">\(\phi_{I_n}\)</span> to be a homeomorphism on the
+interior of the disk. We will assume we stop at a finite dimension. We
+will be left with maps <span class="math inline">\(X_0\hookrightarrow
+X_1\hookrightarrow\cdots\hookrightarrow X_n\)</span> for some finite
+dimension <span class="math inline">\(n\)</span>.</p>
+<p>What topological manifolds are equivalent to a CW complex? The answer
+is the composition of a few results summarized <a
+href="https://mathoverflow.net/questions/201944/topological-n-manifolds-have-the-homotopy-type-of-n-dimensional-cw-complexes">by
+Allen Hatcher</a> (citing <span class="citation"
+data-cites="kirby_siebenmann">(<a href="#ref-kirby_siebenmann"
+role="doc-biblioref">Kirby &amp; Siebenmann, 1977</a>)</span> and <span
+class="citation" data-cites="freedman_quinn">(<a
+href="#ref-freedman_quinn" role="doc-biblioref">Freedman &amp; Quinn,
+1990</a>)</span>):</p>
+<blockquote>
+<p>Every topological manifold has a handlebody structure except in
+dimension 4, where a 4-manifold has a handlebody structure if and only
+if it is smoothable. This is a theorem on page 136 of Freedman and
+Quinn’s book “Topology of 4-Manifolds”, with a reference given to the
+Kirby-Siebenmann book for the higher-dimensional case. It is then an
+elementary fact that an <span class="math inline">\(n\)</span>-manifold
+with a handlebody structure is homotopy equivalent to a CW complex with
+one <span class="math inline">\(k\)</span>-cell for each <span
+class="math inline">\(k\)</span>-handle, so in particular there are no
+cells of dimension greater than <span class="math inline">\(n\)</span>.
+At least in the compact case a manifold with a handlebody structure is
+in fact homeomorphic to a CW complex with <span
+class="math inline">\(k\)</span>-cells corresponding to <span
+class="math inline">\(k\)</span>-handles; see page 107 of
+Kirby-Siebenmann. This probably holds in the noncompact case as well,
+though I don’t know a reference.</p>
+</blockquote>
+<p>It’s easy to see how to take the data of a classical CW complex and
+convert it into a higher inductive type. Just replace the pushout with
+the homotopy pushout, and we have constructed a type that has <span
+class="math inline">\(n\)</span>-cells living in path level <span
+class="math inline">\(n\)</span>. Of course we may end up obtaining more
+paths than we put in the constructor, since even simple spaces like
+spheres have nontrivial higher homotopy. And on the other hand our space
+may turn out to be equivalent to a type with lower truncation level than
+<span class="math inline">\(n\)</span>, for example if we create an
+interval with two points and a path between them, which nominally is a
+1-type but is equivalent to a single point. But the situation should
+mirror the classical picture, so these are all features and not
+bugs.</p>
+<p>But even a CW complex is not obviously amenable to defining discrete
+forms or connections. Why? Because the “bulk” of the manifold, the
+top-dimensional cells, have been thrust up to level <span
+class="math inline">\(n\)</span> in the type theory.</p>
+<p>Imagine trying to approximate a function <span
+class="math inline">\(f:X\to \mathbb{R}\)</span> on a manifold with some
+sort of sampling or averaging. Start by forming a fine triangulation on
+the manifold (i.e. using lots of triangles). To construct a discrete
+approximation <span class="math inline">\(f_d\)</span> it seems natural
+to assign to each triangle a value that approximates <span
+class="math inline">\(f\)</span> in that region, say by taking the
+average of <span class="math inline">\(f\)</span> over the triangle.
+What would play the role of the differential <span
+class="math inline">\(df\)</span>? It makes sense to look at two
+triangles <span class="math inline">\(t_1\)</span> and <span
+class="math inline">\(t_2\)</span> that share an edge <span
+class="math inline">\(e_{12}\)</span> and look at the difference <span
+class="math inline">\(f_d(t_2)-f_d(t_1)\)</span> and assign that to the
+edge <span class="math inline">\(e_{12}\)</span>. This is a
+<em>dual</em> edge to the triangulation, and the two vertices that it
+joins are <span class="math inline">\(t_1\)</span> and <span
+class="math inline">\(t_2\)</span> considered as single points,
+i.e. <em>dual</em> vertices.</p>
+<p>In HoTT terms we would like the top-dimensional classical information
+to live at level 0 in the type theory, and the connectivity to live at
+level 1 and so on. So instead of forming a triangulation or CW structure
+for our manifold, we want to form a <em>Čech nerve of a good open
+cover</em>. The nLab <a
+href="https://ncatlab.org/nlab/show/good+open+cover">states that every
+CW complex admits a good open cover</a><strong>[TODO: try to do
+better]</strong>.</p>
+<p>So let’s form HITs whose points correspond to the bulk, that is to
+open sets in <span class="math inline">\(X\)</span>, so as to capture
+combinatorially structures that are samples or averages of their
+classical counterparts.</p>
+<p>This is calculus without infinitesimals and without tangent spaces.
+Paths and higher paths have finite length. There is no de Rham
+cohomology, only cellular cohomology.</p>
+<p>Consider the surface of a Rubik’s cube as a stand-in for a 2-sphere.
+Let’s call the face that has a white center the white face. If the white
+face is on top and the green face is facing you, then yellow is on the
+bottom, blue is at the back, red is to the right and orange is to the
+left. (This works even if the cube is scrambled.) Form an open cover
+whose open sets are faces plus a little spillover to the four
+neighboring faces. The nerve of this cover is an octahedron with
+vertices colored white, green and so on, with edges that correspond to
+adjacent faces, and with 2-cells for the 3-way intersections taking
+place at the original corners. We can define a non-flat connection on
+this space, one that captures the intrinsic curvature of the embedding
+into 3-dimensional space, in the following way.</p>
+<p>Imagine a closed path on the original cube that starts at the white
+center square, moves along the top face and then the red face to the red
+center square, then comes around to the front green square, then back up
+to the white north pole. This path traverses three faces. In the dual
+octahedron this path picks out the white-red edge, then the red-green
+edge, then green-white. So it’s also a closed path in the dual space. We
+will assign to this curve a point in <span
+class="math inline">\(SO(2)\)</span>, which is the structure group of
+the tangent bundle of the sphere. In particular we assign the value
+“clockwise rotation by 90 degrees”. That’s what happens to an imaginary
+tangent vector as it is transported around this curve. I haven’t defined
+tangent vectors, but I don’t need to, they are just to help us
+understand why we made this choice of group element.</p>
+<p>Classically a connection is usually defined to be a 1-form with
+values in the Lie algebra of the structure group. That’s just the
+infinitesimal version of what we did, which is the assignment of group
+elements to paths.</p>
+<pre class="Agda"><a id="13955" class="Symbol">{-#</a> <a id="13959" class="Keyword">OPTIONS</a> <a id="13967" class="Pragma">--without-K</a> <a id="13979" class="Pragma">--cohesion</a> <a id="13990" class="Pragma">--flat-split</a> <a id="14003" class="Symbol">#-}</a>
+
+<a id="14008" class="Keyword">module</a> <a id="14015" href="discrete_gauge_theory.html" class="Module Operator">discrete_gauge_theory</a> <a id="14037" class="Keyword">where</a>
+
+<a id="14044" class="Keyword">open</a> <a id="14049" class="Keyword">import</a> <a id="14056" href="https://unimath.github.io/agda-unimath/foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
+<a id="14083" class="Keyword">open</a> <a id="14088" class="Keyword">import</a> <a id="14095" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
+</pre>
+<h2 id="bundles-with-connection">Bundles with connection</h2>
+<p>We take as our starting point the delooping framework of <span
+class="citation" data-cites="buchholtz2023central">(<a
+href="#ref-buchholtz2023central" role="doc-biblioref">Buchholtz <em>et
+al.</em>, 2023</a>)</span>. Consider the central type <span
+class="math inline">\(S^1\)</span>, given as the higher inductive
+type:</p>
+<pre class="Agda"><a id="14320" class="Keyword">postulate</a>
+  <a id="𝕊¹"></a><a id="14332" href="discrete_gauge_theory.html#14332" class="Postulate">𝕊¹</a> <a id="14335" class="Symbol">:</a> <a id="14337" href="Agda.Primitive.html#388" class="Primitive">UU</a> <a id="14340" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
+
+<a id="14347" class="Keyword">postulate</a>
+  <a id="base-𝕊¹"></a><a id="14359" href="discrete_gauge_theory.html#14359" class="Postulate">base-𝕊¹</a> <a id="14367" class="Symbol">:</a> <a id="14369" href="discrete_gauge_theory.html#14332" class="Postulate">𝕊¹</a>
+
+<a id="14373" class="Keyword">postulate</a>
+  <a id="loop-𝕊¹"></a><a id="14385" href="discrete_gauge_theory.html#14385" class="Postulate">loop-𝕊¹</a> <a id="14393" class="Symbol">:</a> <a id="14395" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html#5936" class="Datatype">Id</a> <a id="14398" href="discrete_gauge_theory.html#14359" class="Postulate">base-𝕊¹</a> <a id="14406" href="discrete_gauge_theory.html#14359" class="Postulate">base-𝕊¹</a>
+</pre>
+<p>Given a nerve <span class="math inline">\(X\)</span>, the type of
+principal <span class="math inline">\(S^1\)</span> bundles over <span
+class="math inline">\(X\)</span> is the function type <span
+class="math inline">\(X\to \mathsf{BAut}_1 S^1\)</span>.</p>
+<p>Given a particular function <span class="math inline">\(f:X\to
+\mathsf{BAut}_1 S^1\)</span>, what does this function do at the various
+levels of <span class="math inline">\(X\)</span>? On terms <span
+class="math inline">\(x_0:X\)</span> it assigns a particular <span
+class="math inline">\(S^1\)</span>-torsor <span
+class="math inline">\(f(x_0):\mathsf{BAut}_1 S^1\)</span>. On paths
+<span class="math inline">\(p:x_1=_X x_2\)</span> it assigns an
+isomorphism of torsors <span
+class="math inline">\(f(p):f(x_0)=f(x_1)\)</span>.</p>
+<p>Next we will form the total space <span
+class="math inline">\((x:X)\times f(x)\)</span> and look at what we know
+about <em>dependent paths</em>, also known as <em>pathovers</em>. We
+claim that we can lift paths uniquely to dependent paths in a way that
+corresponds to a connection on this bundle.</p>
+<p>Can this connection be curved, or is it necessarily flat? It can be
+curved! Consider a path in the Rubik’s cube nerve (the octahedron)
+starting from the top (white) point (which stands in for the whole white
+face of the cube) and moving to the red point, then green, then back to
+the white point. Applying <span class="math inline">\(f\)</span> to this
+loop gives an automorphism of the torsor <span
+class="math inline">\(f(white)\)</span>. This is a group element of the
+central type <span class="math inline">\(S^1\)</span> which we will name
+<span class="math inline">\(f(wrgw)\)</span>. This can be a non-identity
+element. But since this path bounds a 2-cell <span
+class="math inline">\(wrg\)</span> in <span
+class="math inline">\(X\)</span>, there is a 2-path from this loop to
+<span class="math inline">\(\mathrm{refl}_w\)</span>. Is there a path
+from <span class="math inline">\(f(wrgw)\)</span> to <span
+class="math inline">\(1_{S^1}\)</span>? Yes, the central type <span
+class="math inline">\(S^1\)</span> is connected so there are various
+paths we could choose, which differ by winding number. The 2-face will
+map to this path. <strong>[TODO: detail the 2-type structure of <span
+class="math inline">\(\mathsf{BAut}_1 S^1\)</span>]</strong></p>
+<p>The lifting of paths is a connection, and the assignment of paths
+<span class="math inline">\(1=_{S^1}g\)</span> to 2-cells is curvature.
+Classically these are defined infinitesimally as a 1-form and a 2-form,
+so it’s all making sense.</p>
+<p>If the map is more than just “the bundle” and contains the data of a
+curved connection automatically, can we recover the underlying bundle
+without its connection?</p>
+<p>Classically we have that hiccup that connections aren’t actually
+1-forms, they are points in an affine space modeled on 1-forms. But
+curvature is an honest 2-form. Can we detect that hiccup here? Yes, in
+this context we made an arbitrary choice when we assigned <span
+class="math inline">\(f(white)\)</span>. We could slide the whole image
+of <span class="math inline">\(f\)</span> around in <span
+class="math inline">\(\mathsf{BAut}_1 S^1\)</span> and get an equivalent
+bundle and connection. But no matter where we place the octahedron, the
+curvature assignment is the same, because the choices of torsors cancel
+out. But do they entirely? If you read classical material very carefully
+you might notice fine print like this: curvature is defined only up to
+conjugation! We could have told you that, since all the points in a
+space of torsors have the same group as the loop space at that point,
+but they are conjugate to each other. In fact they are merely conjugate,
+as there are many conjugations (paths between two points) we can choose.
+A whole torsor’s worth!</p>
+<h2 id="pathovers-as-horizontal-vertical">Pathovers as horizontal
+vertical</h2>
+<p>Symmetry Lemma 4.14.1: Fix a section <span
+class="math inline">\(s:(x:B)\to f(x)\)</span> (or just the two
+endpoints of the lift). Given <span class="math inline">\(f\)</span> and
+<span class="math inline">\(s\)</span>, we have <span
+class="math inline">\(\underline{\underline{(x, s(x))} =_{E}
+\underline{(x&#39;, s(x&#39;))}} \simeq \underline{\underline{(x=_B
+x&#39;)}\times \underline{s(x)=_{f(x)}s(x&#39;)}}\)</span>.</p>
+<p>the type on the left are paths over <span
+class="math inline">\(x=x&#39;\)</span> anchored on the section (the
+ones that are <span class="math inline">\(s(x)\xrightarrow[{p}]{=}
+s(x&#39;)\)</span> for some <span
+class="math inline">\(p:x=x&#39;\)</span>)</p>
+<p>This mirrors exactly the classical picture where a connection is
+exactly the data of a decomposition of tangent vectors in the total
+space into a horizontal component and a vertical component. The
+horizontal component is isomorphic to something in the base space, and
+the vertical component is tangent to a fiber, i.e. a torsor.</p>
+<h2 id="gauge-transformations">Gauge transformations</h2>
+<p>Physicists call automorphisms of the principal bundle <em>gauge
+transformations</em>. <strong>[TODO: explain about torsors and gauges
+and such]</strong>. This means homotopies of the given bundle <span
+class="math inline">\(f:X\to \mathsf{BAut}_1 S^1\)</span>,
+i.e. functions of type <span class="math inline">\((x:X)\to
+f(x)=f(x)\)</span>.</p>
+<p>Donaldson-Kronheimer: “The non-triviality of the orbit space is a
+reflection of the impossibility of finding a uniform, global procedure
+by which to pick out a preferred gauge for each equivalence class of
+connections;” (<a
+href="zotero://select/library/items/6SNR3CNY">Donaldson and Kronheimer,
+1997, p. 185</a>) (<a
+href="zotero://open-pdf/library/items/CIC23ZVM?page=185&amp;annotation=2KPBLMAP">pdf</a>)</p>
+<p>The action of <span class="math inline">\(\mathscr{G}\)</span> on
+<span class="math inline">\(\mathscr{A}\)</span> is not free, even when
+a connection <span class="math inline">\(A\)</span> is irreducible. The
+stabilizer of <span class="math inline">\(A\)</span> coincides with the
+center of <span class="math inline">\(G\)</span>. This leads to framed
+connections.</p>
+<h2 id="classical-theorems">Classical theorems</h2>
+<p>Cohen Theorem 2.24 p. 73: Complex line bundles over CPn are the
+integers, and for n&gt;=0 the bundle is the n-fold tensor power of the
+universal line bundle.</p>
+<p>Cohen Theorem 2.25: The only nontriv real line bundle over RPn is the
+canonical line bundle.</p>
+<p>Cohen Theorem 2.27: A bundle has a nontriv section iff the
+classifying map factor through one dimension lower.</p>
+<p>Covering spaces have a unique connection and it’s flat.</p>
+<p>A characteristic class is a natural transformation between the
+functor PrinG and the functor H^*.</p>
+<p>The first Chern class is a complete invariant of complex line
+bundles. The first S-W class is a complete invariant of real line
+bundles.</p>
+<p>c1 is zero iff the bundle has an SU(n) structure. w1 is zero iff the
+bundle has an SO(n) structure.</p>
+<p>The cohomology of BU(n) is a polynomial algebra on n generators over
+Z with ci in H^2i, and similarly for BO(n) over Z2 with wi in H^i.</p>
+<p>Whitney sum formula for c and w.</p>
+<p>The splitting principle.</p>
+<p>The w classes for the tangent bundles of spheres are 0 starting with
+S1.</p>
+<p>The w classes for the tangent bundles of RPn and CPn.</p>
+<h2 id="chern-weil-theory">Chern-Weil theory</h2>
+<h2
+id="cohomology-as-obstructions-to-lifts-obstruction-theory">Cohomology
+as obstructions to lifts (obstruction theory)</h2>
+<h2 id="torus-groups">Torus groups</h2>
+<p>We can get partway towards a theory of principal bundles over
+arbitrary Lie groups by using the <a
+href="https://ncatlab.org/nlab/show/splitting+principle">maximal
+torus</a> (aka “splitting principle”).</p>
+<p>Leray-Hirsch theorem.</p>
+<h2 id="follow-ups">Follow-ups</h2>
+<ul>
+<li><a href="zotero://select/items/1_E7IEEMRP">Scoccola 05/2020 -
+Nilpotent Types and Fracture Squares in Homotopy Type Theory</a></li>
+<li><a href="zotero://select/items/1_TX88MRXW">Cohen - The Topology of
+Fiber Bundles Lecture Notes</a></li>
+<li>intersection forms</li>
+<li>examples of nontrivial manifolds</li>
+<li>a situation where classically there’s an obstruction to a
+distribution; Lie bracket remaining in subbundle</li>
+<li>Baez Galois theory formulations</li>
+<li>locating the classical formulas for curvature (<span
+class="math inline">\(F=dA+\frac{1}{2}A\wedge A\)</span>); Bianchi
+identity</li>
+<li>locating the classical formula for the action of the gauge group on
+a connection/curvature</li>
+<li>locating the Leibniz rule</li>
+<li>if <span class="math inline">\(\mathrm{ap}\)</span> “is”
+differentiation, then is <span
+class="math inline">\(d^2=0\)</span>?</li>
+<li>which map from the Rubik’s cube is the Hopf bundle?</li>
+<li>Hodge star</li>
+<li>orientation of a bundle</li>
+</ul>
+<h2 class="unnumbered" id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-baez_huerta_higher_gauge" class="csl-entry"
+role="doc-biblioentry">
+<span class="smallcaps">Baez</span>, J.C. &amp; <span
+class="smallcaps">Huerta</span>, J. (2010) <a
+href="https://doi.org/10.1007/s10714-010-1070-9">An invitation to higher
+gauge theory</a>. <em>General Relativity and Gravitation</em>,
+<strong>43</strong>, 2335–2392.
+</div>
+<div id="ref-baez_schreiber_higher_gauge" class="csl-entry"
+role="doc-biblioentry">
+<span class="smallcaps">Baez</span>, J.C. &amp; <span
+class="smallcaps">Schreiber</span>, U. (2006) <a
+href="https://arxiv.org/abs/math/0511710">Higher gauge theory</a>.
+</div>
+<div id="ref-buchholtz2023central" class="csl-entry"
+role="doc-biblioentry">
+<span class="smallcaps">Buchholtz</span>, U., <span
+class="smallcaps">Christensen</span>, J.D., <span
+class="smallcaps">Flaten</span>, J.G.T., &amp; <span
+class="smallcaps">Rijke</span>, E. (2023) <a
+href="https://arxiv.org/abs/2301.02636">Central h-spaces and banded
+types</a>.
+</div>
+<div id="ref-freedman_quinn" class="csl-entry" role="doc-biblioentry">
+<span class="smallcaps">Freedman</span>, M.H. &amp; <span
+class="smallcaps">Quinn</span>, F. (1990) <em><a
+href="http://www.jstor.org/stable/j.ctt7ztz2d">Topology of 4-manifolds
+(PMS-39)</a></em>. Princeton University Press.
+</div>
+<div id="ref-hatcher_at" class="csl-entry" role="doc-biblioentry">
+<span class="smallcaps">Hatcher</span>, A. (2002) <em>Algebraic
+topology</em>. Cambridge University Press.
+</div>
+<div id="ref-kirby_siebenmann" class="csl-entry" role="doc-biblioentry">
+<span class="smallcaps">Kirby</span>, R.C. &amp; <span
+class="smallcaps">Siebenmann</span>, L.C. (1977) <em>Foundational essays
+on topological manifolds, smoothings, and triangulations</em>, Annals of
+mathematics studies. Princeton University Press.
+</div>
+<div id="ref-shulman_cohesion" class="csl-entry" role="doc-biblioentry">
+<span class="smallcaps">Shulman</span>, M. (2017) <a
+href="https://arxiv.org/abs/1509.07584">Brouwer’s fixed-point theorem in
+real-cohesive homotopy type theory</a>.
+</div>
+</div>
 </body>
 </html>
