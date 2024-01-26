@@ -8,11 +8,13 @@ do
   # this combo looks good to me right now: -M document-css=true --css Agda.css --mathjax --standalone
   pandoc --lua-filter tikz.lua --from markdown+footnotes+latex_macros \
     -M document-css=false --css Agda.css \
-    --toc --mathjax --standalone --citeproc -M link-citations=true \
+    --toc --number-sections --number-offset=1 --mathjax --standalone --citeproc -M link-citations=true \
     html/$i.md -o html/$i.html
   cat html/$i.html | sed 's="foundation="https://unimath.github.io/agda-unimath/foundation=g' > html/foo.html
   mv html/foo.html html/$i.html
   cat html/$i.html | sed 's="structured-type="https://unimath.github.io/agda-unimath/structured-type=g' > html/foo.html
   mv html/foo.html html/$i.html
+  cp *.png html
+  cp *.gif html
   open html/$i.html
 done
