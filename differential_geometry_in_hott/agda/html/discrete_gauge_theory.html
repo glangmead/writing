@@ -87,23 +87,27 @@ id="toc-previous-work-on-gauge-theory-in-higher-categories"><span
 class="toc-section-number">1.3.1</span> Previous work on gauge theory in
 higher categories</a></li>
 </ul></li>
+<li><a href="#real-cohesion-discrete-types-and-text"
+id="toc-real-cohesion-discrete-types-and-text"><span
+class="toc-section-number">1.4</span> Real cohesion, discrete types, and
+<span class="math inline">\(\text{∫}\)</span></a></li>
 <li><a href="#our-objects-1-combinatorial-manifolds"
 id="toc-our-objects-1-combinatorial-manifolds"><span
-class="toc-section-number">1.4</span> Our objects 1: combinatorial
+class="toc-section-number">1.5</span> Our objects 1: combinatorial
 manifolds</a></li>
 <li><a href="#our-objects-2-groups" id="toc-our-objects-2-groups"><span
-class="toc-section-number">1.5</span> Our objects 2: groups</a></li>
+class="toc-section-number">1.6</span> Our objects 2: groups</a></li>
 <li><a href="#polytopes-in-bs1" id="toc-polytopes-in-bs1"><span
-class="toc-section-number">1.6</span> Polytopes in <span
+class="toc-section-number">1.7</span> Polytopes in <span
 class="math inline">\(BS^1\)</span></a>
 <ul>
 <li><a href="#pathovers-as-horizontal-times-vertical"
 id="toc-pathovers-as-horizontal-times-vertical"><span
-class="toc-section-number">1.6.1</span> Pathovers as horizontal <span
+class="toc-section-number">1.7.1</span> Pathovers as horizontal <span
 class="math inline">\(\times\)</span> vertical</a></li>
 <li><a href="#gauge-transformations"
 id="toc-gauge-transformations"><span
-class="toc-section-number">1.6.2</span> Gauge transformations</a></li>
+class="toc-section-number">1.7.2</span> Gauge transformations</a></li>
 </ul></li>
 <li><a href="#references" id="toc-references">References</a></li>
 </ul>
@@ -361,9 +365,7 @@ in a computer graphics engine).</p>
 id="previous-work-on-gauge-theory-in-higher-categories"><span
 class="header-section-number">1.3.1</span> Previous work on gauge theory
 in higher categories</h3>
-<p>There are a few avenues folks have pursued to treat the theory of
-connections in category theory or homotopy type theory. John Baez and
-collaborators <span class="citation"
+<p>John Baez and collaborators <span class="citation"
 data-cites="baez_schreiber_higher_gauge">(<a
 href="#ref-baez_schreiber_higher_gauge" role="doc-biblioref">Baez &amp;
 Schreiber, 2006</a>)</span> <span class="citation"
@@ -371,12 +373,12 @@ data-cites="baez_huerta_higher_gauge">(<a
 href="#ref-baez_huerta_higher_gauge" role="doc-biblioref">Baez &amp;
 Huerta, 2010</a>)</span> have emphasized the <em>path groupoid</em>
 <span class="math inline">\(\mathcal{P}_1(X)\)</span> of a manifold
-<span class="math inline">\(X\)</span>, which is a sort of infinitary
-higher inductive type whose points are the points of <span
-class="math inline">\(X\)</span>, whose morphisms are so-called <em>thin
-homotopy</em> classes of smooth paths (paths up to a homotopy that is
-1-dimensional, for example a reparameterization of the path that simply
-changes speed but has the same image and orientation), and where
+<span class="math inline">\(X\)</span>, which is an <span
+class="math inline">\(n\)</span>-category whose points are the points of
+<span class="math inline">\(X\)</span>, whose morphisms are so-called
+<em>thin homotopy</em> classes of smooth paths (paths up to a homotopy
+that is 1-dimensional, for example a reparameterization of the path that
+simply changes speed but has the same image and orientation), and where
 composition of paths is carefully defined so that compositions are
 always smooth. A connection is then simply a functor <span
 class="math inline">\(\mathcal{P}_1(X)\to BG\)</span> where <span
@@ -406,8 +408,43 @@ class="math inline">\(\infty\)</span>-groupoid as a higher type. This
 offers a pathway for classical objects to be imported into type theory,
 and for us to then define type-theoretic versions of classical
 constructions such as bundles and connections.</p>
-<h2 data-number="1.4" id="our-objects-1-combinatorial-manifolds"><span
-class="header-section-number">1.4</span> Our objects 1: combinatorial
+<h2 data-number="1.4" id="real-cohesion-discrete-types-and-text"><span
+class="header-section-number">1.4</span> Real cohesion, discrete types,
+and <span class="math inline">\(\text{∫}\)</span></h2>
+<p>We follow <span class="citation" data-cites="shulman_cohesion">(<a
+href="#ref-shulman_cohesion" role="doc-biblioref">Shulman,
+2017</a>)</span> and <span class="citation" data-cites="myersgood">(<a
+href="#ref-myersgood" role="doc-biblioref">Myers, 2022</a>)</span>. The
+modal operator <span class="math inline">\(\text{∫}\)</span> is a
+reflection from <span class="math inline">\(\mathsf{Type}\)</span> into
+discrete types <span
+class="math inline">\(\mathsf{Type}_\text{∫}\)</span>. Its unit <span
+class="math inline">\((-)^\text{∫}:X\to \text{∫}X\)</span> is
+implemented as a constructor of a higher inductive type that has four
+additional constructors. These four constructors assume the existence of
+a family of types <span class="math inline">\(R_i\)</span> that act
+collectively as a type of Dedekind real numbers, and they create left
+and right inverses to the map <span
+class="math inline">\(\mathsf{const}:X\to (R_i\to X)\)</span>.</p>
+<p>This localization at the real numbers will take a space <span
+class="math inline">\(X\)</span> that is a 0-type to its fundamental
+<span class="math inline">\(\infty\)</span>-groupoid as a higher type.
+So in addition to obtaining the homotopy type of <span
+class="math inline">\(X\)</span>, we import its homotopical information
+at the appropriate type-theoretic dimension.</p>
+<p>We will further assume that if the space <span
+class="math inline">\(X\)</span> has a finite good open cover <span
+class="math inline">\(\{U_\alpha\}\)</span>, and if the nerve <span
+class="math inline">\(U_\alpha \to U_{\alpha\beta}\to
+U_{\alpha\beta\gamma}\to\cdots\)</span> of the good open cover gives the
+homotopy type of <span class="math inline">\(X\)</span> classically,
+then we can form a homotopy pushout <span
+class="math inline">\(HX\stackrel{\textup{def}}{=}1\to 1\to 1\)</span>
+from the data of the cover. We claim that <span
+class="math inline">\(HX\)</span> is discrete and that we have a proof
+<span class="math inline">\(P:HX\simeq \text{∫}X\)</span>.</p>
+<h2 data-number="1.5" id="our-objects-1-combinatorial-manifolds"><span
+class="header-section-number">1.5</span> Our objects 1: combinatorial
 manifolds</h2>
 <center>
 <figure>
@@ -566,32 +603,32 @@ understand why we made this choice of group element.</p>
 values in the Lie algebra of the structure group. That’s just the
 infinitesimal version of what we did, which is the assignment of group
 elements to paths.</p>
-<pre class="Agda"><a id="19200" class="Symbol">{-#</a> <a id="19204" class="Keyword">OPTIONS</a> <a id="19212" class="Pragma">--without-K</a> <a id="19224" class="Pragma">--cohesion</a> <a id="19235" class="Pragma">--flat-split</a> <a id="19248" class="Symbol">#-}</a>
+<pre class="Agda"><a id="20266" class="Symbol">{-#</a> <a id="20270" class="Keyword">OPTIONS</a> <a id="20278" class="Pragma">--without-K</a> <a id="20290" class="Pragma">--cohesion</a> <a id="20301" class="Pragma">--flat-split</a> <a id="20314" class="Symbol">#-}</a>
 
-<a id="19253" class="Keyword">module</a> <a id="19260" href="discrete_gauge_theory.html" class="Module Operator">discrete_gauge_theory</a> <a id="19282" class="Keyword">where</a>
+<a id="20319" class="Keyword">module</a> <a id="20326" href="discrete_gauge_theory.html" class="Module Operator">discrete_gauge_theory</a> <a id="20348" class="Keyword">where</a>
 
-<a id="19289" class="Keyword">open</a> <a id="19294" class="Keyword">import</a> <a id="19301" href="https://unimath.github.io/agda-unimath/foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
-<a id="19328" class="Keyword">open</a> <a id="19333" class="Keyword">import</a> <a id="19340" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
+<a id="20355" class="Keyword">open</a> <a id="20360" class="Keyword">import</a> <a id="20367" href="https://unimath.github.io/agda-unimath/foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
+<a id="20394" class="Keyword">open</a> <a id="20399" class="Keyword">import</a> <a id="20406" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
 </pre>
-<h2 data-number="1.5" id="our-objects-2-groups"><span
-class="header-section-number">1.5</span> Our objects 2: groups</h2>
+<h2 data-number="1.6" id="our-objects-2-groups"><span
+class="header-section-number">1.6</span> Our objects 2: groups</h2>
 <p>We take as our starting point the delooping framework of <span
 class="citation" data-cites="buchholtz2023central">(<a
 href="#ref-buchholtz2023central" role="doc-biblioref">Buchholtz <em>et
 al.</em>, 2023</a>)</span>. Consider the central type <span
 class="math inline">\(S^1\)</span>, given as the higher inductive
 type:</p>
-<pre class="Agda"><a id="19563" class="Keyword">postulate</a>
-  <a id="𝕊¹"></a><a id="19575" href="discrete_gauge_theory.html#19575" class="Postulate">𝕊¹</a> <a id="19578" class="Symbol">:</a> <a id="19580" href="Agda.Primitive.html#388" class="Primitive">UU</a> <a id="19583" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
+<pre class="Agda"><a id="20629" class="Keyword">postulate</a>
+  <a id="𝕊¹"></a><a id="20641" href="discrete_gauge_theory.html#20641" class="Postulate">𝕊¹</a> <a id="20644" class="Symbol">:</a> <a id="20646" href="Agda.Primitive.html#388" class="Primitive">UU</a> <a id="20649" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
 
-<a id="19590" class="Keyword">postulate</a>
-  <a id="base-𝕊¹"></a><a id="19602" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a> <a id="19610" class="Symbol">:</a> <a id="19612" href="discrete_gauge_theory.html#19575" class="Postulate">𝕊¹</a>
+<a id="20656" class="Keyword">postulate</a>
+  <a id="base-𝕊¹"></a><a id="20668" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a> <a id="20676" class="Symbol">:</a> <a id="20678" href="discrete_gauge_theory.html#20641" class="Postulate">𝕊¹</a>
 
-<a id="19616" class="Keyword">postulate</a>
-  <a id="loop-𝕊¹"></a><a id="19628" href="discrete_gauge_theory.html#19628" class="Postulate">loop-𝕊¹</a> <a id="19636" class="Symbol">:</a> <a id="19638" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html#5936" class="Datatype">Id</a> <a id="19641" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a> <a id="19649" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a>
+<a id="20682" class="Keyword">postulate</a>
+  <a id="loop-𝕊¹"></a><a id="20694" href="discrete_gauge_theory.html#20694" class="Postulate">loop-𝕊¹</a> <a id="20702" class="Symbol">:</a> <a id="20704" href="https://unimath.github.io/agda-unimath/foundation-core.identity-types.html#5936" class="Datatype">Id</a> <a id="20707" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a> <a id="20715" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a>
 </pre>
-<h2 data-number="1.6" id="polytopes-in-bs1"><span
-class="header-section-number">1.6</span> Polytopes in <span
+<h2 data-number="1.7" id="polytopes-in-bs1"><span
+class="header-section-number">1.7</span> Polytopes in <span
 class="math inline">\(BS^1\)</span></h2>
 <p>Given a nerve <span class="math inline">\(X\)</span>, the type of
 principal <span class="math inline">\(S^1\)</span> bundles over <span
@@ -653,9 +690,9 @@ space of torsors have the same group as the loop space at that point,
 but they are conjugate to each other. In fact they are merely conjugate,
 as there are many conjugations (paths between two points) we can choose.
 A whole torsor’s worth!</p>
-<h3 data-number="1.6.1"
+<h3 data-number="1.7.1"
 id="pathovers-as-horizontal-times-vertical"><span
-class="header-section-number">1.6.1</span> Pathovers as horizontal <span
+class="header-section-number">1.7.1</span> Pathovers as horizontal <span
 class="math inline">\(\times\)</span> vertical</h3>
 <p><strong>Lemma</strong> If <span class="math inline">\(X\)</span> is a
 type and <span class="math inline">\(f:X\to \mathcal{U}\)</span> is a
@@ -669,8 +706,8 @@ product.<strong>[TODO: prove this generalization of Symmetry Lemma
 4.14.1.]</strong></p>
 <p>We can think of the two factors of the equivalence as providing
 horizontal and vertical components of the path in the total space.</p>
-<h3 data-number="1.6.2" id="gauge-transformations"><span
-class="header-section-number">1.6.2</span> Gauge transformations</h3>
+<h3 data-number="1.7.2" id="gauge-transformations"><span
+class="header-section-number">1.7.2</span> Gauge transformations</h3>
 <p>Physicists call automorphisms of the principal bundle <em>gauge
 transformations</em>. <strong>[TODO: explain about torsors and gauges
 and such]</strong>. This means homotopies of the given bundle <span
@@ -786,6 +823,11 @@ role="doc-biblioentry">
 <span class="smallcaps">Milnor</span>, J.W. &amp; <span
 class="smallcaps">Stasheff</span>, J.D. (1974) <em>Characteristic
 classes</em>, Annals of mathematics studies. Princeton University Press.
+</div>
+<div id="ref-myersgood" class="csl-entry" role="doc-biblioentry">
+<span class="smallcaps">Myers</span>, D.J. (2022) <a
+href="https://arxiv.org/abs/1908.08034">Good fibrations through the
+modal prism</a>.
 </div>
 <div id="ref-shulman_cohesion" class="csl-entry" role="doc-biblioentry">
 <span class="smallcaps">Shulman</span>, M. (2017) <a

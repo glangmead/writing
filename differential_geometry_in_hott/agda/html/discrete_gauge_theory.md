@@ -262,9 +262,17 @@ There is another approach, which is to draw inspiration from discrete and combin
 
 ### Previous work on gauge theory in higher categories
 
-There are a few avenues folks have pursued to treat the theory of connections in category theory or homotopy type theory. John Baez and collaborators [@baez_schreiber_higher_gauge] [@baez_huerta_higher_gauge] have emphasized the *path groupoid* $\mathcal{P}_1(X)$ of a manifold $X$, which is a sort of infinitary higher inductive type whose points are the points of $X$, whose morphisms are so-called *thin homotopy* classes of smooth paths (paths up to a homotopy that is 1-dimensional, for example a reparameterization of the path that simply changes speed but has the same image and orientation), and where composition of paths is carefully defined so that compositions are always smooth. A connection is then simply a functor $\mathcal{P}_1(X)\to BG$ where $BG$ is a one-object groupoid whose morphisms form the group $G$. 
+John Baez and collaborators [@baez_schreiber_higher_gauge] [@baez_huerta_higher_gauge] have emphasized the *path groupoid* $\mathcal{P}_1(X)$ of a manifold $X$, which is an $n$-category whose points are the points of $X$, whose morphisms are so-called *thin homotopy* classes of smooth paths (paths up to a homotopy that is 1-dimensional, for example a reparameterization of the path that simply changes speed but has the same image and orientation), and where composition of paths is carefully defined so that compositions are always smooth. A connection is then simply a functor $\mathcal{P}_1(X)\to BG$ where $BG$ is a one-object groupoid whose morphisms form the group $G$. 
 
 The path groupoid construction has not been defined in HoTT, and it's not clear that it can be done or whether it's worthwhile to do so. A related object which has been defined in HoTT is the *fundamental groupoid* of $X$, whose points are the points of $X$ and whose paths are homotopy classes of paths. This is the 1-truncation of the full *fundamental $\infty$-groupoid* of $X$ which does not take equivalence classes but retains all the paths and adds higher equalities for the homotopies. Mike Shulman [@shulman_cohesion] and others have developed and extended a system of functions and higher inductive types that act as *modal operators* inside HoTT, with a corresponding topos-theoretic interpretation that extends ideas of Lawvere known as *cohesion*. One of the higher inductive types is called [*shape*](https://ncatlab.org/nlab/show/shape+modality) and when this operator is applied to a 0-type such as a manifold the output is its fundamental $\infty$-groupoid as a higher type. This offers a pathway for classical objects to be imported into type theory, and for us to then define type-theoretic versions of classical constructions such as bundles and connections.
+
+## Real cohesion, discrete types, and $\shape$
+
+We follow [@shulman_cohesion] and [@myersgood]. The modal operator $\shape$ is a reflection from $\Type$ into discrete types $\Type_\shape$. Its unit $(-)^\shape:X\to \shape X$ is implemented as a constructor of a higher inductive type that has four additional constructors. These four constructors assume the existence of a family of types $R_i$ that act collectively as a type of Dedekind real numbers, and they create left and right inverses to the map $\mathsf{const}:X\to (R_i\to X)$.
+
+This localization at the real numbers will take a space $X$ that is a 0-type to its fundamental $\infty$-groupoid as a higher type. So in addition to obtaining the homotopy type of $X$, we import its homotopical information at the appropriate type-theoretic dimension.
+
+We will further assume that if the space $X$ has a finite good open cover $\{U_\alpha\}$, and if the nerve $U_\alpha \to U_{\alpha\beta}\to U_{\alpha\beta\gamma}\to\cdots$ of the good open cover gives the homotopy type of $X$ classically, then we can form a homotopy pushout $HX\defeq 1\to 1\to 1$ from the data of the cover. We claim that $HX$ is discrete and that we have a proof $P:HX\simeq \shape X$.
 
 ## Our objects 1: combinatorial manifolds
 
@@ -320,25 +328,25 @@ Imagine a closed path on the original cube that starts at the white center squar
 
 Classically a connection is usually defined to be a 1-form with values in the Lie algebra of the structure group. That's just the infinitesimal version of what we did, which is the assignment of group elements to paths.
 
-<pre class="Agda"><a id="19200" class="Symbol">{-#</a> <a id="19204" class="Keyword">OPTIONS</a> <a id="19212" class="Pragma">--without-K</a> <a id="19224" class="Pragma">--cohesion</a> <a id="19235" class="Pragma">--flat-split</a> <a id="19248" class="Symbol">#-}</a>
+<pre class="Agda"><a id="20266" class="Symbol">{-#</a> <a id="20270" class="Keyword">OPTIONS</a> <a id="20278" class="Pragma">--without-K</a> <a id="20290" class="Pragma">--cohesion</a> <a id="20301" class="Pragma">--flat-split</a> <a id="20314" class="Symbol">#-}</a>
 
-<a id="19253" class="Keyword">module</a> <a id="19260" href="discrete_gauge_theory.html" class="Module Operator">discrete_gauge_theory</a> <a id="19282" class="Keyword">where</a>
+<a id="20319" class="Keyword">module</a> <a id="20326" href="discrete_gauge_theory.html" class="Module Operator">discrete_gauge_theory</a> <a id="20348" class="Keyword">where</a>
 
-<a id="19289" class="Keyword">open</a> <a id="19294" class="Keyword">import</a> <a id="19301" href="foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
-<a id="19328" class="Keyword">open</a> <a id="19333" class="Keyword">import</a> <a id="19340" href="foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
+<a id="20355" class="Keyword">open</a> <a id="20360" class="Keyword">import</a> <a id="20367" href="foundation.universe-levels.html" class="Module">foundation.universe-levels</a>
+<a id="20394" class="Keyword">open</a> <a id="20399" class="Keyword">import</a> <a id="20406" href="foundation-core.identity-types.html" class="Module">foundation-core.identity-types</a>
 </pre>
 ## Our objects 2: groups
 
 We take as our starting point the delooping framework of [@buchholtz2023central]. Consider the central type $S^1$, given as the higher inductive type:
 
- <pre class="Agda"><a id="19563" class="Keyword">postulate</a>
-  <a id="𝕊¹"></a><a id="19575" href="discrete_gauge_theory.html#19575" class="Postulate">𝕊¹</a> <a id="19578" class="Symbol">:</a> <a id="19580" href="Agda.Primitive.html#388" class="Primitive">UU</a> <a id="19583" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
+ <pre class="Agda"><a id="20629" class="Keyword">postulate</a>
+  <a id="𝕊¹"></a><a id="20641" href="discrete_gauge_theory.html#20641" class="Postulate">𝕊¹</a> <a id="20644" class="Symbol">:</a> <a id="20646" href="Agda.Primitive.html#388" class="Primitive">UU</a> <a id="20649" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
 
-<a id="19590" class="Keyword">postulate</a>
-  <a id="base-𝕊¹"></a><a id="19602" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a> <a id="19610" class="Symbol">:</a> <a id="19612" href="discrete_gauge_theory.html#19575" class="Postulate">𝕊¹</a>
+<a id="20656" class="Keyword">postulate</a>
+  <a id="base-𝕊¹"></a><a id="20668" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a> <a id="20676" class="Symbol">:</a> <a id="20678" href="discrete_gauge_theory.html#20641" class="Postulate">𝕊¹</a>
 
-<a id="19616" class="Keyword">postulate</a>
-  <a id="loop-𝕊¹"></a><a id="19628" href="discrete_gauge_theory.html#19628" class="Postulate">loop-𝕊¹</a> <a id="19636" class="Symbol">:</a> <a id="19638" href="foundation-core.identity-types.html#5936" class="Datatype">Id</a> <a id="19641" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a> <a id="19649" href="discrete_gauge_theory.html#19602" class="Postulate">base-𝕊¹</a>
+<a id="20682" class="Keyword">postulate</a>
+  <a id="loop-𝕊¹"></a><a id="20694" href="discrete_gauge_theory.html#20694" class="Postulate">loop-𝕊¹</a> <a id="20702" class="Symbol">:</a> <a id="20704" href="foundation-core.identity-types.html#5936" class="Datatype">Id</a> <a id="20707" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a> <a id="20715" href="discrete_gauge_theory.html#20668" class="Postulate">base-𝕊¹</a>
 </pre>
 ## Polytopes in $BS^1$
 
