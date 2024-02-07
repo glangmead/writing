@@ -1,0 +1,11 @@
+\title{greg's forest}
+\author{Greg Langmead}
+\date{2024-02-06}
+
+\def\shape{#{∫}}
+\def\shapez{#{\shape{}_{0}}}
+\def\shapeo{#{\shape{}_{1}}}
+\def\shapet{#{\shape{}_{2}}}
+\def\Type{#{\mathsf{Type}}}
+
+\p{We follow [[shulman_cohesion]] and [[myers_fibrations]]. The modal operator #{\shape} is a reflection from #{\Type} into discrete types #{\Type_{\shape}}. Its unit #{(-)^{\shape}:X\to \shape X} is implemented as a constructor of a higher inductive type that has four additional constructors. These four constructors assume the existence of a family of types #{R_i} that act collectively as a type of Dedekind real numbers, and they create left and right inverses to the map #{\mathsf{const}:X\to (R_i\to X)}.}
