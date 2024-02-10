@@ -1,0 +1,19 @@
+header-includes: |
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Quattrocento:wght@400">
+  <style>
+  body {
+    font-family: Baskerville, 'Libre Baskerville', serif;
+  }
+  h1, h2, h3, h4, h5, h6, .abstract-title {
+    font-family: Quattrocento, sans-serif;
+    font-weight: bold;
+    text-align: center;
+  }
+  </style>
+  $\newcommand{\textesh}{∫}$
+  $\newcommand{\ensuremath}{}$
+title:
+summary: In-progress masters thesis defining connections, curvature, and Chern-Weil theory in the discrete setting of homotopy type theory.
+date: 2023-12-20
+bibliography: connections.bib
+csl: ima.csl

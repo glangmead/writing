@@ -1,0 +1,14 @@
+{
+  "clips" : [
+    {
+      "content" : "\\( $SELECTED_TEXT$0 \\)$1",
+      "name" : "insert math",
+      "shortcut" : "alt-m"
+    },
+    {
+      "content" : "\n\\[ \n$SELECTED_TEXT$0 \n\\]$1",
+      "name" : "insert display math",
+      "shortcut" : "alt-shift-m"
+    }
+  ]
+}

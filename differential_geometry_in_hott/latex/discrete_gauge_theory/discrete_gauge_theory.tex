@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\usepackage{greg}
+\usepackage[baskerville,vvarbb]{newtxmath}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage[nottoc]{tocbibind}
+
+\usepackage{fancyvrb}
+\setmainfont{Baskerville}
+\setsansfont{Quadrat-Serial}
+\setmonofont{Courier New}
+
+\titleformat*{\section}{\large\sffamily}
+\titleformat*{\subsection}{\normalsize\sffamily}
+\titleformat*{\subsubsection}{\normalsize\sffamily}
+\titleformat{\chapter}[hang]{\LARGE\sffamily}{\LARGE\thechapter}{1ex}{}[]
+\titleformat{name=\chapter,numberless}[hang]{\LARGE\sffamily}{}{0ex}{}[]
+
+\title{Discrete gauge theory in homotopy type theory}
+\author{Greg Langmead}
+\begin{document}
+
+\begin{abstract}
+We identify connections, curvature, and gauge transformations within the standard basic foundations of homotopy type theory. Whereas the standard treatment of these topics uses infinitesimal structures, there is an equivalent discrete story of which the infinitesimal version is a limit, analogous to the relationship between vectors and finite paths, or between Čech and de Rham cohomology. We will show how to find discrete differential geometry, provide some evidence that this is what we have found, and use it to prove some results from the 20th century mathematics of gauge theory that depend only on homotopy types.
+\end{abstract}
+
+%\tableofcontents
+
+\mysection{Introduction}
+
+Following David Jaz Myers in \cite{myersgood}, we define a cover as follows:
+
+\begin{mydef}
+  A map \(\pi:E\to B\) is a \emph{cover} if it is \(\shapeo\)-étale and its fibers are sets.
+\end{mydef}
+
+Recall that \(\pi\) being \(\shapeo\)-étale means that the naturality square 
+\[
+\begin{CD}
+E @>(-)^{\shapeo}>> \shapeo E \\
+@V{\pi}VV @VV{\shapeo \pi}V \\
+B @>>(-)^{\shapeo}> \shapeo B
+\end{CD}
+\]
+is a pullback, which means among other things that each corresponding fiber of the vertical maps is equivalent.
+
+As David proves in \cite{myersgood}, the type of \(\shapeo\)-étale maps into \(B\) is equivalent to the function type \(\shapeo B \to \Typeo\). Since a cover has the further condition that the fibers are sets this implies
+
+\begin{mylemma}
+  The type of covers over \(B\) is equivalent to \(\shapeo B \to \Type_{\shapez}\).
+\end{mylemma}
+
+In homotopy type theory we pass easily between the vertical picture (maps into \(B\)) and the horizontal picture (classifying maps of \(B\) into some type of fibers). But when we unpack this a little bit we find important classical stories. If we equip \(B\) with a basepoint \(*_B\) then a map \(f:\shapeo B \dotto \Type_{\shapez}\) is an action of the group \(\shapeo B\) on the set \(f(*_B)\), which is the fiber over \(*_B\).
+
+Let us move up a dimension:
+
+\begin{mydef}
+  A map \(\pi:E\to B\) is a \emph{2-cover} if it is \(\shapet\)-étale and its fibers are groupoids.
+\end{mydef}
+
+\begin{mylemma}
+  The type of 2-covers over \(B\) is equivalent to \(\shapet B \to \Typeo\). Further, since \(\Typeo\) is 2-truncated, the type of 2-covers of \(B\) is equivalent to \(\shape B\to \Typeo\).
+\end{mylemma}
+
+This is the type we will examine.
+
+Let \(S^1\) be the homotopical circle. This is a 1-type and its loop space is \(\zz\). We can deloop \(S^1\) by forming its type of torsors. This is equivalent to \(\BAut_1 S^1\defeq\sit{X:\Type}||X=S^1||_0\). \(\BAutoso\) is a 2-type. (see \cite{buchholtz2023central}).
+
+Since \(S^1:\Typeo\) we see that \(\BAutoso\) is a subtype of \(\Typeo\). Which is to say, among the type of 2-covers of \(B\) are those whose fibers are all \(S^1\)-torsors.
+
+If we believe in the shape operator, then we can design our own discrete types that implement known combinatorial versions of spaces, and discard the original smooth and continuous spaces completely. Mike Shulman proves in \cite{shulman_cohesion} that the shapes of the smooth circle and sphere are \(S^1\) and \(S^2\) respectively.
+
+One compelling candidate for a general type of combinatorial spaces are \emph{higher polytopes}. Polytopes are simply posets satisfying some extra conditions that make them a generalization of polyhedrons to arbitrary dimension. The poset is just the information about the set of vertices, edges, faces, and higher faces and their containment. By using the higher-dimensional constructors of higher inductive types, we can import a polytope into homotopy type theory as a discrete type that intuitively captures the homotopy type of any manifolds we are interested in!
+
+The usual homotopical circle and sphere are not polytopes because the edges don't have enough endpoints... [make the cube and square example].
+
+If \( f \) then 
+\[ 
+F 
+\]
+
+\bibliography{connections}
+\end{document}
