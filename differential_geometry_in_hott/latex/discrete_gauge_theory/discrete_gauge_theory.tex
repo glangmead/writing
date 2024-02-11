@@ -21,7 +21,7 @@
 \begin{document}
 
 \begin{abstract}
-We identify connections, curvature, and gauge transformations within the standard basic foundations of homotopy type theory. Whereas the standard treatment of these topics uses infinitesimal structures, there is an equivalent discrete story of which the infinitesimal version is a limit, analogous to the relationship between vectors and finite paths, or between Čech and de Rham cohomology. We will show how to find discrete differential geometry, provide some evidence that this is what we have found, and use it to prove some results from the 20th century mathematics of gauge theory that depend only on homotopy types.
+We identify connections, curvature, and gauge transformations within the structures of homotopy type theory. Whereas most classical treatments of these structures rely entirely on infinitesimal definitions, there is an equivalent discrete story of which the infinitesimal version is a limit, analogous to the relationship between smooth paths and tangent vectors, or between de Rham and Čech cohomology. We will show how to identify the elements of discrete gauge theory, provide some evidence that this is what we have found, and use it to prove some results from the 20th century mathematics of gauge theory that depend only on homotopy types.
 \end{abstract}
 
 %\tableofcontents
@@ -70,14 +70,11 @@ Since \(S^1:\Typeo\) we see that \(\BAutoso\) is a subtype of \(\Typeo\). Which 
 
 If we believe in the shape operator, then we can design our own discrete types that implement known combinatorial versions of spaces, and discard the original smooth and continuous spaces completely. Mike Shulman proves in \cite{shulman_cohesion} that the shapes of the smooth circle and sphere are \(S^1\) and \(S^2\) respectively.
 
-One compelling candidate for a general type of combinatorial spaces are \emph{higher polytopes}. Polytopes are simply posets satisfying some extra conditions that make them a generalization of polyhedrons to arbitrary dimension. The poset is just the information about the set of vertices, edges, faces, and higher faces and their containment. By using the higher-dimensional constructors of higher inductive types, we can import a polytope into homotopy type theory as a discrete type that intuitively captures the homotopy type of any manifolds we are interested in!
+One compelling candidate for a general type of combinatorial spaces are \emph{higher polytopes}. Polytopes are simply posets satisfying some extra conditions that make them a generalization of polyhedrons to arbitrary dimension. The poset records the information about the set of vertices, edges, faces, and higher faces and their containment. An explicit grading is assigned to each element of the poset to specify its dimension. By using the higher-dimensional constructors of higher inductive types, we can import a polytope into homotopy type theory as a discrete type that intuitively captures the homotopy type of any manifolds we are interested in!
 
-The usual homotopical circle and sphere are not polytopes because the edges don't have enough endpoints... [make the cube and square example].
+Fix a map \( f:B\dotto \BAutoso \) for some discrete type \( B \) with basepoint \( *_B \). Then \( f(*_B) \) is some \( S^1 \)-torsor, and the pointedness of \( f \) means we also have a path \( *_f:f(*_B)=*_{\BAutoso} \). Loops \( p,q:*_B=*_B \) are mapped by \( \ap(f) \) to \( \ap(f)(p)\) and \( \ap(f)(q) \). Let's drop the "\( \ap \)" and just use the notation \( f \), viewing it as a higher functor. Then \( f(p) \) and \( f(q) \) are automorphisms of the torsor \( f(*_B) \), i.e. elements of the loop space \( \loop\BAutoso=S^1 \) (up to conjugation by \( *_f \)). Suppose now there is a 2-path \( H:p=q \). Then \( f(H):f(p)=f(q) \) is a homotopy between these two automorphisms. That is, a path in \( \loop\BAutoso=S^1 \). So the fact that \( S^1 \) is a 1-type means we have somewhere nontrivial to map \( H \). If instead of \( S^1 \) we had started with a discrete 0-type such as \( \zz \) as our group, then \( f(H) \) would be a proposition.
 
-If \( f \) then 
-\[ 
-F 
-\]
+Is the story above hard to follow? Should I get specific with my cube/square HITs right away? Can I tell the story with Lemmas like seems to sometimes work better? Little milestones?
 
 \bibliography{connections}
 \end{document}
