@@ -36,17 +36,60 @@ Homotopy type theory offers us an opportunity to better understand the mathemati
 
 Connections are not inherently infinitesimal. Infinitesimal connections assign holonomy to curves if you integrate them, and if you define holonomy directly on the space of paths in a manifold then you can differentiate the assignment to get a 1-form with values in the Lie algebra of the group where the holonomy takes it values (see \cite{freed1992classical} Appendix B).
 
-Define type families.
+\subsection{Functions are multidimensional}
 
-Define identity types.
+Functions in homotopy type theory carry information in all dimensions at once. Given \( f:X\to Y \) we can access the value of \( f \) on paths with terms like \( \ap(f,-):x=_Xy\to f(x)=_Y f(y) \) and we can iterate this with more \( \ap \)s. 
 
-Define functions and functoriality.
+\subsection{Pathovers}
+Given a type family \( f:X\to \uni \) and a path \( p:x=_X x' \), and given terms \( y:f(x), y':f(x') \) in the two fibers, we can define the type \( y\pathover{p}y' \) by induction: if \( p \) is \( \refl \) then \( y=y' \) lives in a single fiber \( f(x) \) where it reduces to the usual identity type.
 
-Point out that functions are equipped with the full dimensionality of effects, including on paths.
+There is an equivalence \( y\pathover{p}y'\simeq \tr(p,y)=_{f(x')}y' \). Furthermore if we also have a dependent function (section) \( s:\pit{x:X} f(x) \) then we can form \( \apd(f,p):s(x)\pathover{p}s(x') \). In other words, there may be a whole type of paths between two points upstairs \( y, y' \) but if there is also a section then we have a special section-specific pathover between \( s(x), s(x') \).
 
-Define the delooping of a group.
+\begin{mylemma}
+\label{lem:verthoriz}
+(\cite{Symmetry} Lemma 4.14.1). Given 
+\begin{itemize}
+\item a type family \( f:X\to\uni \)
+\item terms \( x,x':X \)
+\item a section \( s:\pit{x:X}f(x) \) 
+\end{itemize}
+then there is an equivalence 
+\[ 
+\left((x,f(x)) =_{\sit{x:X}f(x)} (x',f(x'))\right) \simeq 
+(x=x')\times (f(x)=f(x)).
+\]
+\end{mylemma}
+\begin{proof}
+Both sides are identity types in a sigma type, so we must prove
+\[ 
+\sit{p:x=x'}f(x)\pathover{p}f(x') \simeq \sit{p:x=x'}f(x)=f(x).
+\] 
+This reduces to proving \( f(x)\pathover{p}f(x')\equiv f(x)=f(x)  \). By induction when \( p=\refl \) both sides are \( f(x)=f(x) \) which we prove with \( refl \).
+\end{proof}
 
-Deconstruct a map to the delooping of a group.
+One thing the equivalence in Lemma~\ref{lem:verthoriz} says is that in the presende of a section, and given a path in the base, the dependent paths over that path are equivalent to loops at one upstairs endpoint (the section applied to a downstairs endpoint).
+
+Note also that in Lemma~\ref{lem:verthoriz} we are expressing the type of pathovers (the left hand side) as paths in the sigma type of the type family. The sigma type comes equipped with a projection \( \pr_1:\sit{x:X}f(x)\to X \) and since \( \pr_1\circ f\equiv\id \) we have that \( \ap(\pr_1) \) maps the pathover back to the downstairs path, confirming the ``over'' portion of the name.
+
+\subsection{Deloopings}
+
+A \emph{delooping} of a group is a pointed type whose loop space is the group. The references we follow here are \cite{Symmetry} and \cite{buchholtz2023central}. Especially:
+
+\begin{mydef}
+ (\cite{buchholtz2023central} Definition 4.1) \( \BAut_1(G):=\sit{X:U}||X=G||_0 \).
+\end{mydef}
+
+\begin{mythm}
+(\cite{buchholtz2023central} Theorem 4.26) The type of \( G \)-torsors is equivalent to \( \BAut_1(G) \).
+\end{mythm}
+
+The component \( ||X=G||_0 \) is called a \( G \)-band. Its data consists of a choice of basepoint in \( X \) to map to the identity in \( G \).
+
+The loop space at the base point is the given group. The loop space at other points are equivalent groups (e.g. conjugations of the group). The path spaces between pairs of points are torsors of the given group.
+
+\subsection{Deconstruct a map to the delooping of a group}
+
+A map \( B\dotto \BAuto{G} \) is 
 
 \mysection{Higher covers}
 

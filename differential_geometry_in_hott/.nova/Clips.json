@@ -9,6 +9,11 @@
       "content" : "\n\\[ \n$SELECTED_TEXT$0 \n\\]$1",
       "name" : "insert display math",
       "shortcut" : "alt-shift-m"
+    },
+    {
+      "content" : "\\emph{$0$SELECTED_TEXT}$1",
+      "name" : "Italic",
+      "shortcut" : "cmd-shift-i"
     }
   ]
 }
