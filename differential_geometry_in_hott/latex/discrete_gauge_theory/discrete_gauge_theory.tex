@@ -46,30 +46,21 @@ Given a type family \( f:X\to \uni \) and a path \( p:x=_X x' \), and given term
 There is an equivalence \( y\pathover{p}y'\simeq \tr(p,y)=_{f(x')}y' \). Furthermore if we also have a dependent function (section) \( s:\pit{x:X} f(x) \) then we can form \( \apd(f,p):s(x)\pathover{p}s(x') \). In other words, there may be a whole type of paths between two points upstairs \( y, y' \) but if there is also a section then we have a special section-specific pathover between \( s(x), s(x') \).
 
 \begin{mylemma}
-\label{lem:verthoriz}
-(\cite{Symmetry} Lemma 4.14.1). Given 
-\begin{itemize}
-\item a type family \( f:X\to\uni \)
-\item terms \( x,x':X \)
-\item a section \( s:\pit{x:X}f(x) \) 
-\end{itemize}
-then there is an equivalence 
+Given a type family \( f:X\to\uni \) and terms \( x,x':X, y:f(x), y':f(x') \) then there is an equivalence 
 \[ 
-\left((x,f(x)) =_{\sit{x:X}f(x)} (x',f(x'))\right) \simeq 
-(x=x')\times (f(x)=f(x)).
+  \left((x,y) =_{\sit{x:X}f(x)} (x',y')\right) \simeq 
+  (x=x')\times (y=y).
 \]
 \end{mylemma}
 \begin{proof}
 Both sides are identity types in a sigma type, so we must prove
 \[ 
-\sit{p:x=x'}f(x)\pathover{p}f(x') \simeq \sit{p:x=x'}f(x)=f(x).
+\sit{p:x=x'}y\pathover{p}y' \simeq \sit{p:x=x'}y=y.
 \] 
-This reduces to proving \( f(x)\pathover{p}f(x')\equiv f(x)=f(x)  \). By induction when \( p=\refl \) both sides are \( f(x)=f(x) \) which we prove with \( refl \).
+This reduces to proving \( y\pathover{p}y'\simeq y=y  \). By induction when \( p=\refl \) both sides are \( y=y \) which we prove with \( \refl \). (Compare to (\cite{Symmetry} Lemma 4.14.1) which assumes a section.)
 \end{proof}
 
-One thing the equivalence in Lemma~\ref{lem:verthoriz} says is that in the presende of a section, and given a path in the base, the dependent paths over that path are equivalent to loops at one upstairs endpoint (the section applied to a downstairs endpoint).
-
-Note also that in Lemma~\ref{lem:verthoriz} we are expressing the type of pathovers (the left hand side) as paths in the sigma type of the type family. The sigma type comes equipped with a projection \( \pr_1:\sit{x:X}f(x)\to X \) and since \( \pr_1\circ f\equiv\id \) we have that \( \ap(\pr_1) \) maps the pathover back to the downstairs path, confirming the ``over'' portion of the name.
+So given a path \( p \) in the base and points upstairs over the endpoints, the dependent paths over \( p \) are equivalent to loops at one upstairs point, which are regular non-dependent paths. If \( p \) is a loop in \( x=x \) then the type of dependent loops over that loop is equivalent to the non-dependent loops \( y=y \).
 
 \subsection{Deloopings}
 
@@ -87,9 +78,45 @@ The component \( ||X=G||_0 \) is called a \( G \)-band. Its data consists of a c
 
 The loop space at the base point is the given group. The loop space at other points are equivalent groups (e.g. conjugations of the group). The path spaces between pairs of points are torsors of the given group.
 
-\subsection{Deconstruct a map to the delooping of a group}
+\subsection{Mapping into deloopings}
 
-A map \( B\dotto \BAuto{G} \) is 
+A map \( f:B\dotto \BAuto{G} \) maps points to types that are torsors, maps 1-paths to isomorphims between torsors, and maps 2-paths to homotopies between these. A special case of this is: \( f \) maps a single point \( x \) to a torsor, maps loops \( p:x=x \) to terms of \( G \) and maps 2-paths \( H:p=\refl \) to paths in \( G \) ending at the identity point. For this last map to land somewhere nontrivial \( G \) must have such paths. This is the analogue for us of \( G \) being a Lie group of positive (classical) dimension.
+
+A motivating example is \( \oo\defeq\two\join(\two\join\two) \). This is an octahedron with 6 points, 12 paths, and 8 2-paths. Think of it as representing a good open cover of a cube, where each vertex of \( \oo \) is one contractible open set covering a face of the cube (plus a little overlap to the four neighboring faces), each path in \( \oo \) is an overlap of two of these face open sets, and each 2-path is a 3-way overlap. We use a join because the join keeps all the 0-dimensional points of all of the \( \two \)s as 0-dimensional points in the final type, it doesn't send them up into a higher dimension like the suspension does.
+
+Let's name the vertices after the colors of a Rubik's cube: (\( w \))hite on top, (\( y \))ellow on the bottom, (\( g \))reen facing out of the page, (\( b \))lue facing into the page, (\( r \))ed to the right and (\( o \))range to the left. We can name the paths \( \{wg, wb, wr, wo, yg, yb, yr, yo, gr, rb, bo, og\} \) based on what vertices they connect, with \( wg \) a path of type \( w=g \) and its inverse has the two names \( (wg)^{-1} \) and \( gw \). For the faces \( \{wgr, wbr, wgo, wbo, ygr, ybr, ygo, ybo\} \) the notation means that \( wgr:wg\cdot gr\cdot rw=\refl_w \).
+
+That's the domain of our map. Let's map it into \( \BAutoso \) with a certain basepoint. Consider a generalization of \( S^1 \),  an \emph{\( n \)-gon} \( C_n \), generated by
+\begin{itemize}
+\item \( v_1,\ldots,v_n:C_n \)
+\item \( e_1:v_1=v_2\)
+\item \( e_2:v_2=v_3 \)
+\item \( \ldots \) 
+\item \(e_{n-1}:v_{n-1}=v_n\)
+\item \(e_n:v_n=v_1 \)
+\end{itemize}
+
+There is a map \( s_n:C_n\to C_n \) that sends \( v_i\mapsto v_{i+1} \) and \( v_n\mapsto v_1 \), the generating cyclic permutation. 
+
+\begin{mylemma}
+  We have \( g:\pit{n:\nn}C_n\simeq S^1 \)
+\end{mylemma}
+\proof Generalize \cite{hottbook} Lemma 6.5.1.\qed
+
+The reason we're interested in these is that they form arbitrarily fine-grained approximations to the smooth circle. We can consider an \( n \)-gon to be a circle that has a notion of ``going around \( 1/n \)th of the way''.
+
+Now let's re-point \( \BAutoso \) at \( C_4 \). We can use a + to denote a pointed type, and we can decorate it with the base point, like so: \( \BAutosoc \). We can then refer to the underlying type (first projection from the pointed type) with \( \BAutoso_- \). This is similar to the notation \( \BAutoso_{\div} \) you find in the Symmetry book \cite{Symmetry}.
+
+To construct \( f:\oo\to\BAutosoc \) and have it imitate the tangent bundle of the sphere, try this:
+\begin{itemize}
+\item \( w, y, g, b, r, o\mapsto C_4 \)
+\item \( wg, wb, wr, wo, yg, yb, yr, yo, gr, rb, bo, og\mapsto v_1 \)
+\item \( wrg, wbr, wgo, wob, ygr, yrb, yog, ybo \mapsto s_4 \)
+\end{itemize}
+
+The order of the letters is especially important around the equator, the edges with no \( w \) or \( y \) in them. These appear in opposite order in the faces \( wxx \) versus \( yxx \). So \( ygr \) maps to \( s_4 \) but \( yrg \) maps to \( s_4^{-1} \). 
+
+If you concatenate all 8 faces you perform two full rotations around \( C_4 \). On the one hand we're adding up a total curvature in this discrete setting and getting 2 rotations. On the other hand we're adding some combinatorial data and getting 2. In classical mathematics this is the Gauss-Bonnet theorem, relating total curvature to the Euler characteristic. Its generalization is called Chern-Weil theory, linking characteristic classes with certain functions of curvature. We'll get there.
 
 \mysection{Higher covers}
 
@@ -148,31 +175,6 @@ We can deloop \(S^1\) by forming its type of torsors. This is equivalent to \(\B
 \section{Evidence that we found curved connections}
 
 \subsection{The Hopf fibration}
-
-Consider a generalization of \( S^1 \),  an \emph{\( n \)-gon} \( C_n \), generated by
-\begin{itemize}
-\item \( v_1,\ldots,v_n:C_n \)
-\item \( e_1:v_1=v_2\)
-\item \( e_2:v_2=v_3 \)
-\item \( \ldots \) 
-\item \(e_{n-1}:v_{n-1}=v_n\)
-\item \(e_n:v_n=v_1 \)
-\end{itemize}
-
-\begin{mylemma}
-  We have \( g:\pit{n:\nn}C_n\simeq S^1 \)
-\end{mylemma}
-\proof Generalize \cite{hottbook} Lemma 6.5.1.\qed
-
-\( n \)-gons are all discrete 1-types:
-
-\begin{mydef}
-Let \( c:\nn\to \Typeo \) be given by \( c(n)=(C_n, ||g(n)||_0)\).
-\end{mydef}
-
-The reason we're interested in these is that they form arbitrarily fine-grained approximations to the smooth circle. We can consider an \( n \)-gon to be a circle that has a notion of ``going around \( 1/n \)th of the way''.
-
-Now let's re-point \( \BAutoso \) at \( C_4 \). We can use a + to denote a pointed type, and we can decorate it with the base point, like so: \( \BAutosoc \). We can then refer to the underlying type (first projection from the pointed type) with \( \BAutoso_- \). This is similar to the notation \( \BAutoso_{\div} \) you find in the Symmetry book \cite{Symmetry}.
 
 \subsection{The hairy ball theorem}
 
