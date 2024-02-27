@@ -34,7 +34,35 @@ We identify connections, curvature, and gauge transformations within the structu
 
 Homotopy type theory offers us an opportunity to better understand the mathematics of the past. It does this by moving more of the commonly used structures into the foundational layer of mathematical logic, and then asking us to express old ideas in the new foundations. The difficulty of doing this varies considerably. Some would say that what we gain is the ability to formalize the resulting math, but this makes it appear that ``banking theorems'' is what math is. It's not. Math is about each person's journey of understanding, which we share with each other and at which we help each other succeed. The math is the means, and the byproduct, of our own quest for understanding. I wanted to understand geometry, connections, curvature, and gauge theory, and I have done that. I'd like to share it with you.
 
-Connections are not inherently infinitesimal. Infinitesimal connections assign holonomy to curves if you integrate them, and if you define holonomy directly on the space of paths in a manifold then you can differentiate the assignment to get a 1-form with values in the Lie algebra of the group where the holonomy takes it values (see \cite{freed1992classical} Appendix B).
+\subsection{Connections are not necessarily infinitesimal}
+
+Connections are not inherently infinitesimal, just as cohomology is not inherently of the de Rham variety. Infinitesimal connections can be used to assign holonomy to finite length curves by integrating along them and using the exponential map \( \mathfrak{g}\to G \) of a Lie algebra into its Lie group. Integration respects concatentation of paths and reversal of paths, and so respects the groupoidal nature of holonomy.
+
+Likewise we may define holonomy directly on the space of smooth paths into a finite-dimensional smooth manifold \( \mathcal{P}(M)\defeq [0,1]\to M \). This path space can be given a smooth structure and a groupoidal structure (via concatenation and reversal of paths). We can define a homomorphism \( \mathcal{P}(M) \to G\) to assign holonomy to each path and then differentiate this assignment by taking a limit. For more details see \cite{freed1992classical} Appendix B.
+
+Working entirely with finite paths puts us within the use cases of real-cohesive modal homotopy type theory. This has been known for a decade, ever since we could write down expressions like \( \shape X\to BG \). But this is a space of maps out of a type that although it can have higher paths, it is spatially discrete. This means that the map \( \const:\shape X\to (\rr\to\shape X) \) is an equivalence. Can connections be discrete as well?
+
+Yes, in a fairly obvious way. It's a field called \emph{discrete differential geometry} (DDG). Take an \( n \)-manifold with a triangulation (a combinatorial cell structure where \( n \)-dimensional cells meet at \( n-1 \)-dimensional faces and so on down to 0-cells). We can define discrete functions that assign a single value to each 0-cell, or to each 1-cell, or to each dual 1-cell (pair of adjoining \( n \)-cells) and so on. We can define discrete derivatives (i.e. differences), connections, curvature, and even Laplacian operators. For an introduction that's focused on computer graphics see \cite{crane_connections} \cite{crane_ddg}.
+
+Let's draw inspiration from DDG and define some higher inductive types (HITs) that stand in for the classical smooth manifolds of which they are the homotopy type. Assigning values to cells of various dimension is performed by functions, which already encode data at all dimensions in homotopy type theory. We can make some educated guesses as to what spaces to map our HITs into to mimic classical bundles with connection. We can then look more closely at standard HoTT constructions such as transport and the lifting of paths and see the very close agreement between the theories.
+
+Of course doing all of that doesn't prove that the constructions deserve to be called bundles with connection. We'll need some justification. What criteria would make sense?
+
+\begin{myclaim}
+The analogies hold on various examples.
+\end{myclaim}
+
+\begin{myclaim}
+The classical theorems relating curvature to cohomology (Chern-Weil theory) are made transparent.
+\end{myclaim}
+
+\begin{myclaim}
+Gauge theory --- the relating of bundles to the space of all connections modulo gauge transformations --- is available.
+\end{myclaim}
+
+\begin{myclaim}
+We can prove theorems from gauge theory that depend only on the homotopy type of the manifold.
+\end{myclaim}
 
 \subsection{Functions are multidimensional}
 
@@ -123,10 +151,6 @@ And therefore \( T(rg\cdot go\cdot ob\cdot br)=\mathrm{2\ rotations} \).
 
 
 \mysection{Higher covers}
-
-One problem with the space \( \BAutoso \) is that it's spatially discrete. There are no smooth circles for smooth manifolds to get hung up on. It has been argued that this means that any would-be classifying map \( f:X\to \BAutoso \) can only produce principal bundles with \emph{flat} connections. That would not achieve our goals, and so it would be disappointing. It looks even worse when we notice that \( f \) must factor through the shape unit \( (-)^\shape:X\to\shape X \) by the universal property of \( \shape \) for a map into a discrete space. And when we examine \( \shape X \) we see that homotopic paths are identified and so must apparently be sent to equal holonomies, just as in a flat connection.
-
-Fortunately there's some hand-waving in the previous paragraph and there are indeed non-flat connections in \( \shape f:\shape X\to \BAutoso \). They are not the infinitesimal variety of course. They are known as \emph{discrete connections}\cite{crane_connections}\cite{crane_ddg}. Discrete connections are an assignment of group elements to discrete paths in a combinatorial manifold. If we represent the homotopy type of \( X \) by a discrete combinatorial manifold, then we can observe a meaningful discrete curvature of the principal bundle, and in so doing access the homotopy-invariant aspects of gauge theory.
 
 What makes this all work is that \( S^1 \) is a discrete 1-type, not a discrete set. A map from \( \shape X\to BG \) for a discrete set-level group \( G \) would indeed carry its unique \emph{flat} connection, since homotopic paths must map to the same set element. But so long as we're willing to work with discrete spaces and discrete connections, we can see geometry inside homotopy type theory!
 
