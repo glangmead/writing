@@ -36,20 +36,22 @@ Homotopy type theory offers us an opportunity to better understand the mathemati
 
 \subsection{Connections are not necessarily infinitesimal}
 
-Connections are not inherently infinitesimal, just as cohomology is not inherently of the de Rham variety. Infinitesimal connections can be used to assign holonomy to finite length curves by integrating along them and using the exponential map \( \mathfrak{g}\to G \) of a Lie algebra into its Lie group. Integration respects concatentation of paths and reversal of paths, and so respects the groupoidal nature of holonomy.
+Given a principal bundle \( \pi:P\to X \) a connection can equally well be defined \emph{infinitesimally} as a map from tangent vectors in \( TX \) to horizontal lifts in \( TP \), or via \emph{holonomy} as a map from paths in \( X \) to horizontal lifts in \( P \). Infinitesimal connections can be used to assign holonomy to finite length curves by integrating along them and using the exponential map \( \mathfrak{g}\to G \) of a Lie algebra into its Lie group. Integration respects concatentation of paths and reversal of paths, and so respects the groupoidal nature of holonomy.
 
-Likewise we may define holonomy directly on the space of smooth paths into a finite-dimensional smooth manifold \( \mathcal{P}(M)\defeq [0,1]\to M \). This path space can be given a smooth structure and a groupoidal structure (via concatenation and reversal of paths). We can define a homomorphism \( \mathcal{P}(M) \to G\) to assign holonomy to each path and then differentiate this assignment by taking a limit. For more details see \cite{freed1992classical} Appendix B.
+Likewise we may define holonomy directly on the space of smooth paths into a finite-dimensional smooth manifold \( \mathcal{P}(M)\defeq [0,1]\to M \). This path space can be given a smooth structure and a groupoidal structure (via concatenation and reversal of paths). We can define a homomorphism \( \mathcal{P}(M) \to G\) to assign holonomy to each path and then differentiate this assignment by taking a limit. For the rigorous details see \cite{freed1992classical} Appendix B and \cite{kobayashinomizu} II.3.
 
-Working entirely with finite paths puts us within the use cases of real-cohesive modal homotopy type theory. This has been known for a decade, ever since we could write down expressions like \( \shape X\to BG \). But this is a space of maps out of a type that although it can have higher paths, it is spatially discrete. This means that the map \( \const:\shape X\to (\rr\to\shape X) \) is an equivalence. Can connections be discrete as well?
+Working entirely with finite paths puts us within the use cases of real-cohesive modal homotopy type theory. This has been known for a decade, ever since we could write down expressions like \( \shape X\to BG \). But this is a space of maps out of a type that although it can have higher paths, it is spatially discrete. Discreteness in this sense means that the map \( \const:\shape X\to (\rr\to\shape X) \) is an equivalence. Can connections be discrete as well?
 
-Yes, in a fairly obvious way. It's a field called \emph{discrete differential geometry} (DDG). Take an \( n \)-manifold with a triangulation (a combinatorial cell structure where \( n \)-dimensional cells meet at \( n-1 \)-dimensional faces and so on down to 0-cells). We can define discrete functions that assign a single value to each 0-cell, or to each 1-cell, or to each dual 1-cell (pair of adjoining \( n \)-cells) and so on. We can define discrete derivatives (i.e. differences), connections, curvature, and even Laplacian operators. For an introduction that's focused on computer graphics see \cite{crane_connections} \cite{crane_ddg}.
+Sure, the same way any function can be discrete. Take an \( n \)-manifold with a triangulation (a combinatorial cell structure where \( n \)-dimensional cells meet at \( n-1 \)-dimensional faces and so on down to 0-cells). We can define discrete functions that assign a single value in some codomain to each 0-cell, or to each 1-cell, or to each dual 1-cell (pair of adjoining \( n \)-cells) and so on. We can define discrete derivatives (i.e. differences), connections, curvature, and even Laplacian operators. See the literature from the field of \emph{discrete differential geometry} (DDG) \cite{crane_connections} \cite{crane_ddg} for a parallel train of thought that's focused on computer graphics.
 
 Let's draw inspiration from DDG and define some higher inductive types (HITs) that stand in for the classical smooth manifolds of which they are the homotopy type. Assigning values to cells of various dimension is performed by functions, which already encode data at all dimensions in homotopy type theory. We can make some educated guesses as to what spaces to map our HITs into to mimic classical bundles with connection. We can then look more closely at standard HoTT constructions such as transport and the lifting of paths and see the very close agreement between the theories.
 
-Of course doing all of that doesn't prove that the constructions deserve to be called bundles with connection. We'll need some justification. What criteria would make sense?
+Why ought this to work? Why would we even expect connections to be so near to hand when classically they are an entirely independent and separate structure on a principal bundle? HoTT makes questions like this very simple to ask and to answer. First, HoTT makes it easy to switch between vertical and horizontal thinking: defining bundles as maps into the base \( X \) versus maps from \( X \) into a space of fibers. Second, HoTT packages functions and their ``derivatives'' (the action on paths, which are integrated versions of vector fields after all). Truncation to dimension 0 is the act of taking equivalence classes, and not truncating is the act of maintaining the groupoidal information about all the equivalences inside the domain, the codomain, and the maps. Classically we have the theorem that equivalence classes of principal bundles with group \( G \) over \( X \) are in bijection with homotopy classes of maps \( X\to BG \) into a classifying space. That's the truncation of some groupoidal theorem. If we don't truncate then connections ought to appear at dimension 1: by specifying the lift of a path into the total space of a principal bundle, connections yield isomorphisms between fibers, which by univalence is a path in fiber space.
+
+Of course examining untruncated maps into classifying spaces in HoTT doesn't automatically deserve to be called the study of bundles with connection. We'll need some justification. What criteria would make sense?
 
 \begin{myclaim}
-The analogies hold on various examples.
+We can calculate classical examples and derive classical formulas.
 \end{myclaim}
 
 \begin{myclaim}
@@ -63,6 +65,8 @@ Gauge theory --- the relating of bundles to the space of all connections modulo 
 \begin{myclaim}
 We can prove theorems from gauge theory that depend only on the homotopy type of the manifold.
 \end{myclaim}
+
+The sections below will justify these claims. We will end with a survey of the relationships between topological manifolds, smooth manifolds, and various combinatorial manifolds such as CW complexes, PL manifolds and manifolds with triangulation, so we can consider how limited a theory of HIT manifolds may be.
 
 \subsection{Functions are multidimensional}
 
