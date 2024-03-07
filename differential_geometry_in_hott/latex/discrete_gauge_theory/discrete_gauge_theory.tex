@@ -26,13 +26,29 @@ We identify connections, curvature, and gauge transformations within the structu
 
 %\tableofcontents
 
-\mysection{Introduction}
+\section{Introduction}
 \begin{quote} 
 \centering 
 "It is always ourselves we work on, whether we realize it or not. There is no other work to be done in the world." --- Stephen Talbott, \emph{The Future Does Not Compute}\cite{talbott}
 \end{quote}
 
-Homotopy type theory offers us an opportunity to better understand the mathematics of the past. It does this by moving more of the commonly used structures into the foundational layer of mathematical logic, and then asking us to express old ideas in the new foundations. The difficulty of doing this varies considerably. Some would say that what we gain is the ability to formalize the resulting math, but this makes it appear that ``banking theorems'' is what math is. It's not. Math is about each person's journey of understanding, which we share with each other and at which we help each other succeed. The math is the means, and the byproduct, of our own quest for understanding. I wanted to understand geometry, connections, curvature, and gauge theory, and I have done that. I'd like to share it with you.
+We want to bring the theory of connections and the Chern-Weil discoveries about characteristic classes into homotopy type theory. Here's the very fast version:
+\begin{enumerate}
+\item Classically, manifolds with good open covers are glued together and 0-truncated, i.e. a standard pushout is used.
+\item We will replace the manifold with a discrete object with the same homotopy type, taking the nerve of the open cover.
+\item We can do this \emph{twice}: in sets, and in higher inductive types.
+\item We can remain in 0-types and take the poset of the open cover, forming an abstract polytope. 
+\begin{enumerate}
+  \item Abstract polytopes have this dyadic restriction: two faces meet at each of the edges, in all dimensions: if the ranks of two faces \( a > b \) differ by 2, then there are exactly 2 faces that lie strictly between \( a \) and \( b \).
+  \item There's no particular reason to use polytopes instead of other complexes. I just saw that Egbert had already formalized them (as posets only).
+\end{enumerate}
+\item We can define discrete functions and connections on such a combinatorial object. This is a field called discrete differential geometry. The first two words of the name should probably cancel out.
+\item In HITs we will use the same poset but will put the edges at dimension 1, faces at dimension 2 and so on. This amounts to forming the homotopy pushout of the good open cover, since each open set is contractible. Call this a \emph{higher polytope}.
+\item Both polytopes have the homotopy type of the original manifold in the appropriate sense (one by the nerve theorem, one via real-cohesive HoTT). There are other approaches to doing this, such as the shape modality from real-cohesive homotopy type theory. We probably need to prove they are equivalent.
+\item We will map out of the polytope into the delooping of \( S^1 \) (the discrete 1-type, not the smooth 0-type). We will notice how much HoTT functoriality resembles connections and transport, including curvature.
+\item This will inspire us to claim that HoTT transport deserves to be called a discrete connection.
+\item We will establish some criteria to test this idea, and work through those.
+\end{enumerate}
 
 \subsection{Connections are not necessarily infinitesimal}
 
@@ -55,7 +71,7 @@ We can calculate classical examples and derive classical formulas.
 \end{myclaim}
 
 \begin{myclaim}
-The classical theorems relating curvature to cohomology (Chern-Weil theory) are made transparent.
+The classical theorems relating curvature to cohomology (Chern-Weil theory) are made transparent. The characteristic classes descend to the base. The closedness. Whitney sum formula. Independence of class from connection. (\cite{kobayashinomizu} XII)
 \end{myclaim}
 
 \begin{myclaim}
