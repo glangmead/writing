@@ -32,19 +32,18 @@ We identify connections, curvature, and gauge transformations within the structu
 "It is always ourselves we work on, whether we realize it or not. There is no other work to be done in the world." --- Stephen Talbott, \emph{The Future Does Not Compute}\cite{talbott}
 \end{quote}
 
-We want to bring the theory of connections and the Chern-Weil discoveries about characteristic classes into homotopy type theory. Here's the very fast version:
-\begin{enumerate}
-\item Classically, manifolds with good open covers are glued together and 0-truncated, i.e. a standard pushout is used.
-\item We will replace the manifold with a discrete object with the same homotopy type, taking the nerve of the open cover.
-\item We can do this \emph{twice}: in sets, and in higher inductive types.
-\item We can remain in 0-types: add a vertex for each open set; connect two vertices with an edge if there is a nonempty 2-way overlap; fill in a triangle with a face if there is a 3-way overlap and so on.
-\item We can define discrete functions and connections on such a combinatorial object. This is a field called discrete differential geometry. (The first two words of the name should probably cancel out.)
-\item In HITs we will use the same data but will put the edges at homotopy dimension 1, faces at dimension 2 and so on. This amounts to forming the homotopy pushout of the good open cover, since each open set is contractible.
-\item Both of these combinatorial objects have the homotopy type of the original manifold in the appropriate sense (one by the nerve theorem, one via real-cohesive HoTT).
-\item We will map out of the HIT into the delooping of \( S^1 \) (the discrete 1-type, not the smooth 0-type). We will notice how much HoTT transport resembles connections, including curvature at dimension 2.
-\item This will inspire us to claim that HoTT transport deserves to be called a discrete connection.
-\item We will establish some criteria to test this idea, and work through those.
-\end{enumerate}
+Homotopy type theory (HoTT) is a logical foundation for mathematics that adds to set theory several important mathematical patterns. Among these are \emph{fibrations}, \emph{(higher) groupoids}, and \emph{classifying spaces} (called \emph{universes}). It embodies the philosophy of constructivism by unifying mathematical statements with types and proofs with terms. It has an extensive syntax and a talented team of theory builders who have labored for a decade to equip the syntax with formal initiality proofs and categorical semantics that together generate living, breathing proofs simultaneously in every category with enough structure to support the semantics. It has implementations in several computer languages which have attracted multiple large formalization efforts. It benefits from an unusually strong interdisciplinary culture spanning computer science, mathematics, philosophy, and physics.
+
+The hypothetical scope of HoTT is of course all of mathematics, past, present and future. It contains set theory, and the law of excluded middle and axiom of choice can be added whenever the intended semantics supports them. It therefore invites us to use the rest of its tools to enhance our understanding, and to seek better answers to \emph{why} questions in the same way that category theory sometimes tells us \emph{why} individual results across specific fields are true. Over the last decade many results have been verified in HoTT, and many have insightful new proofs. The topics that have received the most attention so far include homotopy theory, algebraic topology, group theory, category theory, and combinatorics. Our goal is to extend this list with topics from geometry: connections, curvature, gauge theory, characteristic classes, and Chern-Weil theory.
+
+Gauge theory is a collection of tools inspired by, and in dialog with, the standard model of particle physics. The quantum field theories developed during the 20th century are mathematical models that supply spacetime with additional structures: principal bundles, vector bundles, sections of these bundles, and connections. The bundles provide internal dimensions to quantum particles, which are visible experimentally through phenomena such as charge, magnetism, mass, gravity, and quark color. Forces are mediated by massless particles that correspond to the connections. Particles are sections of associated vector bundles. Physical laws are expressed by real- or complex-valued functions called lagrangians, on the configuration space of all of this structure.
+
+Mathematicians discovered that by adding their own gauge theory structures to smooth manifolds of interest they could define new invariants of the homotopy type, the homeomorphism class, or the diffeomorphism class of the manifold. HoTT is not equipped today to explore all of these scenarios since it is most developed in the world of homotopy types only. There is beautiful work to bring in notions of topology and smooth structure through the principal of \emph{cohesion} (the study of spatial relationships by way of operators that \emph{remove} such structure). We will touch on some of this and point the way to future work, but for now we will focus on homotopical results only. 
+
+For the HoTT-oriented audience my goal is to demonstrate that connections and gauge theory are present in the realm of discrete types. This can even serve as an introduction to classical differential geometry, and today's undergraduates who are drawn to HoTT can leverage their intuitions to bypass a lot of confusing material!
+
+For the geometry audience my goal is to offer an entirely new perspective on the de Rham complex in general, and connections and curvature in particular. My grandiose hope is that in this framing we can find a natural and intuitive understanding of Chern-Weil theory, i.e. the link between curvature and characteristic classes. 
+
 
 \subsection{Connections are not necessarily infinitesimal}
 

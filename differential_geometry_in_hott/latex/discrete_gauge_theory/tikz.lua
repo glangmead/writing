@@ -2,8 +2,10 @@ local system = require 'pandoc.system'
 
 local tikz_doc_template = [[
 \documentclass{standalone}
+\usepackage{greg}
 \usepackage{xcolor}
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,positioning,quotes}
 \usepackage[baskerville,vvarbb]{newtxmath}
 \begin{document}
 \nopagecolor
@@ -50,7 +52,7 @@ end
 
 
 function RawBlock(el)
-  if starts_with('\\begin{tikzcd}', el.text) then
+  if starts_with('\\begin{tikzpicture}', el.text) or starts_with('\\begin{tikzcd}', el.text) then
     local filetype = extension_for[FORMAT] or 'svg'
     local fbasename = pandoc.sha1(el.text) .. '.' .. filetype
     local fname = system.get_working_directory() .. '/html/' .. fbasename
