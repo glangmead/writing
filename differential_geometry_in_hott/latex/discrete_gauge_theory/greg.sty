@@ -1,12 +1,12 @@
 \ProvidesPackage{greg}[2021/06/06 v1.0 My own macros]
 
-\RequirePackage[margin=1in]{geometry}
+%\RequirePackage[margin=1in]{geometry}
 %\RequirePackage[utf8]{inputenc}
 \RequirePackage{amsfonts}
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
 \RequirePackage{amscd}
-\RequirePackage{tikz-cd}
+\RequirePackage{tikz}
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
 \let\semicolon\;
@@ -20,14 +20,14 @@
 \RequirePackage{hyperref}
 \RequirePackage[numbers]{natbib}
 \RequirePackage{parskip} % removes paragraph indent, adds vertical space
-\RequirePackage{quiver}
 \RequirePackage{mathtools}
 \RequirePackage{tcolorbox}
 \RequirePackage{mathrsfs}
+\RequirePackage{quiver}
 
 \graphicspath{ {./img/} }
 
-\usetikzlibrary{arrows.meta,positioning,quotes}
+\usetikzlibrary{arrows,positioning,quotes,cd}
 
 \bibliographystyle{IEEEtran} % shows URL
 \setcitestyle{square,numbers}
@@ -36,7 +36,7 @@
 \newcommand{\tp}{\;\mathrm{type}}
 \newcommand{\Hom}{\mathrm{Hom}}
 \newcommand{\G}{\Gamma}
-\renewcommand{\gg}{\mathfrak{g}}
+%\renewcommand{\gg}{\mathfrak{g}}
 \newcommand{\gauge}{\mathcal{G}} % make this mathscr one day
 \newcommand{\pit}[1]{\prod_{#1}} % pi-type
 \newcommand{\pitxa}{\pit{x:A}}
@@ -51,7 +51,7 @@
 \newcommand{\inv}{\ensuremath{\textsf{inv}}}
 \newcommand{\concat}{\ensuremath{\textsf{concat}}}
 \newcommand{\transport}{\ensuremath{\textsf{transport}}}
-\renewcommand{\sec}{\ensuremath{\textsf{sec}}}
+%\renewcommand{\sec}{\ensuremath{\textsf{sec}}}
 \newcommand{\retr}{\ensuremath{\textsf{retr}}}
 \newcommand{\total}{\ensuremath{\textsf{total}}}
 \newcommand{\isequiv}{\ensuremath{\textsf{is\_equiv}}}
@@ -113,7 +113,6 @@
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\uni}{\mathcal{U}}
-\renewcommand{\loop}{\Omega}
 \newcommand{\mysection}[1]{\section{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mysubsection}[1]{\subsection{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mychapter}[1]{\chapter{\texorpdfstring{#1}{\detokenize{#1}}}}

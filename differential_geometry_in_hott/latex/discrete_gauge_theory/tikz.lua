@@ -52,7 +52,9 @@ end
 
 
 function RawBlock(el)
+  print(el)
   if starts_with('\\begin{tikzpicture}', el.text) or starts_with('\\begin{tikzcd}', el.text) then
+    print("tikz thing in Lua")
     local filetype = extension_for[FORMAT] or 'svg'
     local fbasename = pandoc.sha1(el.text) .. '.' .. filetype
     local fname = system.get_working_directory() .. '/html/' .. fbasename
@@ -62,6 +64,6 @@ function RawBlock(el)
     local attr = pandoc.Attr('', {}, {style='transform: scale(1.4); display: block; margin-left: auto; margin-right: auto;'})
     return pandoc.Para({pandoc.Image({}, fbasename, "", attr)})
   else
-   return el
+   return pandoc.read(el.text, 'latex+latex_macros').blocks
   end
 end

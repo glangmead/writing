@@ -45,211 +45,57 @@ For the HoTT-oriented audience my goal is to demonstrate that connections and ga
 For the geometry audience my goal is to offer an entirely new perspective on the de Rham complex in general, and connections and curvature in particular. My grandiose hope is that in this framing we can find a natural and intuitive understanding of Chern-Weil theory, i.e. the link between curvature and characteristic classes. 
 
 
-\subsection{Connections are not necessarily infinitesimal}
+\subsection{Non-infinitesimal calculus}
 
-Given a principal bundle \( \pi:P\to X \) a connection can equally well be defined \emph{infinitesimally} as a map from tangent vectors in \( TX \) to horizontal lifts in \( TP \), or via \emph{holonomy} as a map from paths in \( X \) to horizontal lifts in \( P \). Infinitesimal connections can be used to assign holonomy to finite length curves by integrating along them and using the exponential map \( \mathfrak{g}\to G \) of a Lie algebra into its Lie group. Integration respects concatentation of paths and reversal of paths, and so respects the groupoidal nature of holonomy.
+Our plan is to examine differential geometry using finite methods: using paths instead of vector fields. We will apply the syntax of type theory and work through a first course in differential forms, connections and curvature.
 
-Likewise we may define holonomy directly on the space of smooth paths into a finite-dimensional smooth manifold \( \mathcal{P}(M)\defeq [0,1]\to M \). This path space can be given a smooth structure and a groupoidal structure (via concatenation and reversal of paths). We can define a homomorphism \( \mathcal{P}(M) \to G\) to assign holonomy to each path and then differentiate this assignment by taking a limit. For the rigorous details see \cite{freed1992classical} Appendix B and \cite{kobayashinomizu} II.3.
+We will use a heuristic to guide us: whenever a classical statement uses infinitesimal objects we should find an equivalent one that uses finite objects. We should try to restate results involving tangent vectors using finite-length paths instead. We should try to replace 1-forms with integrals of the 1-form over paths.
 
-Working entirely with finite paths puts us within the use cases of real-cohesive modal homotopy type theory. This has been known for a decade, ever since we could write down expressions like \( \shape X\to BG \). But this is a space of maps out of a type that although it can have higher paths, it is spatially discrete. Discreteness in this sense means that the map \( \const:\shape X\to (\rr\to\shape X) \) is an equivalence. Can connections be discrete as well?
+In addition to changing our perspective on classical geometry we will make a concession on the type theory side: we will work with objects in HoTT that are \emph{discrete}, meaning devoid of cohesion or spatial information. Manifolds will be combinatorial objects, not based on the real numbers. There are three consolations for this loss: first, we will still have access to results in gauge theory that depend only on the homotopy type. Secondly we can approximate a curved manifold as closely as we want by adding more points, paths, and so on to the mesh, bringing more use cases into our construction. And lastly we will hopefully gain a lot of insight into the inner workings of classical differential geometry.
 
-Sure, the same way any function can be discrete. Take an \( n \)-manifold with a triangulation (a combinatorial cell structure where \( n \)-dimensional cells meet at \( n-1 \)-dimensional faces and so on down to 0-cells). We can define discrete functions that assign a single value in some codomain to each 0-cell, or to each 1-cell, or to each dual 1-cell (pair of adjoining \( n \)-cells) and so on. We can define discrete derivatives (i.e. differences), connections, curvature, and even Laplacian operators. See the literature from the field of \emph{discrete differential geometry} (DDG) \cite{crane_connections} \cite{crane_ddg} for a parallel train of thought that's focused on computer graphics.
+Classically, functions on the level of points such as a smooth function between smooth manifolds \( f:M\to N \) can be differentiated to yield a new function that acts on both points and tangent vectors: \( Tf:TM\to TN \). There is no new data in \( Tf \), its action on vectors is computed in terms of its action on points. We package the derived (no pun) data into a new function that acts on both points and vectors. Passing through the heuristic we proposed, we would instead package the derived information as the action on finite-length paths in \( M \). Tangent vectors are equivalence classes of such paths anyway, so it seems no information is lost. This would mean that taking the derivative of a smooth function is the same as to extract its action on paths.
 
-Let's draw inspiration from DDG and define some higher inductive types (HITs) that stand in for the classical smooth manifolds of which they are the homotopy type. Assigning values to cells of various dimension is performed by functions, which already encode data at all dimensions in homotopy type theory. We can make some educated guesses as to what spaces to map our HITs into to mimic classical bundles with connection. We can then look more closely at standard HoTT constructions such as transport and the lifting of paths and see the very close agreement between the theories.
+The derivative is a particular action on paths, one that is entailed in the original function on points. Classically the derivative can be pulled apart to examine \emph{only} its action on paths, often called \( df \). This is a 1-form, meaning a section of the cotangent bundle. A 1-form is an object defined on all of \( M \) which can be integrated over a path to give a number. Again, a function on paths. An arbitrary 1-form is some function on paths, and \( df \) is one such.
 
-Why ought this to work? Why would we even expect connections to be so near to hand when classically they are an entirely independent and separate structure on a principal bundle? HoTT makes questions like this very simple to ask and to answer. First, HoTT makes it easy to switch between vertical and horizontal thinking: defining bundles as maps into the base \( X \) versus maps from \( X \) into a space of fibers. Second, HoTT packages functions and their ``derivatives'' (the action on paths, which are integrated versions of vector fields after all). Truncation to dimension 0 is the act of taking equivalence classes, and not truncating is the act of maintaining the groupoidal information about all the equivalences inside the domain, the codomain, and the maps. Classically we have the theorem that equivalence classes of principal bundles with group \( G \) over \( X \) are in bijection with homotopy classes of maps \( X\to BG \) into a classifying space. That's the truncation of some groupoidal theorem. If we don't truncate then connections ought to appear at dimension 1: by specifying the lift of a path into the total space of a principal bundle, connections yield isomorphisms between fibers, which by univalence is a path in fiber space.
+HoTT also has functions, but those functions always act in all the available dimensions of the type all at once. It is inherently a function on points, paths, and higher paths. We can look at what \( f \) does to paths using the construction \( \ap f \). At this point there is an important check we can make. \( df \) has a few important properties, the most characteristic of which is the Leibniz, or product rule. Is this visible in HoTT?
 
-Of course examining untruncated maps into classifying spaces in HoTT doesn't automatically deserve to be called the study of bundles with connection. We'll need some justification. What criteria would make sense?
-
-\begin{myclaim}
-We can calculate classical examples and derive classical formulas.
-\end{myclaim}
-
-\begin{myclaim}
-The classical theorems relating curvature to cohomology (Chern-Weil theory) are made transparent. The characteristic classes descend to the base. The closedness. Whitney sum formula. Independence of class from connection. (\cite{kobayashinomizu} XII)
-\end{myclaim}
-
-\begin{myclaim}
-Gauge theory --- the relating of bundles to the space of all connections modulo gauge transformations --- is available.
-\end{myclaim}
-
-\begin{myclaim}
-We can prove theorems from gauge theory that depend only on the homotopy type of the manifold.
-\end{myclaim}
-
-The sections below will justify these claims. We will end with a survey of the relationships between topological manifolds, smooth manifolds, and various combinatorial manifolds such as CW complexes, PL manifolds and manifolds with triangulation, so we can consider how limited a theory of HIT manifolds may be.
-
-\subsection{Functions are multidimensional}
-
-Functions in homotopy type theory carry information in all dimensions at once. Given \( f:X\to Y \) we can access the value of \( f \) on paths with terms like \( \ap(f,-):x=_Xy\to f(x)=_Y f(y) \) and we can iterate this with more \( \ap \)s. 
-
-\subsection{Pathovers}
-Given a type family \( f:X\to \uni \) and a path \( p:x=_X x' \), and given terms \( y:f(x), y':f(x') \) in the two fibers, we can define the type \( y\pathover{p}y' \) by induction: if \( p \) is \( \refl \) then \( y=y' \) lives in a single fiber \( f(x) \) where it reduces to the usual identity type.
-
-There is an equivalence \( y\pathover{p}y'\simeq \tr(p,y)=_{f(x')}y' \). Furthermore if we also have a dependent function (section) \( s:\pit{x:X} f(x) \) then we can form \( \apd(f,p):s(x)\pathover{p}s(x') \). In other words, there may be a whole type of paths between two points upstairs \( y, y' \) but if there is also a section then we have a special section-specific pathover between \( s(x), s(x') \).
-
-\begin{mylemma}
-Given a type family \( f:X\to\uni \) and terms \( x,x':X, y:f(x), y':f(x') \) then there is an equivalence 
-\[ 
-  \left((x,y) =_{\sit{x:X}f(x)} (x',y')\right) \simeq 
-  (x=x')\times (y=y).
-\]
-\end{mylemma}
-\begin{proof}
-Both sides are identity types in a sigma type, so we must prove
-\[ 
-\sit{p:x=x'}y\pathover{p}y' \simeq \sit{p:x=x'}y=y.
-\] 
-This reduces to proving \( y\pathover{p}y'\simeq y=y  \). By induction when \( p=\refl \) both sides are \( y=y \) which we prove with \( \refl \). (Compare to (\cite{Symmetry} Lemma 4.14.1) which assumes a section.)
-\end{proof}
-
-So given a path \( p \) in the base and points upstairs over the endpoints, the dependent paths over \( p \) are equivalent to loops at one upstairs point, which are regular non-dependent paths. If \( p \) is a loop in \( x=x \) then the type of dependent loops over that loop is equivalent to the non-dependent loops \( y=y \).
-
-\subsection{Deloopings}
-
-A \emph{delooping} of a group is a pointed type whose loop space is the group. The references we follow here are \cite{Symmetry} and \cite{buchholtz2023central}. Especially:
+The Leibniz rule states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to an H-space \( B \).
 
 \begin{mydef}
- (\cite{buchholtz2023central} Definition 4.1) \( \BAut_1(G):=\sit{X:U}||X=G||_0 \).
+An H-space structure on a pointed type \( (B,b) \) consists of
+\begin{enumerate}
+\item A binary operation \( \mu:B\to B\to B \)
+\item A left unit law \( \mu_l:\mu(\pt,-)=\id_B \)
+\item A right unit law \( \mu_r:\mu(-,\pt)=\id_B \)
+\item A coherence \( \mu_{lr}:\mu_l(\pt)=_{\mu(\pt,\pt)=\pt}\mu_r(\pt) \)
+\end{enumerate}
 \end{mydef}
 
-\begin{mythm}
-(\cite{buchholtz2023central} Theorem 4.26) The type of \( G \)-torsors is equivalent to \( \BAut_1(G) \).
-\end{mythm}
-
-The component \( ||X=G||_0 \) is called a \( G \)-band. Its data consists of a choice of basepoint in \( X \) to map to the identity in \( G \).
-
-The loop space at the base point is the given group. The loop space at other points are equivalent groups (e.g. conjugations of the group). The path spaces between pairs of points are torsors of the given group.
-
-\subsection{Mapping into deloopings}
-
-A motivating example is \( \oo\defeq\two\join(\two\join\two) \). This is an octahedron with 6 points, 12 paths, and 8 2-paths. Think of it as representing a good open cover of a cube, where each vertex of \( \oo \) is one contractible open set covering a face of the cube (plus a little overlap to the four neighboring faces), each path in \( \oo \) is an overlap of two of these face open sets, and each 2-path is a 3-way overlap. We use a join because the join keeps all the 0-dimensional points of all of the \( \two \)s as 0-dimensional points in the final type, it doesn't send them up into a higher dimension like the suspension does.
-
-Let's name the vertices after the colors of a Rubik's cube: (\( w \))hite on top, (\( y \))ellow on the bottom, (\( g \))reen facing out of the page, (\( b \))lue facing into the page, (\( r \))ed to the right and (\( o \))range to the left. So instead of using the same boolean type \( \two \) repeatedly let's perform the join like this: 
-\[ 
-S=\{w, y\}\join (\{b, g\}\join\{r, o\}) 
-\] so that we build up the cube with three pairs of opposite faces. The factor in parentheses \( \{b, g\}\join\{r, o\} \) is a square where \( b \) and \( g \) are at opposite corners and so are \( r \) and \( o \). Then we join a "north and south pole" \( \{w, y\} \) to this sqare, forming the octahedron. This differs from the suspension of the equatorial square \( \{b, g\}\join\{r, o\} \) because the square is not moved into dimensions 1 and 2, and because we have paths from the poles to the equator, not from pole to pole.
-
-That's the domain of our map. Let's map it into \( \BAutoso \) with a certain basepoint. Consider a generalization of \( S^1 \),  an \emph{\( n \)-gon} \( C_n \), generated by
-\begin{itemize}
-\item \( v_1,\ldots,v_n:C_n \)
-\item \( e_1:v_1=v_2\)
-\item \( e_2:v_2=v_3 \)
-\item \( \ldots \) 
-\item \(e_{n-1}:v_{n-1}=v_n\)
-\item \(e_n:v_n=v_1 \)
-\end{itemize}
-
-There is a map \( s_n:C_n\to C_n \) that sends \( v_i\mapsto v_{i+1} \) and \( v_n\mapsto v_1 \), the generating cyclic permutation. 
-
-\begin{mylemma}
-  We have \( g:\pit{n:\nn}C_n\simeq S^1 \)
-\end{mylemma}
-\proof Generalize \cite{hottbook} Lemma 6.5.1.\qed
-
-The reason we're interested in these is that they form arbitrarily fine-grained approximations to the smooth circle. We can consider an \( n \)-gon to be a circle that has a notion of ``going around \( 1/n \)th of the way''.
-
-Now let's re-point \( \BAutoso \) at \( C_4 \). We can use a + to denote a pointed type, and we can decorate it with the base point, like so: \( \BAutosoc \). We can then refer to the underlying type (first projection from the pointed type) with \( \BAutoso_- \). This is similar to the notation \( \BAutoso_{\div} \) you find in the Symmetry book \cite{Symmetry}.
-
-On second thought let's use a suspension after all:
-\[ 
-S'=\Sigma (\{b, g\}\join\{r, o\}) =\Sigma C_4
-\] so that we can more easily compare the tangent bundle with the Hopf bundle. Let's call the poles \( \{w, y\} \), and now we have a copy of \( C_4 \) inside \( w=y \). 
-
-Define the map \( T:S'\to\BAutoso \) as
-\begin{itemize}
-\item \( T(w)=T(y)=C_4 \)
-\item \( T(r)=T(o)=T(b)=T(g)=\id_{C_4} \)
-\item \( T(rg)=T(go)=T(ob)=T(br)=\mathrm{rotation\ by\ 180} \).
-\end{itemize} 
-And therefore \( T(rg\cdot go\cdot ob\cdot br)=\mathrm{2\ rotations} \).
-
-
-\mysection{Higher covers}
-
-What makes this all work is that \( S^1 \) is a discrete 1-type, not a discrete set. A map from \( \shape X\to BG \) for a discrete set-level group \( G \) would indeed carry its unique \emph{flat} connection, since homotopic paths must map to the same set element. But so long as we're willing to work with discrete spaces and discrete connections, we can see geometry inside homotopy type theory!
-
-Following David Jaz Myers in \cite{myersgood}, we define a cover as follows:
-
-\begin{mydef}
-  A map \(\pi:E\to B\) is a \emph{cover} if it is \(\shapeo\)-étale and its fibers are sets.
-\end{mydef}
-
-Recall that \(\pi\) being \(\shapeo\)-étale means that the naturality square 
-\[
-\begin{CD}
-E @>(-)^{\shapeo}>> \shapeo E \\
-@V{\pi}VV @VV{\shapeo \pi}V \\
-B @>>(-)^{\shapeo}> \shapeo B
-\end{CD}
-\]
-is a pullback, which means among other things that each corresponding fiber of the vertical maps is equivalent.
-
-As David proves in \cite{myersgood}, the type of \(\shapeo\)-étale maps into \(B\) is equivalent to the function type \(\shapeo B \to \Typeo\). Since a cover has the further condition that the fibers are sets this implies
-
-\begin{mylemma}
-  The type of covers over \(B\) is equivalent to \(\shapeo B \to \Type_{\shapez}\).
-\end{mylemma}
-
-In homotopy type theory we pass easily between the vertical picture (maps into \(B\)) and the horizontal picture (classifying maps of \(B\) into some type of fibers). But when we unpack this a little bit we find important classical stories. If we equip \(B\) with a basepoint \(*_B\) then a map \(f:\shapeo B \dotto \Type_{\shapez}\) is an action of the group \(\shapeo B\) on the set \(f(*_B)\), which is the fiber over \(*_B\).
-
-Let us move up a dimension:
-
-\begin{mydef}
-  A map \(\pi:E\to B\) is a \emph{2-cover} if it is \(\shapet\)-étale and its fibers are groupoids.
-\end{mydef}
-
-\begin{mylemma}
-  The type of 2-covers over \(B\) is equivalent to \(\shapet B \to \Typeo\). Further, since \(\Typeo\) is 2-truncated, the type of 2-covers of \(B\) is equivalent to \(\shape B\to \Typeo\).
-\end{mylemma}
-
-This is the type we will examine: maps from discrete \( n \)-types to the type of discrete 1-types.
-
-For example, let \(S^1\) be the higher inductive type generated by
-\begin{itemize}
-\item \( \mathsf{base}:S^1 \)
-\item \( \mathsf{loop}:\mathsf{base}=\mathsf{base} \)
-\end{itemize}
-
-We can deloop \(S^1\) by forming its type of torsors. This is equivalent to \(\BAutoso\defeq\sit{X:\Type}||X=S^1||_0\), the type of pairs of a type together with an equivalence class of isomorphisms with \( S^1 \) (see \cite{buchholtz2023central}). 
-
-\begin{mylemma}Terms of \( \BAutoso \) are discrete 1-types.\end{mylemma}\begin{proof} TBD.\end{proof}
-
-\section{Evidence that we found curved connections}
-
-\subsection{The Hopf fibration}
-
-\subsection{The hairy ball theorem}
-
-\subsection{The Atiyah sequence}
-
-This is an exact sequence of bundles. Converting them to paths gives us the lemmas about pathovers.
-
-\subsection{Freed and Hopkins}
-Any claim to define connections in higher toposes must contend with Freed and Hopkins \cite{freed2013chernweil}. They introduce simplicial sets and simplicial sheaves in order to construct a classifying space for principal bundles with connection, which is a higher category. Actually they need higher categories even to classify principal bundles alone, since they wish to do so on the nose rather than up to homotopy, and so they need a groupoid-level classifying space.
-
-In their language, the classifying space is the simplicial sheaf of trivializable principal \( G \)-bundles with connection. (\( G \) is a compact Lie group.) A connection is a classical, infinitesimal one, i.e. a 1-form with values in the Lie algebra \( \gg \). And so their classifying space is the product (bundle classifier) \( \times \) (connection). If we compose the 1-form with integration, we form a map from the paths in the classifying space to \( G \). But the 1-dimensional structure of \( \BAutoso \) is already \( G \) since it's a delooping of \( G \). So maybe they are just building the higher type \( \BAutoso \) as a product of two spaces.
-
-If that's the case, then can we see in our picture the Weil algebra and so on that they end up proving is the cohomology of this classifying space?
-
-\subsection{Atiyah and Bott}
-
-Let \( \Bpb:\Typesp \) be a pointed discrete type and let \( f:\Bpb\dotto\BAutosoc \). If we need to reference the proof of pointedness we'll call it \( *_f:f(b)=C_4 \). 
-
-\begin{mylemma} \( \shape(X\to Y)\simeq \shape X\to \shape Y \)\end{mylemma}.
-\begin{proof}
-TODO
-\end{proof}
-
-And so any results that depend only on the homotopy type of, say, a classifying map, can be studied in HoTT by replacing both the domain and the classifying type with their homotopy types.
-
-\begin{myprop}(\cite{atiyah1983yang} Proposition 2.4)
-  Let \( BG \) be the classifying space for a compact Lie group \( G \). Then in homotopy theory 
-  \[ 
-    B\Gg(P)=\mathrm{Map}_P(M, BG) 
-  \]
-  where \( \Gg(P) \) is the group of automorphisms of the principal bundle \( P \), and where \( \mathrm{Map}_P \) denotes the connected component of \( M\to BG \) containing the classifying map of \( P \).
+The analogue of the algebra of functions to \( \rr \) is:
+\begin{myprop}
+For any type \( M \) and H-space \( B \) the type of maps \( M\to B \) with base point the constant map is an H-space under pointwise multiplication.
 \end{myprop}
+
+We claim that the following deserves to be called the Leibniz rule.
+
+\begin{mylemma}
+For any type \( M \) and H-space \( B \) and maps \( f,g:M\to B \) and path \( p:x=_M y \) we have \( \ap(fg)(p)=\mu(f(x),\ap(g)(p)) \cdot \mu(\ap(f)(p),g(y)) \). (\( \cdot \) is concatenation of paths.)
+\end{mylemma}
+
+The notation is temporarily sloppy, but by \( \mu(a, p) \) for a path \( p \) we mean the functorial action of multiplication by \( a \) on the left, on a path.g
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJCIl0sWzEsMCwiQiJdLFsyLDAsIkIiXSxbMCwxLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTJ9XSxbMCwxLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjJ9XSxbMSwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTJ9XSxbMSwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjJ9XSxbMyw0LCJwIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs1LDYsInEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+\begin{tikzcd}[cramped]
+  B & B & B
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-12pt}, from=1-1, to=1-2]
+  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=12pt}, from=1-1, to=1-2]
+  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-12pt}, from=1-2, to=1-3]
+  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=12pt}, from=1-2, to=1-3]
+  \arrow["p"', shorten <=3pt, shorten >=3pt, Rightarrow, from=0, to=1]
+  \arrow["q"', shorten <=3pt, shorten >=3pt, Rightarrow, from=2, to=3]
+\end{tikzcd}
+
+\end{document}
 
 \bibliography{connections}
 \end{document}
