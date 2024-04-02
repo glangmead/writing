@@ -10,6 +10,6 @@ do
     --toc --number-sections --number-offset=0 --standalone --citeproc -M link-citations=true \
     -V caption-justification:centering \
     $i.tikzimg.tex -o html/$i.html
-  cp *.svg html
+  cp *.png html
   open html/$i.html
 done

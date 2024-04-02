@@ -1,7 +1,14 @@
 # Structural scratch work
 
+Show the example
+Then ask why it works
+
 Leibniz rule: how are we multiplying functions? Mapping into an h-space?
 Define d <=> specifying f on n-paths via f on n-1-paths
+
+Let's not work on d-Leibniz first, let's lump it in with connections.
+
+
 
 - Q: volume form, duality
 
