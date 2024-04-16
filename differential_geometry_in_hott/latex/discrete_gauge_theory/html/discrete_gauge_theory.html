@@ -21,7 +21,6 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -54,8 +53,12 @@
     text-align: center;
   }
   </style>
-  <p><span class="math inline"></span> <span
-  class="math inline"></span></p>
+  <p><span class="math inline">\(\newcommand{\textesh}{∫}\)</span> <span
+  class="math inline">\(\newcommand{\ensuremath}{}\)</span></p>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
 </head>
 <body>
 <nav id="TOC" role="doc-toc">
@@ -69,6 +72,33 @@ class="toc-section-number">2</span> Non-infinitesimal calculus</a></li>
 id="toc-the-tangent-bundle-of-the-2-sphere"><span
 class="toc-section-number">3</span> The tangent bundle of the
 2-sphere</a></li>
+<li><a href="#why-this-is-geometry" id="toc-why-this-is-geometry"><span
+class="toc-section-number">4</span> Why this is geometry</a>
+<ul>
+<li><a href="#connections-as-splittings"
+id="toc-connections-as-splittings"><span
+class="toc-section-number">4.1</span> Connections as splittings</a></li>
+<li><a href="#tensorial" id="toc-tensorial"><span
+class="toc-section-number">4.2</span> Tensorial</a></li>
+<li><a href="#the-leibniz-product-rule"
+id="toc-the-leibniz-product-rule"><span
+class="toc-section-number">4.3</span> The Leibniz (product)
+rule</a></li>
+<li><a href="#nonvanishing-tangent-vector-fields"
+id="toc-nonvanishing-tangent-vector-fields"><span
+class="toc-section-number">4.4</span> Nonvanishing tangent vector
+fields</a></li>
+<li><a href="#gauge-transformations"
+id="toc-gauge-transformations"><span
+class="toc-section-number">4.5</span> Gauge transformations</a></li>
+<li><a href="#characteristic-classes-and-chern-weil-theory"
+id="toc-characteristic-classes-and-chern-weil-theory"><span
+class="toc-section-number">4.6</span> Characteristic classes and
+Chern-Weil theory</a></li>
+<li><a href="#combinatorial-manifolds"
+id="toc-combinatorial-manifolds"><span
+class="toc-section-number">4.7</span> Combinatorial manifolds</a></li>
+</ul></li>
 </ul>
 </nav>
 <h1 data-number="1" id="introduction"><span
@@ -77,7 +107,7 @@ class="header-section-number">1</span> Introduction</h1>
 <p>"It is always ourselves we work on, whether we realize it or not.
 There is no other work to be done in the world." — Stephen Talbott,
 <em>The Future Does Not Compute</em><span class="citation"
-data-cites="talbott">(<a href="#ref-talbott"
+data-cites="talbott"> (<a href="#ref-talbott"
 role="doc-biblioref">Talbott, 1995</a>)</span></p>
 </blockquote>
 <p>Homotopy type theory (HoTT) is a logical foundation for mathematics
@@ -162,297 +192,576 @@ more use cases into our construction. And lastly we will hopefully gain
 a lot of insight into the inner workings of classical differential
 geometry.</p>
 <p>Classically, functions on the level of points such as a smooth
-function between smooth manifolds <span
-class="math inline"><em>f</em> : <em>M</em> → <em>N</em></span> can be
-differentiated to yield a new function that acts on both points and
-tangent vectors: <span
-class="math inline"><em>T</em><em>f</em> : <em>T</em><em>M</em> → <em>T</em><em>N</em></span>.
-There is no new data in <span
-class="math inline"><em>T</em><em>f</em></span>, its action on vectors
-is computed in terms of its action on points. We package the derived (no
-pun) data into a new function that acts on both points and vectors.
-Passing through the heuristic we proposed, we would instead package the
-derived information as the action on finite-length paths in <span
-class="math inline"><em>M</em></span>. Tangent vectors are equivalence
+function between smooth manifolds <span class="math inline">\(f:M\to
+N\)</span> can be differentiated to yield a new function that acts on
+both points and tangent vectors: <span class="math inline">\(Tf:TM\to
+TN\)</span>. There is no new data in <span
+class="math inline">\(Tf\)</span>, its action on vectors is computed in
+terms of its action on points. We package the derived (no pun) data into
+a new function that acts on both points and vectors. Passing through the
+heuristic we proposed, we would instead package the derived information
+as the action on finite-length paths in <span
+class="math inline">\(M\)</span>. Tangent vectors are equivalence
 classes of such paths anyway, so it seems no information is lost. This
 would mean that taking the derivative of a smooth function is the same
 as to extract its action on paths.</p>
 <p>The derivative is a particular action on paths, one that is entailed
 in the original function on points. Classically the derivative can be
 pulled apart to examine <em>only</em> its action on paths, often called
-<span class="math inline"><em>d</em><em>f</em></span>. This is a 1-form,
-meaning a section of the cotangent bundle. A 1-form is an object defined
-on all of <span class="math inline"><em>M</em></span> which can be
-integrated over a path to give a number. Again, a function on paths. An
-arbitrary 1-form is some function on paths, and <span
-class="math inline"><em>d</em><em>f</em></span> is one such.</p>
+<span class="math inline">\(df\)</span>. This is a 1-form, meaning a
+section of the cotangent bundle. A 1-form is an object defined on all of
+<span class="math inline">\(M\)</span> which can be integrated over a
+path to give a number. Again, a function on paths. An arbitrary 1-form
+is some function on paths, and <span class="math inline">\(df\)</span>
+is one such.</p>
 <p>HoTT also has functions, but those functions always act in all the
 available dimensions of the type all at once. It is inherently a
 function on points, paths, and higher paths. We can look at what <span
-class="math inline"><em>f</em></span> does to paths using the
-construction <span class="math inline">ap<em>f</em></span>. At this
+class="math inline">\(f\)</span> does to paths using the construction
+<span class="math inline">\(\ensuremath{\mathsf{ap}}f\)</span>. At this
 point there is an important check we can make. <span
-class="math inline"><em>d</em><em>f</em></span> has a few important
-properties, the most characteristic of which is the Leibniz, or product
-rule. Is this visible in HoTT?</p>
-<p>The Leibniz rule states that if <span
-class="math inline"><em>f</em>, <em>g</em> : <em>M</em> → ℝ</span> are
-two smooth functions to the real numbers then <span
-class="math inline"><em>d</em>(<em>f</em><em>g</em>) = <em>f</em><em>d</em><em>g</em> + <em>g</em><em>d</em><em>f</em></span>.
-Here <span class="math inline"><em>f</em><em>g</em></span> is the
-function formed by taking the pointwise product of <span
-class="math inline"><em>f</em></span> and <span
-class="math inline"><em>g</em></span>. To examine this situation in HoTT
-we need type-theoretic functions <span
-class="math inline"><em>f</em>, <em>g</em> : <em>M</em> → <em>B</em></span>
-from some type <span class="math inline"><em>M</em></span> to an H-space
-<span class="math inline"><em>B</em></span>.</p>
-<div class="mydef">
-<p><strong>Definition 1</strong>. <em>An H-space structure on a pointed
-type <span class="math inline">(<em>B</em>,<em>b</em>)</span> consists
-of</em></p>
-<ol>
-<li><p><em>A binary operation <span
-class="math inline"><em>μ</em> : <em>B</em> → <em>B</em> → <em>B</em></span></em></p></li>
-<li><p><em>A left unit law <span
-class="math inline"><em>μ</em><sub><em>l</em></sub> : <em>μ</em>(pt,−) = id<sub><em>B</em></sub></span></em></p></li>
-<li><p><em>A right unit law <span
-class="math inline"><em>μ</em><sub><em>r</em></sub> : <em>μ</em>(−,pt) = id<sub><em>B</em></sub></span></em></p></li>
-<li><p><em>A coherence <span
-class="math inline"><em>μ</em><sub><em>l</em><em>r</em></sub> : <em>μ</em><sub><em>l</em></sub>(pt)=<sub><em>μ</em>(pt,pt) = pt</sub><em>μ</em><sub><em>r</em></sub>(pt)</span></em></p></li>
-<li><p><em>A proof of left- and right- invertibility: <span
-class="math inline"><em>μ</em>(<em>a</em>,−) : <em>A</em> ≃ <em>A</em></span>,
-<span
-class="math inline"><em>μ</em>(−,<em>b</em>) : <em>A</em> ≃ <em>A</em></span></em></p></li>
-</ol>
-</div>
-<p>The analogue of the algebra of functions to <span
-class="math inline">ℝ</span> is:</p>
-<div class="myprop">
-<p><strong>Proposition 1</strong>. <em>For any type <span
-class="math inline"><em>M</em></span> and H-space <span
-class="math inline"><em>B</em></span> the type of maps <span
-class="math inline"><em>M</em> → <em>B</em></span> with base point the
-constant map is an H-space under pointwise multiplication.</em></p>
-</div>
-<p>We claim thact the following deserves to be called the Leibniz
-rule.</p>
-<div class="mylemma">
-<p><strong>Lemma 1</strong>. <em>For any type <span
-class="math inline"><em>M</em></span> and H-space <span
-class="math inline"><em>B</em></span> and maps <span
-class="math inline"><em>f</em>, <em>g</em> : <em>M</em> → <em>B</em></span>
-and path <span
-class="math inline"><em>p</em> : <em>x</em>=<sub><em>M</em></sub><em>y</em></span>
-we have <span
-class="math inline">ap(<em>f</em><em>g</em>)(<em>p</em>) = <em>μ</em>(<em>f</em>(<em>x</em>),ap(<em>g</em>)(<em>p</em>)) ⋅ <em>μ</em>(ap(<em>f</em>)(<em>p</em>),<em>g</em>(<em>y</em>))</span>.
-(<span class="math inline">⋅</span> is concatenation of paths.)</em></p>
-</div>
-<p>The notation is temporarily sloppy, but by <span
-class="math inline"><em>μ</em>(<em>a</em>,<em>p</em>)</span> for a path
-<span class="math inline"><em>p</em></span> we mean the functorial
-action of multiplication by <span class="math inline"><em>a</em></span>
-on the left, on a path.g</p>
-<p><img src="./09052d33113b7087f7abc8b04e220a13697b45a3.png"
-alt="image" /></p>
+class="math inline">\(df\)</span> has a few important properties, the
+most characteristic of which is the Leibniz, or product rule. Is this
+visible in HoTT?</p>
 <figure>
 <img src="./45744937ac561c6ce05f971621a980d63ad6d2e1.png" />
-<figcaption>The HIT <span
-class="math inline"><em>C</em><sub>4</sub></span> which is one of the
-types in <span
-class="math inline">BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span></figcaption>
+<figcaption>The HIT <span class="math inline">\(C_4\)</span> which is
+one of the types in <span
+class="math inline">\(\mathrm{BAut}_1(S^1)\)</span></figcaption>
 </figure>
 <figure>
-<img src="./3c3983eb70861a2d7ffe23e2afa96e12c7df558c.png" />
-<figcaption>The HIT <span
-class="math inline"><em>Σ</em><em>C</em><sub>4</sub></span> which has 2
-points, 4 1-paths, 4 2-paths.</figcaption>
+<img src="./af2efb8d5bd4f1d5edcb52c7da0f2f4212597f36.png" />
+<figcaption>The HIT <span class="math inline">\(\Sigma C_4\)</span>
+which has 2 points, 4 1-paths, 4 2-paths.</figcaption>
 </figure>
 <figure>
-<img src="./742ee3a0cc0d615082501f31cfc529818a29c2e5.png" />
+<img src="./cdb3d54d1a96709745e781e659f43190ba62ae89.png" />
 <figcaption>The HIT <span
-class="math inline">{<em>w</em>, <em>y</em>} * <em>C</em><sub>4</sub></span>
-which has 6 points, 12 1-paths, 8 2-paths.</figcaption>
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span> which has 6
+points, 12 1-paths, 8 2-paths.</figcaption>
 </figure>
 <h1 data-number="3" id="the-tangent-bundle-of-the-2-sphere"><span
 class="header-section-number">3</span> The tangent bundle of the
 2-sphere</h1>
 <p>The classical 2-sphere embedded in <span
-class="math inline">ℝ<sup>3</sup></span> is curved at every point. But
-we can quantize this curvature by integrating it over a triangulation.
-Consider two great circles at 90 degree angles to each other, passing
-through the north and south pole, and take the equator. Convert this
-data into a combinatorial structure:</p>
+class="math inline">\(\ensuremath{\mathbb{R}}^3\)</span> is curved at
+every point. But we can quantize this curvature by integrating it over a
+triangulation. Consider two great circles at 90 degree angles to each
+other, passing through the north and south pole, and take the equator.
+Convert this data into a combinatorial structure:</p>
 <ol>
-<li><p>The set of vertices <span
-class="math inline">{<em>w</em>, <em>y</em>, <em>b</em>, <em>g</em>, <em>r</em>, <em>o</em>, <em>y</em>}</span>
-where <span class="math inline"><em>w</em></span> is the north pole,
-<span class="math inline"><em>y</em></span> the south pole, and around
-the equator are the points of intersection of the three circles, labeled
-in eastward order <span
-class="math inline">{<em>b</em>, <em>o</em>, <em>g</em>, <em>r</em>}</span>.
-The names come from the colors on a standard Rubik’s cube.</p></li>
+<li><p>The set of vertices <span class="math inline">\(\{w, y, b, g, r,
+o, y\}\)</span> where <span class="math inline">\(w\)</span> is the
+north pole, <span class="math inline">\(y\)</span> the south pole, and
+around the equator are the points of intersection of the three circles,
+labeled in eastward order <span class="math inline">\(\{b, o, g,
+r\}\)</span>. The names come from the colors on a standard Rubik’s
+cube.</p></li>
 <li><p>The set of edges generated by the direct paths between adjacent
-vertices, denoted <span
-class="math inline">{<em>w</em><em>b</em>}, {<em>w</em><em>o</em>}</span>
+vertices, denoted <span class="math inline">\(\{wb\}, \{wo\}\)</span>
 and so on.</p></li>
 <li><p>The set of faces generated by the triangular regions bounded by
 three vertices and three paths, denoted <span
-class="math inline">{<em>w</em><em>b</em><em>o</em>}, {<em>w</em><em>o</em><em>g</em>}</span>
-and so on.</p></li>
+class="math inline">\(\{wbo\}, \{wog\}\)</span> and so on.</p></li>
 </ol>
 <p>Parallel transport in the tangent bundle around the <span
-class="math inline">{<em>w</em><em>o</em><em>g</em>}</span> face will
-rotate a tangent vector by 90 degrees clockwise. This is true for all
-the triangular faces and so the sum of the action of all 8 faces will be
-two rotations around the circle. We can compare this result to the
-standard smooth Gauss-Bonnet theorem.</p>
+class="math inline">\(\{wog\}\)</span> face will rotate a tangent vector
+by 90 degrees clockwise. This is true for all the triangular faces and
+so the sum of the action of all 8 faces will be two rotations around the
+circle. We can compare this result to the standard smooth Gauss-Bonnet
+theorem.</p>
 <p>We can leverage the syntax of HoTT by encoding the above in a map
 between HITs.</p>
 <div class="mydef">
-<p><strong>Definition 2</strong>. <em>Denote by <span
-class="math inline"><em>C</em><sub>4</sub></span> the join <span
-class="math inline">{<em>b</em>, <em>g</em>} * {<em>r</em>, <em>o</em>}</span>.
-This is the equator of the discrete octahedral sphere. Denote by <span
-class="math inline">𝕆</span> the octahedron given by the join <span
-class="math inline">{<em>w</em>, <em>y</em>} * <em>C</em><sub>4</sub></span>.</em></p>
+<p><strong>Definition 1</strong>. <em>Denote by <span
+class="math inline">\(C_4\)</span> the join <span
+class="math inline">\(\{b, g\}*\{r, o\}\)</span>. This is the equator of
+the discrete octahedral sphere. Denote by <span
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span> the octahedron
+given by the join <span class="math inline">\(\{w, y\}*
+C_4\)</span>.</em></p>
+</div>
+<div class="mylemma">
+<p><strong>Lemma 1</strong>. <em><span class="math inline">\((C_4,
+b)\simeq S^1\)</span>.</em></p>
 </div>
 <div class="mylemma">
 <p><strong>Lemma 2</strong>. <em><span
-class="math inline">(<em>C</em><sub>4</sub>,<em>b</em>) ≡ <em>S</em><sup>1</sup></span>.</em></p>
-</div>
-<div class="mylemma">
-<p><strong>Lemma 3</strong>. <em><span
-class="math inline">𝕆 ≡ <em>S</em><sup>2</sup></span>.</em></p>
+class="math inline">\(\ensuremath{\mathbb{O}}\simeq
+S^2\)</span>.</em></p>
 </div>
 <div class="mydef">
-<p><strong>Definition 3</strong>. <em>Let <span
-class="math inline">$\mathrm{BAut}_1(S^1)\stackrel{\textup{def}}{=}\sum_{X:\mathcal{U}}||X=S^1||_0.$</span></em></p>
+<p><strong>Definition 2</strong>. <em>Let <span
+class="math inline">\(\mathrm{BAut}_1(S^1)\stackrel{\mathrm{def}}{=}\sum_{X:\mathcal{U}}||X=S^1||_0.\)</span></em></p>
 </div>
 <div class="mylemma">
-<p><strong>Lemma 4</strong>. <em>We have <span
-class="math inline">(<em>C</em><sub>4</sub>,||{<em>b</em>,<em>g</em>,<em>r</em>,<em>o</em>}↦base,<em>b</em><em>r</em>↦loop,{<em>r</em><em>g</em>,<em>g</em><em>o</em>,<em>o</em><em>b</em>}↦refl||<sub>0</sub>) : BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span></em></p>
+<p><strong>Lemma 3</strong>. <em>We have <span
+class="math inline">\((C_4, ||\{b, g, r, o\}\mapsto \mathsf{base},
+br\mapsto \mathsf{loop}, \{rg, go, ob\}\mapsto
+\ensuremath{\mathsf{refl}}||_0):\mathrm{BAut}_1(S^1)\)</span></em></p>
 </div>
 <div class="mylemma">
-<p><strong>Lemma 5</strong>. <em><span
-class="math inline">BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span> is
-equivalent to the type of <span
-class="math inline"><em>S</em><sup>1</sup></span>-torsors, and to the
-type of <span
-class="math inline">(<em>C</em><sub>4</sub>,<em>b</em>)</span>-torsors.</em></p>
+<p><strong>Lemma 4</strong>. <em><span
+class="math inline">\(\mathrm{BAut}_1(S^1)\)</span> is equivalent to the
+type of <span class="math inline">\(S^1\)</span>-torsors, and to the
+type of <span class="math inline">\((C_4,b)\)</span>-torsors.</em></p>
 </div>
 <p>We will denote other terms of <span
-class="math inline">BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span> with
-notation like <span
-class="math inline">[<em>w</em>,<em>o</em>,<em>y</em>,<em>r</em>]</span>,
-meaning the square isomorphic to <span
-class="math inline"><em>C</em><sub>4</sub></span> but with the given
-four points, and with pointing given by whichever point we listed first.
-We will also introduce notation for maps <span
-class="math inline"><em>f</em> : [<em>a</em>,<em>b</em>,<em>c</em>,<em>d</em>] → [<em>w</em>,<em>x</em>,<em>y</em>,<em>z</em>]</span>
-by indicating where each item in the domain list is sent, like so: <span
-class="math inline">$f\stackrel{\textup{def}}{=}[[x, y, z,
-w]]$</span>.</p>
-<p><span class="math inline"><em>C</em><sub>4</sub></span> has an
-unpointed automorphism connected to the identiy which will play the role
-of rotation by 90 degrees:</p>
+class="math inline">\(\mathrm{BAut}_1(S^1)\)</span> with notation like
+<span class="math inline">\([w, o, y, r]\)</span>, meaning the square
+isomorphic to <span class="math inline">\(C_4\)</span> but with the
+given four points, and with pointing given by whichever point we listed
+first. We will also introduce notation for maps <span
+class="math inline">\(f:[a, b, c, d]\to [w, x, y, z]\)</span> by
+indicating where each item in the domain list is sent, like so: <span
+class="math inline">\(f\stackrel{\mathrm{def}}{=}[[x, y, z,
+w]]\)</span>.</p>
+<p><span class="math inline">\(C_4\)</span> has an unpointed
+automorphism connected to the identiy which will play the role of
+rotation by 90 degrees:</p>
 <div class="mydef">
-<p><strong>Definition 4</strong>. <em>Let <span
-class="math inline"><em>R</em> : <em>C</em><sub>4</sub> → <em>C</em><sub>4</sub></span>
-be given by <span
-class="math inline"><em>R</em>(<em>b</em>) = <em>o</em>, <em>R</em>(<em>o</em>) = <em>g</em>, <em>R</em>(<em>g</em>) = <em>r</em>, <em>R</em>(<em>r</em>) = <em>b</em>, <em>R</em>(<em>b</em><em>o</em>) = <em>o</em><em>g</em>, <em>R</em>(<em>o</em><em>g</em>) = <em>g</em><em>r</em>, <em>R</em>(<em>g</em><em>r</em>) = <em>r</em><em>b</em>, <em>R</em>(<em>r</em><em>b</em>) = <em>b</em><em>o</em>.</span>
-Let <span class="math inline"><em>R</em>′ : <em>R</em> = id</span> be
-the obvious homotopy to the identity.</em></p>
+<p><strong>Definition 3</strong>. <em>Let <span
+class="math inline">\(R:C_4\to C_4\)</span> be given by <span
+class="math inline">\(R(b)=o, R(o)=g, R(g)=r, R(r)=b, R(bo)=og,
+R(og)=gr, R(gr)=rb, R(rb)=bo.\)</span> Let <span
+class="math inline">\(R&#39;:R=\ensuremath{\text{id}}\)</span> be the
+obvious homotopy to the identity.</em></p>
 </div>
 <div class="mydef">
-<p><strong>Definition 5</strong>. <em>Define <span
-class="math inline"><em>T</em><sub>1</sub> : 𝕆 → BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span>
+<p><strong>Definition 4</strong>. <em>Define <span
+class="math inline">\(T_1:\ensuremath{\mathbb{O}}\to\mathrm{BAut}_1(S^1)\)</span>
 by</em></p>
 <ul>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>b</em>) = [<em>w</em>,<em>o</em>,<em>y</em>,<em>r</em>]</span>
-(the equator from the point of view of <span
-class="math inline"><em>b</em></span> as the north pole).</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>o</em>) = [<em>w</em>,<em>b</em>,<em>y</em>,<em>g</em>]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>g</em>) = [<em>w</em>,<em>r</em>,<em>y</em>,<em>o</em>]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>r</em>) = [<em>w</em>,<em>g</em>,<em>y</em>,<em>b</em>]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em>) = [<em>b</em>,<em>o</em>,<em>g</em>,<em>r</em>]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>y</em>) = [<em>b</em>,<em>r</em>,<em>g</em>,<em>o</em>]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>b</em><em>o</em>) = [[<em>w</em>,<em>g</em>,<em>y</em>,<em>b</em>]]</span>
+<li><p><em><span class="math inline">\(T_1(b)=[w, o, y, r]\)</span> (the
+equator from the point of view of <span class="math inline">\(b\)</span>
+as the north pole).</em></p></li>
+<li><p><em><span class="math inline">\(T_1(o)=[w, b, y,
+g]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(g)=[w, r, y,
+o]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(r)=[w, g, y,
+b]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(w)=[b, o, g,
+r]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(y)=[b, r, g,
+o]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(bo)=[[w, g, y, b]]\)</span>
 (tipping one equator onto the other).</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>o</em><em>g</em>) = [[<em>w</em>,<em>o</em>,<em>y</em>,<em>r</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>g</em><em>r</em>) = [[<em>w</em>,<em>g</em>,<em>y</em>,<em>b</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>r</em><em>b</em>) = [[<em>w</em>,<em>r</em>,<em>y</em>,<em>o</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em><em>b</em>) = [[<em>y</em>,<em>o</em>,<em>w</em>,<em>r</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em><em>o</em>) = [[<em>b</em>,<em>y</em>,<em>g</em>,<em>w</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em><em>g</em>) = [[<em>w</em>,<em>o</em>,<em>y</em>,<em>r</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em><em>r</em>) = [[<em>b</em>,<em>w</em>,<em>g</em>,<em>y</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>y</em><em>b</em>) = [[<em>w</em>,<em>r</em>,<em>y</em>,<em>o</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>y</em><em>o</em>) = [[<em>b</em>,<em>y</em>,<em>g</em>,<em>w</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>y</em><em>g</em>) = [[<em>y</em>,<em>r</em>,<em>w</em>,<em>o</em>]]</span>.</em></p></li>
-<li><p><em><span
-class="math inline"><em>T</em><sub>1</sub>(<em>y</em><em>r</em>) = [[<em>b</em>,<em>w</em>,<em>g</em>,<em>y</em>]]</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(og)=[[w, o, y,
+r]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(gr)=[[w, g, y,
+b]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(rb)=[[w, r, y,
+o]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(wb)=[[y, o, w,
+r]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(wo)=[[b, y, g,
+w]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(wg)=[[w, o, y,
+r]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(wr)=[[b, w, g,
+y]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(yb)=[[w, r, y,
+o]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(yo)=[[b, y, g,
+w]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(yg)=[[y, r, w,
+o]]\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(T_1(yr)=[[b, w, g,
+y]]\)</span>.</em></p></li>
 </ul>
 </div>
 <p>At this point we have defined a map on the 1-skeleton of <span
-class="math inline">𝕆</span>. The only constraint we had to follow was
-functoriality, that the imgage of 1-paths had to be 1-paths between the
-images. The choices we made were motivated by the embedding of the
-Rubik’s cube in Euclidean 3-space.</p>
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span>. The only
+constraint we had to follow was functoriality, that the imgage of
+1-paths had to be 1-paths between the images. The choices we made were
+motivated by the embedding of the Rubik’s cube in Euclidean 3-space.</p>
 <div class="myclaim">
 <p><strong>Claim 1</strong>. <em><span
-class="math inline"><em>T</em><sub>1</sub></span> defines a principal
-circle bundle with connection over the 1-skeleton of <span
-class="math inline">𝕆</span>.</em></p>
+class="math inline">\(T_1\)</span> defines a principal circle bundle
+with connection over the 1-skeleton of <span
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span>.</em></p>
 </div>
 <p>We now want to extend this map to all of <span
-class="math inline">𝕆</span> by providing values for the eight faces.
-Here we will be guided by the classical relationship between a
-connection and its curvature. The curvature is computed from the
-connection, it doesn’t contain any new data. Classically the integral of
-curvature over a 2-cell is the holonomy given by transport around the
-boundary. Can we make this idea type check?</p>
-<p>Take the closed path <span
-class="math inline"><em>w</em><em>b</em> ⋅ <em>b</em><em>o</em> ⋅ <em>o</em><em>w</em></span>
-that begins and ends at <span class="math inline"><em>w</em></span>,
-which bounds the face <span
-class="math inline"><em>w</em><em>b</em><em>o</em></span>. We can
-calculate that <span
-class="math inline"><em>T</em><sub>1</sub>(<em>w</em><em>b</em>) ⋅ <em>T</em><sub>1</sub>(<em>b</em><em>o</em>) ⋅ <em>T</em><sub>1</sub>(<em>o</em><em>w</em>) = [[<em>r</em>,<em>b</em>,<em>o</em>,<em>g</em>]] = <em>R</em></span>,
-rotation clockwise one notch. A 2-path would then be a homotopy <span
-class="math inline">refl<sub><em>w</em></sub> = <em>R</em></span> which
-we called <span class="math inline"><em>R</em>′</span>. In a similar way
-all 8 faces (so long as the vertices in its name are listed in clockwise
-order) map to <span class="math inline"><em>R</em>′</span>.</p>
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span> by providing
+values for the eight faces. Here we will be guided by the classical
+relationship between a connection and its curvature. The curvature is
+computed from the connection, it doesn’t contain any new data.
+Classically the integral of curvature over a 2-cell is the holonomy
+given by transport around the boundary. Can we make this idea type
+check?</p>
+<p>Take the closed path <span class="math inline">\(wb\cdot bo\cdot
+ow\)</span> that begins and ends at <span
+class="math inline">\(w\)</span>, which bounds the face <span
+class="math inline">\(wbo\)</span>. We can calculate that <span
+class="math inline">\(T_1(wb)\cdot T_1(bo)\cdot T_1(ow) = [[r, b, o, g]]
+= R\)</span>, rotation clockwise one notch. A 2-path would then be a
+homotopy <span
+class="math inline">\(\ensuremath{\mathsf{refl}}_w=R\)</span> which we
+called <span class="math inline">\(R&#39;\)</span>. In a similar way all
+8 faces (so long as the vertices in its name are listed in clockwise
+order) map to <span class="math inline">\(R&#39;\)</span>.</p>
 <p>This is all classical combinatorial stuff, but in a HoTT package. The
-fact that <span
-class="math inline">BAut<sub>1</sub>(<em>S</em><sup>1</sup>)</span> is a
+fact that <span class="math inline">\(\mathrm{BAut}_1(S^1)\)</span> is a
 2-type gives us someplace to send all the dimensions of the HIT <span
-class="math inline">𝕆</span>.</p>
+class="math inline">\(\ensuremath{\mathbb{O}}\)</span>.</p>
+<h1 data-number="4" id="why-this-is-geometry"><span
+class="header-section-number">4</span> Why this is geometry</h1>
+<p>Discrete differential forms are alien enough that we ought to provide
+evidence that we are describing honest classical differential geometry.
+In this section we will enumerate a wishlist of facts that we believe
+characterize the subject, and then provide evidence for them.</p>
+<ol>
+<li><p>Connections can be described as an infinitesimal splitting of a
+bundle into horizontal and vertical components.</p></li>
+<li><p>There’s a notion of <em>tensorial</em> that holds for forms but
+not for connections.</p></li>
+<li><p>Differentials and directional derivatives satisfy the Leibniz
+(product) rule.</p></li>
+<li><p>Having an everywhere nonvanishing tangent vector field implies
+the Euler characteristic is zero.</p></li>
+<li><p>Characteristic classes of bundles can be computed using a
+connection (Chern-Weil theory).</p></li>
+<li><p>The space of all connections on a fixed bundle is a contractible
+space on which the group of <em>based gauge transformations</em> (bundle
+automorphisms that are the identity on one selected fiber) acts
+freely.</p></li>
+<li><p>The homotopy types of manifolds we care about have combinatorial
+presentations, and the real-cohesive shape modal operator maps between
+them.</p></li>
+</ol>
+<h2 data-number="4.1" id="connections-as-splittings"><span
+class="header-section-number">4.1</span> Connections as splittings</h2>
+<p>The classical story goes like this.</p>
+<div class="mydef">
+<p><strong>Definition 5</strong>. <em>The <em>vertical bundle</em> <span
+class="math inline">\(VP\)</span> of a principal bundle <span
+class="math inline">\(\pi:P\to B\)</span> with Lie group <span
+class="math inline">\(G\)</span> is the kernel of the derivative <span
+class="math inline">\(T\pi:TP\to TB\)</span>.</em></p>
+</div>
+<p><span class="math inline">\(VP\)</span> can be visualized as the
+collection of tangent vectors that point along the fibers. It should be
+clear that the group <span class="math inline">\(\mathrm{Aut}P\)</span>
+acts on <span class="math inline">\(VP\)</span>: an automorphism <span
+class="math inline">\(\phi:P\to P\)</span> sends <span
+class="math inline">\(V_pP\)</span> to <span
+class="math inline">\(V_{\phi(p)}P\)</span>, where of course <span
+class="math inline">\(\pi(p)=\pi(\phi(p))\)</span>.</p>
+<div class="mydef">
+<p><strong>Definition 6</strong>. <em>An <em>Ehresmann connection</em>
+on a principal bundle <span class="math inline">\(\pi:P\to B\)</span>
+with Lie group <span class="math inline">\(G\)</span> is a splitting
+<span class="math inline">\(TP=VP\oplus HP\)</span> at every point of
+<span class="math inline">\(P\)</span> into vertical and “horizontal”
+subspaces, which is preserved by the action of <span
+class="math inline">\(\mathrm{Aut}P\)</span>.</em></p>
+</div>
+<p>Being preserved by the action of <span
+class="math inline">\(\mathrm{Aut}P\)</span> means that the
+complementary horizontal subspaces in a given fiber of <span
+class="math inline">\(\pi:P\to B\)</span> are determined by the
+splitting at any single point in the fiber. The action of <span
+class="math inline">\(G\)</span> on this fiber can then push the
+splitting around to all the other points.</p>
+<p>The motivation for this definition is that we now have an isomorphism
+<span class="math inline">\(T_p\pi:H_pP\to T_{\pi(p)}B\)</span> between
+each horizontal space and the tangent space below it in <span
+class="math inline">\(B\)</span>. This means that given a tangent vector
+at <span class="math inline">\(b:B\)</span> and a point <span
+class="math inline">\(p\)</span> in <span
+class="math inline">\(\pi^{-1}(b)\)</span> we can uniquely lift the
+tangent vector to a horizontal vector at <span
+class="math inline">\(p\)</span>. We can also lift vector fields and
+paths in this way. To lift a path <span
+class="math inline">\(\gamma:[0,1]\to B\)</span> you must specify a lift
+for <span class="math inline">\(\gamma(0)\)</span> and then lift the
+tangent vectors of <span class="math inline">\(\gamma\)</span> and prove
+that you can integrate the lift of that vector field upstairs in <span
+class="math inline">\(HP\)</span>.</p>
+<p>Then, armed with the lifting of paths one immediately obtains
+isomorphisms between the fibers of <span
+class="math inline">\(P\)</span>. So the Ehresmann connection, the
+lifting of paths, and transport isomorphisms between fibers are all
+recapitulations of the structure that the connection adds to the
+bundle.</p>
+<p>Moving now to HoTT, fix a type <span
+class="math inline">\(B:\mathcal{U}\)</span> and a type family <span
+class="math inline">\(f:B\to\mathcal{U}\)</span>. Path induction gives
+us the transport isomorphism <span class="math inline">\(\prod_{p:x=_B
+y}\mathrm{tr}(p):f(x)=f(y)\)</span>. We can use this to define a type of
+<em>dependent paths</em>, also called <em>pathovers</em> or <em>paths
+over</em> a given path.</p>
+<div class="mydef">
+<p><strong>Definition 7</strong>. <em>With the above context and points
+<span class="math inline">\(a:f(x), b:f(y)\)</span> the type of
+<em>dependent paths over <span class="math inline">\(p\)</span></em>
+with endpoints <span class="math inline">\(a, b\)</span> is denoted
+<span class="math display">\[a\xrightarrow[{p}]{=}b.\]</span> By
+induction we can assume <span class="math inline">\(p\)</span> is <span
+class="math inline">\(\ensuremath{\mathsf{refl}}_a\)</span> in which
+case <span class="math inline">\(a\xrightarrow[{p}]{=}b\)</span> is
+<span class="math inline">\(a=_{f(x)}a\)</span>.</em></p>
+</div>
+<p>See <span class="citation" data-cites="Symmetry"> (<a
+href="#ref-Symmetry" role="doc-biblioref">Bezem <em>et al.</em>,
+2023</a>)</span> for more discussion of dependent paths (where they use
+the term “path over”), including composition, and associativity
+thereof.</p>
+<p>The following two lemmas explain how transport decomposes dependent
+paths into horizontal and vertical components. These two lemmas take
+place in the dependent sum <span
+class="math inline">\(\sum_{x:B}f(x)\)</span>.</p>
+<div class="mylemma">
+<p><strong>Lemma 5</strong>. <em>(Path lifting property, <span
+class="citation" data-cites="hottbook"> (<a href="#ref-hottbook"
+role="doc-biblioref">Univalent Foundations Program, 2013</a>)</span>
+Lemma 2.3.2). Let <span class="math inline">\(f:B\to\mathcal{U}\)</span>
+be a type family over <span class="math inline">\(B\)</span> and assume
+we have <span class="math inline">\(a:f(x)\)</span> for some <span
+class="math inline">\(x:B\)</span>. Then for any <span
+class="math inline">\(\alpha:x=_B y\)</span>, we have <span
+class="math display">\[\ensuremath{\mathsf{lift}}(p,
+\alpha):(x,a)=(y,\mathrm{tr}(\alpha)(a))\]</span></em></p>
+</div>
+<div class="mylemma">
+<p><strong>Lemma 6</strong>. <em>Let <span
+class="math inline">\(f:B\to\mathcal{U}\)</span> be a type family over
+<span class="math inline">\(B\)</span> and assume we have <span
+class="math inline">\(x,x&#39;:B,a:f(x),a:f(x&#39;)\)</span>. Then <span
+class="math display">\[((x,a)=(x&#39;,a&#39;))\simeq (x=x&#39;)\times
+(a=a).\]</span></em></p>
+</div>
+<p>This is a slight generalization of <span class="citation"
+data-cites="Symmetry"> (<a href="#ref-Symmetry"
+role="doc-biblioref">Bezem <em>et al.</em>, 2023</a>)</span> Lemma
+4.14.1. To prove it we can assume <span
+class="math inline">\(x&#39;\)</span> is <span
+class="math inline">\(x\)</span> in which case the lemma is a special
+case of the identity type of a sum type.</p>
+<h2 data-number="4.2" id="tensorial"><span
+class="header-section-number">4.2</span> Tensorial</h2>
+<p>Let <span class="math inline">\(\alpha\)</span> be an <span
+class="math inline">\(n\)</span>-form on a smooth manifold <span
+class="math inline">\(B\)</span>. We are encouraged to think of <span
+class="math inline">\(\alpha\)</span> as a function that takes <span
+class="math inline">\(n\)</span> vector fields as input and returns a
+smooth function. Denoting by <span class="math inline">\(\Gamma
+TB\)</span> the type of vector fields, this gives <span
+class="math inline">\(\alpha:(\Gamma TB)^n\to (B\to
+\ensuremath{\mathbb{R}})\)</span>. If this seems so natural as to be
+confusing, remember that forms are usually defined as sections of the
+exterior power of the cotangent bundle, and so we are moving between
+viewing a form as a section of a bundle, or as a function on tuples of
+vector fields.</p>
+<p>An <span class="math inline">\(n\)</span>-form viewed this way has
+the property that it is linear over <span
+class="math inline">\(B\to\ensuremath{\mathbb{R}}\)</span> in every
+component, i.e. if <span class="math inline">\(f_1, \ldots,
+f_n:B\to\ensuremath{\mathbb{R}}\)</span> then <span
+class="math inline">\(\alpha(f_1 X_1,\ldots, f_n X_n) = f_1\cdots
+f_n\alpha(X_1,\ldots,X_n).\)</span> We also say that <span
+class="math inline">\(\alpha\)</span> is <em>tensorial</em> in every
+argument. A function on vector fields is tensorial just when it’s linear
+over the action of smooth functions on vector fields. Examples include
+<span class="math inline">\(n\)</span>-forms and metrics (which are
+symmetric instead of being antisymmetric like forms).</p>
+<p>But what about connections and curvature?</p>
+<h2 data-number="4.3" id="the-leibniz-product-rule"><span
+class="header-section-number">4.3</span> The Leibniz (product) rule</h2>
+<p>The Leibniz rule states that if <span class="math inline">\(f, g:M\to
+\ensuremath{\mathbb{R}}\)</span> are two smooth functions to the real
+numbers then <span class="math inline">\(d(fg) = fdg + gdf\)</span>.
+Here <span class="math inline">\(fg\)</span> is the function formed by
+taking the pointwise product of <span class="math inline">\(f\)</span>
+and <span class="math inline">\(g\)</span>. To examine this situation in
+HoTT we need type-theoretic functions <span class="math inline">\(f,
+g:M\to B\)</span> from some type <span class="math inline">\(M\)</span>
+to an H-space <span class="math inline">\(B\)</span>.</p>
+<div class="mydef">
+<p><strong>Definition 8</strong>. <em>An H-space structure on a pointed
+type <span class="math inline">\((B,b)\)</span> consists of</em></p>
+<ol>
+<li><p><em>A binary operation <span class="math inline">\(\mu:B\to B\to
+B\)</span></em></p></li>
+<li><p><em>A left unit law <span
+class="math inline">\(\mu_l:\mu(\mathrm{pt},-)=\ensuremath{\text{id}}_B\)</span></em></p></li>
+<li><p><em>A right unit law <span
+class="math inline">\(\mu_r:\mu(-,\mathrm{pt})=\ensuremath{\text{id}}_B\)</span></em></p></li>
+<li><p><em>A coherence <span
+class="math inline">\(\mu_{lr}:\mu_l(\mathrm{pt})=_{\mu(\mathrm{pt},\mathrm{pt})=\mathrm{pt}}\mu_r(\mathrm{pt})\)</span></em></p></li>
+<li><p><em>A proof of left- and right- invertibility: <span
+class="math inline">\(\mu(a,-):A\simeq A\)</span>, <span
+class="math inline">\(\mu(-, b):A\simeq A\)</span></em></p></li>
+</ol>
+</div>
+<p>The analogue of the algebra of functions to <span
+class="math inline">\(\ensuremath{\mathbb{R}}\)</span> is:</p>
+<div class="myprop">
+<p><strong>Proposition 1</strong>. <em>For any type <span
+class="math inline">\(M\)</span> and H-space <span
+class="math inline">\(B\)</span> the type of maps <span
+class="math inline">\(M\to B\)</span> with base point the constant map
+is an H-space under pointwise multiplication.</em></p>
+</div>
+<p>We claim thact the following deserves to be called the Leibniz
+rule.</p>
+<div class="mylemma">
+<p><strong>Lemma 7</strong>. <em>For any type <span
+class="math inline">\(M\)</span> and H-space <span
+class="math inline">\(B\)</span> and maps <span
+class="math inline">\(f,g:M\to B\)</span> and path <span
+class="math inline">\(p:x=_M y\)</span> we have <span
+class="math inline">\(\ensuremath{\mathsf{ap}}(fg)(p)=\mu(f(x),\ensuremath{\mathsf{ap}}(g)(p))
+\cdot \mu(\ensuremath{\mathsf{ap}}(f)(p),g(y))\)</span>. (<span
+class="math inline">\(\cdot\)</span> is concatenation of
+paths.)</em></p>
+</div>
+<p>The notation is temporarily sloppy, but by <span
+class="math inline">\(\mu(a, p)\)</span> for a path <span
+class="math inline">\(p\)</span> we mean the functorial action of
+multiplication by <span class="math inline">\(a\)</span> on the left, on
+a path.g</p>
+<p><img src="./09052d33113b7087f7abc8b04e220a13697b45a3.png"
+alt="image" /></p>
+<h2 data-number="4.4" id="nonvanishing-tangent-vector-fields"><span
+class="header-section-number">4.4</span> Nonvanishing tangent vector
+fields</h2>
+<p>What’s the non-infinitesimal version of this?</p>
+<h2 data-number="4.5" id="gauge-transformations"><span
+class="header-section-number">4.5</span> Gauge transformations</h2>
+<p>A <em>gauge transformation</em> is a term inherited from physics.
+It’s an automorphism of a principal bundle <span
+class="math inline">\(P\to X\)</span>, meaning a homeomorphism of <span
+class="math inline">\(P\)</span> that commutes with the projection to
+<span class="math inline">\(X\)</span> and so acts on each fiber. It is
+further required to be equivariant under the action of the group <span
+class="math inline">\(G\)</span>, and so it’s very similar to the act of
+multiplying each fiber by a continuously varying element of <span
+class="math inline">\(G\)</span>. Another way to say that is that, since
+each fiber is a <span class="math inline">\(G\)</span>-torsor, a gauge
+transformation is a continuously varying isomorphism of each fiber with
+<span class="math inline">\(G\)</span>, or a continuously varying choice
+of identity element. If we think of a <span
+class="math inline">\(G\)</span>-torsor as the fundamental physical
+quantity, and a particular choice of identity element as a choice of
+units, then you can see why we might want to consider gauge
+transformations “physically meaningless”. Even though this group <span
+class="math inline">\(\mathrm{Aut}P\)</span> is very large, we will
+sometimes want to quotient by it.</p>
+<p>In HoTT this is easy to express. If a bundle <span
+class="math inline">\(P\to X\)</span> is classified by <span
+class="math inline">\(f:X\to\mathrm{BAut}_1(S^1)\)</span> then the group
+of gauge transformations is just the type <span
+class="math inline">\(f=f\)</span> or in other words <span
+class="math inline">\(\Omega_f(X\to\mathrm{BAut}_1(S^1))\)</span>. The
+delooping <span class="math inline">\(B(\mathrm{Aut}P)\)</span> of this
+group is then <span
+class="math inline">\(||X\to\mathrm{BAut}_1(S^1)||_{(f)}\)</span>, the
+connected component of this mapping type containing <span
+class="math inline">\(f\)</span>. In 1982 this was a theorem!<span
+class="citation" data-cites="atiyah1983yang"> (<a
+href="#ref-atiyah1983yang" role="doc-biblioref">Atiyah &amp; Bott,
+1983</a>)</span></p>
+<h2 data-number="4.6"
+id="characteristic-classes-and-chern-weil-theory"><span
+class="header-section-number">4.6</span> Characteristic classes and
+Chern-Weil theory</h2>
+<p>What is Chern-Weil theory about? (cite Freed-Hopkins<span
+class="citation" data-cites="freed2013chernweil"> (<a
+href="#ref-freed2013chernweil" role="doc-biblioref">Freed &amp; Hopkins,
+2013</a>)</span>)</p>
+<h2 data-number="4.7" id="combinatorial-manifolds"><span
+class="header-section-number">4.7</span> Combinatorial manifolds</h2>
+<p>The combinatorial structure we have in mind is a nerve of a good open
+cover. What do we know about which smooth manifolds have such covers?
+While we’re at it, let’s survey all the combinatorial-flavored spaces
+and survey what smooth manifolds are homotopy equivalent to which
+structures.</p>
+<p>What topological manifolds are equivalent to a CW complex? The answer
+is the composition of a few results summarized by Allen Hatcher<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a> (citing <span class="citation"
+data-cites="kirby_siebenmann"> (<a href="#ref-kirby_siebenmann"
+role="doc-biblioref">Kirby &amp; Siebenmann, 1977</a>)</span> and <span
+class="citation" data-cites="freedman_quinn"> (<a
+href="#ref-freedman_quinn" role="doc-biblioref">Freedman &amp; Quinn,
+1990</a>)</span>):</p>
+<blockquote>
+<p>Every topological manifold has a handlebody structure except in
+dimension 4, where a 4-manifold has a handlebody structure if and only
+if it is smoothable. This is a theorem on page 136 of Freedman and
+Quinn’s book "Topology of 4-Manifolds", with a reference given to the
+Kirby-Siebenmann book for the higher-dimensional case. It is then an
+elementary fact that an <span class="math inline">\(n\)</span>-manifold
+with a handlebody structure is homotopy equivalent to a CW complex with
+one <span class="math inline">\(k\)</span>-cell for each <span
+class="math inline">\(k\)</span>-handle, so in particular there are no
+cells of dimension greater than <span class="math inline">\(n\)</span>.
+At least in the compact case a manifold with a handlebody structure is
+in fact homeomorphic to a CW complex with <span
+class="math inline">\(k\)</span>-cells corresponding to <span
+class="math inline">\(k\)</span>-handles; see page 107 of
+Kirby-Siebenmann. This probably holds in the noncompact case as well,
+though I don’t know a reference.</p>
+</blockquote>
 <div id="refs" class="references csl-bib-body hanging-indent"
 data-entry-spacing="0" role="list">
+<div id="ref-atiyah1983yang" class="csl-entry" role="listitem">
+<span class="smallcaps">Atiyah</span>, M.F. &amp; <span
+class="smallcaps">Bott</span>, R. (1983) The yang-mills equations over
+riemann surfaces. <em>Philosophical Transactions of the Royal Society of
+London. Series A, Mathematical and Physical Sciences</em>,
+<strong>308</strong>, 523–615.
+</div>
+<div id="ref-Symmetry" class="csl-entry" role="listitem">
+<span class="smallcaps">Bezem</span>, M., <span
+class="smallcaps">Buchholtz</span>, U., <span
+class="smallcaps">Cagne</span>, P., <span
+class="smallcaps">Dundas</span>, B.I., &amp; <span
+class="smallcaps">Grayson</span>, D.R. (2023) Symmetry.
+</div>
+<div id="ref-freed2013chernweil" class="csl-entry" role="listitem">
+<span class="smallcaps">Freed</span>, D.S. &amp; <span
+class="smallcaps">Hopkins</span>, M.J. (2013) <a
+href="https://arxiv.org/abs/1301.5959">Chern-weil forms and abstract
+homotopy theory</a>.
+</div>
+<div id="ref-freedman_quinn" class="csl-entry" role="listitem">
+<span class="smallcaps">Freedman</span>, M.H. &amp; <span
+class="smallcaps">Quinn</span>, F. (1990) <em><a
+href="http://www.jstor.org/stable/j.ctt7ztz2d">Topology of 4-manifolds
+(PMS-39)</a></em>. Princeton University Press.
+</div>
+<div id="ref-kirby_siebenmann" class="csl-entry" role="listitem">
+<span class="smallcaps">Kirby</span>, R.C. &amp; <span
+class="smallcaps">Siebenmann</span>, L.C. (1977) <em>Foundational essays
+on topological manifolds, smoothings, and triangulations</em>, Annals of
+mathematics studies. Princeton University Press.
+</div>
 <div id="ref-talbott" class="csl-entry" role="listitem">
 <span class="smallcaps">Talbott</span>, S. (1995) <em><a
 href="https://books.google.com/books?id=KcXaAAAAMAAJ">The future does
 not compute: Transcending the machines in our midst</a></em>. O’Reilly
 &amp; Associates.
 </div>
+<div id="ref-hottbook" class="csl-entry" role="listitem">
+<span class="smallcaps">Univalent Foundations Program</span> (2013)
+<em>Homotopy type theory: Univalent foundations of mathematics</em>.
+Institute for Advanced Study: <a
+href="https://homotopytypetheory.org/book"
+class="uri">https://homotopytypetheory.org/book</a>.
 </div>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a
+href="https://mathoverflow.net/questions/201944/topological-n-manifolds-have-the-homotopy-type-of-n-dimensional-cw-complexes"
+class="uri">https://mathoverflow.net/questions/201944/topological-n-manifolds-have-the-homotopy-type-of-n-dimensional-cw-complexes</a><a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </body>
 </html>

@@ -4,11 +4,11 @@
 \usepackage{fontspec}
 \usepackage{titlesec}
 \usepackage[nottoc]{tocbibind}
-
 \usepackage{fancyvrb}
 \setmainfont{Baskerville}
 \setsansfont{Quadrat-Serial}
 \setmonofont{Courier New}
+\urlstyle{rm}
 
 \titleformat*{\section}{\large\sffamily}
 \titleformat*{\subsection}{\normalsize\sffamily}
@@ -45,6 +45,7 @@ For the HoTT-oriented audience my goal is to demonstrate that connections and ga
 For the geometry audience my goal is to offer an entirely new perspective on the de Rham complex in general, and connections and curvature in particular. My grandiose hope is that in this framing we can find a natural and intuitive understanding of Chern-Weil theory, i.e. the link between curvature and characteristic classes. 
 
 
+
 \section{Non-infinitesimal calculus}
 
 Our plan is to examine differential geometry using finite methods: using paths instead of vector fields. We will apply the syntax of type theory and work through a first course in differential forms, connections and curvature.
@@ -59,42 +60,6 @@ The derivative is a particular action on paths, one that is entailed in the orig
 
 HoTT also has functions, but those functions always act in all the available dimensions of the type all at once. It is inherently a function on points, paths, and higher paths. We can look at what \( f \) does to paths using the construction \( \ap f \). At this point there is an important check we can make. \( df \) has a few important properties, the most characteristic of which is the Leibniz, or product rule. Is this visible in HoTT?
 
-The Leibniz rule states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to an H-space \( B \).
-
-\begin{mydef}
-An H-space structure on a pointed type \( (B,b) \) consists of
-\begin{enumerate}
-\item A binary operation \( \mu:B\to B\to B \)
-\item A left unit law \( \mu_l:\mu(\pt,-)=\id_B \)
-\item A right unit law \( \mu_r:\mu(-,\pt)=\id_B \)
-\item A coherence \( \mu_{lr}:\mu_l(\pt)=_{\mu(\pt,\pt)=\pt}\mu_r(\pt) \)
-\item A proof of left- and right- invertibility: \( \mu(a,-):A\simeq A \), \( \mu(-, b):A\simeq A \)
-\end{enumerate}
-\end{mydef}
-
-The analogue of the algebra of functions to \( \rr \) is:
-\begin{myprop}
-For any type \( M \) and H-space \( B \) the type of maps \( M\to B \) with base point the constant map is an H-space under pointwise multiplication.
-\end{myprop}
-
-We claim thact the following deserves to be called the Leibniz rule.
-
-\begin{mylemma}
-For any type \( M \) and H-space \( B \) and maps \( f,g:M\to B \) and path \( p:x=_M y \) we have \( \ap(fg)(p)=\mu(f(x),\ap(g)(p)) \cdot \mu(\ap(f)(p),g(y)) \). (\( \cdot \) is concatenation of paths.)
-\end{mylemma}
-
-The notation is temporarily sloppy, but by \( \mu(a, p) \) for a path \( p \) we mean the functorial action of multiplication by \( a \) on the left, on a path.g
-
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJCIl0sWzEsMCwiQiJdLFsyLDAsIkIiXSxbMCwxLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTJ9XSxbMCwxLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjJ9XSxbMSwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTJ9XSxbMSwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjJ9XSxbMyw0LCJwIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs1LDYsInEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
-\begin{tikzcd}[cramped]
-  B & B & B
-  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-12pt}, from=1-1, to=1-2]
-  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=12pt}, from=1-1, to=1-2]
-  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-12pt}, from=1-2, to=1-3]
-  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=12pt}, from=1-2, to=1-3]
-  \arrow["p"', shorten <=3pt, shorten >=3pt, Rightarrow, from=0, to=1]
-  \arrow["q"', shorten <=3pt, shorten >=3pt, Rightarrow, from=2, to=3]
-\end{tikzcd}
 
 \begin{figure}[h]
 \centering
@@ -135,40 +100,40 @@ arrow/.style={->,semithick}
   dim1vertex/.style={}]
 \coordinate (-1, -1, 0) at (-1, -1, 0);
 \coordinate (-1, 1, 0) at (-1, 1, 0);
-\coordinate (0, 0, -1) at (0, 0, -1);
-\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (0, 0, -1.4) at (0, 0, -1.4);
+\coordinate (0, 0, 1.4) at (0, 0, 1.4);
 \coordinate (1, -1, 0) at (1, -1, 0);
 \coordinate (1, 1, 0) at (1, 1, 0);
 %% Drawing edges in the back
 %%
 \draw[edge,dim2back] (-1, -1, 0) -- (-1, 1, 0);
-\draw[edge,back] (-1, -1, 0) -- (0, 0, -1);
-\draw[edge,back] (-1, -1, 0) -- (0, 0, 1);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
 \draw[edge,dim2back] (-1, -1, 0) -- (1, -1, 0);
 %% Drawing vertices in the back
 %%
 \node[dim1vertex] at (-1, -1, 0)     {};
 %% Drawing the facets
 %%
-\fill[facet] (1, 1, 0) -- (0, 0, -1) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (0, 0, 1) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
 %% Drawing edges in the front
 %%
-\draw[edge] (-1, 1, 0) -- (0, 0, -1);
-\draw[edge] (-1, 1, 0) -- (0, 0, 1);
+\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
 \draw[dim2edge] (-1, 1, 0) -- (1, 1, 0);
-\draw[edge] (0, 0, -1) -- (1, -1, 0);
-\draw[edge] (0, 0, -1) -- (1, 1, 0);
-\draw[edge] (0, 0, 1) -- (1, -1, 0);
-\draw[edge] (0, 0, 1) -- (1, 1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
 \draw[dim2edge] (1, -1, 0) -- (1, 1, 0);
 %% Drawing the vertices in the front
 %%
 \node[dim1vertex] at (-1, 1, 0)     {};
-\node[vertex] at (0, 0, -1)     {};
-\node[vertex] at (0, 0, 1)     {};
+\node[vertex] at (0, 0, -1.4)     {};
+\node[vertex] at (0, 0, 1.4)     {};
 \node[dim1vertex] at (1, -1, 0)     {};
 \node[dim1vertex] at (1, 1, 0)     {};
 \end{tikzpicture}
@@ -203,29 +168,32 @@ arrow/.style={->,semithick}
 \node[vertex] at (-1, -1, 0)     {};
 %% Drawing the facets
 %%
-\fill[facet] (1, 1, 0) -- (0, 0, -1) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (0, 0, 1) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
 %% Drawing edges in the front
 %%
-\draw[edge] (-1, 1, 0) -- (0, 0, -1);
-\draw[edge] (-1, 1, 0) -- (0, 0, 1);
+\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
 \draw[edge] (-1, 1, 0) -- (1, 1, 0);
-\draw[edge] (0, 0, -1) -- (1, -1, 0);
-\draw[edge] (0, 0, -1) -- (1, 1, 0);
-\draw[edge] (0, 0, 1) -- (1, -1, 0);
-\draw[edge] (0, 0, 1) -- (1, 1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
 \draw[edge] (1, -1, 0) -- (1, 1, 0);
 %% Drawing the vertices in the front
 %%
-\node[vertex] at (-1, 1, 0)     {};
-\node[vertex] at (0, 0, -1)     {};
-\node[vertex] at (0, 0, 1)     {};
-\node[vertex] at (1, -1, 0)     {};
-\node[vertex] at (1, 1, 0)     {};
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
 \end{tikzpicture}
-\caption{The HIT \( \{w, y\}* C_4 \) which has 6 points, 12 1-paths, 8 2-paths.}
+\caption{The HIT \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
 \end{figure}
 
 \section{The tangent bundle of the 2-sphere}
@@ -309,6 +277,152 @@ We now want to extend this map to all of \( \oo \) by providing values for the e
 Take the closed path \( wb\cdot bo\cdot ow \) that begins and ends at \( w \), which bounds the face \( wbo \). We can calculate that \( T_1(wb)\cdot T_1(bo)\cdot T_1(ow) = [[r, b, o, g]] = R \), rotation clockwise one notch. A 2-path would then be a homotopy \( \refl_w=R \) which we called \( R' \). In a similar way all 8 faces (so long as the vertices in its name are listed in clockwise order) map to \( R' \).
 
 This is all classical combinatorial stuff, but in a HoTT package. The fact that \( \BAutoso \) is a 2-type gives us someplace to send all the dimensions of the HIT \( \oo \). 
+
+\section{Why this is geometry}
+
+Discrete differential forms are alien enough that we ought to provide evidence that we are describing honest classical differential geometry. In this section we will enumerate a wishlist of facts that we believe characterize the subject, and then provide evidence for them.
+
+\begin{enumerate}
+\item Connections can be described as an infinitesimal splitting of a bundle into horizontal and vertical components.
+\item There's a notion of \emph{tensorial} that holds for forms but not for connections.
+\item Differentials and directional derivatives satisfy the Leibniz (product) rule.
+\item The Gauss-Bonnet theorem holds, relating the curvature of a 2-manifold to the Euler characteristic.
+\item Having an everywhere nonvanishing tangent vector field implies the Euler characteristic is zero.
+\item Characteristic classes of bundles can be computed using a connection (Chern-Weil theory).
+\item The space of all connections on a fixed bundle is a contractible space on which the group of \emph{based gauge transformations} (bundle automorphisms that are the identity on one selected fiber) acts freely.
+\item The homotopy types of manifolds we care about have combinatorial presentations, and the real-cohesive shape modal operator maps between them.
+\end{enumerate}
+
+Other questions we might explore:
+\begin{enumerate}
+\item Where is orientation in this story? Can we compute any examples of Stiefel-Whitney classes?
+\item Can we define the Hopf bundle?
+\end{enumerate}
+
+\subsection{Connections as splittings}
+
+The classical story goes like this.
+
+\begin{mydef}
+The \emph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to B \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TB \). 
+\end{mydef}
+
+\( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that the group \( \Aut P \) acts on \( VP \): an automorphism \( \phi:P\to P \) sends \( V_pP \) to \( V_{\phi(p)}P \), where of course \( \pi(p)=\pi(\phi(p)) \).
+
+\begin{mydef}
+An \emph{Ehresmann connection} on a principal bundle \( \pi:P\to B \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
+\end{mydef}
+
+Being preserved by the action of \( \Aut P \) means that the complementary horizontal subspaces in a given fiber of \( \pi:P\to B \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
+
+The motivation for this definition is that we now have an isomorphism \( T_p\pi:H_pP\to T_{\pi(p)}B \) between each horizontal space and the tangent space below it in \( B \). This means that given a tangent vector at \( b:B \) and a point \( p \) in \( \pi^{-1}(b) \) we can uniquely lift the tangent vector to a horizontal vector at \( p \). We can also lift vector fields and paths in this way. To lift a path \( \gamma:[0,1]\to B \) you must specify a lift for \( \gamma(0) \) and then lift the tangent vectors of \( \gamma \) and prove that you can integrate the lift of that vector field upstairs in \( HP \).
+
+Then, armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \). So the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
+
+Moving now to HoTT, fix a type \( B:\U \) and a type family \( f:B\to\U \). Path induction gives us the transport isomorphism \( \pit{p:x=_B y}\tr(p):f(x)=f(y) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
+
+\begin{mydef}
+With the above context and points \( a:f(x), b:f(y) \) the type of \emph{dependent paths over \( p \)} with endpoints \( a, b \) is denoted
+\[ 
+ a\pathover{p}b.
+\]
+By induction we can assume \( p \) is \( \refl_a \) in which case \( a\pathover{p}b \) is \( a=_{f(x)}a \).
+\end{mydef}
+
+See \cite{Symmetry} for more discussion of dependent paths (where they use the term ``path over''), including composition, and associativity thereof.
+
+The following two lemmas explain how transport decomposes dependent paths into horizontal and vertical components. These two lemmas take place in the dependent sum \( \sit{x:B}f(x) \).
+
+\begin{mylemma}
+  (Path lifting property, \cite{hottbook} Lemma 2.3.2). Let \(f:B\to\U \) be a type family over \( B \) and assume we have \( a:f(x) \) for some \( x:B \). Then for any \( \alpha:x=_B y \), we have 
+  \[ 
+  \lift(p, \alpha):(x,a)=(y,\tr(\alpha)(a))
+  \]
+\end{mylemma}
+
+\begin{mylemma}
+Let \(f:B\to\U \) be a type family over \( B \) and assume we have \( x,x':B,a:f(x),a:f(x') \). Then 
+\[ 
+((x,a)=(x',a'))\simeq (x=x')\times (a=a).
+\]
+\end{mylemma}
+
+This is a slight generalization of \cite{Symmetry} Lemma 4.14.1. To prove it we can assume \( x' \) is \( x \) in which case the lemma is a special case of the identity type of a sum type.
+
+\subsection{Tensorial}
+
+Let \( \alpha \) be an \( n \)-form on a smooth manifold \( B \). We are encouraged to think of \( \alpha \) as a function that takes \( n \) vector fields as input and returns a smooth function. Denoting by \( \Gamma TB \) the type of vector fields, this gives \( \alpha:(\Gamma TB)^n\to (B\to \rr) \). If this seems so natural as to be confusing, remember that forms are usually defined as sections of the exterior power of the cotangent bundle, and so we are moving between viewing a form as a section of a bundle, or as a function on tuples of vector fields.
+
+An \( n \)-form viewed this way has the property that it is linear over \( B\to\rr \) in every component, i.e. if \( f_1, \ldots, f_n:B\to\rr \) then \( \alpha(f_1 X_1,\ldots, f_n X_n) = f_1\cdots f_n\alpha(X_1,\ldots,X_n). \) We also say that \( \alpha \) is \emph{tensorial} in every argument. A function on vector fields is tensorial just when it's linear over the action of smooth functions on vector fields. Examples include \( n \)-forms and metrics (which are symmetric instead of being antisymmetric like forms). 
+
+But what about connections and curvature?
+
+\subsection{The Leibniz (product) rule}
+
+The Leibniz rule states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to an H-space \( B \).
+
+\begin{mydef}
+An H-space structure on a pointed type \( (B,b) \) consists of
+\begin{enumerate}
+\item A binary operation \( \mu:B\to B\to B \)
+\item A left unit law \( \mu_l:\mu(\pt,-)=\id_B \)
+\item A right unit law \( \mu_r:\mu(-,\pt)=\id_B \)
+\item A coherence \( \mu_{lr}:\mu_l(\pt)=_{\mu(\pt,\pt)=\pt}\mu_r(\pt) \)
+\item A proof of left- and right- invertibility: \( \mu(a,-):A\simeq A \), \( \mu(-, b):A\simeq A \)
+\end{enumerate}
+\end{mydef}
+
+The analogue of the algebra of functions to \( \rr \) is:
+\begin{myprop}
+For any type \( M \) and H-space \( B \) the type of maps \( M\to B \) with base point the constant map is an H-space under pointwise multiplication.
+\end{myprop}
+
+We claim thact the following deserves to be called the Leibniz rule.
+
+\begin{mylemma}
+For any type \( M \) and H-space \( B \) and maps \( f,g:M\to B \) and path \( p:x=_M y \) we have \( \ap(fg)(p)=\mu(f(x),\ap(g)(p)) \cdot \mu(\ap(f)(p),g(y)) \). (\( \cdot \) is concatenation of paths.)
+\end{mylemma}
+
+The notation is temporarily sloppy, but by \( \mu(a, p) \) for a path \( p \) we mean the functorial action of multiplication by \( a \) on the left, on a path.g
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJCIl0sWzEsMCwiQiJdLFsyLDAsIkIiXSxbMCwxLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTJ9XSxbMCwxLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjJ9XSxbMSwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTJ9XSxbMSwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjJ9XSxbMyw0LCJwIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs1LDYsInEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+\begin{tikzcd}[cramped]
+  B & B & B
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-12pt}, from=1-1, to=1-2]
+  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=12pt}, from=1-1, to=1-2]
+  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-12pt}, from=1-2, to=1-3]
+  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=12pt}, from=1-2, to=1-3]
+  \arrow["p"', shorten <=3pt, shorten >=3pt, Rightarrow, from=0, to=1]
+  \arrow["q"', shorten <=3pt, shorten >=3pt, Rightarrow, from=2, to=3]
+\end{tikzcd}
+
+\subsection{Nonvanishing tangent vector fields}
+
+Associated bundles in HoTT.
+
+A nowhere-vanishing section is therefore a section of a decomposition \( \pit{x:B}GL(n)=GL(n-1)\times GL(1) \) acting separately on the section direction and on the quotient of the vector space by the section direction.
+
+\subsection{Gauge transformations}
+
+A \emph{gauge transformation} is a term inherited from physics. It's an automorphism of a principal bundle \( P\to X \), meaning a homeomorphism of \( P \) that commutes with the projection to \( X \) and so acts on each fiber. It is further required to be equivariant under the action of the group \( G \), and so it's very similar to the act of multiplying each fiber by a continuously varying element of \( G \). Another way to say that is that, since each fiber is a \( G \)-torsor, a gauge transformation is a continuously varying isomorphism of each fiber with \( G \), or a continuously varying choice of identity element. If we think of a \( G \)-torsor as the fundamental physical quantity, and a particular choice of identity element as a choice of units, then you can see why we might want to consider gauge transformations ``physically meaningless''. Even though this group \( \Aut P \) is very large, we will sometimes want to quotient by it.
+
+In HoTT this is easy to express. If a bundle \( P\to X \) is classified by \( f:X\to\BAutoso \) then the group of gauge transformations is just the type \( f=f \) or in other words \( \Omega_f(X\to\BAutoso) \). The delooping \( B(\Aut P) \) of this group is then \( ||X\to\BAutoso||_{(f)} \), the connected component of this mapping type containing \( f \). In 1982 this was a theorem!\cite{atiyah1983yang}
+
+\subsection{Characteristic classes and Chern-Weil theory}
+
+Chern-Weil ``theory'' is actually a map, from the space of connections on the bundle \( \pi:P\to B \) to the cohomology ring of \( B \), plus the claim that these are the characteristic classes for the bundle. (cite Freed-Hopkins\cite{freed2013chernweil})
+
+\subsection{Combinatorial manifolds}
+
+The combinatorial structure we have in mind is a nerve of a good open cover. What do we know about which smooth manifolds have such covers? While we're at it, let's survey all the combinatorial-flavored spaces and survey what smooth manifolds are homotopy equivalent to which structures.
+
+What topological manifolds are equivalent to a CW complex? The answer is the composition of a few results summarized by Allen Hatcher\footnote{\url{https://mathoverflow.net/questions/201944/topological-n-manifolds-have-the-homotopy-type-of-n-dimensional-cw-complexes}} (citing \cite{kirby_siebenmann} and \cite{freedman_quinn}):
+
+\begin{quote}
+Every topological manifold has a handlebody structure except in dimension 4, where a 4-manifold has a handlebody structure if and only if it is smoothable. This is a theorem on page 136 of Freedman and Quinn's book "Topology of 4-Manifolds", with a reference given to the Kirby-Siebenmann book for the higher-dimensional case. It is then an elementary fact that an \( n \)-manifold with a handlebody structure is homotopy equivalent to a CW complex with one \( k \)-cell for each \( k \)-handle, so in particular there are no cells of dimension greater than \( n \). At least in the compact case a manifold with a handlebody structure is in fact homeomorphic to a CW complex with \( k \)-cells corresponding to \( k \)-handles; see page 107 of Kirby-Siebenmann. This probably holds in the noncompact case as well, though I don't know a reference.
+\end{quote}
+
 \bibliography{connections}
 \end{document}
+
 
