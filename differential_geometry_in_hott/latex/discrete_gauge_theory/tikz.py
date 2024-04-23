@@ -35,7 +35,8 @@ def tikz2image(tikz, filetype, outfile):
     if filetype == 'pdf':
         shutil.copyfile(tmpdir + '/tikz.pdf', outfile + '.pdf')
     else:
-        call(["convert", "-density", "250", "-antialias", "-background", "white", "-alpha", "remove", "-alpha", "off", tmpdir + '/tikz.pdf', outfile + '.' + filetype])
+        shutil.copyfile(tmpdir + '/tikz.pdf', outfile + '.pdf')
+        call(["convert", "-density", "150", "-antialias", "-background", "white", "-alpha", "remove", "-alpha", "off", outfile + '.pdf', outfile + '.' + filetype])
 
 def log(s):
    sys.stderr.write(f"{s}\n")
@@ -50,6 +51,7 @@ def action(elem, doc):
         code = elem.text
 
         if code.strip().startswith(r"\begin{tikzcd}") or code.strip().startswith(r"\begin{tikzpicture}"):
+            sys.stderr.write(code)
             outfile = imagedir + '/' + sha1(code)
             filetype = {'html': 'png', 'latex': 'png'}.get(doc.format, 'png')
             src = outfile + '.' + filetype

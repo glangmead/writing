@@ -9,7 +9,7 @@ do
     -M document-css=false --metadata-file=$i.yml \
     --toc --number-sections --number-offset=0 --standalone --citeproc -M link-citations=true \
     -V caption-justification:centering \
-    $i.tikzimg.tex -o html/$i.html
+    $i.tikzimg.tex -t html -o html/$i.html
   cp *.png html
   open html/$i.html
 done
