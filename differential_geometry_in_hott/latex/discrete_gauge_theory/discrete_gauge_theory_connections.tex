@@ -1,0 +1,171 @@
+\section{Why this is geometry}
+
+How can we double check that we are describing the intended theory of geometry? In this section we will enumerate a wishlist of facts that we believe characterize the subject, and then provide evidence for some of them.
+
+Here are the translations that are covered in the current paper:
+\begin{align*}
+& \text{\small Connections are infinitesimal splittings of a} & \quad &\text{\small Paths in a sigma type are equivalent to a}        \\
+& \text{\small principal bundle.} & \quad&\text{\small pair of paths.}        \\ \hline
+& \text{\small Differentials satisfy the Leibniz (product) rule.} &\quad  &\text{\small Horizontal composition in an H-space is} \\ 
+&  &  \quad&\text{\small performed in two steps.} \\ \hline
+& \text{\small Connections with 0-truncated groups are covering}        &\quad &\text{\small Transport around contractible loops is } \refl             \\ 
+& \text{\small spaces with unique flat connection.}        & \quad&\text{\small when fibers are sets.}             \\ \hline
+& \text{\small The group of gauge transformations (bundle} &\quad &\text{\small Homotopies of classifying maps respect } \\ 
+& \text{\small automorphisms) acts on the space of connections.} & \quad&\text{\small the splitting of paths in sigma types.} \\ 
+\end{align*}
+
+And here are questions to explore in the future:
+\begin{enumerate}
+\item There's a notion of \emph{tensorial} that holds for forms but not for connections.
+\item Where is the Grassmannian structure of wedge product?
+\item The Gauss-Bonnet theorem holds, relating the curvature of a 2-manifold to the Euler characteristic.
+\item More generally, characteristic classes of bundles can be computed using a connection (Chern-Weil theory).
+\end{enumerate}
+
+\subsection{Higher maps contain connections}
+
+To hew close to the intended context of the term ``connection'' we will examine manifold-like types mapping into bundle-classifying-like types. The novelty here, compared to other HoTT investigations, is the focus on combinatorial types to stand in for manifolds.
+
+In recent times it has been believed in the HoTT community that maps from a discrete type to a discrete classifying space can encode only the connections that a classical mathematician would call \emph{flat} (zero curvature). In this context the word \emph{discrete} means having the discrete topology, in the sense of cohesion\cite{shulman_cohesion}. This is not the case! We will show that if the codomain is a classifying space of \( S^1 \) or other group of homotopy dimension at least 1, then non-flat connections appear despite the type \( S^1 \) being topologically discrete. Another common meaning of the shorthand ``discrete'' is to indicate a 0-truncated type, i.e. a set, as opposed to a type with higher homotopical structures. We will show that indeed if the codomain classifies sets, which is the case for example with the classifying space \( B\zz \), the delooping of \( \zz \), then connections are flat. (The type we denote by \( \mathbb{S}^1\defeq\{(x, y)|x^2+y^2=1\} \) is a set and is not topologically discrete. We will not be discussing it at all in this paper.)
+
+The DDG philosophy tells us to look at HITs that are polytope-like. A polytope \( M \) will have finitely many 0-dimesional (point) constructors \( \{m_0^i\} \), finitely many 1-dimesnional constructors \( \{m_1^{ij}:m_0^i=m_0^j\} \), and so on. Type families \( f:M\to \U \) on this type specify where each of these constructors is sent. In DDG parlance, \( f \) restricted to the 0-dimensional constructors of \( M \) is a 0-form and \( f \) restricted to the 1-dimensional constructors (not the 1-skeleton but just the 1-dimensional parts, whatever that means in HoTT) is a 1-form, and so on.
+
+A principal \( S^1 \) bundle is a family of \( S^1 \) torsors and so we will often be focusing on the function type \( M\to \BAutoso \). The novel claim here is that \( M\to \BAutoso \) contains more than just all the principal \( S^1 \)-bundles: it also contains all the connections on all the bundles. Every connection is present, both curved and flat, because we have complete freedom to specify the images of the paths.
+
+Classically, curvature is a property of the connection. It is computed either on infinitesimal loops, or on the infinitesimal surface bounded by the loop. In fact it is ``the derivative of the connection'' morally speaking. Getting into the details would wreck the simplicity we're going for\footnote{I'm picking and choosing where to tell the story fully twice (see the next section) and where to simply look for motivation.}. We will look for curvature by examining \( f \) on 1-dimensional loops. If \( M \) is at least a 2-type and if we want to claim that \( f \) classifies a bundle with connection, then we will be required to map the 2-faces of \( M \) (the 2-dimesional constructors) to a path from \( \refl \) to the image of a bounding loop. So at dimension 2 we will impose that constraint. Since \( \BAutoso \) is 2-truncated, \( f \) factors through the truncation map \( M\to||M||_2 \) and so that's the top dimension.
+
+There is an example at the end of this paper. For those who are best served by examples, do look at it and return to this point.
+
+
+
+\subsection{Connections as splittings}
+
+The classical story goes like this.
+
+\begin{mydef}
+The \emph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TM \). 
+\end{mydef}
+
+\( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that the group \( \Aut P \) acts on \( VP \): an automorphism \( \phi:P\to P \) sends \( V_pP \) to \( V_{\phi(p)}P \), where of course \( \pi(p)=\pi(\phi(p)) \).
+
+\begin{mydef}
+An \emph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
+\end{mydef}
+
+Being preserved by the action of \( \Aut P \) means that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
+
+The motivation for this definition is that we now have an isomorphism \( T_p\pi:H_pP\to T_{\pi(p)}M \) between each horizontal space and the tangent space below it in \( M \). This means that given a tangent vector at \( x:M \) and a point \( p \) in \( \pi^{-1}(x) \) we can uniquely lift the tangent vector to a horizontal vector at \( p \). We can also lift vector fields and paths in this way. To lift a path \( \gamma:[0,1]\to M \) you must specify a lift for \( \gamma(0) \) and then lift the tangent vectors of \( \gamma \) and prove that you can integrate the lift of that vector field upstairs in \( HP \).
+
+Then, armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \). So the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
+
+Moving now to HoTT, fix a type \( M:\U \) and a type family \( f:M\to\U \). Path induction gives us the transport isomorphism \( \pit{p:x=_M y}\tr(p):f(x)=f(y) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
+
+\begin{mydef}
+With the above context and points \( a:f(x), b:f(y) \) the type of \emph{dependent paths over \( p \)} with endpoints \( a, b \) is denoted
+\[ a\pathover{p}b.
+\]
+By induction we can assume \( p \) is \( \refl_a \) in which case \( a\pathover{p}b \) is \( a=_{f(x)}a \).
+\end{mydef}
+
+See \cite{Symmetry} for more discussion of dependent paths (where they use the term ``path over''), including composition, and associativity thereof.
+
+We recall now the identity type of sigma types:
+
+\begin{mythm}\label{thm:idsit}
+(HoTT book Theorem 2.7.2 \cite{hottbook}) If \( f:M\to \U \) is a type family and \( w,w':\sit{x:M}f(x) \) then there is an equivalence 
+\[ 
+\mathsf{split}:(w=w')\simeq \sit{p:\pr_1(w)=_M\pr_1(w')} \left[\tr(p)(\pr_2(w))\right] = \pr_2(w').
+\]
+\end{mythm}
+
+In particular, given \( p:x=_M y \) and \( w:f(x) \) we have \( w\pathover{p}tr(p)(w)\simeq tr(p)(w)=_{f(y)}tr(p)(w) \) which has the term \( \refl \) which we can call ``the horizontal lift of \( p \) starting at \( w \).'' We can imitate the classical definition of a connection by defining \( \omega\defeq \pr_2\circ\mathsf{split} \), the projection onto the vertical component. And thus in HoTT we can see the equivalence of transport and lifting of paths into horizontal and vertical components.
+
+\subsection{The Leibniz (product) rule}
+
+The Leibniz rule for exterior differentiation states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). This is an interaction between multiplication in \( \rr \) and the action on vectors of smooth functions (the 1-forms \( df \) and \( dg \)). 
+
+To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to a central H-space \( B \). Let \( \mu:B\to B\to B \) be the H-space multiplication. How does \( \mu \) act on paths? Suppose we have \( a, a', b, b':B \) and \( p:a=_B a', q:b=_B b' \). Then we also have homotopies \( \mu(p, -):\mu(a, -)=_{B\to B}\mu(a', -) \) and \( \mu(-,q):\mu(-,b)=_{B\to B}\mu(-,b'). \) Since \( \mu(a, -):B=B \) is an (unpointed) equivalence of \( B \), and similarly for \( \mu(b, -) \) and so on, this data assembles into the following diagram of higher groupoid morphisms:
+
+\begin{center}
+% https://q.uiver.app/#q=WzAsMyxbMiwwLCJCIl0sWzAsMCwiQiJdLFs0LDAsIkIiXSxbMSwwLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTN9XSxbMSwwLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjN9XSxbMCwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTN9XSxbMCwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjN9XSxbMyw0LCJcXG11KHAsLSkiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV0sWzUsNiwiXFxtdSgtLHEpIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\begin{tikzcd}
+  B && B && B
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-18pt}, from=1-1, to=1-3]
+  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=18pt}, from=1-1, to=1-3]
+  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-18pt}, from=1-3, to=1-5]
+  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=18pt}, from=1-3, to=1-5]
+  \arrow["{\mu(p,-)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+  \arrow["{\mu(-,q)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+\end{tikzcd}
+\end{center}
+
+And so the two homotopies can be horizontally composed to give a path \[ \mu(p,-)\star\mu(-,q): \mu(a, b)=\mu(a',b'). \] Horizontal composition is given by \[\mu(p,-)\star\mu(-,q)\defeq(\mu(p,-)\cdot_r \mu(-,b))\cdot(\mu(a', -)\cdot_l\mu(-, q))\] where \[ \mu(p,-)\cdot_r\mu(-,b):\mu(a,b)=\mu(a',b) \] and \[ \mu(a',-)\cdot_l\mu(-,q):\mu(a',b)=\mu(a',b') \] are defined by path induction.  See the HoTT book Theorem 2.1.6 on the Eckmann-Hilton argument\cite{hottbook}.
+
+We can recognize the process of using whiskering to form horizontal composition in the Leibniz rule. 
+
+Quick aside: moving from infinitesimal calculus to finite groupoid algebra actually involves two changes. The first is the change from vectors to paths, forms to functions and so on. But it's also the case that tangent vectors have just the one basepoint, whereas paths have two endpoints. You can see this play out in this example, where \( a \) and \( a' \) were distinct points (and \( b \) and \( b' \)).
+
+The horizontal composition we build lives entirely in \( B \) and we didn't make use of \( M \) yet. The Leibniz rule will be a pointwise version of what's going on in \( B \). Denote by \( \mu\circ(f,g):M\to B \) the map which sends \( x\mapsto \mu(f(x),g(x)) \).
+
+\begin{mylemma}
+Given \( f, g:M\to B \) and \( p:x=_M y \) then 
+\begin{align*}
+ \ap(\mu\circ(f,g))(p)&=\mu(f(p),-)\star\mu(-,g(p))\\
+ &=\left[\mu(f(p),-)\cdot_r \mu(-,g(x))\right]\cdot \left[\mu(f(y),-)\cdot_l\mu(-,g(p))\right]\\
+ &:\mu(f(x),g(x))=\mu(f(y),g(y))
+\end{align*}
+\end{mylemma}
+
+\subsection{Covering spaces}
+
+If \( G \) is a 0-truncated group such as \( \zz \) then the type of torsors (delooping) \( BG \) is 1-truncated. If \( f:M\to BG \) is a type family then \( \sit{x:M}f(x) \) has fibers that are sets (\( G \)-torsors). So transport functions are set isomorphisms, and the transport of any contractible loop in \( M \) will be \( \refl \) (the identity) of the fiber, which is what we mean by flat.
+
+\subsection{Gauge transformations}
+
+A \emph{gauge transformation} is a term inherited from physics. It's an automorphism of a principal bundle \( P\to M \), meaning a homeomorphism of \( P \) that commutes with the projection to \( M \) and so acts on each fiber. It is further required to be equivariant under the action of the group \( G \), and so it's very similar to the act of multiplying each fiber by a continuously varying element of \( G \).
+
+In HoTT if the bundle is classified by \( f:M\to \U \) then an automorphism is a homotopy \( f\sim f \) and the group of gauge transformations is the loop space \( \Omega_f(M\to \U) \). 
+
+Recall that torsors have a physical interpretation as a quantity without a specified unit, such as mass, length, or time. When we choose a base point in a torsor it becomes the standard torsor \( G \) acting on itself (for example, the additive real numbers). A physicist is looking for properties or laws that are independent of such a choice. In the 20th century physicists further wondered about choices of units that vary from point to point, and began searching for laws that are invariant under this much larger space of transformations. And so they and we are led to explore quotienting by the action of the group of gauge transformations, and in particular the space of connections ``mod gauge.'' In this scenario the base manifold \( M \) is spacetime, and a gauge transformation is a smoothly varying choice of gauge (units) at each point.
+
+Gauge transformations act on connections. When we view connections as infinitesimal splittings of \( TP \) into vertical and horizontal sub-bundles, a gauge transformation that is constant in the neighborhood of a point will not change the splitting, it will just shift the fiber rigidly along itself, but one that is changing rapidly near a point will tilt the horizontal subspaces. So there are two effects: the effect of sliding along the fiber, and the effect of the rate of change of the gauge transformation. In classical geometry you'll see formulas like this:
+
+\begin{mythm}
+Let \( P\to M \) be a principal bundle and \( A\in\Omega^1(M,\mathfrak{g}) \) a connection 1-form on \( P \). Suppose that \( H\in \mathscr{G}(P) \) is a bundle automorphism. Then \( H^*A \) is a connection 1-form and in a neighborhood \( U \) of a point \( x\in M \) we can write \( H \) as a function \( H_U:U\to G \) where \( H_U(x)\in G \) is a group element multiplying the fiber at \( x \), and then we have
+\[ 
+H^*A=\Ad_{H_U(x)^{-1}}\circ A + H_U^*(\mu_G)
+\] where \( \mu_G:\Omega^1(G,\mathfrak{g}) \) is the Maurer-Cartan form on \( G \).
+\end{mythm}
+
+This theorem is a combination of Theorems 5.2.2 and 5.4.4 in the excellent recent book on gauge theory for mathematicians interested in physics by Mark Hamilton\cite{hamilton2017}.
+
+It's not so important to fully understand this formula because we will re-explain it in HoTT terms in a moment. But notice that \( H^*A \) (the action of the gauge transformation on the connection 1-form) has contributions from two terms (both of which are vertical --- connections always map onto the vertical bundle). The first is the adjoint action at the specific point \( x \). This is always what we expect when we shift the base point in a torsor and look at the resulting group (or in this case, the Lie algebra). The second term involves the Maurer-Cartan form, which is the derivative of subtraction in the group. It takes tangent vectors at \( g:G \) to a tangent vector at the identity (the Lie algebra, denoted \( \mathfrak{g} \)) by differentiating the action of multiplication by \( g^{-1} \). If we think in terms of finite-length paths, then imagine a path \( p:g=g' \) and the function \( (g^{-1}\cdot -) \). The function will act on the path to give a path \( g^{-1}\cdot p:e=(g'\cdot g^{-1}) \) that starts at the identity. So the Maurer-Cartan form shifts paths to start at the identity by subtracting off the start point. Our Maurer-Cartan term is the pullback of the Maurer-Cartan form by \( H \) which records how \( H \) acts infinitesimally, i.e. the contribution from the gauge transformation \( H \) that comes from the rapidity of change from point to point. This term will be large when \( H_U \) has a large derivative.
+
+In HoTT the connection's parallel transport is visible as the transport function, and the horizontal-vertical splitting is visible in the decomposition of paths in the sigma type (total space) into pairs of paths. What is the effect of applying a homotopy \( H:f\sim f \) on transport, and on splitting?
+
+\( H \) is a family of fiber automorphisms: \( H:\pit{a:M}f(a)=f(a) \) which we can assemble into an equivalence \( H':\sit{a:M}f(a)=\sit{a:M}f(a) \) that acts fiberwise. We want to compute the action of \( \ap(H') \) on the horizontal-vertical decomposition of paths from Theorem~\ref{thm:idsit} by computing \( \omega\circ\ap(H')=\pr_2\circ\mathsf{split}\circ\ap(H') \).
+
+Denote \( \sit{a:M}f(a) \) by \( P \). We'll adopt a convention of roman letters for structures in \( M \) and Greek for those upstairs in \( P \). Let \( p:a=_M b \) be a path in the base and let \( \pi:(a,\alpha)=_P (b,\beta) \) be a path in \( P \) over \( p \). Then \( \omega(\pi):\tr_p(\alpha)=\beta \).
+
+Now let's apply \( H \). We have \( \ap(H')(\pi):(a,H(a)(\alpha))=_P(b,H(b)(\beta)) \) which is still a path over \( p \). Applying \( \omega \) we get \[ \omega(\ap(H')(\pi)):\tr_p(H(a)(\alpha))=(H(b)(\beta)) \]. Using the lemma below we can if we wish rewrite this as 
+\[ 
+\omega(\ap(H')(\pi)):H(b)\left[\tr_p(\alpha)=\beta\right]
+\]
+which uses only \( H(b) \).
+
+\begin{mylemma}
+Given a function \( f:M\to\U \) and homotopy \( H:f\sim f \) the following square commutes and so in the type family we have \( \tr(H(x)\cdot f(p)) = \tr(f(p)\cdot H(y)) \).
+\end{mylemma}
+\begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmKGEpIl0sWzEsMCwiZihiKSJdLFsxLDEsImYoYikiXSxbMCwxLCJmKGEpIl0sWzAsMywiSChhKSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCJmKHApIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsImYocCkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiSChiKSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\begin{tikzcd}
+  {f(a)} & {f(b)} \\
+  {f(a)} & {f(b)}
+  \arrow["{f(p)}", equal, from=1-1, to=1-2]
+  \arrow["{H(a)}"', equal, from=1-1, to=2-1]
+  \arrow["{H(b)}", equal, from=1-2, to=2-2]
+  \arrow["{f(p)}"', equal, from=2-1, to=2-2]
+\end{tikzcd}
+\end{center}
+
+

@@ -51,7 +51,6 @@ def action(elem, doc):
         code = elem.text
 
         if code.strip().startswith(r"\begin{tikzcd}") or code.strip().startswith(r"\begin{tikzpicture}"):
-            sys.stderr.write(code)
             outfile = imagedir + '/' + sha1(code)
             filetype = {'html': 'png', 'latex': 'png'}.get(doc.format, 'png')
             src = outfile + '.' + filetype

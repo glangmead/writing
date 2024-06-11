@@ -3,7 +3,8 @@
 # --html-highlight=code emits a markdown file, but --html-highlight=all emits an HTML file
 for i in discrete_gauge_theory
 do
-  /opt/homebrew/Cellar/pandoc/3.1.11.1/bin/pandoc --filter tikz.py --from latex+raw_tex $i.tex -o $i.tikzimg.tex
+  latexpand $i.tex > $i.copyincludes.tex
+  /opt/homebrew/Cellar/pandoc/3.1.11.1/bin/pandoc --filter tikz.py --from latex+raw_tex $i.copyincludes.tex -o $i.tikzimg.tex
   echo "\usepackage{greg}" > foo && cat $i.tikzimg.tex >> foo && mv foo $i.tikzimg.tex
   /opt/homebrew/Cellar/pandoc/3.1.11.1/bin/pandoc --from latex+latex_macros --mathjax \
     -M document-css=false --metadata-file=$i.yml \

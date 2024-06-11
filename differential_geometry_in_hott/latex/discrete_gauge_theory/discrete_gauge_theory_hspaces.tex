@@ -1,0 +1,63 @@
+\section{Central H-spaces}
+
+\begin{itemize}
+\item introduce torsors
+\item show subtlety how \( BG \) doesn't classify stuff since it has extra properties
+\item draw 
+% https://q.uiver.app/#q=WzAsNyxbMSwwLCJQIl0sWzIsMCwiRUciXSxbMywwLCJcXG1hdGhjYWx7VX0nIl0sWzEsMSwiTSJdLFsyLDEsIkJHIl0sWzMsMSwiXFxtYXRoY2Fse1V9Il0sWzAsMCwiXFxzdW1fe2E6TX1VKGYoeCkpIl0sWzQsNSwiVShcXHRleHR7Zm9yZ2V0fSkiXSxbMSwyXSxbMCwxXSxbMyw0LCJmIl0sWzAsM10sWzEsNF0sWzIsNV0sWzAsNCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNSwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzYsMCwiOj0iXV0=
+\begin{tikzcd}
+  {\sum_{a:M}U(f(x))} & P & EG & {\mathcal{U}'} \\
+  & M & BG & {\mathcal{U}}
+  \arrow["{:=}", from=1-1, to=1-2]
+  \arrow[from=1-2, to=1-3]
+  \arrow[from=1-2, to=2-2]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+  \arrow[from=1-3, to=1-4]
+  \arrow[from=1-3, to=2-3]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-3, to=2-4]
+  \arrow[from=1-4, to=2-4]
+  \arrow["f", from=2-2, to=2-3]
+  \arrow["{U(\text{forget})}", from=2-3, to=2-4]
+\end{tikzcd}
+\item H-spaces paper result equating this to a universal cover of a component of the universe. (It should feel significant that \( BS^1\simeq \BAutoso \).)
+\end{itemize}
+
+Central H-spaces are the classifying spaces for principal bundles on abelian groups. We won't be able to access the full theory for nonabelian groups just yet, but we hope that the theory of maximal tori and weights might bring even those within reach of the central H-space paradigm.
+
+We will rely on the lovely paper by Buchholtz, Christensen, Flaten and Rijke \cite{buchholtz2023central}. 
+
+\begin{mydef}
+An H-space structure on a pointed type \( (B,b) \) consists of
+\begin{enumerate}
+\item A binary operation \( \mu:B\to B\to B \)
+\item A left unit law \( \mu_l:\mu(\pt,-)=\id_B \)
+\item A right unit law \( \mu_r:\mu(-,\pt)=\id_B \)
+\item A coherence \( \mu_{lr}:\mu_l(\pt)=_{\mu(\pt,\pt)=\pt}\mu_r(\pt) \)
+\item A proof of left- and right- invertibility: \( \mu(a,-):A\simeq A \), \( \mu(-, b):A\simeq A \)
+\end{enumerate}
+\end{mydef}
+
+\begin{myprop}
+(\cite{buchholtz2023central} Prop 3.6) Let \( A \) be a pointed type. Then the following are equivalent:
+\begin{enumerate}
+\item \( A \) is central.
+\item \( A \) is a connected H-space and \( A\dotto A \) is a set.
+\item \( A \) is a connected H-space and \( A\simeq A \) is a set.
+\end{enumerate}
+\end{myprop}
+
+This result will inform our study of the Leibniz rule: the analogue of the algebra of functions to \( \rr \) is:
+\begin{myprop}
+For any type \( M \) and H-space \( B \) the type of maps \( M\to B \) with base point the constant map is an H-space under pointwise multiplication.
+\end{myprop}
+
+We will also be looking in detail at maps into the classifying space of \( S^1 \) bundles. The Buchholtz et al paper\cite{buchholtz2023central} describes this type in several helpful ways, summarized by:
+
+\begin{mythm}
+For any central H-space \( A \) (such as \( S^1 \)) the type of torsors of \( A \) is a delooping of \( A \), and is equivalent to \( \BAut_1(A)\defeq \sit{X:\U}||X=A||_0. \) This delooping is also a central H-space and so can be infinitely delooped.
+\end{mythm}
+
+This means that we can form a sequence of deloopings \( \zz, S^1, \BAutoso, \ldots \).
+
+
+
