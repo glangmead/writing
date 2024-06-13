@@ -1,0 +1,22 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+node distance = 15mm and 15mm,
+V/.style = {circle, fill, draw=black, inner sep=1pt, font=\footnotesize},
+every edge quotes/.style = {auto, font=\footnotesize},
+arrow/.style={->,semithick}
+]
+\begin{scope}[nodes=V]
+  \node[label=above left:\( c_1 \)] (1) {};
+  \node[label=above right:\( c_2 \)] (2) [right=of 1]  {};
+  \node[label=below right:\( c_3 \)] (3) [below=of 2]  {};
+  \node[label=below left:\( c_4 \)] (4) [below=of 1]  {};
+\end{scope}
+\draw[arrow]
+        (1)  edge["\( c_1c_2 \)"] (2)
+        (2)  edge["\( c_2c_3 \)"] (3)
+        (3)  edge["\( c_3c_4 \)"] (4)
+        (4)  edge["\( c_4c_1 \)"] (1);
+\end{tikzpicture}
+\caption{The HIT \( C_4 \) which is one of the types in \( \BAutoso \)}
+\end{figure}

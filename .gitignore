@@ -17,6 +17,8 @@ MAlonzo/**
 .*.lb
 *.ptb
 
+tmp/
+
 ## Intermediate documents:
 *.dvi
 *.xdv
