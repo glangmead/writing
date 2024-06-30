@@ -1,4 +1,31 @@
-\section{Gauss-Bonnet, Vector Fields and Poincaré-Hopf theorem}
+\section{Gauss-Bonnet, Vector Fields, and the Poincaré-Hopf Theorem}
+
+\begin{enumerate}
+\item Given Chern-Weil, we can hypothesize that Pfaffians and determinants can be made from the path groupoid structure.
+\item Theorem 1: Gauss-Bonnet: curvature vs euler characteristic (2-d)
+\item Theorem 2: Gauss-Bonnet-Chern (2n-d, Pfaffian/Euler class, 1944)
+\item Theorem 3: Poincaré-Hopf: v.f. index is indep of v.f., and is euler characteristic via a specific v.f.
+\item Non-theorem: v.f. on torus is the gradient of a Morse function. Bringing in Morse theory is future work.
+\end{enumerate}
+
+% https://q.uiver.app/#q=WzAsNixbMCwyLCJNIl0sWzIsMiwiQlNeMSJdLFsyLDAsIkVTXjEiXSxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fT17XFxkaXNwbGF5c3R5bGVcXHN1bV97YTpNfWYoYSl9Il0sWzAsNCwiXFxPbWVnYV4yTSJdLFsyLDQsIlxcT21lZ2FeMkJTXjEiXSxbMCwxLCJmIiwyXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiRWYiXSxbMywxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCJ7XFxkaXNwbGF5c3R5bGUgWDpcXHByb2Rfe2E6TX1mKGEpfSIsMCx7ImN1cnZlIjotM31dLFs0LDUsIlxcT21lZ2FeMmYiXSxbMCw0LCJcXE9tZWdhXjIiXSxbMSw1LCJcXE9tZWdhXjIiXSxbMywwLCJcXG1hdGhybXtleHB9IiwwLHsiY3VydmUiOi0zfV1d
+\begin{tikzcd}
+  {\stackrel{\mathrm{def}}={\displaystyle\sum_{a:M}f(a)}} && {ES^1} \\
+  \\
+  M && {BS^1} \\
+  \\
+  {\Omega^2M} && {\Omega^2BS^1}
+  \arrow["Ef", from=1-1, to=1-3]
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
+  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
+  \arrow["{{\displaystyle X:\prod_{a:M}f(a)}}", curve={height=-18pt}, from=3-1, to=1-1]
+  \arrow["f"', from=3-1, to=3-3]
+  \arrow["{\Omega^2}", from=3-1, to=5-1]
+  \arrow["{\Omega^2}", from=3-3, to=5-3]
+  \arrow["{\Omega^2f}", from=5-1, to=5-3]
+\end{tikzcd}
 
 To prove the Gauss-Bonnet theorem one needs a notion of \emph{Euler characteristic} and a notion of curvature. To prove the Poincaré-Hopf theorem, one needs a notion of \emph{the index of a vector field}, and again, a notion of curvature. To prove both and relate them it helps to equate the Euler characteristic to the index of a special vector field. 
 
@@ -14,9 +41,17 @@ Note that \( X \) is a pointing of all the fibers. So a second vector field can 
 The index of a vector field at a zero is given by transport composed with exp.
 \end{mydef}
 
-\begin{mydef}
+\begin{mythm}
+The total index is independent of the vector field.
+\end{mythm}
 
-\end{mydef}
+\begin{mythm}
+(Poincaré-Hopf) The total index is equal to the total curvature.
+\end{mythm}
+
+\begin{mythm}
+The total index is equal to the Euler characteristic.
+\end{mythm}
 
 
 

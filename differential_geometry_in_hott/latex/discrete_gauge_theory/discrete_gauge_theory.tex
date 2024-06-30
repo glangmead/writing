@@ -35,40 +35,6 @@ Homotopy type theory captures all the major concepts of differential geometry in
 ``It is always ourselves we work on, whether we realize it or not. There is no other work to be done in the world.'' --- Stephen Talbott, \emph{The Future Does Not Compute}\cite{talbott}
 \end{quote}
 
-\section{TODO}
-After meeting with SA,MA 5/1/2024
-\begin{itemize}
-\item Focus on one audience: HoTT folks. Don't intermix as much classic geometry.
-\item Section 1. Make explicit the triangle of DG, DDG, HoTT.
-\item Section 2. Sphere example and combinatorial manifolds, torus example.
-\item Section 3. Torsors and H-spaces
-\item Poincaré-Hopf and/or Gauss-Bonnet, even just for some examples. The curvature will be given by loops around a circle via \( \Omega^2 f \) and the vector field will be integrated to an automorphism \( M\to M \) and some integer from there.
-% https://q.uiver.app/#q=WzAsNixbMCwyLCJNIl0sWzIsMiwiQlNeMSJdLFsyLDAsIkVTXjEiXSxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fT17XFxkaXNwbGF5c3R5bGVcXHN1bV97YTpNfWYoYSl9Il0sWzAsNCwiXFxPbWVnYV4yTSJdLFsyLDQsIlxcT21lZ2FeMkJTXjEiXSxbMCwxLCJmIiwyXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiRWYiXSxbMywxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCJ7XFxkaXNwbGF5c3R5bGUgWDpcXHByb2Rfe2E6TX1mKGEpfSIsMCx7ImN1cnZlIjotM31dLFs0LDUsIlxcT21lZ2FeMmYiXSxbMCw0LCJcXE9tZWdhXjIiXSxbMSw1LCJcXE9tZWdhXjIiXSxbMywwLCJcXG1hdGhybXtleHB9IiwwLHsiY3VydmUiOi0zfV1d
-\begin{tikzcd}
-  {\stackrel{\mathrm{def}}={\displaystyle\sum_{a:M}f(a)}} && {ES^1} \\
-  \\
-  M && {BS^1} \\
-  \\
-  {\Omega^2M} && {\Omega^2BS^1}
-  \arrow["Ef", from=1-1, to=1-3]
-  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
-  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{\displaystyle X:\prod_{a:M}f(a)}}", curve={height=-18pt}, from=3-1, to=1-1]
-  \arrow["f"', from=3-1, to=3-3]
-  \arrow["{\Omega^2}", from=3-1, to=5-1]
-  \arrow["{\Omega^2}", from=3-3, to=5-3]
-  \arrow["{\Omega^2f}", from=5-1, to=5-3]
-\end{tikzcd}
-\item Vector fields are sections of the disk bundle, which is the combinatorial neighborhood. We can define the circle bundle with our map to \( \BAutoso \) and add the base point to form the disk. Note that the requirement that every point have a link that is a simplicial sphere is called "combinatorial manifold" or "combinatorial triangulation".
-\item When is a vector field an automorphism?
-\item the disk bundle has a canonical section given by choosing the center point in each fiber. It has two other sections, one for each orientation of the circle.
-\item At a fixed point of a vector field therefore, we can compare the vector field to either of the canonical sections. Use this to map to \( S^1 \) or \( C_4 \) or a path in one of those. This will have a winding number which is our index.
-\item Prove that the total index is independent of a vector field that isn't the identity.
-\item Prove Poincaré-Hopf
-\end{itemize}
-
 \input{discrete_gauge_theory_ddg}
 
 \input{discrete_gauge_theory_examples}

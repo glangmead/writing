@@ -1,0 +1,109 @@
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  back/.style={loosely dotted, thin},
+  edge/.style={->,black, thick},
+  line/.style={black, thick},
+  facet/.style={fill=blue!95!black,fill opacity=0.1},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (r_cap) at (0, -1, 5);
+\coordinate (g_cap) at (0, 0, 4 );
+\coordinate (o_cap) at (0, 1, 5 );
+\coordinate (b_cap) at (0, 0, 6 );
+
+\coordinate (r_cup) at (0, -1, 1);
+\coordinate (g_cup) at (0, 0, 2 );
+\coordinate (o_cup) at (0, 1, 1 );
+\coordinate (b_cup) at (0, 0, 0 );
+
+\coordinate (r_ohole) at (-2, -1, 3);
+\coordinate (g_ohole) at (-1, 0,  3);
+\coordinate (o_ohole) at (-2, 1,  3);
+\coordinate (b_ohole) at (-3, 0,  3);
+
+\coordinate (r_rhole) at (2, -1, 3);
+\coordinate (g_rhole) at (1, 0,  3);
+\coordinate (o_rhole) at (2, 1,  3);
+\coordinate (b_rhole) at (3, 0,  3);
+
+\draw[edge,back] (r_cap) -- (g_cap);
+\draw[edge]      (g_cap) -- (o_cap);
+\draw[edge]      (o_cap) -- (b_cap);
+\draw[edge,back] (b_cap) -- (r_cap);
+
+\draw[edge,back] (r_cup) -- (g_cup);
+\draw[edge]      (g_cup) -- (o_cup);
+\draw[edge]      (o_cup) -- (b_cup);
+\draw[edge,back] (b_cup) -- (r_cup);
+
+\draw[edge,back] (r_ohole) -- (g_ohole);
+\draw[edge]      (g_ohole) -- (o_ohole);
+\draw[edge]      (o_ohole) -- (b_ohole);
+\draw[edge,back] (b_ohole) -- (r_ohole);
+
+\draw[edge,back] (r_rhole) -- (g_rhole);
+\draw[edge]      (g_rhole) -- (o_rhole);
+\draw[edge]      (o_rhole) -- (b_rhole);
+\draw[edge,back] (b_rhole) -- (r_rhole);
+
+\draw[line,back] (r_cap) --   (r_ohole);
+\draw[line,back] (r_ohole) -- (r_cup);
+\draw[line,back] (r_cup) --   (r_rhole);
+\draw[line,back] (r_rhole) -- (r_cap);
+
+\draw[line] (g_cap) --   (g_ohole);
+\draw[line] (g_ohole) -- (g_cup);
+\draw[line] (g_cup) --   (g_rhole);
+\draw[line] (g_rhole) -- (g_cap);
+
+\draw[line] (o_cap) --   (o_ohole);
+\draw[line] (o_ohole) -- (o_cup);
+\draw[line] (o_cup) --   (o_rhole);
+\draw[line] (o_rhole) -- (o_cap);
+
+\draw[line] (b_cap) --   (b_ohole);
+\draw[line] (b_ohole) -- (b_cup);
+\draw[line] (b_cup) --   (b_rhole);
+\draw[line] (b_rhole) -- (b_cap);
+
+\fill[facet] (r_cap) -- (r_ohole) -- (g_ohole) -- (g_cap) -- cycle {};
+\fill[facet] (r_cap) -- (r_rhole) -- (g_rhole) -- (g_cap) -- cycle {};
+\fill[facet] (r_cap) -- (r_ohole) -- (b_ohole) -- (b_cap) -- cycle {};
+\fill[facet] (r_cap) -- (r_rhole) -- (b_rhole) -- (b_cap) -- cycle {};
+
+\fill[facet] (o_cap) -- (o_ohole) -- (g_ohole) -- (g_cap) -- cycle {};
+\fill[facet] (o_cap) -- (o_rhole) -- (g_rhole) -- (g_cap) -- cycle {};
+\fill[facet] (o_cap) -- (o_ohole) -- (b_ohole) -- (b_cap) -- cycle {};
+\fill[facet] (o_cap) -- (o_rhole) -- (b_rhole) -- (b_cap) -- cycle {};
+
+\fill[facet] (r_cup) -- (r_ohole) -- (g_ohole) -- (g_cup) -- cycle {};
+\fill[facet] (r_cup) -- (r_rhole) -- (g_rhole) -- (g_cup) -- cycle {};
+\fill[facet] (r_cup) -- (r_ohole) -- (b_ohole) -- (b_cup) -- cycle {};
+\fill[facet] (r_cup) -- (r_rhole) -- (b_rhole) -- (b_cup) -- cycle {};
+
+\fill[facet] (o_cup) -- (o_ohole) -- (g_ohole) -- (g_cup) -- cycle {};
+\fill[facet] (o_cup) -- (o_rhole) -- (g_rhole) -- (g_cup) -- cycle {};
+\fill[facet] (o_cup) -- (o_ohole) -- (b_ohole) -- (b_cup) -- cycle {};
+\fill[facet] (o_cup) -- (o_rhole) -- (b_rhole) -- (b_cup) -- cycle {};
+
+\begin{scope}[nodes=vertex]
+\node[label=left:\( r_{\mathrm{cap}} \)] at (r_cap) {};
+\node at (g_cap) {};
+\node at (o_cap) {};
+\node[label=above:\( b_{\mathrm{cap}} \)] at (b_cap) {};
+\node at (r_cup) {};
+\node at (g_cup) {};
+\node at (o_cup) {};
+\node[label=below:\( b_{\mathrm{cup}} \)] at (b_cup) {};
+\node at (r_ohole) {};
+\node at (g_ohole) {};
+\node at (o_ohole) {};
+\node[label=right:\( b_{\mathrm{rhole}} \)] at (b_ohole) {};
+\node at (r_rhole) {};
+\node at (g_rhole) {};
+\node at (o_rhole) {};
+\node[label=left:\( b_{\mathrm{lhole}} \)] at (b_rhole) {};
+\end{scope}
+\end{tikzpicture}

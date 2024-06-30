@@ -6,7 +6,7 @@ Applied mathematicians and computer scientists have been developing discrete dif
 
 The applied category theory community has begun to develop category theoretic foundations and software libraries to increase the reusability and compositionality of finite element methods in science and engineering problems. See for example recent work to bring discrete exterior calculus into the AlgebraicJulia library \cite{morris_decapodes} \cite{patterson_diffeq}.
 
-For these classically-minded applied mathematicians DDG is defined on combinatorial manifolds such as simplicial complexes or polytopes, of any finite dimension. The 0-cells play the role of points, the 1-cells are path segments, and so on. They define \( n \)-forms as functions on the \( n \)-dimensional faces of the manifold into the real numbers, which is then extended by linearity to arbitrary \( n \)-chains. Exterior differentiation is defined by Stokes theorem (which is no longer a theorem in this setting), by which we mean the following. 
+For these classically-minded applied mathematicians DDG is defined on combinatorial manifolds such as simplicial complexes, of any finite dimension. The 0-cells play the role of points, the 1-cells are path segments, and so on. They define \( n \)-forms as functions on the \( n \)-dimensional faces of the manifold into the real numbers, which is then extended by linearity to arbitrary \( n \)-chains. Exterior differentiation is defined by Stokes theorem (which is no longer a theorem in this setting), by which we mean the following. 
 
 \begin{mydef}
 (Exterior derivative in DDG.) Let \( \omega \) be an \( n-1 \)-form on a combinatorial manifold \( M \), and let \( \Omega \) be an \( n \)-face of \( M \). Let \( \partial \) be the boundary operator on faces. The exterior derivative \( d \) is defined by 
@@ -15,8 +15,5 @@ For these classically-minded applied mathematicians DDG is defined on combinator
 \]
 \end{mydef}
 
-At this point a study of DDG would move into chain complexes, where the forms of different dimensions are combined through the grading. Grassman algebras would be introduced, to convey the dependence of forms on orientation. The Leibniz rule (product rule) would be explored. Defining connections and curvature require constructing a codomain that is group-like and then creating more definitions about transport and holonomy. At that point major theorems like Gauss-Bonnet and Chern-Weil would be available to prove.
-
-We will take a different path. We will not define forms, complexes, or Grassman algebras at all. We will view ordinary HoTT functions out of a type as \emph{synthetic discrete differential forms}. The codomain will be a central H-space, which combines the features of the real numbers (in that functions can be pointwise multiplied) and classifying spaces of groups (so that maps into the H-space can classify bundles). We will then merely \emph{observe} the emergence of various aspects of geometry.
-
-We won't be able to answer every question, so eventually we will stop and point to future directions.
+We will take the following path. We will use DDG as a stepping stone between smooth geometry and HoTT. We will learn how to see the finite analogues of infinitesimal constructions, and then use the syntax of type theory to re-present them. It won't always be a two-step process! Sometimes even the smooth arguments are made with finite combinatorial methods, and then a limit is taken. This is especially true where the Gauss-Bonnet and Poincaré-Hopf theorems are concerned.
+\[\mathrm{Differential\ geometry}\longrightarrow\mathrm{Discrete\ differential\ geometry}\longrightarrow \mathrm{Homotopy\ type\ theory}\]
