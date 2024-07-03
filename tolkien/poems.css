@@ -1,0 +1,45 @@
+teiHeader {
+  display: none;
+}
+
+body {
+  font-family: serif; 
+  display: block;
+  margin: 3em; 
+}
+
+text > head {
+  font-size: 2rem;
+  font-weight: bold; 
+  font-family: sans-serif;
+  display: block;
+}
+
+div > head {
+  font-weight: bold; 
+  font-family: sans-serif;
+}
+
+lg { 
+  margin: 1em;
+}
+
+/* There are double lg's around each poem as a whole, so this is the inner one */
+lg > lg {
+  margin: -1em;
+}
+
+l { 
+  display: block;
+}
+
+l::before {
+  content: attr(n) ' ';
+  position: absolute;
+  left: 1em
+}
+
+l[rend="indent"] {
+  margin-left: 1em;
+}
+
