@@ -6,15 +6,13 @@
 \item Theorem 2: Gauss-Bonnet-Chern (2n-d, Pfaffian/Euler class, 1944)
 \item Theorem 3: Poincaré-Hopf: v.f. index is indep of v.f., and is euler characteristic via a specific v.f.
 \item Non-theorem: v.f. on torus is the gradient of a Morse function. Bringing in Morse theory is future work.
-\end{enumerate}
-
-% https://q.uiver.app/#q=WzAsNixbMCwyLCJNIl0sWzIsMiwiQlNeMSJdLFsyLDAsIkVTXjEiXSxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fT17XFxkaXNwbGF5c3R5bGVcXHN1bV97YTpNfWYoYSl9Il0sWzAsNCwiXFxPbWVnYV4yTSJdLFsyLDQsIlxcT21lZ2FeMkJTXjEiXSxbMCwxLCJmIiwyXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiRWYiXSxbMywxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCJ7XFxkaXNwbGF5c3R5bGUgWDpcXHByb2Rfe2E6TX1mKGEpfSIsMCx7ImN1cnZlIjotM31dLFs0LDUsIlxcT21lZ2FeMmYiXSxbMCw0LCJcXE9tZWdhXjIiXSxbMSw1LCJcXE9tZWdhXjIiXSxbMywwLCJcXG1hdGhybXtleHB9IiwwLHsiY3VydmUiOi0zfV1d
+\item use % https://q.uiver.app/#q=WzAsNixbMCwyLCJNIl0sWzIsMiwiQlNeMSJdLFsyLDAsIkVTXjEiXSxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fT17XFxkaXNwbGF5c3R5bGVcXHN1bV97YTpNfWYoYSl9Il0sWzAsNCwiXFxPbWVnYV4yTSJdLFsyLDQsIlxcT21lZ2FeMkJTXjEiXSxbMCwxLCJmIiwyXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiRWYiXSxbMywxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCJ7XFxkaXNwbGF5c3R5bGUgWDpcXHByb2Rfe2E6TX1mKGEpfSIsMCx7ImN1cnZlIjotM31dLFs0LDUsIlxcT21lZ2FeMmYiXSxbMCw0LCJcXE9tZWdhXjIiXSxbMSw1LCJcXE9tZWdhXjIiXSxbMywwLCJcXG1hdGhybXtleHB9IiwwLHsiY3VydmUiOi0zfV1d
 \begin{tikzcd}
-  {\stackrel{\mathrm{def}}={\displaystyle\sum_{a:M}f(a)}} && {ES^1} \\
+  {P\stackrel{\mathrm{def}}={\displaystyle\sum_{a:M}f(a)}} && {ES^1} \\
   \\
-  M && {BS^1} \\
+  M && {\BAutoso} \\
   \\
-  {\Omega^2M} && {\Omega^2BS^1}
+  {\Omega^2M} && {\Omega^2\BAutoso}
   \arrow["Ef", from=1-1, to=1-3]
   \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
   \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
@@ -26,6 +24,21 @@
   \arrow["{\Omega^2}", from=3-3, to=5-3]
   \arrow["{\Omega^2f}", from=5-1, to=5-3]
 \end{tikzcd}
+\end{enumerate}
+
+\subsection{Discrete vector fields}
+
+If \( M \) is a combinatorial manifold and we form a type family over \( M \) using \( \link \), \( \xbox \), or \( \xdisk \) then what we want to examine next is the dependent function type of this family, which are equivalent to sections of the sigma type. These sections will play the role of vector fields.
+
+Introduce the notation \( P_f\defeq \sit{x:M}f(x) \) and \( V_f\defeq \pit{x:M}f(x) \). We will also refer to the 0-skeleton of \( M \) as \( M_0 \) and the 1-skeleton as \( M_1 \). We'll be interested in \( P_\xbox \) (the xbox bundle over \( M \)) and \( V_\xbox \) (the type of sections thereof). Since \( M \) is a HIT, then to specify a map \( X:V_\xbox \) we need to supply a point in each fiber, and for each path \( p:x=_M y \) in \( M \) a path \( X(p):p_* X(x)=_{\xbox(y)} X(y) \).
+
+Since \( \xbox \) is defined using the neighboring points and paths of \( M \), we can exponentiate \( P_\xbox \), forming a map \( \exp:P_\xbox\to M \): just map the xboxes back onto where they came from in \( M \). This is the finite version of exponentiating a tangent space. It's very different from the projection map \( \pr_1 \) since it spreads the fibers out along \( M \).
+
+Hence we also have a map \( \exp\circ X:M\to M \) which is in general not an equivalence but can be. We can think of it as the \emph{flow} given by \( X \), the analogue of integrating a vector field for some finite time.
+
+\subsection{The index of a fixed point}
+
+Suppose that \( x \) satisfies \( X(x)=\refl_x \), and so \( \exp\circ X(x)=x \) and \( x \) is a fixed point of the flow. Combinatorial manifolds are finite and decidable so this equation makes sense. In such a situation we can form a map \( \tr\circ X\circ\exp:\link(x)\to\link(x). \) Starting with a point in \( \link(x) \) we exponentiate to the actual neighboring point in \( M \), take the value of \( X \) on this other point (some neighbor of this neighbor, possibly \( x \)), and transport that back to \( \link(x) \). Such a map has a degree, and that degree is a discrete version of what is called the \emph{index} of the vector field at a fixed point.
 
 To prove the Gauss-Bonnet theorem one needs a notion of \emph{Euler characteristic} and a notion of curvature. To prove the Poincaré-Hopf theorem, one needs a notion of \emph{the index of a vector field}, and again, a notion of curvature. To prove both and relate them it helps to equate the Euler characteristic to the index of a special vector field. 
 
@@ -51,6 +64,10 @@ The total index is independent of the vector field.
 
 \begin{mythm}
 The total index is equal to the Euler characteristic.
+\end{mythm}
+
+\begin{mythm}
+(Gauss-Bonnet) The total curvature is equal to the Euler characteristic.
 \end{mythm}
 
 

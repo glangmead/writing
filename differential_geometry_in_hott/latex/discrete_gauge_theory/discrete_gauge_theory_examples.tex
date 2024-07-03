@@ -1,4 +1,9 @@
 \section{Examples}
+
+TODO:
+\begin{enumerate}
+\item Color-code each continuous cycle on the flat torus and the 3d torus, and use that to demonstrate how the curvature acts.
+\end{enumerate}
 \subsection{The octahedron}
 
 We will define some higher inductive types to serve as domain and codomain of these motivating examples.
@@ -254,16 +259,24 @@ All the faces do the same thing: they map to a homotopy between the identity and
 
 \subsection{The torus}
 
-We can define a combinatorial torus as a similar HIT. Each vertex will again have four neighbors and all the links will be merely equal to \( C_4 \). See Figure~\ref{fig:torus}. Hmm that one isn't a combinatorial manifold so never mind!
+We can define a combinatorial torus as a similar HIT. This time each vertex will have six neighbors. So all the links will be merely equal to \( C_6 \) which is a hexagonal version of \( C_4 \). See Figure~\ref{fig:torus}. 
 
-In this case it should be intuitively obvious that transport around the boundary of any face is the identity, corresponding to the torus being flat.
+To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take this simple alternating-triangle pattern, then glue the left and right edges, then bend into Figure~\ref{fig:torus}. The fact that each column in Figure~\ref{fig:flattorus} has four dots corresponds to the torus in Figure~\ref{fig:torus} having a square in front, diamond in the middle, and square in back.
 
 \begin{figure}[h]
 \centering
 \input{discrete_gauge_theory_torus_tikz}
-\caption{Torus. The squares are nicknamed cap, cup, lhole, and rhole. Each one has a \( b, r, g, o \) vertex, in that order when following the arrows. All the \( b \)s are on the outer corners, all the \( r \)s are in the back, and so on.}
+\caption{Torus embedded in 3-dimensional space. Black lines trace four circular paths, red ones connect the front path to the middle ones, and blue ones connect the back path to the middle ones.}
 \label{fig:torus}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\input{discrete_gauge_theory_torusflat_tikz}
+\caption{An inspiration for the torus. Identify the sides and then the top, definitionally, to get the actual torus.}
+\label{fig:flattorus}
+\end{figure}
+
 
 \subsection{Combinatorial manifolds}
 

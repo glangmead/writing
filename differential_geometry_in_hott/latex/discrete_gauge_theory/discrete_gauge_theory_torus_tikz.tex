@@ -1,109 +1,153 @@
 \begin{tikzpicture}%
-  [x={(-0.860769cm, -0.121512cm)},
-  y={(0.508996cm, -0.205391cm)},
-  z={(-0.000053cm, 0.971107cm)},
-  scale=1,
-  back/.style={loosely dotted, thin},
-  edge/.style={->,black, thick},
-  line/.style={black, thick},
-  facet/.style={fill=blue!95!black,fill opacity=0.1},
-  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
-\coordinate (r_cap) at (0, -1, 5);
-\coordinate (g_cap) at (0, 0, 4 );
-\coordinate (o_cap) at (0, 1, 5 );
-\coordinate (b_cap) at (0, 0, 6 );
+[x={(0.979243cm, 0.060639cm)},
+y={(0.202689cm, -0.292816cm)},
+z={(-0.000031cm, 0.954244cm)},
+scale=1.00,
+back/.style={blue, thin},
+front/.style={red, thin},
+cycle/.style={black, thin},
+behind/.style={black, thick},
+ahead/.style={black, thick},
+facet/.style={fill=blue!95!black,fill opacity=0.05},
+vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 
-\coordinate (r_cup) at (0, -1, 1);
-\coordinate (g_cup) at (0, 0, 2 );
-\coordinate (o_cup) at (0, 1, 1 );
-\coordinate (b_cup) at (0, 0, 0 );
+\coordinate (odl) at (-3.0, 0.0, 0.0);
+\coordinate (odr) at (3.0, 0.0, 0.0);
+\coordinate (odb) at (0.0, 0.0, -3.0);
+\coordinate (odt) at (0.0, 0.0, 3.0);
 
-\coordinate (r_ohole) at (-2, -1, 3);
-\coordinate (g_ohole) at (-1, 0,  3);
-\coordinate (o_ohole) at (-2, 1,  3);
-\coordinate (b_ohole) at (-3, 0,  3);
+\coordinate (idl) at (-1.1, 0.0, 0.0);
+\coordinate (idr) at (1.1, 0.0, 0.0);
+\coordinate (idb) at (0.0, 0.0, -1.1);
+\coordinate (idt) at (0.0, 0.0, 1.1);
 
-\coordinate (r_rhole) at (2, -1, 3);
-\coordinate (g_rhole) at (1, 0,  3);
-\coordinate (o_rhole) at (2, 1,  3);
-\coordinate (b_rhole) at (3, 0,  3);
+\coordinate (bul) at (-1.4, -1.0, 1.4);
+\coordinate (bur) at (1.4, -1.0, 1.4);
+\coordinate (bbl) at (-1.4, -1.0, -1.4);
+\coordinate (bbr) at (1.4, -1.0, -1.4);
 
-\draw[edge,back] (r_cap) -- (g_cap);
-\draw[edge]      (g_cap) -- (o_cap);
-\draw[edge]      (o_cap) -- (b_cap);
-\draw[edge,back] (b_cap) -- (r_cap);
+\coordinate (ful) at (-1.4, 1.0, 1.4);
+\coordinate (fur) at (1.4, 1.0, 1.4);
+\coordinate (fbl) at (-1.4, 1.0, -1.4);
+\coordinate (fbr) at (1.4, 1.0, -1.4);
 
-\draw[edge,back] (r_cup) -- (g_cup);
-\draw[edge]      (g_cup) -- (o_cup);
-\draw[edge]      (o_cup) -- (b_cup);
-\draw[edge,back] (b_cup) -- (r_cup);
+\draw[cycle] (bbl) -- (bbr);
+\draw[cycle] (bbl) -- (bul);
+\draw[cycle] (bbr) -- (bbl);
+\draw[cycle] (bbr) -- (bur);
+\draw[cycle] (bul) -- (bbl);
+\draw[cycle] (bul) -- (bur);
+\draw[cycle] (bur) -- (bbr);
+\draw[cycle] (fbl) -- (fbr);
+\draw[cycle] (fbl) -- (ful);
+\draw[cycle] (fbr) -- (fur);
+\draw[cycle] (ful) -- (fbl);
+\draw[cycle] (ful) -- (fur);
+\draw[cycle] (fur) -- (fbr);
+\draw[cycle] (idl) -- (idb);
+\draw[cycle] (idl) -- (idt);
+\draw[cycle] (idr) -- (idb);
+\draw[cycle] (idr) -- (idt);
+\draw[cycle] (odb) -- (odl);
+\draw[cycle] (odb) -- (odr);
+\draw[cycle] (odl) -- (odb);
+\draw[cycle] (odl) -- (odt);
+\draw[cycle] (odt) -- (odl);
+\draw[cycle] (odt) -- (odr);
 
-\draw[edge,back] (r_ohole) -- (g_ohole);
-\draw[edge]      (g_ohole) -- (o_ohole);
-\draw[edge]      (o_ohole) -- (b_ohole);
-\draw[edge,back] (b_ohole) -- (r_ohole);
+\draw[ahead,back] (bbl) -- (idb);
+\draw[ahead,back] (bbl) -- (odb);
+\draw[behind,back] (bbl) -- (idl);
+\draw[behind,back] (bbl) -- (odl);
 
-\draw[edge,back] (r_rhole) -- (g_rhole);
-\draw[edge]      (g_rhole) -- (o_rhole);
-\draw[edge]      (o_rhole) -- (b_rhole);
-\draw[edge,back] (b_rhole) -- (r_rhole);
+\draw[behind,back] (bbr) -- (idb);
+\draw[behind,back] (bbr) -- (odb);
+\draw[ahead,back] (bbr) -- (idr);
+\draw[ahead,back] (bbr) -- (odr);
 
-\draw[line,back] (r_cap) --   (r_ohole);
-\draw[line,back] (r_ohole) -- (r_cup);
-\draw[line,back] (r_cup) --   (r_rhole);
-\draw[line,back] (r_rhole) -- (r_cap);
+\draw[behind,back] (bul) -- (idl);
+\draw[behind,back] (bul) -- (odl);
+\draw[ahead,back] (bul) -- (idt);
+\draw[ahead,back] (bul) -- (odt);
 
-\draw[line] (g_cap) --   (g_ohole);
-\draw[line] (g_ohole) -- (g_cup);
-\draw[line] (g_cup) --   (g_rhole);
-\draw[line] (g_rhole) -- (g_cap);
+\draw[ahead,back] (bur) -- (idr);
+\draw[ahead,back] (bur) -- (odr);
+\draw[behind,back] (bur) -- (idt);
+\draw[behind,back] (bur) -- (odt);
 
-\draw[line] (o_cap) --   (o_ohole);
-\draw[line] (o_ohole) -- (o_cup);
-\draw[line] (o_cup) --   (o_rhole);
-\draw[line] (o_rhole) -- (o_cap);
+\draw[ahead,front] (fbl) -- (idb);
+\draw[ahead,front] (fbl) -- (odb);
+\draw[behind,front] (fbl) -- (idl);
+\draw[behind,front] (fbl) -- (odl);
 
-\draw[line] (b_cap) --   (b_ohole);
-\draw[line] (b_ohole) -- (b_cup);
-\draw[line] (b_cup) --   (b_rhole);
-\draw[line] (b_rhole) -- (b_cap);
+\draw[behind,front] (fbr) -- (idb);
+\draw[behind,front] (fbr) -- (odb);
+\draw[ahead,front] (fbr) -- (idr);
+\draw[ahead,front] (fbr) -- (odr);
 
-\fill[facet] (r_cap) -- (r_ohole) -- (g_ohole) -- (g_cap) -- cycle {};
-\fill[facet] (r_cap) -- (r_rhole) -- (g_rhole) -- (g_cap) -- cycle {};
-\fill[facet] (r_cap) -- (r_ohole) -- (b_ohole) -- (b_cap) -- cycle {};
-\fill[facet] (r_cap) -- (r_rhole) -- (b_rhole) -- (b_cap) -- cycle {};
+\draw[behind,front] (ful) -- (idl);
+\draw[behind,front] (ful) -- (odl);
+\draw[ahead,front] (ful) -- (idt);
+\draw[ahead,front] (ful) -- (odt);
 
-\fill[facet] (o_cap) -- (o_ohole) -- (g_ohole) -- (g_cap) -- cycle {};
-\fill[facet] (o_cap) -- (o_rhole) -- (g_rhole) -- (g_cap) -- cycle {};
-\fill[facet] (o_cap) -- (o_ohole) -- (b_ohole) -- (b_cap) -- cycle {};
-\fill[facet] (o_cap) -- (o_rhole) -- (b_rhole) -- (b_cap) -- cycle {};
+\draw[ahead,front] (fur) -- (idr);
+\draw[ahead,front] (fur) -- (odr);
+\draw[behind,front] (fur) -- (idt);
+\draw[behind,front] (fur) -- (odt);
 
-\fill[facet] (r_cup) -- (r_ohole) -- (g_ohole) -- (g_cup) -- cycle {};
-\fill[facet] (r_cup) -- (r_rhole) -- (g_rhole) -- (g_cup) -- cycle {};
-\fill[facet] (r_cup) -- (r_ohole) -- (b_ohole) -- (b_cup) -- cycle {};
-\fill[facet] (r_cup) -- (r_rhole) -- (b_rhole) -- (b_cup) -- cycle {};
+\fill[facet] (bbl) -- (idl) -- (idb) -- cycle {};
+\fill[facet] (bbl) -- (odl) -- (bul) -- cycle {};
+\fill[facet] (bbl) -- (odb) -- (bbr) -- cycle {};
+\fill[facet] (bul) -- (idl) -- (bbl) -- cycle {};
+\fill[facet] (bul) -- (odl) -- (odt) -- cycle {};
+\fill[facet] (fbl) -- (idl) -- (idb) -- cycle {};
+\fill[facet] (fbl) -- (odl) -- (ful) -- cycle {};
+\fill[facet] (fbl) -- (odl) -- (odb) -- cycle {};
+\fill[facet] (fbl) -- (odb) -- (odl) -- cycle {};
+\fill[facet] (ful) -- (idl) -- (fbl) -- cycle {};
+\fill[facet] (ful) -- (odl) -- (fbl) -- cycle {};
+\fill[facet] (ful) -- (odt) -- (odl) -- cycle {};
+\fill[facet] (odl) -- (odb) -- (bbl) -- cycle {};
+\fill[facet] (odl) -- (odt) -- (bul) -- cycle {};
+\fill[facet] (odb) -- (odl) -- (bbl) -- cycle {};
+\fill[facet] (idt) -- (idl) -- (bul) -- cycle {};
+\fill[facet] (idt) -- (idl) -- (ful) -- cycle {};
+\fill[facet] (idt) -- (idr) -- (bur) -- cycle {};
+\fill[facet] (idt) -- (idr) -- (fur) -- cycle {};
+\fill[facet] (odt) -- (odl) -- (ful) -- cycle {};
+\fill[facet] (bbr) -- (idb) -- (bbl) -- cycle {};
+\fill[facet] (bbr) -- (odb) -- (odr) -- cycle {};
+\fill[facet] (bbr) -- (idr) -- (idb) -- cycle {};
+\fill[facet] (bbr) -- (odr) -- (bur) -- cycle {};
+\fill[facet] (bur) -- (idt) -- (bul) -- cycle {};
+\fill[facet] (bur) -- (odt) -- (bul) -- cycle {};
+\fill[facet] (bur) -- (odt) -- (odr) -- cycle {};
+\fill[facet] (bur) -- (idr) -- (bbr) -- cycle {};
+\fill[facet] (fbr) -- (idb) -- (fbl) -- cycle {};
+\fill[facet] (fbr) -- (odb) -- (fbl) -- cycle {};
+\fill[facet] (fbr) -- (idr) -- (idb) -- cycle {};
+\fill[facet] (fbr) -- (odr) -- (fur) -- cycle {};
+\fill[facet] (fur) -- (idt) -- (ful) -- cycle {};
+\fill[facet] (fur) -- (odt) -- (ful) -- cycle {};
+\fill[facet] (fur) -- (idr) -- (fbr) -- cycle {};
+\fill[facet] (odr) -- (odb) -- (fbr) -- cycle {};
+\fill[facet] (odr) -- (odt) -- (fur) -- cycle {};
+\node[vertex] at (idl)     {};
+\node[vertex] at (bbl)     {};
+\node[vertex] at (bul)     {};
+\node[vertex] at (fbl)     {};
+\node[vertex] at (ful)     {};
+\node[vertex] at (odl)     {};
+\node[vertex] at (idb)     {};
+\node[vertex] at (odb)     {};
+\node[vertex] at (idt)     {};
+\node[vertex] at (odt)     {};
+\node[vertex] at (idr)     {};
+\node[vertex] at (bbr)     {};
+\node[vertex] at (bur)     {};
+\node[vertex] at (fbr)     {};
+\node[vertex] at (fur)     {};
+\node[vertex] at (odr)     {};
 
-\fill[facet] (o_cup) -- (o_ohole) -- (g_ohole) -- (g_cup) -- cycle {};
-\fill[facet] (o_cup) -- (o_rhole) -- (g_rhole) -- (g_cup) -- cycle {};
-\fill[facet] (o_cup) -- (o_ohole) -- (b_ohole) -- (b_cup) -- cycle {};
-\fill[facet] (o_cup) -- (o_rhole) -- (b_rhole) -- (b_cup) -- cycle {};
 
-\begin{scope}[nodes=vertex]
-\node[label=left:\( r_{\mathrm{cap}} \)] at (r_cap) {};
-\node at (g_cap) {};
-\node at (o_cap) {};
-\node[label=above:\( b_{\mathrm{cap}} \)] at (b_cap) {};
-\node at (r_cup) {};
-\node at (g_cup) {};
-\node at (o_cup) {};
-\node[label=below:\( b_{\mathrm{cup}} \)] at (b_cup) {};
-\node at (r_ohole) {};
-\node at (g_ohole) {};
-\node at (o_ohole) {};
-\node[label=right:\( b_{\mathrm{rhole}} \)] at (b_ohole) {};
-\node at (r_rhole) {};
-\node at (g_rhole) {};
-\node at (o_rhole) {};
-\node[label=left:\( b_{\mathrm{lhole}} \)] at (b_rhole) {};
-\end{scope}
 \end{tikzpicture}
