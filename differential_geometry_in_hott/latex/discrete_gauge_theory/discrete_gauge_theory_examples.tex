@@ -261,12 +261,12 @@ All the faces do the same thing: they map to a homotopy between the identity and
 
 We can define a combinatorial torus as a similar HIT. This time each vertex will have six neighbors. So all the links will be merely equal to \( C_6 \) which is a hexagonal version of \( C_4 \). See Figure~\ref{fig:torus}. 
 
-To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take this simple alternating-triangle pattern, then glue the left and right edges, then bend into Figure~\ref{fig:torus}. The fact that each column in Figure~\ref{fig:flattorus} has four dots corresponds to the torus in Figure~\ref{fig:torus} having a square in front, diamond in the middle, and square in back.
+To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take this simple alternating-triangle pattern, then glue the left and right edges, then bend into Figure~\ref{fig:torus}. The fact that each column in Figure~\ref{fig:flattorus} has four dots corresponds to the torus in Figure~\ref{fig:torus} having a square in front, diamonds in the middle, and a square in back.
 
 \begin{figure}[h]
 \centering
 \input{discrete_gauge_theory_torus_tikz}
-\caption{Torus embedded in 3-dimensional space. Black lines trace four circular paths, red ones connect the front path to the middle ones, and blue ones connect the back path to the middle ones.}
+\caption{Torus embedded in 3-dimensional space. Black lines trace four square-shaped paths, red ones connect the front square to the middle diamonds, and blue ones connect the back path to the middle ones.}
 \label{fig:torus}
 \end{figure}
 
@@ -276,6 +276,39 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \caption{An inspiration for the torus. Identify the sides and then the top, definitionally, to get the actual torus.}
 \label{fig:flattorus}
 \end{figure}
+
+It's a bit of a challenge to visualize how the connection should twist these ``xhexes'' as we move around. Part of the issue is that we have actually constrained ourselves quite a bit by requiring the tangent space to be the link itself, which only has six settings. We could be more precise about angles if the tangent spaces had many subdivisions of the circle. If we had an actual application in mind then we might do that, but for now we'll be content to operate more conceptually.
+
+Given an arbitrary edge on the 3d-embedded torus, how should we decide how to map the hexagons at the endpoints? The goal is of course to approximate the actual geometry of transport on a curved torus, so we should learn a little about that. Which is comforting -- we're trying to capture geometry, so it's good that we need to use some!
+
+Of all the edges on our shape, the ones that are not very similar to geodesics are the squares in front and back. The two diamonds clearly correspond to highly symmetric geodesics, and less clearly there are four other cycles that are close enough to geodesics that if we drew the edges curved, they'd be actual geodesics on the torus they were hugging (Figure~\ref{fig:torus_geodesic}).
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.3]{torus_geodesic.png}
+\caption{A geodesic on a torus with inner radius 1 and outer radius 3.}
+\label{fig:torus_geodesic_smooth}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\input{discrete_gauge_theory_torus_tr_frame1_tikz}
+\caption{This path is very similar to an actual geodesic on an actual torus. There are three other analogous ones, one that also passes through the top and bottom of the outer diamond, and two that are 90 degree rotations of those two.}
+\label{fig:torus_geodesic}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\input{discrete_gauge_theory_torus_tr_frame2_tikz}
+\input{discrete_gauge_theory_torus_tr_frame3_tikz}
+\caption{This shows the transport map along the top of the front square. It is twistier than along other edges. It pivots the hexagon around the top of the outer diamond.}
+\label{fig:torus_twist}
+\end{figure}
+
+Transport along geodesics is minimal in a technical sense, meaning the least twisty. If we use the flat torus diagram to help us, then we can identify the outer and inner diamond, which are three of the vertical black lines, as geodesics, as well as all of the diagonal lines, which are the ones in Figure~\ref{fig:torus_geodesic}. That leaves only the black vertical lines that go around the front and back squares. Those are not geodesics, and some twisting will take place there.
+
+I am talking about twisting on individual edges, but that's not a concept with standalone meaning since the hexagons are torsors. I'm impicitly using the flat torus to makes the hexagons all pointed, by pointing them at the top as they appear in Figure~\ref{fig:flattorus}. But let's not use that extra information, and instead let's start talking about loops around faces.
 
 
 \subsection{Combinatorial manifolds}

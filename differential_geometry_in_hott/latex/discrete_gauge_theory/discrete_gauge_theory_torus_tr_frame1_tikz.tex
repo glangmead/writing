@@ -3,11 +3,12 @@
 y={(0.202689cm, -0.292816cm)},
 z={(-0.000031cm, 0.954244cm)},
 scale=1.00,
-back/.style={blue, thin},
-front/.style={red, thin},
-cycle/.style={black, thin},
-behind/.style={black, thick},
-ahead/.style={black, thick},
+back/.style={gray, thin},
+key/.style={black, very thick},
+front/.style={gray, thin},
+cycle/.style={gray, thin},
+behind/.style={gray, thick},
+ahead/.style={gray, thick},
 facet/.style={fill=blue!95!black,fill opacity=0.05},
 vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 
@@ -61,14 +62,14 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[behind,back] (bbl) -- (odl);
 
 \draw[behind,back] (bbr) -- (idb);
-\draw[behind,back] (bbr) -- (odb);
-\draw[ahead,back] (bbr) -- (idr);
+\draw[behind,back,key] (bbr) -- (odb);
+\draw[ahead,back,key] (bbr) -- (idr);
 \draw[ahead,back] (bbr) -- (odr);
 
-\draw[behind,back] (bul) -- (idl);
+\draw[behind,back,key] (bul) -- (idl);
 \draw[behind,back] (bul) -- (odl);
 \draw[ahead,back] (bul) -- (idt);
-\draw[ahead,back] (bul) -- (odt);
+\draw[ahead,back,key] (bul) -- (odt);
 
 \draw[ahead,back] (bur) -- (idr);
 \draw[ahead,back] (bur) -- (odr);
@@ -76,8 +77,8 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[behind,back] (bur) -- (odt);
 
 \draw[ahead,front] (fbl) -- (idb);
-\draw[ahead,front] (fbl) -- (odb);
-\draw[behind,front] (fbl) -- (idl);
+\draw[ahead,front,key] (fbl) -- (odb);
+\draw[behind,front,key] (fbl) -- (idl);
 \draw[behind,front] (fbl) -- (odl);
 
 \draw[behind,front] (fbr) -- (idb);
@@ -90,10 +91,10 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[ahead,front] (ful) -- (idt);
 \draw[ahead,front] (ful) -- (odt);
 
-\draw[ahead,front] (fur) -- (idr);
+\draw[ahead,front,key] (fur) -- (idr);
 \draw[ahead,front] (fur) -- (odr);
 \draw[behind,front] (fur) -- (idt);
-\draw[behind,front] (fur) -- (odt);
+\draw[behind,front,key] (fur) -- (odt);
 
 \fill[facet] (bbl) -- (idl) -- (idb) -- cycle {};
 \fill[facet] (bbl) -- (odl) -- (bul) -- cycle {};

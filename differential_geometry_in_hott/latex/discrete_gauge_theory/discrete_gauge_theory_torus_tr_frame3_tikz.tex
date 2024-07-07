@@ -1,14 +1,22 @@
 \begin{tikzpicture}%
-[x={(0.979243cm, 0.060639cm)},
-y={(0.202689cm, -0.292816cm)},
+[x={(1cm, 0cm)},
+y={(0, -0)},
 z={(-0.000031cm, 0.954244cm)},
 scale=1.00,
-back/.style={blue, thin},
-front/.style={red, thin},
-cycle/.style={black, thin},
-behind/.style={black, thick},
-ahead/.style={black, thick},
-facet/.style={fill=blue!95!black,fill opacity=0.05},
+back/.style={gray, thin},
+key/.style={gray, thin},
+front/.style={gray, thin},
+cycle/.style={gray, thin},
+arrow/.style={->,black, very thick},
+behind/.style={gray, thick},
+ahead/.style={gray, thick},
+facet/.style={fill=blue!95!black,fill opacity=0.0},
+rfacet/.style={fill=red!95!black,fill opacity=0.5},
+ofacet/.style={fill=orange!95!black,fill opacity=0.5},
+yfacet/.style={fill=yellow!95!black,fill opacity=0.5},
+gfacet/.style={fill=green!95!black,fill opacity=0.5},
+bfacet/.style={fill=blue!95!black,fill opacity=0.5},
+vfacet/.style={fill=violet!95!black,fill opacity=0.5},
 vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 
 \coordinate (odl) at (-3.0, 0.0, 0.0);
@@ -42,7 +50,7 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[cycle] (fbl) -- (ful);
 \draw[cycle] (fbr) -- (fur);
 \draw[cycle] (ful) -- (fbl);
-\draw[cycle] (ful) -- (fur);
+\draw[arrow] (ful) -- (fur);
 \draw[cycle] (fur) -- (fbr);
 \draw[cycle] (idl) -- (idb);
 \draw[cycle] (idl) -- (idt);
@@ -61,14 +69,14 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[behind,back] (bbl) -- (odl);
 
 \draw[behind,back] (bbr) -- (idb);
-\draw[behind,back] (bbr) -- (odb);
-\draw[ahead,back] (bbr) -- (idr);
+\draw[behind,back,key] (bbr) -- (odb);
+\draw[ahead,back,key] (bbr) -- (idr);
 \draw[ahead,back] (bbr) -- (odr);
 
-\draw[behind,back] (bul) -- (idl);
+\draw[behind,back,key] (bul) -- (idl);
 \draw[behind,back] (bul) -- (odl);
 \draw[ahead,back] (bul) -- (idt);
-\draw[ahead,back] (bul) -- (odt);
+\draw[ahead,back,key] (bul) -- (odt);
 
 \draw[ahead,back] (bur) -- (idr);
 \draw[ahead,back] (bur) -- (odr);
@@ -76,8 +84,8 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[behind,back] (bur) -- (odt);
 
 \draw[ahead,front] (fbl) -- (idb);
-\draw[ahead,front] (fbl) -- (odb);
-\draw[behind,front] (fbl) -- (idl);
+\draw[ahead,front,key] (fbl) -- (odb);
+\draw[behind,front,key] (fbl) -- (idl);
 \draw[behind,front] (fbl) -- (odl);
 
 \draw[behind,front] (fbr) -- (idb);
@@ -90,10 +98,23 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \draw[ahead,front] (ful) -- (idt);
 \draw[ahead,front] (ful) -- (odt);
 
-\draw[ahead,front] (fur) -- (idr);
+\draw[ahead,front,key] (fur) -- (idr);
 \draw[ahead,front] (fur) -- (odr);
 \draw[behind,front] (fur) -- (idt);
-\draw[behind,front] (fur) -- (odt);
+\draw[behind,front,key] (fur) -- (odt);
+
+\fill[facet] (fbl) -- (odl) -- (ful) -- cycle {};
+\fill[facet] (ful) -- (idl) -- (fbl) -- cycle {};
+\fill[facet] (ful) -- (odt) -- (odl) -- cycle {};
+\fill[facet] (idt) -- (idl) -- (ful) -- cycle {};
+
+\fill[vfacet] (fur) -- (idt) -- (ful) -- cycle {};
+\fill[rfacet] (fur) -- (odt) -- (ful) -- cycle {};
+
+\fill[bfacet] (idt) -- (idr) -- (fur) -- cycle {};
+\fill[yfacet] (fbr) -- (odr) -- (fur) -- cycle {};
+\fill[gfacet] (fur) -- (idr) -- (fbr) -- cycle {};
+\fill[ofacet] (odr) -- (odt) -- (fur) -- cycle {};
 
 \fill[facet] (bbl) -- (idl) -- (idb) -- cycle {};
 \fill[facet] (bbl) -- (odl) -- (bul) -- cycle {};
@@ -101,15 +122,10 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \fill[facet] (bul) -- (idl) -- (bbl) -- cycle {};
 \fill[facet] (bul) -- (odl) -- (odt) -- cycle {};
 \fill[facet] (fbl) -- (idl) -- (idb) -- cycle {};
-\fill[facet] (fbl) -- (odl) -- (ful) -- cycle {};
 \fill[facet] (fbl) -- (odb) -- (odl) -- cycle {};
-\fill[facet] (ful) -- (idl) -- (fbl) -- cycle {};
-\fill[facet] (ful) -- (odt) -- (odl) -- cycle {};
 \fill[facet] (odb) -- (odl) -- (bbl) -- cycle {};
 \fill[facet] (idt) -- (idl) -- (bul) -- cycle {};
-\fill[facet] (idt) -- (idl) -- (ful) -- cycle {};
 \fill[facet] (idt) -- (idr) -- (bur) -- cycle {};
-\fill[facet] (idt) -- (idr) -- (fur) -- cycle {};
 \fill[facet] (bbr) -- (idb) -- (bbl) -- cycle {};
 \fill[facet] (bbr) -- (odb) -- (odr) -- cycle {};
 \fill[facet] (bbr) -- (idr) -- (idb) -- cycle {};
@@ -121,12 +137,7 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \fill[facet] (fbr) -- (idb) -- (fbl) -- cycle {};
 \fill[facet] (fbr) -- (odb) -- (fbl) -- cycle {};
 \fill[facet] (fbr) -- (idr) -- (idb) -- cycle {};
-\fill[facet] (fbr) -- (odr) -- (fur) -- cycle {};
-\fill[facet] (fur) -- (idt) -- (ful) -- cycle {};
-\fill[facet] (fur) -- (odt) -- (ful) -- cycle {};
-\fill[facet] (fur) -- (idr) -- (fbr) -- cycle {};
 \fill[facet] (odr) -- (odb) -- (fbr) -- cycle {};
-\fill[facet] (odr) -- (odt) -- (fur) -- cycle {};
 \node[vertex] at (idl)     {};
 \node[vertex] at (bbl)     {};
 \node[vertex] at (bul)     {};
