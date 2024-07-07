@@ -2,7 +2,8 @@
 
 TODO:
 \begin{enumerate}
-\item Color-code each continuous cycle on the flat torus and the 3d torus, and use that to demonstrate how the curvature acts.
+\item Color-code each continuous cycle on the flat torus and the 3d torus, and use that to demonstrate how the curvature acts (begun).
+\item Motivate the refinement by showing a many-triangled neighborhood being tranpsorted around a small triangle.
 \end{enumerate}
 \subsection{The octahedron}
 
@@ -277,9 +278,9 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \label{fig:flattorus}
 \end{figure}
 
-It's a bit of a challenge to visualize how the connection should twist these ``xhexes'' as we move around. Part of the issue is that we have actually constrained ourselves quite a bit by requiring the tangent space to be the link itself, which only has six settings. We could be more precise about angles if the tangent spaces had many subdivisions of the circle. If we had an actual application in mind then we might do that, but for now we'll be content to operate more conceptually.
+It's a bit of a challenge to visualize how the connection should twist these ``xhexes'' as we move around. Part of the issue is that we have actually constrained ourselves quite a bit by requiring the tangent space to be the link of a point, which only has six points. We could be more precise about angles if the tangent spaces had many subdivisions of the circle. The way to achieve better approximations, which we will not pursue in this paper, is to \emph{refine} a given triangulation, and then choose a contractible neighborhood for each point which is not the link but goes ``farther out'' and consists of many edges and encloses many triangles. We could then transport along a single edge, and map between two circles that each have many segments, approximating to arbitrary precision any real-world application. The theory and practice of refinements is extensive and includes computer graphics research.
 
-Given an arbitrary edge on the 3d-embedded torus, how should we decide how to map the hexagons at the endpoints? The goal is of course to approximate the actual geometry of transport on a curved torus, so we should learn a little about that. Which is comforting -- we're trying to capture geometry, so it's good that we need to use some!
+But given an arbitrary edge on our impoverished 3d-embedded torus, how should we decide how to map the hexagons at the endpoints? The goal is of course to approximate the actual geometry of transport on a curved torus, so we should learn a little about that. Which is comforting -- we're trying to capture geometry, so it's good that we need to use some!
 
 Of all the edges on our shape, the ones that are not very similar to geodesics are the squares in front and back. The two diamonds clearly correspond to highly symmetric geodesics, and less clearly there are four other cycles that are close enough to geodesics that if we drew the edges curved, they'd be actual geodesics on the torus they were hugging (Figure~\ref{fig:torus_geodesic}).
 
@@ -302,7 +303,9 @@ Of all the edges on our shape, the ones that are not very similar to geodesics a
 \centering
 \input{discrete_gauge_theory_torus_tr_frame2_tikz}
 \input{discrete_gauge_theory_torus_tr_frame3_tikz}
-\caption{This shows the transport map along the top of the front square. It is twistier than along other edges. It pivots the hexagon around the top of the outer diamond.}
+\input{discrete_gauge_theory_torus_tr_frame4_tikz}
+\input{discrete_gauge_theory_torus_tr_frame5_tikz}
+\caption{This shows the transport map along the top triangle, in the counterclockwise direction. The first transport is twistier than along other edges: it pivots the hexagon around the top of the outer diamond. The net effect of the three stages is to rotate the original hexagon by one notch counterclockwise.}
 \label{fig:torus_twist}
 \end{figure}
 

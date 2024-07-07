@@ -1,0 +1,160 @@
+\begin{tikzpicture}%
+[x={(1cm, 0cm)},
+y={(0cm, -1cm)},
+z={(0cm, 0cm)},
+scale=1.00,
+back/.style={gray, thin},
+key/.style={gray, thin},
+front/.style={gray, thin},
+cycle/.style={gray, thin},
+arrow/.style={->,black, very thick},
+behind/.style={gray, thick},
+ahead/.style={gray, thick},
+facet/.style={fill=blue!95!black,fill opacity=0.0},
+rfacet/.style={fill=red!95!black,fill opacity=0.5},
+ofacet/.style={fill=orange!95!black,fill opacity=0.5},
+yfacet/.style={fill=yellow!95!black,fill opacity=0.5},
+gfacet/.style={fill=green!95!black,fill opacity=0.5},
+bfacet/.style={fill=blue!95!black,fill opacity=0.5},
+vfacet/.style={fill=violet!95!black,fill opacity=0.5},
+vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+
+\coordinate (odl) at (-3.0, 0.0, 0.0);
+\coordinate (odr) at (3.0, 0.0, 0.0);
+\coordinate (odb) at (0.0, 0.0, -3.0);
+\coordinate (odt) at (0.0, 0.0, 3.0);
+
+\coordinate (idl) at (-1.1, 0.0, 0.0);
+\coordinate (idr) at (1.1, 0.0, 0.0);
+\coordinate (idb) at (0.0, 0.0, -1.1);
+\coordinate (idt) at (0.0, 0.0, 1.1);
+
+\coordinate (bul) at (-1.4, -1.0, 1.4);
+\coordinate (bur) at (1.4, -1.0, 1.4);
+\coordinate (bbl) at (-1.4, -1.0, -1.4);
+\coordinate (bbr) at (1.4, -1.0, -1.4);
+
+\coordinate (ful) at (-1.4, 1.0, 1.4);
+\coordinate (fur) at (1.4, 1.0, 1.4);
+\coordinate (fbl) at (-1.4, 1.0, -1.4);
+\coordinate (fbr) at (1.4, 1.0, -1.4);
+
+\draw[cycle] (bbl) -- (bbr);
+\draw[cycle] (bbl) -- (bul);
+\draw[cycle] (bbr) -- (bbl);
+\draw[cycle] (bbr) -- (bur);
+\draw[cycle] (bul) -- (bbl);
+\draw[cycle] (bul) -- (bur);
+\draw[cycle] (bur) -- (bbr);
+\draw[cycle] (fbl) -- (fbr);
+\draw[cycle] (fbl) -- (ful);
+\draw[cycle] (fbr) -- (fur);
+\draw[cycle] (ful) -- (fbl);
+\draw[cycle] (ful) -- (fur);
+\draw[cycle] (fur) -- (fbr);
+\draw[cycle] (idl) -- (idb);
+\draw[cycle] (idl) -- (idt);
+\draw[cycle] (idr) -- (idb);
+\draw[cycle] (idr) -- (idt);
+\draw[cycle] (odb) -- (odl);
+\draw[cycle] (odb) -- (odr);
+\draw[cycle] (odl) -- (odb);
+\draw[cycle] (odl) -- (odt);
+\draw[cycle] (odt) -- (odl);
+\draw[cycle] (odt) -- (odr);
+
+\draw[ahead,back] (bbl) -- (idb);
+\draw[ahead,back] (bbl) -- (odb);
+\draw[behind,back] (bbl) -- (idl);
+\draw[behind,back] (bbl) -- (odl);
+
+\draw[behind,back] (bbr) -- (idb);
+\draw[behind,back,key] (bbr) -- (odb);
+\draw[ahead,back,key] (bbr) -- (idr);
+\draw[ahead,back] (bbr) -- (odr);
+
+\draw[behind,back,key] (bul) -- (idl);
+\draw[behind,back] (bul) -- (odl);
+\draw[ahead,back] (bul) -- (idt);
+\draw[ahead,back,key] (bul) -- (odt);
+
+\draw[ahead,back] (bur) -- (idr);
+\draw[ahead,back] (bur) -- (odr);
+\draw[behind,back] (bur) -- (idt);
+\draw[behind,back] (bur) -- (odt);
+
+\draw[ahead,front] (fbl) -- (idb);
+\draw[ahead,front,key] (fbl) -- (odb);
+\draw[behind,front,key] (fbl) -- (idl);
+\draw[behind,front] (fbl) -- (odl);
+
+\draw[behind,front] (fbr) -- (idb);
+\draw[behind,front] (fbr) -- (odb);
+\draw[ahead,front] (fbr) -- (idr);
+\draw[ahead,front] (fbr) -- (odr);
+
+\draw[behind,front] (ful) -- (idl);
+\draw[behind,front] (ful) -- (odl);
+\draw[ahead,front] (ful) -- (idt);
+\draw[ahead,front] (ful) -- (odt);
+
+\draw[ahead,front,key] (fur) -- (idr);
+\draw[ahead,front] (fur) -- (odr);
+\draw[behind,front] (fur) -- (idt);
+\draw[behind,front,key,arrow] (fur) -- (odt);
+
+\fill[facet] (fbl) -- (odl) -- (ful) -- cycle {};
+\fill[facet] (ful) -- (idl) -- (fbl) -- cycle {};
+\fill[facet] (idt) -- (idl) -- (ful) -- cycle {};
+
+\fill[facet] (fur) -- (idt) -- (ful) -- cycle {};
+
+\fill[rfacet] (odt) -- (odl) -- (ful) -- cycle {};
+\fill[ofacet] (odt) -- (bul) -- (odl) -- cycle {};
+\fill[vfacet] (odt) -- (ful) -- (fur) -- cycle {};
+\fill[bfacet] (odt) -- (fur) -- (odr) -- cycle {};
+\fill[yfacet] (odt) -- (bul) -- (bur) -- cycle {};
+\fill[gfacet] (odt) -- (odr) -- (bur) -- cycle {};
+
+\fill[facet] (idt) -- (idr) -- (fur) -- cycle {};
+\fill[facet] (fbr) -- (odr) -- (fur) -- cycle {};
+\fill[facet] (fur) -- (idr) -- (fbr) -- cycle {};
+
+\fill[facet] (bbl) -- (idl) -- (idb) -- cycle {};
+\fill[facet] (bbl) -- (odl) -- (bul) -- cycle {};
+\fill[facet] (bbl) -- (odb) -- (bbr) -- cycle {};
+\fill[facet] (bul) -- (idl) -- (bbl) -- cycle {};
+\fill[facet] (fbl) -- (idl) -- (idb) -- cycle {};
+\fill[facet] (fbl) -- (odb) -- (odl) -- cycle {};
+\fill[facet] (odb) -- (odl) -- (bbl) -- cycle {};
+\fill[facet] (idt) -- (idl) -- (bul) -- cycle {};
+\fill[facet] (idt) -- (idr) -- (bur) -- cycle {};
+\fill[facet] (bbr) -- (idb) -- (bbl) -- cycle {};
+\fill[facet] (bbr) -- (odb) -- (odr) -- cycle {};
+\fill[facet] (bbr) -- (idr) -- (idb) -- cycle {};
+\fill[facet] (bbr) -- (odr) -- (bur) -- cycle {};
+\fill[facet] (bur) -- (idt) -- (bul) -- cycle {};
+\fill[facet] (bur) -- (idr) -- (bbr) -- cycle {};
+\fill[facet] (fbr) -- (idb) -- (fbl) -- cycle {};
+\fill[facet] (fbr) -- (odb) -- (fbl) -- cycle {};
+\fill[facet] (fbr) -- (idr) -- (idb) -- cycle {};
+\fill[facet] (odr) -- (odb) -- (fbr) -- cycle {};
+\node[vertex] at (idl)     {};
+\node[vertex] at (bbl)     {};
+\node[vertex] at (bul)     {};
+\node[vertex] at (fbl)     {};
+\node[vertex] at (ful)     {};
+\node[vertex] at (odl)     {};
+\node[vertex] at (idb)     {};
+\node[vertex] at (odb)     {};
+\node[vertex] at (idt)     {};
+\node[vertex] at (odt)     {};
+\node[vertex] at (idr)     {};
+\node[vertex] at (bbr)     {};
+\node[vertex] at (bur)     {};
+\node[vertex] at (fbr)     {};
+\node[vertex] at (fur)     {};
+\node[vertex] at (odr)     {};
+
+
+\end{tikzpicture}
