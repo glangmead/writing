@@ -1,102 +1,54 @@
-\section{Central H-spaces}
+\section{Torsors}
 
-\begin{itemize}
-\item introduce torsors
-\item show subtlety how \( BG \) doesn't classify stuff since it has extra properties
-\item draw 
-% https://q.uiver.app/#q=WzAsNyxbMSwwLCJQIl0sWzIsMCwiRUciXSxbMywwLCJcXG1hdGhjYWx7VX0nIl0sWzEsMSwiTSJdLFsyLDEsIkJHIl0sWzMsMSwiXFxtYXRoY2Fse1V9Il0sWzAsMCwiXFxzdW1fe2E6TX1VKGYoeCkpIl0sWzQsNSwiVShcXHRleHR7Zm9yZ2V0fSkiXSxbMSwyXSxbMCwxXSxbMyw0LCJmIl0sWzAsM10sWzEsNF0sWzIsNV0sWzAsNCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNSwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzYsMCwiOj0iXV0=
-\begin{tikzcd}
-  {\sum_{a:M}U(f(x))} & P & EG & {\mathcal{U}'} \\
-  & M & BG & {\mathcal{U}}
-  \arrow["{:=}", from=1-1, to=1-2]
-  \arrow[from=1-2, to=1-3]
-  \arrow[from=1-2, to=2-2]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-  \arrow[from=1-3, to=1-4]
-  \arrow[from=1-3, to=2-3]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-3, to=2-4]
-  \arrow[from=1-4, to=2-4]
-  \arrow["f", from=2-2, to=2-3]
-  \arrow["{U(\text{forget})}", from=2-3, to=2-4]
-\end{tikzcd}
-\item H-spaces paper result equating this to a universal cover of a component of the universe. (It should feel significant that \( BS^1\simeq \BAutoso \).)
-\end{itemize}
-
-To create a tangent bundle of a surface we need to map loops on the surface to isomorphisms of the plane. For us this means we need to map loops on the surface to circles. That in turn means we are looking for a codomain that is a \emph{delooping} of the circle.
-
-Let \( G \) be a group consisting of a set (0-type) \( S \), an identity \( e:S \), a multiplication \( \mu:S\times S \to S \), an inverse function \( i:S\to S \) satisfying the group laws (associativity of \( \mu \), unit laws). 
-
-Let a \( G \)-type be a type \( X:\U \) equipped with an action \( m:G\to X\simeq X \). To form a classifying type \( \GType \) of \( G \)-types we can let \( G \) act on the universe:
-
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lc1xcbWF0aGNhbHtVfV8qIl0sWzAsMSwiXFxtYXRoY2Fse1V9XyoiXSxbMCwyLCJcXG1hdGhjYWx7VX0iXSxbMCwxLCJtIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXV0=
-\begin{center}
-\begin{tikzcd}
-  {G\times\mathcal{U}_*} \\
-  {\mathcal{U}_*} \\
-  {\mathcal{U}}
-  \arrow["m", from=1-1, to=2-1]
-  \arrow["{\mathrm{pr}_1}", from=2-1, to=3-1]
-\end{tikzcd}
-\end{center}
-
-where \( m \) preserves fibers of the universal fibration. We can form type families of \( G \)-types by pulling back this diagram:
-
-% https://q.uiver.app/#q=WzAsNixbMSwwLCJHXFx0aW1lc1xcbWF0aGNhbHtVfV8qIl0sWzEsMSwiXFxtYXRoY2Fse1V9XyoiXSxbMSwyLCJcXG1hdGhjYWx7VX0iXSxbMCwwLCJHXFx0aW1lcyBQIl0sWzAsMSwiUCJdLFswLDIsIlgiXSxbMCwxLCJtIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXSxbNCw1LCJcXG1hdGhybXtwcn1fMSIsMl0sWzMsNCwibSIsMl0sWzMsMF0sWzQsMV0sWzUsMl0sWzQsMiwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzMsMSwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
-\begin{center}
-\begin{tikzcd}
-  {G\times P} & {G\times\mathcal{U}_*} \\
-  P & {\mathcal{U}_*} \\
-  X & {\mathcal{U}}
-  \arrow[from=1-1, to=1-2]
-  \arrow["m"', from=1-1, to=2-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-  \arrow["m", from=1-2, to=2-2]
-  \arrow[from=2-1, to=2-2]
-  \arrow["{\mathrm{pr}_1}"', from=2-1, to=3-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-  \arrow["{\mathrm{pr}_1}", from=2-2, to=3-2]
-  \arrow[from=3-1, to=3-2]
-\end{tikzcd}
-\end{center}
-
-If we add to this the requirement that the action be free and transitive, we obtain the type \( \GTor \) of \( G \)-torsors.
-
-Central H-spaces are the classifying spaces for principal bundles on abelian groups. We won't be able to access the full theory for nonabelian groups just yet, but we hope that the theory of maximal tori and weights might bring even those within reach of the central H-space paradigm.
-
-We will rely on the lovely paper by Buchholtz, Christensen, Flaten and Rijke \cite{buchholtz2023central}. 
+Classical geometry tells us to look for an appropriate type of torsors to map into. Homotopy type theory tells us to look for a univalent fibration to map into. The type of torsors is not a connected component of the universe, because torsors have additional structure on top of an underlying type. So we'll need to resolve that.
 
 \begin{mydef}
-An H-space structure on a pointed type \( (B,b) \) consists of
-\begin{enumerate}
-\item A binary operation \( \mu:B\to B\to B \)
-\item A left unit law \( \mu_l:\mu(\pt,-)=\id_B \)
-\item A right unit law \( \mu_r:\mu(-,\pt)=\id_B \)
-\item A coherence \( \mu_{lr}:\mu_l(\pt)=_{\mu(\pt,\pt)=\pt}\mu_r(\pt) \)
-\item A proof of left- and right- invertibility: \( \mu(a,-):A\simeq A \), \( \mu(-, b):A\simeq A \)
-\end{enumerate}
+Let \( G \) be a group (a set with the usual classical structure and properties). A \emph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:G\to\Aut(X) \). If in addition we have a term
+\[ 
+\mathsf{is\_torsor}:||X||_{-1}\times \pit{g:G}\mathsf{is\_equiv}(\phi(-,x):G\to X)
+\] then we call this data a \emph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( TG \).
 \end{mydef}
 
-\begin{myprop}
-(\cite{buchholtz2023central} Prop 3.6) Let \( A \) be a pointed type. Then the following are equivalent:
-\begin{enumerate}
-\item \( A \) is central.
-\item \( A \) is a connected H-space and \( A\dotto A \) is a set.
-\item \( A \) is a connected H-space and \( A\simeq A \) is a set.
-\end{enumerate}
-\end{myprop}
+If \( (X,\phi),(Y,\psi):TG \) then a \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
 
-This result will inform our study of the Leibniz rule: the analogue of the algebra of functions to \( \rr \) is:
-\begin{myprop}
-For any type \( M \) and H-space \( B \) the type of maps \( M\to B \) with base point the constant map is an H-space under pointwise multiplication.
-\end{myprop}
+\begin{mylemma}
+There is a natural equivalence \( (X=_{TG}Y) \simeq (X\to_G Y) \).\qed
+\end{mylemma}
 
-We will also be looking in detail at maps into the classifying space of \( S^1 \) bundles. The Buchholtz et al paper\cite{buchholtz2023central} describes this type in several helpful ways, summarized by:
+Denote by \( * \) the torsor given by \( G \) actions on its underlying set by left-translation. This serves as a basepoint for \( TG \) and we have a group isomorphism \( \Omega TG\simeq G \).
+
+\begin{mylemma}
+A \( G \)-set \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exists a \( G \)-equivariant equivalence \( *\to_G X \).\qed
+\end{mylemma}
+
+\begin{mycor}
+The pointed type \( (TG,*) \) is a \( \K(G,1) \).\qed
+\end{mycor}
+
+\subsection{Univalent replacement for torsors}
+
+The homotopy type theory of cohomology and bundles tells us that the type of \( G \)-bundles on a type \( M \) is the type \( M\to\K(G,1) \). So we will start there as well. But this is a type of structured types, a connected component of \( G \)-sets rather than a connected component of the universe. The paths \emph{in the universe} between two \( G \)-sets is equivalent to the type of equivalences between the \emph{underlying types}, not just the equivariant equivalences.
+
+We'll resolve this problem with the following discussion, following Scoccola\cite{sco}. We will state the definitions and theorems for a general \( \K(G,n) \) but we will be focusing on \( n=1 \) in this note.
+
+\begin{mydef}
+Let \( \EM(G,n)\defeq \BAut(\K(G,1))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\). A \( \K(G,n)-bundle \) on a type \( M \) is the fiber of a map \( M\to\EM(G,n) \).
+\end{mydef}
+
+Scoccola uses the action on the universe of suspension and of forgetting a point to form the composition 
+\[ 
+\EM(G,n)\xrightarrow[]{\Sigma} \EM_{\bullet\bullet}(G,n)\xrightarrow[]{F_\bullet}\EMp(G,n)
+\]
+from types to types with two points (north and south), to pointed types (by forgetting the south point).
+
+\begin{mydef}
+Given \( f:M\to\EM(G,n) \), the \emph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ\Sigma\circ f \).
+\end{mydef}
 
 \begin{mythm}
-For any central H-space \( A \) (such as \( S^1 \)) the type of torsors of \( A \) is a delooping of \( A \), and is equivalent to \( \BAut_1(A)\defeq \sit{X:\U}||X=A||_0. \) This delooping is also a central H-space and so can be infinitely delooped.
+(Scoccola\cite{sco} Proposition 2.39). A \( \K(G,n) \) bundle \( f:M\to\EM(G,n) \) is equivalent to a map in \( M\to\K(G,n+1) \), and so is a principal fibration, if and only if the associated action \( f_\bullet \) is contractible.
 \end{mythm}
 
-This means that we can form a sequence of deloopings \( \zz, S^1, \BAutoso, \ldots \).
-
+And so we can continue to work with the classifying space \( \EM(G,1) \) and study \( \K(G,1) \)-fibrations, and then later add the extra propositional requirement when it is needed to prove that we are working with \( M\to\K(G,2) \).
 
 

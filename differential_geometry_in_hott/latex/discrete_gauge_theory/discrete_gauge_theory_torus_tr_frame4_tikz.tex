@@ -24,20 +24,20 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \coordinate (odb) at (0.0, 0.0, -3.0);
 \coordinate (odt) at (0.0, 0.0, 3.0);
 
-\coordinate (idl) at (-1.1, 0.0, 0.0);
-\coordinate (idr) at (1.1, 0.0, 0.0);
-\coordinate (idb) at (0.0, 0.0, -1.1);
-\coordinate (idt) at (0.0, 0.0, 1.1);
+\coordinate (idl) at (-0.5, 0.0, 0.0);
+\coordinate (idr) at (0.5, 0.0, 0.0);
+\coordinate (idb) at (0.0, 0.0, -0.5);
+\coordinate (idt) at (0.0, 0.0, 0.5);
 
-\coordinate (bul) at (-1.4, -1.0, 1.4);
-\coordinate (bur) at (1.4, -1.0, 1.4);
-\coordinate (bbl) at (-1.4, -1.0, -1.4);
-\coordinate (bbr) at (1.4, -1.0, -1.4);
+\coordinate (bul) at (-1, -1.0, 1);
+\coordinate (bur) at (1, -1.0, 1);
+\coordinate (bbl) at (-1, -1.0, -1);
+\coordinate (bbr) at (1, -1.0, -1);
 
-\coordinate (ful) at (-1.4, 1.0, 1.4);
-\coordinate (fur) at (1.4, 1.0, 1.4);
-\coordinate (fbl) at (-1.4, 1.0, -1.4);
-\coordinate (fbr) at (1.4, 1.0, -1.4);
+\coordinate (ful) at (-1, 1.0, 1);
+\coordinate (fur) at (1, 1.0, 1);
+\coordinate (fbl) at (-1, 1.0, -1);
+\coordinate (fbr) at (1, 1.0, -1);
 
 \draw[cycle] (bbl) -- (bbr);
 \draw[cycle] (bbl) -- (bul);
@@ -109,12 +109,12 @@ vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 
 \fill[facet] (fur) -- (idt) -- (ful) -- cycle {};
 
-\fill[rfacet] (odt) -- (odl) -- (ful) -- cycle {};
-\fill[ofacet] (odt) -- (bul) -- (odl) -- cycle {};
-\fill[vfacet] (odt) -- (ful) -- (fur) -- cycle {};
-\fill[bfacet] (odt) -- (fur) -- (odr) -- cycle {};
-\fill[yfacet] (odt) -- (bul) -- (bur) -- cycle {};
-\fill[gfacet] (odt) -- (odr) -- (bur) -- cycle {};
+\fill[vfacet] (odt) -- (odl) -- (ful) -- cycle {};
+\fill[rfacet] (odt) -- (bul) -- (odl) -- cycle {};
+\fill[bfacet] (odt) -- (ful) -- (fur) -- cycle {};
+\fill[gfacet] (odt) -- (fur) -- (odr) -- cycle {};
+\fill[ofacet] (odt) -- (bul) -- (bur) -- cycle {};
+\fill[yfacet] (odt) -- (odr) -- (bur) -- cycle {};
 
 \fill[facet] (idt) -- (idr) -- (fur) -- cycle {};
 \fill[facet] (fbr) -- (odr) -- (fur) -- cycle {};

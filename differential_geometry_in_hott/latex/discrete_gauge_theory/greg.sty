@@ -8,6 +8,7 @@
 \RequirePackage{amscd}
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
+\RequirePackage{multicol}
 
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
@@ -30,6 +31,9 @@
 \RequirePackage{luatex85}
 \RequirePackage[all]{xy}
 
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
 \graphicspath{ {./img/} }
 
 \usetikzlibrary{arrows,positioning,quotes,cd}
@@ -40,6 +44,12 @@
 %%% Common categories
 \newcommand{\tp}{\;\mathrm{type}}
 \newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\EM}{\mathrm{EM}}
+\newcommand{\EMp}{\mathrm{EM_{\bullet}}}
+\newcommand{\EMzn}{\mathrm{EM}(\zz,n)}
+\newcommand{\EMpzn}{\mathrm{EM_{\bullet}}(\zz,n)}
+\newcommand{\EMzo}{\mathrm{EM}(\zz,1)}
+\newcommand{\EMpzo}{\mathrm{EM_{\bullet}}(\zz,1)}
 \newcommand{\G}{\Gamma}
 %\renewcommand{\gg}{\mathfrak{g}}
 \newcommand{\gauge}{\mathcal{G}} % make this mathscr one day
@@ -82,6 +92,7 @@
 \newcommand{\zz}{\ensuremath{\mathbb{Z}}}
 \newcommand{\vvv}{\ensuremath{\mathbb{V}}}
 \newcommand{\cinfty}{\ensuremath{C^{\infty}}}
+\newcommand{\ctmfd}{\mathsf{Comb2Mfd}}
 \newcommand{\smfd}{\mathsf{SmoothMfd}}
 \newcommand{\calg}{\mathsf{CAlg}_{\rr}}
 \newcommand{\cart}{\mathsf{CartSp}}
@@ -97,9 +108,11 @@
 \newcommand{\shape}{\text{\textesh}}
 \newcommand{\op}[1]{#1^{\mathsf{op}}}
 \newcommand{\pt}{\mathrm{pt}}
+\newcommand{\ev}{\mathrm{ev}}
 \newcommand{\Aut}{\mathrm{Aut}}
 \newcommand{\BAut}{\mathrm{BAut}}
 \newcommand{\BAuto}[1]{\BAut_1(#1)}
+\newcommand{\so}{S^1}
 \newcommand{\BAutoso}{\BAuto{S^1}}
 \newcommand{\ptt}[2]{{#1}_{+{#2}}}
 \newcommand{\BAutosoc}{\ptt{\BAutoso}{C_4}}
@@ -113,6 +126,7 @@
 \newcommand{\disk}{\mathsf{disk}}
 \newcommand{\xdisk}{\mathsf{xdisk}}
 \newcommand{\GTor}{\mathsf{GTor}}
+\newcommand{\Tor}{\mathsf{Tor}}
 \newcommand{\GType}{\mathsf{GType}}
 \newcommand{\Type}{\mathsf{Type}}
 \newcommand{\Typeo}{\Type_{\shapeo}}
@@ -124,6 +138,7 @@
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\uni}{\mathcal{U}}
+\newcommand{\K}{\mathrm{K}}
 \newcommand{\mysection}[1]{\section{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mysubsection}[1]{\subsection{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mychapter}[1]{\chapter{\texorpdfstring{#1}{\detokenize{#1}}}}
@@ -154,13 +169,12 @@
 \newcommand{\gc}[1]{\marginpar{\bf $\leftarrow$ {#1}}}
 \newcommand{\commentout}[1]{}
 \newcommand{\image}{\mathrm{Image}}
-\newcommand{\myfig}[2]{\begin{figure}[ht]\caption{#1}\centering\includegraphics[width=0.6\textwidth]{#2}\end{figure}}
+\newcommand{\myfig}[2]{\begin{figure}[h]\caption{#1}\centering\includegraphics[width=0.6\textwidth]{#2}\end{figure}}
 %\newcommand{\gc}[1]{}
 \newcommand{\defeq}{\stackrel{\mathrm{def}}{=}}
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\BG}{\mathsf{B}G}
 \newcommand{\Copy}{\mathrm{Copy}}
-\newcommand{\Tor}{\mathsf{Tor}}
 \newcommand{\gset}{G\text{-}\Set}
 \newcommand{\torg}{\Tor_G}
 \newcommand{\dotto}{\,\cdot\!\to}
@@ -191,6 +205,16 @@
 \newcommand{\Bb}{\mathscr{B}}
 \newcommand{\pathover}[1]{\xrightarrow[{#1}]{=}}
 
+\newtheoremstyle{mythmstyle}
+{5pt} % Space above
+{-4pt} % Space below
+{} % Body font
+{} % Indent amount
+{\bfseries} % Theorem head font
+{.} % Punctuation after theorem head
+{.5em} % Space after theorem head
+{} % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{mythmstyle}
 \newtheorem{mydef}{Definition}
 \newtheorem{mythm}{Theorem}
 \newtheorem{mylemma}{Lemma}
