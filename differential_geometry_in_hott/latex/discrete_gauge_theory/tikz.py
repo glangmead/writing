@@ -49,6 +49,9 @@ def action(elem, doc):
     """
     if type(elem) == pf.RawBlock and elem.format == "latex":
         code = elem.text
+        # sys.stderr.write("-----\n")
+        # sys.stderr.write(code)
+        # sys.stderr.write("-----\n")
 
         if code.strip().startswith(r"\begin{tikzcd}") or code.strip().startswith(r"\begin{tikzpicture}"):
             outfile = imagedir + '/' + sha1(code)

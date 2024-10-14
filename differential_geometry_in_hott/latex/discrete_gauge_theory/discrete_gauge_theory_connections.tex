@@ -12,7 +12,7 @@ Here are the translations that are covered in the current paper:
 & \text{\small automorphisms) acts on the space of connections.} & \quad&\text{\small the splitting of paths in sigma types.} \\ 
 \end{align*}
 
-\subsection{Higher maps contain connections}
+\subsection{Connections}
 
 To hew close to the intended context of the term ``connection'' we will examine manifold-like types mapping into bundle-classifying-like types. The novelty here, compared to other HoTT investigations, is the focus on combinatorial types to stand in for manifolds.
 
@@ -22,13 +22,11 @@ The DDG philosophy tells us to look at HITs that are polytope-like. A polytope \
 
 A principal \( S^1 \) bundle is a family of \( S^1 \) torsors and so we will often be focusing on the function type \( M\to \BAutoso \). The novel claim here is that \( M\to \BAutoso \) contains more than just all the principal \( S^1 \)-bundles: it also contains all the connections on all the bundles. Every connection is present, both curved and flat, because we have complete freedom to specify the images of the paths.
 
-Classically, curvature is a property of the connection. It is computed either on infinitesimal loops, or on the infinitesimal surface bounded by the loop. In fact it is ``the derivative of the connection'' morally speaking. Getting into the details would wreck the simplicity we're going for\footnote{I'm picking and choosing where to tell the story fully twice (see the next section) and where to simply look for motivation.}. We will look for curvature by examining \( f \) on 1-dimensional loops. If \( M \) is at least a 2-type and if we want to claim that \( f \) classifies a bundle with connection, then we will be required to map the 2-faces of \( M \) (the 2-dimesional constructors) to a path from \( \refl \) to the image of a bounding loop. So at dimension 2 we will impose that constraint. Since \( \BAutoso \) is 2-truncated, \( f \) factors through the truncation map \( M\to||M||_2 \) and so that's the top dimension.
+Classically, curvature is a property of the connection. It is computed either on infinitesimal loops, or on the infinitesimal surface bounded by the loop. In fact it is ``the derivative of the connection'' morally speaking. We will look for curvature by examining \( f \) on 1-dimensional loops. If \( M \) is at least a 2-type and if we want to claim that \( f \) classifies a bundle with connection, then we will be required to map the 2-faces of \( M \) (the 2-dimesional constructors) to a path from \( \refl \) to the image of a bounding loop. So at dimension 2 we will impose that constraint. Since \( \BAutoso \) is 2-truncated, \( f \) factors through the truncation map \( M\to||M||_2 \) and so that's the top dimension.
 
 There is an example at the end of this paper. For those who are best served by examples, do look at it and return to this point.
 
-
-
-\subsection{Connections as splittings}
+\subsubsection{Connections as splittings}
 
 The classical story goes like this.
 
@@ -70,47 +68,11 @@ We recall now the identity type of sigma types:
 
 In particular, given \( p:x=_M y \) and \( w:f(x) \) we have \( w\pathover{p}tr(p)(w)\simeq tr(p)(w)=_{f(y)}tr(p)(w) \) which has the term \( \refl \) which we can call ``the horizontal lift of \( p \) starting at \( w \).'' We can imitate the classical definition of a connection by defining \( \omega\defeq \pr_2\circ\mathsf{split} \), the projection onto the vertical component. And thus in HoTT we can see the equivalence of transport and lifting of paths into horizontal and vertical components.
 
-\subsection{The Leibniz (product) rule}
-
-The Leibniz rule for exterior differentiation states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). This is an interaction between multiplication in \( \rr \) and the action on vectors of smooth functions (the 1-forms \( df \) and \( dg \)). 
-
-To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to a central H-space \( B \). Let \( \mu:B\to B\to B \) be the H-space multiplication. How does \( \mu \) act on paths? Suppose we have \( a, a', b, b':B \) and \( p:a=_B a', q:b=_B b' \). Then we also have homotopies \( \mu(p, -):\mu(a, -)=_{B\to B}\mu(a', -) \) and \( \mu(-,q):\mu(-,b)=_{B\to B}\mu(-,b'). \) Since \( \mu(a, -):B=B \) is an (unpointed) equivalence of \( B \), and similarly for \( \mu(b, -) \) and so on, this data assembles into the following diagram of higher groupoid morphisms:
-
-\begin{center}
-% https://q.uiver.app/#q=WzAsMyxbMiwwLCJCIl0sWzAsMCwiQiJdLFs0LDAsIkIiXSxbMSwwLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTN9XSxbMSwwLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjN9XSxbMCwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTN9XSxbMCwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjN9XSxbMyw0LCJcXG11KHAsLSkiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV0sWzUsNiwiXFxtdSgtLHEpIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
-\begin{tikzcd}
-  B && B && B
-  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-18pt}, from=1-1, to=1-3]
-  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=18pt}, from=1-1, to=1-3]
-  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-18pt}, from=1-3, to=1-5]
-  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=18pt}, from=1-3, to=1-5]
-  \arrow["{\mu(p,-)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
-  \arrow["{\mu(-,q)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
-\end{tikzcd}
-\end{center}
-
-And so the two homotopies can be horizontally composed to give a path \[ \mu(p,-)\star\mu(-,q): \mu(a, b)=\mu(a',b'). \] Horizontal composition is given by \[\mu(p,-)\star\mu(-,q)\defeq(\mu(p,-)\cdot_r \mu(-,b))\cdot(\mu(a', -)\cdot_l\mu(-, q))\] where \[ \mu(p,-)\cdot_r\mu(-,b):\mu(a,b)=\mu(a',b) \] and \[ \mu(a',-)\cdot_l\mu(-,q):\mu(a',b)=\mu(a',b') \] are defined by path induction.  See the HoTT book Theorem 2.1.6 on the Eckmann-Hilton argument\cite{hottbook}.
-
-We can recognize the process of using whiskering to form horizontal composition in the Leibniz rule. 
-
-Quick aside: moving from infinitesimal calculus to finite groupoid algebra actually involves two changes. The first is the change from vectors to paths, forms to functions and so on. But it's also the case that tangent vectors have just the one basepoint, whereas paths have two endpoints. You can see this play out in this example, where \( a \) and \( a' \) were distinct points (and \( b \) and \( b' \)).
-
-The horizontal composition we build lives entirely in \( B \) and we didn't make use of \( M \) yet. The Leibniz rule will be a pointwise version of what's going on in \( B \). Denote by \( \mu\circ(f,g):M\to B \) the map which sends \( x\mapsto \mu(f(x),g(x)) \).
-
-\begin{mylemma}
-Given \( f, g:M\to B \) and \( p:x=_M y \) then 
-\begin{align*}
- \ap(\mu\circ(f,g))(p)&=\mu(f(p),-)\star\mu(-,g(p))\\
- &=\left[\mu(f(p),-)\cdot_r \mu(-,g(x))\right]\cdot \left[\mu(f(y),-)\cdot_l\mu(-,g(p))\right]\\
- &:\mu(f(x),g(x))=\mu(f(y),g(y))
-\end{align*}
-\end{mylemma}
-
-\subsection{Covering spaces}
+\subsubsection{Covering spaces}
 
 If \( G \) is a 0-truncated group such as \( \zz \) then the type of torsors (delooping) \( BG \) is 1-truncated. If \( f:M\to BG \) is a type family then \( \sit{x:M}f(x) \) has fibers that are sets (\( G \)-torsors). So transport functions are set isomorphisms, and the transport of any contractible loop in \( M \) will be \( \refl \) (the identity) of the fiber, which is what we mean by flat.
 
-\subsection{Gauge transformations}
+\subsubsection{Gauge transformations}
 
 A \emph{gauge transformation} is a term inherited from physics. It's an automorphism of a principal bundle \( P\to M \), meaning a homeomorphism of \( P \) that commutes with the projection to \( M \) and so acts on each fiber. It is further required to be equivariant under the action of the group \( G \), and so it's very similar to the act of multiplying each fiber by a continuously varying element of \( G \).
 
@@ -157,5 +119,43 @@ Given a function \( f:M\to\U \) and homotopy \( H:f\sim f \) the following squar
   \arrow["{f(p)}"', equal, from=2-1, to=2-2]
 \end{tikzcd}
 \end{center}
+
+\subsection{Vector fields}
+
+A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain, and so the function is a partial function.
+
+\begin{mydef}
+If \( M \) is a combinatorial manifold and \( Z\subset M_0 \) is a set of vertices in \( M \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( M\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \emph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( M\setminus Z \) has boundary circles where each vertex was removed.
+\end{mydef}
+
+\begin{mydef}
+Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \emph{vector field on \( M \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:M\setminus Z}T(x) \). The \emph{exponential map} \( \exp:P\to M \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In diagram form we have:
+\end{mydef}
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dXQ==
+\begin{center}
+\begin{tikzcd}
+  {P\stackrel{\mathrm{def}}={\sum_{C:TM}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  \\
+  {M\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  \arrow["{\overline{T}}", from=1-1, to=1-3]
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
+  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
+  \arrow["{{X:\prod_{x:M\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
+  \arrow["T", from=3-1, to=3-3]
+\end{tikzcd}
+\end{center}
+
+Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( M\setminus Z\to M \), and can be thought of as the flow of the vector field. It can be extended to a map \( M\to M \) by taking the identity map on \( Z \).
+
+The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_2) \), a path ending at \( X(v_2):T(v_2) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl(X(v)) \).
+
+Faceovers are paths from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). This amounts to contracting the endpoint \( a \) back to \( X(v) \) along the path, like a tape measure. In so doing we have squeezed a face of the manifold into the polygonal fiber \( X(v) \).
+
+\begin{mydef}
+The \emph{index} of \( X \) is the winding number of something.
+\end{mydef}
+
+
 
 

@@ -1,74 +1,46 @@
-\section{Gauss-Bonnet, Vector Fields, and the Poincaré-Hopf Theorem}
+\section{Leibniz, Gauss-Bonnet, Poincaré-Hopf}
 
-\begin{enumerate}
-\item Given Chern-Weil, we can hypothesize that Pfaffians and determinants can be made from the path groupoid structure.
-\item Theorem 1: Gauss-Bonnet: curvature vs euler characteristic (2-d)
-\item Theorem 2: Gauss-Bonnet-Chern (2n-d, Pfaffian/Euler class, 1944)
-\item Theorem 3: Poincaré-Hopf: v.f. index is indep of v.f., and is euler characteristic via a specific v.f.
-\item Non-theorem: v.f. on torus is the gradient of a Morse function. Bringing in Morse theory is future work.
-\item use % https://q.uiver.app/#q=WzAsNixbMCwyLCJNIl0sWzIsMiwiQlNeMSJdLFsyLDAsIkVTXjEiXSxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fT17XFxkaXNwbGF5c3R5bGVcXHN1bV97YTpNfWYoYSl9Il0sWzAsNCwiXFxPbWVnYV4yTSJdLFsyLDQsIlxcT21lZ2FeMkJTXjEiXSxbMCwxLCJmIiwyXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiRWYiXSxbMywxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCJ7XFxkaXNwbGF5c3R5bGUgWDpcXHByb2Rfe2E6TX1mKGEpfSIsMCx7ImN1cnZlIjotM31dLFs0LDUsIlxcT21lZ2FeMmYiXSxbMCw0LCJcXE9tZWdhXjIiXSxbMSw1LCJcXE9tZWdhXjIiXSxbMywwLCJcXG1hdGhybXtleHB9IiwwLHsiY3VydmUiOi0zfV1d
+\subsection{The Leibniz (product) rule}
+
+The Leibniz rule for exterior differentiation states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). This is an interaction between multiplication in \( \rr \) and the action on vectors of smooth functions (the 1-forms \( df \) and \( dg \)). 
+
+To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to a central H-space \( B \). Let \( \mu:B\to B\to B \) be the H-space multiplication. How does \( \mu \) act on paths? Suppose we have \( a, a', b, b':B \) and \( p:a=_B a', q:b=_B b' \). Then we also have homotopies \( \mu(p, -):\mu(a, -)=_{B\to B}\mu(a', -) \) and \( \mu(-,q):\mu(-,b)=_{B\to B}\mu(-,b'). \) Since \( \mu(a, -):B=B \) is an (unpointed) equivalence of \( B \), and similarly for \( \mu(b, -) \) and so on, this data assembles into the following diagram of higher groupoid morphisms:
+
+\begin{center}
+% https://q.uiver.app/#q=WzAsMyxbMiwwLCJCIl0sWzAsMCwiQiJdLFs0LDAsIkIiXSxbMSwwLCJcXG11KGEsLSkiLDAseyJjdXJ2ZSI6LTN9XSxbMSwwLCJcXG11KGEnLC0pIiwyLHsiY3VydmUiOjN9XSxbMCwyLCJcXG11KC0sYikiLDAseyJjdXJ2ZSI6LTN9XSxbMCwyLCJcXG11KC0sYicpIiwyLHsiY3VydmUiOjN9XSxbMyw0LCJcXG11KHAsLSkiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV0sWzUsNiwiXFxtdSgtLHEpIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
 \begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\displaystyle\sum_{a:M}f(a)}} && {ES^1} \\
-  \\
-  M && {\BAutoso} \\
-  \\
-  {\Omega^2M} && {\Omega^2\BAutoso}
-  \arrow["Ef", from=1-1, to=1-3]
-  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
-  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{\displaystyle X:\prod_{a:M}f(a)}}", curve={height=-18pt}, from=3-1, to=1-1]
-  \arrow["f"', from=3-1, to=3-3]
-  \arrow["{\Omega^2}", from=3-1, to=5-1]
-  \arrow["{\Omega^2}", from=3-3, to=5-3]
-  \arrow["{\Omega^2f}", from=5-1, to=5-3]
+  B && B && B
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{\mu(a,-)}", curve={height=-18pt}, from=1-1, to=1-3]
+  \arrow[""{name=1, anchor=center, inner sep=0}, "{\mu(a',-)}"', curve={height=18pt}, from=1-1, to=1-3]
+  \arrow[""{name=2, anchor=center, inner sep=0}, "{\mu(-,b)}", curve={height=-18pt}, from=1-3, to=1-5]
+  \arrow[""{name=3, anchor=center, inner sep=0}, "{\mu(-,b')}"', curve={height=18pt}, from=1-3, to=1-5]
+  \arrow["{\mu(p,-)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+  \arrow["{\mu(-,q)}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
 \end{tikzcd}
-\end{enumerate}
+\end{center}
 
-\subsection{Discrete vector fields}
+And so the two homotopies can be horizontally composed to give a path \[ \mu(p,-)\star\mu(-,q): \mu(a, b)=\mu(a',b'). \] Horizontal composition is given by \[\mu(p,-)\star\mu(-,q)\defeq(\mu(p,-)\cdot_r \mu(-,b))\cdot(\mu(a', -)\cdot_l\mu(-, q))\] where \[ \mu(p,-)\cdot_r\mu(-,b):\mu(a,b)=\mu(a',b) \] and \[ \mu(a',-)\cdot_l\mu(-,q):\mu(a',b)=\mu(a',b') \] are defined by path induction.  See the HoTT book Theorem 2.1.6 on the Eckmann-Hilton argument\cite{hottbook}.
 
-If \( M \) is a combinatorial manifold and we form a type family over \( M \) using \( \link \), \( \xbox \), or \( \xdisk \) then what we want to examine next is the dependent function type of this family, which are equivalent to sections of the sigma type. These sections will play the role of vector fields.
+We can recognize the process of using whiskering to form horizontal composition in the Leibniz rule. 
 
-Introduce the notation \( P_f\defeq \sit{x:M}f(x) \) and \( V_f\defeq \pit{x:M}f(x) \). We will also refer to the 0-skeleton of \( M \) as \( M_0 \) and the 1-skeleton as \( M_1 \). We'll be interested in \( P_\xbox \) (the xbox bundle over \( M \)) and \( V_\xbox \) (the type of sections thereof). Since \( M \) is a HIT, then to specify a map \( X:V_\xbox \) we need to supply a point in each fiber, and for each path \( p:x=_M y \) in \( M \) a path \( X(p):p_* X(x)=_{\xbox(y)} X(y) \).
+Quick aside: moving from infinitesimal calculus to finite groupoid algebra actually involves two changes. The first is the change from vectors to paths, forms to functions and so on. But it's also the case that tangent vectors have just the one basepoint, whereas paths have two endpoints. You can see this play out in this example, where \( a \) and \( a' \) were distinct points (and \( b \) and \( b' \)).
 
-Since \( \xbox \) is defined using the neighboring points and paths of \( M \), we can exponentiate \( P_\xbox \), forming a map \( \exp:P_\xbox\to M \): just map the xboxes back onto where they came from in \( M \). This is the finite version of exponentiating a tangent space. It's very different from the projection map \( \pr_1 \) since it spreads the fibers out along \( M \).
+The horizontal composition we build lives entirely in \( B \) and we didn't make use of \( M \) yet. The Leibniz rule will be a pointwise version of what's going on in \( B \). Denote by \( \mu\circ(f,g):M\to B \) the map which sends \( x\mapsto \mu(f(x),g(x)) \).
 
-Hence we also have a map \( \exp\circ X:M\to M \) which is in general not an equivalence but can be. We can think of it as the \emph{flow} given by \( X \), the analogue of integrating a vector field for some finite time.
+\begin{mylemma}
+Given \( f, g:M\to B \) and \( p:x=_M y \) then 
+\begin{align*}
+ \ap(\mu\circ(f,g))(p)&=\mu(f(p),-)\star\mu(-,g(p))\\
+ &=\left[\mu(f(p),-)\cdot_r \mu(-,g(x))\right]\cdot \left[\mu(f(y),-)\cdot_l\mu(-,g(p))\right]\\
+ &:\mu(f(x),g(x))=\mu(f(y),g(y))
+\end{align*}
+\end{mylemma}
 
-\subsection{The index of a fixed point}
+\subsection{The total curvature}
 
-Suppose that \( x \) satisfies \( X(x)=\refl_x \), and so \( \exp\circ X(x)=x \) and \( x \) is a fixed point of the flow. Combinatorial manifolds are finite and decidable so this equation makes sense. In such a situation we can form a map \( \tr\circ X\circ\exp:\link(x)\to\link(x). \) Starting with a point in \( \link(x) \) we exponentiate to the actual neighboring point in \( M \), take the value of \( X \) on this other point (some neighbor of this neighbor, possibly \( x \)), and transport that back to \( \link(x) \). Such a map has a degree, and that degree is a discrete version of what is called the \emph{index} of the vector field at a fixed point.
+\subsection{The total index}
 
-To prove the Gauss-Bonnet theorem one needs a notion of \emph{Euler characteristic} and a notion of curvature. To prove the Poincaré-Hopf theorem, one needs a notion of \emph{the index of a vector field}, and again, a notion of curvature. To prove both and relate them it helps to equate the Euler characteristic to the index of a special vector field. 
+\subsection{Equality of total index and total curvature}
 
-\begin{mydef}
-A vector field is a section \( X \) of the disk bundle. A zero of \( X \) is a vertex \( x \) where \( X(x)=x:\disk(x) \), the center of the disk.
-\end{mydef}
-
-The following proofs follow the explanations given in \cite{needham}. But as we might hope, the proofs can be brought into HoTT in a much abbreviated form!
-
-Note that \( X \) is a pointing of all the fibers. So a second vector field can be lifted to the classifying map to pointed types, which is contractible. That's really all that's going on in these classical proofs!
-
-\begin{mydef}
-The index of a vector field at a zero is given by transport composed with exp.
-\end{mydef}
-
-\begin{mythm}
-The total index is independent of the vector field.
-\end{mythm}
-
-\begin{mythm}
-(Poincaré-Hopf) The total index is equal to the total curvature.
-\end{mythm}
-
-\begin{mythm}
-The total index is equal to the Euler characteristic.
-\end{mythm}
-
-\begin{mythm}
-(Gauss-Bonnet) The total curvature is equal to the Euler characteristic.
-\end{mythm}
-
-
+\subsection{Identification with Euler characteristic}
 

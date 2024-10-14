@@ -1,6 +1,12 @@
 \section{Combinatorial manifolds}
 
-We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}.
+We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. These are a subclass of simplicial complexes.
+
+\begin{mydef}
+An \emph{abstract simplicial complex} \( S \) consists of a set \( S_0 \) of vertices, and for each \( k>0 \) a set \( S_k \) of subsets of \( S_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( S_k \) is an element of \( S_j \).
+\end{mydef}
+
+Note that we don't require all subsets of \( S_0 \) to be included -- that would make \( S \) an individual simplex. A simplicial complex is a family of simplices that are identified along various faces.
 
 \begin{mydef}
 In an abstract simplicial complex \( X \), the \emph{link} of a vertex \( v \) is the set containing every face \( f\in X \) such that \( v\notin f \) and \( f\cup v \) is a face of \( X \).
@@ -14,7 +20,32 @@ In a 2-dimensional combinatorial manifold, the link is the immediate neighbors o
 
 A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects.
 
-To convert a simplicial complex to a higher inductive type, we will simply convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension. We will begin with a type that is important both for the domain and the codomain of mere circles: a square.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{Torus-triang.png}
+\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (By Ag2gaeh - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=30856793)}
+\label{fig:torus_wiki_triangulation}
+\end{figure}
+
+\subsection{Higher simplicial complexes}
+
+To convert a simplicial complex to a higher inductive type, we will convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension. In order to specify the directionality of all the edges and faces, we need to first choose an ordering for each set in \( S \):
+
+\begin{mydef}
+The higher inductive type \( S' \) corresponding to the abstract simplicial complex \( S \) is given by
+\begin{enumerate}
+\item choosing an order for the elements of each \( S_k \)
+\item vertices: a function \( \mathsf{v_0}:S_0\to S' \) serving as the 0-dimensional constructors
+\item edges: a function \( \mathsf{v_1}:S_1\to S' \) sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
+\item at dimension \( k \), if \( S_k=\{S_{k1},\ldots,S_{kn}\}\), a path from \( \refl_{S_{k1}} \) to the concatenation \( \mathsf{v_{k-1}}(S_{k1})\cdot\mathsf{v_{k-1}}(S_{k2})\cdot\cdots\cdot\mathsf{v_{k-1}}(S_{kn})) \).
+\end{enumerate}
+\end{mydef}
+
+Classical constructions such as face maps, degeneracy maps, and boundary will not be needed since homotopy type theory provides related tools (\( \refl \), groupoid operations). Now for some examples.
+
+\subsection{Polygons}
+
+We will begin with a type that is important both for the domain and the codomain of mere circles: a square.
 
 \begin{mydef}
 The higher inductive type \( C_4 \) (where C stands for ``circle'').
@@ -98,7 +129,7 @@ yo &: y=o & & & ybo &: yb\cdot bo\cdot yo^{-1} = \refl_y
 
 We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton.
 
-\subsubsection{The function \texorpdfstring{\( \link \)}{link}}
+\subsection{The function \texorpdfstring{\( \link \)}{link}}
 
 Taking the link of a vertex gives us a map to the universe.
 
@@ -184,7 +215,7 @@ Define \( T_2:\oo\to\BAut C_4 \) by extending \( T_1 \) to the faces as follows:
 where \( H_R:R=\refl \) is the obvious homotopy.
 \end{mydef}
 
-All the faces do the same thing: they map to a homotopy between the identity and clockwise rotation by a quarter turn. Concatenating the eight faces in the 2-groupoid \( \oo \) would then map to a homotopy between the identity and two full rotations. This makes visible in HoTT the link between curvature and the euler characteristic (which is 2 for the octahedron).
+All the faces do the same thing: they map to a homotopy between the identity and clockwise rotation by a quarter turn. Concatenating the eight faces in the 2-groupoid \( \oo \) would then map to a homotopy between the identity and two full rotations. This makes visible in HoTT the link between curvature and the Euler characteristic (which is 2 for the octahedron).
 
 \subsection{The torus}
 
@@ -224,7 +255,7 @@ I am talking about twisting on individual edges, but that's not a concept with s
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=200pt]{dense_circle.pdf}
+\includegraphics[width=200pt]{dense_circle.png}
 \caption{To better approximate small transport angles, we would refine the mesh and instead of the link we would use circle-like paths that include more triangles, and have many edges. Imagine transporting the blue circle around the triangle indicated in the center. The point on the circle might move through the path shown, indicating how the circle comes back rotated just a few degrees counterclockwise. Use your imagination to discretize the smooth circle onto the points of the mesh.}
 \label{fig:dense_circle}
 \end{figure}
