@@ -14,17 +14,7 @@ Here are the translations that are covered in the current paper:
 
 \subsection{Connections}
 
-To hew close to the intended context of the term ``connection'' we will examine manifold-like types mapping into bundle-classifying-like types. The novelty here, compared to other HoTT investigations, is the focus on combinatorial types to stand in for manifolds.
 
-In recent times it has been believed in the HoTT community that maps from a discrete type to a discrete classifying space can encode only the connections that a classical mathematician would call \emph{flat} (zero curvature). In this context the word \emph{discrete} means having the discrete topology, in the sense of cohesion\cite{shulman_cohesion}. This is not the case! We will show that if the codomain is a classifying space of \( S^1 \) or other group of homotopy dimension at least 1, then non-flat connections appear despite the type \( S^1 \) being topologically discrete. Another common meaning of the shorthand ``discrete'' is to indicate a 0-truncated type, i.e. a set, as opposed to a type with higher homotopical structures. We will show that indeed if the codomain classifies sets, which is the case for example with the classifying space \( B\zz \), the delooping of \( \zz \), then connections are flat. (The type we denote by \( \mathbb{S}^1\defeq\{(x, y)|x^2+y^2=1\} \) is a set and is not topologically discrete. We will not be discussing it at all in this paper.)
-
-The DDG philosophy tells us to look at HITs that are polytope-like. A polytope \( M \) will have finitely many 0-dimesional (point) constructors \( \{m_0^i\} \), finitely many 1-dimesnional constructors \( \{m_1^{ij}:m_0^i=m_0^j\} \), and so on. Type families \( f:M\to \U \) on this type specify where each of these constructors is sent. In DDG parlance, \( f \) restricted to the 0-dimensional constructors of \( M \) is a 0-form and \( f \) restricted to the 1-dimensional constructors (not the 1-skeleton but just the 1-dimensional parts, whatever that means in HoTT) is a 1-form, and so on.
-
-A principal \( S^1 \) bundle is a family of \( S^1 \) torsors and so we will often be focusing on the function type \( M\to \BAutoso \). The novel claim here is that \( M\to \BAutoso \) contains more than just all the principal \( S^1 \)-bundles: it also contains all the connections on all the bundles. Every connection is present, both curved and flat, because we have complete freedom to specify the images of the paths.
-
-Classically, curvature is a property of the connection. It is computed either on infinitesimal loops, or on the infinitesimal surface bounded by the loop. In fact it is ``the derivative of the connection'' morally speaking. We will look for curvature by examining \( f \) on 1-dimensional loops. If \( M \) is at least a 2-type and if we want to claim that \( f \) classifies a bundle with connection, then we will be required to map the 2-faces of \( M \) (the 2-dimesional constructors) to a path from \( \refl \) to the image of a bounding loop. So at dimension 2 we will impose that constraint. Since \( \BAutoso \) is 2-truncated, \( f \) factors through the truncation map \( M\to||M||_2 \) and so that's the top dimension.
-
-There is an example at the end of this paper. For those who are best served by examples, do look at it and return to this point.
 
 \subsubsection{Connections as splittings}
 
@@ -122,7 +112,7 @@ Given a function \( f:M\to\U \) and homotopy \( H:f\sim f \) the following squar
 
 \subsection{Vector fields}
 
-A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain, and so the function is a partial function.
+A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain because we are very opinionated that the codomain be mere circles, and so the function is a partial function.
 
 \begin{mydef}
 If \( M \) is a combinatorial manifold and \( Z\subset M_0 \) is a set of vertices in \( M \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( M\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \emph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( M\setminus Z \) has boundary circles where each vertex was removed.
@@ -153,8 +143,10 @@ The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not j
 Faceovers are paths from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). This amounts to contracting the endpoint \( a \) back to \( X(v) \) along the path, like a tape measure. In so doing we have squeezed a face of the manifold into the polygonal fiber \( X(v) \).
 
 \begin{mydef}
-The \emph{index} of \( X \) is the winding number of something.
+The \emph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain.
 \end{mydef}
+
+Need pictures here. Show the classical examples of index +1 and -1.
 
 
 
