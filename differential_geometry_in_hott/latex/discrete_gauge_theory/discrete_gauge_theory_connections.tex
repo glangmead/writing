@@ -1,16 +1,6 @@
 \section{Higher geometry}
 
-Here are the translations that are covered in the current paper:
-\begin{align*}
-& \text{\small Connections are infinitesimal splittings of a} & \quad &\text{\small Paths in a sigma type are equivalent to a}        \\
-& \text{\small principal bundle.} & \quad&\text{\small pair of paths.}        \\ \hline
-& \text{\small Differentials satisfy the Leibniz (product) rule.} &\quad  &\text{\small Horizontal composition in an H-space is} \\ 
-&  &  \quad&\text{\small performed in two steps.} \\ \hline
-& \text{\small Connections with 0-truncated groups are covering}        &\quad &\text{\small Transport around contractible loops is } \refl             \\ 
-& \text{\small spaces with unique flat connection.}        & \quad&\text{\small when fibers are sets.}             \\ \hline
-& \text{\small The group of gauge transformations (bundle} &\quad &\text{\small Homotopies of classifying maps respect } \\ 
-& \text{\small automorphisms) acts on the space of connections.} & \quad&\text{\small the splitting of paths in sigma types.} \\ 
-\end{align*}
+There are no theorems in this section. We don't have two definitions of connections in HoTT that we can prove are equivalent. Instead we'll compare some key features of the classical theory to the system we have sketched above. It is my hope that differential geometers could onboard into HoTT through this work, and that someone new to geometry could learn it here as well. In both cases a dictionary of sorts would be helpful.
 
 \subsection{Connections}
 
@@ -21,13 +11,13 @@ The action on paths of the function \( T:M\to \EMzo \) is what is called a conne
 The classical story goes like this.
 
 \begin{mydef}
-The \emph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TM \). 
+The \defemph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TM \). 
 \end{mydef}
 
 \( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that the group \( \Aut P \) acts on \( VP \): an automorphism \( \phi:P\to P \) sends \( V_pP \) to \( V_{\phi(p)}P \), where of course \( \pi(p)=\pi(\phi(p)) \).
 
 \begin{mydef}
-An \emph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
+An \defemph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
 \end{mydef}
 
 Being preserved by the action of \( \Aut P \) means that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
@@ -39,7 +29,7 @@ Then, armed with the lifting of paths one immediately obtains isomorphisms betwe
 Moving now to HoTT, fix a type \( M:\U \) and a type family \( f:M\to\U \). Path induction gives us the transport isomorphism \( \pit{p:x=_M y}\tr(p):f(x)=f(y) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
 
 \begin{mydef}
-With the above context and points \( a:f(x), b:f(y) \) the type of \emph{dependent paths over \( p \)} with endpoints \( a, b \) is denoted
+With the above context and points \( a:f(x), b:f(y) \) the type of \defemph{dependent paths over \( p \)} with endpoints \( a, b \) is denoted
 \[ a\pathover{p}b.
 \]
 By induction we can assume \( p \) is \( \refl_a \) in which case \( a\pathover{p}b \) is \( a=_{f(x)}a \).
@@ -109,44 +99,6 @@ Given a function \( f:M\to\U \) and homotopy \( H:f\sim f \) the following squar
   \arrow["{f(p)}"', equal, from=2-1, to=2-2]
 \end{tikzcd}
 \end{center}
-
-\subsection{Vector fields}
-
-A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain because we are very opinionated that the codomain be mere circles, and so the function is a partial function.
-
-\begin{mydef}
-If \( M \) is a combinatorial manifold and \( Z\subset M_0 \) is a set of vertices in \( M \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( M\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \emph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( M\setminus Z \) has boundary circles where each vertex was removed.
-\end{mydef}
-
-\begin{mydef}
-Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \emph{vector field on \( M \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:M\setminus Z}T(x) \). The \emph{exponential map} \( \exp:P\to M \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In diagram form we have:
-\end{mydef}
-% https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dXQ==
-\begin{center}
-\begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\sum_{C:TM}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
-  \\
-  {M\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
-  \arrow["{\overline{T}}", from=1-1, to=1-3]
-  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
-  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{X:\prod_{x:M\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
-  \arrow["T", from=3-1, to=3-3]
-\end{tikzcd}
-\end{center}
-
-Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( M\setminus Z\to M \), and can be thought of as the flow of the vector field. It can be extended to a map \( M\to M \) by taking the identity map on \( Z \).
-
-The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_2) \), a path ending at \( X(v_2):T(v_2) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl(X(v)) \).
-
-Faceovers are paths from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). This amounts to contracting the endpoint \( a \) back to \( X(v) \) along the path, like a tape measure. In so doing we have squeezed a face of the manifold into the polygonal fiber \( X(v) \).
-
-\begin{mydef}
-The \emph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain.
-\end{mydef}
-
-Need pictures here. Show the classical examples of index +1 and -1.
 
 
 

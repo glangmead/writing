@@ -16,6 +16,9 @@ do
     $i.tikzimg.tex -t html -o ../html/$i.html
   cp *.png ../html
   cd ..
+  cp *.png html
   cp dense_circle.pdf html
+  cat html/$i.html | sed 's/embed src="\(.*\).pdf"/img src="\1.png"/' > html/foo.html
+  mv html/foo.html html/$i.html
   open html/$i.html
 done

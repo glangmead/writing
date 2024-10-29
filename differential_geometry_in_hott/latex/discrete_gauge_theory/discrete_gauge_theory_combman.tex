@@ -3,22 +3,67 @@
 We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. These are a subclass of simplicial complexes.
 
 \begin{mydef}
-An \emph{abstract simplicial complex} \( S \) consists of a set \( S_0 \) of vertices, and for each \( k>0 \) a set \( S_k \) of subsets of \( S_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( S_k \) is an element of \( S_j \).
+An \defemph{abstract simplicial complex} \( M \) consists of a set \( M_0 \) of vertices, and for each \( k>0 \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \).
 \end{mydef}
 
-Note that we don't require all subsets of \( S_0 \) to be included -- that would make \( S \) an individual simplex. A simplicial complex is a family of simplices that are identified along various faces.
+Note that we don't require all subsets of \( M_0 \) to be included -- that would make \( M \) an individual simplex. A simplicial complex is a family of simplices that are identified along various faces.
 
 \begin{mydef}
-In an abstract simplicial complex \( X \), the \emph{link} of a vertex \( v \) is the set containing every face \( f\in X \) such that \( v\notin f \) and \( f\cup v \) is a face of \( X \).
+In an abstract simplicial complex \( M \), the \defemph{link} of a vertex \( v \) is the set containing every face \( m\in M \) such that \( v\notin m \) and \( m\cup v \) is a face of \( M \).
 \end{mydef}
+
+The link is all the neighboring vertices of \( v \) and the codimension 1 faces joining those to each other. See for example Figure~\ref{fig:link}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+  \draw
+    (0, 0) grid[step=1cm] (3, 3)
+    (0, 2) -- (1, 3)
+    (0, 1) -- (2, 3)
+    (0, 0) -- (3, 3)
+    (1, 0) -- (3, 2)
+    (2, 0) -- (3, 1)
+  ;
+  \fill[radius=3pt]
+    \foreach \x in {0, ..., 3} {
+      \foreach \y in {0, ..., 3} {
+        (\x, \y) circle[]
+      }
+    }
+  ;
+  \path[above left]
+    \foreach \p/\v in {
+      {1, 3}/a,
+      {2, 3}/b,
+      {0, 2}/f,
+      {1, 2}/v,
+      {2, 2}/c,
+      {0, 1}/e,
+      {1, 1}/d%
+    } {
+      (\p) node {$\v$}
+    }
+  ;
+\end{tikzpicture}
+\caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \)}.
+\label{fig:link}
+\end{figure}
 
 \begin{mydef}
-A \emph{combinatorial manfiold} (or \emph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere).
+A \defemph{combinatorial manfiold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere).
 \end{mydef}
 
-In a 2-dimensional combinatorial manifold, the link is the immediate neighbors of \( v \) and the (1-dimensional) edges between them, forming a polygon.
+In a 2-dimensional combinatorial manifold the link is a polygon. See Figures~\ref{fig:sphere_triangulation}, \ref{fig:torus_wiki_triangulation}, and \ref{fig:genus3_wiki_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
 
 A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{triangulated_sphere.pdf}
+\caption{A combinatorial triangulation of a sphere, created with stripy.}
+\label{fig:sphere_triangulation}
+\end{figure}
 
 \begin{figure}[htbp]
 \centering
@@ -27,21 +72,28 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 \label{fig:torus_wiki_triangulation}
 \end{figure}
 
-\subsection{Higher simplicial complexes}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{triangulated_genus3.pdf}
+\caption{A 3-holes torus with triangulation, from Wikipedia. (By Ag2gaeh - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Tri-brezel.svg)}
+\label{fig:genus3_wiki_triangulation}
+\end{figure}
+
+\subsection{Higher inductive combinatorial manifolds}
 
 To convert a simplicial complex to a higher inductive type, we will convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension. In order to specify the directionality of all the edges and faces, we need to first choose an ordering for each set in \( S \):
 
 \begin{mydef}
-The higher inductive type \( S' \) corresponding to the abstract simplicial complex \( S \) is given by
+The higher inductive type \( M' \) corresponding to the abstract simplicial complex \( M \) is given by
 \begin{enumerate}
-\item choosing an order for the elements of each \( S_k \)
-\item vertices: a function \( \mathsf{v_0}:S_0\to S' \) serving as the 0-dimensional constructors
-\item edges: a function \( \mathsf{v_1}:S_1\to S' \) sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
-\item at dimension \( k \), if \( S_k=\{S_{k1},\ldots,S_{kn}\}\), a path from \( \refl_{S_{k1}} \) to the concatenation \( \mathsf{v_{k-1}}(S_{k1})\cdot\mathsf{v_{k-1}}(S_{k2})\cdot\cdots\cdot\mathsf{v_{k-1}}(S_{kn})) \).
+\item choosing an order for the elements of each \( M_k \)
+\item vertices: a function \( \mathsf{v_0}:M_0\to M' \) serving as the 0-dimensional constructors
+\item edges: a function \( \mathsf{v_1}:M_1\to M' \) sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
+\item at dimension \( k \), if \( M_k=\{M_{k1},\ldots,M_{kn}\}\), a path from \( \refl_{M_{k1}} \) to the concatenation \( \mathsf{v_{k-1}}(M_{k1})\cdot\mathsf{v_{k-1}}(M_{k2})\cdot\cdots\cdot\mathsf{v_{k-1}}(M_{kn})) \).
 \end{enumerate}
 \end{mydef}
 
-Classical constructions such as face maps, degeneracy maps, and boundary will not be needed since homotopy type theory provides related tools (\( \refl \), groupoid operations). Now for some examples.
+We will drop the prime and work with higher inductive combinatorial manfiolds exclusively going forward. 
 
 \subsection{Polygons}
 
@@ -65,7 +117,7 @@ c_4c_1 &: c_4 = c_1 \\
 \caption{The HIT \( C_4 \).}
 \end{figure}
 
-We may also think of \( C_4 \) as the join of the two-element sets \( \{c_1, c_3\}* \{c_2, c_4\} \). The circle itself is a non-example since it lacks the second vertex of the edge:
+We may also think of \( C_4 \) as the join of the two-element sets \( \{c_1, c_3\}* \{c_2, c_4\} \). The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
 
 \begin{mydef}
 The higher inductive type \( \so \):
@@ -76,6 +128,8 @@ The higher inductive type \( \so \):
 \end{align*}
 \end{mydef}
 
+Nonetheless, all polygons are equivalent to each other and to \( \so \).
+
 \begin{mylemma}
 The function \( \ell:C_4\to\so \) given by \( \ell(c_i)=\mathsf{base} \) for all \( i \), and \( \ell(c_ic_j)=\mathsf{loop} \) for all \( i,j \) is an equivalence with inverse \( \ell^{-1}(\mathsf{base})=c_1 \) and \( \ell^{-1}(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). There are clearly other inverses for different choices of vertex.
 \end{mylemma}
@@ -84,12 +138,14 @@ The function \( \ell:C_4\to\so \) given by \( \ell(c_i)=\mathsf{base} \) for all
 We have \( (C_4,||\ell||_{-1}):\EMzo. \)
 \end{mycor}
 
+Real-world triangulations of surfaces will often have links that are \( n \)-gons for a variable \( n \). For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
+
 \subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
-We will create our first combinatorial manifold, a 2-sphere. We will adopt the convention that a subscript indicates the dimension of a subskeleton of a complex. For instance, we have \( \mathsf{base}:\so_0 \).
+We will create our first combinatorial surface, a 2-sphere. We will adopt the convention that a subscript indicates the dimension of a subskeleton of a complex. For instance, we have \( \mathsf{base}:\so_0 \).
 
 \begin{mydef}
-The HIT \( \oo_0 \) is just 6 points, intended as the 0-skeleton of an octahedron, with vertices named after the colors on the faces of a puzzle cube.
+The HIT \( \oo_0 \) is just 6 points, intended as the 0-skeleton of an octahedron, with vertices named after the colors on the faces of a famous Central European puzzle cube.
 \[ w, y, b, r, g, o : \oo_0 \]
 \end{mydef}
 
@@ -131,10 +187,10 @@ We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \)
 
 \subsection{The function \texorpdfstring{\( \link \)}{link}}
 
-Taking the link of a vertex gives us a map to the universe.
+Taking the link of a vertex gives us a map to polygons.
 
 \begin{mydef}
-\( \link:\oo_0\to\BAut C_4 \) is given by induction:
+\( \link:\oo_0\to\EMzo \) is given by induction:
 \begin{align*}
 \link(w) &= brgo & \link(r) &= wbyg \\
 \link(y) &= bogr & \link(g) &= wryo \\
@@ -152,9 +208,8 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 
 To extend \( \link \) to the 1-skeleton, imagine how \( \link \) changes as we slide from point to point. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
 
-The full map on the 1-skeleton is:
 \begin{mydef}
-Define \( T_1:\oo_1\to\BAut C_4 \) on just the 1-skeleton by extending \( \link \) as follows:
+Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( \link \) as follows:
 Transport away from \( w \):
 \begin{itemize}
 \item \( T_1(wb):[b, r, g, o]\mapsto [y, r, w, o] \) (\( r, o \) fixed)
@@ -199,7 +254,7 @@ The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
 Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \).
 
 \begin{mydef}
-Define \( T_2:\oo\to\BAut C_4 \) by extending \( T_1 \) to the faces as follows:
+Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 \begin{multicols}{2}
 \begin{itemize}
 \item \( T_2(wbr)=H_R \) 
@@ -237,28 +292,64 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \label{fig:flattorus}
 \end{figure}
 
-It's a bit of a challenge to visualize how the connection should twist these links as we move around. Part of the issue is that we have actually constrained ourselves quite a bit by requiring the tangent space to be the link of a point, which only has six points. We could be more precise about angles if the tangent spaces had many subdivisions of the circle. The way to achieve better approximations, which we will not pursue in this paper, is to \emph{refine} a given triangulation, and then choose a contractible neighborhood for each point which is not the link but goes ``farther out'' and consists of many edges and encloses many triangles. We could then transport along a single edge, and map between two circles that each have many segments, approximating to arbitrary precision any real-world application. The theory and practice of refinements is extensive and includes computer graphics research.
+\subsection{Vector fields}
+
+A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain because we are very opinionated that the codomain be mere circles, and so the function is a partial function.
+
+\begin{mydef}
+If \( M \) is a combinatorial manifold and \( Z\subset M_0 \) is a set of vertices in \( M \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( M\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \defemph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( M\setminus Z \) has boundary circles where each vertex was removed.
+\end{mydef}
+
+Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. We'll end up working around that when we need to.
 
 \begin{figure}[htbp]
 \centering
-\input{discrete_gauge_theory_torus_tr_frame2_tikz}
-\input{discrete_gauge_theory_torus_tr_frame3_tikz}
-\input{discrete_gauge_theory_torus_tr_frame4_tikz}
-\input{discrete_gauge_theory_torus_tr_frame5_tikz}
-\caption{This shows the transport map along the top triangle, in the counterclockwise direction. The first transport is twistier than along other edges: it pivots the hexagon around the top of the outer diamond. The net effect of the three stages is to rotate the original hexagon by one notch counterclockwise.}
-\label{fig:torus_twist}
+\input{discrete_gauge_theory_torusflathole_tikz}
+\caption{The flat torus with one vertex removed. This also removes the edges and faces containing that vertex.}
+\label{fig:flattorus_zero}
 \end{figure}
-
-Transport along geodesics is minimal in a technical sense, meaning the least twisty. If we use the flat torus diagram to help us, then we can identify the outer and inner diamond, which are three of the vertical black lines, as geodesics, as well as all of the diagonal lines, which are the ones in Figure~\ref{fig:torus_geodesic}. That leaves only the black vertical lines that go around the front and back squares. Those are not geodesics, and some twisting will take place there.
-
-I am talking about twisting on individual edges, but that's not a concept with standalone meaning since the hexagons are torsors. I'm impicitly using the flat torus to makes the hexagons all pointed, by pointing them at the top as they appear in Figure~\ref{fig:flattorus}. But let's not use that extra information, and instead let's start talking about loops around faces.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=200pt]{dense_circle.png}
-\caption{To better approximate small transport angles, we would refine the mesh and instead of the link we would use circle-like paths that include more triangles, and have many edges. Imagine transporting the blue circle around the triangle indicated in the center. The point on the circle might move through the path shown, indicating how the circle comes back rotated just a few degrees counterclockwise. Use your imagination to discretize the smooth circle onto the points of the mesh.}
-\label{fig:dense_circle}
+\input{discrete_gauge_theory_torusflatclock_tikz}
+\input{discrete_gauge_theory_torusflatcounterclock_tikz}
+\input{discrete_gauge_theory_torusflatnegindex_tikz}
+\input{discrete_gauge_theory_torusflatzeroindex_tikz}
+\caption{Four vector fields around a zero. The first has index 1 and circulates clockwise. The second also has index 1 despite circulating counterclockwise, because if you trace a clockwise path the vector also rotates clockwise. The third has index -1 since it circulates counterclockwise as you trace a clockwise path. The fourth has index 0.}
+\label{fig:flattorus_clock}
 \end{figure}
+
+\begin{mydef}
+Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( M \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:M\setminus Z}T(x) \). The \defemph{exponential map} \( \exp:P\to M \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
+\end{mydef}
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dLFswLDIsIlRfXFxidWxsZXQiXSxbMywxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+\begin{center}
+\begin{tikzcd}
+  {P\stackrel{\mathrm{def}}={\sum_{C:TM}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  \\
+  {M\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  \arrow["{\overline{T}}", from=1-1, to=1-3]
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
+  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
+  \arrow["{{X:\prod_{x:M\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
+  \arrow["{T_\bullet}", from=3-1, to=1-3]
+  \arrow["T", from=3-1, to=3-3]
+\end{tikzcd}
+\end{center}
+
+Where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( M\setminus Z\to M \), and can be thought of as the flow of the vector field. It can be extended to a map \( M\to M \) by taking the identity map on \( Z \).
+
+The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_2) \), a path ending at \( X(v_2):T(v_2) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl(X(v)) \).
+
+Faceovers are paths from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). This amounts to contracting the endpoint \( a \) back to \( X(v) \) along the path, like a tape measure. In so doing we have squeezed a face of the manifold into the polygonal fiber \( X(v) \).
+
+\begin{mydef}
+The \defemph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain.
+\end{mydef}
+
+Need pictures here. Show the classical examples of index +1 and -1.
 
 
 

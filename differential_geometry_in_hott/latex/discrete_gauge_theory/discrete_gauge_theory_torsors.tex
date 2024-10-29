@@ -1,12 +1,12 @@
-\section{Torsors}
+\section{Torsors and principal bundles}
 
-Classical geometry tells us to look for an appropriate type of torsors to map into. Homotopy type theory tells us to look for a univalent fibration to map into. The type of torsors is not a connected component of the universe, because torsors have additional structure on top of an underlying type. So we'll need to resolve that.
+The classical theory of principal bundles tells us to look for an appropriate classifying space of torsors to map into. Homotopy type theory tells us that classifying spaces are univalent fibrations. The type of torsors is not a priori such a fibration, so we'll do some work to make that happen. This will constitute the codomain of the investigation.
 
 \begin{mydef}
-Let \( G \) be a group (a set with the usual classical structure and properties). A \emph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:G\to\Aut(X) \). If in addition we have a term
+Let \( G \) be a group (a set with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:G\to\Aut(X) \). If in addition we have a term
 \[ 
 \mathsf{is\_torsor}:||X||_{-1}\times \pit{g:G}\mathsf{is\_equiv}(\phi(-,x):G\to X)
-\] then we call this data a \emph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( TG \).
+\] then we call this data a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( TG \).
 \end{mydef}
 
 If \( (X,\phi),(Y,\psi):TG \) then a \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
@@ -42,16 +42,18 @@ Scoccola uses the action on the universe of suspension and of forgetting a point
 from types to types with two points (north and south), to pointed types (by forgetting the south point).
 
 \begin{mydef}
-Given \( f:M\to\EM(G,n) \), the \emph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ\Sigma\circ f \).
+Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ\Sigma\circ f \).
 \end{mydef}
 
 \begin{mythm}
 (Scoccola\cite{sco} Proposition 2.39). A \( \K(G,n) \) bundle \( f:M\to\EM(G,n) \) is equivalent to a map in \( M\to\K(G,n+1) \), and so is a principal fibration, if and only if the associated action \( f_\bullet \) is contractible.
 \end{mythm}
 
-And so we can continue to work with the classifying space \( \EM(G,1) \) and study \( \K(G,1) \)-fibrations, and then later add the extra propositional requirement when it is needed to prove that we are working with \( M\to\K(G,2) \).
+Note that \( \EMp(G,n)\simeq \K(\Aut G,1) \). In the special case of \( \EMzo \) the conditions of the theorem are met when \( f_\bullet:M\to\K(\Aut \zz, 1) \) is contractible. This amounts to a choice of direction for all the circles, and so deserves to be renamed that \( M \) is \emph{orientable}.
 
-\subsection{Pathovers}
+And so we can continue to work with the classifying space \( \EM(G,1) \) and study \( \K(G,1) \)-fibrations, knowing that if the manifold is oriented then these are principal bundles.
+
+\subsection{Pathovers in principal bundles}
 Suppose we have \( T:M\to\EMzo \). Paths in a sigma type \( \sit{x:M}T(x) \) are given by pairs of paths: a path \( p:x=_M y \) in the base, and a pathover \( p':\tr_p(x')=_{T(y)}y' \) between \( x':T(x) \) and \( y':T(y) \) in the fibers. We can't directly compare \( x' \) and \( y' \) since they are of different types, so we apply transport to one of them (which is asymmetrical, but equivalent to the alternatives). We say \( p' \) lies over \( p \). 
 
 The individual fibers of \( T \) are polygons (the link of the vertex of which it is the fiber). Given a path \( p:x=_M y \) in \( M \), one of its pathovers consists of a path in \( T(y) \). And given a face in \( M \), a faceover is a homotopy from a pathover to refl.
