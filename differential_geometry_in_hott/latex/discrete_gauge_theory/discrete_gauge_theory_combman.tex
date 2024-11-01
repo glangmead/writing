@@ -46,7 +46,7 @@ The link is all the neighboring vertices of \( v \) and the codimension 1 faces 
     }
   ;
 \end{tikzpicture}
-\caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \)}.
+\caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \)}, forming a hexagon.
 \label{fig:link}
 \end{figure}
 
@@ -117,7 +117,7 @@ c_4c_1 &: c_4 = c_1 \\
 \caption{The HIT \( C_4 \).}
 \end{figure}
 
-We may also think of \( C_4 \) as the join of the two-element sets \( \{c_1, c_3\}* \{c_2, c_4\} \). The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
+The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
 
 \begin{mydef}
 The higher inductive type \( \so \):
@@ -133,6 +133,9 @@ Nonetheless, all polygons are equivalent to each other and to \( \so \).
 \begin{mylemma}
 The function \( \ell:C_4\to\so \) given by \( \ell(c_i)=\mathsf{base} \) for all \( i \), and \( \ell(c_ic_j)=\mathsf{loop} \) for all \( i,j \) is an equivalence with inverse \( \ell^{-1}(\mathsf{base})=c_1 \) and \( \ell^{-1}(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). There are clearly other inverses for different choices of vertex.
 \end{mylemma}
+\begin{proof}
+See for example the HoTT Book\cite{hottbook} Lemma 6.5.1 which proves that \( \Sigma\mathbf{2}\simeq S^1 \).
+\end{proof}
 
 \begin{mycor}
 We have \( (C_4,||\ell||_{-1}):\EMzo. \)
@@ -206,7 +209,7 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 \label{fig:triangle_of_equators}
 \end{figure}
 
-To extend \( \link \) to the 1-skeleton, imagine how \( \link \) changes as we slide from point to point. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
+To extend \( \link \) to the 1-skeleton we have complete freedom. We will do something ``tangent bundley'', imagining how \( \link \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
 
 \begin{mydef}
 Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( \link \) as follows:
@@ -251,7 +254,7 @@ The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
 \end{multicols}
 \end{mydef}
 
-Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \).
+Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here there is no additional freedom.
 
 \begin{mydef}
 Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
@@ -270,7 +273,7 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 where \( H_R:R=\refl \) is the obvious homotopy.
 \end{mydef}
 
-All the faces do the same thing: they map to a homotopy between the identity and clockwise rotation by a quarter turn. Concatenating the eight faces in the 2-groupoid \( \oo \) would then map to a homotopy between the identity and two full rotations. This makes visible in HoTT the link between curvature and the Euler characteristic (which is 2 for the octahedron).
+All the faces do the same thing: they map to a homotopy between the identity and clockwise rotation by a quarter turn. Concatenating the eight faces in the 2-groupoid \( \oo \) would then map to a homotopy between the identity and two full rotations. This makes visible in HoTT the link between curvature and the Euler characteristic (which is 2 for the octahedron). More on that later.
 
 \subsection{The torus}
 
@@ -281,7 +284,7 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \begin{figure}[htbp]
 \centering
 \input{discrete_gauge_theory_torus_tikz}
-\caption{Torus embedded in 3-dimensional space. Black lines trace four square-shaped paths, red ones connect the front square to the middle diamonds, and blue ones connect the back path to the middle ones.}
+\caption{Torus embedded in 3-dimensional space. If you see color in your rendering then black lines trace four square-shaped paths, red ones connect the front square to the middle diamonds, and blue ones connect the back path to the middle ones.}
 \label{fig:torus}
 \end{figure}
 
@@ -309,16 +312,6 @@ Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. Th
 \label{fig:flattorus_zero}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torusflatclock_tikz}
-\input{discrete_gauge_theory_torusflatcounterclock_tikz}
-\input{discrete_gauge_theory_torusflatnegindex_tikz}
-\input{discrete_gauge_theory_torusflatzeroindex_tikz}
-\caption{Four vector fields around a zero. The first has index 1 and circulates clockwise. The second also has index 1 despite circulating counterclockwise, because if you trace a clockwise path the vector also rotates clockwise. The third has index -1 since it circulates counterclockwise as you trace a clockwise path. The fourth has index 0.}
-\label{fig:flattorus_clock}
-\end{figure}
-
 \begin{mydef}
 Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( M \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:M\setminus Z}T(x) \). The \defemph{exponential map} \( \exp:P\to M \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
 \end{mydef}
@@ -341,15 +334,24 @@ Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices.
 
 Where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( M\setminus Z\to M \), and can be thought of as the flow of the vector field. It can be extended to a map \( M\to M \) by taking the identity map on \( Z \).
 
-The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_2) \), a path ending at \( X(v_2):T(v_2) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl(X(v)) \).
+The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_1) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl_{X(v)} \).
 
-Faceovers are paths from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). This amounts to contracting the endpoint \( a \) back to \( X(v) \) along the path, like a tape measure. In so doing we have squeezed a face of the manifold into the polygonal fiber \( X(v) \).
+Faceovers are homotopies from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). The faceover implies that the loopover has winding number 0. Which brings us to index.
 
 \begin{mydef}
-The \defemph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain.
+The \defemph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain of \( X \).
 \end{mydef}
 
-Need pictures here. Show the classical examples of index +1 and -1.
+We will revisit the index later when we discuss the total index. Figure~\ref{fig:flattorus_clock} shows some discrete versions of the classical examples of index +1, --1 and 0. One note: the figures are only illustrating the value of the vector field on vertices. The \( \apd \) operation could in theory spin the vector many times around the link on its way from one vertex to the next. We will assume at all times that the smallest movement is taking place, and we leave it to the imagination whether that movement is clockwise or counterclockwise. A formalization would have to specify this fully of course.
 
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torusflatclock_tikz}
+\input{discrete_gauge_theory_torusflatcounterclock_tikz}
+\input{discrete_gauge_theory_torusflatnegindex_tikz}
+\input{discrete_gauge_theory_torusflatzeroindex_tikz}
+\caption{Four vector fields around a zero. The first has index 1 and circulates clockwise. The second also has index 1 despite circulating counterclockwise, because if you trace a clockwise path the vector also rotates clockwise. The third has index -1 since it circulates counterclockwise as you trace a clockwise path. The fourth has index 0 and could in fact be extended to the hole.}
+\label{fig:flattorus_clock}
+\end{figure}
 
 

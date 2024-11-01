@@ -27,7 +27,7 @@ The pointed type \( (TG,*) \) is a \( \K(G,1) \).\qed
 
 \subsection{Univalent replacement for torsors}
 
-The homotopy type theory of cohomology and bundles tells us that the type of \( G \)-bundles on a type \( M \) is the type \( M\to\K(G,1) \). So we will start there as well. But this is a type of structured types, a connected component of \( G \)-sets rather than a connected component of the universe. The paths \emph{in the universe} between two \( G \)-sets is equivalent to the type of equivalences between the \emph{underlying types}, not just the equivariant equivalences.
+The homotopy type theory of cohomology and bundles tells us that the type of principal \( G \)-bundles on a type \( M \) is the type \( M\to\K(G,1) \). But this is a type of structured types, a connected component of \( G \)-sets rather than a connected component of the universe. The paths \emph{in the universe} between two \( G \)-sets is equivalent to the type of equivalences between the \emph{underlying types}, not just the equivariant equivalences. We wish to work with a connected component of the universe \( \uni \).
 
 We'll resolve this problem with the following discussion, following Scoccola\cite{sco}. We will state the definitions and theorems for a general \( \K(G,n) \) but we will be focusing on \( n=1 \) in this note.
 
@@ -35,7 +35,7 @@ We'll resolve this problem with the following discussion, following Scoccola\cit
 Let \( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\). A \( \K(G,n)-bundle \) on a type \( M \) is the fiber of a map \( M\to\EM(G,n) \).
 \end{mydef}
 
-Scoccola uses the action on the universe of suspension and of forgetting a point to form the composition 
+Scoccola uses two self-maps on the universe: suspension \( \Sigma \) and forgetting a point \( F_\bullet \) to form the composition 
 \[ 
 \EM(G,n)\xrightarrow[]{\Sigma} \EM_{\bullet\bullet}(G,n)\xrightarrow[]{F_\bullet}\EMp(G,n)
 \]
@@ -51,10 +51,10 @@ Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)
 
 Note that \( \EMp(G,n)\simeq \K(\Aut G,1) \). In the special case of \( \EMzo \) the conditions of the theorem are met when \( f_\bullet:M\to\K(\Aut \zz, 1) \) is contractible. This amounts to a choice of direction for all the circles, and so deserves to be renamed that \( M \) is \emph{orientable}.
 
-And so we can continue to work with the classifying space \( \EM(G,1) \) and study \( \K(G,1) \)-fibrations, knowing that if the manifold is oriented then these are principal bundles.
+And so we can continue to work with the classifying space \( \EM(G,1) \) and study \( \K(G,1) \)-fibrations, knowing that if the bundle is orientable then these are principal bundles.
 
 \subsection{Pathovers in principal bundles}
-Suppose we have \( T:M\to\EMzo \). Paths in a sigma type \( \sit{x:M}T(x) \) are given by pairs of paths: a path \( p:x=_M y \) in the base, and a pathover \( p':\tr_p(x')=_{T(y)}y' \) between \( x':T(x) \) and \( y':T(y) \) in the fibers. We can't directly compare \( x' \) and \( y' \) since they are of different types, so we apply transport to one of them (which is asymmetrical, but equivalent to the alternatives). We say \( p' \) lies over \( p \). 
+Suppose we have \( T:M\to\EMzo \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Paths in a sigma type \( \sit{x:M}T(x) \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr_p(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them (which is asymmetrical, but equivalent to the alternatives). We say \( \pi \) lies over \( p \). 
 
-The individual fibers of \( T \) are polygons (the link of the vertex of which it is the fiber). Given a path \( p:x=_M y \) in \( M \), one of its pathovers consists of a path in \( T(y) \). And given a face in \( M \), a faceover is a homotopy from a pathover to refl.
+The individual fibers of \( T \) will be polygons. Given a path \( p:a=_M b \) one of its pathovers consists of a path in \( T(b) \). And given a face in \( M \), a faceover is a homotopy from a pathover to \( \refl \).
 
