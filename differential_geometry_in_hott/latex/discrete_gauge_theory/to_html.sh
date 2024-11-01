@@ -18,7 +18,7 @@ do
   cd ..
   cp *.png html
   cp dense_circle.pdf html
-  cat html/$i.html | sed 's/embed src="\(.*\).pdf"/img src="\1.png"/' > html/foo.html
+  cat html/$i.html | sed 's/embed src="\(.*\).pdf"/img src="\1.png"/' | sed 's/0◻//g' | sed 's=<p><em><span>2</span></em></p>==g' > html/foo.html
   mv html/foo.html html/$i.html
   open html/$i.html
 done
