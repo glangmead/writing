@@ -35,14 +35,14 @@ We'll resolve this problem with the following discussion, following Scoccola\cit
 Let \( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\). A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is the fiber of a map \( M\to\EM(G,n) \).
 \end{mydef}
 
-Scoccola uses two self-maps on the universe: suspension \( \Sigma \) and forgetting a point \( F_\bullet \) to form the composition 
+Scoccola uses two self-maps on the universe: suspension followed by \( (n+1) \)-truncation \( ||\Sigma||_{n+1} \) and forgetting a point \( F_\bullet \) to form the composition 
 \[ 
-\EM(G,n)\xrightarrow[]{\Sigma} \EM_{\bullet\bullet}(G,n)\xrightarrow[]{F_\bullet}\EMp(G,n)
+\EM(G,n)\xrightarrow[]{||\Sigma||_{n+1}} \EM_{\bullet\bullet}(G,n+1)\xrightarrow[]{F_\bullet}\EMp(G,n+1)
 \]
 from types to types with two points (north and south), to pointed types (by forgetting the south point).
 
 \begin{mydef}
-Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ\Sigma\circ f \).
+Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ||\Sigma||_{n+1}\circ f \).
 \end{mydef}
 
 \begin{mythm}
