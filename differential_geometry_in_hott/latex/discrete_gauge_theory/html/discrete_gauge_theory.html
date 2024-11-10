@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="dcterms.date" content="2023-12-20" />
+  <meta name="dcterms.date" content="2024-11-01" />
   <title>discrete_gauge_theory.tikzimg</title>
   <style>
     code{white-space: pre-wrap;}
@@ -345,11 +345,13 @@ class="math inline">\(\mathrm{K}(G,n)\)</span>-bundle</strong> on a type
 <span class="math inline">\(M\)</span> is the fiber of a map <span
 class="math inline">\(M\to\mathrm{EM}(G,n)\)</span>.</em></p>
 </div>
-<p>Scoccola uses two self-maps on the universe: suspension <span
-class="math inline">\(\Sigma\)</span> and forgetting a point <span
-class="math inline">\(F_\bullet\)</span> to form the composition <span
-class="math display">\[\mathrm{EM}(G,n)\xrightarrow[]{\Sigma}
-\mathrm{EM}_{\bullet\bullet}(G,n)\xrightarrow[]{F_\bullet}\mathrm{EM_{\bullet}}(G,n)\]</span>
+<p>Scoccola uses two self-maps on the universe: suspension followed by
+<span class="math inline">\((n+1)\)</span>-truncation <span
+class="math inline">\(||\Sigma||_{n+1}\)</span> and forgetting a point
+<span class="math inline">\(F_\bullet\)</span> to form the composition
+<span
+class="math display">\[\mathrm{EM}(G,n)\xrightarrow[]{||\Sigma||_{n+1}}
+\mathrm{EM}_{\bullet\bullet}(G,n+1)\xrightarrow[]{F_\bullet}\mathrm{EM_{\bullet}}(G,n+1)\]</span>
 from types to types with two points (north and south), to pointed types
 (by forgetting the south point).</p>
 <div class="mydef">
@@ -358,7 +360,7 @@ class="math inline">\(f:M\to\mathrm{EM}(G,n)\)</span>, the
 <strong>associated action of <span class="math inline">\(M\)</span> on
 <span class="math inline">\(G\)</span></strong>, denoted by <span
 class="math inline">\(f_\bullet\)</span> is defined to be <span
-class="math inline">\(f_\bullet=F_\bullet\circ\Sigma\circ
+class="math inline">\(f_\bullet=F_\bullet\circ||\Sigma||_{n+1}\circ
 f\)</span>.</em></p>
 </div>
 <div class="mythm">
@@ -372,15 +374,20 @@ so is a principal fibration, if and only if the associated action <span
 class="math inline">\(f_\bullet\)</span> is contractible.</em></p>
 </div>
 <p>Note that <span
-class="math inline">\(\mathrm{EM_{\bullet}}(G,n)\simeq
-\mathrm{K}(\mathop{\mathrm{Aut}}G,1)\)</span>. In the special case of
-<span
+class="math inline">\(\mathrm{EM_{\bullet}}(G,n+1)\simeq
+\mathrm{K}(\mathop{\mathrm{Aut}}G,1)\)</span> (independent of <span
+class="math inline">\(n\)</span>). In the special case of <span
 class="math inline">\(\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
 the conditions of the theorem are met when <span
 class="math inline">\(f_\bullet:M\to\mathrm{K}(\mathop{\mathrm{Aut}}\ensuremath{\mathbb{Z}},
 1)\)</span> is contractible. This amounts to a choice of direction for
-all the circles, and so deserves to be renamed that <span
-class="math inline">\(f\)</span> is <em>orientable</em>.</p>
+all the circles, and so deserves the name “<span
+class="math inline">\(f\)</span> is <em>orientable</em>.” In addition
+<span class="math inline">\(f_\bullet\)</span> deserves to be called the
+first Stiefel-Whitney class of <span class="math inline">\(f\)</span>,
+and the requirement here is that it vanishes. Reinterpreting more of the
+theory of characteristic classes would be an enlightening future
+project.</p>
 <p>And so we can continue to work with the classifying space <span
 class="math inline">\(\mathrm{EM}(G,1)\)</span> and study <span
 class="math inline">\(\mathrm{K}(G,1)\)</span>-fibrations, knowing that
@@ -1218,7 +1225,7 @@ class="math inline">\(\omega(\pi):\mathrm{tr}_p(\alpha)=\beta\)</span>.</p>
 class="math inline">\(\ensuremath{\mathsf{ap}}(H&#39;)(\pi):(a,H(a)(\alpha))=_P(b,H(b)(\beta))\)</span>
 which is still a path over <span class="math inline">\(p\)</span>.
 Applying <span class="math inline">\(\omega\)</span> we get <span
-class="math display">\[\omega(\ensuremath{\mathsf{ap}}(H&#39;)(\pi)):\mathrm{tr}_p(H(a)(\alpha))=(H(b)(\beta))\]</span>.
+class="math display">\[\omega(\ensuremath{\mathsf{ap}}(H&#39;)(\pi)):\mathrm{tr}_p(H(a)(\alpha))=(H(b)(\beta)).\]</span>
 Using the lemma below we can if we wish rewrite this as <span
 class="math display">\[\omega(\ensuremath{\mathsf{ap}}(H&#39;)(\pi)):H(b)\left[\mathrm{tr}_p(\alpha)=\beta\right]\]</span>
 which uses only <span class="math inline">\(H(b)\)</span>. This is the
