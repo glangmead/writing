@@ -91,7 +91,7 @@ class="toc-section-number">3</span> Combinatorial manifolds</a>
 id="toc-higher-inductive-combinatorial-manifolds"><span
 class="toc-section-number">3.1</span> Higher inductive combinatorial
 manifolds</a></li>
-<li><a href="#polygons" id="toc-polygons"><span
+<li><a href="#sec:polygons" id="toc-sec:polygons"><span
 class="toc-section-number">3.2</span> Polygons</a></li>
 <li><a href="#the-higher-inductive-type-oo"
 id="toc-the-higher-inductive-type-oo"><span
@@ -148,10 +148,10 @@ characteristic</a></li>
 </ul>
 </nav>
 <h1 class="unnumbered" id="abstract">Abstract</h1>
-<p>Homotopy type theory captures all the major concepts of differential
-geometry including connections, curvature, and gauge theory. We show
-this by focusing on combinatorial manifolds, which are discrete in the
-sense of real cohesion<span class="citation"
+<p>Homotopy type theory can capture some of the major concepts of
+differential geometry including connections, curvature, and vector
+fields. We show this by focusing on combinatorial manifolds, which are
+discrete in the sense of real cohesion<span class="citation"
 data-cites="shulman_cohesion"> (<a href="#ref-shulman_cohesion"
 role="doc-biblioref">Shulman, 2017</a>)</span>, and drawing inspiration
 from the field of discrete differential geometry. We prove the
@@ -197,55 +197,61 @@ a disk with a discrete circle boundary (i.e. a polygon). We can call
 terms <span
 class="math inline">\(C:\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
 “mere circles.”</p>
-<p>Note that <span
+<p>We will see in Section <a href="#sec:polygons"
+data-reference-type="ref" data-reference="sec:polygons">3.2</a> that
+<span
 class="math inline">\(\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
-contains all the polygons. Therefore we can construct a map <span
-class="math inline">\(T:M\to\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
-that maps each vertex to the polygon consisting of its neighbors. This
-will serve as the circle bundle of the tangent bundle of the manifold,
-i.e. the principal bundle consisting of nonzero tangent vectors.</p>
-<p>Now consider the type <span
+contains all the polygons. We will construct a map <span
+class="math inline">\(\mathsf{link}:M\to\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
+that maps each vertex to the polygon consisting of its neighbors. Then
+we can consider the type of pointed mere circles <span
 class="math inline">\(\mathrm{EM_{\bullet}}(\ensuremath{\mathbb{Z}},1)\stackrel{\mathrm{def}}{=}\sum_{Y:\mathrm{EM}(\ensuremath{\mathbb{Z}},1)}Y\)</span>
-of pointed mere circles. We have the pullback</p>
-<p><img src="./74450eed5fb2f88dbc562cb7b364d5fc183485f8.png"
-alt="image" /></p>
-<p>from the univalent fibration on the right, forming the usual fiber of
-<span class="math inline">\(T\)</span> as a sigma type. Such classifying
-maps are not always principal bundles; there is an extra condition on
-<span class="math inline">\(T\)</span> that we will get into later. For
-now it’s important only that we are mapping into a univalent fibration
-so that we can make use of type theory. Univalent fibrations are always
-equivalent to a projection of a type of pointed types to some connected
-component of the universe<span class="citation"
-data-cites="christensen_univalence"> (<a
+as well as the first projection that forgets the point. This is a
+univalent fibration (univalent fibrations are always equivalent to a
+projection of a type of pointed types to some connected component of the
+universe<span class="citation" data-cites="christensen_univalence"> (<a
 href="#ref-christensen_univalence" role="doc-biblioref">Christensen,
-2015</a>)</span>.</p>
+2015</a>)</span>). If we form the pullback</p>
+<p><img src="./9c97f36dc8322034bc4869643bffe6cfd8a5fa50.png"
+alt="image" /></p>
+<p>then we have a bundle of mere circles, with total space given by the
+<span class="math inline">\(\sum_{}\)</span>-type construction. We will
+show that this is not a principal bundle, i.e. a bundle of torsors.
+Torsors are types with the additional structure of a group action. But
+if <span class="math inline">\(\mathsf{link}\)</span> satisfies an
+additional property (amounting to an orientation) then the pullback is a
+principal fibration, i.e. <span
+class="math inline">\(\mathsf{link}\)</span> factors through a map <span
+class="math inline">\(\mathrm{K}(\ensuremath{\mathbb{Z}},2)\to\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>,
+where <span
+class="math inline">\(\mathrm{K}(\ensuremath{\mathbb{Z}},2)\)</span> is
+an Eilenberg-Mac Lane space.</p>
 <p>We will investigate that the data in dimensions 1 and 2 of <span
-class="math inline">\(T\)</span> can be thought of as a connection,
-notably one that is not necessarily flat. Moreover, lifting <span
-class="math inline">\(T\)</span> to <span
-class="math inline">\(\mathrm{EM_{\bullet}}(\ensuremath{\mathbb{Z}},1)\)</span>
-can be thought of as a vector field. There will in general not be a
-total lift, just a partial function. The domain will have a boundary of
-circles, and the winding number on these can be thought of as the index
-of the vector field. We can then examine the total curvature and the
-total index and prove that they are equal, and equal to the usual Euler
-characteristic. This will simultaneously prove the Poincaré-Hopf theorem
-and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds.
-This is similar to the classical proof of Hopf<span class="citation"
-data-cites="hopf"> (<a href="#ref-hopf" role="doc-biblioref">Hopf,
-1983</a>)</span>, presented in detail in Needham<span class="citation"
-data-cites="needham"> (<a href="#ref-needham"
-role="doc-biblioref">Needham, 2021</a>)</span>.</p>
-<p>Taking the dimension 1 part of a function can be thought of as its
-derivative (“<span
-class="math inline">\(\ensuremath{\mathsf{ap}}\)</span> is <span
-class="math inline">\(d\)</span>”). If the codomain has an H-space
-structure then we can ask about how the action on paths interacts with
-pointwise multiplication. This will lead us to the Leibniz formula in
-this context, which emerges simply from horizontal composition in the
-codomain. This also implies that we can view a connection as the
-derivative of a bundle classifying map.</p>
+class="math inline">\(\mathsf{link}\)</span> can be thought of as a
+connection, notably one that is not necessarily flat. Moreover, lifting
+<span class="math inline">\(\mathsf{link}\)</span> to <span
+class="math inline">\(\mathsf{link}_\bullet:M\to\mathrm{EM_{\bullet}}(\ensuremath{\mathbb{Z}},1)\)</span>
+can be thought of as a nonvanishing vector field. There will in general
+not be a total lift, just a partial function. The domain of <span
+class="math inline">\(\mathsf{link}_\bullet\)</span> will have a
+boundary of circles, and the winding number on these can be thought of
+as the index of <span
+class="math inline">\(\mathsf{link}_\bullet\)</span>. We can then
+examine the total curvature and the total index and prove that they are
+equal, and equal to the usual Euler characteristic. This will
+simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem
+in 2 dimensions, for combinatorial manifolds. This is similar to the
+classical proof of Hopf<span class="citation" data-cites="hopf"> (<a
+href="#ref-hopf" role="doc-biblioref">Hopf, 1983</a>)</span>, presented
+in detail in Needham<span class="citation" data-cites="needham"> (<a
+href="#ref-needham" role="doc-biblioref">Needham, 2021</a>)</span>.</p>
+<p>Because the codomain <span
+class="math inline">\(\mathrm{K}(\ensuremath{\mathbb{Z}},2)\)</span> has
+an H-space structure, we might ask about how the action on paths of
+<span class="math inline">\(\mathsf{link}\)</span>, or any function for
+that matter, interacts with pointwise multiplication. This will lead us
+to the Leibniz formula, which emerges simply from horizontal composition
+in the codomain.</p>
 <h2 data-number="1.1" id="future-work"><span
 class="header-section-number">1.1</span> Future work</h2>
 <p>The results of this note can be extended in many directions. There
@@ -431,30 +437,45 @@ is orientable.</p>
 class="header-section-number">2.2</span> Pathovers in principal
 bundles</h2>
 <p>Suppose we have <span
-class="math inline">\(T:M\to\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>.
+class="math inline">\(T:M\to\mathrm{EM}(\ensuremath{\mathbb{Z}},1)\)</span>
+and <span
+class="math inline">\(P\stackrel{\mathrm{def}}{=}\sum_{x:M}T(x)\)</span>.
 We adopt a convention of naming objects in <span
 class="math inline">\(M\)</span> with Latin letters, and the
 corresponding structures in <span class="math inline">\(P\)</span> with
-Greek letters. Paths in a sigma type <span
-class="math inline">\(\sum_{x:M}T(x)\)</span> are given by pairs of
-paths: a path <span class="math inline">\(p:a=_M b\)</span> in the base,
-and a pathover <span
+Greek letters. Recall that if <span class="math inline">\(p:a=_M
+b\)</span> then <span class="math inline">\(T\)</span> acts on <span
+class="math inline">\(p\)</span> with what’s called the <em>action on
+paths</em>, denoted <span
+class="math inline">\(\ensuremath{\mathsf{ap}}(T)(p):T(a)=T(b)\)</span>.
+This is a path in the codomain, which in this case is a type of types.
+Type theory also provides a function called <em>transport</em>, denoted
+<span class="math inline">\(\mathrm{tr}_p:T(a)\to T(b)\)</span> which
+acts on the fibers of <span class="math inline">\(P\)</span>. <span
+class="math inline">\(\mathrm{tr}_p\)</span> acts on the terms of the
+types <span class="math inline">\(T(a)\)</span> and <span
+class="math inline">\(T(b)\)</span>, and univalence tells us this is the
+isomorphism corresponding to <span
+class="math inline">\(\ensuremath{\mathsf{ap}}(T)(p)\)</span>.</p>
+<p>Type theory also tells us that paths in <span
+class="math inline">\(P\)</span> are given by pairs of paths: a path
+<span class="math inline">\(p:a=_M b\)</span> in the base, and a
+pathover <span
 class="math inline">\(\pi:\mathrm{tr}_p(\alpha)=_{T(b)}\beta\)</span>
 between <span class="math inline">\(\alpha:T(a)\)</span> and <span
 class="math inline">\(\beta:T(b)\)</span> in the fibers. We can’t
 directly compare <span class="math inline">\(\alpha\)</span> and <span
 class="math inline">\(\beta\)</span> since they are of different types,
-so we apply transport to one of them (which is asymmetrical, but
-equivalent to the alternatives). We say <span
+so we apply transport to one of them. We say <span
 class="math inline">\(\pi\)</span> lies over <span
-class="math inline">\(p\)</span>.</p>
-<p>The individual fibers of <span class="math inline">\(T\)</span> will
-be polygons. Given a path <span class="math inline">\(p:a=_M b\)</span>
-one of its pathovers consists of a path in <span
-class="math inline">\(T(b)\)</span>. And given a face in <span
-class="math inline">\(M\)</span>, a faceover is a homotopy from a
-pathover to <span
-class="math inline">\(\ensuremath{\mathsf{refl}}\)</span>.</p>
+class="math inline">\(p\)</span>. See Figure <a href="#fig:pathovers"
+data-reference-type="ref" data-reference="fig:pathovers">1</a>.</p>
+<figure id="fig:pathovers">
+<img src="pathovers.png" style="width:2.77778in" />
+<figcaption>A path <span class="math inline">\(\pi\)</span> over the
+path <span class="math inline">\(p\)</span> in the base involves the
+transport function.</figcaption>
+</figure>
 <h1 data-number="3" id="combinatorial-manifolds"><span
 class="header-section-number">3</span> Combinatorial manifolds</h1>
 <p>We will adapt to higher inductive types in a straightforward manner
@@ -492,7 +513,7 @@ class="math inline">\(M\)</span>.</em></p>
 <p>The link is all the neighboring vertices of <span
 class="math inline">\(v\)</span> and the codimension 1 faces joining
 those to each other. See for example Figure <a href="#fig:link"
-data-reference-type="ref" data-reference="fig:link">1</a>.</p>
+data-reference-type="ref" data-reference="fig:link">2</a>.</p>
 <figure id="fig:link">
 <img src="./77310e6013360f123738b3984e7a97ecabc90011.png" />
 <figcaption>The link of <span class="math inline">\(v\)</span> in this
@@ -503,7 +524,7 @@ hexagon.</figcaption>
 </figure>
 <div class="mydef">
 <p><strong>Definition 6</strong>. <em>A <strong>combinatorial
-manfiold</strong> (or <strong>combinatorial triangulation</strong>) of
+manifold</strong> (or <strong>combinatorial triangulation</strong>) of
 dimension <span class="math inline">\(n\)</span> is a simplicial complex
 of dimension <span class="math inline">\(n\)</span> such that the link
 of every vertex is a simplicial sphere of dimension <span
@@ -513,11 +534,11 @@ class="math inline">\(n-1\)</span>-sphere).</em></p>
 </div>
 <p>In a 2-dimensional combinatorial manifold the link is a polygon. See
 Figures <a href="#fig:sphere_triangulation" data-reference-type="ref"
-data-reference="fig:sphere_triangulation">2</a>, <a
+data-reference="fig:sphere_triangulation">3</a>, <a
 href="#fig:torus_wiki_triangulation" data-reference-type="ref"
-data-reference="fig:torus_wiki_triangulation">3</a>, and <a
+data-reference="fig:torus_wiki_triangulation">4</a>, and <a
 href="#fig:genus3_wiki_triangulation" data-reference-type="ref"
-data-reference="fig:genus3_wiki_triangulation">4</a> for some examples
+data-reference="fig:genus3_wiki_triangulation">5</a> for some examples
 of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.</p>
 <p>A classical 1940 result of Whitehead, building on Cairn, states that
 every smooth manifold admits a combinatorial triangulation<span
@@ -576,7 +597,7 @@ class="math inline">\(\mathsf{v_{k-1}}(M_{k1})\cdot\mathsf{v_{k-1}}(M_{k2})\cdot
 </div>
 <p>We will drop the prime and work with higher inductive combinatorial
 manfiolds exclusively going forward.</p>
-<h2 data-number="3.2" id="polygons"><span
+<h2 data-number="3.2" id="sec:polygons"><span
 class="header-section-number">3.2</span> Polygons</h2>
 <p>We will begin with a type that is important both for the domain and
 the codomain of mere circles: a square.</p>
@@ -636,7 +657,7 @@ class="math inline">\((C_4,||\ell||_{-1}):\mathrm{EM}(\ensuremath{\mathbb{Z}},1)
 class="math inline">\(n\)</span>. For example we can see hexagons and
 pentagons in Figure <a href="#fig:sphere_triangulation"
 data-reference-type="ref"
-data-reference="fig:sphere_triangulation">2</a>. This presumably
+data-reference="fig:sphere_triangulation">3</a>. This presumably
 introduces only a minor practical inconvenience and doesn’t materially
 affect the discussion to come.</p>
 <h2 data-number="3.3" id="the-higher-inductive-type-oo"><span
@@ -786,7 +807,7 @@ class="math inline">\(T_1\)</span> does to triangular paths such as
 circulates around the boundary of face <span
 class="math inline">\(wbr\)</span>). You can see it if you imagine
 Figure <a href="#fig:triangle_of_equators" data-reference-type="ref"
-data-reference="fig:triangle_of_equators">5</a> as the frames of a short
+data-reference="fig:triangle_of_equators">6</a> as the frames of a short
 movie. Or you can place your palm over the top of a cube and note where
 your fingers are pointing, then slide your hand to an equatorial face,
 then along the equator, then back to the top. The answer is: you come
@@ -873,17 +894,17 @@ vertex will have six neighbors. So all the links will be merely equal to
 <span class="math inline">\(C_6\)</span> which is a hexagonal version of
 <span class="math inline">\(C_4\)</span>. See Figure <a
 href="#fig:torus" data-reference-type="ref"
-data-reference="fig:torus">6</a>.</p>
+data-reference="fig:torus">7</a>.</p>
 <p>To help parse this figure, imagine instead Figure <a
 href="#fig:flattorus" data-reference-type="ref"
-data-reference="fig:flattorus">7</a>. We take this simple
+data-reference="fig:flattorus">8</a>. We take this simple
 alternating-triangle pattern, then glue the left and right edges, then
 bend into Figure <a href="#fig:torus" data-reference-type="ref"
-data-reference="fig:torus">6</a>. The fact that each column in Figure <a
+data-reference="fig:torus">7</a>. The fact that each column in Figure <a
 href="#fig:flattorus" data-reference-type="ref"
-data-reference="fig:flattorus">7</a> has four dots corresponds to the
+data-reference="fig:flattorus">8</a> has four dots corresponds to the
 torus in Figure <a href="#fig:torus" data-reference-type="ref"
-data-reference="fig:torus">6</a> having a square in front, diamonds in
+data-reference="fig:torus">7</a> having a square in front, diamonds in
 the middle, and a square in back.</p>
 <figure id="fig:torus">
 <img src="./0087b249788a090ea395f319a1aa6bb257b59103.png" />
@@ -924,7 +945,7 @@ class="math inline">\(M\setminus Z\)</span> has boundary circles where
 each vertex was removed.</em></p>
 </div>
 <p>Figure <a href="#fig:flattorus_zero" data-reference-type="ref"
-data-reference="fig:flattorus_zero">8</a> illustrates what removing a
+data-reference="fig:flattorus_zero">9</a> illustrates what removing a
 point looks like. The resulting type is no longer a combinatorial
 manifold, since it fails the condition about every point having a
 circular link. We’ll end up working around that when we need to.</p>
@@ -999,7 +1020,7 @@ in the domain of <span class="math inline">\(X\)</span>.</em></p>
 </div>
 <p>We will revisit the index later when we discuss the total index.
 Figure <a href="#fig:flattorus_clock" data-reference-type="ref"
-data-reference="fig:flattorus_clock">9</a> shows some discrete versions
+data-reference="fig:flattorus_clock">10</a> shows some discrete versions
 of the classical examples of index +1, –1 and 0. One note: the figures
 are only illustrating the value of the vector field on vertices. The
 <span class="math inline">\(\mathrm{apd}\)</span> operation could in
@@ -1387,18 +1408,14 @@ class="header-section-number">5</span> Leibniz, Gauss-Bonnet,
 Poincaré-Hopf</h1>
 <h2 data-number="5.1" id="the-leibniz-product-rule"><span
 class="header-section-number">5.1</span> The Leibniz (product) rule</h2>
-<p>This is a slight aside in the context of this note, but it belongs
-here anyway because it follows from the slogan “<span
-class="math inline">\(\ensuremath{\mathsf{ap}}\)</span> is <span
-class="math inline">\(d\)</span>”, i.e. that calculus and differential
-geometry are visible in type theory through the action on paths, which
-is a finite version of the infinitesimal tangent vector. If we think we
-have some new understanding of the operator <span
-class="math inline">\(d\)</span>, then we should test it by finding the
-Leibniz rule.</p>
-<p>The Leibniz rule for exterior differentiation states that if <span
-class="math inline">\(f, g:M\to \ensuremath{\mathbb{R}}\)</span> are two
-smooth functions to the real numbers then <span
+<p>The intuition that motivates everything in this note is that
+derivatives and connections are visible in type theory through the
+action on paths, because a path is a finite version of an infinitesimal
+tangent vector. And if we think we have some new understanding of
+differentiation, then we should be able to see the Leibniz rule.</p>
+<p>The Leibniz rule, or product rule, for differentiation states that if
+<span class="math inline">\(f, g:M\to \ensuremath{\mathbb{R}}\)</span>
+are two smooth functions to the real numbers then <span
 class="math inline">\(d(fg) = fdg + gdf\)</span>. Here <span
 class="math inline">\(fg\)</span> is the function formed by taking the
 pointwise product of <span class="math inline">\(f\)</span> and <span
@@ -1511,7 +1528,7 @@ new face. In this way we produce an equivalent type <span
 class="math inline">\(M_Z\simeq M\)</span> but which is no longer
 combinatorial since we have erased some of the edges from some of the
 neighborhoods. See Figure <a href="#fig:torus_morse"
-data-reference-type="ref" data-reference="fig:torus_morse">10</a> where
+data-reference-type="ref" data-reference="fig:torus_morse">11</a> where
 the outlined hexagons are the composition of the six triangular faces
 around a zero.</p>
 <p>If <span class="math inline">\(X\)</span> is a vector field with

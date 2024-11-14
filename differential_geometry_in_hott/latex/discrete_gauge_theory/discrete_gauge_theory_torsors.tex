@@ -60,7 +60,15 @@ Reinterpreting more of the theory of characteristic classes would be an enlighte
 In summary, we can continue to work with the univalent fibration \( \EM(G,1) \) and still know that we are also studying principal \( \K(G,1) \)-fibrations, if the bundle is orientable.
 
 \subsection{Pathovers in principal bundles}
-Suppose we have \( T:M\to\EMzo \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Paths in a sigma type \( \sit{x:M}T(x) \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr_p(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them (which is asymmetrical, but equivalent to the alternatives). We say \( \pi \) lies over \( p \). 
+Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}T(x) \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):T(a)=T(b) \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr_p:T(a)\to T(b) \) which acts on the fibers of \( P \). \( \tr_p \) acts on the terms of the types \( T(a) \) and \( T(b) \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
 
-The individual fibers of \( T \) will be polygons. Given a path \( p:a=_M b \) one of its pathovers consists of a path in \( T(b) \). And given a face in \( M \), a faceover is a homotopy from a pathover to \( \refl \).
+Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr_p(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{pathovers.pdf}
+\caption{A path \( \pi \) over the path \( p \) in the base involves the transport function.}
+\label{fig:pathovers}
+\end{figure}
+
+Lastly we want to recall that in the presence of a section \( s:M\to P \) there is a dependent generalization of \( \ap \) called \( \apd \): \( \apd_p(s):\tr_p(s(a))=s(b) \) which is a pathover between the two values of the section over the basepoints of the path \( p \).

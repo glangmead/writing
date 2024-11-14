@@ -2,9 +2,9 @@
 
 \subsection{The Leibniz (product) rule}
 
-This is a slight aside in the context of this note, but it belongs here anyway because it follows from the slogan ``\( \ap \) is \( d \)'', i.e. that calculus and differential geometry are visible in type theory through the action on paths, which is a finite version of the infinitesimal tangent vector. If we think we have some new understanding of the operator \( d \), then we should test it by finding the Leibniz rule.
+The intuition that motivates everything in this note is that derivatives and connections are visible in type theory through the action on paths, because a path is a finite version of an infinitesimal tangent vector. And if we think we have some new understanding of differentiation, then we should be able to see the Leibniz rule.
 
-The Leibniz rule for exterior differentiation states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). This is an interaction between multiplication in \( \rr \) and the action on vectors of smooth functions (the 1-forms \( df \) and \( dg \)). 
+The Leibniz rule, or product rule, for differentiation states that if \( f, g:M\to \rr \) are two smooth functions to the real numbers then \( d(fg) = fdg + gdf \). Here \( fg \) is the function formed by taking the pointwise product of \( f \) and \( g \). This is an interaction between multiplication in \( \rr \) and the action on vectors of smooth functions (the 1-forms \( df \) and \( dg \)). 
 
 To examine this situation in HoTT we need type-theoretic functions \( f, g:M\to B \) from some type \( M \) to a central H-space \( B \). Let \( \mu:B\to B\to B \) be the H-space multiplication. How does \( \mu \) act on paths? Suppose we have \( a, a', b, b':B \) and \( p:a=_B a', q:b=_B b' \). Then we also have homotopies \( \mu(p, -):\mu(a, -)=_{B\to B}\mu(a', -) \) and \( \mu(-,q):\mu(-,b)=_{B\to B}\mu(-,b'). \) Since \( \mu(a, -):B=B \) is an (unpointed) equivalence of \( B \), and similarly for \( \mu(b, -) \) and so on, this data assembles into the following diagram of higher groupoid morphisms:
 
@@ -52,7 +52,7 @@ It is crucial that \( T(M) \) can be nontrivial (i.e. not \( \refl_v \)) even th
 
 \subsection{The total index}
 
-If we have \( M\setminus Z \) for some isolated set of verticies \( Z \), then for each \( z:Z \) we can compose all the faces which contain \( z \), forming a new face. In this way we produce an equivalent type \( M_Z\simeq M \) but which is no longer combinatorial since we have erased some of the edges from some of the neighborhoods. See Figure~\ref{fig:torus_morse} where the outlined hexagons are the composition of the six triangular faces around a zero.
+See Figure~\ref{fig:torus_morse} where the outlined hexagons are the composition of the six triangular faces around a zero.
 
 If \( X \) is a vector field with isolated zeros on \( Z \), then \( M_Z \) is a convenient replacement for \( M \) because \( X \) is a partial function defined on all of \( M_Z \) except for a collection of faces, each of which bounds one of the zeros of \( Z \).
 

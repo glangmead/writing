@@ -20,26 +20,24 @@ and prove
 
 We will consider functions \( M\to \EM(\zz,1) \) where \( \EM(\zz,1) \) is the connected component in the universe of the Eilenberg-MacLane space \( \K(\zz,1) \) which we will take to be \( \so \), and where \( M \) is a combinatorial manifold of dimension 2, which is a simplicial complex encoded in a higher inductive type, such that each vertex has a neighborhood that looks like a disk with a discrete circle boundary (i.e. a polygon). We can call terms \( C:\EM(\zz,1) \) ``mere circles.''
 
-Note that \( \EM(\zz,1) \) contains all the polygons. Therefore we can construct a map \( T:M\to\EM(\zz,1) \) that maps each vertex to the polygon consisting of its neighbors. This will serve as the circle bundle of the tangent bundle of the manifold, i.e. the principal bundle consisting of nonzero tangent vectors.
-
-Now consider the type \( \EMp(\zz,1)\defeq \sit{Y:\EM(\zz,1)}Y \) of pointed mere circles. We have the pullback
+We will see in Section~\ref{sec:polygons} that \( \EM(\zz,1) \) contains all the polygons. We will construct a map \( \link:M\to\EM(\zz,1) \) that maps each vertex to the polygon consisting of its neighbors. Then we can consider the type of pointed mere circles \( \EMp(\zz,1)\defeq \sit{Y:\EM(\zz,1)}Y \) as well as the first projection that forgets the point. This is a univalent fibration (univalent fibrations are always equivalent to a projection of a type of pointed types to some connected component of the universe\cite{christensen_univalence}). If we form the pullback
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fXs9fVxcc3VtX3tDOlRNfUMiXSxbMSwwLCJcXG1hdGhybXtFTX1fXFxidWxsZXQoXFxtYXRoYmJ7Wn0sMSkiXSxbMSwxLCJcXG1hdGhybXtFTX0oXFxtYXRoYmJ7Wn0sMSkiXSxbMCwxLCJNIl0sWzAsMywiXFxtYXRocm17cHJ9XzEiLDJdLFsxLDIsIlxcbWF0aHJte3ByfV8xIiwyXSxbMCwxLCJcXG92ZXJsaW5le1R9Il0sWzMsMiwiVCJdLFswLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
 \begin{center}
 \begin{tikzcd}[cramped]
-  {P\stackrel{\mathrm{def}}{=}\sum_{C:TM}C} & {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  {P} & {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
   M & {\mathrm{EM}(\mathbb{Z},1)}
-  \arrow["{\overline{T}}", from=1-1, to=1-2]
+  \arrow["", from=1-1, to=1-2]
   \arrow["{\mathrm{pr}_1}"', from=1-1, to=2-1]
   \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
   \arrow["{\mathrm{pr}_1}"', from=1-2, to=2-2]
-  \arrow["T", from=2-1, to=2-2]
+  \arrow["{\mathsf{link}}", from=2-1, to=2-2]
 \end{tikzcd}
 \end{center}
-from the univalent fibration on the right, forming the usual fiber of \( T \) as a sigma type. Such classifying maps are not always principal bundles; there is an extra condition on \( T \) that we will get into later. For now it's important only that we are mapping into a univalent fibration so that we can make use of type theory. Univalent fibrations are always equivalent to a projection of a type of pointed types to some connected component of the universe\cite{christensen_univalence}.
+then we have a bundle of mere circles, with total space given by the \( \sit{} \)-type construction. We will show that this is not a principal bundle, i.e. a bundle of torsors. Torsors are types with the additional structure of a group action. But if \( \link  \) satisfies an additional property (amounting to an orientation) then the pullback is a principal fibration, i.e. \( \link \) factors through a map \( \K(\zz,2)\to\EMzo \), where \( \K(\zz,2) \) is an Eilenberg-Mac Lane space. 
 
-We will investigate that the data in dimensions 1 and 2 of \( T \) can be thought of as a connection, notably one that is not necessarily flat. Moreover, lifting \( T \) to \( \EMp(\zz,1) \) can be thought of as a vector field. There will in general not be a total lift, just a partial function. The domain will have a boundary of circles, and the winding number on these can be thought of as the index of the vector field. We can then examine the total curvature and the total index and prove that they are equal, and equal to the usual Euler characteristic. This will simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds. This is similar to the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
+We will investigate that the data in dimensions 1 and 2 of \( \link \) can be thought of as a connection, notably one that is not necessarily flat. Moreover, lifting \( \link \) to \( \link_\bullet:M\to\EMp(\zz,1) \) can be thought of as a nonvanishing vector field. There will in general not be a total lift, just a partial function. The domain of \( \link_\bullet \) will have a boundary of circles, and the winding number on these can be thought of as the index of \( \link_\bullet \). We can then examine the total curvature and the total index and prove that they are equal, and equal to the usual Euler characteristic. This will simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds. This is similar to the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
 
-Taking the dimension 1 part of a function can be thought of as its derivative (``\( \ap \) is \( d \)''). If the codomain has an H-space structure then we can ask about how the action on paths interacts with pointwise multiplication. This will lead us to the Leibniz formula in this context, which emerges simply from horizontal composition in the codomain. This also implies that we can view a connection as the derivative of a bundle classifying map.
+Because the codomain \( \K(\zz,2) \) has an H-space structure, we might ask about how the action on paths of \( \link \), or any function for that matter, interacts with pointwise multiplication. This will lead us to the Leibniz formula, which emerges simply from horizontal composition in the codomain.
 
 \subsection{Future work}
 The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 

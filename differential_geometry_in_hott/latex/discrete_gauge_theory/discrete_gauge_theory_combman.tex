@@ -3,13 +3,13 @@
 We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. These are a subclass of simplicial complexes.
 
 \begin{mydef}
-An \defemph{abstract simplicial complex} \( M \) consists of a set \( M_0 \) of vertices, and for each \( k>0 \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \).
+An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} consists of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets).
 \end{mydef}
 
 Note that we don't require all subsets of \( M_0 \) to be included -- that would make \( M \) an individual simplex. A simplicial complex is a family of simplices that are identified along various faces.
 
 \begin{mydef}
-In an abstract simplicial complex \( M \), the \defemph{link} of a vertex \( v \) is the set containing every face \( m\in M \) such that \( v\notin m \) and \( m\cup v \) is a face of \( M \).
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-face containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
 \end{mydef}
 
 The link is all the neighboring vertices of \( v \) and the codimension 1 faces joining those to each other. See for example Figure~\ref{fig:link}.
@@ -51,7 +51,7 @@ The link is all the neighboring vertices of \( v \) and the codimension 1 faces 
 \end{figure}
 
 \begin{mydef}
-A \defemph{combinatorial manfiold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere).
+A \defemph{combinatorial manifold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere). Denote by \( \combmfdset \) the type of combinatorial manifolds of dimension \( n \) (which the notation again reminds us are sets).
 \end{mydef}
 
 In a 2-dimensional combinatorial manifold the link is a polygon. See Figures~\ref{fig:sphere_triangulation}, \ref{fig:torus_wiki_triangulation}, and \ref{fig:genus3_wiki_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
@@ -81,21 +81,18 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 
 \subsection{Higher inductive combinatorial manifolds}
 
-To convert a simplicial complex to a higher inductive type, we will convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension. In order to specify the directionality of all the edges and faces, we need to first choose an ordering for each set in \( S \):
+To convert a simplicial complex \( M \) of dimension at most 2 to a higher inductive type, we will convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension.
 
 \begin{mydef}
-The higher inductive type \( M' \) corresponding to the abstract simplicial complex \( M \) is given by
+The function \( \mathcal{R}:\simcompt\to\Type \) is called \defemph{realization} and creates a higher inductive type from the data of a simplicial complex. Given \( M:\simcompt \) then \( \mathcal{R}(M) \) is given by
 \begin{enumerate}
-\item choosing an order for the elements of each \( M_k \)
-\item vertices: a function \( \mathsf{v_0}:M_0\to M' \) serving as the 0-dimensional constructors
-\item edges: a function \( \mathsf{v_1}:M_1\to M' \) sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
-\item at dimension \( k \), if \( M_k=\{M_{k1},\ldots,M_{kn}\}\), a path from \( \refl_{M_{k1}} \) to the concatenation \( \mathsf{v_{k-1}}(M_{k1})\cdot\mathsf{v_{k-1}}(M_{k2})\cdot\cdots\cdot\mathsf{v_{k-1}}(M_{kn})) \).
+\item vertices: a function \( \mathsf{v_0}:M_0\to \mathcal{R}(M) \) serving as the 0-dimensional constructors
+\item edges: a function \( \mathsf{v_1} \) on 1-faces, sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
+\item 2-faces: a function \( \mathsf{v_2} \) on 2-faces, sending \( \{a, b, c\}\mapsto \refl_a = \mathsf{v_1}(\{a, b\})\cdot \mathsf{v_1}(\{b, c\})\cdot \mathsf{v_1}(\{a, c\})^{-1} \).
 \end{enumerate}
 \end{mydef}
 
-We will drop the prime and work with higher inductive combinatorial manfiolds exclusively going forward. 
-
-\subsection{Polygons}
+\subsection{Polygons}\label{sec:polygons}
 
 We will begin with a type that is important both for the domain and the codomain of mere circles: a square.
 
@@ -134,14 +131,16 @@ Nonetheless, all polygons are equivalent to each other and to \( \so \).
 The function \( \ell:C_4\to\so \) given by \( \ell(c_i)=\mathsf{base} \) for all \( i \), and \( \ell(c_ic_j)=\mathsf{loop} \) for all \( i,j \) is an equivalence with inverse \( \ell^{-1}(\mathsf{base})=c_1 \) and \( \ell^{-1}(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). There are clearly other inverses for different choices of vertex.
 \end{mylemma}
 \begin{proof}
-See for example the HoTT Book\cite{hottbook} Lemma 6.5.1 which proves that \( \Sigma\mathbf{2}\simeq S^1 \).
+We can adapt the proof in the HoTT Book\cite{hottbook} of Lemma 6.5.1 which proves that \( \Sigma\mathbf{2}\simeq S^1 \).
 \end{proof}
+
+Recalling that terms of \( \EMzo \) are pairs: a type, and a mere equivalence with \( \so \), we have:
 
 \begin{mycor}
 We have \( (C_4,||\ell||_{-1}):\EMzo. \)
 \end{mycor}
 
-Real-world triangulations of surfaces will often have links that are \( n \)-gons for a variable \( n \). For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
+Real-world triangulations of surfaces will often have links whose number of vertices varies across the surface. For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
 
 \subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
@@ -188,12 +187,50 @@ yo &: y=o & & & ybo &: yb\cdot bo\cdot yo^{-1} = \refl_y
 
 We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton.
 
+\subsection{Groupoid operations on higher inductive combinatorial manifolds}
+
+Let \( M:\simcompt \) be a combinatorial 2-manifold and \( \mm\defeq\mathcal{R}(M):\combmfdt \) its realization as a higher inductive type. \( \mm \) has triangular 2-faces just as \( M \) does, except they are 2-paths in the HoTT sense. If two faces \( bca \) and \( bdc \) share the edge \( bc \) (see Figure~\ref{fig:concat}), then we can form the type \( bca':ba\cdot ac = bc \) by reorganizing the face as a path from the concatenation of two edges to the third edge. Similarly we can form \( bdc':bd\cdot dc=bc \). We can now concatenate these:
+\[ 
+bca'\cdot bdc'^{-1}: ba\cdot ac = bd\cdot dc
+\] 
+which fills the 4-gon \( abdc \), and so can be reorganized as a path \( abdc:\refl_a=\refl_a \) or a path \( bdca:\refl_b=\refl_b \) or other possibilities.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{concat.pdf}
+\caption{Concatenating the triangles \( abc \) and \( bdc \) gives the 4-gon \( abdc \).}
+\label{fig:concat}
+\end{figure}
+
+We will have two use cases for this operation. The first is to consider the concatenation of \emph{all} the faces of \( \mm \), which if we choose a base point \( x:\mm \) is a path from \( \refl_x \) to itself. This will play the role of the ``fundamental homology class'' from classical topology, which is an object on which 2-forms can be evaluated to compute their value on the whole manifold. 
+
+\begin{mydef}
+\label{def:totalface}
+If \( \mm:\combmfdt \) is a combinatorial manifold and \( v:\mm_0 \) is a vertex, a \( total face \) of \( \mm \) is any concatenation of all the data in \( \mm \) that produces a term in \( \refl_v=\refl_v \).
+\end{mydef}
+
+The second use case for concatenating faces is to create an \emph{equivalent} type to \( \mm \) but without one of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{hex_concat.pdf}
+\caption{Concatenating the six triangles in the approrpiate way produces a 2-path in \( \refl_v=\refl_v \).}
+\label{fig:hex_concat}
+\end{figure}
+
+\begin{mydef}
+If \( \mm:\combmfdt \) is a combinatorial manifold and \( Z\subset \mm_0 \) is a set of vertices in \( \mm \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( \mm\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \defemph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( \mm\setminus Z \) has boundary circles where each vertex was removed.
+\end{mydef}
+
+\begin{mydef}
+\label{def:replacement}
+If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then for each \( z:Z \) we can compose all the faces which contain \( z \), forming a new face (see Figure~\ref{fig:hex_concat}). In this way we produce an equivalent type \( \mm_Z\simeq \mm \) but which is no longer combinatorial since we have erased some of the edges from some of the neighborhoods. We call \( \mm_Z \) the \defemph{replacement of \( \mm \) without \( Z \)}.
+\end{mydef}
+
 \subsection{The function \texorpdfstring{\( \link \)}{link}}
 
 Taking the link of a vertex gives us a map to polygons.
 
 \begin{mydef}
-\( \link:\oo_0\to\EMzo \) is given by induction:
+\( \link:\oo_0\to\EMzo \) is given by:
 \begin{align*}
 \link(w) &= brgo & \link(r) &= wbyg \\
 \link(y) &= bogr & \link(g) &= wryo \\
@@ -299,11 +336,7 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 
 A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain because we are very opinionated that the codomain be mere circles, and so the function is a partial function.
 
-\begin{mydef}
-If \( M \) is a combinatorial manifold and \( Z\subset M_0 \) is a set of vertices in \( M \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( M\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \defemph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( M\setminus Z \) has boundary circles where each vertex was removed.
-\end{mydef}
-
-Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. We'll end up working around that when we need to.
+Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
 
 \begin{figure}[htbp]
 \centering
