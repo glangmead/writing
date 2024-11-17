@@ -81,20 +81,28 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 
 \subsection{Higher inductive combinatorial manifolds}
 
-To convert a simplicial complex \( M \) of dimension at most 2 to a higher inductive type, we will convert the data in each classical dimension to a path constructor of the corresponding HoTT dimension.
+We will convert a simplicial complex \( M \) of dimension at most 2 to a higher inductive type, in two steps. 
 
 \begin{mydef}
-The function \( \mathcal{R}:\simcompt\to\Type \) is called \defemph{realization} and creates a higher inductive type from the data of a simplicial complex. Given \( M:\simcompt \) then \( \mathcal{R}(M) \) is given by
+Define \( \combmfdt \) to be the type of \defemph{higher inductive constructors of combinatorial manifolds of dimension at most 2} and let \( \mathcal{H}:\combmfdsett\to\combmfdt \) be a map from a combinatorial manifold to such a HIT following this method:
 \begin{enumerate}
-\item vertices: a function \( \mathsf{v_0}:M_0\to \mathcal{R}(M) \) serving as the 0-dimensional constructors
+\item vertices: a function \( \mathsf{v_0}:M_0\to \mathcal{H}(M) \) serving as the 0-dimensional constructors
 \item edges: a function \( \mathsf{v_1} \) on 1-faces, sending \( \{a, b\}\mapsto \mathsf{v_0}(a)=\mathsf{v_0}(b) \)
 \item 2-faces: a function \( \mathsf{v_2} \) on 2-faces, sending \( \{a, b, c\}\mapsto \refl_a = \mathsf{v_1}(\{a, b\})\cdot \mathsf{v_1}(\{b, c\})\cdot \mathsf{v_1}(\{a, c\})^{-1} \).
 \end{enumerate}
 \end{mydef}
 
+We will assume there is a rigorous theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. See for example David Wärn's recent work on pushouts\cite{warn_pushouts}.
+
+\begin{mydef}
+Denote by \( \mathcal{R}:\combmfdt\to\Type \) the process of generating a type from the HIT data (which we refer to as \defemph{realization}). Note that \( \mathcal{R}(\mathcal{H}(M)) \) is not in general a set, and may not even be 2-truncated for an arbitrary 2-dimensional combinatorial manifold \( M:\combmfdsett \).
+\end{mydef}
+
+We're making the distinction between \( \mathcal{H} \) and \( \mathcal{R} \) because we will work so closely with the constructors when we map out of them, but of course type theory tells us that to define a map out of the type \( \mathcal{R}(\mathcal{H}(M)) \) we just have to define it on the constructors, so the distinction is not very sharp.
+
 \subsection{Polygons}\label{sec:polygons}
 
-We will begin with a type that is important both for the domain and the codomain of mere circles: a square.
+We will now start looking at some examples, first by defining a type that is important both for the domain and the codomain of mere circles: a square.
 
 \begin{mydef}
 The higher inductive type \( C_4 \) (where C stands for ``circle'').
@@ -128,17 +136,26 @@ The higher inductive type \( \so \):
 Nonetheless, all polygons are equivalent to each other and to \( \so \).
 
 \begin{mylemma}
-The function \( \ell:C_4\to\so \) given by \( \ell(c_i)=\mathsf{base} \) for all \( i \), and \( \ell(c_ic_j)=\mathsf{loop} \) for all \( i,j \) is an equivalence with inverse \( \ell^{-1}(\mathsf{base})=c_1 \) and \( \ell^{-1}(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). There are clearly other inverses for different choices of vertex.
+\label{lem:c4equiv}
+Define the function \( \ell:C_4\to\so \) by
+\begin{align*}
+\ell(c_i)&=\mathsf{base}, i=1, 2, 3, 4 \\
+\ell(c_1c_2)&=\mathsf{loop} \\
+\ell(c_2c_3)=\ell(c_3c_4)=\ell(c_4c_1)&=\refl_{\mathsf{base}}
+\end{align*}
+and define the function \( s_1:\so\to C_4 \) by \( s_1(\mathsf{base})=c_1 \) and \( s_1(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). (The subscript on \( s_1 \) reminds us that we chose vertex \( c_1 \) to map \( \mathsf{base} \) to.) Then \( \ell \) and \( s_1 \) constitute an equivalence \( \mathsf{c4\_equiv}:\mathsf{is_equiv}(\ell,s_1) \).
 \end{mylemma}
 \begin{proof}
-We can adapt the proof in the HoTT Book\cite{hottbook} of Lemma 6.5.1 which proves that \( \Sigma\mathbf{2}\simeq S^1 \).
+We need \( \pit{x:C_4}s_1(\ell(x))=x \) and \( \pit{y:S^1}\ell(s_1(y))=y \).
 \end{proof}
 
 Recalling that terms of \( \EMzo \) are pairs: a type, and a mere equivalence with \( \so \), we have:
 
 \begin{mycor}
-We have \( (C_4,||\ell||_{-1}):\EMzo. \)
+We have \( (C_4,||\mathsf{c4\_equiv}||_{-1}):\EMzo. \)
 \end{mycor}
+
+More claims: given some other square \( abcd \) and an equivalence with \( C_4 \), we get a path in \( \EMzo \). This includes automorphisms of \( C_4 \). For example \( R \). Furthermore there is a homotopy from \( R \) to the identity, which give a 2-path \( \refl_{C_4}=R \) in the universe.
 
 Real-world triangulations of surfaces will often have links whose number of vertices varies across the surface. For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
 
@@ -189,11 +206,15 @@ We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \)
 
 \subsection{Groupoid operations on higher inductive combinatorial manifolds}
 
-Let \( M:\simcompt \) be a combinatorial 2-manifold and \( \mm\defeq\mathcal{R}(M):\combmfdt \) its realization as a higher inductive type. \( \mm \) has triangular 2-faces just as \( M \) does, except they are 2-paths in the HoTT sense. If two faces \( bca \) and \( bdc \) share the edge \( bc \) (see Figure~\ref{fig:concat}), then we can form the type \( bca':ba\cdot ac = bc \) by reorganizing the face as a path from the concatenation of two edges to the third edge. Similarly we can form \( bdc':bd\cdot dc=bc \). We can now concatenate these:
-\[ 
-bca'\cdot bdc'^{-1}: ba\cdot ac = bd\cdot dc
-\] 
-which fills the 4-gon \( abdc \), and so can be reorganized as a path \( abdc:\refl_a=\refl_a \) or a path \( bdca:\refl_b=\refl_b \) or other possibilities.
+Let \( M:\simcompt \) be a combinatorial 2-manifold and \( \mm\defeq\mathcal{H}(M):\combmfdt \) the corresponding higher inductive type. \( \mm \) has triangular 2-faces just as \( M \) does, except they are 2-paths in the HoTT sense. If two faces \( bca \) and \( bdc \) share the edge \( bc \) (see Figure~\ref{fig:concat}), then we can define some operations that combine the combinatorics of simplices with the higher groupoid operations generated by our HIT. 
+
+Consider the following 2-path from a loop at \( a \) (which traverses the boundary of each triangle) to \( \refl_a \):
+\begin{equation}
+\label{eq:face_concat_paths}
+\underbrace{\underbrace{ab\cdot bc\cdot ca}_{=\refl_a}\cdot \underbrace{ab}_{\text{move to }b}\cdot \underbrace{bd\cdot dc\cdot cb}_{=\refl_b}\cdot \underbrace{ba}_{\text{back to }a}}_{=\refl_a}. 
+\end{equation}
+This 2-path must be definitionally equal to the 4-gon \( abdc:\refl_a=\refl_a \). From this observation we can imagine concatenating additional faces, choosing some strategy for visiting each face in some order \( \{f_1, f_2, \ldots, f_n\} \), and for each face choosing a vertex \( v_i \) in that face and a path \( p_i:a=v_i \) to move from \( a \) to that face.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{concat.pdf}
@@ -201,14 +222,14 @@ which fills the 4-gon \( abdc \), and so can be reorganized as a path \( abdc:\r
 \label{fig:concat}
 \end{figure}
 
-We will have two use cases for this operation. The first is to consider the concatenation of \emph{all} the faces of \( \mm \), which if we choose a base point \( x:\mm \) is a path from \( \refl_x \) to itself. This will play the role of the ``fundamental homology class'' from classical topology, which is an object on which 2-forms can be evaluated to compute their value on the whole manifold. 
+We will have two use cases for this operation. The first is to consider the concatenation of \emph{all} the faces of \( \mm \), i.e. a term \( f_\mm:\refl_a=\refl_a \) corresponding to \( \mm \) itself. This will play the role of the ``fundamental homology class'' from classical topology, which is an object on which 2-forms can be evaluated to compute their value on the whole manifold. 
 
 \begin{mydef}
 \label{def:totalface}
-If \( \mm:\combmfdt \) is a combinatorial manifold and \( v:\mm_0 \) is a vertex, a \( total face \) of \( \mm \) is any concatenation of all the data in \( \mm \) that produces a term in \( \refl_v=\refl_v \).
+If \( \mm:\combmfdt \) is a combinatorial manifold and \( a:\mm_0 \) is a vertex, a \defemph{total face} of \( \mm \) is a term \( f_\mm:\refl_a=\refl_a \) given by any choice of ordering of the faces \( \{f_i\} \), a vertex \( v_i \) in each face, and terms \( a=v_i \) for each face.
 \end{mydef}
 
-The second use case for concatenating faces is to create an \emph{equivalent} type to \( \mm \) but without one of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
+The second use case for concatenating faces is to create a HIT related to \( \mm \) but without one of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{hex_concat.pdf}
@@ -222,15 +243,22 @@ If \( \mm:\combmfdt \) is a combinatorial manifold and \( Z\subset \mm_0 \) is a
 
 \begin{mydef}
 \label{def:replacement}
-If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then for each \( z:Z \) we can compose all the faces which contain \( z \), forming a new face (see Figure~\ref{fig:hex_concat}). In this way we produce an equivalent type \( \mm_Z\simeq \mm \) but which is no longer combinatorial since we have erased some of the edges from some of the neighborhoods. We call \( \mm_Z \) the \defemph{replacement of \( \mm \) without \( Z \)}.
+If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then for each \( z:Z \) we can compose all the faces which contain \( z \), forming a new face (see Figure~\ref{fig:hex_concat}). In this way we produce a HIT called \( \mm_Z \), which is no longer combinatorial. We call \( \mm_Z \) the \defemph{replacement of \( \mm \) without \( Z \)}.
 \end{mydef}
 
-\subsection{The function \texorpdfstring{\( \link \)}{link}}
+\begin{mylemma}
+If \( Z \) are isolated points of \( \mm \) then we have \( \mathcal{R}(\mm)=_\Type\mathcal{R}(\mm_Z) \).
+\end{mylemma}
+\begin{proof}
+Concatenating all the faces around a given point \( z:Z \) gives a map \( \mathsf{concat}_z:\mm\to\mathcal{R}(\mm_Z) \). Compose these to form \( \mathsf{concat}\defeq\mathsf{concat}_{z_n}\circ\cdots\mathsf{concat}_{z_1}:\mm\to\mathcal{R}(\mm_Z) \). The rest of the data of \( \mm \) has an obvious inclusion into \( \mm_Z \) and hence \( \mathcal{R}(\mm_Z) \).  In the other direction we map any face bouding a hexagon to the corresponding concatenation of faces in \( \mathcal{R}(\mm) \) and map the rest of the data by the obvious inclusion. We omit the proof that these are inverses.
+\end{proof}
 
-Taking the link of a vertex gives us a map to polygons.
+\subsection{The function \texorpdfstring{\( T \)}{T}}
+
+We will build up a map \( T \) out of \( \oo \). Taking the link of a vertex gives us a map from vertices to polygons.
 
 \begin{mydef}
-\( \link:\oo_0\to\EMzo \) is given by:
+\( T_0\defeq\link:\oo_0\to\EMzo \) is given by:
 \begin{align*}
 \link(w) &= brgo & \link(r) &= wbyg \\
 \link(y) &= bogr & \link(g) &= wryo \\
@@ -242,14 +270,16 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 \begin{figure}[htbp]
 \centering
 \input{discrete_gauge_theory_oo_transport_tikz}
-\caption{\( \link \) for the verticies \( w, b\) and \( r \).}
+\caption{\( \link \) for the vertices \( w, b\) and \( r \).}
 \label{fig:triangle_of_equators}
 \end{figure}
 
-To extend \( \link \) to the 1-skeleton we have complete freedom. We will do something ``tangent bundley'', imagining how \( \link \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
+To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. In other words, defining a map one dimension at a time makes clear that on a HIT the action on paths is extra structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection.
+
+Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
 
 \begin{mydef}
-Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( \link \) as follows:
+Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( T_0 \) as follows:
 Transport away from \( w \):
 \begin{itemize}
 \item \( T_1(wb):[b, r, g, o]\mapsto [y, r, w, o] \) (\( r, o \) fixed)
@@ -291,7 +321,9 @@ The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
 \end{multicols}
 \end{mydef}
 
-Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here there is no additional freedom.
+Note that by composing \( R \) with the map \( \mathsf{c4\_equiv} \) from Lemma~\ref{lem:c4equiv} we obtain a loop in the universe, a term of \( C_4=_{\EMzo}C_4 \).
+
+Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here \emph{there is no additional freedom}.
 
 \begin{mydef}
 Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
@@ -310,7 +342,42 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 where \( H_R:R=\refl \) is the obvious homotopy.
 \end{mydef}
 
-All the faces do the same thing: they map to a homotopy between the identity and clockwise rotation by a quarter turn. Concatenating the eight faces in the 2-groupoid \( \oo \) would then map to a homotopy between the identity and two full rotations. This makes visible in HoTT the link between curvature and the Euler characteristic (which is 2 for the octahedron). More on that later.
+If the action of \( T_1 \) on paths is to be a connection, then we clearly see the curvature of that connection in the definition of \( T_2 \) on the triangular 2-paths! We have exactly paralleled the classical definition, where infinitesimal curvature is defined by computing the parallel transport around an infinitesimal loop. 
+
+\begin{mynote}
+We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of transport.''
+\end{mynote}
+
+\subsection{\texorpdfstring{\( T \)}{T} on concatenations of faces}
+
+Continuing with the classical analogies, we should seek a way to concatenate the curvature on two or more faces. This would correspond to integrating the curvature 2-form over a 2-cell, including integrating over the whole manifold to compute \emph{total curvature}. Look again at Figure~\ref{fig:concat} where we concatenated two faces that share an edge. HoTT maps respect groupoid operations, so we have
+\( T_2(abc\cdot bdc) = T_2(abdc) \). We can double-check this by comparing transport around the 4-gon to transport along a path analogous to
+\[ ab\cdot bc\cdot ca\cdot ab \cdot bd\cdot dc\cdot cb \cdot ba \]
+that we examined in Equation~\ref{eq:face_concat_paths}.
+
+Here we can take a vertical 4-gon like \( wbyr \).
+
+\begin{mylemma}
+\[ 
+T_1(wb\cdot by\cdot yr\cdot rw) = T_1(wb\cdot br\cdot rw\cdot wb\cdot by\cdot yr\cdot rb\cdot bw) 
+\]
+\end{mylemma}
+\begin{proof}
+Both are equal to \( R^2 \) acting to permute \( \{b, r, g, o\} \) to \( \{g, o, b, r\} \).
+\end{proof}
+
+Similarly transport around the other vertical wedges \( wryg \), \( wgyo \) and \( woyb \) are each \( R^2 \), and the four wedges can be composed to obtain \( R^8:\link(w)=\link(w) \). This implies that the total face given by concatenating all 8 faces (in this order) maps by \( T_2 \) to the homotopy that unwinds \( R^8 \) to the identity.
+
+What if we chose another strategy for concatenating the faces of \( \oo \)? Suppose we concatenate all four triangles in the upper hemisphere with \( w \) as the basepoint, then move to \( y \) and compose the four southern triangles, then move back up to \( w \)?
+\begin{mylemma}
+\[ 
+T_1(wb\cdot br\cdot rg\cdot go\cdot ow) = T_1(wb\cdot by\cdot (yr\cdot rb\cdot bo\cdot og\cdot gr\cdot ry)\cdot yb\cdot bw) 
+\]
+\end{mylemma}
+\begin{proof}
+Both are equal to \( R^4 \).
+\end{proof}
+And therefore by concatenating the path on the left with the path on the right we see that this different ordering of the faces gives the same value of \( T_2 \) as before, namely \( R^8 \).
 
 \subsection{The torus}
 
@@ -332,9 +399,17 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \label{fig:flattorus}
 \end{figure}
 
+This somewhat arbitrary and unfamiliar model of a torus has the helpful property that it is a combinatorial manifold that is somewhat minimal while still being representable by a donut shape. But the donut-shaped version suggests a very different tangent bundle than the flat model! Starting with the flat model, we can easily see how to define \( T_1 \) by sliding a link rigidly along the page to the link of some adjacent vertex. Then we can see that transport around any loop is the identity and so \( T_2 \) is always the homotopy \( \refl_\id \) from the identity to itself.
+
+The donut-shaped torus suggests a different tangent bundle, one determined by the embedding in 3-space that we have represented. But the easiest way to think about that bundle and its connection and curvature is to wait until we have a proof of the Poincaré-Hopf theorem, so that we can instead use a downward-flowing vector field inspired by Morse theory.
+
 \subsection{Vector fields}
 
-A vector field is a partial function \( T_\bullet:M\to\EMpzo \) that lifts \( T \). In other words, a pointing of some of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. We will have to omit such vanishing points from the domain because we are very opinionated that the codomain be mere circles, and so the function is a partial function.
+\begin{mydef}
+A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\star \), the disjoint union of \( B \) with the 1-element type.
+\end{mydef}
+
+If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. So instead of having some notion of the full tangent space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \star \). This lets us continue to work with \( \EMzo \).
 
 Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
 
@@ -346,45 +421,203 @@ Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. Th
 \end{figure}
 
 \begin{mydef}
-Let \( M \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( M \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:M\setminus Z}T(x) \). The \defemph{exponential map} \( \exp:P\to M \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
+Let \( \mm:\combmfdt \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( \mm \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:\mm\setminus Z}T(x) \) (and eliding the unique term of \( Z\to\star \)). The \defemph{exponential map} \( \exp:P\to \mm \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
 \end{mydef}
 % https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dLFswLDIsIlRfXFxidWxsZXQiXSxbMywxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
 \begin{center}
 \begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\sum_{C:TM}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  {P\stackrel{\mathrm{def}}={\sum_{C:T(\mm\setminus Z)}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
   \\
-  {M\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  {\mm\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
   \arrow["{\overline{T}}", from=1-1, to=1-3]
   \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
   \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
   \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
   \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{X:\prod_{x:M\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
+  \arrow["{{X:\prod_{x:\mm\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
   \arrow["{T_\bullet}", from=3-1, to=1-3]
   \arrow["T", from=3-1, to=3-3]
 \end{tikzcd}
 \end{center}
+where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( \mm\setminus Z\to \mm \), and can be thought of as the flow of the vector field.
 
-Where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( M\setminus Z\to M \), and can be thought of as the flow of the vector field. It can be extended to a map \( M\to M \) by taking the identity map on \( Z \).
-
-The vector field \( X \) is a map on all dimensions of \( M\setminus Z \), not just the vertices. HoTT tells us that \( X \) also selects an ``edgeover'' for each edge, and ``faceover'' for each face. And these can be composed, so that we have an entire 2-groupoid \( X(M\setminus Z) \) inside \( P \). If \( e_{12}:v_1=_M v_2 \) then \( X(e_{12}):\tr_{e_{12}}(X(v_1))=X(v_2) \), which is a path in \( T(v_2) \) that ends at the selected point \( X(v_2):T(v_2) \). The same goes for loops: given a loop \( \ell:v_1=_M v_1 \) we have \( X(\ell):\tr_\ell(X(v_1))=X(v_1) \). It doesn't need to be a loop upstairs but it might be. Of course we always have \( X(\refl_{v})=\refl_{X(v)} \).
-
-Faceovers are homotopies from \( \refl_{X(v)} \) to a path \( a=X(v) \) in some fiber \( T(v) \). The faceover implies that the loopover has winding number 0. Which brings us to index.
+Let's see a few examples.
 
 \begin{mydef}
-The \defemph{index} of \( X \) at an isolated vertex \( z:Z \) is the degree of the map \( \exp\circ\tr:\link(z)\to\link(z) \). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain of \( X \).
+The \defemph{spinning vector field} \( \Xspin \) on \( \oo\setminus\{w, y\} \) is given by the following data. We compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_spin}
+\begin{align*}
+\exp\circ\Xspin(b)  &=r   \\
+\exp\circ\Xspin(r)  &=g   \\
+\exp\circ\Xspin(g)  &=o   \\
+\exp\circ\Xspin(o)  &=b   \\
+\exp\circ\Xspin(br) &= rg \\
+\exp\circ\Xspin(rg) &= go \\
+\exp\circ\Xspin(go) &= ob \\
+\exp\circ\Xspin(ob) &= br \\
+\end{align*}
 \end{mydef}
-
-We will revisit the index later when we discuss the total index. Figure~\ref{fig:flattorus_clock} shows some discrete versions of the classical examples of index +1, --1 and 0. One note: the figures are only illustrating the value of the vector field on vertices. The \( \apd \) operation could in theory spin the vector many times around the link on its way from one vertex to the next. We will assume at all times that the smallest movement is taking place, and we leave it to the imagination whether that movement is clockwise or counterclockwise. A formalization would have to specify this fully of course.
 
 \begin{figure}[htbp]
 \centering
-\input{discrete_gauge_theory_torusflatclock_tikz}
-\input{discrete_gauge_theory_torusflatcounterclock_tikz}
-\input{discrete_gauge_theory_torusflatnegindex_tikz}
-\input{discrete_gauge_theory_torusflatzeroindex_tikz}
-\caption{Four vector fields around a zero. The first has index 1 and circulates clockwise. The second also has index 1 despite circulating counterclockwise, because if you trace a clockwise path the vector also rotates clockwise. The third has index -1 since it circulates counterclockwise as you trace a clockwise path. The fourth has index 0 and could in fact be extended to the hole.}
-\label{fig:flattorus_clock}
-\end{figure}
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  eqback/.style={->, very thick},
+  back/.style={loosely dotted, thin},
+  eqedge/.style={->, very thick},
+  edge/.style={black, thin},
+  facet/.style={fill=blue!95!black,fill opacity=0.0},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (-1, -1, 0) at (-1, -1, 0);
+\coordinate (-1, 1, 0) at (-1, 1, 0);
+\coordinate (0, 0, -1) at (0, 0, -1);
+\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (1, -1, 0) at (1, -1, 0);
+\coordinate (1, 1, 0) at (1, 1, 0);
+%% Drawing edges in the back
+%%
+\draw[edge,eqback] (-1, -1, 0) -- (-1, 1, 0);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
+\draw[edge,eqback] (1, -1, 0) -- (-1, -1, 0);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (-1, -1, 0)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
+\draw[eqedge] (-1, 1, 0) -- (1, 1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
+\draw[eqedge] (1, 1, 0) -- (1, -1, 0);
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
+\end{tikzpicture}
+\caption{The vector field \( \Xspin \) on \( \oo \), which circulates around the equator. \( w \) and \( y \) are zeros.}
+\label{fig:sphere_spin}
+\end{figure}%fig:sphere_spin
+
+\begin{mydef}
+The \defemph{downward vector field} \( \Xdown \) on \( \oo\setminus\{w, y\} \) is given by the following data, where again we compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_downward}
+\begin{align*}
+\exp\circ\Xspin(b)  &=y   \\
+\exp\circ\Xspin(r)  &=y   \\
+\exp\circ\Xspin(g)  &=y   \\
+\exp\circ\Xspin(o)  &=y   \\
+\exp\circ\Xspin(br) &= \refl_y \\
+\exp\circ\Xspin(rg) &= \refl_y \\
+\exp\circ\Xspin(go) &= \refl_y \\
+\exp\circ\Xspin(ob) &= \refl_y \\
+\end{align*}
+\end{mydef}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  eqback/.style={->, very thick},
+  back/.style={loosely dotted, thin},
+  eqedge/.style={->, very thick},
+  edge/.style={black, thin},
+  facet/.style={fill=blue!95!black,fill opacity=0.0},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (-1, -1, 0) at (-1, -1, 0);
+\coordinate (-1, 1, 0) at (-1, 1, 0);
+\coordinate (0, 0, -1) at (0, 0, -1);
+\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (1, -1, 0) at (1, -1, 0);
+\coordinate (1, 1, 0) at (1, 1, 0);
+%% Drawing edges in the back
+%%
+\draw[edge,back] (-1, -1, 0) -- (-1, 1, 0);
+\draw[eqedge] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
+\draw[edge,back] (1, -1, 0) -- (-1, -1, 0);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (-1, -1, 0)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[eqedge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
+\draw[edge] (-1, 1, 0) -- (1, 1, 0);
+\draw[eqedge] (1, -1, 0) -- (0, 0, -1.4);
+\draw[eqedge] (1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
+\draw[edge] (1, 1, 0) -- (1, -1, 0);
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
+\end{tikzpicture}
+\caption{The vector field \( \Xdown \) on \( \oo \), which flows downward. \( w \) and \( y \) are zeros.}
+\label{fig:sphere_downward}
+\end{figure}%fig:sphere_downward
+
+To avoid naming every vertex, edge and face of the torus we will just sketch how to define the picture in Figure~\ref{fig:morse_torus}. 
+
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torus_morse_tikz}
+\caption{A vector field on the torus that flows downward, when viewed as a donut. The zeros are represented as missing dots. Every dot has one outgoing vector.}
+\label{fig:morse_torus}
+\end{figure}%fig:morse_torus
+
+\subsection{Index}
+
+There is a classical concept called the \emph{index} of a vector field \emph{at a zero}. The purpose is to capture whether the zero is a source, a sink, a swirl, or a combination. In Figure~\ref{fig:morse_torus} we see a vector field that has four zeros. 
+
+The picture doesn't capture what is happening on paths and faces, so let's spell it out 
+
+\begin{mydef}
+The \defemph{index} of \( X \) at an isolated vertex \( z:Z \) is the \emph{degree} of the map \( \exp\circ\tr:\link(z)\to\link(z) \) (i.e. \( \Omega (\exp\circ\tr)(1):\zz \)). The map \( \tr \) transports \( P \) and \( X \) along the spokes joining the link to the point \( z \). Although \( z \) is not in the domain of \( X \), the hypothesis of \( z \) being isolated implies that the link is in the domain of \( X \).
+\end{mydef}
+
+% We will revisit the index later when we discuss the total index. Figure~\ref{fig:flattorus_clock} shows some discrete versions of the classical examples of index +1, --1 and 0. One note: the figures are only illustrating the value of the vector field on vertices. The \( \apd \) operation could in theory spin the vector many times around the link on its way from one vertex to the next. We will assume at all times that the smallest movement is taking place, and we leave it to the imagination whether that movement is clockwise or counterclockwise. A formalization would have to specify this fully of course.
+% 
+% \begin{figure}[htbp]
+% \centering
+% \input{discrete_gauge_theory_torusflatclock_tikz}
+% \input{discrete_gauge_theory_torusflatcounterclock_tikz}
+% \input{discrete_gauge_theory_torusflatnegindex_tikz}
+% \input{discrete_gauge_theory_torusflatzeroindex_tikz}
+% \caption{Four vector fields around a zero. The first has index 1 and circulates clockwise. The second also has index 1 despite circulating counterclockwise, because if you trace a clockwise path the vector also rotates clockwise. The third has index -1 since it circulates counterclockwise as you trace a clockwise path. The fourth has index 0 and could in fact be extended to the hole.}
+% \label{fig:flattorus_clock}
+% \end{figure}
 
 
