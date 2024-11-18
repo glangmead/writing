@@ -1,4 +1,154 @@
-\section{Leibniz, Gauss-Bonnet, Poincaré-Hopf}
+\section{Why this works}
+
+\subsection{Classical connections}
+
+\begin{mydef}
+A \defemph{principal bundle} is a smooth map \( \pi:P\to M \) between smooth manifolds such that
+\begin{enumerate}
+\item All the fibers of \( \pi \) are equivalent as a smooth manifold to a fixed Lie group \( G \).
+\item There is a smooth \( G \)-action \( P\times G\to P \) on the right that acts on fibers, and does so freely and transitively.
+\item There exists an open cover \( \{U_i\} \) of \( M \) and equivariant diffeomorphisms \( \phi_i:P|_{U_i}\to U_i\times G \) (i.e. \( \phi_i(p\cdot g)= \phi_i(p)\cdot g\)).
+\end{enumerate}
+\end{mydef}
+
+Physicists call principal bundle automorphisms ``gauge transformations'':
+
+\begin{mydef}
+A \defemph{gauge transformation} is a map \( \Phi:P\to P \) commuting with the projection to \( M \) and which is \( G \)-equivariant, i.e. \( \Phi(p\cdot g) = \Phi(p)\cdot g \). Denote the group of gauge transformations by \( \Aut P \). In the literature it is sometimes denoted \( \mathscr{G}(P) \).
+\end{mydef}
+
+\begin{mydef}
+The \defemph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TM \).
+\end{mydef}
+
+\( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that at each point of \( M \) the group \( G \) acts on \( VP \), sending vertical vectors to vertical vectors. In other words, \( \Aut P \) acts on \( VP \).
+
+\begin{mydef}
+An \defemph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and complementary ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
+\end{mydef}
+
+Being preserved by the action of \( \Aut P \) implies that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
+
+The utility and parsimony of this definition relates to the solvability of ordinary differential equations. We now have an isomorphism \( T_p\pi:H_pP\simeq T_{\pi(p)}M \) between each horizontal space and the tangent space below it in \( M \). This means that given a tangent vector at \( x:M \) and a point \( p \) in \( \pi^{-1}(x) \) we can uniquely lift the tangent vector to a horizontal vector at \( p \). We can also lift vector fields and paths in this way. To lift a path \( \gamma:[0,1]\to M \) you must specify a lift for \( \gamma(0) \) and then lift the tangent vectors of \( \gamma \) and prove that you can integrate the lift of that vector field upstairs in \( HP \).
+
+Armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \): given a path in \( M \) we can map the starting point of a lift to the ending point. So the three constructions: the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
+
+\subsubsection{Gauge theory}
+
+Given a bundle \( \pi:P\to M \) there is a space of connections \( \mathscr{A}(P) \). The group \( \Aut P \) acts on this space. For example, a gauge transformation that is constant in the neighborhood of a point will not change the splitting, it will just shift the fiber rigidly along itself. But at the other extreme, a gauge transformation that is changing rapidly near a point will tilt the horizontal subspaces rapidly. The field of \defemph{gauge theory} begins with a study of the quotient space \( \mathscr{A}(P)/\Aut P \).
+
+\begin{mynote}
+Recall that torsors have a physical interpretation as a quantity without a specified unit, such as mass, length, or time. When we choose a base point in a torsor it becomes the standard torsor \( G \) acting on itself (for example, the additive real numbers). A physicist is looking for properties or laws that are independent of such a choice. In the 20th century physicists further wondered about choices of units that vary from point to point, and began searching for laws that are invariant under this much larger space of transformations. This led directly to the discovery of connections and curvature as useful fields that complement the matter fields, which are sections of associated vector bundles. They were then led to explore quotienting by the action of the group of gauge transformations, and in particular the space of connections ``mod gauge.'' In this scenario the base manifold \( M \) is spacetime, and a gauge transformation is a smoothly varying choice of gauge (units) at each point.
+\end{mynote}
+
+We can characterize connections and curvature in terms of splittings of certain sequences. Atiyah and Bott (\cite{atiyah1983yang} equation 3.4) describe the space of vector fields on a total space \( P \) as a Lie algebra extension of \( \Gamma TM \) by \( \Gamma \ad P \), respectively the Lie algebra of vector fields on the base and vertical vector fields on \( P \). A non-flat connection will fail to split this sequence because horizontal vector fields may have a non-horizontal component when taking the Lie bracket. This extension is referred to as the \emph{Atiyah sequence}. 
+
+In this century mathematicians in HoTT and HoTT-adjacent fields sought an \emph{integrated Atiyah sequence}, including Urs Schreiber\cite{urs_atiyah}\cite{urs_atiyah_blog}. This would be a Lie groupoidal version of the Atiyah sequence on Lie algebras. If a groupoid extension could be examined, a link could be sought to Schreier theory. We'll return to these ideas in the next section.
+
+\subsection{Type theory version}
+
+Moving now to HoTT, fix a type \( M:\U \) and a type family \( f:M\to\U \). Path induction gives us the transport isomorphism \( \pit{p:a=_M b}\tr(p):f(a)=f(b) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
+
+\begin{mydef}
+With the above context and points \( \alpha:f(a), \beta:f(b) \) the type of \defemph{dependent paths over \( p \)} with endpoints \( \alpha, \beta \) is denoted
+\[ \alpha\pathover{p}\beta.
+\]
+By induction we can assume \( p \) is \( \refl_a \) in which case \( \alpha\pathover{p}\beta \) is \( \alpha=_{f(a)}\alpha \).
+\end{mydef}
+
+See \cite{Symmetry} for more discussion of dependent paths (where they use the term ``path over''), including composition, and associativity thereof.
+
+We recall now the identity type of sigma types:
+
+\begin{mythm}\label{thm:idsit}
+(HoTT book Theorem 2.7.2 \cite{hottbook}) If \( f:M\to \U \) is a type family and \( \alpha,\beta:\sit{x:M}f(x) \) then there is an equivalence 
+\[ 
+\mathsf{split}:(\alpha=\beta)\simeq \sit{p:\pr_1(\alpha)=_M\pr_1(\beta)} \left[\tr(p)(\pr_2(\alpha))\right] = \pr_2(\beta).
+\]
+\end{mythm}
+
+\begin{mydef}
+Given \( p:a=_M b \) and \( \alpha:f(a) \) we have 
+\[
+\left(\alpha\pathover{p}\tr(p)(\alpha)\right)\simeq \left(\tr(p)(\alpha)=_{f(b)}\tr(p)(\alpha)\right)
+\]
+which has the term \( \refl \) which we can call \defemph{the horizontal lift of \( p \) starting at \( \alpha \)}.
+\end{mydef}
+
+ We can imitate the classical definition of a connection by defining \( \omega\defeq \pr_2\circ\mathsf{split} \), the projection onto the vertical component.
+
+In HoTT if the bundle is classified by \( f:M\to \U \) then an automorphism is a homotopy \( H:f\sim f \) and the group of gauge transformations is the loop space \( \Omega_f(M\to \U) \). What is the effect of applying a homotopy \( H:f\sim f \) on transport, and on splitting?
+
+\( H \) is a family of fiber automorphisms: \( H:\pit{a:M}f(a)=f(a) \) which we can assemble into an equivalence \( H':\sit{a:M}f(a)=\sit{a:M}f(a) \) that acts fiberwise. We want to compute the action of \( \ap(H') \) on the horizontal-vertical decomposition of paths from Theorem~\ref{thm:idsit} by computing \( \omega\circ\ap(H')=\pr_2\circ\mathsf{split}\circ\ap(H') \).
+
+Denote \( \sit{a:M}f(a) \) by \( P \). Let \( p:a=_M b \) be a path in the base and let \( \pi:(a,\alpha)=_P (b,\beta) \) be a path in \( P \) over \( p \). Then \( \omega(\pi):\tr_p(\alpha)=\beta \).
+
+Now let's apply \( H \). We have \( \ap(H')(\pi):(a,H(a)(\alpha))=_P(b,H(b)(\beta)) \) which is still a path over \( p \). Applying \( \omega \) we get \[ \omega(\ap(H')(\pi)):\tr_p(H(a)(\alpha))=(H(b)(\beta)). \] Using the lemma below we can if we wish rewrite this as 
+\[ 
+\omega(\ap(H')(\pi)):H(b)\left[\tr_p(\alpha)=\beta\right]
+\]
+which uses only \( H(b) \). This is the action of gauge transformations on connections.
+
+\begin{mylemma}
+Given a function \( f:M\to\U \), path \( p:a=_M b \), and homotopy \( H:f\sim f \) the following square commutes and so in the type family we have \( \tr(H(x)\cdot f(p)) = \tr(f(p)\cdot H(y)) \).
+\end{mylemma}
+\begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmKGEpIl0sWzEsMCwiZihiKSJdLFsxLDEsImYoYikiXSxbMCwxLCJmKGEpIl0sWzAsMywiSChhKSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCJmKHApIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsImYocCkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiSChiKSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\begin{tikzcd}
+  {f(a)} & {f(b)} \\
+  {f(a)} & {f(b)}
+  \arrow["{f(p)}", equal, from=1-1, to=1-2]
+  \arrow["{H(a)}"', equal, from=1-1, to=2-1]
+  \arrow["{H(b)}", equal, from=1-2, to=2-2]
+  \arrow["{f(p)}"', equal, from=2-1, to=2-2]
+\end{tikzcd}
+\end{center}
+
+HoTT provides new ways to talk about trivializations of bundles, and flatness of connections.
+
+\begin{mythm}\label{thm:triv}
+The following are equivalent for a map \( T:M\to\EMzo \):
+\begin{enumerate}
+\item The principal bundle \( P\defeq\sit{x:M}Tx \) is a trivial bundle.
+\item The dependent sum \( \sit{x:M}Tx \) is equivalent to a non-dependent sum.
+\item There exists a total lifting \( T_\bullet \) to pointed types.
+\item \( T \) is contractible.
+\end{enumerate}
+\end{mythm}
+
+\begin{proof}
+1 and 2 are equivalent by definition. 1 implies 3 by choosing the basepoint of the second factor of \( M\times \so \). 3 implies 1 because the global choice of basepoint is a global isomorphism with \( \so \). 1 and 4 are equivalent because a trivialization is a contraction to \( M\times\so \).
+\end{proof}
+
+The classical definition of a flat connection is that contractible loops lift to horizontal loops, i.e. there is no holonomy around small loops. This implies that homotopic paths have the same transport. Here's how we'll describe this in HoTT:
+\begin{mydef}
+We call a connection on \( \sit{x:M}Tx \) \defemph{flat} if \( T \) factors through the 1-truncation \( ||M||_1 \).
+\end{mydef}
+
+\begin{mylemma}
+If \( T:M\to\EMzo \) is flat and \( M \) is simply connected then \( T \) is trivial.
+\end{mylemma}
+\begin{proof}
+\( T \) factors through \( ||M||_1 \) which is contractible.
+\end{proof}
+
+\subsubsection{Gauge theory revisited}
+
+The sigma type \( P\defeq\sit{x:M}Tx \) and projection map to \( M \) package the insights of the Atiyah sequence and observations about what does and doesn't split:
+
+The fiber sequence \( \so\to P\to M \) does not split unless \( P \) is trivial, by Theorem~\ref{thm:triv}.
+
+Paths \( p:a=_M b \) do lift to \( P \) given a starting point \( \alpha:Ta \). This is what we are calling the connection, and it is the finite version of the vertical/horizontal splitting \( TP=VP\oplus HP \). Theorem~\ref{thm:idsit} provides the factoring of pathovers into horizontal and vertical. So at the level of paths there \emph{is} a splitting, a map from \( M \) to \( P \).
+
+But suppose we have two paths \( p,q:a=_M b \) and a point \( \alpha \) over \( a \). If we concatenate the two horizontal lifts \( (p,\refl_{\tr(p)(\alpha)}) \) and \( (q^{-1}, \refl_{\tr(q^{-1})\circ\tr(p)(\alpha)}) \) into a loopover of \( p\cdot q^{-1} \) then we get a term in \( (p\cdot q^{-1}, \tr(q^{-1})\circ\tr(p)(\alpha)=\alpha) \). As we have seen this can be a non-\( \refl \) path in \( Ta \)! The concatenation of two horizontal lifts can be non-horizontal. This is the analogous statement to Atiyah's observation that the Lie bracket of two horizontal vectors can have a vertical component, and that this can be identified with curvature.
+
+To work with connections mod gauge we don't really have to add anything to our existing picture, because we are always working with higher types such as \( M\to\EMzo \) which have automorphisms (in this case gauge transformations, aka self-homotopies) baked in.
+
+Thinking back to the desired link with Schreier theory, David Jaz Myers showed that in the case of higher groups we have an equivalence between the type of extensions of a group \( G \) by \( F \) and the actions of \( G \) on a delooping \( BF \):
+\[ 
+\mathrm{Ext}(G; F) \simeq (BG \dotto \BAut(BF))
+\]
+(see \cite{myersthesis} Theorem 2.5.7). Our type of classifying maps \( M\to\EMzo \) can be seen as extensions of \( \pi_1(M) \), or of \( M \) itself, by the group \( \so \). What a lovely reframing of principal bundles.
 
 \subsection{The Leibniz (product) rule}
 
@@ -38,86 +188,3 @@ Given \( f, g:M\to B \) and \( p:x=_M y \) then
 \end{align*}
 \end{mylemma}
 
-\subsection{The total curvature}
-
-\begin{mydef}
-Let \( F(M) \) denote the groupoid of faces of \( M \) generated by the faces in its constructor. Let \( V:\pit{f:F(M)}f \) be a selected vertex of every face, and let \( \partial:\pit{f:F(M)}Vf=_M Vf \) be the clockwise boundary path around a face. Let \( v \) be the basepoint of \( M \). Then in particular we have \( M:F(M) \) the concatenation of all faces (i.e. \( M \) itself), and we have \( \partial(M):v=_M v \) which is the concatenation of all boundaries.
-\end{mydef}
-
-Observe that each generating edge of \( M \) is visited once in each direction in the concatenation \( \partial(M) \). 
-
-The bundle map \( T \) can be examined on each face. On a face \( f \) bounding a loop \( \ell:v=_M v \) the map \( T:M\to\EMzo \) assigns a homotopy \( T(f):\refl_v=T(\ell) \), where \( T(\ell) \) is an automorphism of \( T(v) \). On the composition of all faces we have \( T(M):T(v)=T(v) \), the \defemph{total curvature}.
-
-It is crucial that \( T(M) \) can be nontrivial (i.e. not \( \refl_v \)) even though it's computed by transporting across every edge in \( \partial(M) \) once in each direction!
-
-\subsection{The total index}
-
-See Figure~\ref{fig:torus_morse} where the outlined hexagons are the composition of the six triangular faces around a zero.
-
-If \( X \) is a vector field with isolated zeros on \( Z \), then \( M_Z \) is a convenient replacement for \( M \) because \( X \) is a partial function defined on all of \( M_Z \) except for a collection of faces, each of which bounds one of the zeros of \( Z \).
-
-\begin{mynote}
-If the combinatorial manifold was imported into type theory via some process of sampling or other, perhpaps more theoretical, construction then we should allow for zeros to occur on verticies, edges, or faces. We can reduce the case of a zero on a vertex or edge to that of a face with the replacement method just described. The original combinatorial neighborhood structure continues to live in the fibers of \( T \), it's only the base manifold that has been replaced.
-\end{mynote}
-
-\begin{mydef}
-Given a face \( f:F(M\setminus Z) \), define \defemph{the index of \( X \) on \( f \)} to be the winding number (also called the degree) of \( X(\partial f) \). The \defemph{total index} of \( X \) on \( M\setminus Z \) is the index of \( X \) on \( \partial(M\setminus Z) \).
-\end{mydef}
-
-The index computation skips some faces of \( M \) and can most definitely be nonzero.
-
-\subsection{Equality of total index and total curvature}
-
-Here we closely follow the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
-
-\begin{mythm}
-The total curvature's winding number is equal to the total index of \( X \).
-\end{mythm}
-The fact that the index was already an integer, whereas the curvature is a path accounts for the factor of \( 2\pi \) in some classical statement of this theorem (e.g. \cite{needham} section 26.3).
-\begin{proof}
-Let \( C \) be a fixed pointed polygon (e.g. \( C_4 \) or \( C_6 \) which we met earlier). We can consider \( X \) to map each vertex of \( M_Z \) to \( C \). On each face of \( M_Z \) (no faces are omitted) we traverse the boundary, which is in the domain of both \( T \) and of \( X \). So we avoid the complication that \( X \) is not defined on some of the faces by remaining on the 1-skeleton. For a given edge \( e_{12}:v_1=_{M_Z} v_2 \) the function \( \tr_{e_{12}}X(v_1)=X(v_2) \) is a path in \( C \). We will traverse every edge twice, once in each direction, which will cancel to give \( \refl_v \). In particular the boundaries around the zeros of \( X \) are themselves traversed twice in opposite directions, canceling the total index.
-\end{proof}
-
-\begin{mycor}
-The total index of a vector field with isolated zeros is independent of the vector field.
-\end{mycor}
-
-\begin{mycor}
-The total curvature is an integer.
-\end{mycor}
-
-The last step is to link this value to the Euler characteristic.
-
-\subsection{Identification with Euler characteristic}
-
-Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
-
-Imagine a combinatorial manifold of a genus g oriented surface standing upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will be index 1, and ones around the holes will be index -1. We include some sketches in the case of a torus. This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=400pt]{torus_morse_grad.pdf}
-\caption{A sketch of downward flow on the torus.}
-\label{fig:torus_morse}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-% https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJ1bGxldCJdLFswLDEsIlxcYnVsbGV0Il0sWzAsMiwiXFxidWxsZXQiXSxbMCwzLCJcXGJ1bGxldCJdLFsxLDAsIlxcbWF0aHJte3RvcH0iXSxbMSwxLCJcXG1hdGhybXt1cHBlclxcIGhvbGV9Il0sWzEsMiwiXFxtYXRocm17bG93ZXJcXCBob2xlfSJdLFsxLDMsIlxcbWF0aHJte2JvdHRvbX0iXSxbMCwxLCIiLDIseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDEsIiIsMCx7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwzLCIiLDAseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwzLCIiLDEseyJjdXJ2ZSI6LTV9XSxbMCwzLCIiLDEseyJjdXJ2ZSI6NX1dLFsxLDIsIiIsMSx7ImN1cnZlIjoyfV0sWzEsMiwiIiwxLHsiY3VydmUiOi0yfV1d
-\begin{tikzcd}[cramped]
-  \bullet & {\mathrm{top}} \\
-  \bullet & {\mathrm{upper\ hole}} \\
-  \bullet & {\mathrm{lower\ hole}} \\
-  \bullet & {\mathrm{bottom}}
-  \arrow[curve={height=-6pt}, dashed, from=1-1, to=2-1]
-  \arrow[curve={height=6pt}, dashed, from=1-1, to=2-1]
-  \arrow[curve={height=-30pt}, from=1-1, to=4-1]
-  \arrow[curve={height=30pt}, from=1-1, to=4-1]
-  \arrow[curve={height=12pt}, from=2-1, to=3-1]
-  \arrow[curve={height=-12pt}, from=2-1, to=3-1]
-  \arrow[curve={height=-6pt}, dashed, from=3-1, to=4-1]
-  \arrow[curve={height=6pt}, dashed, from=3-1, to=4-1]
-\end{tikzcd}
-\caption{Schematic of the zeros of the downward flow of a torus.}
-\label{fig:torus_morse_skel}
-\end{figure}

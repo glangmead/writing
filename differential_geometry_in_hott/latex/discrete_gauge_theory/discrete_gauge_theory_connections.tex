@@ -1,154 +1,486 @@
-\section{The connection to connections}
+\section{Connections and vector fields}
 
-We don't have two definitions of connections in HoTT that we can prove are equivalent. Instead we'll compare some key features of the classical theory to the system we have sketched above. It is my hope that differential geometers could onboard into HoTT through this work, and that someone new to geometry could learn it here as well. In both cases a dictionary of sorts would be helpful.
+\subsection{The function \texorpdfstring{\( T \)}{T}}
 
-\subsection{Classical version}
-
-\begin{mydef}
-A \defemph{principal bundle} is a smooth map \( \pi:P\to M \) between smooth manifolds such that
-\begin{enumerate}
-\item All the fibers of \( \pi \) are equivalent as a smooth manifold to a fixed Lie group \( G \).
-\item There is a smooth \( G \)-action \( P\times G\to P \) on the right that acts on fibers, and does so freely and transitively.
-\item There exists an open cover \( \{U_i\} \) of \( M \) and equivariant diffeomorphisms \( \phi_i:P|_{U_i}\to U_i\times G \) (i.e. \( \phi_i(p\cdot g)= \phi_i(p)\cdot g\)).
-\end{enumerate}
-\end{mydef}
-
-Physicists call principal bundle automorphisms ``gauge transformations'':
+We will build up a map \( T \) out of \( \oo \) which is meant to be like a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
 
 \begin{mydef}
-A \defemph{gauge transformation} is a map \( \Phi:P\to P \) commuting with the projection to \( M \) and which is \( G \)-equivariant, i.e. \( \Phi(p\cdot g) = \Phi(p)\cdot g \). Denote the group of gauge transformations by \( \Aut P \). In the literature it is sometimes denoted \( \mathscr{G}(P) \).
+\( T_0\defeq\link:\oo_0\to\EMzo \) is given by:
+\begin{align*}
+\link(w) &= brgo & \link(r) &= wbyg \\
+\link(y) &= bogr & \link(g) &= wryo \\
+\link(b) &= woyr & \link(o) &= wgyb
+\end{align*}
+We chose these orderings for the vertices in the link, by visualizing standing at the given vertex as if it were the north pole, then looking south and enumerating the link in clockwise order, starting from \( w \) if possible, else \( b \).
+\end{mydef}
+
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_oo_transport_tikz}
+\caption{\( \link \) for the vertices \( w, b\) and \( r \).}
+\label{fig:triangle_of_equators}
+\end{figure}
+
+To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. In other words, defining a map one dimension at a time makes clear that on a HIT the action on paths is extra structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection:
+
+\begin{mydef}
+\label{def:connection}
+A \defemph{connection} on a higher combinatorial manifold is an extension of a principal bundle from the 0-skeleton to the 1-skeleton.
+\end{mydef}
+
+Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
+
+\begin{mydef}
+Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( T_0 \) as follows:
+Transport away from \( w \):
+\begin{itemize}
+\item \( T_1(wb):[b, r, g, o]\mapsto [y, r, w, o] \) (\( r, o \) fixed)
+\item \( T_1(wr):[b, r, g, o]\mapsto [b, y, g, w] \) (\( b, g \) fixed)
+\item \( T_1(wg):[b, r, g, o]\mapsto [w, r, y, o] \)
+\item \( T_1(wo):[b, r, g, o]\mapsto [b, w, g, y] \)
+\end{itemize}
+Transport away from \( y \):
+\begin{itemize}
+\item \( T_1(yb):[b, o, g, r]\mapsto [w, o, y, r] \)
+\item \( T_1(yr):[b, o, g, r]\mapsto [b, y, g, w] \)
+\item \( T_1(yg):[b, o, g, r]\mapsto [y, o, w, r] \)
+\item \( T_1(yo):[b, o, g, r]\mapsto [b, w, g, y] \)
+\end{itemize}
+Transport along the equator:
+\begin{itemize}
+\item \( T_1(br):[w, o, y, r]\mapsto [w, b, y, g] \) 
+\item \( T_1(rg):[w, b, y, g]\mapsto [w, r, y, o] \)
+\item \( T_1(go):[w, r, y, o]\mapsto [w, g, y, b] \)
+\item \( T_1(ob):[w, g, y, b]\mapsto [w, o, y, r] \)
+\end{itemize}
+\end{mydef}
+
+It's very important to be able to visualize what \( T_1 \) does to triangular paths such as \( wb\cdot br\cdot rw \) (which circulates around the boundary of face \( wbr \)). You can see it if you imagine Figure~\ref{fig:triangle_of_equators} as the frames of a short movie. Or you can place your palm over the top of a cube and note where your fingers are pointing, then slide your hand to an equatorial face, then along the equator, then back to the top. The answer is: you come back rotated clockwise by a quarter-turn. 
+
+\begin{mydef}
+The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
+\begin{multicols}{2}
+\begin{itemize}
+\item \( R(c_1) = c_2 \)
+\item \( R(c_2) = c_3 \)
+\item \( R(c_3) = c_4 \)
+\item \( R(c_4) = c_1 \)
+\item \( R(c_1c_2) = c_2c_3 \)
+\item \( R(c_2c_3) = c_3c_4 \)
+\item \( R(c_3c_4) = c_4c_1 \)
+\item \( R(c_4c_1) = c_1c_2 \)
+\end{itemize}
+\end{multicols}
+\end{mydef}
+
+Note that by composing \( R \) with the map \( \mathsf{c4\_equiv} \) from Lemma~\ref{lem:c4equiv} we obtain a loop in the universe, a term of \( C_4=_{\EMzo}C_4 \).
+
+Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here \emph{there is no additional freedom}.
+
+\begin{mydef}
+Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
+\begin{multicols}{2}
+\begin{itemize}
+\item \( T_2(wbr)=H_R \) 
+\item \( T_2(wrg)=H_R \)
+\item \( T_2(wgo)=H_R \)
+\item \( T_2(ybo)=H_R \)
+\item \( T_2(yrb)=H_R \) 
+\item \( T_2(ygr)=H_R \)
+\item \( T_2(yog)=H_R \)
+\item \( T_2(ybo)=H_R \)
+\end{itemize}
+\end{multicols}
+where \( H_R:R=\refl \) is the obvious homotopy.
 \end{mydef}
 
 \begin{mydef}
-The \defemph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) with Lie group \( G \) is the kernel of the derivative \( T\pi:TP\to TM \).
+\label{def:curvature}
+The \defemph{curvature of a connection} on a type family \( T:\mm\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a higher combinatorial manifold \( \mm \) is the automorphism \( \tr_{p_f}(Tv) \).
 \end{mydef}
-
-\( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that at each point of \( M \) the group \( G \) acts on \( VP \), sending vertical vectors to vertical vectors. In other words, \( \Aut P \) acts on \( VP \).
-
-\begin{mydef}
-An \defemph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and complementary ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
-\end{mydef}
-
-Being preserved by the action of \( \Aut P \) implies that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
-
-The utility and parsimony of this definition relates to the solvability of ordinary differential equations. We now have an isomorphism \( T_p\pi:H_pP\simeq T_{\pi(p)}M \) between each horizontal space and the tangent space below it in \( M \). This means that given a tangent vector at \( x:M \) and a point \( p \) in \( \pi^{-1}(x) \) we can uniquely lift the tangent vector to a horizontal vector at \( p \). We can also lift vector fields and paths in this way. To lift a path \( \gamma:[0,1]\to M \) you must specify a lift for \( \gamma(0) \) and then lift the tangent vectors of \( \gamma \) and prove that you can integrate the lift of that vector field upstairs in \( HP \).
-
-Armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \): given a path in \( M \) we can map the starting point of a lift to the ending point. So the three constructions: the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
-
-\subsubsection{Gauge theory}
-
-Given a bundle \( \pi:P\to M \) there is a space of connections \( \mathscr{A}(P) \). The group \( \Aut P \) acts on this space. For example, a gauge transformation that is constant in the neighborhood of a point will not change the splitting, it will just shift the fiber rigidly along itself. But at the other extreme, a gauge transformation that is changing rapidly near a point will tilt the horizontal subspaces rapidly. The field of \defemph{gauge theory} begins with a study of the quotient space \( \mathscr{A}(P)/\Aut P \).
 
 \begin{mynote}
-Recall that torsors have a physical interpretation as a quantity without a specified unit, such as mass, length, or time. When we choose a base point in a torsor it becomes the standard torsor \( G \) acting on itself (for example, the additive real numbers). A physicist is looking for properties or laws that are independent of such a choice. In the 20th century physicists further wondered about choices of units that vary from point to point, and began searching for laws that are invariant under this much larger space of transformations. This led directly to the discovery of connections and curvature as useful fields that complement the matter fields, which are sections of associated vector bundles. They were then led to explore quotienting by the action of the group of gauge transformations, and in particular the space of connections ``mod gauge.'' In this scenario the base manifold \( M \) is spacetime, and a gauge transformation is a smoothly varying choice of gauge (units) at each point.
+We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
 \end{mynote}
 
-We can characterize connections and curvature in terms of splittings of certain sequences. Atiyah and Bott (\cite{atiyah1983yang} equation 3.4) describe the space of vector fields on a total space \( P \) as a Lie algebra extension of \( \Gamma TM \) by \( \Gamma \ad P \), respectively the Lie algebra of vector fields on the base and vertical vector fields on \( P \). A non-flat connection will fail to split this sequence because horizontal vector fields may have a non-horizontal component when taking the Lie bracket. This extension is referred to as the \emph{Atiyah sequence}. 
+\subsection{\texorpdfstring{\( T \)}{T} on concatenations of faces}
 
-In this century mathematicians in HoTT and HoTT-adjacent fields sought an \emph{integrated Atiyah sequence}, including Urs Schreiber\cite{urs_atiyah}\cite{urs_atiyah_blog}. This would be a Lie groupoidal version of the Atiyah sequence on Lie algebras. If a groupoid extension could be examined, a link could be sought to Schreier theory. We'll return to these ideas in the next section.
-
-\subsection{Type theory version}
-
-Moving now to HoTT, fix a type \( M:\U \) and a type family \( f:M\to\U \). Path induction gives us the transport isomorphism \( \pit{p:a=_M b}\tr(p):f(a)=f(b) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
-
-\begin{mydef}
-With the above context and points \( \alpha:f(a), \beta:f(b) \) the type of \defemph{dependent paths over \( p \)} with endpoints \( \alpha, \beta \) is denoted
-\[ \alpha\pathover{p}\beta.
-\]
-By induction we can assume \( p \) is \( \refl_a \) in which case \( \alpha\pathover{p}\beta \) is \( \alpha=_{f(a)}\alpha \).
-\end{mydef}
-
-See \cite{Symmetry} for more discussion of dependent paths (where they use the term ``path over''), including composition, and associativity thereof.
-
-We recall now the identity type of sigma types:
-
-\begin{mythm}\label{thm:idsit}
-(HoTT book Theorem 2.7.2 \cite{hottbook}) If \( f:M\to \U \) is a type family and \( \alpha,\beta:\sit{x:M}f(x) \) then there is an equivalence 
-\[ 
-\mathsf{split}:(\alpha=\beta)\simeq \sit{p:\pr_1(\alpha)=_M\pr_1(\beta)} \left[\tr(p)(\pr_2(\alpha))\right] = \pr_2(\beta).
-\]
-\end{mythm}
-
-\begin{mydef}
-Given \( p:a=_M b \) and \( \alpha:f(a) \) we have 
-\[
-\left(\alpha\pathover{p}\tr(p)(\alpha)\right)\simeq \left(\tr(p)(\alpha)=_{f(b)}\tr(p)(\alpha)\right)
-\]
-which has the term \( \refl \) which we can call \defemph{the horizontal lift of \( p \) starting at \( \alpha \)}.
-\end{mydef}
-
- We can imitate the classical definition of a connection by defining \( \omega\defeq \pr_2\circ\mathsf{split} \), the projection onto the vertical component.
-
-In HoTT if the bundle is classified by \( f:M\to \U \) then an automorphism is a homotopy \( H:f\sim f \) and the group of gauge transformations is the loop space \( \Omega_f(M\to \U) \). What is the effect of applying a homotopy \( H:f\sim f \) on transport, and on splitting?
-
-\( H \) is a family of fiber automorphisms: \( H:\pit{a:M}f(a)=f(a) \) which we can assemble into an equivalence \( H':\sit{a:M}f(a)=\sit{a:M}f(a) \) that acts fiberwise. We want to compute the action of \( \ap(H') \) on the horizontal-vertical decomposition of paths from Theorem~\ref{thm:idsit} by computing \( \omega\circ\ap(H')=\pr_2\circ\mathsf{split}\circ\ap(H') \).
-
-Denote \( \sit{a:M}f(a) \) by \( P \). Let \( p:a=_M b \) be a path in the base and let \( \pi:(a,\alpha)=_P (b,\beta) \) be a path in \( P \) over \( p \). Then \( \omega(\pi):\tr_p(\alpha)=\beta \).
-
-Now let's apply \( H \). We have \( \ap(H')(\pi):(a,H(a)(\alpha))=_P(b,H(b)(\beta)) \) which is still a path over \( p \). Applying \( \omega \) we get \[ \omega(\ap(H')(\pi)):\tr_p(H(a)(\alpha))=(H(b)(\beta)). \] Using the lemma below we can if we wish rewrite this as 
-\[ 
-\omega(\ap(H')(\pi)):H(b)\left[\tr_p(\alpha)=\beta\right]
-\]
-which uses only \( H(b) \). This is the action of gauge transformations on connections.
+Continuing with the classical analogies, we should seek a way to concatenate the curvature on two or more faces. This would correspond to integrating the curvature 2-form over a larger 2-cell, including integrating over a total face to compute \emph{total curvature}. Look again at Figure~\ref{fig:concat} where we concatenated two faces that share an edge. HoTT maps respect groupoid operations, so we have
+\( T_2(abc\cdot bdc) = T_2(abdc) \). We can double-check this by comparing transport around a 4-gon like \( wbyr \).
 
 \begin{mylemma}
-Given a function \( f:M\to\U \), path \( p:a=_M b \), and homotopy \( H:f\sim f \) the following square commutes and so in the type family we have \( \tr(H(x)\cdot f(p)) = \tr(f(p)\cdot H(y)) \).
+\[ 
+T_1(wb\cdot by\cdot yr\cdot rw) = T_1(wb\cdot br\cdot rw\cdot wb\cdot by\cdot yr\cdot rb\cdot bw) 
+\]
 \end{mylemma}
+\begin{proof}
+Both are equal to \( R^2 \) acting to permute \( \{b, r, g, o\} \) to \( \{g, o, b, r\} \).
+\end{proof}
+
+Similarly transport around the other vertical wedges \( wryg \), \( wgyo \) and \( woyb \) are each \( R^2 \), and the four wedges can be composed to obtain \( R^8:\link(w)=\link(w) \). This implies that the total face given by concatenating all 8 faces (in this order) maps by \( T_2 \) to the homotopy that unwinds \( R^8 \) to the identity.
+
+What if we chose another strategy for concatenating the faces of \( \oo \)? Suppose we concatenate all four triangles in the upper hemisphere with \( w \) as the basepoint, then move to \( y \) and compose the four southern triangles, then move back up to \( w \)?
+\begin{mylemma}
+\[ 
+T_1(wb\cdot br\cdot rg\cdot go\cdot ow) = T_1(wb\cdot by\cdot (yr\cdot rb\cdot bo\cdot og\cdot gr\cdot ry)\cdot yb\cdot bw) 
+\]
+\end{mylemma}
+\begin{proof}
+Both are equal to \( R^4 \).
+\end{proof}
+And therefore by concatenating the path on the left with the path on the right we see that this different ordering of the faces gives the same value of \( T_2 \) as before, namely \( R^8 \).
+
+\subsection{The torus}
+
+We can define a combinatorial torus as a similar HIT. This time each vertex will have six neighbors. So all the links will be merely equal to \( C_6 \) which is a hexagonal version of \( C_4 \). See Figure~\ref{fig:torus}. 
+
+To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take this simple alternating-triangle pattern, then glue the left and right edges, then bend into Figure~\ref{fig:torus}. The fact that each column in Figure~\ref{fig:flattorus} has four dots corresponds to the torus in Figure~\ref{fig:torus} having a square in front, diamonds in the middle, and a square in back.
+
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torus_tikz}
+\caption{Torus embedded in 3-dimensional space. If you see color in your rendering then black lines trace four square-shaped paths, red ones connect the front square to the middle diamonds, and blue ones connect the back path to the middle ones.}
+\label{fig:torus}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torusflat_tikz}
+\caption{An inspiration for the torus. Identify the sides and then the top, definitionally, to get the actual torus.}
+\label{fig:flattorus}
+\end{figure}
+
+This somewhat arbitrary and unfamiliar model of a torus has the helpful property that it is a combinatorial manifold that is somewhat minimal while still being representable by a donut shape. But the donut-shaped version suggests a very different tangent bundle than the flat model! Starting with the flat model, we can easily see how to define \( T_1 \) by sliding a link rigidly along the page to the link of some adjacent vertex. Then we can see that transport around any loop is the identity and so \( T_2 \) is always the homotopy \( \refl_\id \) from the identity to itself.
+
+The donut-shaped torus suggests a different tangent bundle, one determined by the embedding in 3-space that we have represented. But the easiest way to think about that bundle and its connection and curvature is to wait until we have a proof of the Poincaré-Hopf theorem, so that we can instead use a downward-flowing vector field inspired by Morse theory.
+
+\subsection{Vector fields}
+
+\begin{mydef}
+A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\star \), the disjoint union of \( B \) with the 1-element type.
+\end{mydef}
+
+If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. So instead of having some notion of the full tangent space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \star \). This lets us continue to work with \( \EMzo \).
+
+Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
+
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torusflathole_tikz}
+\caption{The flat torus with one vertex removed. This also removes the edges and faces containing that vertex.}
+\label{fig:flattorus_zero}
+\end{figure}
+
+\begin{mydef}
+Let \( \mm:\combmfdt \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( \mm \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:\mm\setminus Z}T(x) \) (and eliding the unique term of \( Z\to\star \)). The \defemph{exponential map} \( \exp:P\to \mm \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
+\end{mydef}
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dLFswLDIsIlRfXFxidWxsZXQiXSxbMywxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
 \begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmKGEpIl0sWzEsMCwiZihiKSJdLFsxLDEsImYoYikiXSxbMCwxLCJmKGEpIl0sWzAsMywiSChhKSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCJmKHApIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsImYocCkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiSChiKSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
 \begin{tikzcd}
-  {f(a)} & {f(b)} \\
-  {f(a)} & {f(b)}
-  \arrow["{f(p)}", equal, from=1-1, to=1-2]
-  \arrow["{H(a)}"', equal, from=1-1, to=2-1]
-  \arrow["{H(b)}", equal, from=1-2, to=2-2]
-  \arrow["{f(p)}"', equal, from=2-1, to=2-2]
+  {P\stackrel{\mathrm{def}}={\sum_{C:T(\mm\setminus Z)}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  \\
+  {\mm\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  \arrow["{\overline{T}}", from=1-1, to=1-3]
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
+  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
+  \arrow["{{X:\prod_{x:\mm\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
+  \arrow["{T_\bullet}", from=3-1, to=1-3]
+  \arrow["T", from=3-1, to=3-3]
 \end{tikzcd}
 \end{center}
+where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( \mm\setminus Z\to \mm \), and can be thought of as the flow of the vector field.
 
-HoTT provides new ways to talk about trivializations of bundles, and flatness of connections.
+Let's see a few examples.
 
-\begin{mythm}\label{thm:triv}
-The following are equivalent for a map \( T:M\to\EMzo \):
-\begin{enumerate}
-\item The principal bundle \( P\defeq\sit{x:M}Tx \) is a trivial bundle.
-\item The dependent sum \( \sit{x:M}Tx \) is equivalent to a non-dependent sum.
-\item There exists a total lifting \( T_\bullet \) to pointed types.
-\item \( T \) is contractible.
-\end{enumerate}
-\end{mythm}
-
-\begin{proof}
-1 and 2 are equivalent by definition. 1 implies 3 by choosing the basepoint of the second factor of \( M\times \so \). 3 implies 1 because the global choice of basepoint is a global isomorphism with \( \so \). 1 and 4 are equivalent because a trivialization is a contraction to \( M\times\so \).
-\end{proof}
-
-The classical definition of a flat connection is that contractible loops lift to horizontal loops, i.e. there is no holonomy around small loops. This implies that homotopic paths have the same transport. Here's how we'll describe this in HoTT:
 \begin{mydef}
-We call a connection on \( \sit{x:M}Tx \) \defemph{flat} if \( T \) factors through the 1-truncation \( ||M||_1 \).
+The \defemph{spinning vector field} \( \Xspin \) on \( \oo\setminus\{w, y\} \) is given by the following data. We compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_spin}
+\begin{align*}
+\exp\circ\Xspin(b)  &=r   \\
+\exp\circ\Xspin(r)  &=g   \\
+\exp\circ\Xspin(g)  &=o   \\
+\exp\circ\Xspin(o)  &=b   \\
+\end{align*}
+We must also define pathovers and faceovers. For example, \( \Xspin(b) \) is the point \( r \) in the link \( woyr \). Transport along \( br \) takes the link of \( b \) to the link of \( r \), mapping \( r:Tb \) to \( g:Tr \). This agrees with \( \Xspin(r) \) and so \( \Xspin(br)=\refl_g \) in \( Tr \). We similarly obtain \( \refl \) pathovers for the other equatorial edges. And since we have deleted all the faces when removing the zeros, there are no faceovers.
 \end{mydef}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  eqback/.style={-Latex, very thick},
+  back/.style={loosely dotted, thin},
+  eqedge/.style={-Latex, very thick},
+  edge/.style={black, thin},
+  facet/.style={fill=blue!95!black,fill opacity=0.0},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (-1, -1, 0) at (-1, -1, 0);
+\coordinate (-1, 1, 0) at (-1, 1, 0);
+\coordinate (0, 0, -1) at (0, 0, -1);
+\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (1, -1, 0) at (1, -1, 0);
+\coordinate (1, 1, 0) at (1, 1, 0);
+%% Drawing edges in the back
+%%
+\draw[edge,eqback] (-1, -1, 0) -- (-1, 1, 0);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
+\draw[edge,eqback] (1, -1, 0) -- (-1, -1, 0);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (-1, -1, 0)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
+\draw[eqedge] (-1, 1, 0) -- (1, 1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
+\draw[eqedge] (1, 1, 0) -- (1, -1, 0);
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
+\end{tikzpicture}
+\caption{The vector field \( \Xspin \) on \( \oo \), which circulates around the equator. \( w \) and \( y \) are zeros.}
+\label{fig:sphere_spin}
+\end{figure}%fig:sphere_spin
+
+\begin{mydef}
+The \defemph{downward vector field} \( \Xdown \) on \( \oo\setminus\{w, y\} \) is given by the following data, where again we compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_downward}
+\begin{align*}
+\exp\circ\Xspin(b)  &=y   \\
+\exp\circ\Xspin(r)  &=y   \\
+\exp\circ\Xspin(g)  &=y   \\
+\exp\circ\Xspin(o)  &=y   \\
+\end{align*}
+We also need to select a pathover for each edge on the equator. Transport on all these edges takes \( y \) in one fiber to \( y \) in the next, so we choose the path \( \refl_y\) in all four of these fibers. Again there are no faceovers to map.
+\end{mydef}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  eqback/.style={-Latex, very thick},
+  back/.style={loosely dotted, thin},
+  eqedge/.style={-Latex, very thick},
+  edge/.style={black, thin},
+  facet/.style={fill=blue!95!black,fill opacity=0.0},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (-1, -1, 0) at (-1, -1, 0);
+\coordinate (-1, 1, 0) at (-1, 1, 0);
+\coordinate (0, 0, -1) at (0, 0, -1);
+\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (1, -1, 0) at (1, -1, 0);
+\coordinate (1, 1, 0) at (1, 1, 0);
+%% Drawing edges in the back
+%%
+\draw[edge,back] (-1, -1, 0) -- (-1, 1, 0);
+\draw[eqedge] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
+\draw[edge,back] (1, -1, 0) -- (-1, -1, 0);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (-1, -1, 0)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[eqedge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
+\draw[edge] (-1, 1, 0) -- (1, 1, 0);
+\draw[eqedge] (1, -1, 0) -- (0, 0, -1.4);
+\draw[eqedge] (1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
+\draw[edge] (1, 1, 0) -- (1, -1, 0);
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
+\end{tikzpicture}
+\caption{The vector field \( \Xdown \) on \( \oo \), which flows downward. \( w \) and \( y \) are zeros.}
+\label{fig:sphere_downward}
+\end{figure}%fig:sphere_downward
+
+
+
+\subsection{Index of a vector field}
+
+Index should be an integer that computes a winding number ``of the vector field'' around a zero. We can compute an integer from a map by taking its \emph{degree}, which is a construction we will assume that we have, for example using \cite{buchholtz_favonia}.
+
+\begin{mydef}
+Let \( \mm:\combmfdt \) and let \( T:\mm\to\EMzo \) be the discrete tangent bundle given on \( \mm_0 \) by \( \link \). Let \( z:Z \) be a zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). We call the degree of the map \( \tr(\link z):Tl_{z1}=Tl_{z1} \) the \defemph{index of \( X \) at \( z \)}. It does not depend on which vertex we use.
+\end{mydef}
+
+% \begin{mydef}
+% Let \( \mm:\combmfdt \), let \( T:\mm\to\EMzo \) be the discrete tangent bundle given on \( \mm_0 \) by \( \link \). Let \( P\defeq\sit{x:\mm}Tx \), and \( Z \) be a set of isolated zeros. Let \( X:\mm\setminus Z\to P \) be a nonvanishing vector field. Finally, let \( z:Z \) be a zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). Define a map \( X'(z):\link z\to \link z \), called \defemph{the circle automorphism at \( z \)}, on vertices of \( \link z \) as follows:
+% \[ 
+% X'(z)(l_{zi}) = \exp\left(\tr(l_{zi}z)(X(l_{zi})\right) 
+% \] In words, we transport the vector field along the unique edge joining \( l_{zi} \) to \( z \), then apply \( \exp \). The result will be some point in \( \link z \). In different words, \( X(l_{zi}) \) may point various places: to another point of \( \link z \), to \( z \) itself, or somewhere beyond \( \link z \). Transporting all these fibers to the central fiber at \( z \), then exponentiating, gives a self-map of the link.
+% 
+% \( X'(z) \) extends to the edges of \( \link z \), e.g. \( l_{z1}l_{z2} \), by the action on paths of \( \tr \) along \( l_{zi}z \). To visualize this we can imagine transporting \( X \) along an edge of \( \link z \) from \( l_{z1} \) to \( l_{z2} \) and then transporting the result along \( l_{z2}z \).
+% 
+% Finally, we call the degree of \( X'(z) \) on the clockwise-oriented link the \defemph{index of \( X \) at \( z \)}.\qed
+% \end{mydef}
+
 \begin{mylemma}
-If \( T:M\to\EMzo \) is flat and \( M \) is simply connected then \( T \) is trivial.
+The index of \( \Xspin \) at both \( y \) and at \( w \) is 1, and the same for \( \Xdown \).
 \end{mylemma}
 \begin{proof}
-\( T \) factors through \( ||M||_1 \) which is contractible.
+\( \apd(\Xspin)(br) = \refl_{\Xspin(r)} \) and similarly for the other edges and for \( \Xdown \). So \( \apd \) on the loop around the equator is the identity, which has index 1.
 \end{proof}
 
-\subsubsection{Gauge theory revisited}
+If these vector fields both have index +1, what does index --1 look like? We can see an example on the torus.
 
-The sigma type \( P\defeq\sit{x:M}Tx \) and projection map to \( M \) package the insights of the Atiyah sequence and observations about what does and doesn't split:
+On the torus we can also consider both a spinning vector field and a downward vector field. Figure~\ref{fig:spin_torus} shows one way to spin the torus, and in this case there are no zeros so the index is the degree of a map from the empty set, which is 0 (as it factors through a constant map).
 
-The fiber sequence \( \so\to P\to M \) does not split unless \( P \) is trivial, by Theorem~\ref{thm:triv}.
+Figure~\ref{fig:morse_torus} shows a downward flow with four zeros. Although this is a picture of the flat torus, the vector field is derived from the shape of Figure~\ref{fig:torus} where we actually have a notion of up and down. We see at the position labeled (outer, top of diamonds), i.e. the top of the torus, an everywhere outward pointing vector field. At (outer, bottom of diamonds) we see an inward pointing vector field. But at (hole, top of diamonds), i.e. the top of the hole, we see something else. Looking first at the red arrows, then the downward pointing black arrow, then the blue arrows on the left, then the upward pointing black arrow (which is towards the bottom of the figure) we have moved clockwise on the page, but the arrows have rotated counterclockwise (leftward on the page, then downward, then rightward, then upward on the page). This is a zero of index --1, and so is the one at (hole, bottom of diamonds). Adding these four numbers we again get 0.
 
-Paths \( p:a=_M b \) do lift to \( P \) given a starting point \( \alpha:Ta \). This is what we are calling the connection, and it is the finite version of the vertical/horizontal splitting \( TP=VP\oplus HP \). Theorem~\ref{thm:idsit} provides the factoring of pathovers into horizontal and vertical. So at the level of paths there \emph{is} a splitting, a map from \( M \) to \( P \).
+Summarizing what we've seen in our examples, vector fields with isolated zeros have an index, and this index tracks with the Euler characteristic.
 
-But suppose we have two paths \( p,q:a=_M b \) and a point \( \alpha \) over \( a \). If we concatenate the two horizontal lifts \( (p,\refl_{\tr(p)(\alpha)}) \) and \( (q^{-1}, \refl_{\tr(q^{-1})\circ\tr(p)(\alpha)}) \) into a loopover of \( p\cdot q^{-1} \) then we get a term in \( (p\cdot q^{-1}, \tr(q^{-1})\circ\tr(p)(\alpha)=\alpha) \). As we have seen this can be a non-\( \refl \) path in \( Ta \)! The concatenation of two horizontal lifts can be non-horizontal. This is the analogous statement to Atiyah's observation that the Lie bracket of two horizontal vectors can have a vertical component, and that this can be identified with curvature.
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torus_spin_tikz}
+\caption{A vector field on the torus that spins and has no zeros.}
+\label{fig:spin_torus}
+\end{figure}%fig:spin_torus
 
-To work with connections mod gauge we don't really have to add anything to our existing picture, because we are always working with higher types such as \( M\to\EMzo \) which have automorphisms (in this case gauge transformations, aka self-homotopies) baked in.
+\begin{figure}[htbp]
+\centering
+\input{discrete_gauge_theory_torus_morse_tikz}
+\caption{A vector field on the torus that flows downward, when viewed as a donut. The zeros are represented as missing dots. Every dot has one outgoing vector.}
+\label{fig:morse_torus}
+\end{figure}%fig:morse_torus
 
-Thinking back to the desired link with Schreier theory, David Jaz Myers showed that in the case of higher groups we have an equivalence between the type of extensions of a group \( G \) by \( F \) and the actions of \( G \) on a delooping \( BF \):
-\[ 
-\mathrm{Ext}(G; F) \simeq (BG \dotto \BAut(BF))
-\]
-(see \cite{myersthesis} Theorem 2.5.7). Our type of classifying maps \( M\to\EMzo \) can be seen as extensions of \( \pi_1(M) \), or of \( M \) itself, by the group \( \so \). What a lovely reframing of principal bundles.
+\subsection{Equality of total index and total curvature}
 
+Here we are inspired by the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
+
+\begin{mydef}
+\label{def:enumeration}
+An \defemph{enumeration} of a principal bundle with connection and vector field on a higher combinatorial manifold consists of the following data:
+\begin{itemize}
+\item a principal bundle \( T:\mm\to\EMzo \) on some higher combinatorial manifold
+\item a nonvanishing vector field \( X:\mm\setminus Z\to P \) with isolated zeros \( Z \)
+\item a total face of the replacement \( \mm_Z \), that is 
+\begin{itemize}
+\item a basepoint \( a:\mm_Z \) 
+\item a term \( f_{\mm_Z}:\refl_a=\refl_a \) given by
+\begin{itemize}
+\item an ordering of the face constructors \( \{f_i\} \), with the sub-list of faces denoted \( \{f_zk\} \) are the replacement faces at the zeros
+\item a vertex \( v_i \) in each face
+\item terms \( a=v_i \) for each face
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{mydef}
+
+\begin{mynote}
+An enumeration let us work both with \( \mm\setminus Z \) where the vector field is nonvanishing, while also having access to the disks that are missing from \( \mm\setminus Z \).
+\end{mynote}
+
+\begin{mylemma}
+The sub-list of faces \( \{f_i\}-\{f_zk\} \) obtained by skipping the replacement faces at the zeros, is an ordering of face constructors for \( \mm\setminus Z \).
+\end{mylemma}
+\begin{proof}
+The algorithm that visits each face in order always starts and ends at \( a \) and so we can skip any faces we wish, to obtain an ordering of face constructors for the remaining union of faces.
+\end{proof}
+
+\begin{mylemma}
+The degree of \( Y \) is minus the total index of \( X \).
+\end{mylemma}
+\begin{proof}
+First note that on \( \mm\setminus Z \) the vector field \( X \) trivializes the bundle by mapping into the contractible type of pointed types over \( \Kzt \). So \( X\simeq Y:\mm\setminus Z\to (Ta,a) \), the fixed pointed circle in the fiber of the basepoint \( a \). 
+
+The ordering of faces \( \{f_i\}-\{f_zk\} \) provides an ordering of all the edges, say \( \{e_l\} \). Each edge appears an even number of times in this list, traversed in opposite directions, except those bounding a replacement face. These replacement-bounding edges are traversed an odd number of times and can be concatenated to traverse the boundary counterclockwise. Concatenation of paths in \( S^1 \) is abelian, so  \( Y(\{e_l\}) \) cancels except on the boundary of the replacement faces, which gives a map from the disjoint union of boundary circles to \( S^1 \), with each boundary circle traversed in the counterclockwise direction. The orientation gives the minus sign.
+\end{proof}
+
+Consider now the total face \( f_{\mm_Z} \) of \( \mm_Z \) and its ordering of faces \( \{f_i\} \). \( Y \) is only defined on some of these faces. We will define a new function on all the \( \{f_i\} \).
+
+\begin{mydef}
+The \defemph{coupling map} \( C:f_i\to S^1 \) is given by \( C(f_i)\defeq\apd(X)(\partial f_i) \) where \( \partial f_i:v_i=v_i \) is the clockwise path around the face starting from the vertex supplied by the data of the total face.
+\end{mydef}
+
+Because \( \apd \) uses both transport and the value of the vector field, it couples the connection with the vector field, hence the name. Of course in HoTT this coupling is built into the definition of \( \apd \), so that's another reminder that we aren't straying far from the foundations to find these geometrical concepts. 
+
+The fact that \( C \) is defined on all the faces, by using the value of the vector field only on the 1-skeleton of \( \mm_Z \) where it was always defined, lets us make the final part of the argument.
+
+\begin{mylemma}
+\( C:\mm_Z\to S^1 \) is constant.
+\end{mylemma}
+\begin{proof}
+The data of the total face provides an ordering of all the edges. Each edge appears an even number of times, traversed in opposite directions, including the edges in the replacement faces. Concatenation of paths in \( S^1 \) is abelian, so the paths all cancel.
+\end{proof}
+
+\( C \) is similar to \( X \) except that it is a total function. On any given edge it computes a path, that is, a homotopy from the function \( \tr \) to the function \( X \), which we can call ``the difference between transport and the vector field on that edge.'' We have found a way to add all these homotopies together to get 0. We can call this total ``the difference between the total index and the total curvature.''
+
+Recall now that we made some arbitrary choices in Definition~\ref{def:enumeration} of an enumeration, and hence the function \( C \). But since \( C \) is unconditionally constant, the space of extra data is contractible.
+
+\begin{mycor}
+The total index of a vector field with isolated zeros is independent of the vector field.
+\end{mycor}
+
+\begin{mycor}
+The total curvature is an integer.
+\end{mycor}
+
+The last step is to link this value to the Euler characteristic.
+
+\subsection{Identification with Euler characteristic}
+
+Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
+
+Imagine a combinatorial manifold of a genus g oriented surface standing upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will be index 1, and ones around the holes will be index -1. We include some sketches in the case of a torus. This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \).
+
+\begin{figure}[htbp]
+\centering
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJ1bGxldCJdLFswLDEsIlxcYnVsbGV0Il0sWzAsMiwiXFxidWxsZXQiXSxbMCwzLCJcXGJ1bGxldCJdLFsxLDAsIlxcbWF0aHJte3RvcH0iXSxbMSwxLCJcXG1hdGhybXt1cHBlclxcIGhvbGV9Il0sWzEsMiwiXFxtYXRocm17bG93ZXJcXCBob2xlfSJdLFsxLDMsIlxcbWF0aHJte2JvdHRvbX0iXSxbMCwxLCIiLDIseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDEsIiIsMCx7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwzLCIiLDAseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwzLCIiLDEseyJjdXJ2ZSI6LTV9XSxbMCwzLCIiLDEseyJjdXJ2ZSI6NX1dLFsxLDIsIiIsMSx7ImN1cnZlIjoyfV0sWzEsMiwiIiwxLHsiY3VydmUiOi0yfV1d
+\begin{tikzcd}[cramped]
+  \bullet & {\mathrm{top}} \\
+  \bullet & {\mathrm{upper\ hole}} \\
+  \bullet & {\mathrm{lower\ hole}} \\
+  \bullet & {\mathrm{bottom}}
+  \arrow[curve={height=-6pt}, dashed, from=1-1, to=2-1]
+  \arrow[curve={height=6pt}, dashed, from=1-1, to=2-1]
+  \arrow[curve={height=-30pt}, from=1-1, to=4-1]
+  \arrow[curve={height=30pt}, from=1-1, to=4-1]
+  \arrow[curve={height=12pt}, from=2-1, to=3-1]
+  \arrow[curve={height=-12pt}, from=2-1, to=3-1]
+  \arrow[curve={height=-6pt}, dashed, from=3-1, to=4-1]
+  \arrow[curve={height=6pt}, dashed, from=3-1, to=4-1]
+\end{tikzcd}
+\caption{Schematic of the zeros of the downward flow of a torus.}
+\label{fig:torus_morse_skel}
+\end{figure}

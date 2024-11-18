@@ -36,7 +36,10 @@
 
 \graphicspath{ {./img/} }
 
-\usetikzlibrary{arrows,arrows.meta,positioning,quotes,cd,calc,shapes,decorations.pathreplacing}
+\usetikzlibrary{arrows.meta,positioning,quotes,cd,calc,shapes,decorations.pathreplacing}
+%%\tikzset{every picture/.append style={line cap=round, line width=1.5pt, {Latex-Latex}}}
+%%\tikzset{arrows={-Latex[angle=40:2.5mm]}}
+%%\tikzset{>={Latex[scale=1.2]}}
 \bibliographystyle{IEEEtran} % shows URL
 \setcitestyle{square,numbers}
 
@@ -118,6 +121,7 @@
 \DeclareMathOperator{\BAut}{BAut}
 \DeclareMathOperator{\ad}{ad}
 \DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\link}{\mathsf{link}}
 \newcommand{\apd}{\mathsf{apd}}
 \newcommand{\HIT}{\mathsf{HIT}}
 \newcommand{\BAuto}[1]{\BAut_1(#1)}
@@ -130,7 +134,7 @@
 \newcommand{\LAut}{\mathrm{LAut}}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\Fin}{\mathrm{Fin}}
-\newcommand{\link}{\mathsf{link}}
+\newcommand{\loopy}{\mathsf{\Omega}}
 \newcommand{\xbox}{\mathsf{xbox}}
 \newcommand{\disk}{\mathsf{disk}}
 \newcommand{\xdisk}{\mathsf{xdisk}}
@@ -146,6 +150,8 @@
 \newcommand{\diffeo}{\mathrm{Diffeo}}
 \newcommand{\uni}{\mathcal{U}}
 \newcommand{\K}{\mathrm{K}}
+\newcommand{\Kzt}{\K(\zz,2)}
+\newcommand{\Kzo}{\K(\zz,1)}
 \newcommand{\mysection}[1]{\section{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mysubsection}[1]{\subsection{\texorpdfstring{#1}{\detokenize{#1}}}}
 \newcommand{\mychapter}[1]{\chapter{\texorpdfstring{#1}{\detokenize{#1}}}}
@@ -213,6 +219,13 @@
 \newcommand{\pathover}[1]{\xrightarrow[{#1}]{=}}
 \newcommand{\Xspin}{X_{\mathrm{spin}}}
 \newcommand{\Xdown}{X_{\mathrm{down}}}
+\newcommand{\Xup}{X_{\mathrm{up}}}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$}
+\renewcommand{\labelitemiv}{$\bullet$}
+
 \newtheoremstyle{mythmstyle}
 {5pt} % Space above
 {-4pt} % Space below
