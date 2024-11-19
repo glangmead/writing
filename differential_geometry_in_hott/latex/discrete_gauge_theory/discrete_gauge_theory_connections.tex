@@ -2,7 +2,7 @@
 
 \subsection{The function \texorpdfstring{\( T \)}{T}}
 
-We will build up a map \( T \) out of \( \oo \) which is meant to be like a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
+We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
 
 \begin{mydef}
 \( T_0\defeq\link:\oo_0\to\EMzo \) is given by:
@@ -21,11 +21,11 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 \label{fig:triangle_of_equators}
 \end{figure}
 
-To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. In other words, defining a map one dimension at a time makes clear that on a HIT the action on paths is extra structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection:
+To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. Defining a map by induction makes clear that the action on paths is its own structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection:
 
 \begin{mydef}
 \label{def:connection}
-A \defemph{connection} on a higher combinatorial manifold is an extension of a principal bundle from the 0-skeleton to the 1-skeleton.
+A \defemph{connection} on a higher combinatorial manifold is an extension of a circle bundle from the 0-skeleton to the 1-skeleton.
 \end{mydef}
 
 Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
@@ -73,7 +73,7 @@ The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
 \end{multicols}
 \end{mydef}
 
-Note that by composing \( R \) with the map \( \mathsf{c4\_equiv} \) from Lemma~\ref{lem:c4equiv} we obtain a loop in the universe, a term of \( C_4=_{\EMzo}C_4 \).
+Note by univalence the equivalence \( R \) gives a loop in the universe, a term of \( C_4=_{\EMzo}C_4 \).
 
 Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here \emph{there is no additional freedom}.
 
@@ -91,12 +91,12 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 \item \( T_2(ybo)=H_R \)
 \end{itemize}
 \end{multicols}
-where \( H_R:R=\refl \) is the obvious homotopy.
+where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with \( R^-1 \). Passing through univalence we get a 2-path between \( R \) and \( \refl \) in the loop space \( C_4=_{\EMzo}C_4 \).
 \end{mydef}
 
 \begin{mydef}
 \label{def:curvature}
-The \defemph{curvature of a connection} on a type family \( T:\mm\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a higher combinatorial manifold \( \mm \) is the automorphism \( \tr_{p_f}(Tv) \).
+The \defemph{curvature of a connection} on a type family \( T:\mm\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a higher combinatorial manifold \( \mm \) is the automorphism \( \tr(p_f)(Tv) \) together with a homotopy to \( \id_{Tv} \).
 \end{mydef}
 
 \begin{mynote}
@@ -106,7 +106,7 @@ We have defined a function on a cell by requiring it to correspond to the value 
 \subsection{\texorpdfstring{\( T \)}{T} on concatenations of faces}
 
 Continuing with the classical analogies, we should seek a way to concatenate the curvature on two or more faces. This would correspond to integrating the curvature 2-form over a larger 2-cell, including integrating over a total face to compute \emph{total curvature}. Look again at Figure~\ref{fig:concat} where we concatenated two faces that share an edge. HoTT maps respect groupoid operations, so we have
-\( T_2(abc\cdot bdc) = T_2(abdc) \). We can double-check this by comparing transport around a 4-gon like \( wbyr \).
+\( T_2(abc\cdot bdc) = T_2(abdc) \). We can double-check this by comparing transport around a 4-gon like \( wbyr \) to a path that traverses each face.
 
 \begin{mylemma}
 \[ 
@@ -117,7 +117,7 @@ T_1(wb\cdot by\cdot yr\cdot rw) = T_1(wb\cdot br\cdot rw\cdot wb\cdot by\cdot yr
 Both are equal to \( R^2 \) acting to permute \( \{b, r, g, o\} \) to \( \{g, o, b, r\} \).
 \end{proof}
 
-Similarly transport around the other vertical wedges \( wryg \), \( wgyo \) and \( woyb \) are each \( R^2 \), and the four wedges can be composed to obtain \( R^8:\link(w)=\link(w) \). This implies that the total face given by concatenating all 8 faces (in this order) maps by \( T_2 \) to the homotopy that unwinds \( R^8 \) to the identity.
+Similarly transport around the other vertical wedges \( wryg \), \( wgyo \) and \( woyb \) are each \( R^2 \), and the four wedges can be composed to obtain \( R^8:\link(w)=\link(w) \). This implies that the total face given by concatenating all 8 faces (in this order) maps by \( T_2 \) to \( R^8 \) together with the homotopy that unwinds \( R^8 \) to the identity.
 
 What if we chose another strategy for concatenating the faces of \( \oo \)? Suppose we concatenate all four triangles in the upper hemisphere with \( w \) as the basepoint, then move to \( y \) and compose the four southern triangles, then move back up to \( w \)?
 \begin{mylemma}
@@ -150,9 +150,9 @@ To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take t
 \label{fig:flattorus}
 \end{figure}
 
-This somewhat arbitrary and unfamiliar model of a torus has the helpful property that it is a combinatorial manifold that is somewhat minimal while still being representable by a donut shape. But the donut-shaped version suggests a very different tangent bundle than the flat model! Starting with the flat model, we can easily see how to define \( T_1 \) by sliding a link rigidly along the page to the link of some adjacent vertex. Then we can see that transport around any loop is the identity and so \( T_2 \) is always the homotopy \( \refl_\id \) from the identity to itself.
+This somewhat arbitrary and unfamiliar model of a torus has the helpful property that it is a combinatorial manifold that is somewhat minimal while still being representable by a donut shape. But the donut-shaped version suggests a very different connection than the flat model! Starting with the flat model, we can easily see how to define \( T_1 \) by sliding a link rigidly along the page to the link of some adjacent vertex. Then we can see that transport around any loop is the identity and so \( T_2 \) is always the identity (together with the homotopy \( \refl_\id \) from the identity to itself). So if we imagine a way to visit every face like we did for the octahedron, starting and ending at some basepoint \( v \), we expect to see no net rotation at all of \( Tv \). Later we will call this ``total curvature 0.''
 
-The donut-shaped torus suggests a different tangent bundle, one determined by the embedding in 3-space that we have represented. But the easiest way to think about that bundle and its connection and curvature is to wait until we have a proof of the Poincaré-Hopf theorem, so that we can instead use a downward-flowing vector field inspired by Morse theory.
+The donut-shaped torus suggests a different connection, one determined by the embedding in 3-space that we have represented. But the easiest way to think about that bundle and its connection and curvature is to wait until we have a proof of the Poincaré-Hopf theorem, so that we can instead compute with a vector field.
 
 \subsection{Vector fields}
 
@@ -160,9 +160,9 @@ The donut-shaped torus suggests a different tangent bundle, one determined by th
 A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\star \), the disjoint union of \( B \) with the 1-element type.
 \end{mydef}
 
-If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. So instead of having some notion of the full tangent space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \star \). This lets us continue to work with \( \EMzo \).
+If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. So instead of having a notion corresponding to the full tangent vector space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \star \). This lets us continue to work with \( \EMzo \) instead of a type of tangent spaces.
 
-Figure~\ref{fig:flattorus_zero} illustrates what removing a point looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
+Figure~\ref{fig:flattorus_zero} illustrates what removing the preimage of \( \star \) looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
 
 \begin{figure}[htbp]
 \centering
@@ -202,7 +202,7 @@ The \defemph{spinning vector field} \( \Xspin \) on \( \oo\setminus\{w, y\} \) i
 \exp\circ\Xspin(g)  &=o   \\
 \exp\circ\Xspin(o)  &=b   \\
 \end{align*}
-We must also define pathovers and faceovers. For example, \( \Xspin(b) \) is the point \( r \) in the link \( woyr \). Transport along \( br \) takes the link of \( b \) to the link of \( r \), mapping \( r:Tb \) to \( g:Tr \). This agrees with \( \Xspin(r) \) and so \( \Xspin(br)=\refl_g \) in \( Tr \). We similarly obtain \( \refl \) pathovers for the other equatorial edges. And since we have deleted all the faces when removing the zeros, there are no faceovers.
+We must also define pathovers and faceovers, i.e. \( \apd(\Xspin \). For example, \( \Xspin(b) \) is the point \( r \) in the link \( woyr \). Transport along \( br \) takes the link of \( b \) to the link of \( r \), mapping \( r:Tb \) to \( g:Tr \). This agrees with \( \Xspin(r) \) and so we will choose \( \Xspin(br)=\refl_g \) in \( Tr \). We similarly choose \( \refl \) pathovers for the other equatorial edges. And since we have deleted all the faces when removing the zeros, there are no faceovers.
 \end{mydef}
 
 \begin{figure}[htbp]
@@ -334,14 +334,12 @@ We also need to select a pathover for each edge on the equator. Transport on all
 \label{fig:sphere_downward}
 \end{figure}%fig:sphere_downward
 
-
-
 \subsection{Index of a vector field}
 
-Index should be an integer that computes a winding number ``of the vector field'' around a zero. We can compute an integer from a map by taking its \emph{degree}, which is a construction we will assume that we have, for example using \cite{buchholtz_favonia}.
+Index should be an integer that computes a winding number ``of the vector field'' around a zero. We can compute an integer from a map by taking its \emph{degree}, which is a construction we will assume that we have, for example using \cite{buchholtz_favonia}, where they indeed require that degree agrees with winding number for maps \( S^1\to S^1 \).
 
 \begin{mydef}
-Let \( \mm:\combmfdt \) and let \( T:\mm\to\EMzo \) be the discrete tangent bundle given on \( \mm_0 \) by \( \link \). Let \( z:Z \) be a zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). We call the degree of the map \( \tr(\link z):Tl_{z1}=Tl_{z1} \) the \defemph{index of \( X \) at \( z \)}. It does not depend on which vertex we use.
+Let \( \mm:\combmfdt \) and let \( T:\mm\to\EMzo \) be a bundle of circles given on \( \mm_0 \) by \( \link \). Let \( z:Z \) be an isolated zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). We call the degree of the map \( \tr(\link z):Tl_{z1}=Tl_{z1} \) the \defemph{index of \( X \) at \( z \)}. It does not depend on which vertex we use.
 \end{mydef}
 
 % \begin{mydef}
@@ -356,19 +354,19 @@ Let \( \mm:\combmfdt \) and let \( T:\mm\to\EMzo \) be the discrete tangent bund
 % \end{mydef}
 
 \begin{mylemma}
-The index of \( \Xspin \) at both \( y \) and at \( w \) is 1, and the same for \( \Xdown \).
+The index of \( \Xspin \) at both \( y \) and at \( w \) is 1, and the same is true for \( \Xdown \).
 \end{mylemma}
 \begin{proof}
 \( \apd(\Xspin)(br) = \refl_{\Xspin(r)} \) and similarly for the other edges and for \( \Xdown \). So \( \apd \) on the loop around the equator is the identity, which has index 1.
 \end{proof}
 
-If these vector fields both have index +1, what does index --1 look like? We can see an example on the torus.
+If these vector fields both have index +1, what does index --1 look like? We can see an example on the torus with its downward vector field.
 
 On the torus we can also consider both a spinning vector field and a downward vector field. Figure~\ref{fig:spin_torus} shows one way to spin the torus, and in this case there are no zeros so the index is the degree of a map from the empty set, which is 0 (as it factors through a constant map).
 
-Figure~\ref{fig:morse_torus} shows a downward flow with four zeros. Although this is a picture of the flat torus, the vector field is derived from the shape of Figure~\ref{fig:torus} where we actually have a notion of up and down. We see at the position labeled (outer, top of diamonds), i.e. the top of the torus, an everywhere outward pointing vector field. At (outer, bottom of diamonds) we see an inward pointing vector field. But at (hole, top of diamonds), i.e. the top of the hole, we see something else. Looking first at the red arrows, then the downward pointing black arrow, then the blue arrows on the left, then the upward pointing black arrow (which is towards the bottom of the figure) we have moved clockwise on the page, but the arrows have rotated counterclockwise (leftward on the page, then downward, then rightward, then upward on the page). This is a zero of index --1, and so is the one at (hole, bottom of diamonds). Adding these four numbers we again get 0.
+Figure~\ref{fig:morse_torus} shows a downward flow with four zeros. Although this is a picture of the flat torus, the vector field is derived from the shape of Figure~\ref{fig:torus} where we actually have a notion of up and down. We see at the position labeled (outer, top of diamonds), i.e. the top of the torus, an everywhere outward pointing vector field. At (outer, bottom of diamonds) we see an inward pointing vector field. But at (hole, top of diamonds), i.e. the top of the hole, we see something else. Imagine transport from the neighbor to the lower right to the neighbor below, then continuing clockwise around the link. If we assume that we define \( \apd \) on these edges to be \emph{counterclockwise} rotation, then transport around the whole link has degree --1. Similarly for the zero at (hole, bottom of diamonds). Adding these four indexes we again get 0.
 
-Summarizing what we've seen in our examples, vector fields with isolated zeros have an index, and this index tracks with the Euler characteristic.
+Summarizing what we've seen in our examples, vector fields with isolated zeros have an index, and this index tracks with the total curvature, and the Euler characteristic.
 
 \begin{figure}[htbp]
 \centering
@@ -392,14 +390,14 @@ Here we are inspired by the classical proof of Hopf\cite{hopf}, presented in det
 \label{def:enumeration}
 An \defemph{enumeration} of a principal bundle with connection and vector field on a higher combinatorial manifold consists of the following data:
 \begin{itemize}
-\item a principal bundle \( T:\mm\to\EMzo \) on some higher combinatorial manifold
+\item a family \( T:\mm\to\Kzt \) on some higher combinatorial manifold
 \item a nonvanishing vector field \( X:\mm\setminus Z\to P \) with isolated zeros \( Z \)
-\item a total face of the replacement \( \mm_Z \), that is 
+\item a total face of the replacement \( \mm_Z \) (Definition~\ref{def:totalface}), that is 
 \begin{itemize}
 \item a basepoint \( a:\mm_Z \) 
 \item a term \( f_{\mm_Z}:\refl_a=\refl_a \) given by
 \begin{itemize}
-\item an ordering of the face constructors \( \{f_i\} \), with the sub-list of faces denoted \( \{f_zk\} \) are the replacement faces at the zeros
+\item an ordering of the face constructors \( \{f_i\} \), with the sub-list of faces denoted \( \{f_{zk}\} \) refers to the replacement faces at the zeros
 \item a vertex \( v_i \) in each face
 \item terms \( a=v_i \) for each face
 \end{itemize}
@@ -412,25 +410,23 @@ An enumeration let us work both with \( \mm\setminus Z \) where the vector field
 \end{mynote}
 
 \begin{mylemma}
-The sub-list of faces \( \{f_i\}-\{f_zk\} \) obtained by skipping the replacement faces at the zeros, is an ordering of face constructors for \( \mm\setminus Z \).
-\end{mylemma}
-\begin{proof}
+The sub-list of faces \( \{f_i\}-\{f_{zk}\} \) obtained by skipping the replacement faces at the zeros, is an ordering of face constructors for \( \mm\setminus Z \).
+\end{mylemma}\begin{proof}
 The algorithm that visits each face in order always starts and ends at \( a \) and so we can skip any faces we wish, to obtain an ordering of face constructors for the remaining union of faces.
 \end{proof}
 
+Note that on \( \mm\setminus Z \) the vector field \( X \) trivializes the bundle by mapping into the contractible type of pointed types over \( \Kzt \). So \( X\simeq Y:\mm\setminus Z\to (Ta,a) \), the fixed pointed circle in the fiber of the basepoint \( a \). 
+
 \begin{mylemma}
 The degree of \( Y \) is minus the total index of \( X \).
-\end{mylemma}
-\begin{proof}
-First note that on \( \mm\setminus Z \) the vector field \( X \) trivializes the bundle by mapping into the contractible type of pointed types over \( \Kzt \). So \( X\simeq Y:\mm\setminus Z\to (Ta,a) \), the fixed pointed circle in the fiber of the basepoint \( a \). 
-
-The ordering of faces \( \{f_i\}-\{f_zk\} \) provides an ordering of all the edges, say \( \{e_l\} \). Each edge appears an even number of times in this list, traversed in opposite directions, except those bounding a replacement face. These replacement-bounding edges are traversed an odd number of times and can be concatenated to traverse the boundary counterclockwise. Concatenation of paths in \( S^1 \) is abelian, so  \( Y(\{e_l\}) \) cancels except on the boundary of the replacement faces, which gives a map from the disjoint union of boundary circles to \( S^1 \), with each boundary circle traversed in the counterclockwise direction. The orientation gives the minus sign.
+\end{mylemma}\begin{proof}
+The ordering of faces \( \{f_i\}-\{f_{zk}\} \) provides an ordering of all the edges, say \( \{e_l\} \). Each edge appears an even number of times in this list, traversed in opposite directions, except those bounding a replacement face. These replacement-bounding edges are traversed an odd number of times and can be concatenated to traverse the boundary counterclockwise. Concatenation of paths in \( S^1 \) is abelian, so  \( Y(\{e_l\}) \) cancels except on the boundary of the replacement faces, which gives a map from the disjoint union of boundary circles to \( Ta \), with each boundary circle traversed in the counterclockwise direction. The orientation gives the minus sign.
 \end{proof}
 
 Consider now the total face \( f_{\mm_Z} \) of \( \mm_Z \) and its ordering of faces \( \{f_i\} \). \( Y \) is only defined on some of these faces. We will define a new function on all the \( \{f_i\} \).
 
 \begin{mydef}
-The \defemph{coupling map} \( C:f_i\to S^1 \) is given by \( C(f_i)\defeq\apd(X)(\partial f_i) \) where \( \partial f_i:v_i=v_i \) is the clockwise path around the face starting from the vertex supplied by the data of the total face.
+The \defemph{coupling map} \( C:\mm_Z\to Ta \) is defined to be \( Y \) on \( \mm\setminus Z \) and on the remaining faces it is defined by \( C(f_i)\defeq\apd(X)(\partial f_i) \) where \( \partial f_i:v_i=v_i \) is the clockwise path around the face starting from the vertex supplied by the data of the total face.
 \end{mydef}
 
 Because \( \apd \) uses both transport and the value of the vector field, it couples the connection with the vector field, hence the name. Of course in HoTT this coupling is built into the definition of \( \apd \), so that's another reminder that we aren't straying far from the foundations to find these geometrical concepts. 
@@ -438,13 +434,13 @@ Because \( \apd \) uses both transport and the value of the vector field, it cou
 The fact that \( C \) is defined on all the faces, by using the value of the vector field only on the 1-skeleton of \( \mm_Z \) where it was always defined, lets us make the final part of the argument.
 
 \begin{mylemma}
-\( C:\mm_Z\to S^1 \) is constant.
+\( C:\cup_i\{f_i\}\to Ta \) is equal to a constant map.
 \end{mylemma}
 \begin{proof}
-The data of the total face provides an ordering of all the edges. Each edge appears an even number of times, traversed in opposite directions, including the edges in the replacement faces. Concatenation of paths in \( S^1 \) is abelian, so the paths all cancel.
+The data of the total face provides an ordering of all the edges. Each edge appears an even number of times, traversed in opposite directions, including the edges in the replacement faces. Concatenation of paths in the polygon \( Ta \) is abelian, so the paths all cancel.
 \end{proof}
 
-\( C \) is similar to \( X \) except that it is a total function. On any given edge it computes a path, that is, a homotopy from the function \( \tr \) to the function \( X \), which we can call ``the difference between transport and the vector field on that edge.'' We have found a way to add all these homotopies together to get 0. We can call this total ``the difference between the total index and the total curvature.''
+\( C \) is similar to \( X \) and \( Y \) except that it is a total function. On any given edge it computes a path, that is, a homotopy from the function \( \tr \) to the function \( X \), which we can call ``the difference between transport and the vector field on that edge.'' We have found a way to add all these homotopies together to get 0. We can call this total ``the difference between the total index and the total curvature.''
 
 Recall now that we made some arbitrary choices in Definition~\ref{def:enumeration} of an enumeration, and hence the function \( C \). But since \( C \) is unconditionally constant, the space of extra data is contractible.
 
@@ -460,9 +456,9 @@ The last step is to link this value to the Euler characteristic.
 
 \subsection{Identification with Euler characteristic}
 
-Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
+Here we only point the way. Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
 
-Imagine a combinatorial manifold of a genus g oriented surface standing upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will be index 1, and ones around the holes will be index -1. We include some sketches in the case of a torus. This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \).
+Imagine starting with a classical 2-manifold of genus \( g \) that has been triangulated. Stand it upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will have zeros of (classical) index 1, and zeros in the holes will have index --1. We include some sketches in the case of a torus (Figure~\ref{fig:torus_morse_skel}). This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \). If we choose the triangulation so that the zeros are at vertices, we should be able to import that data into \( \combmfdt \) and reproduce the computation using the tools in this note.
 
 \begin{figure}[htbp]
 \centering

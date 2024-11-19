@@ -61,21 +61,21 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{triangulated_sphere.pdf}
-\caption{A combinatorial triangulation of a sphere, created with stripy.}
+\caption{A combinatorial triangulation of a sphere, created with the tool \texttt{stripy}.}
 \label{fig:sphere_triangulation}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{Torus-triang.png}
-\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (By Ag2gaeh - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=30856793)}
+\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
 \label{fig:torus_wiki_triangulation}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{triangulated_genus3.pdf}
-\caption{A 3-holes torus with triangulation, from Wikipedia. (By Ag2gaeh - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Tri-brezel.svg)}
+\caption{A 3-holes torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
 \label{fig:genus3_wiki_triangulation}
 \end{figure}
 
@@ -92,13 +92,13 @@ Define \( \combmfdt \) to be the type of \defemph{higher inductive constructors 
 \end{enumerate}
 \end{mydef}
 
-We will assume there is a rigorous theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. See for example David Wärn's recent work on pushouts\cite{warn_pushouts}.
+We will assume there is a formal theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. For recent work on HITs see for example David Wärn's discussion of pushouts\cite{warn_pushouts}.
 
 \begin{mydef}
 Denote by \( \mathcal{R}:\combmfdt\to\Type \) the process of generating a type from the HIT data (which we refer to as \defemph{realization}). Note that \( \mathcal{R}(\mathcal{H}(M)) \) is not in general a set, and may not even be 2-truncated for an arbitrary 2-dimensional combinatorial manifold \( M:\combmfdsett \).
 \end{mydef}
 
-We're making the distinction between \( \mathcal{H} \) and \( \mathcal{R} \) because we will work so closely with the constructors when we map out of them, but of course type theory tells us that to define a map out of the type \( \mathcal{R}(\mathcal{H}(M)) \) we just have to define it on the constructors, so the distinction is not very sharp.
+We're making the distinction between \( \mathcal{H} \) and \( \mathcal{R} \) because we will mostly study functions and phenomena on \( \mathcal{H}(M) \) for some simplicial complex \( M \).
 
 \subsection{Polygons}\label{sec:polygons}
 
@@ -146,8 +146,34 @@ Define the function \( \ell:C_4\to\so \) by
 and define the function \( s_1:\so\to C_4 \) by \( s_1(\mathsf{base})=c_1 \) and \( s_1(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). (The subscript on \( s_1 \) reminds us that we chose vertex \( c_1 \) to map \( \mathsf{base} \) to.) Then \( \ell \) and \( s_1 \) constitute an equivalence \( \mathsf{c4\_equiv}:\mathsf{is_equiv}(\ell,s_1) \).
 \end{mylemma}
 \begin{proof}
-We need \( \pit{x:C_4}s_1(\ell(x))=x \) and \( \pit{y:S^1}\ell(s_1(y))=y \).
+First we need to construct a term \( 4e:\pit{x:C_4}s_1(\ell(x))=x \) by induction on \( C_4 \), by defining terms
+\begin{enumerate}
+\item \( 4ei:s_1(\ell(c_i))=c_i \)
+\item \( 4eij:\apd(c_ic_j)(4ei)=4ej \), i.e. \( 4eij: s_1(\ell(c_ic_j))\cdot 4ei\cdot c_ic_j=4ej \).
+\end{enumerate}
+where in the second goal we used a result about \( \apd \) on transport (HoTT Book\cite{hottbook} Theorem 2.11.3). These goals are fulfilled by
+\begin{itemize}
+\item \( 4e1=\refl_{c_1} \)
+\item \( 4e2={c_1c_2} \)
+\item \( 4e3={c_1c_2\cdot c_2c_3} \)
+\item \( 4e4={c_1c_2\cdot c_2c_3\cdot c_3c_4} \)
+\item \( 4e12=(c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1)^{-1}\cdot(-) \)
+\item \( 4e23=\refl_{c_1c_2\cdot c_2c_3} \)
+\item \( 4e34=\refl_{c_1c_2\cdot c_2c_3\cdot c_3c_4} \)
+\item \( 4e41=4e12 \).
+\end{itemize}
+Next we need a term \( e4:\pit{y:S^1}\ell(s_1(y))=y \) by induction on \( S^1 \), by defining.
+\begin{enumerate}
+\item \( e4b:\ell(s_1(\mathsf{base}))=\mathsf{base} \)
+\item \( e4l:\apd(\mathsf{loop})(e4b)=e4b \), i.e. \( e4l:\ell(s_1(\mathsf{loop}))\cdot e4b\cdot e4b \).
+\end{enumerate}
+These goals are fulfilled by
+\begin{itemize}
+\item \( e4b=\refl_{\mathsf{base}} \)
+\item \( e4l=\refl_{\mathsf{loop}} \).
+\end{itemize}
 \end{proof}
+A different approach might be to prove that \( C_n\simeq C_{n-1} \) by removing just one vertex, and seeing that the argument generates equivalences between any polygon, or a polygon and \( S^1 \).
 
 Recalling that terms of \( \EMzo \) are pairs: a type, and a mere equivalence with \( \so \), we have:
 
@@ -155,7 +181,7 @@ Recalling that terms of \( \EMzo \) are pairs: a type, and a mere equivalence wi
 We have \( (C_4,||\mathsf{c4\_equiv}||_{-1}):\EMzo. \)
 \end{mycor}
 
-More claims: given some other square \( abcd \) and an equivalence with \( C_4 \), we get a path in \( \EMzo \). This includes automorphisms of \( C_4 \). For example \( R \). Furthermore there is a homotopy from \( R \) to the identity, which give a 2-path \( \refl_{C_4}=R \) in the universe.
+Given some other square \( abcd \) and an equivalence with \( C_4 \), we get via univalence a path in \( \EMzo \). This includes automorphisms of \( C_4 \), for example \( R \). Furthermore there is a homotopy from \( R \) to the identity, which give a 2-path \( \refl_{C_4}=R \) in the universe.
 
 Real-world triangulations of surfaces will often have links whose number of vertices varies across the surface. For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
 
@@ -226,11 +252,11 @@ If we have a combinatorial manifold \( \mm:\combmfdt \) (or a combinatorial mani
 
 Of course there are many choices in this definition of total face!
 
-The second use case for concatenating faces is to create a HIT related to \( \mm \) but without one of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
+The second use case for concatenating faces is to create a HIT related to \( \mm \) but without some of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{hex_concat.pdf}
-\caption{Concatenating the six triangles in the approrpiate way produces a 2-path in \( \refl_v=\refl_v \).}
+\caption{Concatenating the six triangles in the approrpiate way produces a 2-path in \( \refl_v=\refl_v \) and removes the vertex at the center.}
 \label{fig:hex_concat}
 \end{figure}
 
@@ -247,5 +273,28 @@ If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then
 If \( Z \) are isolated points of \( \mm \) then we have \( \mathcal{R}(\mm)=_\Type\mathcal{R}(\mm_Z) \).
 \end{mylemma}
 \begin{proof}
-Concatenating all the faces around a given point \( z:Z \) gives a map \( \mathsf{concat}_z:\mm\to\mathcal{R}(\mm_Z) \). Compose these to form \( \mathsf{concat}\defeq\mathsf{concat}_{z_n}\circ\cdots\mathsf{concat}_{z_1}:\mm\to\mathcal{R}(\mm_Z) \). The rest of the data of \( \mm \) has an obvious inclusion into \( \mm_Z \) and hence \( \mathcal{R}(\mm_Z) \).  In the other direction we map any face bouding a hexagon to the corresponding concatenation of faces in \( \mathcal{R}(\mm) \) and map the rest of the data by the obvious inclusion. We omit the proof that these are inverses.
+We will prove that concatenating two faces of \( \mm \) as in Figure~\ref{fig:concat} produces an equivalent type. Let \( A \) be the constructor given on the left that includes the edge \( bc \), and \( B \) the constructor on the right. We will define functions on constructors. Let \( f:A\to B \) be
+\begin{itemize}
+\item \( f(a:A)=a:B, f(b)=b, f(c)=c, f(d)=d \)
+\item \( f(ab)=ab, f(bd)=bd, f(dc)=dc, f(ca)=ca \)
+\item \( f(bc)=bdc \)
+\item \( f(abc)=abcd \)
+\item \( f(bdc)=\refl_{bd\cdot dc} \)
+\end{itemize} 
+which ``squishes the right face onto its right >-shaped boundary.'' In the other direction let \( g:B\to A \) be the inclusion of all the constructors of dimension 1 and 2, and set \( g(abdc)=abc*bdc \), which denotes the concatenation operation across the shared edge.
+
+We must provide a term \( gf:\pit{x:A}g(f(x))=x \) which requires supplying four paths, five pathovers, and two faceovers. The four paths are \( \refl_a \), \( \refl_b \), \( \refl_c \) and \( \refl_c \). Four of the pathovers are \( \refl_{ab} \), \( \refl_{bd} \), \( \refl_{dc} \), \( \refl_{ca} \). It remains to find terms 
+\begin{enumerate}
+\item \( \mathit{gfbc}:\apd(bc)(\refl_b)=\refl_c \)
+\item \( \mathit{gfabc}:\apd(abc)(\refl_{ab}\cdot \mathit{gfbc}\cdot \refl_{ca})=\refl_{\refl_a} \), i.e. \( \mathit{gfabc}:g(f(abc))^{-1}\cdot  (\refl_{ab}\cdot \mathit{gfbc}\cdot \refl_{ca})\cdot abc = \refl_{\refl_a} \)
+\item \( \mathit{gfbdc}:\apd(bdc)(\refl_{bd}\cdot \refl_{dc}\cdot \mathit{gfbc}^{-1})=\refl_{\refl_b} \), i.e. \( \mathit{gfbdc}:g(f(bdc))^{-1}\cdot (\refl_{bd}\cdot \refl_{dc}\cdot \mathit{gfbc}^{-1})\cdot bdc \)
+\end{enumerate}
+which are supplied by
+\begin{enumerate}
+\item \( cbd:cb\cdot bd\cdot dc=\refl_c \)
+\item \( \refl_{\refl_{\refl_a}}\)
+\item \( \refl_{\refl_{\refl_b}}\).
+\end{enumerate}
+
+We must also provide a term \( \mathit{fg}:\pit{x:B}f(g(x))=x \) which is \( \refl \) on all constructors.
 \end{proof}

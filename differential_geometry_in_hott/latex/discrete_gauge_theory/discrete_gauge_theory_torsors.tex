@@ -1,6 +1,6 @@
 \section{Torsors and principal bundles}
 
-The classical theory of principal bundles tells us to look for an appropriate classifying space of torsors to map into. Homotopy type theory tells us that classifying spaces are univalent fibrations. The type of torsors is not a priori such a fibration, so we'll do some work to make that happen. This will constitute the codomain of the investigation.
+The classical theory of principal bundles tells us to look for an appropriate classifying space of torsors to map into.
 
 \begin{mydef}
 Let \( G \) be a group (a set with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:G\to\Aut(X) \). If in addition we have a term
@@ -25,11 +25,13 @@ A \( G \)-set \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exi
 The pointed type \( (TG,*) \) is a \( \K(G,1) \).\qed
 \end{mycor}
 
-\subsection{Univalent replacement for torsors}
+In particular, to classify principal \( S^1 \)-bundles we map into the space \( \K(S^1, 1) \), a type of torsors of the circle. Since \( S^1 \) is a \( \Kzo \), we have \( \K(S^1,1)\simeq\Kzt \).
 
-The homotopy type theory of cohomology and bundles tells us that the type of principal \( G \)-bundles on a type \( M \) is the type \( M\to\K(G,1) \). But this is a type of structured types, a connected component of \( G \)-sets rather than a connected component of the universe. The paths \emph{in the universe} between two \( G \)-sets is equivalent to the type of equivalences between the \emph{underlying types}, not just the equivariant equivalences. We wish to work with a connected component of the universe \( \uni \).
+\subsection{Bundles of mere circles}
 
-We'll resolve this problem with the following discussion, following Scoccola\cite{sco}. We will state the definitions and theorems for a general \( \K(G,n) \) but we will be focusing on \( n=1 \) in this note.
+We find it illuminating to look also at the slightly more general classifying space of \( \Kzo \)-bundles, that is bundles whose fiber are equivalent to \( \Kzo \). We can understand very well when these are in fact bundles of circle torsors, which will in turn shed light on orientation in this setting. 
+
+We will follow Scoccola\cite{sco}. We will state the definitions and theorems for a general \( \K(G,n) \) but we will be focusing on \( n=1 \) in this note.
 
 \begin{mydef}
 Let \( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\). A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is the fiber of a map \( M\to\EM(G,n) \).
@@ -51,18 +53,20 @@ Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)
 
 Let's relate this to \emph{orientation}. Note that the obstruction in the theorem is about a map into \( \EMp(G,n+1) \) and further note that \( \EMp(G,n)\simeq \K(\Aut G,1) \) (independent of \( n \)). The theorem says that the data of a map into \( \EM(G,n) \) factors into data about a map into \( \K(G,n+1) \) and one into \( \K(\Aut G,1) \). Informally, \( \EM(G,n) \) is a little too large to be a \( K(G,n+1) \), as it includes data about automorphisms of \( G \).
 
-In the special case of \( \EMzo \) the conditions of the theorem are met when \( f_\bullet:M\to\K(\Aut \zz, 1) \) is contractible. \( \Aut\zz \) consists of the \( \zz/2\zz \) worth of outer automorphisms given by multiplication by \( \pm 1 \). Symmetries of the circle are our discrete stand-in for the matrix group \( O(2) \), which contains both rotations and (orientation-reversing) reflections of the plane. Requiring a contractible induced map to \( \pm 1 \) amounts to a choice of direction for all the circles, and so deserves the name ``\( f \) is \emph{orientable}.'' In addition \( f_\bullet \) deserves to be called the first Stiefel-Whitney class of \( f \), and the requirement here is that it vanishes. 
+In the special case of \( \EMzo \) the conditions of the theorem are met when \( f_\bullet:M\to\K(\Aut \zz, 1) \) is contractible. \( \Aut\zz \) consists of the \( \zz/2\zz \) worth of outer automorphisms given by multiplication by \( \pm 1 \). If we look at the fiber sequence
+\[ 
+\K(S^1, 1)\to \BAut S^1\to \K(\Aut \zz, 1)
+\] we see the automorphisms of the circle as an extension of the group of automorphisms that are homotopic to the identity (which are the torsorial actions) by the group that sends the loop in \( S^1 \) to its inverse. This is another way to see that a map \( f:M\to \BAut S^1\simeq \EMzo \) factors through \( \K(S^1, 1)\simeq \Kzt \) if and only if the composition to \( \K(\Aut\zz,1) \) is trivial. This amounts to a choice of loop-direction for all the circles, and so deserves the name ``\( f \) is \emph{oriented}.'' In addition the map \( \BAut S^1\to \K(\Aut \zz, 1) \) deserves to be called the first Stiefel-Whitney class of \( f \), and the requirement here is that it vanishes.
 
 \begin{mynote}
-Reinterpreting more of the theory of characteristic classes would be an enlightening future project. Defining a Chern class and Euler class in 2 dimensions is a goal of this note, but we will not prove all the various laws these classes satisfy (the Whitney sum formula and so on). Nonabelian matrix Lie groups such as \( SO(n) \) and \( SU(n) \) are not fully imported into homotopy type theory, but recall that some classical results from the theory of characteristic classes are obtained by replacing the group with a maximal torus, which should be a smaller leap from what is presented here\cite{splitting_principle}.
+Reinterpreting more of the theory of characteristic classes would be an enlightening future project. Defining a Chern class and Euler class in 2 dimensions is related to the goals of this note, but the full theory is about a family of invariants in different dimensions that have various relations between each other and satisfy other properties.
 \end{mynote}
 
-In summary, we can continue to work with the univalent fibration \( \EM(G,1) \) and still know that we are also studying principal \( \K(G,1) \)-fibrations, if the bundle is orientable.
+\subsection{Pathovers in circle bundles}
+\label{sec:pathovers}
+Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}T(x) \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):T(a)=T(b) \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr(p):T(a)\to T(b) \) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( T(a) \) and \( T(b) \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
 
-\subsection{Pathovers in principal bundles}
-Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}T(x) \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):T(a)=T(b) \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr_p:T(a)\to T(b) \) which acts on the fibers of \( P \). \( \tr_p \) acts on the terms of the types \( T(a) \) and \( T(b) \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
-
-Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr_p(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
+Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 
 \begin{figure}[htbp]
 \centering
@@ -71,4 +75,4 @@ Type theory also tells us that paths in \( P \) are given by pairs of paths: a p
 \label{fig:pathovers}
 \end{figure}
 
-Lastly we want to recall that in the presence of a section \( s:M\to P \) there is a dependent generalization of \( \ap \) called \( \apd \): \( \apd_p(s):\tr_p(s(a))=s(b) \) which is a pathover between the two values of the section over the basepoints of the path \( p \).
+Lastly we want to recall that in the presence of a section \( X:M\to P \) there is a dependent generalization of \( \ap \) called \( \apd \): \( \apd(X)(p):\tr(p)(X(a))=X(b) \) which is a pathover between the two values of the section over the basepoints of the path \( p \).

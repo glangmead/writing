@@ -7,7 +7,7 @@ The arguments in this note flowed from a simple hypothesis: that \( \ap \) is an
 \item Connections are \emph{not} entailed in the data of a classical principal bundle. But they do answer the question: what does the bundle do on paths, i.e. how do we transport along a path? In this sense a connection might be the derivative of a bundle (and curvature the derivative of the connection).
 \item In HoTT the transport function on fibers along a path is part of the type family. But of course if we are working inductively on a HIT, there is a moment after we define the family on points and before we define it on paths. In this sense connections are also extra structure.
 \item de Rham complexes and cohomology are graded by dimension, but in HoTT this data is unified into a higher groupoid. Is a complex an infinitesimal limit of a groupoid?
-\item The Leibniz rule (product rule) for real-valued smooth functions \( f,g:M\to\rr \) is \( d(fg)=fdg + gdf \). In HoTT given functions \( f,g:M\to H \) for any type \( M \) and H-space \( H \) with multiplication \( * \), and path \( p:x=_M y \), we have \( f(p)* g(p) = (f(x)* g(p))\cdot (f(p)*g(y)) \), where we say \( f(p) \) instead of \( \ap(p)(f) \). The Leibniz formula is so often treated as an axiom that it was surprising to the author to see this, ahem, derivation of it.
+\item The Leibniz rule (product rule) for real-valued smooth functions \( f,g:M\to\rr \) is \( d(fg)=fdg + gdf \). In HoTT given functions \( f,g:M\to H \) for any type \( M \) and H-space \( H \) with multiplication \( * \), and path \( p:x=_M y \), we have \( f(p)* g(p) = (f(x)* g(p))\cdot (f(p)*g(y)) \), where we say \( f(p) \) instead of \( \ap(p)(f) \). The Leibniz formula is so often treated as an axiom that it was surprising to the author to see this relationship with whiskering.
 \end{enumerate}
 
 We will end with some discussion of classical connections and how to find more analogies with what we defined in previous sections.
@@ -36,128 +36,37 @@ The \defemph{vertical bundle} \( VP \) of a principal bundle \( \pi:P\to M \) wi
 \( VP \) can be visualized as the collection of tangent vectors that point along the fibers. It should be clear that at each point of \( M \) the group \( G \) acts on \( VP \), sending vertical vectors to vertical vectors. In other words, \( \Aut P \) acts on \( VP \).
 
 \begin{mydef}
-An \defemph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and complementary ``horizontal'' subspaces, which is preserved by the action of \( \Aut P \).
+An \defemph{Ehresmann connection} on a principal bundle \( \pi:P\to M \) with Lie group \( G \) is a splitting \( TP=VP\oplus HP \) at every point of \( P \) into vertical and complementary ``horizontal'' subspaces, which is preserved by the action of \( G \).
 \end{mydef}
 
-Being preserved by the action of \( \Aut P \) implies that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
+Being preserved by the action of \( G \) implies that the complementary horizontal subspaces in a given fiber of \( \pi:P\to M \) are determined by the splitting at any single point in the fiber. The action of \( G \) on this fiber can then push the splitting around to all the other points.
 
 The utility and parsimony of this definition relates to the solvability of ordinary differential equations. We now have an isomorphism \( T_p\pi:H_pP\simeq T_{\pi(p)}M \) between each horizontal space and the tangent space below it in \( M \). This means that given a tangent vector at \( x:M \) and a point \( p \) in \( \pi^{-1}(x) \) we can uniquely lift the tangent vector to a horizontal vector at \( p \). We can also lift vector fields and paths in this way. To lift a path \( \gamma:[0,1]\to M \) you must specify a lift for \( \gamma(0) \) and then lift the tangent vectors of \( \gamma \) and prove that you can integrate the lift of that vector field upstairs in \( HP \).
 
 Armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \): given a path in \( M \) we can map the starting point of a lift to the ending point. So the three constructions: the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
 
+Moving now to HoTT, fix a combinatorial manifold \( \mm:\combmfdt \) and a principal bundle \( T:\mm\to\Kzt \) with pullback \( P \). HoTT immediately provides a transport isomorphism of fibers from a path in \( \mm \). Recall the theory of pathovers from Section~\ref{sec:pathovers}. Does HoTT provide a lifting of paths in \( \mm \) to paths in \( P \)? Given a path \( p:a=_\mm b \) and a point \( \alpha:Ta \) above \( a \), we obtain a slightly constrained type of paths over \( p \) that begin at \( \alpha \) and end at \( \tr(p)(\alpha \). This is the type \( \tr(p)(\alpha)=\tr(p)(\alpha) \) which has the canonical term \( \refl \). In this sense HoTT has split the type of paths over \( p \) into pairs given by \( p \) itself and loops in \( \tr(p)(\alpha)=\tr(p)(\alpha) \) in \( Tb \). The term \( \refl \) could be called the horizontal lift of the path.
+
 \subsubsection{Gauge theory}
 
-Given a bundle \( \pi:P\to M \) there is a space of connections \( \mathscr{A}(P) \). The group \( \Aut P \) acts on this space. For example, a gauge transformation that is constant in the neighborhood of a point will not change the splitting, it will just shift the fiber rigidly along itself. But at the other extreme, a gauge transformation that is changing rapidly near a point will tilt the horizontal subspaces rapidly. The field of \defemph{gauge theory} begins with a study of the quotient space \( \mathscr{A}(P)/\Aut P \).
+Classically, given a bundle \( \pi:P\to M \) there is a space of connections \( \mathscr{A}(P) \). The group \( \Aut P \) acts on this space. For example, a gauge transformation that is constant in the neighborhood of a point (i.e. is given by multiplication by a fixed \( g:G \)) will not change the splitting, it will just shift the splitting rigidly along the fiber. But at the other extreme, a gauge transformation that is changing rapidly near a point will \emph{tilt} the horizontal subspaces. The field of \defemph{gauge theory} begins with a study of this action, and of the quotient space \( \mathscr{A}(P)/\Aut P \).
 
 \begin{mynote}
-Recall that torsors have a physical interpretation as a quantity without a specified unit, such as mass, length, or time. When we choose a base point in a torsor it becomes the standard torsor \( G \) acting on itself (for example, the additive real numbers). A physicist is looking for properties or laws that are independent of such a choice. In the 20th century physicists further wondered about choices of units that vary from point to point, and began searching for laws that are invariant under this much larger space of transformations. This led directly to the discovery of connections and curvature as useful fields that complement the matter fields, which are sections of associated vector bundles. They were then led to explore quotienting by the action of the group of gauge transformations, and in particular the space of connections ``mod gauge.'' In this scenario the base manifold \( M \) is spacetime, and a gauge transformation is a smoothly varying choice of gauge (units) at each point.
+Recall that torsors have a physical interpretation as a quantity without a specified unit, such as mass, length, or time. When we choose a base point in a torsor it becomes the standard torsor \( G \) acting on itself (for example, the additive real numbers). Physicists call a choice of units a ``gauge,'' and they look for laws that are independent of such a choice. In the 20th century physicists further wondered about choices of units that vary from point to point, and began searching for objects that are invariant under this much larger space of transformations. This led directly to the discovery of connections and curvature as useful fields that complement the matter fields. These days, matter fields are sections of vector bundles associated to a principal bundle by a group representation, and force fields such as photons are connections. They were then led to explore quotienting by the action of the group of gauge transformations, working ``mod gauge.'' In this scenario the base manifold \( M \) is spacetime, and a gauge transformation is a smoothly varying choice of gauge (units) at each point.
 \end{mynote}
 
-We can characterize connections and curvature in terms of splittings of certain sequences. Atiyah and Bott (\cite{atiyah1983yang} equation 3.4) describe the space of vector fields on a total space \( P \) as a Lie algebra extension of \( \Gamma TM \) by \( \Gamma \ad P \), respectively the Lie algebra of vector fields on the base and vertical vector fields on \( P \). A non-flat connection will fail to split this sequence because horizontal vector fields may have a non-horizontal component when taking the Lie bracket. This extension is referred to as the \emph{Atiyah sequence}. 
+In HoTT the gauge transformations are the type \( T\sim T\defeq \pit{a:\mm}Ta=Ta \), and rather than taking a quotient we have this group already emergent as paths in the space \( \mm\to\Kzt \). 
 
-In this century mathematicians in HoTT and HoTT-adjacent fields sought an \emph{integrated Atiyah sequence}, including Urs Schreiber\cite{urs_atiyah}\cite{urs_atiyah_blog}. This would be a Lie groupoidal version of the Atiyah sequence on Lie algebras. If a groupoid extension could be examined, a link could be sought to Schreier theory. We'll return to these ideas in the next section.
-
-\subsection{Type theory version}
-
-Moving now to HoTT, fix a type \( M:\U \) and a type family \( f:M\to\U \). Path induction gives us the transport isomorphism \( \pit{p:a=_M b}\tr(p):f(a)=f(b) \). We can use this to define a type of \emph{dependent paths}, also called \emph{pathovers} or \emph{paths over} a given path.
-
-\begin{mydef}
-With the above context and points \( \alpha:f(a), \beta:f(b) \) the type of \defemph{dependent paths over \( p \)} with endpoints \( \alpha, \beta \) is denoted
-\[ \alpha\pathover{p}\beta.
-\]
-By induction we can assume \( p \) is \( \refl_a \) in which case \( \alpha\pathover{p}\beta \) is \( \alpha=_{f(a)}\alpha \).
-\end{mydef}
-
-See \cite{Symmetry} for more discussion of dependent paths (where they use the term ``path over''), including composition, and associativity thereof.
-
-We recall now the identity type of sigma types:
-
-\begin{mythm}\label{thm:idsit}
-(HoTT book Theorem 2.7.2 \cite{hottbook}) If \( f:M\to \U \) is a type family and \( \alpha,\beta:\sit{x:M}f(x) \) then there is an equivalence 
+Atiyah and Bott (\cite{atiyah1983yang} equation 3.4) noted that the horizontal lift of two vector fields may have a vertical component when taking their \emph{Lie bracket}, and identified this vertical component with the curvature. This forms an obstruction to splitting the \emph{Atiyah sequence} of Lie algebras
 \[ 
-\mathsf{split}:(\alpha=\beta)\simeq \sit{p:\pr_1(\alpha)=_M\pr_1(\beta)} \left[\tr(p)(\pr_2(\alpha))\right] = \pr_2(\beta).
+\text{vertical vector fields on }P \hookrightarrow \text{vector fields on }P \xrightarrow[]{\mathrm{lift}\circ\pi} \text{horizontal vector fields on }P.
 \]
-\end{mythm}
+despite the splitting at the level of vector spaces.
 
-\begin{mydef}
-Given \( p:a=_M b \) and \( \alpha:f(a) \) we have 
-\[
-\left(\alpha\pathover{p}\tr(p)(\alpha)\right)\simeq \left(\tr(p)(\alpha)=_{f(b)}\tr(p)(\alpha)\right)
-\]
-which has the term \( \refl \) which we can call \defemph{the horizontal lift of \( p \) starting at \( \alpha \)}.
-\end{mydef}
+In HoTT the analogue of bracketing two vector fields is (presumably) composing two paths \( p,q:a=_\mm b \) to form a loop \( p\cdot q^{-1} \). The curvature can be seen by noting that the transport automorphism around the loop can be nontrivial, as discussed earlier in the note.
 
- We can imitate the classical definition of a connection by defining \( \omega\defeq \pr_2\circ\mathsf{split} \), the projection onto the vertical component.
-
-In HoTT if the bundle is classified by \( f:M\to \U \) then an automorphism is a homotopy \( H:f\sim f \) and the group of gauge transformations is the loop space \( \Omega_f(M\to \U) \). What is the effect of applying a homotopy \( H:f\sim f \) on transport, and on splitting?
-
-\( H \) is a family of fiber automorphisms: \( H:\pit{a:M}f(a)=f(a) \) which we can assemble into an equivalence \( H':\sit{a:M}f(a)=\sit{a:M}f(a) \) that acts fiberwise. We want to compute the action of \( \ap(H') \) on the horizontal-vertical decomposition of paths from Theorem~\ref{thm:idsit} by computing \( \omega\circ\ap(H')=\pr_2\circ\mathsf{split}\circ\ap(H') \).
-
-Denote \( \sit{a:M}f(a) \) by \( P \). Let \( p:a=_M b \) be a path in the base and let \( \pi:(a,\alpha)=_P (b,\beta) \) be a path in \( P \) over \( p \). Then \( \omega(\pi):\tr_p(\alpha)=\beta \).
-
-Now let's apply \( H \). We have \( \ap(H')(\pi):(a,H(a)(\alpha))=_P(b,H(b)(\beta)) \) which is still a path over \( p \). Applying \( \omega \) we get \[ \omega(\ap(H')(\pi)):\tr_p(H(a)(\alpha))=(H(b)(\beta)). \] Using the lemma below we can if we wish rewrite this as 
-\[ 
-\omega(\ap(H')(\pi)):H(b)\left[\tr_p(\alpha)=\beta\right]
-\]
-which uses only \( H(b) \). This is the action of gauge transformations on connections.
-
-\begin{mylemma}
-Given a function \( f:M\to\U \), path \( p:a=_M b \), and homotopy \( H:f\sim f \) the following square commutes and so in the type family we have \( \tr(H(x)\cdot f(p)) = \tr(f(p)\cdot H(y)) \).
-\end{mylemma}
-\begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmKGEpIl0sWzEsMCwiZihiKSJdLFsxLDEsImYoYikiXSxbMCwxLCJmKGEpIl0sWzAsMywiSChhKSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCJmKHApIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsImYocCkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiSChiKSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
-\begin{tikzcd}
-  {f(a)} & {f(b)} \\
-  {f(a)} & {f(b)}
-  \arrow["{f(p)}", equal, from=1-1, to=1-2]
-  \arrow["{H(a)}"', equal, from=1-1, to=2-1]
-  \arrow["{H(b)}", equal, from=1-2, to=2-2]
-  \arrow["{f(p)}"', equal, from=2-1, to=2-2]
-\end{tikzcd}
-\end{center}
-
-HoTT provides new ways to talk about trivializations of bundles, and flatness of connections.
-
-\begin{mythm}\label{thm:triv}
-The following are equivalent for a map \( T:M\to\EMzo \):
-\begin{enumerate}
-\item The principal bundle \( P\defeq\sit{x:M}Tx \) is a trivial bundle.
-\item The dependent sum \( \sit{x:M}Tx \) is equivalent to a non-dependent sum.
-\item There exists a total lifting \( T_\bullet \) to pointed types.
-\item \( T \) is contractible.
-\end{enumerate}
-\end{mythm}
-
-\begin{proof}
-1 and 2 are equivalent by definition. 1 implies 3 by choosing the basepoint of the second factor of \( M\times \so \). 3 implies 1 because the global choice of basepoint is a global isomorphism with \( \so \). 1 and 4 are equivalent because a trivialization is a contraction to \( M\times\so \).
-\end{proof}
-
-The classical definition of a flat connection is that contractible loops lift to horizontal loops, i.e. there is no holonomy around small loops. This implies that homotopic paths have the same transport. Here's how we'll describe this in HoTT:
-\begin{mydef}
-We call a connection on \( \sit{x:M}Tx \) \defemph{flat} if \( T \) factors through the 1-truncation \( ||M||_1 \).
-\end{mydef}
-
-\begin{mylemma}
-If \( T:M\to\EMzo \) is flat and \( M \) is simply connected then \( T \) is trivial.
-\end{mylemma}
-\begin{proof}
-\( T \) factors through \( ||M||_1 \) which is contractible.
-\end{proof}
-
-\subsubsection{Gauge theory revisited}
-
-The sigma type \( P\defeq\sit{x:M}Tx \) and projection map to \( M \) package the insights of the Atiyah sequence and observations about what does and doesn't split:
-
-The fiber sequence \( \so\to P\to M \) does not split unless \( P \) is trivial, by Theorem~\ref{thm:triv}.
-
-Paths \( p:a=_M b \) do lift to \( P \) given a starting point \( \alpha:Ta \). This is what we are calling the connection, and it is the finite version of the vertical/horizontal splitting \( TP=VP\oplus HP \). Theorem~\ref{thm:idsit} provides the factoring of pathovers into horizontal and vertical. So at the level of paths there \emph{is} a splitting, a map from \( M \) to \( P \).
-
-But suppose we have two paths \( p,q:a=_M b \) and a point \( \alpha \) over \( a \). If we concatenate the two horizontal lifts \( (p,\refl_{\tr(p)(\alpha)}) \) and \( (q^{-1}, \refl_{\tr(q^{-1})\circ\tr(p)(\alpha)}) \) into a loopover of \( p\cdot q^{-1} \) then we get a term in \( (p\cdot q^{-1}, \tr(q^{-1})\circ\tr(p)(\alpha)=\alpha) \). As we have seen this can be a non-\( \refl \) path in \( Ta \)! The concatenation of two horizontal lifts can be non-horizontal. This is the analogous statement to Atiyah's observation that the Lie bracket of two horizontal vectors can have a vertical component, and that this can be identified with curvature.
-
-To work with connections mod gauge we don't really have to add anything to our existing picture, because we are always working with higher types such as \( M\to\EMzo \) which have automorphisms (in this case gauge transformations, aka self-homotopies) baked in.
-
-Thinking back to the desired link with Schreier theory, David Jaz Myers showed that in the case of higher groups we have an equivalence between the type of extensions of a group \( G \) by \( F \) and the actions of \( G \) on a delooping \( BF \):
+In this century mathematicians in HoTT and HoTT-adjacent fields sought an \emph{integrated Atiyah sequence}, including Urs Schreiber\cite{urs_atiyah}\cite{urs_atiyah_blog}. This would be a Lie groupoidal version of the Atiyah sequence of Lie algebras. If a groupoid extension could be examined, the thinking went, a link could be sought to Schreier theory. Tying everything together we see that the desired groupoid is just the type \( P \) itself! To tie this with Schreier theory, we'll recall that David Jaz Myers showed that we have an equivalence between the type of extensions of a group \( G \) by a group \( F \) and the actions of \( G \) on a delooping \( BF \):
 \[ 
 \mathrm{Ext}(G; F) \simeq (BG \dotto \BAut(BF))
 \]
-(see \cite{myersthesis} Theorem 2.5.7). Our type of classifying maps \( M\to\EMzo \) can be seen as extensions of \( \pi_1(M) \), or of \( M \) itself, by the group \( \so \). What a lovely reframing of principal bundles.
+(see \cite{myersthesis} Theorem 2.5.7). Our type of classifying maps \( \mm\to\EMzo \) can be seen as extensions of \( \pi_1(\mm) \) by the group \( \Aut S^1 \). Such extensions that are furthermore principal fibrations are the oriented ones, as we showed before. What a lovely reframing of principal bundles.

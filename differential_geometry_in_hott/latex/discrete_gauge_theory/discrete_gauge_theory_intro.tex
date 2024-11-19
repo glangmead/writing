@@ -1,42 +1,8 @@
-\section*{\texorpdfstring{Math\textsubscript{i}e\textsubscript{u}matical}{Mathematical} todos}
-\begin{enumerate}
-\item How to make a principal bundle that is a sigma type? 
-\item (done) Improve the introduction of HoTT terms like pathovers, \( \ap \), \( \tr \), and \( \apd \).
-\item Prove we have terms and paths in the universe and not just maps between polygons.
-\item (done) Introduce a ``realization'' operation from simplicial sets to HITs.
-\item Spell out how the faces of a higher combinatorial manifold form a groupoid, with careful definitions.
-\item Spell out what I mean by the replacement manifold \( \mm_Z \) that has points removed.
-\item Emphasize that vector fields are nonvanishing and partial, because they cannot be total.
-\item Commit to the definition of a connection, not relying on vibes.
-\item Confirm definition of flatness.
-\item Fix Leibniz rule or remove (it's independent of everything else, just fun).
-\end{enumerate}
-Notes
-
-curvature must be defined on any circle (polygon) in the manifold?
-but classical curvature is always local, doesn't need to be defined on non-bounding loops.
-holonomy is defined on arbitrary loops, curvature only on loops bounding a 2-cell.
-
-total curvature:
-one approach: calculate total curvature ad-hoc in my examples, and point to what is needed in general
-compute total curv of octahedron twice and show they agree
-
-define connections directly on the HIT constructor (dim 1) (higher connections are on the higher skeleta ctors)
-
-ponder this falsehood: truer analogy to classical connections: define a tangent bundle on the HIT, and parallel the classical construction of lifting paths and so on
-
-i don't need to bring in EMzn. EMz1 is the space of circles. keep it, due to link mapping there.
-i can even have nonorientable tangent bundles. can use scoccola to specify the condition on orientability and relate to kz2
-S1 -> Aut S1 -> Z2, extension of Z2 by S1, using Z2 as  flip
-take B of these (or K, 1)
-map to BAut S1 will lift to BS1 exactly when the map to BZ2 is trivial
-
-
 \section{Overview}
 We will define 
 \begin{itemize}
 \item combinatorial 2-manifolds
-\item principal circle bundles of tangent bundles
+\item circle bundles, and principal circle bundles of tangent bundles
 \item vector fields,
 \end{itemize}
 and then observe emerging from those definitions the presence of
@@ -47,7 +13,6 @@ and then observe emerging from those definitions the presence of
 \end{itemize}
 and prove
 \begin{itemize}
-\item the Leibniz formula
 \item the Gauss-Bonnet theorem
 \item and the Poincaré-Hopf theorem.
 \end{itemize}
@@ -69,9 +34,7 @@ We will see in Section~\ref{sec:polygons} that \( \EM(\zz,1) \) contains all the
 \end{center}
 then we have a bundle of mere circles, with total space given by the \( \sit{} \)-type construction. We will show that this is not a principal bundle, i.e. a bundle of torsors. Torsors are types with the additional structure of a group action. But if \( \link  \) satisfies an additional property (amounting to an orientation) then the pullback is a principal fibration, i.e. \( \link \) factors through a map \( \K(\zz,2)\to\EMzo \), where \( \K(\zz,2) \) is an Eilenberg-Mac Lane space. 
 
-We will investigate that the data in dimensions 1 and 2 of \( \link \) can be thought of as a connection, notably one that is not necessarily flat. Moreover, lifting \( \link \) to \( \link_\bullet:M\to\EMp(\zz,1) \) can be thought of as a nonvanishing vector field. There will in general not be a total lift, just a partial function. The domain of \( \link_\bullet \) will have a boundary of circles, and the winding number on these can be thought of as the index of \( \link_\bullet \). We can then examine the total curvature and the total index and prove that they are equal, and equal to the usual Euler characteristic. This will simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds. This is similar to the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
-
-Because the codomain \( \K(\zz,2) \) has an H-space structure, we might ask about how the action on paths of \( \link \), or any function for that matter, interacts with pointwise multiplication. This will lead us to the Leibniz formula, which emerges simply from horizontal composition in the codomain.
+We will argue that extending \( \link \) to a function \( T \) on paths can be thought of as constructing a connection, notably one that is not necessarily flat (trivial). Moreover, lifting \( T \) to \( T_\bullet:M\to\EMp(\zz,1) \) can be thought of as a nonvanishing vector field. There will in general not be a total lift, just a partial function. The domain of \( T_\bullet \) will have a boundary of circles, and the degree (winding number) on the disjoint union of these can be thought of as the index of \( T_\bullet \). We can then examine the total curvature and the total index and prove that they are equal, and argue that they are equal to the usual Euler characteristic. This will simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds. This is similar to the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
 
 \subsection{Future work}
 The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 
