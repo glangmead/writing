@@ -1,4 +1,142 @@
-\section{Combinatorial manifolds}
+\section{Polytopes and combinatorial manifolds}
+
+We will use two types of classical combinatorial structures: \emph{abstract polytopes} and \emph{combinatorial manifolds}. The latter is a subtype of the former. Abstract polytopes (or just ``polytopes'' in this note) encompass polygons, polyhedra, and higher-dimensional versions. They exclude certain undesirable shapes such as two triangles that meet at one vertex. But they aren't necessarily simplicial either:
+
+
+\begin{verbatim}
+
+Meeting with steve:
+the ctors present the HIT, and the HIT is a type.
+universe must be closed under inductive types.
+polygons of different cardinality will tangle with transport.
+
+
+Minimal HITs:
+
+def S1:
+base: S1
+loop: base=base
+
+def S2:
+N: S2
+surf: refl_N = refl_N
+
+def torus:
+b:torus
+p,q:b=b
+donut:p.q=q.p
+
+
+the map R (realization) R(S2):U lossy map
+
+R(C_4) has an equivalence to R(S1)
+perhaps this is R(the map C_4->S1, the strict one)
+C_4->S1 is a strict map
+S1->C_4 is non-strict, uses generated data, uses data from R(C_4)
+
+def OO:
+6 vertices
+12 edges
+8 faces
+
+f:S2->OO 
+T:OO->EM(Z,1)
+
+def OO_w:
+5 vertices
+8 edges
+5 faces: four bottom triangles, and a square refl_b=loop "brgob"
+
+g:S2->OO_w
+
+compose f and g^{-1} to give OO equiv OO_w
+
+Tof(base) is (C_4, is_equiv_s1)
+inside this is a twice rotation around C_4 and a homotopy to id(C_4)
+
+"strict morphism of HITs": ctors to ctors
+
+Imagine only having X:U, or X:*-> U
+
+Claim: we cannot see the one-notch "90 degree" rotation of C_4 at the level of types.
+
+-- Connections --
+Type X w/ 1-skel X_1
+HIT gives skeletal filtration
+functions naturally given as per-skeleton steps
+there are constraints/obstructions:
+obstruction to extend map T from vertices a, b to path e:a=b is that T(a) and T(b) are in same connected component
+say 2-cell F contracts a loop L: F:L=refl_v some vertex v
+we have a choice of v for each face F
+then T(F) must be in same component as refl_v (refl_v:\pi_1 X with basepoint v)
+T(F) is merely refl, and holonomy is merely refl, and connection on this face F is merely flat
+curvature is a function from 2-cells to \pi_1(X,v)
+T(v):U
+T(L):T(v)=T(v)
+
+T(F):refl_{T(v)}=T(L)
+the class ||T(L)||:\pi_1(U,T(v)) is an obstruction to having T(F), to extending T to F
+
+The hierarchy of maps extending to higher skeletons, which we call connections of dimension 1, 2, etc.
+This works for ANY HIT.
+The combinatorial manifold structure is just one special case that gives me a specific map T.
+\end{verbatim}
+
+\subsection{Polytopes}
+
+\begin{mydef}
+A \defemph{finite abstract polytope} \( \mathcal{P} \) of dimension \( n \) is a finite poset \( P \) equipped with 
+\begin{itemize}
+\item two elements \( p_{\mathrm{min}}, p_{\mathrm{max}}:P \)
+\item a \emph{rank} function \( r:P\to \zz \)
+\end{itemize}
+and properties
+\begin{itemize}
+\item a proof that \( a\leq b\to r(a)\leq r(b) \)
+\item a proof that \( p_{\mathrm{min}} \) is minimal: \( \pit{p:P}p\geq p_{\mathrm{min}} \)
+\item a proof that \( p_{\mathrm{max}} \) is maximal: \( \pit{p:P}p\leq p_{\mathrm{max}} \)
+\item a proof that \( r(p_{\mathrm{min}}) = -1 \) (so that non-minimal elements have rank at least 0)
+\item a proof that \( r(p_{\mathrm{max}}) = n+1 \) (so that non-maximal elements have rank at most \( n \))
+\item a proof that rank ``counts containment'': \( \pit{a,b:P}(a\leq b)\times (\mathsf{is\_empty}\sit{c:P}(a\leq c\leq b))\to b=a+1 \)
+\item a proof of \emph{strong connectedness} (all intervals are connected via a chain of containment): \newline\( \pit{a,b:P\setminus\{p_{\mathrm{min}}, p_{\mathrm{max}}\}}\left(\sit{x:P}a\leq x\leq b\text{ is connected}\right) \)
+\item a proof of the \emph{diamond condition} that between two elements that differ by two ranks lie exactly two elements: \( \pit{a,b:P}(r(b)-r(a)=2)\to \#(\sit{c:P}a\leq c\leq b)=4 \) (of which \( a \) and \( b \) are two).
+\end{itemize}
+\end{mydef}
+
+The diamond condition captures that two edges meet at a vertex, two faces meet at one edge, and so on. See the Hasse diagram (a graph of the poset with rank represented on the \( y \)-axis) of a tetrahedron in Figure~\ref{fig:hasse_tetrahedron} and the square pyramid (which will arise later as an octahedron minus its south pole) in Figure~\ref{fig:hasse_pyramid}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{hasse_tetrahedron.pdf}
+\caption{A finite abstract polytope representation of a tetrahedron, in the form of its ``Hasse diagram'' (from polytope.miraheze.org, public domain).}
+\label{fig:hasse_tetrahedron}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=350pt]{pyramid.pdf}
+\caption{The Hasse diagram of a square pyramid (from wikimedia.org, public domain).}
+\label{fig:hasse_pyramid}
+\end{figure}
+
+Next we will map abstract polytopes to higher inductive types. The poset structure will generate the paths, so the rank will correspond to the dimension. But as usual in a HIT we will need to make a choice of direction for each path constructor, which wasn't necessary in the polytope setting. We will restrict to dimension at most 2.
+
+\begin{mydef}
+A \defemph{higher inductive polytope (HIP) of dimension at most 2} \( \P \) for a polytope \( \mathcal{P} \) of dimension at most 2 is a type with constructor data given by
+\begin{enumerate}
+\item For each rank 0 element \( v \) a term \( V:\P \).
+\item For each rank 1 element \( e \) and rank 1 pair \( v_1,v_2\leq e \) (cardinality 2 by the diamond condition) a path \( E:V_1=V_2 \).
+\item For each rank 2 element \( f \) containing edges \( e_1,\ldots,e_n \) containing a cycle of vertex pairs \( \{\{v_{11},v_{12}\},\ldots,\{v_{n1},v_{n2}=v_{11}\}\} \) a 2-path \( F:E_1\cdot\ldots\cdot E_n=\refl_{v_{11}} \).
+\end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+Given a HIT of dimension at most 2 we have the \defemph{skeleta} \( \P_0,\P_1,\P_2 \) where \( \P_i \) is the HIT generated by using the constructors up to dimension \( i \). The HIT also provides a chain of inclusions of skeleta \( \P_0\to\P_1\to\P_2 \).
+\end{mydef}
+
+If \( Z:\uni \) is a type then to define a map \( \P\to Z \) we start with a map \( \P\to Z \) and extend it to \( \P_1 \) and then \( \P_2 \). 
+
+\subsection{Combinatorial manifolds}
 
 We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. These are a subclass of simplicial complexes.
 
@@ -95,10 +233,10 @@ Define \( \combmfdt \) to be the type of \defemph{higher inductive constructors 
 We will assume there is a formal theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. For recent work on HITs see for example David Wärn's discussion of pushouts\cite{warn_pushouts}.
 
 \begin{mydef}
-Denote by \( \mathcal{R}:\combmfdt\to\Type \) the process of generating a type from the HIT data (which we refer to as \defemph{realization}). Note that \( \mathcal{R}(\mathcal{H}(M)) \) is not in general a set, and may not even be 2-truncated for an arbitrary 2-dimensional combinatorial manifold \( M:\combmfdsett \).
+Denote by \( \re:\combmfdt\to\Type \) the process of generating a type from the HIT data (which we refer to as \defemph{realization}). Note that \( \re(\mathcal{H}(M)) \) is not in general a set, and may not even be 2-truncated for an arbitrary 2-dimensional combinatorial manifold \( M:\combmfdsett \).
 \end{mydef}
 
-We're making the distinction between \( \mathcal{H} \) and \( \mathcal{R} \) because we will mostly study functions and phenomena on \( \mathcal{H}(M) \) for some simplicial complex \( M \).
+We're making the distinction between \( \mathcal{H} \) and \( \re \) because we will mostly study functions and phenomena on \( \mathcal{H}(M) \) for some simplicial complex \( M \).
 
 \subsection{Polygons}\label{sec:polygons}
 
@@ -149,7 +287,7 @@ and define the function \( s_1:\so\to C_4 \) by \( s_1(\mathsf{base})=c_1 \) and
 First we need to construct a term \( 4e:\pit{x:C_4}s_1(\ell(x))=x \) by induction on \( C_4 \), by defining terms
 \begin{enumerate}
 \item \( 4ei:s_1(\ell(c_i))=c_i \)
-\item \( 4eij:\apd(c_ic_j)(4ei)=4ej \), i.e. \( 4eij: s_1(\ell(c_ic_j))\cdot 4ei\cdot c_ic_j=4ej \).
+\item \( 4eij:\apd(c_ic_j)(4ei)=4ej \), i.e. \( 4eij: s_1(\ell(c_ic_j))^{-1}\cdot 4ei\cdot c_ic_j=4ej \).
 \end{enumerate}
 where in the second goal we used a result about \( \apd \) on transport (HoTT Book\cite{hottbook} Theorem 2.11.3). These goals are fulfilled by
 \begin{itemize}
@@ -165,7 +303,7 @@ where in the second goal we used a result about \( \apd \) on transport (HoTT Bo
 Next we need a term \( e4:\pit{y:S^1}\ell(s_1(y))=y \) by induction on \( S^1 \), by defining.
 \begin{enumerate}
 \item \( e4b:\ell(s_1(\mathsf{base}))=\mathsf{base} \)
-\item \( e4l:\apd(\mathsf{loop})(e4b)=e4b \), i.e. \( e4l:\ell(s_1(\mathsf{loop}))\cdot e4b\cdot e4b \).
+\item \( e4l:\apd(\mathsf{loop})(e4b)=e4b \), i.e. \( e4l:\ell(s_1(\mathsf{loop}))^{-1}\cdot e4b\cdot e4b \).
 \end{enumerate}
 These goals are fulfilled by
 \begin{itemize}
@@ -270,7 +408,7 @@ If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then
 \end{mydef}
 
 \begin{mylemma}
-If \( Z \) are isolated points of \( \mm \) then we have \( \mathcal{R}(\mm)=_\Type\mathcal{R}(\mm_Z) \).
+If \( Z \) are isolated points of \( \mm \) then we have \( \re(\mm)=_\Type\re(\mm_Z) \).
 \end{mylemma}
 \begin{proof}
 We will prove that concatenating two faces of \( \mm \) as in Figure~\ref{fig:concat} produces an equivalent type. Let \( A \) be the constructor given on the left that includes the edge \( bc \), and \( B \) the constructor on the right. We will define functions on constructors. Let \( f:A\to B \) be

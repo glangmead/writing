@@ -3,26 +3,26 @@
 The classical theory of principal bundles tells us to look for an appropriate classifying space of torsors to map into.
 
 \begin{mydef}
-Let \( G \) be a group (a set with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:G\to\Aut(X) \). If in addition we have a term
+Let \( G \) be a group with identity element \( e \) (with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If in addition we have a term
 \[ 
-\mathsf{is\_torsor}:||X||_{-1}\times \pit{g:G}\mathsf{is\_equiv}(\phi(-,x):G\to X)
-\] then we call this data a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( TG \).
+\mathsf{is\_torsor}:||X||_{-1}\times \pit{x:X}\mathsf{is\_equiv}(\phi(-,x):(G,e)\to (X,x))
+\] then we call this data a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \).
 \end{mydef}
 
-If \( (X,\phi),(Y,\psi):TG \) then a \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
+If \( (X,\phi),(Y,\psi):BG \) then a \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
 
 \begin{mylemma}
-There is a natural equivalence \( (X=_{TG}Y) \simeq (X\to_G Y) \).\qed
+There is a natural equivalence \( (X=_{BG}Y) \simeq (X\to_G Y) \).\qed
 \end{mylemma}
 
-Denote by \( * \) the torsor given by \( G \) actions on its underlying set by left-translation. This serves as a basepoint for \( TG \) and we have a group isomorphism \( \Omega TG\simeq G \).
+Denote by \( * \) the torsor given by \( G \) actions on its underlying set by left-translation. This serves as a basepoint for \( BG \) and we have a group isomorphism \( \Omega BG\simeq G \).
 
 \begin{mylemma}
 A \( G \)-set \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exists a \( G \)-equivariant equivalence \( *\to_G X \).\qed
 \end{mylemma}
 
 \begin{mycor}
-The pointed type \( (TG,*) \) is a \( \K(G,1) \).\qed
+The pointed type \( (BG,*) \) is a \( \K(G,1) \).\qed
 \end{mycor}
 
 In particular, to classify principal \( S^1 \)-bundles we map into the space \( \K(S^1, 1) \), a type of torsors of the circle. Since \( S^1 \) is a \( \Kzo \), we have \( \K(S^1,1)\simeq\Kzt \).
