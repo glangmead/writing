@@ -5,6 +5,38 @@ We will use two types of classical combinatorial structures: \emph{abstract poly
 
 \begin{verbatim}
 
+Meeting with Mathieu 11/27:
+an angle is: a path in S1 from base, which is equiv to a path in AutS1 from the identity to another automorphism. (automorphism is primary: aut of tangent circle)
+viewed as automorphisms we can compose them.
+viewed as paths, multiply path 2 by the element at the endpoint of path 1.
+
+
+Curvature maps a loop in the base to a path in automorphisms of the tangent circle at the base.
+
+A vector field + a trivialization ("fiducial v.f.") maps a loop in the base to the tangent circle at the basepoint. We can take the index/degree of this.
+
+given a loop L:v=v, v.f. F, take F(L):tr_L(F(v))=F(v) ("apd", dependent action on paths).
+
+type family f:A->U, \prod_{a:A}fa is the type of dependent functions
+let X:\prod_{a:A}fa
+we can apply X to a path p:a=_A b
+X(p) is a path over p
+X(p):tr_p(X(a))=X(b)
+X(a), X(b) are terms of different types
+
+covariant derivative of F along itself: lift F to F' horizontal on TP (P->M), take [F', F']
+
+tangent bundle TM->M w/ connection \omega
+covariant derivative of F in the direction of X \nabla_X(F)(x). 
+1. lift X and F to horizontal fields X', F' in TTM
+2. compute [X', F'] to TTM
+3. decompose [X', F'] = [X, F]' + \omega([X', F'])
+
+Use this:
+\nabla_X(F) = [X, F] + \omega(X)(F)
+Now take X=F
+\nabla_F(F) = [F, F] + \omega(F)(F) = \omega(F)(F)
+
 Meeting with steve:
 the ctors present the HIT, and the HIT is a type.
 universe must be closed under inductive types.
