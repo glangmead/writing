@@ -1,5 +1,5 @@
 ```agda
-{-# OPTIONS --without-K --exact-split --no-import-sorts --auto-inline -WnoWithoutKFlagPrimEraseEquality #-}
+{-# OPTIONS --without-K --no-exact-split --no-import-sorts --auto-inline -WnoWithoutKFlagPrimEraseEquality #-}
 
 module manifold_equivalences where
 
@@ -26,8 +26,7 @@ mys1_s1 : mys1 → 𝕊¹
 mys1_s1 x = base-𝕊¹
 
 s1_mys1 : 𝕊¹ → mys1
-s1_mys1 base-𝕊¹ = (pr1 (cofork-standard-coequalizer edge-s1)) v-mys1
--- inl-pushout (point v-mys1) (point v-mys1) (v-mys1)
+s1_mys1 base-𝕊¹ = (map-cofork edge-s1 (cofork-standard-coequalizer edge-s1)) v-mys1
 
 -- C4: the set of vertices
 data C4-zero : UU lzero where
@@ -68,11 +67,11 @@ data OO-zero : UU lzero where
     w b r g o y : OO-zero
 
 -- Octahedron: the set of edges
-data OO-one : UU lzero where
-    wb wr wg wo yb yr yg yo br rg go ob : OO-one
+data OO-one-set : UU lzero where
+    wb wr wg wo yb yr yg yo br rg go ob : OO-one-set
 
 -- Octahedron: the source map of edges
-src-OO1 : OO-one → OO-zero
+src-OO1 : OO-one-set → OO-zero
 src-OO1 wb = w
 src-OO1 wr = w
 src-OO1 wg = w
@@ -87,7 +86,7 @@ src-OO1 go = g
 src-OO1 ob = o
 
 -- Octahedron: the target map of edges
-trg-OO1 : OO-one → OO-zero
+trg-OO1 : OO-one-set → OO-zero
 trg-OO1 wb = b
 trg-OO1 wr = r
 trg-OO1 wg = g
@@ -107,37 +106,46 @@ edges-OO = make-double-arrow src-OO1 trg-OO1
 -- Octahedron: 1-skeleton by forming the pushout of the edge src-trg maps
 OO1 : UU lzero
 OO1 = standard-coequalizer edges-OO
--- pushout (left-map-double-arrow edges-OO) (right-map-double-arrow edges-OO)
 
 -- Faces of the octahedron
-data OO-two : UU lzero where
-    wbr wrg wgo wob ybo yrb ygr yog : OO-two
+data OO-two-set : UU lzero where
+    wbr wrg wgo wob ybo yrb ygr yog : OO-two-set
 
 -- Octahedron: the target map of faces (with codomain loops in OO1)
-trg-OO2 : OO-two → (Σ OO1 (λ x → (Id x x)))
-trg-OO2 wbr = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , refl
-trg-OO2 wrg = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , refl
-trg-OO2 wgo = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , refl
-trg-OO2 wob = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , refl
-trg-OO2 ybo = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , refl
-trg-OO2 yog = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , refl
-trg-OO2 ygr = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , refl
-trg-OO2 yrb = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , refl
+trg-OO2 : OO-two-set → (Σ OO1 (λ x → (Id x x)))
+trg-OO2 wbr = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , refl
+trg-OO2 wrg = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , refl
+trg-OO2 wgo = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , refl
+trg-OO2 wob = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , refl
+trg-OO2 ybo = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , refl
+trg-OO2 yog = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , refl
+trg-OO2 ygr = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , refl
+trg-OO2 yrb = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , refl
 
-src-OO2 : OO-two → (Σ OO1 (λ x → (Id x x)))
-src-OO2 wbr = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , ((pr2 (cofork-standard-coequalizer edges-OO)) wb) ∙ ((pr2 (cofork-standard-coequalizer edges-OO)) br) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) wr))
-src-OO2 wrg = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , ((pr2 (cofork-standard-coequalizer edges-OO)) wr) ∙ ((pr2 (cofork-standard-coequalizer edges-OO)) rg) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) wg))
-src-OO2 wgo = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , ((pr2 (cofork-standard-coequalizer edges-OO)) wg) ∙ ((pr2 (cofork-standard-coequalizer edges-OO)) go) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) wo))
-src-OO2 wob = ((pr1 (cofork-standard-coequalizer edges-OO)) w) , ((pr2 (cofork-standard-coequalizer edges-OO)) wo) ∙ ((pr2 (cofork-standard-coequalizer edges-OO)) ob) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) wb))
-src-OO2 ybo = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , ((pr2 (cofork-standard-coequalizer edges-OO)) yb) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) ob)) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) yo))
-src-OO2 yog = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , ((pr2 (cofork-standard-coequalizer edges-OO)) yo) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) go)) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) yg))
-src-OO2 ygr = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , ((pr2 (cofork-standard-coequalizer edges-OO)) yg) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) rg)) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) yr))
-src-OO2 yrb = ((pr1 (cofork-standard-coequalizer edges-OO)) y) , ((pr2 (cofork-standard-coequalizer edges-OO)) yr) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) br)) ∙ (inv ((pr2 (cofork-standard-coequalizer edges-OO)) yb))
+src-OO2 : OO-two-set → (Σ OO1 (λ x → (Id x x)))
+src-OO2 wbr = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wb) ∙ ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) br) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wr))
+src-OO2 wrg = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wr) ∙ ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) rg) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wg))
+src-OO2 wgo = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wg) ∙ ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) go) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wo))
+src-OO2 wob = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) w) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wo) ∙ ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) ob) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) wb))
+src-OO2 ybo = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yb) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) ob)) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yo))
+src-OO2 yog = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yo) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) go)) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yg))
+src-OO2 ygr = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yg) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) rg)) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yr))
+src-OO2 yrb = ((map-cofork edges-OO (cofork-standard-coequalizer edges-OO)) y) , ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yr) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) br)) ∙ (inv ((coh-cofork edges-OO (cofork-standard-coequalizer edges-OO)) yb))
 
 faces-OO : double-arrow lzero lzero
 faces-OO = make-double-arrow src-OO2 trg-OO2
 
 OO : UU lzero
 OO = standard-coequalizer faces-OO
+
+-- todo: make sure we have (or construct) maps OO-zero -> OO1 -> OO
+OO-skel-incl-0 : OO-zero → OO1
+OO-skel-incl-0 = map-cofork edges-OO (cofork-standard-coequalizer edges-OO)
+
+OO-skel-incl-1 : OO1 → OO
+OO-skel-incl-1 = λ x → (map-cofork faces-OO (cofork-standard-coequalizer faces-OO) (x , refl))
+
+-- todo: construct an isomorphism with the 2-sphere
+
 
 ```
