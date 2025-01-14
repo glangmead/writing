@@ -1,9 +1,11 @@
-\section{Polytopes and combinatorial manifolds}
+\section{Combinatorial manifolds}
+
+\begin{comment}
 
 We will use two types of classical combinatorial structures: \emph{abstract polytopes} and \emph{combinatorial manifolds}. The latter is a subtype of the former. Abstract polytopes (or just ``polytopes'' in this note) encompass polygons, polyhedra, and higher-dimensional versions. They exclude certain undesirable shapes such as two triangles that meet at one vertex. But they aren't necessarily simplicial either:
 
-
-\begin{verbatim}
+\end{comment}
+\begin{comment}
 
 Meeting with Mathieu 11/27:
 an angle is: a path in S1 from base, which is equiv to a path in AutS1 from the identity to another automorphism. (automorphism is primary: aut of tangent circle)
@@ -112,8 +114,9 @@ the class ||T(L)||:\pi_1(U,T(v)) is an obstruction to having T(F), to extending 
 The hierarchy of maps extending to higher skeletons, which we call connections of dimension 1, 2, etc.
 This works for ANY HIT.
 The combinatorial manifold structure is just one special case that gives me a specific map T.
-\end{verbatim}
+\end{comment}
 
+\begin{comment}
 \subsection{Polytopes}
 
 \begin{mydef}
@@ -167,6 +170,9 @@ Given a HIT of dimension at most 2 we have the \defemph{skeleta} \( \P_0,\P_1,\P
 \end{mydef}
 
 If \( Z:\uni \) is a type then to define a map \( \P\to Z \) we start with a map \( \P\to Z \) and extend it to \( \P_1 \) and then \( \P_2 \). 
+
+
+\end{comment}
 
 \subsection{Combinatorial manifolds}
 
@@ -295,7 +301,7 @@ c_4c_1 &: c_4 = c_1 \\
 The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
 
 \begin{mydef}
-The higher inductive type \( \so \):
+The higher inductive type \( \so \) which we can also call \( C_1 \):
 \begin{align*}
 \so &:\Type \\
 \mathsf{base}&:\so \\
@@ -303,57 +309,41 @@ The higher inductive type \( \so \):
 \end{align*}
 \end{mydef}
 
-Nonetheless, all polygons are equivalent to each other and to \( \so \).
 
+\subsection{New in 2025: Adding and removing points from polygons}
 \begin{mylemma}
-\label{lem:c4equiv}
-Define the function \( \ell:C_4\to\so \) by
-\begin{align*}
-\ell(c_i)&=\mathsf{base}, i=1, 2, 3, 4 \\
-\ell(c_1c_2)&=\mathsf{loop} \\
-\ell(c_2c_3)=\ell(c_3c_4)=\ell(c_4c_1)&=\refl_{\mathsf{base}}
-\end{align*}
-and define the function \( s_1:\so\to C_4 \) by \( s_1(\mathsf{base})=c_1 \) and \( s_1(\mathsf{loop})=c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1 \). (The subscript on \( s_1 \) reminds us that we chose vertex \( c_1 \) to map \( \mathsf{base} \) to.) Then \( \ell \) and \( s_1 \) constitute an equivalence \( \mathsf{c4\_equiv}:\mathsf{is_equiv}(\ell,s_1) \).
+Let \( C_n \) be the polygon 1-dimensional HIT with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
 \end{mylemma}
 \begin{proof}
-First we need to construct a term \( 4e:\pit{x:C_4}s_1(\ell(x))=x \) by induction on \( C_4 \), by defining terms
-\begin{enumerate}
-\item \( 4ei:s_1(\ell(c_i))=c_i \)
-\item \( 4eij:\apd(c_ic_j)(4ei)=4ej \), i.e. \( 4eij: s_1(\ell(c_ic_j))^{-1}\cdot 4ei\cdot c_ic_j=4ej \).
-\end{enumerate}
-where in the second goal we used a result about \( \apd \) on transport (HoTT Book\cite{hottbook} Theorem 2.11.3). These goals are fulfilled by
-\begin{itemize}
-\item \( 4e1=\refl_{c_1} \)
-\item \( 4e2={c_1c_2} \)
-\item \( 4e3={c_1c_2\cdot c_2c_3} \)
-\item \( 4e4={c_1c_2\cdot c_2c_3\cdot c_3c_4} \)
-\item \( 4e12=(c_1c_2\cdot c_2c_3\cdot c_3c_4\cdot c_4c_1)^{-1}\cdot(-) \)
-\item \( 4e23=\refl_{c_1c_2\cdot c_2c_3} \)
-\item \( 4e34=\refl_{c_1c_2\cdot c_2c_3\cdot c_3c_4} \)
-\item \( 4e41=4e12 \).
-\end{itemize}
-Next we need a term \( e4:\pit{y:S^1}\ell(s_1(y))=y \) by induction on \( S^1 \), by defining.
-\begin{enumerate}
-\item \( e4b:\ell(s_1(\mathsf{base}))=\mathsf{base} \)
-\item \( e4l:\apd(\mathsf{loop})(e4b)=e4b \), i.e. \( e4l:\ell(s_1(\mathsf{loop}))^{-1}\cdot e4b\cdot e4b \).
-\end{enumerate}
-These goals are fulfilled by
-\begin{itemize}
-\item \( e4b=\refl_{\mathsf{base}} \)
-\item \( e4l=\refl_{\mathsf{loop}} \).
-\end{itemize}
+(TBD, sketched in my notebook.)
 \end{proof}
-A different approach might be to prove that \( C_n\simeq C_{n-1} \) by removing just one vertex, and seeing that the argument generates equivalences between any polygon, or a polygon and \( S^1 \).
 
-Recalling that terms of \( \EMzo \) are pairs: a type, and a mere equivalence with \( \so \), we have:
+With the lemma we can prove that all the polygons are merely equal to \( S^1 \) and hence are in \( \EMzo \). 
 
-\begin{mycor}
-We have \( (C_4,||\mathsf{c4\_equiv}||_{-1}):\EMzo. \)
-\end{mycor}
+With the lemma we can define a function on polygons that inserts \( k \) vertices between each original vertex, providing us a map \( m_k:C_n\to C_{kn} \). 
 
-Given some other square \( abcd \) and an equivalence with \( C_4 \), we get via univalence a path in \( \EMzo \). This includes automorphisms of \( C_4 \), for example \( R \). Furthermore there is a homotopy from \( R \) to the identity, which give a 2-path \( \refl_{C_4}=R \) in the universe.
+With \( m_k \) we can start with a surface that has pentagonal plus hexagonal links, and apply \( m_6 \) to the pentagons and \( m_5 \) to the hexagons, and have a type family that is the tangent bundle (because it comes from the link) but where every fiber has 30 vertices.
 
-Real-world triangulations of surfaces will often have links whose number of vertices varies across the surface. For example we can see hexagons and pentagons in Figure~\ref{fig:sphere_triangulation}. This presumably introduces only a minor practical inconvenience and doesn't materially affect the discussion to come.
+\subsection{New in 2025: The classical adding of angles is given by horizontal composition}
+Let me start a new discussion of composing faces. Consider Figure~\ref{fig:horiz_concat} and the diamond on the left. Denote the clockwise triangular path around the left triangle by \( bcab \), and around the right by \( bdcb \). These are loops at \( b \). Say that the tangent map \( T \) satisfies \( T(bcab)=R \) where \( R \) is rotation by 1 notch in the 4-sided polygon \( Tb \), and similarly \( T(bdcb)=R \) as well. 
+
+Since \( bcab \) has a filler 2-cell, which we will call \( f_1 \), we know that \( T(f_1)=H \) where \( H:R=\id \) is a path in \( \Aut(Tb) \) from \( R \) to the identity. Similarly for \( f_2 \), the filler for \( bdcb \). 
+
+The two faces can be horizontally composed giving \( f_1\star f_2 \), which fills the diamond \( bdcab \). It also gives us a way to combine the two homotopies into a single homotopy \( H\star H:R^2=\id \). 
+
+In this way, given an explicit ordering of the faces (a ``plan'' for visiting all faces of the manifold), we can ``sum'' the curvature. For our ocatahedron where each triangle produces a rotation of \( R \), we'd get \( R^8 \).
+
+This sum will be very similar to concatenating edges that circulate once around each face.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=250pt]{concat.pdf}
+\caption{Horizontal concatenation.}
+\label{fig:horiz_concat}
+\end{figure}
+
+
+
 
 \subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
