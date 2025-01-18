@@ -5,116 +5,7 @@
 We will use two types of classical combinatorial structures: \emph{abstract polytopes} and \emph{combinatorial manifolds}. The latter is a subtype of the former. Abstract polytopes (or just ``polytopes'' in this note) encompass polygons, polyhedra, and higher-dimensional versions. They exclude certain undesirable shapes such as two triangles that meet at one vertex. But they aren't necessarily simplicial either:
 
 \end{comment}
-\begin{comment}
 
-Meeting with Mathieu 11/27:
-an angle is: a path in S1 from base, which is equiv to a path in AutS1 from the identity to another automorphism. (automorphism is primary: aut of tangent circle)
-viewed as automorphisms we can compose them.
-viewed as paths, multiply path 2 by the element at the endpoint of path 1.
-
-
-Curvature maps a loop in the base to a path in automorphisms of the tangent circle at the base.
-
-A vector field + a trivialization ("fiducial v.f.") maps a loop in the base to the tangent circle at the basepoint. We can take the index/degree of this.
-
-given a loop L:v=v, v.f. F, take F(L):tr_L(F(v))=F(v) ("apd", dependent action on paths).
-
-type family f:A->U, \prod_{a:A}fa is the type of dependent functions
-let X:\prod_{a:A}fa
-we can apply X to a path p:a=_A b
-X(p) is a path over p
-X(p):tr_p(X(a))=X(b)
-X(a), X(b) are terms of different types
-
-covariant derivative of F along itself: lift F to F' horizontal on TP (P->M), take [F', F']
-
-tangent bundle TM->M w/ connection \omega
-covariant derivative of F in the direction of X \nabla_X(F)(x). 
-1. lift X and F to horizontal fields X', F' in TTM
-2. compute [X', F'] to TTM
-3. decompose [X', F'] = [X, F]' + \omega([X', F'])
-
-Use this:
-\nabla_X(F) = [X, F] + \omega(X)(F)
-Now take X=F
-\nabla_F(F) = [F, F] + \omega(F)(F) = \omega(F)(F)
-
-Meeting with steve:
-the ctors present the HIT, and the HIT is a type.
-universe must be closed under inductive types.
-polygons of different cardinality will tangle with transport.
-
-
-Minimal HITs:
-
-def S1:
-base: S1
-loop: base=base
-
-def S2:
-N: S2
-surf: refl_N = refl_N
-
-def torus:
-b:torus
-p,q:b=b
-donut:p.q=q.p
-
-
-the map R (realization) R(S2):U lossy map
-
-R(C_4) has an equivalence to R(S1)
-perhaps this is R(the map C_4->S1, the strict one)
-C_4->S1 is a strict map
-S1->C_4 is non-strict, uses generated data, uses data from R(C_4)
-
-def OO:
-6 vertices
-12 edges
-8 faces
-
-f:S2->OO 
-T:OO->EM(Z,1)
-
-def OO_w:
-5 vertices
-8 edges
-5 faces: four bottom triangles, and a square refl_b=loop "brgob"
-
-g:S2->OO_w
-
-compose f and g^{-1} to give OO equiv OO_w
-
-Tof(base) is (C_4, is_equiv_s1)
-inside this is a twice rotation around C_4 and a homotopy to id(C_4)
-
-"strict morphism of HITs": ctors to ctors
-
-Imagine only having X:U, or X:*-> U
-
-Claim: we cannot see the one-notch "90 degree" rotation of C_4 at the level of types.
-
--- Connections --
-Type X w/ 1-skel X_1
-HIT gives skeletal filtration
-functions naturally given as per-skeleton steps
-there are constraints/obstructions:
-obstruction to extend map T from vertices a, b to path e:a=b is that T(a) and T(b) are in same connected component
-say 2-cell F contracts a loop L: F:L=refl_v some vertex v
-we have a choice of v for each face F
-then T(F) must be in same component as refl_v (refl_v:\pi_1 X with basepoint v)
-T(F) is merely refl, and holonomy is merely refl, and connection on this face F is merely flat
-curvature is a function from 2-cells to \pi_1(X,v)
-T(v):U
-T(L):T(v)=T(v)
-
-T(F):refl_{T(v)}=T(L)
-the class ||T(L)||:\pi_1(U,T(v)) is an obstruction to having T(F), to extending T to F
-
-The hierarchy of maps extending to higher skeletons, which we call connections of dimension 1, 2, etc.
-This works for ANY HIT.
-The combinatorial manifold structure is just one special case that gives me a specific map T.
-\end{comment}
 
 \begin{comment}
 \subsection{Polytopes}
@@ -251,7 +142,7 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=200pt]{triangulated_genus3.pdf}
-\caption{A 3-holes torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
+\caption{A 3-holed torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
 \label{fig:genus3_wiki_triangulation}
 \end{figure}
 
@@ -281,7 +172,7 @@ We're making the distinction between \( \mathcal{H} \) and \( \re \) because we 
 We will now start looking at some examples, first by defining a type that is important both for the domain and the codomain of mere circles: a square.
 
 \begin{mydef}
-The higher inductive type \( C_4 \) (where C stands for ``circle'').
+The higher inductive type \( C_4 \) (where C stands for ``circle''). See Figure~\ref{fig:c4}.
 \begin{align*}
 C_4 &: \Type \\
 c_1, c_2, c_3, c_4 &: C_4 \\
@@ -296,6 +187,7 @@ c_4c_1 &: c_4 = c_1 \\
 \centering
 \input{discrete_gauge_theory_c4_tikz}
 \caption{The HIT \( C_4 \).}
+\label{fig:c4}
 \end{figure}
 
 The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
@@ -309,41 +201,129 @@ The higher inductive type \( \so \) which we can also call \( C_1 \):
 \end{align*}
 \end{mydef}
 
+Both of these are examples of a family of HIT data we will call \( \Gon \), the type of \( n \)-gon HITs for some natural number \( n \), following the pattern of the HITs above. We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have \( \re:\Gon\to \EMzo \).
 
-\subsection{New in 2025: Adding and removing points from polygons}
-\begin{mylemma}
-Let \( C_n \) be the polygon 1-dimensional HIT with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
-\end{mylemma}
-\begin{proof}
-(TBD, sketched in my notebook.)
-\end{proof}
-
-With the lemma we can prove that all the polygons are merely equal to \( S^1 \) and hence are in \( \EMzo \). 
-
-With the lemma we can define a function on polygons that inserts \( k \) vertices between each original vertex, providing us a map \( m_k:C_n\to C_{kn} \). 
-
-With \( m_k \) we can start with a surface that has pentagonal plus hexagonal links, and apply \( m_6 \) to the pentagons and \( m_5 \) to the hexagons, and have a type family that is the tangent bundle (because it comes from the link) but where every fiber has 30 vertices.
-
-\subsection{New in 2025: The classical adding of angles is given by horizontal composition}
-Let me start a new discussion of composing faces. Consider Figure~\ref{fig:horiz_concat} and the diamond on the left. Denote the clockwise triangular path around the left triangle by \( bcab \), and around the right by \( bdcb \). These are loops at \( b \). Say that the tangent map \( T \) satisfies \( T(bcab)=R \) where \( R \) is rotation by 1 notch in the 4-sided polygon \( Tb \), and similarly \( T(bdcb)=R \) as well. 
-
-Since \( bcab \) has a filler 2-cell, which we will call \( f_1 \), we know that \( T(f_1)=H \) where \( H:R=\id \) is a path in \( \Aut(Tb) \) from \( R \) to the identity. Similarly for \( f_2 \), the filler for \( bdcb \). 
-
-The two faces can be horizontally composed giving \( f_1\star f_2 \), which fills the diamond \( bdcab \). It also gives us a way to combine the two homotopies into a single homotopy \( H\star H:R^2=\id \). 
-
-In this way, given an explicit ordering of the faces (a ``plan'' for visiting all faces of the manifold), we can ``sum'' the curvature. For our ocatahedron where each triangle produces a rotation of \( R \), we'd get \( R^8 \).
-
-This sum will be very similar to concatenating edges that circulate once around each face.
+\subsection{Adding and removing points from polygons}
+Given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form the type family of paths \( \alpha:A\to\uni, \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
+\[ 
+\tr(p)(q) = \phi(p)^{-1}\cdot q\cdot \psi(p)
+\]
+which gives a path in \( \phi(a')=\psi(a') \) by connecting dots between the terms \( \phi(a'), \phi(a), \psi(a), \psi(a') \). This relates a would-be homotopy \( \phi\sim\psi \) specified at a single point, to a point at the end of a path. We will use this to help construct such homotopies.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=250pt]{concat.pdf}
-\caption{Horizontal concatenation.}
-\label{fig:horiz_concat}
+\begin{tikzpicture}[
+node distance = 20mm and 20mm,
+V/.style = {circle, fill, draw=black, inner sep=1pt},
+every edge quotes/.style = {auto},
+arrow/.style={->,semithick}
+]
+\begin{scope}[nodes=V]
+  \node[label=above left:\( \phi(a) \)] (1) {};
+  \node[label=above right:\( \phi(a') \)] (2) [right=of 1]  {};
+  \node[label=below right:\( \psi(a') \)] (3) [below=of 2]  {};
+  \node[label=below left:\( \psi(a) \)] (4) [below=of 1]  {};
+  \node[label=below:\( a \)] (5) [below=of 4]  {};
+  \node[label=below:\( a' \)] (6) [below=of 3]  {};
+\end{scope}
+\draw[arrow]
+        (2)  edge[swap, "\( \phi(p)^{-1} \)"] (1)
+        (4)  edge["\( \psi(p) \)"] (3)
+        (1)  edge[swap, "\( q \)"] (4)
+        (5)  edge["\( p \)"] (6);
+\end{tikzpicture}
+\caption{Transport along \( p \) in the fibers of a family of paths. The fiber over \( a \) is \( \phi(a)=\psi(a) \) where \( \phi,\psi:A\to B \).}
+\label{fig:transport_family_of_paths}
 \end{figure}
 
+\begin{mylemma}\label{lem:addpoints}
+Let \( C_n \) be the polygon 1-dimensional HIT with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
+\end{mylemma}
+\begin{proof}
+(Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( C_1 \) we will denote its constructors by \( \base \) and \( \loopo \). For \( C_2 \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( C_3 \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
 
+First we will define \( f:C_2\to C_1 \) and \( g:C_1\to C_2 \), then prove they are inverses.
+\begin{align*}
+f(v_1)=f(v_2)&=\base &\quad g(\base)&=v_1\\
+f(\ell_{12})&=\loopo&\quad g(\loopo)&=\ell_{12}\cdot r_{21}\\
+f(r_{21}) &= \refl_{\base}& & \\
+\end{align*}
 
+We need to show that \( f\circ g\sim \id_{C_1} \) and \( g\circ f\sim\id_{C_2} \).
+Think of \( f \) as sliding \( v_2 \) along \( r_{21} \) to coalesce with \( v_1 \). This may help understand why the unfortunately intricate proof is working.
+
+We need terms \( p:\pit{a:C_1}f(g(a))=a \) and \( q:\pit{a:C_2}g(f(a))=a \). We will proceed by induction, defining appropriate paths on point constructors and then checking a condition on path constructors that confirms that the built-in transport of these type families respects the definition on points.
+
+Looking first at \( g\circ f \), which shrinks \( r_{21} \), we have the following data to work with:
+\begin{align*}
+g(f(v_1))=g(f(v_2))&=v_1\\
+g(f(\ell_{12}))&=\ell_{12}\cdot r_{21}\\
+g(f(r_{21})) &= \refl_{v_1}.
+\end{align*}
+We then need to supply a homotopy from this data to \( \id_{C_2} \), which consists of a section and pathovers over \( C_2 \):
+\begin{align*}
+p_1&:g(f(v_1))=v_1\\
+p_2&:g(f(v_1))=v_2\\
+H_\ell&:\tr(\ell_{12})(p_1)=p_2\\
+H_r&:\tr(r_{21})(p_2)=p_1.
+\end{align*}
+which simplifies to
+\begin{align*}
+p_1&:v_1=v_1\\
+p_2&:v_1=v_2\\
+H_\ell&:g(f(\ell_{12}))^{-1}\cdot p_1\cdot \ell_{12}=p_2\\
+H_r&:=g(f(r_{21}))^{-1}\cdot p_2\cdot r_{21}= p_1
+\end{align*}
+and then to 
+\begin{align*}
+p_1&:v_1=v_1\\
+p_2&:v_1=v_2\\
+H_\ell&:(\ell_{12}\cdot r_{21})^{-1}\cdot p_1\cdot \ell_{12}=p_2\\
+H_r&:\refl_{v_1}\cdot p_2\cdot r_{21}= p_1
+\end{align*}
+
+To solve all of these constraints we can choose \( p_1\defeq\refl_{v_1} \), which by consulting either \( H_\ell \) or \( H_r \) requires that we take \( p_2\defeq{r_{21}}^{-1}\).
+
+Now examining \( f\circ g \), we have
+\begin{align*}
+f(g(\base))&=\base&\\
+f(g(\loopo))&=f(\ell_{12}\cdot r_{21})=\loopo
+\end{align*}
+and so we have an easy proof that this is the identity.
+
+The proof of the more general case \( C_n \simeq C_{n-1}\) is very similar. Take the maps \( f:C_n\to C_{n-1} \), \( g:C_{n-1}\to C_n \) to be
+\begin{align*}
+f(v_i)=v_i&\quad(i=1,\ldots,n-1) & g(v_i)&=v_i&\quad(i=1,\ldots,n-1)\\
+f(v_n)=v_1&\quad& g(e_{i,i+1})&=e_{i,i+1}&\quad(i=1,\ldots,n-2)\\
+f(e_{i,i+1})=e_{i,i+1}&\quad(i=1,\ldots,n-1)& g(e_{n-1,1})&=e_{n-1,n}\cdot e_{n,1}&\\
+f(e_{n-1,n})=e_{n-1,1}&&&&\\
+f(e_{n,1})=\refl_{v_1}&&&&
+\end{align*}
+where \( f \) should be thought of as shrinking \( e_{n,1} \) so that \( v_n \) coalesces into \( v_1 \).
+
+The proof that \( g\circ f\sim\id_{C_n} \) proceeds as follows: the composition is definitionally the identity except 
+\begin{align*}
+g(f(v_n))&=v_1\\
+g(f(e_{n-1,n}))&=e_{n-1,n}\cdot e_{n,1}\\
+g(f(e_{n,1}))&= \refl_{v_1}.
+\end{align*}
+Guided by our previous experience we choose \( {e_{n,1}}^{-1}:g(f(v_n))=v_n \), and define the pathovers by transport.
+
+The proof that \( f\circ g\sim\id_{C_{n-1}} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
+\end{proof}
+
+\begin{mycor}
+All polygons are equivalent to \( \so \), i.e. we have a term in \( \pit{n:\nn}||C_n=S^1|| \), and hence \( \Gon \) is a subtype of \( \EMzo \).
+\end{mycor}
+\begin{proof}
+We can add \( n-1 \) points to \( S^1 \) and use Lemma~\ref{lem:addpoints}.
+\end{proof}
+
+\begin{mydef}
+For \( k:\nn \) define \( m_k:\Gon\to\Gon \) where \( m_k:C_n\to C_{kn} \) adds \( k \) vertices between each of the original verticies of \( C_n \).
+\end{mydef}
+
+With \( m_k \) we can start with a surface that has pentagonal plus hexagonal links, and apply \( m_6 \) to the pentagons and \( m_5 \) to the hexagons, and have a type family that is the tangent bundle (because it comes from the link) but where every fiber has 30 vertices.
 
 \subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
@@ -389,72 +369,3 @@ yo &: y=o & & & ybo &: yb\cdot bo\cdot yo^{-1} = \refl_y
 \end{figure}
 
 We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton.
-
-\subsection{Groupoid operations on higher inductive combinatorial manifolds}
-
-Let \( M:\simcompt \) be a combinatorial 2-manifold and \( \mm\defeq\mathcal{H}(M):\combmfdt \) the corresponding higher inductive type. \( \mm \) has triangular 2-faces just as \( M \) does, except they are 2-paths in the HoTT sense. If two faces \( bca \) and \( bdc \) share the edge \( bc \) (see Figure~\ref{fig:concat}), then we can define an operation that combines the combinatorics of simplices with the higher groupoid operations generated by our HIT. 
-
-Consider Figure~\ref{fig:concat} and the 2-paths \( bac: ba\cdot ac=bc \) and \( bdc: bd\cdot dc = bc \). The 2-path concatenation \( bac\cdot bdc^{-1} \) is a path in \( ba\cdot ac = bd\cdot dc \). And from there we see we have a 4-gon \( abdc:\refl_b=\refl_b \). In this way we can concatenate faces across common boundaries once we choose a common vertex (in this case \( b \)).
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=250pt]{concat.pdf}
-\caption{Concatenating the triangles \( bac \) and \( bdc \) gives the 4-gon \( abdc \).}
-\label{fig:concat}
-\end{figure}
-
-We will have two use cases for this operation. The first is to consider the concatenation of \emph{all} the faces of \( \mm \), i.e. a term \( f_\mm:\refl_a=\refl_a \) corresponding to \( \mm \) itself. This will play the role of the ``fundamental homology class'' from classical topology, which is an object on which 2-forms can be evaluated to compute their value on the whole manifold. 
-
-\begin{mydef}
-\label{def:totalface}
-If we have a combinatorial manifold \( \mm:\combmfdt \) (or a combinatorial manifold minus some isolated zeros \( \mm\defeq\mathbb{N}\setminus Z \)) and \( a:\mm_0 \) is a vertex, a \defemph{total face} of \( \mm \) is a term \( f_\mm:\refl_a=\refl_a \) given by any choice of ordering of the faces \( \{f_i\} \), a vertex \( v_i \) in each face, and terms \( a=v_i \) for each face.
-\end{mydef}
-
-Of course there are many choices in this definition of total face!
-
-The second use case for concatenating faces is to create a HIT related to \( \mm \) but without some of the point constructors. Figure~\ref{fig:hex_concat} illustrates the equivalence.
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{hex_concat.pdf}
-\caption{Concatenating the six triangles in the approrpiate way produces a 2-path in \( \refl_v=\refl_v \) and removes the vertex at the center.}
-\label{fig:hex_concat}
-\end{figure}
-
-\begin{mydef}
-If \( \mm:\combmfdt \) is a combinatorial manifold and \( Z\subset \mm_0 \) is a set of vertices in \( \mm \) with members \( Z=\{z_0,\ldots,z_n\} \), then denote by \( \mm\setminus Z \) the type given by omitting the vertices in \( Z \) from the constructors in all dimensions where they appeared. Call the points of \( Z \) \defemph{isolated} if no two of them are neighbors, i.e. we have \( \pit{z:Z}\link(z)\cap Z=\emptyset \). In the isolated case \( \mm\setminus Z \) has boundary circles where each vertex was removed.
-\end{mydef}
-
-\begin{mydef}
-\label{def:replacement}
-If we have \( \mm\setminus Z \) for some isolated set of verticies \( Z \), then for each \( z:Z \) we can compose all the faces which contain \( z \), forming a new face (see Figure~\ref{fig:hex_concat}). In this way we produce a HIT called \( \mm_Z \), which is no longer combinatorial. We call \( \mm_Z \) the \defemph{replacement of \( \mm \) without \( Z \)}.
-\end{mydef}
-
-\begin{mylemma}
-If \( Z \) are isolated points of \( \mm \) then we have \( \re(\mm)=_\Type\re(\mm_Z) \).
-\end{mylemma}
-\begin{proof}
-We will prove that concatenating two faces of \( \mm \) as in Figure~\ref{fig:concat} produces an equivalent type. Let \( A \) be the constructor given on the left that includes the edge \( bc \), and \( B \) the constructor on the right. We will define functions on constructors. Let \( f:A\to B \) be
-\begin{itemize}
-\item \( f(a:A)=a:B, f(b)=b, f(c)=c, f(d)=d \)
-\item \( f(ab)=ab, f(bd)=bd, f(dc)=dc, f(ca)=ca \)
-\item \( f(bc)=bdc \)
-\item \( f(abc)=abcd \)
-\item \( f(bdc)=\refl_{bd\cdot dc} \)
-\end{itemize} 
-which ``squishes the right face onto its right >-shaped boundary.'' In the other direction let \( g:B\to A \) be the inclusion of all the constructors of dimension 1 and 2, and set \( g(abdc)=abc*bdc \), which denotes the concatenation operation across the shared edge.
-
-We must provide a term \( gf:\pit{x:A}g(f(x))=x \) which requires supplying four paths, five pathovers, and two faceovers. The four paths are \( \refl_a \), \( \refl_b \), \( \refl_c \) and \( \refl_c \). Four of the pathovers are \( \refl_{ab} \), \( \refl_{bd} \), \( \refl_{dc} \), \( \refl_{ca} \). It remains to find terms 
-\begin{enumerate}
-\item \( \mathit{gfbc}:\apd(bc)(\refl_b)=\refl_c \)
-\item \( \mathit{gfabc}:\apd(abc)(\refl_{ab}\cdot \mathit{gfbc}\cdot \refl_{ca})=\refl_{\refl_a} \), i.e. \( \mathit{gfabc}:g(f(abc))^{-1}\cdot  (\refl_{ab}\cdot \mathit{gfbc}\cdot \refl_{ca})\cdot abc = \refl_{\refl_a} \)
-\item \( \mathit{gfbdc}:\apd(bdc)(\refl_{bd}\cdot \refl_{dc}\cdot \mathit{gfbc}^{-1})=\refl_{\refl_b} \), i.e. \( \mathit{gfbdc}:g(f(bdc))^{-1}\cdot (\refl_{bd}\cdot \refl_{dc}\cdot \mathit{gfbc}^{-1})\cdot bdc \)
-\end{enumerate}
-which are supplied by
-\begin{enumerate}
-\item \( cbd:cb\cdot bd\cdot dc=\refl_c \)
-\item \( \refl_{\refl_{\refl_a}}\)
-\item \( \refl_{\refl_{\refl_b}}\).
-\end{enumerate}
-
-We must also provide a term \( \mathit{fg}:\pit{x:B}f(g(x))=x \) which is \( \refl \) on all constructors.
-\end{proof}
