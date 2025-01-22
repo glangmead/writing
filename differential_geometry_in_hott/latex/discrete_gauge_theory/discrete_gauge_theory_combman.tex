@@ -77,6 +77,7 @@ Note that we don't require all subsets of \( M_0 \) to be included -- that would
 
 \begin{mydef}
 In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-face containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
+\label{def:link}
 \end{mydef}
 
 The link is all the neighboring vertices of \( v \) and the codimension 1 faces joining those to each other. See for example Figure~\ref{fig:link}.
@@ -159,7 +160,7 @@ Define \( \combmfdt \) to be the type of \defemph{higher inductive constructors 
 \end{enumerate}
 \end{mydef}
 
-We will assume there is a formal theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. For recent work on HITs see for example David Wärn's discussion of pushouts\cite{warn_pushouts}.
+We will assume there is a formal theory of such HITs, and that at least up to dimension 2 there are no obstructions to simply copying over the combinatorial data to the HIT constructors. We will further assume that taking the link of a point (Definition~\ref{def:link}) can be imported verbatim to the HIT context without difficulty. For recent work on HITs see for example David Wärn's discussion of pushouts\cite{warn_pushouts}.
 
 \begin{mydef}
 Denote by \( \re:\combmfdt\to\Type \) the process of generating a type from the HIT data (which we refer to as \defemph{realization}). Note that \( \re(\mathcal{H}(M)) \) is not in general a set, and may not even be 2-truncated for an arbitrary 2-dimensional combinatorial manifold \( M:\combmfdsett \).
@@ -201,10 +202,10 @@ The higher inductive type \( \so \) which we can also call \( C_1 \):
 \end{align*}
 \end{mydef}
 
-Both of these are examples of a family of HIT data we will call \( \Gon \), the type of \( n \)-gon HITs for some natural number \( n \), following the pattern of the HITs above. We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have \( \re:\Gon\to \EMzo \).
+Both of these are examples of a family of HIT data we will call \( \Gon \), the set of \( n \)-gon HITs for some natural number \( n \), following the pattern of the HITs above. We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have \( \re:\Gon\to \EMzo \).
 
 \subsection{Adding and removing points from polygons}
-Given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form the type family of paths \( \alpha:A\to\uni, \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
+Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
 \[ 
 \tr(p)(q) = \phi(p)^{-1}\cdot q\cdot \psi(p)
 \]
@@ -323,7 +324,7 @@ We can add \( n-1 \) points to \( S^1 \) and use Lemma~\ref{lem:addpoints}.
 For \( k:\nn \) define \( m_k:\Gon\to\Gon \) where \( m_k:C_n\to C_{kn} \) adds \( k \) vertices between each of the original verticies of \( C_n \).
 \end{mydef}
 
-With \( m_k \) we can start with a surface that has pentagonal plus hexagonal links, and apply \( m_6 \) to the pentagons and \( m_5 \) to the hexagons, and have a type family that is the tangent bundle (because it comes from the link) but where every fiber has 30 vertices.
+With \( m_k \) we can start with a collection of pentagons and hexagons and make the collection homogeneous: by applying \( m_6 \) to the pentagons and \( m_5 \) to the hexagons we obtain a collection of 30-gons. This will be useful when we work more with the link function.
 
 \subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
@@ -368,4 +369,4 @@ yo &: y=o & & & ybo &: yb\cdot bo\cdot yo^{-1} = \refl_y
 \caption{The HIT \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
 \end{figure}
 
-We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton.
+We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton by the obvious inclusion of constructors.

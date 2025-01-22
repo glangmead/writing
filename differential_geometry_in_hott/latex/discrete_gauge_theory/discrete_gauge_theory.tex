@@ -43,12 +43,12 @@ Polygons of different cardinality will tangle with transport.
 Greg suggests I could use an isomorphism from a combinatorial manifold to a HIT with just one 2-cell to capture ``total curvature'':
 
 \begin{verbatim}
-def S1:
-base: S1
+def S^1:
+base: S^1
 loop: base=base
 
-def S2:
-N: S2
+def S^2:
+N: S^2
 surf: refl_N = refl_N
 
 def torus:
@@ -57,13 +57,13 @@ p,q:b=b
 donut:p.q=q.p
 \end{verbatim}
 
-The map \( \re \) (realization) is a lossy map. \( R(S2):\uni  \).
+The map \( \re \) (realization) is a lossy map. \( \re(S^2):\uni  \).
 
 ``strict morphism of HITs'': map constructors to constructors. \( C_4\to S^1 \) is a strict map.
 
 \( \re(C_4) \) has an equivalence to \( \re(S^1) \). Perhaps this is \( \re \)(the map \( C_4\to S^1 \), the strict one). But \( S^1\to C_4 \) is non-strict, uses generated data, uses data from \( \re(C_4) \).
 
-Claim: we cannot see the one-notch "90 degree" rotation of \( C_4 \) at the level of types.
+Claim: we cannot see the one-notch ``90 degree'' rotation of \( C_4 \) at the level of types.
 
 \subsubsection{Extension to next dimension as obstruction theory}
 
@@ -72,7 +72,7 @@ Claim: we cannot see the one-notch "90 degree" rotation of \( C_4 \) at the leve
 \item HIT gives skeletal filtration
 \item functions naturally given as per-skeleton steps
 \item there are constraints/obstructions: obstruction to extend map \( T \) from vertices \( a, b \) to path \( e:a=b \) is that \( T(a) \) and \( T(b) \) are in the same connected component.
-\item say a 2-cell \( F \) contracts a loop \( L: F:L=\refl_v \) some vertex \( v \)
+\item say a 2-cell \( F \) contracts a loop \( L \), i.e. \( F:L=\refl_v \) some vertex \( v \)
 \item we have a choice of \( v \) for each face \( F \)
 \item then \( T(F) \) must be in same component as \( \refl_v \) (\( \refl_v:\pi_1 X \) with basepoint \( v \))
 \item \( T(F) \) is merely \( \refl \), and holonomy is merely \( \refl \), and connection on this face \( F \) is merely flat
@@ -82,7 +82,7 @@ Claim: we cannot see the one-notch "90 degree" rotation of \( C_4 \) at the leve
 \begin{align*}
 T(v)&:U\\
 T(L)&:T(v)=T(v)\\
-T(F)&:refl_{T(v)}=T(L)
+T(F)&:\refl_{T(v)}=T(L)
 \end{align*}
 
 The class \( ||T(L)||:\pi_1(U,T(v)) \) is an obstruction to having \( T(F) \), to extending \( T \) to \( F \).
@@ -106,7 +106,7 @@ A vector field + a trivialization (``fiducial v.f.'' in the book by Needham) map
 
 Given a loop \( L:v=v \), v.f. \( F \), take \( F(L):tr_L(F(v))=F(v) \) (\( \apd \), dependent action on paths).
 
-Type family \( f:A->U \), \( \prod_{a:A}fa \) is the type of dependent functions. Let \( X:\prod_{a:A}fa \). We can apply \( X \) to a path \( p:a=_A b \). \( X(p) \) is a path over \( p \).
+Type family \( f:A\to U \), \( \prod_{a:A}fa \) is the type of dependent functions. Let \( X:\prod_{a:A}fa \). We can apply \( X \) to a path \( p:a=_A b \). \( X(p) \) is a path over \( p \).
 \[ 
 X(p):tr_p(X(a))=X(b) 
 \]
@@ -142,6 +142,7 @@ Now take \( X=F \):
 \input{discrete_gauge_theory_vector_fields}
 \clearpage
 % \input{discrete_gauge_theory_ap_is_d}
+% \clearpage
 
 \bibliography{connections}
 \end{document}

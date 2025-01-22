@@ -1,5 +1,6 @@
 \section{Why this works}
 
+\begin{comment}
 The arguments in this note flowed from a simple hypothesis: that \( \ap \) is analogous to \( d \), the exterior derivative. For example:
 
 \begin{enumerate}
@@ -9,6 +10,7 @@ The arguments in this note flowed from a simple hypothesis: that \( \ap \) is an
 \item de Rham complexes and cohomology are graded by dimension, but in HoTT this data is unified into a higher groupoid. Is a complex an infinitesimal limit of a groupoid?
 \item The Leibniz rule (product rule) for real-valued smooth functions \( f,g:M\to\rr \) is \( d(fg)=fdg + gdf \). In HoTT given functions \( f,g:M\to H \) for any type \( M \) and H-space \( H \) with multiplication \( * \), and path \( p:x=_M y \), we have \( f(p)* g(p) = (f(x)* g(p))\cdot (f(p)*g(y)) \), where we say \( f(p) \) instead of \( \ap(p)(f) \). The Leibniz formula is so often treated as an axiom that it was surprising to the author to see this relationship with whiskering.
 \end{enumerate}
+\end{comment}
 
 We will end with some discussion of classical connections and how to find more analogies with what we defined in previous sections.
 
@@ -45,7 +47,7 @@ The utility and parsimony of this definition relates to the solvability of ordin
 
 Armed with the lifting of paths one immediately obtains isomorphisms between the fibers of \( P \): given a path in \( M \) we can map the starting point of a lift to the ending point. So the three constructions: the Ehresmann connection, the lifting of paths, and transport isomorphisms between fibers are all recapitulations of the structure that the connection adds to the bundle.
 
-Moving now to HoTT, fix a combinatorial manifold \( \mm:\combmfdt \) and a principal bundle \( T:\mm\to\Kzt \) with pullback \( P \). HoTT immediately provides a transport isomorphism of fibers from a path in \( \mm \). Recall the theory of pathovers from Section~\ref{sec:pathovers}. Does HoTT provide a lifting of paths in \( \mm \) to paths in \( P \)? Given a path \( p:a=_\mm b \) and a point \( \alpha:Ta \) above \( a \), we obtain a slightly constrained type of paths over \( p \) that begin at \( \alpha \) and end at \( \tr(p)(\alpha \). This is the type \( \tr(p)(\alpha)=\tr(p)(\alpha) \) which has the canonical term \( \refl \). In this sense HoTT has split the type of paths over \( p \) into pairs given by \( p \) itself and loops in \( \tr(p)(\alpha)=\tr(p)(\alpha) \) in \( Tb \). The term \( \refl \) could be called the horizontal lift of the path.
+Moving now to HoTT, fix a combinatorial manifold \( \mm:\combmfdt \) and a principal bundle \( T:\mm\to\Kzt \) with pullback \( P \). HoTT immediately provides a transport isomorphism of fibers from a path in \( \mm \). Recall the theory of pathovers from Section~\ref{sec:pathovers}. Does HoTT provide a lifting of paths in \( \mm \) to paths in \( P \)? Given a path \( p:a=_\mm b \) and a point \( \alpha:Ta \) above \( a \), we obtain a slightly constrained type of paths over \( p \) that begin at \( \alpha \) and end at \( \tr(p)(\alpha) \). This is the type \( \tr(p)(\alpha)=\tr(p)(\alpha) \) which has the canonical term \( \refl \). In this sense HoTT has split the type of paths over \( p \) into pairs given by \( p \) itself and loops in \( \tr(p)(\alpha)=\tr(p)(\alpha) \) in \( Tb \). The term \( \refl \) could be called the horizontal lift of the path.
 
 \subsubsection{Gauge theory}
 
