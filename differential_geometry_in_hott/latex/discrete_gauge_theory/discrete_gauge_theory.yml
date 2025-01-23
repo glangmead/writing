@@ -17,19 +17,3 @@ summary: In-progress masters thesis defining connections, curvature, and Chern-W
 date: 2024-11-01
 bibliography: connections.bib
 csl: ima.csl
-theoremnos-names:
-- id: mythm
-  name: Theorem
-- id: myprop
-  name: Proposition
-- id: mylemma
-  name: Lemma
-- id: mydef
-  name: Definition
-- id: mycor
-  name: Corollary
-- id: myclaim
-  name: Claim
-eqnos-number-by-section: True
-theoremnos-number-by-section: True
-theoremnos-shared-counter: False
