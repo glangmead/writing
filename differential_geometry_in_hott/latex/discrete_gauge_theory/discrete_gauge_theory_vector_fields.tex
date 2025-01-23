@@ -1,12 +1,46 @@
 \section{Vector fields}
 
 \begin{mydef}
-A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\star \), the disjoint union of \( B \) with the 1-element type.
+A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\unit \), the disjoint union of \( B \) with the 1-element type.
 \end{mydef}
 
-If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. So instead of having a notion corresponding to the full tangent vector space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \star \). This lets us continue to work with \( \EMzo \) instead of a type of tangent spaces.
+If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. 
+%So instead of having a notion corresponding to the full tangent vector space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \unit \). This lets us continue to work with \( \EMzo \) instead of a type of tangent spaces.
 
-Figure~\ref{fig:flattorus_zero} illustrates what removing the preimage of \( \star \) looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
+\begin{mydef}
+Let \( \mm:\combmfdt \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( \mm \) (with zero set \( Z \))} is a partial section of \( P \), i.e. a term \( X:\pit{x:\mm\setminus Z}T(x) \) (and eliding the unique term of \( Z\to\unit \)).
+\end{mydef}
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJcXG1hdGhiYntNfVxcc2V0bWludXMgWiJdLFsyLDIsIlxcbWF0aHJte0VNfShcXG1hdGhiYntafSwxKSJdLFsyLDAsIlxcbWF0aHJte0VNfV9cXGJ1bGxldChcXG1hdGhiYntafSwxKSJdLFswLDAsIlBcXHN0YWNrcmVse1xcbWF0aHJte2RlZn19PXtcXHN1bV97QzpUKFxcbWF0aGJie019XFxzZXRtaW51cyBaKX1DfSJdLFswLDEsIlQiXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIiwwLHsiY3VydmUiOi0xfV0sWzMsMiwiXFxvdmVybGluZXtUfSJdLFswLDMsIntYOlxccHJvZF97eDpcXG1hdGhiYntNfVxcc2V0bWludXMgWn1UeH0iLDAseyJjdXJ2ZSI6LTF9XSxbMCwyLCJUX1xcYnVsbGV0Il0sWzMsMSwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+\begin{center}
+\begin{tikzcd}
+  {P\stackrel{\mathrm{def}}={\sum_{C:T(\mm\setminus Z)}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  \\
+  {\mm\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  \arrow["{\overline{T}}", from=1-1, to=1-3]
+  \arrow["{\mathrm{pr}_1}", curve={height=-6pt}, from=1-1, to=3-1]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
+  \arrow["{{X:\prod_{x:\mm\setminus Z}Tx}}", curve={height=-6pt}, from=3-1, to=1-1]
+  \arrow["{T_\bullet}", from=3-1, to=1-3]
+  \arrow["T", from=3-1, to=3-3]
+\end{tikzcd}
+\end{center}
+where \( T_\bullet=\overline{T}\circ X \). 
+
+The lift \( T_\bullet \) equips the fibers of \( T \) with points, and provides pointings to the transport maps. (The action of \( X \) on paths provides the proofs of pointedness.)
+
+The goal now is to recompute the total curvature in the context of some vector field \( X \) and obtain three values:
+\begin{enumerate}
+\item The total curvature, e.g. in the case of \( \oo \) the value \( R^8 \).
+\item The total winding of \( X \), which will take the proof of pointedness around all faces in the domain of \( X \). Being a loop in a circle, this is an integer.
+\item A pointed version of curvature, which couples the winding of \( X \) to the transport, which is a total function, and which produces a contractible pointed map, i.e. 0.
+\end{enumerate}
+
+Once we have these, we will unpack how they provide a proof in HoTT of the Poincaré-Hopf theorem and the Gauss-Bonnet theorem.
+
+\begin{comment}
+
+Figure~\ref{fig:flattorus_zero} illustrates what removing the preimage of \( \unit \) looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
 
 \begin{figure}[htbp]
 \centering
@@ -15,28 +49,7 @@ Figure~\ref{fig:flattorus_zero} illustrates what removing the preimage of \( \st
 \label{fig:flattorus_zero}
 \end{figure}
 
-\begin{mydef}
-Let \( \mm:\combmfdt \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( \mm \) with zero set \( Z \)} is a partial section of \( P \), i.e. a term \( X:\pit{x:\mm\setminus Z}T(x) \) (and eliding the unique term of \( Z\to\star \)). The \defemph{exponential map} \( \exp:P\to \mm \) is the map sending points in a fiber to the corresponding point in the link of the base point: \( \exp(x, y:\link(x))=y \). In commutative diagram form we have:
-\end{mydef}
-% https://q.uiver.app/#q=WzAsNCxbMCwyLCJNXFxzZXRtaW51cyBaIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRNfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiXSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4Ok1cXHNldG1pbnVzIFp9VHh9IiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiXFxtYXRocm17ZXhwfSIsMCx7ImN1cnZlIjotM31dLFswLDIsIlRfXFxidWxsZXQiXSxbMywxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-\begin{center}
-\begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\sum_{C:T(\mm\setminus Z)}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
-  \\
-  {\mm\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
-  \arrow["{\overline{T}}", from=1-1, to=1-3]
-  \arrow["{\mathrm{pr}_1}", from=1-1, to=3-1]
-  \arrow["{\mathrm{exp}}", curve={height=-18pt}, from=1-1, to=3-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{X:\prod_{x:\mm\setminus Z}Tx}}", curve={height=-18pt}, from=3-1, to=1-1]
-  \arrow["{T_\bullet}", from=3-1, to=1-3]
-  \arrow["T", from=3-1, to=3-3]
-\end{tikzcd}
-\end{center}
-where \( T_\bullet=\overline{T}\circ X \). Note that \( \exp \) is different from \( \pr_1 \) since it spreads a fiber out onto the manifold. The composition \( \exp\circ X \) is a map \( \mm\setminus Z\to \mm \), and can be thought of as the flow of the vector field.
-
-Let's see a few examples.
+Let's see a couple examples.
 
 \begin{mydef}
 The \defemph{spinning vector field} \( \Xspin \) on \( \oo\setminus\{w, y\} \) is given by the following data. We compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_spin}
@@ -177,9 +190,11 @@ We also need to select a pathover for each edge on the equator. Transport on all
 \caption{The vector field \( \Xdown \) on \( \oo \), which flows downward. \( w \) and \( y \) are zeros.}
 \label{fig:sphere_downward}
 \end{figure}%fig:sphere_downward
+\end{comment}
 
 \subsection{Index of a vector field}
 
+\begin{comment}
 Index should be an integer that computes a winding number ``of the vector field'' around a zero. We can compute an integer from a map by taking its \emph{degree}, which is a construction we will assume that we have, for example using \cite{buchholtz_favonia}, where they indeed require that degree agrees with winding number for maps \( S^1\to S^1 \).
 
 \begin{mydef}
@@ -225,9 +240,11 @@ Summarizing what we've seen in our examples, vector fields with isolated zeros h
 \caption{A vector field on the torus that flows downward, when viewed as a donut. The zeros are represented as missing dots. Every dot has one outgoing vector.}
 \label{fig:morse_torus}
 \end{figure}%fig:morse_torus
+\end{comment}
 
 \subsection{Equality of total index and total curvature}
 
+\begin{comment}
 Here we are inspired by the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
 
 \begin{mydef}
@@ -297,9 +314,11 @@ The total curvature is an integer.
 \end{mycor}
 
 The last step is to link this value to the Euler characteristic.
+\end{comment}
 
 \subsection{Identification with Euler characteristic}
 
+\begin{comment}
 Here we only point the way. Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
 
 Imagine starting with a classical 2-manifold of genus \( g \) that has been triangulated. Stand it upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will have zeros of (classical) index 1, and zeros in the holes will have index --1. We include some sketches in the case of a torus (Figure~\ref{fig:torus_morse_skel}). This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \). If we choose the triangulation so that the zeros are at vertices, we should be able to import that data into \( \combmfdt \) and reproduce the computation using the tools in this note.
@@ -324,3 +343,4 @@ Imagine starting with a classical 2-manifold of genus \( g \) that has been tria
 \caption{Schematic of the zeros of the downward flow of a torus.}
 \label{fig:torus_morse_skel}
 \end{figure}
+\end{comment}
