@@ -22,6 +22,7 @@ MAlonzo/**
 *.cb2
 .*.lb
 *.ptb
+*.fdb_latexmk
 
 tmp/
 
