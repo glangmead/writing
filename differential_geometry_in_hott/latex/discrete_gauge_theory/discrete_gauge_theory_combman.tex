@@ -1,31 +1,211 @@
-\section{Combinatorial manifolds}
+\section{Discrete manifolds}
 
-We will adapt to higher inductive types in a straightforward manner the classical construction of \emph{combinatorial manifolds}. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. These are a subclass of simplicial complexes.
-
-\subsection{Polygons}\label{sec:polygons}
-
-We will now start looking at some examples, first by defining a type that is important both for the domain and the codomain of mere circles: a square.
+\subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-The higher inductive type \( C_4 \) (where C stands for ``circle''). See Figure~\ref{fig:c4}.
-\begin{align*}
-C_4 &: \Type \\
-c_1, c_2, c_3, c_4 &: C_4 \\
-c_1c_2 &: c_1 = c_2 \\
-c_2c_3 &: c_2 = c_3 \\
-c_3c_4 &: c_3 = c_4 \\
-c_4c_1 &: c_4 = c_1 \\
-\end{align*}
+An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} consists of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). \( M \) is automatically equipped with a chain of inclusions \( M_0\hookrightarrow M_1\hookrightarrow\cdots\hookrightarrow M_n=M \) where each \( M_k:\simcompk \) is a complex in its own right. We call \( M_k \) the \defemph{\( k \)-skeleton} of \( M \).
 \end{mydef}
+
+\begin{mydef}
+Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( |M|:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{k-1}| \) we form \( |M_k| \) by the pushout in sets
+\end{mydef}
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+\begin{center}
+\begin{tikzcd}
+  {M_{k}\times\partial\Delta^k} & {|M_{k-1}|} \\
+  {M_{k}\times\Delta^k} & {|M_{k}|}
+  \arrow["{\mathrm{attach}}", from=1-1, to=1-2]
+  \arrow["{\mathrm{id}\times\mathrm{incl}}"', hook, from=1-1, to=2-1]
+  \arrow["{i_k}", from=1-2, to=2-2]
+  \arrow[from=2-1, to=2-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+\end{tikzcd}
+\end{center}
+which attaches each \( k \)-simplex by taking the convex hull of the appropriate \( k+1 \) points in \( |M_{k-1}| \).
+The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_1|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_n|=|M| \).
+
+\begin{mydef}
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-face containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
+\label{def:link}
+\end{mydef}
+
+The link is all the neighboring vertices of \( v \) and the codimension 1 faces joining those to each other. See for example Figure~\ref{fig:link}.
 
 \begin{figure}[htbp]
 \centering
-\input{discrete_gauge_theory_c4_tikz}
-\caption{The HIT \( C_4 \).}
-\label{fig:c4}
+\begin{tikzpicture}
+  \draw
+    (0, 0) grid[step=1cm] (3, 3)
+    (0, 2) -- (1, 3)
+    (0, 1) -- (2, 3)
+    (0, 0) -- (3, 3)
+    (1, 0) -- (3, 2)
+    (2, 0) -- (3, 1)
+  ;
+  \fill[radius=3pt]
+    \foreach \x in {0, ..., 3} {
+      \foreach \y in {0, ..., 3} {
+        (\x, \y) circle[]
+      }
+    }
+  ;
+  \path[above left]
+    \foreach \p/\v in {
+      {1, 3}/a,
+      {2, 3}/b,
+      {0, 2}/f,
+      {1, 2}/v,
+      {2, 2}/c,
+      {0, 1}/e,
+      {1, 1}/d%
+    } {
+      (\p) node {$\v$}
+    }
+  ;
+\end{tikzpicture}
+\caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \), forming a hexagon.}
+\label{fig:link}
 \end{figure}
 
-The standard HoTT circle itself is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
+\begin{mydef}
+A \defemph{combinatorial manifold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere). Denote by \( \combmfdset \) the type of combinatorial manifolds of dimension \( n \) (which the notation again reminds us are sets).
+\end{mydef}
+
+In a 2-dimensional combinatorial manifold the link is a polygon. See Figures~\ref{fig:sphere_triangulation}, \ref{fig:torus_wiki_triangulation}, and \ref{fig:genus3_wiki_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
+
+A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{triangulated_sphere.pdf}
+\caption{A combinatorial triangulation of a sphere, created with the tool \texttt{stripy}.}
+\label{fig:sphere_triangulation}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{Torus-triang.png}
+\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
+\label{fig:torus_wiki_triangulation}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200pt]{triangulated_genus3.pdf}
+\caption{A 3-holed torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
+\label{fig:genus3_wiki_triangulation}
+\end{figure}
+
+\subsection{Higher inductive combinatorial manifolds}
+
+Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a homotopy pushout:
+
+\begin{mydef}
+Define the function \defemph{(higher) realization} \( \re:\simcomp\to\Type \) by performing a homotopy pushout of the data from the geometric realization. The simplex \( \Delta^k \) is contractible up to homotopy so we can omit it.
+\end{mydef}
+
+For example in dimension 1 we could take the triangle with vertices \( \{v_1, v_2, v_3\} \) and edges \( \{e_{12}, e_{23}, e_{31}\} \) and form a polygon \( C_3 \):
+\begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzAsMSwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFsxLDEsIkNfMyJdLFsxLDNdLFsyLDNdLFswLDIsIlxcc3Vic3RhY2t7ZV97MTJ9XFx0aW1lc1xceyBOLFNcXH1cXG1hcHN0byBcXHt2XzEsdl8yXFx9IFxcXFxlX3syM31cXHRpbWVzXFx7TixTXFx9XFxtYXBzdG8gXFx7dl8yLHZfM1xcfVxcXFxlX3szMX1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMyx2XzFcXH19IiwyXSxbMCwxLCJcXG1hdGhybXtwcl8xfSJdLFszLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+\begin{tikzcd}
+  {C_{3,1}\times S^0=\{e_{12},e_{23},e_{31}\}\times \{N, S\}} & {C_{3,1}} \\
+  {C_{3,0}=\{v_1,v_2,v_3\}} & {C_3}
+  \arrow["{\mathrm{pr_1}}", from=1-1, to=1-2]
+  \arrow["\begin{array}{c} \substack{e_{12}\times\{ N,S\}\mapsto \{v_1,v_2\} \\e_{23}\times\{N,S\}\mapsto \{v_2,v_3\}\\e_{31}\times\{ N,S\}\mapsto \{v_3,v_1\}} \end{array}"', from=1-1, to=2-1]
+  \arrow[from=1-2, to=2-2]
+  \arrow[from=2-1, to=2-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+\end{tikzcd}
+\end{center}
+In dimension 2 we could fill in maps from \( C_3 \) into our higher type by adding faces:
+% https://q.uiver.app/#q=WzAsOCxbMCwyLCJFXzFcXHRpbWVzIFNeMCJdLFswLDEsIlhfMCJdLFsxLDEsIlhfMSJdLFsxLDIsIkVfMSJdLFsxLDAsIkVfMlxcdGltZXMgQ18zIl0sWzIsMCwiRV8yIl0sWzIsMSwiWF8yIl0sWzAsMCwiRV8wIl0sWzAsMSwiXFxwYXJ0aWFsXzAiXSxbMSwyXSxbMCwzLCJcXG1hdGhybXtwcn1fMSIsMl0sWzMsMl0sWzIsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMiw2XSxbNCwyLCJcXHBhcnRpYWxfMSIsMl0sWzUsNl0sWzQsNSwiXFxtYXRocm17cHJ9XzEiXSxbNiw0LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsxLDMsImhfMSIsMSx7ImxldmVsIjoyfV0sWzIsNSwiaF8yIiwxLHsibGV2ZWwiOjJ9XSxbNywxLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{center}
+\begin{tikzcd}
+   & {M_2\times C_3} & {M_2} \\
+  {M_0=\mm_0} & {\mm_1} & {\mm_2} \\
+  {M_1\times S^0} & {M_1}
+  \arrow["{\mathrm{pr}_1}", from=1-2, to=1-3]
+  \arrow["{\partial_1}"', from=1-2, to=2-2]
+  \arrow[from=1-3, to=2-3]
+  \arrow[from=2-1, to=2-2]
+  \arrow["{h_1}" below right, shorten >=2ex, shorten <=2ex, Rightarrow, from=3-1, to=2-2]
+  \arrow["{h_2}", shorten >=2ex, shorten <=2ex, Rightarrow, from=1-2, to=2-3]
+  \arrow[from=2-2, to=2-3]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-2, to=3-1]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-3, to=1-2]
+  \arrow["{\partial_0}", from=3-1, to=2-1]
+  \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
+  \arrow[from=3-2, to=2-2]
+\end{tikzcd}
+\end{center}
+The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. Similarly, \( \partial_1 \) maps each \( (f, C_3) \) to the triangle that this face bounds. The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
+
+The horizontal chain of maps in this latter diagram shows that we have more. The construction in fact gives us a map to \emph{presented types}:
+
+\begin{mydef}
+Let \( \Type^n \) denote the universe of \( n \)-types. Denote by \( \Type^{[n]} \) the type of \defemph{presented \( n \)-types} consisting of types and maps \( X_0\xrightarrow[]{f_1} X_1\xrightarrow[]{f_2}\cdots\xrightarrow[]{f_n} X_n \) where \( X_i:\Type^i \) is an \( i \)-type.
+\end{mydef}
+
+We therefore have a map \( \re:\simcomp\to\Type^{[n]} \). But we can also remember the data of the maps \( M_i\to\mm_i \), so that \( \re \) takes values in diagrams of the form
+\begin{equation}
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJNXzAiXSxbMCwxLCJNXzEiXSxbMCwyLCJNXzIiXSxbMSwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFsxLDIsIlxcbWF0aGJie019XzIiXSxbMCwzLCJcXHZkb3RzIl0sWzEsMywiXFx2ZG90cyJdLFswLDMsIipfdiJdLFsxLDQsIipfZSJdLFsyLDUsIipfZiJdLFswLDEsImlfMSIsMl0sWzEsMiwiaV8yIiwyXSxbMyw0LCJcXG1hdGhybXtza31fMSJdLFs0LDUsIlxcbWF0aHJte3NrfV8yIl0sWzUsNywiXFxtYXRocm17c2t9XzMiXSxbMiw2LCJpXzMiLDJdXQ==
+\begin{tikzcd}
+  {M_0} & {\mathbb{M}_0} \\
+  {M_1} & {\mathbb{M}_1} \\
+  {M_2} & {\mathbb{M}_2} \\
+  \vdots & \vdots
+  \arrow["{*_v}", from=1-1, to=1-2]
+  \arrow["{i_1}"', from=1-1, to=2-1]
+  \arrow["{\mathrm{sk}_1}", from=1-2, to=2-2]
+  \arrow["{*_e}", from=2-1, to=2-2]
+  \arrow["{i_2}"', from=2-1, to=3-1]
+  \arrow["{\mathrm{sk}_2}", from=2-2, to=3-2]
+  \arrow["{*_f}", from=3-1, to=3-2]
+  \arrow["{i_3}"', from=3-1, to=4-1]
+  \arrow["{\mathrm{sk}_3}", from=3-2, to=4-2]
+\end{tikzcd}
+\label{fig:marked_presented_type}
+\end{equation}
+
+which is a natural transformation from the inclusion \( \simcomp\to\Type \) to \( \re \).
+
+\begin{mydef}
+The type of \defemph{marked presented \( n \)-types} is a presented \( n \)-type together with maps from sets forming a commutative diagram as in \ref{fig:marked_presented_type}.
+\end{mydef}
+
+The horizontal maps pick out terms for each vertex, edge, face, and so on. Each of these higher faces has a designated point coming from the pushout, with a family of paths joining that point to the entire boundary. This is a hub and spoke model, with the maps \( *_v \) etc. giving us the hubs.
+
+We can add to the diagram the spans that actually define the pushouts:
+\begin{center}
+% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV8wIl0sWzEsMSwiTV8xIl0sWzEsMiwiTV8yIl0sWzIsMCwiXFxtYXRoYmJ7TX1fMCJdLFsyLDEsIlxcbWF0aGJie019XzEiXSxbMiwyLCJcXG1hdGhiYntNfV8yIl0sWzEsMywiXFx2ZG90cyJdLFsyLDMsIlxcdmRvdHMiXSxbMCwwLCJNXzFcXHRpbWVzIFNeMCJdLFswLDEsIk1fMlxcdGltZXMgQ18zIl0sWzAsMywiKl92Il0sWzEsNCwiKl9lIl0sWzIsNSwiKl9mIl0sWzAsMSwiaV8xIiwyXSxbMSwyLCJpXzIiLDJdLFszLDQsIlxcbWF0aHJte3NrfV8xIl0sWzQsNSwiXFxtYXRocm17c2t9XzIiXSxbNSw3LCJcXG1hdGhybXtza31fMyJdLFsyLDYsImlfMyIsMl0sWzgsMywiIiwwLHsiY3VydmUiOi0yfV0sWzgsMV0sWzksMl0sWzksNCwiIiwwLHsiY3VydmUiOi0yfV1d
+\begin{tikzcd}
+  {M_1\times S^0} & {M_0} & {\mathbb{M}_0} \\
+  {M_2\times C_3} & {M_1} & {\mathbb{M}_1} \\
+  & {M_2} & {\mathbb{M}_2} \\
+  & \vdots & \vdots
+  \arrow[curve={height=-18pt}, from=1-1, to=1-3]
+  \arrow[from=1-1, to=2-2]
+  \arrow["{*_v}", from=1-2, to=1-3]
+  \arrow["{i_1}"', from=1-2, to=2-2]
+  \arrow["{\mathrm{sk}_1}", from=1-3, to=2-3]
+  \arrow[curve={height=-18pt}, from=2-1, to=2-3]
+  \arrow[from=2-1, to=3-2]
+  \arrow["{*_e}", from=2-2, to=2-3]
+  \arrow["{i_2}"', from=2-2, to=3-2]
+  \arrow["{\mathrm{sk}_2}", from=2-3, to=3-3]
+  \arrow["{*_f}", from=3-2, to=3-3]
+  \arrow["{i_3}"', from=3-2, to=4-2]
+  \arrow["{\mathrm{sk}_3}", from=3-3, to=4-3]
+\end{tikzcd}
+\end{center}
+
+Going forward we will stick with 2-dimensional complexes, where forming the link of a vertex gives us a map \( \mm_0\to\Gon \) exactly when the complex is a combinatorial manifold, which by Corollary~\ref{cor:gon} means we have a map \( \link:\mm_0\to\EMzo \). Extending this map to all of \( \mm \) and exploring what we obtain is the main purpose of this note.
+
+We will import some of von Raumer\cite{vonraumer_nonabelian}, where he proves that given \( \mm:\Type^{[2]} \) we obtain a double groupoid.
+
+\subsection{Polygons}\label{sec:polygons}
+
+The 1-type \( C_3 \) we created earlier by pushing out the combinatorial data of a set-based simplicial triangle is clearly an example of a type of marked presented polygons \( C_n, n:\nn \). The standard HoTT circle itself is usually given as a HIT and is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
 
 \begin{mydef}
 The higher inductive type \( \so \) which we can also call \( C_1 \):
@@ -36,7 +216,7 @@ The higher inductive type \( \so \) which we can also call \( C_1 \):
 \end{align*}
 \end{mydef}
 
-Both of these are examples of a family of HIT data we will call \( \Gon \), the set of \( n \)-gon HITs for some natural number \( n \), following the pattern of the HITs above. We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have \( \re:\Gon\to \EMzo \).
+Denote by \( \Gon \) the set of marked presented \( n \)-gons for some natural number \( n \). We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have a forgetful map \( \Gon\to \EMzo \).
 
 \subsection{Adding and removing points from polygons}
 Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
@@ -72,7 +252,7 @@ arrow/.style={->,semithick}
 \end{figure}
 
 \begin{mylemma}\label{lem:addpoints}
-Let \( C_n \) be the polygon 1-dimensional HIT with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
+Let \( C_n \) be the marked presented polygon 1-type with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
 \end{mylemma}
 \begin{proof}
 (Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( C_1 \) we will denote its constructors by \( \base \) and \( \loopo \). For \( C_2 \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( C_3 \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
@@ -148,6 +328,7 @@ The proof that \( f\circ g\sim\id_{C_{n-1}} \) requires only noting that \( f(g(
 \end{proof}
 
 \begin{mycor}
+\label{cor:gon}
 All polygons are equivalent to \( \so \), i.e. we have a term in \( \pit{n:\nn}||C_n=S^1|| \), and hence \( \Gon \) is a subtype of \( \EMzo \).
 \end{mycor}
 \begin{proof}
@@ -160,180 +341,113 @@ For \( k:\nn \) define \( m_k:\Gon\to\Gon \) where \( m_k:C_n\to C_{kn} \) adds 
 
 With \( m_k \) we can start with a collection of pentagons and hexagons and make the collection homogeneous: by applying \( m_6 \) to the pentagons and \( m_5 \) to the hexagons we obtain a collection of 30-gons. This will be useful when we work more with the link function.
 
-\subsection{Abstract simplicial complexes}
+\subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
 
-\begin{mydef}
-An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} consists of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). \( M \) is automatically equipped with a chain of inclusions \( M_0\hookrightarrow M_1\hookrightarrow\cdots\hookrightarrow M_n=M \) where each \( M_k:\simcompk \) is a complex in its own right. We call \( M_k \) the \defemph{\( k \)-skeleton} of \( M \).
-\end{mydef}
-
-\begin{mydef}
-Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization \( |M|:\Topcat \) of \( M \)} in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{k-1}| \) we form \( |M_k| \) by the pushout
-\end{mydef}
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
-\begin{center}
-\begin{tikzcd}
-  {M_{k}\times\partial\Delta^k} & {|M_{k-1}|} \\
-  {M_{k}\times\Delta^k} & {|M_{k}|}
-  \arrow["{\mathrm{attach}}", from=1-1, to=1-2]
-  \arrow["{\mathrm{id}\times\mathrm{incl}}"', hook, from=1-1, to=2-1]
-  \arrow["{i_k}", from=1-2, to=2-2]
-  \arrow[from=2-1, to=2-2]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
-\end{tikzcd}
-\end{center}
-which attaches each \( k \)-simplex by taking the convex hull of the appropriate \( k+1 \) points in \( |M_{k-1}| \).
-The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_1|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_n|=|M| \).
-
-\begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-face containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
-\label{def:link}
-\end{mydef}
-
-The link is all the neighboring vertices of \( v \) and the codimension 1 faces joining those to each other. See for example Figure~\ref{fig:link}.
+We will create our first combinatorial surface, an octahedron. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-  \draw
-    (0, 0) grid[step=1cm] (3, 3)
-    (0, 2) -- (1, 3)
-    (0, 1) -- (2, 3)
-    (0, 0) -- (3, 3)
-    (1, 0) -- (3, 2)
-    (2, 0) -- (3, 1)
-  ;
-  \fill[radius=3pt]
-    \foreach \x in {0, ..., 3} {
-      \foreach \y in {0, ..., 3} {
-        (\x, \y) circle[]
-      }
-    }
-  ;
-  \path[above left]
-    \foreach \p/\v in {
-      {1, 3}/a,
-      {2, 3}/b,
-      {0, 2}/f,
-      {1, 2}/v,
-      {2, 2}/c,
-      {0, 1}/e,
-      {1, 1}/d%
-    } {
-      (\p) node {$\v$}
-    }
-  ;
+    \matrix (A) [matrix of math nodes, row sep=1.5cm, column sep=0cm]
+    { 
+       ~ &  ~ & ~ & ~ & ~ & \left\{\substack{{w, b, r}\\ {g, o, y}}\right\} \\  
+  ~ &  ~ & \scriptstyle\{w, b, r\} & \scriptstyle\{w, r, g\}  & \scriptstyle\{w, g, o\} & \scriptstyle\{w, o, b\} & \scriptstyle\{y, b, r\} & \scriptstyle\{y, r, g\}  & \scriptstyle\{y, g, o\} & \scriptstyle\{y, o, b\}\\
+  \scriptstyle\{w, b\} & \scriptstyle\{w,r\}  & \scriptstyle\{w,g\} & \scriptstyle\{w,o\} & \scriptstyle\{b, r\} & \scriptstyle\{r, g\}  & \scriptstyle\{g, o\} & \scriptstyle\{o, b\} & \scriptstyle\{y, b\} & \scriptstyle\{y,r\}  & \scriptstyle\{y,g\} & \scriptstyle\{y,o\}\\
+  ~ & ~ & ~ &  \scriptstyle\{w\}  & \scriptstyle\{b\} & \scriptstyle\{r\} & \scriptstyle\{g\} & \scriptstyle\{o\} & \scriptstyle\{y\}\\
+      ~ & ~ &  ~ & ~ & ~ & \emptyset \\
+    };
+    \draw (A-1-6.south)--(A-2-3.north);
+    \draw (A-1-6.south)--(A-2-4.north);
+    \draw (A-1-6.south)--(A-2-5.north);
+    \draw (A-1-6.south)--(A-2-6.north);
+    \draw (A-1-6.south)--(A-2-7.north);
+    \draw (A-1-6.south)--(A-2-8.north);
+    \draw (A-1-6.south)--(A-2-9.north);
+    \draw (A-1-6.south)--(A-2-10.north);
+
+    \draw (A-2-3.south)--(A-3-1.north);
+    \draw (A-2-3.south)--(A-3-2.north);
+    \draw (A-2-3.south)--(A-3-5.north);
+
+    \draw (A-2-4.south)--(A-3-2.north);
+    \draw (A-2-4.south)--(A-3-3.north);
+    \draw (A-2-4.south)--(A-3-6.north);
+
+    \draw (A-2-5.south)--(A-3-3.north);
+    \draw (A-2-5.south)--(A-3-4.north);
+    \draw (A-2-5.south)--(A-3-7.north);
+
+    \draw (A-2-6.south)--(A-3-4.north);
+    \draw (A-2-6.south)--(A-3-1.north);
+    \draw (A-2-6.south)--(A-3-8.north);
+
+    \draw (A-2-7.south)--(A-3-5.north);
+    \draw (A-2-7.south)--(A-3-10.north);
+    \draw (A-2-7.south)--(A-3-9.north);
+
+    \draw (A-2-8.south)--(A-3-6.north);
+    \draw (A-2-8.south)--(A-3-11.north);
+    \draw (A-2-8.south)--(A-3-10.north);
+
+    \draw (A-2-9.south)--(A-3-7.north);
+    \draw (A-2-9.south)--(A-3-12.north);
+    \draw (A-2-9.south)--(A-3-11.north);
+
+    \draw (A-2-10.south)--(A-3-8.north);
+    \draw (A-2-10.south)--(A-3-9.north);
+    \draw (A-2-10.south)--(A-3-12.north);
+
+    \draw (A-3-1.south)--(A-4-4.north);
+    \draw (A-3-1.south)--(A-4-5.north);
+
+    \draw (A-3-2.south)--(A-4-4.north);
+    \draw (A-3-2.south)--(A-4-6.north);
+
+    \draw (A-3-3.south)--(A-4-4.north);
+    \draw (A-3-3.south)--(A-4-7.north);
+
+    \draw (A-3-4.south)--(A-4-4.north);
+    \draw (A-3-4.south)--(A-4-8.north);
+
+    \draw (A-3-5.south)--(A-4-5.north);
+    \draw (A-3-5.south)--(A-4-6.north);
+
+    \draw (A-3-6.south)--(A-4-6.north);
+    \draw (A-3-6.south)--(A-4-7.north);
+
+    \draw (A-3-7.south)--(A-4-7.north);
+    \draw (A-3-7.south)--(A-4-8.north);
+
+    \draw (A-3-8.south)--(A-4-8.north);
+    \draw (A-3-8.south)--(A-4-5.north);
+
+    \draw (A-3-9.south)--(A-4-9.north);
+    \draw (A-3-9.south)--(A-4-5.north);
+
+    \draw (A-3-10.south)--(A-4-9.north);
+    \draw (A-3-10.south)--(A-4-6.north);
+
+    \draw (A-3-11.south)--(A-4-9.north);
+    \draw (A-3-11.south)--(A-4-7.north);
+
+    \draw (A-3-12.south)--(A-4-9.north);
+    \draw (A-3-12.south)--(A-4-8.north);
+
+    \draw (A-4-4.south)--(A-5-6.north);
+    \draw (A-4-5.south)--(A-5-6.north);
+    \draw (A-4-6.south)--(A-5-6.north);
+    \draw (A-4-7.south)--(A-5-6.north);
+    \draw (A-4-8.south)--(A-5-6.north);
+    \draw (A-4-9.south)--(A-5-6.north);
 \end{tikzpicture}
-\caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \), forming a hexagon.}
-\label{fig:link}
+\caption{Hasse diagram of an octahedron \( O \). The row of singletons is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
+\label{fig:hasse_octohedron}
 \end{figure}
 
-\begin{mydef}
-A \defemph{combinatorial manifold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a simplicial sphere of dimension \( n-1 \) (i.e. its geometric realization is homeomorphic to an \( n-1 \)-sphere). Denote by \( \combmfdset \) the type of combinatorial manifolds of dimension \( n \) (which the notation again reminds us are sets).
-\end{mydef}
-
-In a 2-dimensional combinatorial manifold the link is a polygon. See Figures~\ref{fig:sphere_triangulation}, \ref{fig:torus_wiki_triangulation}, and \ref{fig:genus3_wiki_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
-
-A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{triangulated_sphere.pdf}
-\caption{A combinatorial triangulation of a sphere, created with the tool \texttt{stripy}.}
-\label{fig:sphere_triangulation}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{Torus-triang.png}
-\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
-\label{fig:torus_wiki_triangulation}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{triangulated_genus3.pdf}
-\caption{A 3-holed torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
-\label{fig:genus3_wiki_triangulation}
-\end{figure}
-
-\subsection{Higher inductive combinatorial manifolds}
-
-Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a homotopy pushout:
-
-\begin{mydef}
-Define the function \defemph{realization} \( \re:\simcomp\to\Type \) by forming a homotopy pushout of the data, for example in dimension 2:
-\end{mydef}
-% https://q.uiver.app/#q=WzAsOCxbMCwyLCJFXzFcXHRpbWVzIFNeMCJdLFswLDEsIlhfMCJdLFsxLDEsIlhfMSJdLFsxLDIsIkVfMSJdLFsxLDAsIkVfMlxcdGltZXMgQ18zIl0sWzIsMCwiRV8yIl0sWzIsMSwiWF8yIl0sWzAsMCwiRV8wIl0sWzAsMSwiXFxwYXJ0aWFsXzAiXSxbMSwyXSxbMCwzLCJcXG1hdGhybXtwcn1fMSIsMl0sWzMsMl0sWzIsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMiw2XSxbNCwyLCJcXHBhcnRpYWxfMSIsMl0sWzUsNl0sWzQsNSwiXFxtYXRocm17cHJ9XzEiXSxbNiw0LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsxLDMsImhfMSIsMSx7ImxldmVsIjoyfV0sWzIsNSwiaF8yIiwxLHsibGV2ZWwiOjJ9XSxbNywxLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
-\begin{center}
-\begin{tikzcd}
-   & {E_2\times C_3} & {M_2} \\
-  {M_0=\mm_0} & {\mm_1} & {\mm_2} \\
-  {M_1\times S^0} & {M_1}
-  \arrow["{\mathrm{pr}_1}", from=1-2, to=1-3]
-  \arrow["{\partial_1}"', from=1-2, to=2-2]
-  \arrow[from=1-3, to=2-3]
-  \arrow[from=2-1, to=2-2]
-  \arrow["{h_1}" below right, shorten >=2ex, shorten <=2ex, Rightarrow, from=3-1, to=2-2]
-  \arrow["{h_2}", shorten >=2ex, shorten <=2ex, Rightarrow, from=1-2, to=2-3]
-  \arrow[from=2-2, to=2-3]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-2, to=3-1]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-3, to=1-2]
-  \arrow["{\partial_0}", from=3-1, to=2-1]
-  \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
-  \arrow[from=3-2, to=2-2]
-\end{tikzcd}
-\end{center}
-The types \( C_3 \) and \( X_1 \) are 1-types, \( X_2 \) is a 2-type, and the rest are sets. The map \( \partial_1 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. Similarly, \( \partial_2 \) maps each \( (f, C_3) \) to the triangle that this face bounds. The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
-
-Using the chain of skeleton inclusions gives us more, it gives us a map to \emph{presented types}:
-
-\begin{mydef}
-Let \( \Type^n \) denote the universe of \( n \)-types. Denote by \( \Type^{[n]} \) the type of \defemph{presented \( n \)-types} consisting of types and maps \( X_0\xrightarrow[]{f_1} X_1\xrightarrow[]{f_2}\cdots\xrightarrow[]{f_n} X_n \) where \( X_i:\Type^i \) is an \( i \)-type.
-\end{mydef}
-
-We will import some of von Raumer\cite{vonraumer_nonabelian}, where he proves that given \( \mm:\Type^{[2]} \) we obtain a double groupoid.
-
-\subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
-
-We will create our first combinatorial surface, a 2-sphere. We will adopt the convention that a subscript indicates the dimension of a subskeleton of a complex. For instance, we have \( \mathsf{base}:\so_0 \).
-
-\begin{mydef}
-The HIT \( \oo_0 \) is just 6 points, intended as the 0-skeleton of an octahedron, with vertices named after the colors on the faces of a famous Central European puzzle cube.
-\[ w, y, b, r, g, o : \oo_0 \]
-\end{mydef}
-
-\begin{mydef}
-The HIT \( \oo_1 \) is the 1-skeleton of an octahedron.
-\begin{align*}
-w, y, b, r, g, o &: \oo_1 & yg &: y=g \\
-wb &: w=b & yo &: y=o \\
-wr &: w=r & br &: b=r \\
-wg &: w=g & rg &: r=g \\
-wo &: w=o & go &: g=o \\
-yb &: y=b & ob &: o=b \\
-yr &: y=r
-\end{align*}
-\end{mydef}
-
-\begin{mydef}
-The HIT \( \oo \) is an octahedron:
-\begin{align*}
-w, y, b, r, g, o &: \oo \\
-wb &: w=b & br &: b=r & wbr &: wb\cdot br\cdot wr^{-1} = \refl_w \\
-wr &: w=r & rg &: r=g & wrg &: wr\cdot rg\cdot wg^{-1} = \refl_w \\
-wg &: w=g & go &: g=o & wgo &: wg\cdot go\cdot wo^{-1} = \refl_w \\
-wo &: w=o & ob &: o=b & wob &: wo\cdot ob\cdot wb^{-1} = \refl_w \\
-yb &: y=b & & & yrb &: yr\cdot rb\cdot yb^{-1} = \refl_y \\
-yr &: y=r & & & ygr &: yg\cdot gr\cdot yr^{-1} = \refl_y \\
-yg &: y=g & & & yog &: yo\cdot og\cdot yg^{-1} = \refl_y \\
-yo &: y=o & & & ybo &: yb\cdot bo\cdot yo^{-1} = \refl_y 
-\end{align*}
-\end{mydef}
+Applying the map \( \re \) to \( O_0\to O_1\to O \) gives the presented type \( \oo_0\to \oo_1\to \oo \).
 
 \begin{figure}[htbp]
 \centering
 \input{discrete_gauge_theory_oo_tikz}
-\caption{The HIT \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
+\caption{The marked presented type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
 \end{figure}
-
-We have obvious maps \( \oo_0\xrightarrow[]{i_0} \oo_1\xrightarrow[]{i_1} \oo \) that include each skeleton into the next-higher-dimensional skeleton by the obvious inclusion of constructors.

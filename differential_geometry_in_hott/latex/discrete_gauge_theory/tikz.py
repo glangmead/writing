@@ -47,11 +47,16 @@ def action(elem, doc):
     return [] -> delete element
 
     """
-    if type(elem) == pf.RawBlock and elem.format == "latex":
+    # try:
+    #   sys.stderr.write("-----\n")
+    #   sys.stderr.write(elem.text)
+    #   sys.stderr.write("--\n")
+    #   sys.stderr.write(str(type(elem)))
+    #   sys.stderr.write("-----\n")
+    # except:
+    #   pass
+    if type(elem) in [pf.RawBlock, pf.Math] and elem.format in ["latex", "DisplayMath"]:
         code = elem.text
-        # sys.stderr.write("-----\n")
-        # sys.stderr.write(code)
-        # sys.stderr.write("-----\n")
 
         if code.strip().startswith(r"\begin{tikzcd}") or code.strip().startswith(r"\begin{tikzpicture}"):
             outfile = imagedir + '/' + sha1(code)
@@ -65,8 +70,12 @@ def action(elem, doc):
                     pass
                 tikz2image(code, filetype, outfile)
                 sys.stderr.write('Created image ' + src + '\n')
-
-            return pf.Para(pf.Image(url=src))
+            
+            if elem.format == "latex":
+               result = pf.Para(pf.Image(url=src))
+            if elem.format == "DisplayMath":
+               result = [pf.LineBreak, pf.Image(url=src)]
+            return result
         else:
             return None
             #return pf.run_pandoc(text=code, args=["--from", "latex+latex_macros", "--to", "latex"], pandoc_path="/opt/homebrew/Cellar/pandoc/3.1.11.1/bin/pandoc")
