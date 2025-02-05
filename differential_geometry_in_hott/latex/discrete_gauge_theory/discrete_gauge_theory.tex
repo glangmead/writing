@@ -6,12 +6,16 @@
 \usepackage{titling}
 \usepackage[nottoc]{tocbibind}
 \usepackage{fancyvrb}
-\usepackage[commandnameprefix=ifneeded]{changes}
-\definechangesauthor[name=Greg, color=red]{Greg}
 \setmainfont{Baskerville}
 \setsansfont{Quadrat-Serial}
 \setmonofont{Courier New}
 \urlstyle{rm}
+
+% changes package, and a bit more room on the right
+\usepackage[commandnameprefix=ifneeded]{changes}
+\definechangesauthor[name=Greg, color=red]{Greg}
+\setlength{\marginparwidth}{1in}
+\geometry{right=1.2in}
 
 \renewenvironment{abstract}{\section*{\abstractname}}{}
 \titleformat*{\section}{\large\sffamily}
@@ -37,7 +41,6 @@ Higher inductive types can capture some concepts of differential geometry in two
 \end{quote}
 
 \listofchanges[title=Changelist]
-Sections 3, 4, 5 are very new.
 
 \begin{comment}
 \section*{Notes so far from Mathieu and Steve}

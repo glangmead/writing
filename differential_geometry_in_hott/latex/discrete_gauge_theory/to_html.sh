@@ -2,6 +2,7 @@ set -xe
 # from https://jesper.sikanda.be/posts/literate-agda.html
 
 # --html-highlight=code emits a markdown file, but --html-highlight=all emits an HTML file
+mkdir -p tmp
 for i in discrete_gauge_theory
 do
   latexpand $i.tex > tmp/$i.copyincludes.tex
