@@ -103,45 +103,57 @@ The \defemph{curvature of a connection} on a family \( T:\mm\to\uni \) at a vert
 We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
 \end{mynote}
 
-\subsection{\texorpdfstring{\( T \)}{T} on concatenations of faces}
-
-A marked presented type has a structure rich enough to perform 1-groupoid and 2-groupoid operations. Consider a subcomplex \( P\subset M \) and use it as a \emph{probe} by composing with the marking maps into \( \mm \):
-
+\subsection{Total curvature}
+\chcomment[id=Greg]{This subsection is new}
+\begin{mydef}
+The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} is a 1-type given by:
+\begin{itemize}
+\item a set of tail vertices \( p_1,\ldots,p_n \)
+\item triangle vertices \( v_1, v_2, v_3 \)
+\item tail edges \( e_i:p_i=_L p_{i-1}, i=1,\ldots,n-1 \)
+\item edge \( e_n:p_n=_L v_1 \)
+\item triangle edges \( e_ij:v_i=_L v_j \)
+\end{itemize}
+The loop determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle clockwise, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1} \].
 \begin{center}
-% https://q.uiver.app/#q=WzAsOSxbMSwwLCJNXzAiXSxbMSwxLCJNXzEiXSxbMSwyLCJNXzIiXSxbMiwwLCJcXG1hdGhiYntNfV8wIl0sWzIsMSwiXFxtYXRoYmJ7TX1fMSJdLFsyLDIsIlxcbWF0aGJie019XzIiXSxbMCwwLCJQXzAiXSxbMCwxLCJQXzEiXSxbMCwyLCJQXzIiXSxbMCwzLCIqX3YiXSxbMSw0LCIqX2UiXSxbMiw1LCIqX2YiXSxbMCwxLCJpXzEiLDJdLFsxLDIsImlfMiIsMl0sWzMsNCwiXFxtYXRocm17c2t9XzEiXSxbNCw1LCJcXG1hdGhybXtza31fMiJdLFs2LDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzcsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbOCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs2LDcsImlfMSIsMl0sWzcsOCwiaV8yIiwyXV0=
-\begin{tikzcd}
-  {P_0} & {M_0} & {\mathbb{M}_0} \\
-  {P_1} & {M_1} & {\mathbb{M}_1} \\
-  {P_2} & {M_2} & {\mathbb{M}_2}
-  \arrow[hook, from=1-1, to=1-2]
-  \arrow["{i_1}"', from=1-1, to=2-1]
-  \arrow["{*_v}", from=1-2, to=1-3]
-  \arrow["{i_1}"', from=1-2, to=2-2]
-  \arrow["{\mathrm{sk}_1}", from=1-3, to=2-3]
-  \arrow[hook, from=2-1, to=2-2]
-  \arrow["{i_2}"', from=2-1, to=3-1]
-  \arrow["{*_e}", from=2-2, to=2-3]
-  \arrow["{i_2}"', from=2-2, to=3-2]
-  \arrow["{\mathrm{sk}_2}", from=2-3, to=3-3]
-  \arrow[hook, from=3-1, to=3-2]
-  \arrow["{*_f}", from=3-2, to=3-3]
-\end{tikzcd}
+\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.5]}}]
+  \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
+    % Define coordinates for the equilateral triangle
+    \node[internal, label=above:\( v_2 \)] (A) at (1, 1.732) {}; % Top vertex
+    \node[internal, label=below:\( v_1 \)] (B) at (0, 0) {};     % Left vertex
+    \node[internal, label=below:\( v_3 \)] (C) at (2, 0) {};     % Right vertex
+
+    % Draw the equilateral triangle with black vertices
+    \draw[arrow] (A) edge["\( e_{23} \)"] (C);
+    \draw[arrow] (B) edge["\( e_{12} \)"] (A);
+    \draw[arrow] (C) edge[swap, "\( e_{31} \)"] (B);
+    
+    % Define coordinates for the three additional vertices on the line segment
+    \node[internal, label=below:\( p_n \)] (D) at (-1, 0) {}; % First vertex to the left of B
+    \node[internal, label=below:\( p_2 \)] (E) at (-2, 0) {}; % Second vertex
+    \node[internal, label=below:\( p_1 \)] (F) at (-3, 0) {}; % Third vertex
+
+    % Draw the line segment from B through D, E, F
+    \draw[arrow] (F) edge["\( e_1 \)"] (E);
+    \draw[thick, dashed] (E)--(D);
+    \draw[arrow] (D) edge["\( e_n \)"] (B);
+    
+
+    % Add black circles at each vertex of the triangle
+    \fill [black] (A) circle (3pt);
+    \fill [black] (B) circle (3pt);
+    \fill [black] (C) circle (3pt);
+    
+    % Add black circles at each additional vertex
+    \fill [black] (D) circle (3pt);
+    \fill [black] (E) circle (3pt);
+    \fill [black] (F) circle (3pt);
+\end{tikzpicture}
 \end{center}
+Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
+\end{mydef}
 
-For example consider Figure~\ref{fig:concat} and the diamond on the left, which is the image in \( \mm \) of a probe. Denote the clockwise triangular path around the left triangle by \( bcab \), and around the right by \( bdcb \). These are loops at \( b \). Say that the tangent map \( T \) satisfies \( T(bcab)=R \) where \( R \) is some rotation of the 4-sided polygon \( Tb \), and similarly \( T(bdcb)=R \) as well. 
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=250pt]{concat.pdf}
-\caption{Concatenating the triangular probes \( bac \) and \( bdc \) in \( \mm \) gives the 4-gon \( abdc \).}
-\label{fig:concat}
-\end{figure}
-
-Since \( bcab \) has a filler 2-cell, which we will call \( f_1 \), we know that \( T(f_1)=H_R \) where \( H_R:R=\refl \) is a path in \( \Aut(Tb) \) from \( R \) to the identity. Similarly if \( f_2 \) is the filler for \( bdcb \) then \( T(f_2)=H_R \).
-
-The two faces can be horizontally composed giving \( f_1\star f_2 \), which fills the diamond \( bdcab \). Then we also obtain \( T(f_1\star f_2):R^2=\id \).
-
-In this way, given an explicit ordering of the faces (a ``plan'' for visiting all faces of the manifold), we can ``sum'' the curvature. For our ocatahedron where each triangle produces a rotation of \( R \), we'd get \( R^8 \).
+The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \). If \( \pi_1,\ldots,\pi_k:L\to \mm \) are \( k \) distinct probes, and \( \pi_i(p_1)=*_\mm \) is a fixed basepoint for all \( i \), then we have \( \pi_i(L):\Omega_*(\mm) \) and we can concatenate all the loops \( \pi_1(L)\cdot\cdots\cdot\pi_k(L) \). This is the construction that will allow us to compute classical sums: total curvature and total index.
 
 \begin{comment}
 \subsection{The torus}
