@@ -106,7 +106,7 @@ We have defined a function on a cell by requiring it to correspond to the value 
 \subsection{Total curvature}
 \chcomment[id=Greg]{This subsection is new}
 \begin{mydef}
-The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} is a 1-type given by:
+The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} (Figure~\ref{fig:lasso}) is a 1-type given by:
 \begin{itemize}
 \item a set of tail vertices \( p_1,\ldots,p_n \)
 \item triangle vertices \( v_1, v_2, v_3 \)
@@ -115,7 +115,10 @@ The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} is a 1-
 \item triangle edges \( e_ij:v_i=_L v_j \)
 \end{itemize}
 The loop determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle clockwise, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1} \].
-\begin{center}
+Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
+\end{mydef}
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.5]}}]
   \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
     % Define coordinates for the equilateral triangle
@@ -149,9 +152,9 @@ The loop determined by the lasso is the concatenation along the tail towards the
     \fill [black] (E) circle (3pt);
     \fill [black] (F) circle (3pt);
 \end{tikzpicture}
-\end{center}
-Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
-\end{mydef}
+\caption{The lasso \( L \), a triangle with a tail, for probing manifolds.}
+\label{fig:lasso}
+\end{figure}
 
 The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \). If \( \pi_1,\ldots,\pi_k:L\to \mm \) are \( k \) distinct probes, and \( \pi_i(p_1)=*_\mm \) is a fixed basepoint for all \( i \), then we have \( \pi_i(L):\Omega_*(\mm) \) and we can concatenate all the loops \( \pi_1(L)\cdot\cdots\cdot\pi_k(L) \). This is the construction that will allow us to compute classical sums: total curvature and total index.
 
