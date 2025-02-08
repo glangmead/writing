@@ -3,12 +3,10 @@
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-\chcomment[id=Greg]{Face-sets are \( M_k \), skeleta are \( M_{\leq k} \) now}
-An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} consists of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}=\cup_{i\leq k} M_i \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
+An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is \added[id=Greg]{an ordered list} consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). \added[id=Greg]{Let \( M_{\leq k}= [M_0,\ldots,M_k] \)} and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
 \end{mydef}
 
 \begin{mydef}
-\chcomment[id=Greg]{Using \( M_{\leq k} \) notation}
 Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( |M|:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{\leq k-1}| \) we form \( |M_{\leq k}| \) by the pushout in sets
 \end{mydef}
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
@@ -27,7 +25,6 @@ which attaches each \( k \)-simplex by taking the convex hull of the appropriate
 The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_{\leq 1}|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_{\leq n}|=|M| \).
 
 \begin{mydef}
-\chcomment[id=Greg]{Old def was probably overly 2-dim'l, fixed by using the word ``subcomplex''}
 In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
 \label{def:link}
 \end{mydef}
@@ -101,7 +98,7 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 
 \subsection{Higher inductive combinatorial manifolds}
 
-Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a \replaced[id=Greg]{sequence of homotopy pushouts}{homotopy pushout}:
+Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a sequence of homotopy pushouts:
 
 \begin{mydef}
 Define the function \defemph{(higher) realization} \( \re:\simcomp\to\Type \) by performing a homotopy pushout of the data from the geometric realization. The simplex \( \Delta^k \) is contractible up to homotopy so we can omit it.
@@ -140,11 +137,11 @@ In dimension 2 we could fill in maps from \( C_3 \) into our higher type by addi
   \arrow["{\partial_0}", from=3-1, to=2-1]
   \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
   \arrow["{*_1}"', from=3-2, to=2-2]
-\end{tikzcd}\chcomment[id=Greg]{homotopies point the right way; explicit \( *_i \)}
+\end{tikzcd}
 \end{center}
 The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. Similarly, \( \partial_1 \) maps each \( (f, C_3) \) to the triangle that this face bounds. The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
 
-\added[id=Greg, comment=more explanation]{Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be}
+Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be
 \begin{center}%
 % https://q.uiver.app/#q=WzAsMTAsWzIsMSwiXFxtYXRoYmJ7TX1fe24tMX0iXSxbMiwwLCJNX25cXHRpbWVzIFNee24tMX0iXSxbMywwLCJNX24iXSxbMywxLCJcXG1hdGhiYntNfV9uIl0sWzEsMSwiXFxtYXRoYmJ7TX1fe24tMn0iXSxbMSwwLCJNX3tuLTJ9Il0sWzIsMiwiTV97bi0xfSJdLFsxLDIsIlxcY2RvdHMiXSxbMCwwLCJcXGNkb3RzIl0sWzAsMSwiXFxjZG90cyJdLFswLDNdLFsxLDAsIlxccGFydGlhbF97bi0xfSIsMl0sWzIsMywiKl9uIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFswLDIsImhfbiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzQsMF0sWzUsNCwiKl97bi0yfSJdLFs2LDAsIipfe24tMX0iLDJdLFs4LDVdLFs5LDRdLFs3LDZdLFswLDcsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsOCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbOSw1LCJoX3tuLTJ9IiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCw2LCJoX3tuLTF9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
@@ -173,16 +170,16 @@ The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and th
 It's useful to define types that remember all or some of the data in these diagrams:
 
 \begin{mydef}
-Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams.\chcomment[id=Greg]{Revised definition of presented types}
+Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams.
 \end{mydef}
 
-The name ``presented type'' is inspired by von Raumer\cite{vonraumer_nonabelian}, where he uses such a structure in dimension 2 to construct double groupoids and crossed modules in type theory.\chcomment[id=Greg]{more oblique reference to van Raumer}
+The name ``presented type'' is inspired by von Raumer\cite{vonraumer_nonabelian}, where he uses such a structure in dimension 2 to construct double groupoids and crossed modules in type theory.
 
 \begin{mydef}
 Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \).
 \end{mydef}
 
-\added[id=Greg, comment=more explanation]{The maps \( *_i:M_i\to\mm_i \) pick out hub terms for each vertex, edge, face, and so on. Each of these higher faces has this designated point and a family of paths joining that point to the entire boundary. This is a hub and spoke model, with the maps \( *_v \) etc. giving us the hubs. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.}
+The maps \( *_i:M_i\to\mm_i \) pick out hub terms for each vertex, edge, face, and so on. Each of these higher faces has this designated point and a family of paths joining that point to the entire boundary. This is a hub and spoke model, with the maps \( *_v \) etc. giving us the hubs. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.
 
 Going forward we will stick with 2-dimensional complexes, where forming the link of a vertex gives us a map \( \mm_0\to\Gon \) exactly when the complex is a combinatorial manifold, which by Corollary~\ref{cor:gon} means we have a map \( \link:\mm_0\to\EMzo \). Extending this map to all of \( \mm \) and exploring what we obtain is the main purpose of this note.
 
