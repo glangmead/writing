@@ -3,7 +3,7 @@
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is \added[id=Greg]{an ordered list} consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). \added[id=Greg]{Let \( M_{\leq k}= [M_0,\ldots,M_k] \)} and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
+An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
 \end{mydef}
 
 \begin{mydef}
@@ -328,7 +328,7 @@ We will create our first combinatorial surface, an octahedron. In \( \simcomp \)
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-    \matrix (A) [matrix of math nodes, row sep=1.5cm, column sep=0cm]
+    \matrix (A) [matrix of math nodes, row sep=1cm, column sep=-.2cm]
     { 
        ~ &  ~ & ~ & ~ & ~ & \left\{\substack{{w, b, r}\\ {g, o, y}}\right\} \\  
   ~ &  ~ & \scriptstyle\{w, b, r\} & \scriptstyle\{w, r, g\}  & \scriptstyle\{w, g, o\} & \scriptstyle\{w, o, b\} & \scriptstyle\{y, b, r\} & \scriptstyle\{y, r, g\}  & \scriptstyle\{y, g, o\} & \scriptstyle\{y, o, b\}\\
@@ -420,6 +420,7 @@ We will create our first combinatorial surface, an octahedron. In \( \simcomp \)
     \draw (A-4-8.south)--(A-5-6.north);
     \draw (A-4-9.south)--(A-5-6.north);
 \end{tikzpicture}
+
 \caption{Hasse diagram of an octahedron \( O \). The row of singletons is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
 \label{fig:hasse_octohedron}
 \end{figure}

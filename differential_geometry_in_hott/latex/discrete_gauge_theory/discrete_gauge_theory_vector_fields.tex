@@ -1,33 +1,27 @@
 \section{Vector fields}
 
-\begin{mydef}
-A \defemph{partial function} \( f:A\to B \) is a function \( f:A\to B+\unit \), the disjoint union of \( B \) with the 1-element type.
-\end{mydef}
-
-If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should be a partial function \( T_\bullet:\mm\to\EMpzo \) that lifts \( T \). In other words, a pointing of \emph{some} of the fibers. This aligns with the classical picture of a choice of nonzero vector at each point, except for some points where the vector field vanishes. 
-%So instead of having a notion corresponding to the full tangent vector space (one candidate for which would be the disk at each point, i.e. \( \link \) plus its spokes and filler triangles) we are mapping some vertices to their circular fibers, and others to \( \unit \). This lets us continue to work with \( \EMzo \) instead of a type of tangent spaces.
+If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should consist of, in part, a choice of a point in each fiber:
 
 \begin{mydef}
-Let \( \mm:\combmfdt \) be a combinatorial manifold and \( Z \) an isolated set of vertices. A \defemph{vector field \( X \) on \( \mm \) (with zero set \( Z \))} is a partial section of \( P \), i.e. a term \( X:\pit{x:\mm\setminus Z}T(x) \) (and eliding the unique term of \( Z\to\unit \)).
+Let \( \mm:\combmfdt \) be a combinatorial manifold. A \defemph{vector field \( X \) on \( \mm \)} is a section of \( P \) on the 1-skeleton of \( \mm \), i.e. a term \( X:\pit{x:\mm_1}T(x) \).
 \end{mydef}
-% https://q.uiver.app/#q=WzAsNCxbMCwyLCJcXG1hdGhiYntNfVxcc2V0bWludXMgWiJdLFsyLDIsIlxcbWF0aHJte0VNfShcXG1hdGhiYntafSwxKSJdLFsyLDAsIlxcbWF0aHJte0VNfV9cXGJ1bGxldChcXG1hdGhiYntafSwxKSJdLFswLDAsIlBcXHN0YWNrcmVse1xcbWF0aHJte2RlZn19PXtcXHN1bV97QzpUKFxcbWF0aGJie019XFxzZXRtaW51cyBaKX1DfSJdLFswLDEsIlQiXSxbMiwxLCJcXG1hdGhybXtwcn1fMSJdLFszLDAsIlxcbWF0aHJte3ByfV8xIiwwLHsiY3VydmUiOi0xfV0sWzMsMiwiXFxvdmVybGluZXtUfSJdLFswLDMsIntYOlxccHJvZF97eDpcXG1hdGhiYntNfVxcc2V0bWludXMgWn1UeH0iLDAseyJjdXJ2ZSI6LTF9XSxbMCwyLCJUX1xcYnVsbGV0Il0sWzMsMSwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
 \begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJcXG1hdGhiYntNfV8xIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRcXG1hdGhiYntNfV8xfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiLDAseyJjdXJ2ZSI6LTF9XSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4OlxcbWF0aGJie019XzF9VHh9IiwwLHsiY3VydmUiOi0xfV0sWzAsMiwiVF9cXGJ1bGxldCJdLFszLDEsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
 \begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\sum_{C:T(\mm\setminus Z)}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
+  {P\stackrel{\mathrm{def}}={\sum_{C:T\mathbb{M}_1}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
   \\
-  {\mm\setminus Z} && {\mathrm{EM}(\mathbb{Z},1)}
+  {\mathbb{M}_1} && {\mathrm{EM}(\mathbb{Z},1)}
   \arrow["{\overline{T}}", from=1-1, to=1-3]
   \arrow["{\mathrm{pr}_1}", curve={height=-6pt}, from=1-1, to=3-1]
   \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
   \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{X:\prod_{x:\mm\setminus Z}Tx}}", curve={height=-6pt}, from=3-1, to=1-1]
+  \arrow["{{X:\prod_{x:\mathbb{M}_1}Tx}}", curve={height=-6pt}, from=3-1, to=1-1]
   \arrow["{T_\bullet}", from=3-1, to=1-3]
   \arrow["T", from=3-1, to=3-3]
-\end{tikzcd}
-\end{center}
+\end{tikzcd}\end{center}
 where \( T_\bullet=\overline{T}\circ X \). 
 
-The lift \( T_\bullet \) equips the fibers of \( T \) with points, and provides pointings to the transport maps. (The action of \( X \) on paths provides the proofs of pointedness.)
+On 1-paths \( p:x=_{\mm_1}y \) \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \).
 
 The goal now is to recompute the total curvature in the context of some vector field \( X \) and obtain three values:
 \begin{enumerate}
@@ -38,209 +32,22 @@ The goal now is to recompute the total curvature in the context of some vector f
 
 Once we have these, we will unpack how they provide a proof in HoTT of the Poincaré-Hopf theorem and the Gauss-Bonnet theorem.
 
-\begin{comment}
+\subsection{Index of a vector field: subtracting curvature}
 
-Figure~\ref{fig:flattorus_zero} illustrates what removing the preimage of \( \unit \) looks like. The resulting type is no longer a combinatorial manifold, since it fails the condition about every point having a circular link. 
+Index should be an integer that computes a winding number ``of the vector field'' around a zero. Classically this is done in a local trivialization around a zero of the vector field, with a canonical flat connection associated to the trivialization (an isomorphism with a product bundle). We should therefore first look for a loop in one of our pointed fibers \( (Tm, Xm) \). Let \( \pi_1,\ldots,\pi_k:L\to\mm \) be a face enumerator with basepoint \( m:\mm \) (Definition~\ref{def:face_enumerator}) and consider the loop \( \ell\defeq\ell_{L,1} \).
 
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torusflathole_tikz}
-\caption{The flat torus with one vertex removed. This also removes the edges and faces containing that vertex.}
-\label{fig:flattorus_zero}
-\end{figure}
+\( T\ell:Tm=Tm \) is the holonomy isomporphism of the loop, and it has flatness structure \( H\ell:T\ell=\id_m \). The vector field assigns a dependent path over the loop (a \emph{loopover}) \( X\ell:T\ell(Xm)=Xm \) which is not a closed loop in general. (Remember, this is the whole point of curvature: transporting around a loop does not produce a \emph{pointed} isomorphism of the fiber.)
 
-Let's see a couple examples.
+But notice that the flatness structure tells us exactly how to close the loopover and produce an honest loop in \( (Tm,Xm) \), namely by evaluating \( H\ell \) at \( Xm \), giving \( H\ell(Xm):T\ell(Xm)=Xm \), which is of the same type as \( X\ell \). Forming the concatenation \( X\ell\cdot H\ell(Xm)^{-1}:Xm=Xm \) gives a term in the loop space \( \Omega_{Xm}(Tm)\simeq\zz \). Conceptually, we have asked how much the vector field swirls as it moves around the loop \emph{not counting any swirl of the parallel transport}. The concatenation \( -\cdot H\ell(Xm)^{-1} \) is a subtraction of the effect of curvature.
 
+We have constructed a map \( \Omega_m(\mm)\to \Omega_{Xm}(Tm)\):
 \begin{mydef}
-The \defemph{spinning vector field} \( \Xspin \) on \( \oo\setminus\{w, y\} \) is given by the following data. We compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_spin}
-\begin{align*}
-\exp\circ\Xspin(b)  &=r   \\
-\exp\circ\Xspin(r)  &=g   \\
-\exp\circ\Xspin(g)  &=o   \\
-\exp\circ\Xspin(o)  &=b   \\
-\end{align*}
-We must also define pathovers and faceovers, i.e. \( \apd(\Xspin \). For example, \( \Xspin(b) \) is the point \( r \) in the link \( woyr \). Transport along \( br \) takes the link of \( b \) to the link of \( r \), mapping \( r:Tb \) to \( g:Tr \). This agrees with \( \Xspin(r) \) and so we will choose \( \Xspin(br)=\refl_g \) in \( Tr \). We similarly choose \( \refl \) pathovers for the other equatorial edges. And since we have deleted all the faces when removing the zeros, there are no faceovers.
+The \defemph{index} \( \mathscr{I}_X:\Omega_m(\mm)\to \Omega_{Xm}(Tm) \) is the map \( \ell\mapsto X\ell\cdot H\ell(Xm)^{-1}:Xm=Xm\).
 \end{mydef}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}%
-  [x={(-0.860769cm, -0.121512cm)},
-  y={(0.508996cm, -0.205391cm)},
-  z={(-0.000053cm, 0.971107cm)},
-  scale=1,
-  eqback/.style={-Latex, very thick},
-  back/.style={loosely dotted, thin},
-  eqedge/.style={-Latex, very thick},
-  edge/.style={black, thin},
-  facet/.style={fill=blue!95!black,fill opacity=0.0},
-  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
-\coordinate (-1, -1, 0) at (-1, -1, 0);
-\coordinate (-1, 1, 0) at (-1, 1, 0);
-\coordinate (0, 0, -1) at (0, 0, -1);
-\coordinate (0, 0, 1) at (0, 0, 1);
-\coordinate (1, -1, 0) at (1, -1, 0);
-\coordinate (1, 1, 0) at (1, 1, 0);
-%% Drawing edges in the back
-%%
-\draw[edge,eqback] (-1, -1, 0) -- (-1, 1, 0);
-\draw[edge,back] (-1, -1, 0) -- (0, 0, -1.4);
-\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
-\draw[edge,eqback] (1, -1, 0) -- (-1, -1, 0);
-%% Drawing vertices in the back
-%%
-\node[vertex] at (-1, -1, 0)     {};
-%% Drawing the facets
-%%
-\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
-%% Drawing edges in the front
-%%
-\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
-\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
-\draw[eqedge] (-1, 1, 0) -- (1, 1, 0);
-\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
-\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
-\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
-\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
-\draw[eqedge] (1, 1, 0) -- (1, -1, 0);
-%% Drawing the vertices in the front
-%%
-\begin{scope}[nodes=vertex]
-\node[label=above right:\( b \)] at (-1, 1, 0)     {};
-\node[label=below:\( y \)] at (0, 0, -1.4)     {};
-\node[label=above:\( w \)] at (0, 0, 1.4)     {};
-\node[label=above left:\( g \)] at (1, -1, 0)     {};
-\node[label=above left:\( r \)] at (1, 1, 0)     {};
-\node[label=above right:\( o \)] at (-1, -1, 0)     {};
-\end{scope}
-\end{tikzpicture}
-\caption{The vector field \( \Xspin \) on \( \oo \), which circulates around the equator. \( w \) and \( y \) are zeros.}
-\label{fig:sphere_spin}
-\end{figure}%fig:sphere_spin
-
 \begin{mydef}
-The \defemph{downward vector field} \( \Xdown \) on \( \oo\setminus\{w, y\} \) is given by the following data, where again we compose with \( \exp \) to keep the notation directly in \( \oo \). See Figure~\ref{fig:sphere_downward}
-\begin{align*}
-\exp\circ\Xspin(b)  &=y   \\
-\exp\circ\Xspin(r)  &=y   \\
-\exp\circ\Xspin(g)  &=y   \\
-\exp\circ\Xspin(o)  &=y   \\
-\end{align*}
-We also need to select a pathover for each edge on the equator. Transport on all these edges takes \( y \) in one fiber to \( y \) in the next, so we choose the path \( \refl_y\) in all four of these fibers. Again there are no faceovers to map.
+The \defemph{total index} of \( X \) is \( \mathscr{I}_X(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}) \).
 \end{mydef}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}%
-  [x={(-0.860769cm, -0.121512cm)},
-  y={(0.508996cm, -0.205391cm)},
-  z={(-0.000053cm, 0.971107cm)},
-  scale=1,
-  eqback/.style={-Latex, very thick},
-  back/.style={loosely dotted, thin},
-  eqedge/.style={-Latex, very thick},
-  edge/.style={black, thin},
-  facet/.style={fill=blue!95!black,fill opacity=0.0},
-  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
-\coordinate (-1, -1, 0) at (-1, -1, 0);
-\coordinate (-1, 1, 0) at (-1, 1, 0);
-\coordinate (0, 0, -1) at (0, 0, -1);
-\coordinate (0, 0, 1) at (0, 0, 1);
-\coordinate (1, -1, 0) at (1, -1, 0);
-\coordinate (1, 1, 0) at (1, 1, 0);
-%% Drawing edges in the back
-%%
-\draw[edge,back] (-1, -1, 0) -- (-1, 1, 0);
-\draw[eqedge] (-1, -1, 0) -- (0, 0, -1.4);
-\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
-\draw[edge,back] (1, -1, 0) -- (-1, -1, 0);
-%% Drawing vertices in the back
-%%
-\node[vertex] at (-1, -1, 0)     {};
-%% Drawing the facets
-%%
-\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
-\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
-%% Drawing edges in the front
-%%
-\draw[eqedge] (-1, 1, 0) -- (0, 0, -1.4);
-\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
-\draw[edge] (-1, 1, 0) -- (1, 1, 0);
-\draw[eqedge] (1, -1, 0) -- (0, 0, -1.4);
-\draw[eqedge] (1, 1, 0) -- (0, 0, -1.4);
-\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
-\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
-\draw[edge] (1, 1, 0) -- (1, -1, 0);
-%% Drawing the vertices in the front
-%%
-\begin{scope}[nodes=vertex]
-\node[label=above right:\( b \)] at (-1, 1, 0)     {};
-\node[label=below:\( y \)] at (0, 0, -1.4)     {};
-\node[label=above:\( w \)] at (0, 0, 1.4)     {};
-\node[label=above left:\( g \)] at (1, -1, 0)     {};
-\node[label=above left:\( r \)] at (1, 1, 0)     {};
-\node[label=above right:\( o \)] at (-1, -1, 0)     {};
-\end{scope}
-\end{tikzpicture}
-\caption{The vector field \( \Xdown \) on \( \oo \), which flows downward. \( w \) and \( y \) are zeros.}
-\label{fig:sphere_downward}
-\end{figure}%fig:sphere_downward
-\end{comment}
-
-\subsection{Index of a vector field}
-
-\begin{comment}
-Index should be an integer that computes a winding number ``of the vector field'' around a zero. We can compute an integer from a map by taking its \emph{degree}, which is a construction we will assume that we have, for example using \cite{buchholtz_favonia}, where they indeed require that degree agrees with winding number for maps \( S^1\to S^1 \).
-
-\begin{mydef}
-Let \( \mm:\combmfdt \) and let \( T:\mm\to\EMzo \) be a bundle of circles given on \( \mm_0 \) by \( \link \). Let \( z:Z \) be an isolated zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). We call the degree of the map \( \tr(\link z):Tl_{z1}=Tl_{z1} \) the \defemph{index of \( X \) at \( z \)}. It does not depend on which vertex we use.
-\end{mydef}
-
-% \begin{mydef}
-% Let \( \mm:\combmfdt \), let \( T:\mm\to\EMzo \) be the discrete tangent bundle given on \( \mm_0 \) by \( \link \). Let \( P\defeq\sit{x:\mm}Tx \), and \( Z \) be a set of isolated zeros. Let \( X:\mm\setminus Z\to P \) be a nonvanishing vector field. Finally, let \( z:Z \) be a zero and let \( \link z \) be its polygonal link in \( \mm \), with a clockwise orientation, say with ordered vertices \( \{l_{z1},\ldots,l_{zn}\} \). Define a map \( X'(z):\link z\to \link z \), called \defemph{the circle automorphism at \( z \)}, on vertices of \( \link z \) as follows:
-% \[ 
-% X'(z)(l_{zi}) = \exp\left(\tr(l_{zi}z)(X(l_{zi})\right) 
-% \] In words, we transport the vector field along the unique edge joining \( l_{zi} \) to \( z \), then apply \( \exp \). The result will be some point in \( \link z \). In different words, \( X(l_{zi}) \) may point various places: to another point of \( \link z \), to \( z \) itself, or somewhere beyond \( \link z \). Transporting all these fibers to the central fiber at \( z \), then exponentiating, gives a self-map of the link.
-% 
-% \( X'(z) \) extends to the edges of \( \link z \), e.g. \( l_{z1}l_{z2} \), by the action on paths of \( \tr \) along \( l_{zi}z \). To visualize this we can imagine transporting \( X \) along an edge of \( \link z \) from \( l_{z1} \) to \( l_{z2} \) and then transporting the result along \( l_{z2}z \).
-% 
-% Finally, we call the degree of \( X'(z) \) on the clockwise-oriented link the \defemph{index of \( X \) at \( z \)}.\qed
-% \end{mydef}
-
-\begin{mylemma}
-The index of \( \Xspin \) at both \( y \) and at \( w \) is 1, and the same is true for \( \Xdown \).
-\end{mylemma}
-\begin{proof}
-\( \apd(\Xspin)(br) = \refl_{\Xspin(r)} \) and similarly for the other edges and for \( \Xdown \). So \( \apd \) on the loop around the equator is the identity, which has index 1.
-\end{proof}
-
-If these vector fields both have index +1, what does index --1 look like? We can see an example on the torus with its downward vector field.
-
-On the torus we can also consider both a spinning vector field and a downward vector field. Figure~\ref{fig:spin_torus} shows one way to spin the torus, and in this case there are no zeros so the index is the degree of a map from the empty set, which is 0 (as it factors through a constant map).
-
-Figure~\ref{fig:morse_torus} shows a downward flow with four zeros. Although this is a picture of the flat torus, the vector field is derived from the shape of Figure~\ref{fig:torus} where we actually have a notion of up and down. We see at the position labeled (outer, top of diamonds), i.e. the top of the torus, an everywhere outward pointing vector field. At (outer, bottom of diamonds) we see an inward pointing vector field. But at (hole, top of diamonds), i.e. the top of the hole, we see something else. Imagine transport from the neighbor to the lower right to the neighbor below, then continuing clockwise around the link. If we assume that we define \( \apd \) on these edges to be \emph{counterclockwise} rotation, then transport around the whole link has degree --1. Similarly for the zero at (hole, bottom of diamonds). Adding these four indexes we again get 0.
-
-Summarizing what we've seen in our examples, vector fields with isolated zeros have an index, and this index tracks with the total curvature, and the Euler characteristic.
-
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torus_spin_tikz}
-\caption{A vector field on the torus that spins and has no zeros.}
-\label{fig:spin_torus}
-\end{figure}%fig:spin_torus
-
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torus_morse_tikz}
-\caption{A vector field on the torus that flows downward, when viewed as a donut. The zeros are represented as missing dots. Every dot has one outgoing vector.}
-\label{fig:morse_torus}
-\end{figure}%fig:morse_torus
-\end{comment}
 
 \subsection{Equality of total index and total curvature}
 

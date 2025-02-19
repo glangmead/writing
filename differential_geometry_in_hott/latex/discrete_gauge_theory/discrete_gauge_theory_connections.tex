@@ -58,6 +58,7 @@ Transport along the equator:
 It's very important to be able to visualize what \( T_1 \) does to triangular paths such as \( wb\cdot br\cdot rw \) (which circulates around the boundary of face \( wbr \)). You can see it if you imagine Figure~\ref{fig:triangle_of_equators} as the frames of a short movie. Or you can place your palm over the top of a cube and note where your fingers are pointing, then slide your hand to an equatorial face, then along the equator, then back to the top. The answer is: you come back rotated clockwise by a quarter-turn. 
 
 \begin{mydef}
+\label{def:octahedron_holonomy}
 The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
 \begin{multicols}{2}
 \begin{itemize}
@@ -78,6 +79,7 @@ Note by univalence the equivalence \( R \) gives a loop in the universe, a term 
 Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here \emph{there is no additional freedom}.
 
 \begin{mydef}
+\label{def:octahedron_curvature}
 Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 \begin{multicols}{2}
 \begin{itemize}
@@ -96,14 +98,14 @@ where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with 
 
 \begin{mydef}
 \label{def:curvature}
-The \defemph{curvature of a connection} on a family \( T:\mm\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \) together with a homotopy to \( \id_{Tv} \). Since curvature is a proof that the holonomy is the identity, we may also call it a \defemph{flatness structure}.
+The \defemph{curvature of a connection} on a family \( T:\mm\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \) together with a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \). Since curvature is a proof that the holonomy is the identity, we may also call it a \defemph{flatness structure}.
 \end{mydef}
 
 \begin{mynote}
 We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
 \end{mynote}
 
-\subsection{Total curvature}
+\subsection{Total holonomy}
 \begin{mydef}
 The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} (Figure~\ref{fig:lasso}) is a 1-type given by:
 \begin{itemize}
@@ -113,12 +115,12 @@ The \defemph{triangular lasso \( L:\Type \) with tail of length \( n \)} (Figure
 \item edge \( e_n:p_n=_L v_1 \)
 \item triangle edges \( e_ij:v_i=_L v_j \)
 \end{itemize}
-The loop determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle clockwise, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1} \].
+The loop \( \ell_L \) determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle clockwise, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1}. \]
 Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
 \end{mydef}
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.5]}}]
+\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
   \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
     % Define coordinates for the equilateral triangle
     \node[internal, label=above:\( v_2 \)] (A) at (1, 1.732) {}; % Top vertex
@@ -142,20 +144,31 @@ Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \)
     
 
     % Add black circles at each vertex of the triangle
-    \fill [black] (A) circle (3pt);
-    \fill [black] (B) circle (3pt);
-    \fill [black] (C) circle (3pt);
+    \fill [black] (A) circle (2pt);
+    \fill [black] (B) circle (2pt);
+    \fill [black] (C) circle (2pt);
     
     % Add black circles at each additional vertex
-    \fill [black] (D) circle (3pt);
-    \fill [black] (E) circle (3pt);
-    \fill [black] (F) circle (3pt);
+    \fill [black] (D) circle (2pt);
+    \fill [black] (E) circle (2pt);
+    \fill [black] (F) circle (2pt);
 \end{tikzpicture}
 \caption{The lasso \( L \), a triangle with a tail, for probing manifolds.}
 \label{fig:lasso}
 \end{figure}
 
-The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \). If \( \pi_1,\ldots,\pi_k:L\to \mm \) are \( k \) distinct probes, and \( \pi_i(p_1)=*_\mm \) is a fixed basepoint for all \( i \), then we have \( \pi_i(L):\Omega_*(\mm) \) and we can concatenate all the loops \( \pi_1(L)\cdot\cdots\cdot\pi_k(L) \). This is the construction that will allow us to compute classical sums: total curvature and total index.
+The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \). 
+
+\begin{mydef}
+\label{def:face_enumerator}
+Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. Let \( m:\mm \) be a fixed basepoint. A \defemph{face enumerator} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \). We further require that the triangles circulate around the faces in a \defemph{clockwise orientation}. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a clockwise orientation for all faces.
+\end{mydef}
+
+Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{L,i}:Tm=Tm \). We can concatenate all the loops \( \ell_{L,1}\cdot\cdots\cdot\ell_{L,k} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}):Tm=Tm  \).
+
+\begin{mylemma}
+The total holonomy of \( T_1 \) on \( \oo \)(Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
+\end{mylemma}
 
 \begin{comment}
 \subsection{The torus}
