@@ -10,16 +10,16 @@ Let \( \mm:\combmfdt \) be a combinatorial manifold. A \defemph{vector field \( 
 \begin{tikzcd}
   {P\stackrel{\mathrm{def}}={\sum_{C:T\mathbb{M}_1}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
   \\
-  {\mathbb{M}_1} && {\mathrm{EM}(\mathbb{Z},1)}
+  {\mathbb{M}_1} && {\mathrm{EM}(\mathbb{Z},1).}
   \arrow["{\overline{T}}", from=1-1, to=1-3]
   \arrow["{\mathrm{pr}_1}", curve={height=-6pt}, from=1-1, to=3-1]
   \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
   \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
   \arrow["{{X:\prod_{x:\mathbb{M}_1}Tx}}", curve={height=-6pt}, from=3-1, to=1-1]
-  \arrow["{T_\bullet}", from=3-1, to=1-3]
+  \arrow["{(T,X)}", from=3-1, to=1-3]
   \arrow["T", from=3-1, to=3-3]
 \end{tikzcd}\end{center}
-where \( T_\bullet=\overline{T}\circ X \). 
+
 
 On 1-paths \( p:x=_{\mm_1}y \) \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \).
 
