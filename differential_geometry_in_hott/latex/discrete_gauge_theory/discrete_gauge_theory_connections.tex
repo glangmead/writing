@@ -25,7 +25,7 @@ To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete f
 
 \begin{mydef}
 \label{def:connection}
-A \defemph{connection} on a higher combinatorial manifold is an extension of a \deleted[id=Greg]{circle }bundle from the 0-skeleton to the 1-skeleton.
+A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle from the 0-skeleton to the 1-skeleton.
 \end{mydef}
 
 Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
@@ -98,7 +98,7 @@ where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with 
 
 \begin{mydef}
 \label{def:curvature}
-The\chcomment[id=Greg]{Rewrote} \defemph{curvature of a connection} on a family \( T:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \). A \defemph{flatness structure on the face \( f \)} is an extension of \( T \) to \( f \), which is a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \) from the curvature of \( f \) at \( v \) to the identity.
+The \defemph{curvature of a connection} on a family \( T:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \). A \defemph{flatness structure on the face \( f \)} is an extension of \( T \) to \( f \), which is a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \) from the curvature of \( f \) at \( v \) to the identity.
 \end{mydef}
 
 \begin{mynote}
@@ -161,7 +161,7 @@ The purpose of this type is to probe combinatorial manifolds in an organized fas
 
 \begin{mydef}
 \label{def:face_enumerator}
-Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. Let \( m:\mm \) be a fixed basepoint. A \defemph{face enumerator} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \). We further require that \replaced[id=Greg, comment={Temporary change until I tackle orientation properly.}]{each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction}{the triangles circulate around the faces in a \defemph{clockwise orientation}}. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise).
+Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. Let \( m:\mm \) be a fixed basepoint. A \defemph{face enumerator} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \). We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise).
 \end{mydef}
 
 Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{L,i}:Tm=Tm \). We can concatenate all the loops \( \ell_{L,1}\cdot\cdots\cdot\ell_{L,k} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}):Tm=Tm  \).
