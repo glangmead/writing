@@ -1,5 +1,25 @@
 \section{Connections and curvature}
 
+\todo{expand and clarify connections. suggest terminology such as \( n \)-connections, obstruction language}
+\begin{mydef}
+\label{def:bundle}
+A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a map from \( \mm_0 \) to \( \uni \).\todo{Define the tangent bundle in particular}
+\end{mydef}
+
+\begin{mydef}
+\label{def:connection}
+A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle from the 0-skeleton to the 1-skeleton \( \mm_1 \). \todo{In the case of the tangent bundle define an orientation.}
+\end{mydef}
+
+\begin{mydef}
+\label{def:curvature}
+The \defemph{curvature of a connection} on a family \( T:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \). A \defemph{flatness structure on the face \( f \)} is an extension of \( T \) to \( f \), which is a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \) from the curvature of \( f \) at \( v \) to the identity.
+\end{mydef}
+
+\begin{mynote}
+We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
+\end{mynote}
+
 \subsection{The function \texorpdfstring{\( T \)}{T}}
 
 We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
@@ -22,11 +42,6 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 \end{figure}
 
 To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. Defining a map by induction makes clear that the action on paths is its own structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection:
-
-\begin{mydef}
-\label{def:connection}
-A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle from the 0-skeleton to the 1-skeleton.
-\end{mydef}
 
 Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
 
@@ -96,15 +111,6 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with \( R^{-1} \). Passing through univalence we get a 2-path between \( R \) and \( \refl \) in the loop space \( C_4=_{\EMzo}C_4 \).
 \end{mydef}
 
-\begin{mydef}
-\label{def:curvature}
-The \defemph{curvature of a connection} on a family \( T:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \). A \defemph{flatness structure on the face \( f \)} is an extension of \( T \) to \( f \), which is a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \) from the curvature of \( f \) at \( v \) to the identity.
-\end{mydef}
-
-\begin{mynote}
-We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
-\end{mynote}
-
 \subsection{Total holonomy}
 \begin{mydef}
 The \defemph{triangular lasso \( L_n:\Type \) with tail of length \( n \)} (Figure~\ref{fig:lasso}) is a 1-type given by:
@@ -169,6 +175,8 @@ Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with
 \begin{mylemma}
 The total holonomy of \( T_1 \) on \( \oo \)(Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
 \end{mylemma}
+
+Prove\todo{independence on choices of face enumerator} that on a manifold \( \mm \) the total holonomy does not depend on the choices of the face enumerator.
 
 \begin{comment}
 \subsection{The torus}

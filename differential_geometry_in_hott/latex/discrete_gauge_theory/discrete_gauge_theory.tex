@@ -12,7 +12,8 @@
 \urlstyle{rm}
 
 % changes package, and a bit more room on the right
-\usepackage[commandnameprefix=ifneeded]{changes}
+\usepackage{todonotes}
+\usepackage[commandnameprefix=ifneeded, todonotes={textsize=tiny}]{changes}
 \definechangesauthor[name=Greg, color=red]{Greg}
 \setlength{\marginparwidth}{1in}
 \geometry{right=1.2in}
@@ -41,6 +42,7 @@ Higher inductive types can capture some concepts of differential geometry in two
 \end{quote}
 
 \listofchanges[title=Changelist]
+\listoftodos
 
 \begin{comment}
 \section*{Notes so far from Mathieu and Steve}

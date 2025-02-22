@@ -7,6 +7,10 @@ An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimensi
 \end{mydef}
 
 \begin{mydef}
+An \defemph{orientation} for a simplicial complex is\todo{orientation, and the slightly extra structure of an ordered list of vertices for each top-dim face}.
+\end{mydef}
+
+\begin{mydef}
 Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( |M|:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{\leq k-1}| \) we form \( |M_{\leq k}| \) by the pushout in sets
 \end{mydef}
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
@@ -25,7 +29,7 @@ which attaches each \( k \)-simplex by taking the convex hull of the appropriate
 The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_{\leq 1}|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_{\leq n}|=|M| \).
 
 \begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \). \todo{Discuss orientation of the link in sets}
 \label{def:link}
 \end{mydef}
 
