@@ -1,10 +1,10 @@
 \section{Bundles, connections, and curvature}
 
-We will use the dimension structure of a marked presented manifold\ref{def:marked_presented_manifold} to construct maps by extending to each higher skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq M\re^{[n]}(M) \) the corresponding marked presented manifold.
+We will use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct maps by extending to each higher skeleton. We can state these definitions in the context of an arbitrary-dimensional manifold. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
 
 \begin{mydef}
 \label{def:bundle}
-A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a type family, i.e. a term of \( f_0:\mm_0 \to \uni \). If the type family is given by taking the link\ref{def:link} of a vertex then we call the bundle \defemph{the tangent bundle} of \( \mm \) and it necessarily maps \( \mm_0\to\EMzo \).
+A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a type family, i.e. a term of \( f_0:\mm_0 \to \uni \). If the type family is given by taking the link(\ref{def:link}) of a vertex then we call the bundle \defemph{the tangent bundle} of \( \mm \) and it necessarily maps \( \mm_0\to\EMzo \).
 \end{mydef}
 
 \begin{mydef}
@@ -16,10 +16,17 @@ For a connection to exist, the bundle \( f_0 \) must extend to \( \mm_1 \). Give
 
 \begin{mydef}
 \label{def:curvature}
-The \defemph{curvature} on a bundle-with-connection \( f_1:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( F \) with boundary path \( p_F \) is the automorphism \( \tr(p_F)(fv) \). An extension of \( f_1 \) to \( F \) is a homotopy \( H_F:\tr(p_F)(fv)\sim\id_{fv} \) from the curvature of \( F \) at \( v \) to the identity. We will call such an extension a \defemph{flatness structure on the face \( f \)}. By analogy to the definition of a 1-connection we can also call this a \defemph{2-connection}.
+The \defemph{curvature} on a bundle-with-connection \( f_1:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( F \) with boundary path \( p_F \) is the automorphism \( \tr(p_F):f_0v=f_0v \). An extension of \( f_1 \) to \( F \) is a \defemph{2-connection on the face \( F \)}.
 \end{mydef}
 
-For a 2-connection to exist on a face \( F \), the holonomy map \( \tr(p_F) \) must be in the connected component of the identity map \( \id_{fv} \).
+For a 2-connection to exist on a face \( F \) the holonomy map \( \tr(p_F) \) must be in the connected component of the identity map \( \id_{f_0v} \).
+
+\begin{mylemma}
+A 2-connection on the face \( F \) is equivalent to a homotopy \( H_F:\tr(p_F)(f_0v)\sim\id_{f_0v} \) from the curvature of \( F \) at \( v \) to the identity. We will call \( H_F \) the \defemph{flatness structure on the face \( F \)} since it provides a path to the trivial holonomy.
+\end{mylemma}
+\begin{proof}
+The face \( F \) provides a path \( p_F=_\mm\refl_v \), i.e. a filler of the boundary path. If \( f_1 \) extends to a map \( f_2 \) on \( F \) then by functoriality we have a term \( f_2(p_F)=\refl_{f_2v} \), i.e. a term \( f_1(p_F)=\refl_{f_0v} \). We then observe that transport is given by this action on paths \( f_1(p_F) \).
+\end{proof}
 
 \subsection{The function \texorpdfstring{\( T \)}{T} on \texorpdfstring{\( \oo \)}{O}}
 
@@ -122,7 +129,7 @@ The \defemph{triangular lasso \( L_n:\Type \) with tail of length \( n \)} (Figu
 \item edge \( e_n:p_n=_L v_1 \)
 \item triangle edges \( e_ij:v_i=_L v_j \)
 \end{itemize}
-The loop \( \ell_L \) determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle clockwise, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1}. \]
+The loop \( \ell_L \) determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1}. \]
 Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
 \end{mydef}
 \begin{figure}[htbp]
@@ -164,11 +171,11 @@ Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \)
 \label{fig:lasso}
 \end{figure}
 
-The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \). 
+The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \).
 
 \begin{mydef}
 \label{def:face_enumerator}
-Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. Let \( m:\mm \) be a fixed basepoint. A \defemph{face enumerator} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \). We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise).
+Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. A \defemph{face enumerator of maximum length \( n \)} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L_n\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \), where \( m:\mm \) is a chosen basepoint. We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise). It is convenient to fix one value of \( n \) for all the lassos, even if some lassos only need a shorter tail (in which case they can repeat some values and use \( \refl \) for some of the tail).
 \end{mydef}
 
 Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{L,i}:Tm=Tm \). We can concatenate all the loops \( \ell_{L,1}\cdot\cdots\cdot\ell_{L,k} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}):Tm=Tm  \).
@@ -177,8 +184,39 @@ Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with
 The total holonomy of \( T_1 \) on \( \oo \)(Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
 \end{mylemma}
 
-Prove\todo{independence on choices of face enumerator} that on a manifold \( \mm \) the total holonomy does not depend on the choices of the face enumerator.
+\begin{myprop}
+For a marked presented manifold \( \mm=\mrlzn(M) \) the total holonomy does not depend on the choices of the face enumerator.
+\end{myprop}
+\begin{proof}
+We will prove that changing the image of a point in the tail to an adjacent vertex does not affect the result. We will then prove that moving the master basepoint \( m \) to an adjacent vertex does not affect the result. The full result follows by concatenating such proofs. Figure~\ref{fig:tail_move} shows the image in \( \mm \) of two functions \( f, g \) on a segment of the tail. If \( f \) and \( g \) agree on the rest of the lasso, how is total holonomy affected? We will traverse this segment twice: left to right, then later from right to left. When moving to the right we must compare \( g(e_i)\cdot g(e_{i+1}) \) to \( f(e_i)\cdot f(e_{i+1}) \). There is a filler \( H:f(e_i)\cdot f(e_{i+1})=g(e_i)\cdot g(e_{i+1}) \) and so if the holonomy around the lasso \( f(L) \) is \[ f(e_1)\cdot\cdots\cdot f(e_i)\cdot f(e_{i+1})\cdot\cdots\cdot f(e_{i+1})^{-1}\cdot f(e_i)^{-1}\cdot\cdots f(e_1)^{-1} \] then there is a path \[ f(e_1)\cdot\cdots\cdot H\cdot\cdots\cdot H^{-1}\cdot\cdots f(e_1)^{-1} \] from \( f(L) \) to \( g(L) \).
+\end{proof}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
+  \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
+    % Define coordinates for the three additional vertices on the line segment
+    \node[internal, label=below:\( \begin{array}{c} f(p_i)\\g(p_i)\end{array} \)]  (P1)  at (-6, 0) {};
+    \node[internal, label=below:\( f(p_{i+1}) \)]  (P21) at (-4, 0) {};
+    \node[internal, label=above:\( g(p_{i+1}) \)] (P22) at (-4, 2) {};
+    \node[internal, label=below:\( \begin{array}{c} f(p_{i+2})\\g(p_{i+2})\end{array} \)]  (P3)  at (-2, 0) {};
+
+    % f
+    \draw[arrow] (P1)  edge["\( f(e_i) \)"] (P21);
+    \draw[arrow] (P21) edge["\( f(e_{i+1})\)"]  (P3);
+
+    \draw[arrow] (P1)  edge["\( g(e_i) \)"] (P22);
+    \draw[arrow] (P22) edge["\( g(e_{i+1})\)"]  (P3);
+    
+    % Add black circles at each additional vertex
+    \fill [black] (P1) circle (2pt);
+    \fill [black] (P21) circle (2pt);
+    \fill [black] (P3) circle (2pt);
+    \fill [black] (P22) circle (2pt);
+\end{tikzpicture}
+\caption{Two images of a part of the lasso tail.}
+\label{fig:tail_move}
+\end{figure}
 \begin{comment}
 \subsection{The torus}
 

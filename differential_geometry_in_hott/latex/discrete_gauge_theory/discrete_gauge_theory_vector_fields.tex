@@ -1,27 +1,18 @@
 \section{Vector fields}
 
-If \( T:\mm\to\EMzo \) is a bundle of mere circles, then a vector field should consist of, in part, a choice of a point in each fiber:
+We will again use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct vector fields on each skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
 
 \begin{mydef}
-Let \( \mm:\combmfdt \) be a combinatorial manifold. A \defemph{vector field \( X \) on \( \mm \)} is a section of \( P \) on the 1-skeleton of \( \mm \), i.e. a term \( X:\pit{x:\mm_1}T(x) \).
+\label{def:vector_field}
+A \defemph{nonvanishing flow} on a higher combinatorial manifold \( \mm \) is a section of the tangent bundle over the 0-skeleton, i.e. a term of \( X_0:\pit{x:\mm_0}Tx \).
 \end{mydef}
-\begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwyLCJcXG1hdGhiYntNfV8xIl0sWzIsMiwiXFxtYXRocm17RU19KFxcbWF0aGJie1p9LDEpIl0sWzIsMCwiXFxtYXRocm17RU19X1xcYnVsbGV0KFxcbWF0aGJie1p9LDEpIl0sWzAsMCwiUFxcc3RhY2tyZWx7XFxtYXRocm17ZGVmfX09e1xcc3VtX3tDOlRcXG1hdGhiYntNfV8xfUN9Il0sWzAsMSwiVCJdLFsyLDEsIlxcbWF0aHJte3ByfV8xIl0sWzMsMCwiXFxtYXRocm17cHJ9XzEiLDAseyJjdXJ2ZSI6LTF9XSxbMywyLCJcXG92ZXJsaW5le1R9Il0sWzAsMywie1g6XFxwcm9kX3t4OlxcbWF0aGJie019XzF9VHh9IiwwLHsiY3VydmUiOi0xfV0sWzAsMiwiVF9cXGJ1bGxldCJdLFszLDEsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
-\begin{tikzcd}
-  {P\stackrel{\mathrm{def}}={\sum_{C:T\mathbb{M}_1}C}} && {\mathrm{EM}_\bullet(\mathbb{Z},1)} \\
-  \\
-  {\mathbb{M}_1} && {\mathrm{EM}(\mathbb{Z},1).}
-  \arrow["{\overline{T}}", from=1-1, to=1-3]
-  \arrow["{\mathrm{pr}_1}", curve={height=-6pt}, from=1-1, to=3-1]
-  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=3-3]
-  \arrow["{{X:\prod_{x:\mathbb{M}_1}Tx}}", curve={height=-6pt}, from=3-1, to=1-1]
-  \arrow["{(T,X)}", from=3-1, to=1-3]
-  \arrow["T", from=3-1, to=3-3]
-\end{tikzcd}\end{center}
 
+\begin{mydef}
+\label{def:vector_pathover}
+A \defemph{nonvanishing vector field} on \( \mm \) is an extension \( X \) of \( X_0 \) from the 0-skeleton to the 1-skeleton: \( X:\pit{x:\mm_1}Tx \).
+\end{mydef}
 
-On 1-paths \( p:x=_{\mm_1}y \) \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \).
+On 1-paths \( p:x=_{\mm_1}y \), \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \).
 
 The goal now is to recompute the total curvature in the context of some vector field \( X \) and obtain three values:
 \begin{enumerate}

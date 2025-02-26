@@ -165,17 +165,17 @@ Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delt
 It's useful to define types that remember all or some of the data in these diagrams:
 
 \begin{mydef}
-Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. The diagrams also provide a map \( \re^{[n]}:\simcomp\to\Typen \) we call \defemph{presented realization}. If \( M \) is a simpicial manifold then we call \( \re^{[n]}(M) \) a \defemph{presented manifold}.
+Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. The diagrams also provide a map \( \rlzn:\simcomp\to\Typen \) we call \defemph{presented realization}. If \( M \) is a combinatorial manifold then we call \( \rlzn(M) \) a \defemph{presented manifold}.
 \end{mydef}
 
 The name ``presented type'' is inspired by von Raumer\cite{vonraumer_nonabelian}, where he uses such a structure in dimension 2 to construct double groupoids and crossed modules in type theory.
 
 \begin{mydef}
 \label{def:marked_presented_manifold}
-Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \). The diagrams also provide a map \( M\re^{[n]}:\simcomp\to\MTypen \) we call the \defemph{marked presented realization}. If \( M \) is a simpicial manifold then we call \( M\re^{[n]}(M) \) a \defemph{marked presented manifold}.
+Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \). The diagrams also provide a map \( \mrlzn:\simcomp\to\MTypen \) we call the \defemph{marked presented realization}. If \( M \) is a combinatorial manifold then we call \( \mrlzn(M) \) a \defemph{marked presented manifold}.
 \end{mydef}
 
-The maps \( *_i:M_i\to\mm_i \) pick out hub terms for each vertex, edge, face, and so on. Each of these higher faces has this designated point and a family of paths joining that point to the entire boundary. This is a hub and spoke model, with the maps \( *_v \) etc. giving us the hubs. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.
+The maps \( *_i:M_i\to\mm_i \) pick out vertices when \( i=0 \) and hub terms for each edge, face, and so on when \( i>1 \). Each of the higher faces has a hub and a family of paths joining the hub to the entire boundary. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.
 
 Going forward we will stick with 2-dimensional complexes, where forming the link of a vertex gives us a map \( \mm_0\to\Gon \) exactly when the complex is a combinatorial manifold, which by Corollary~\ref{cor:gon} means we have a map \( \link:\mm_0\to\EMzo \). Extending this map to all of \( \mm \) and exploring what we obtain is the main purpose of this note.
 
