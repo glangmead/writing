@@ -7,7 +7,8 @@ An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimensi
 \end{mydef}
 
 \begin{mydef}
-An \defemph{orientation} for a simplicial complex is\todo{orientation, and the slightly extra structure of an ordered list of vertices for each top-dim face}.
+\label{def:enumeration}
+An \defemph{enumeration} for a simplicial complex of dimension \( n \) is a choice for each top-dimensional face \( f_i:M_n \) of a total ordering of its \( n+1 \) vertices, denoted \( f_{i,E}=[f_{i,1},\ldots,f_{i,n+1}] \). This is the same as an orientation plus a starting vertex. Additionally we impose a compatibility condition: when two \( n \)-faces \( f_1,f_2 \) share an \( n-1 \)-face \( e=\{x_1,\ldots,x_n\} \), the two total orders for \( e \) inherited from \( f_1 \) and \( f_2 \) differ by an odd permutation. Equivalently, \( f_1 \) and \( f_2 \) assign opposite orientations to \( e \). 
 \end{mydef}
 
 \begin{mydef}
@@ -29,7 +30,7 @@ which attaches each \( k \)-simplex by taking the convex hull of the appropriate
 The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_{\leq 1}|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_{\leq n}|=|M| \).
 
 \begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \). \todo{Discuss orientation of the link in sets}
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \). We will call a total ordering of the link an \defemph{enumeration}, as we did for the faces.
 \label{def:link}
 \end{mydef}
 
@@ -75,53 +76,38 @@ The link is easier to understand as all the neighboring vertices of \( v \) and 
 A \defemph{combinatorial manifold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a \defemph{simplicial sphere} of dimension \( n-1 \) (meaning its geometric realization is homeomorphic to an \( n-1 \)-sphere). Denote by \( \combmfdset \) the type of combinatorial manifolds of dimension \( n \) (which the notation again reminds us are sets).
 \end{mydef}
 
-In a 2-dimensional combinatorial manifold the link is a polygon. See Figures~\ref{fig:sphere_triangulation}, \ref{fig:torus_wiki_triangulation}, and \ref{fig:genus3_wiki_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
+In a 2-dimensional combinatorial manifold the link is a polygon. See Figure~\ref{fig:sphere_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
 
-A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}.
+A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. There are important examples in four dimensions of topological manifolds that do not have any smoothness structure or triangulation. These will be out of reach of the theory we are building.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=200pt]{triangulated_sphere.pdf}
-\caption{A combinatorial triangulation of a sphere, created with the tool \texttt{stripy}.}
+\includegraphics[width=100pt]{triangulated_sphere.pdf}
+\includegraphics[width=100pt]{Torus-triang.png}
+\includegraphics[width=100pt]{triangulated_genus3.pdf}
+\caption{Combinatorial triangulations of a sphere, torus, and 3-holed torus. Sphere created with the tool \texttt{stripy}; torus from Wikipedia (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.); 3-holed torus from Wikipedia (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
 \label{fig:sphere_triangulation}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{Torus-triang.png}
-\caption{A torus with an interesting triangulation, from Wikipedia. The links have various vertex counts from 5-7. Clearly a constant value of 6 would also work. (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
-\label{fig:torus_wiki_triangulation}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=200pt]{triangulated_genus3.pdf}
-\caption{A 3-holed torus with triangulation, from Wikipedia. (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
-\label{fig:genus3_wiki_triangulation}
 \end{figure}
 
 \subsection{Higher inductive combinatorial manifolds}
 
-Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a sequence of homotopy pushouts:
-
-\begin{mydef}
-Define the function \defemph{(higher) realization} \( \re:\simcomp\to\Type \) by performing a homotopy pushout of the data from the geometric realization. The simplex \( \Delta^k \) is contractible up to homotopy so we can omit it.
-\end{mydef}
-
-For example in dimension 1 we could take the triangle with vertices \( \{v_1, v_2, v_3\} \) and edges \( \{e_{12}, e_{23}, e_{31}\} \) and form a polygon \( C_3 \):
+Instead of \( |M|:\Topcat \) we can use the simplicial complex to obtain \( \mm:\Type \) by forming a sequence of \emph{homotopy} pushouts. For example in dimension 1 we could take the triangle with vertices \( \{v_1, v_2, v_3\} \) and edges \( \{e_{12}, e_{23}, e_{31}\} \) and form a polygon \( C_3 \):
 \begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzAsMSwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFsxLDEsIkNfMyJdLFsxLDNdLFsyLDNdLFswLDIsIlxcc3Vic3RhY2t7ZV97MTJ9XFx0aW1lc1xceyBOLFNcXH1cXG1hcHN0byBcXHt2XzEsdl8yXFx9IFxcXFxlX3syM31cXHRpbWVzXFx7TixTXFx9XFxtYXBzdG8gXFx7dl8yLHZfM1xcfVxcXFxlX3szMX1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMyx2XzFcXH19IiwyXSxbMCwxLCJcXG1hdGhybXtwcl8xfSJdLFszLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzIsMSwiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzEsMiwiQ18zIl0sWzAsMiwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFswLDEsIlxcbWF0aHJte3ByXzF9Il0sWzAsMywiXFxzdWJzdGFja3tlX3sxMn1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMSx2XzJcXH0gXFxcXGVfezIzfVxcdGltZXNcXHtOLFNcXH1cXG1hcHN0byBcXHt2XzIsdl8zXFx9XFxcXGVfezMxfVxcdGltZXNcXHsgTixTXFx9XFxtYXBzdG8gXFx7dl8zLHZfMVxcfX0iLDJdLFsxLDJdLFszLDJdLFsyLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzMsMSwiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
   {C_{3,1}\times S^0=\{e_{12},e_{23},e_{31}\}\times \{N, S\}} & {C_{3,1}} \\
+  \\
   {C_{3,0}=\{v_1,v_2,v_3\}} & {C_3}
   \arrow["{\mathrm{pr_1}}", from=1-1, to=1-2]
-  \arrow["\begin{array}{c} \substack{e_{12}\times\{ N,S\}\mapsto \{v_1,v_2\} \\e_{23}\times\{N,S\}\mapsto \{v_2,v_3\}\\e_{31}\times\{ N,S\}\mapsto \{v_3,v_1\}} \end{array}"', from=1-1, to=2-1]
-  \arrow[from=1-2, to=2-2]
-  \arrow["{h_1}"', shorten <=31pt, shorten >=31pt, Rightarrow, from=2-1, to=1-2]
-  \arrow[from=2-1, to=2-2]
-  \arrow["\ulcorner"{anchor=center, below, pos=0, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow["\begin{array}{c} \substack{e_{12}\times\{ N,S\}\mapsto \{v_1,v_2\} \\e_{23}\times\{N,S\}\mapsto \{v_2,v_3\}\\e_{31}\times\{ N,S\}\mapsto \{v_3,v_1\}} \end{array}"', from=1-1, to=3-1]
+  \arrow["{*_1}", from=1-2, to=3-2]
+  \arrow["{h_1}"', shorten <=40pt, shorten >=40pt, Rightarrow, from=3-1, to=1-2]
+  \arrow[from=3-1, to=3-2]
+  \arrow["\ulcorner"{pos=0.05, rotate=180}, draw=none, from=3-2, to=1-1]
 \end{tikzcd}
 \end{center}
+The left vertical map expresses the connectivity between the edges and vertices in the set-based complex. The right vertical map \( *_1 \) provides a hub point for each edge, and the homotopy \( h_1 \) provides the spokes that connect the hub to the vertices. So in contrast to a geometric realization, the 1-dimensional cells in the HoTT sense are generated by the filler homotopy.
+
 In dimension 2 we could fill in maps from \( C_3 \) into our higher type by adding faces (hence reusing the object we just built above):
 \begin{center}
 % https://q.uiver.app/#q=WzAsNyxbMCwyLCJNXzFcXHRpbWVzIFNeMCJdLFswLDEsIk1fMD1cXG1hdGhiYntNfV8wIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFsxLDIsIk1fMSJdLFsxLDAsIk1fMlxcdGltZXMgQ18zIl0sWzIsMCwiTV8yIl0sWzIsMSwiXFxtYXRoYmJ7TX1fMiJdLFswLDEsIlxccGFydGlhbF8wIl0sWzEsMl0sWzAsMywiXFxtYXRocm17cHJ9XzEiLDJdLFszLDIsIipfMSIsMl0sWzIsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMiw2XSxbNCwyLCJcXHBhcnRpYWxfMSIsMl0sWzUsNiwiKl8yIl0sWzQsNSwiXFxtYXRocm17cHJ9XzEiXSxbNiw0LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsyLDUsImhfMiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzEsMywiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
@@ -134,16 +120,20 @@ In dimension 2 we could fill in maps from \( C_3 \) into our higher type by addi
   \arrow["{*_2}", from=1-3, to=2-3]
   \arrow[from=2-1, to=2-2]
   \arrow["{h_1}"', shorten <=11pt, shorten >=11pt, Rightarrow, from=2-1, to=3-2]
-  \arrow["{h_2}", shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=1-3]
+  \arrow["{h_2}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=1-3]
   \arrow[from=2-2, to=2-3]
   \arrow["\ulcorner"{anchor=center, above, pos=0.1, rotate=-90}, draw=none, from=2-2, to=3-1]
-  \arrow["\ulcorner"{anchor=center, below, pos=0, rotate=180}, draw=none, from=2-3, to=1-2]
+  \arrow["\ulcorner"{anchor=center, below, pos=-0.05, rotate=180}, draw=none, from=2-3, to=1-2]
   \arrow["{\partial_0}", from=3-1, to=2-1]
   \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
   \arrow["{*_1}"', from=3-2, to=2-2]
 \end{tikzcd}
 \end{center}
-The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. Similarly, \( \partial_1 \) maps each \( (f, C_3) \) to the triangle that this face bounds. The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
+The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. 
+
+\( \partial_1 \) maps each \( (f, C_3) \) to the triangle that this face bounds. How? \( C_3 \) is itself a pushout, so to map out of it we must map from the span \( \{v_1, v_2, v_3\}\leftarrow C_{3,1}\times S^0\rightarrow C_{3, 1} \). This amounts to a choice of three points and three connecting edges. We require these to be the image under \( M_0\to\mm_1 \) of the vertices inside the set-based face \( M_2 \) itself.
+ 
+ The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
 
 Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be
 \begin{center}%
@@ -151,22 +141,23 @@ Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delt
 \begin{tikzcd}
   \cdots & {M_{n-2}} & {M_n\times S^{n-1}} & {M_n} \\
   \cdots & {\mathbb{M}_{n-2}} & {\mathbb{M}_{n-1}} & {\mathbb{M}_n} \\
-  & \cdots & {M_{n-1}}
+  & {M_{n-1}\times S^{n-2}} & {M_{n-1}}
+  \arrow["{\partial_{n-2}}"', swap, from=3-2, to=2-2]
   \arrow[from=1-1, to=1-2]
   \arrow["{*_{n-2}}", from=1-2, to=2-2]
   \arrow["{\mathrm{pr}_1}", from=1-3, to=1-4]
   \arrow["{\partial_{n-1}}"', from=1-3, to=2-3]
   \arrow["{*_n}", from=1-4, to=2-4]
-  \arrow["{h_{n-2}}", shorten <=8pt, shorten >=8pt, Rightarrow, from=2-1, to=1-2]
+  \arrow["{h_{n-2}}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-1, to=1-2]
   \arrow[from=2-1, to=2-2]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow["\ulcorner"{pos=-0.01, rotate=180}, draw=none, from=2-2, to=1-1]
   \arrow[from=2-2, to=2-3]
   \arrow["{h_{n-1}}"', shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=3-3]
-  \arrow["{h_n}", shorten <=11pt, shorten >=11pt, Rightarrow, from=2-3, to=1-4]
+  \arrow["{h_n}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-3, to=1-4]
   \arrow[from=2-3, to=2-4]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-4, to=1-3]
-  \arrow[from=3-2, to=3-3]
+  \arrow["\ulcorner"{pos=-0.15, rotate=-90}, draw=none, from=2-3, to=3-2]
+  \arrow["\ulcorner"{pos=0.01, rotate=180}, draw=none, from=2-4, to=1-3]
+  \arrow["{\mathrm{pr}_1}", swap, from=3-2, to=3-3]
   \arrow["{*_{n-1}}"', from=3-3, to=2-3]
 \end{tikzcd}
 \end{center}
@@ -174,13 +165,14 @@ Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delt
 It's useful to define types that remember all or some of the data in these diagrams:
 
 \begin{mydef}
-Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams.
+Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. The diagrams also provide a map \( \re^{[n]}:\simcomp\to\Typen \) we call \defemph{presented realization}. If \( M \) is a simpicial manifold then we call \( \re^{[n]}(M) \) a \defemph{presented manifold}.
 \end{mydef}
 
 The name ``presented type'' is inspired by von Raumer\cite{vonraumer_nonabelian}, where he uses such a structure in dimension 2 to construct double groupoids and crossed modules in type theory.
 
 \begin{mydef}
-Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \).
+\label{def:marked_presented_manifold}
+Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \). The diagrams also provide a map \( M\re^{[n]}:\simcomp\to\MTypen \) we call the \defemph{marked presented realization}. If \( M \) is a simpicial manifold then we call \( M\re^{[n]}(M) \) a \defemph{marked presented manifold}.
 \end{mydef}
 
 The maps \( *_i:M_i\to\mm_i \) pick out hub terms for each vertex, edge, face, and so on. Each of these higher faces has this designated point and a family of paths joining that point to the entire boundary. This is a hub and spoke model, with the maps \( *_v \) etc. giving us the hubs. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.

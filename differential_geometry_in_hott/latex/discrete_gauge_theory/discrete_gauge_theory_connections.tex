@@ -1,26 +1,27 @@
-\section{Connections and curvature}
+\section{Bundles, connections, and curvature}
 
-\todo{expand and clarify connections. suggest terminology such as \( n \)-connections, obstruction language}
+We will use the dimension structure of a marked presented manifold\ref{def:marked_presented_manifold} to construct maps by extending to each higher skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq M\re^{[n]}(M) \) the corresponding marked presented manifold.
+
 \begin{mydef}
 \label{def:bundle}
-A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a map from \( \mm_0 \) to \( \uni \).\todo{Define the tangent bundle in particular}
+A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a type family, i.e. a term of \( f_0:\mm_0 \to \uni \). If the type family is given by taking the link\ref{def:link} of a vertex then we call the bundle \defemph{the tangent bundle} of \( \mm \) and it necessarily maps \( \mm_0\to\EMzo \).
 \end{mydef}
 
 \begin{mydef}
 \label{def:connection}
-A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle from the 0-skeleton to the 1-skeleton \( \mm_1 \). \todo{In the case of the tangent bundle define an orientation.}
+A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle \( f_0 \) from the 0-skeleton to the 1-skeleton: \( f_1:\mm_1\to\uni \). A connection on the tangent bundle is \defemph{orientable} if it factors through \( \Kzt \), and the factorization is called an \defemph{orientation of the tangent bundle}.
 \end{mydef}
+
+For a connection to exist, the bundle \( f_0 \) must extend to \( \mm_1 \). Given two points \( x,y:\mm_0 \) and (the realization of) an edge \( e:x=y \) there is an obstruction to the extension, namely that \( f_0(x) \) and \( f_0(y) \) must live in the same connected component of \( \uni \) (or of \( \EMzo \) in the case of a tangent bundle). The entirety of \( f_0 \) can be extended if every vertex maps to the same connected component. If the bundle is an oriented tangent bundle, and if we choose a base point \( m:\mm_1 \) and an orientation of \( \link(m) \) then transport along any loop preserves this orientation. Note that this is orientation of a \emph{link}, not orientation of a \emph{face} as in Definition~\ref{def:enumeration}.
 
 \begin{mydef}
 \label{def:curvature}
-The \defemph{curvature of a connection} on a family \( T:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( f \) with boundary path \( p_f \) of a marked presented type \( \mm \) is the automorphism \( \tr(p_f)(Tv) \). A \defemph{flatness structure on the face \( f \)} is an extension of \( T \) to \( f \), which is a homotopy \( H_f:\tr(p_f)(Tv)\sim\id_{Tv} \) from the curvature of \( f \) at \( v \) to the identity.
+The \defemph{curvature} on a bundle-with-connection \( f_1:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( F \) with boundary path \( p_F \) is the automorphism \( \tr(p_F)(fv) \). An extension of \( f_1 \) to \( F \) is a homotopy \( H_F:\tr(p_F)(fv)\sim\id_{fv} \) from the curvature of \( F \) at \( v \) to the identity. We will call such an extension a \defemph{flatness structure on the face \( f \)}. By analogy to the definition of a 1-connection we can also call this a \defemph{2-connection}.
 \end{mydef}
 
-\begin{mynote}
-We have defined a function on a cell by requiring it to correspond to the value on the boundary of that cell. This is familiar in classical differential topology, where it's called \emph{the exterior derivative}. The duality of \( d \) and \( \partial \) is recognizable in \( T_2 \), and we might say ``curvature is the derivative of the connection.''
-\end{mynote}
+For a 2-connection to exist on a face \( F \), the holonomy map \( \tr(p_F) \) must be in the connected component of the identity map \( \id_{fv} \).
 
-\subsection{The function \texorpdfstring{\( T \)}{T}}
+\subsection{The function \texorpdfstring{\( T \)}{T} on \texorpdfstring{\( \oo \)}{O}}
 
 We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
 
