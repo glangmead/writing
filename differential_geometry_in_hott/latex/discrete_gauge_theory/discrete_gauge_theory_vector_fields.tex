@@ -1,6 +1,6 @@
 \section{Vector fields}
 
-We will again use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct vector fields on each skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
+We\chcomment[id=Greg]{All new section} will again use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct vector fields on each skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
 
 \begin{mydef}
 \label{def:vector_field}
@@ -12,133 +12,20 @@ A \defemph{nonvanishing flow} on a higher combinatorial manifold \( \mm \) is a 
 A \defemph{nonvanishing vector field} on \( \mm \) is an extension \( X \) of \( X_0 \) from the 0-skeleton to the 1-skeleton: \( X:\pit{x:\mm_1}Tx \).
 \end{mydef}
 
-On 1-paths \( p:x=_{\mm_1}y \), \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \).
+An extension of \( X \) to the full 2-skeleton of \( \mm \) would be a trivialization of the tangent bundle, which we do not stipulate. But we do not lose any classical generality by assuming we have such a section/trivialization on the 1-skeleton. This corresponds to the fact that the zeros of a vector field can be perturbed to be isolated, and to live inside the faces of a triangulation.
 
-The goal now is to recompute the total curvature in the context of some vector field \( X \) and obtain three values:
+On 1-paths \( p:x=_{\mm_1}y \), \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \). All told, given a loop \( \ell:m=_\mm m \) around a single face, we have the following constructions:
+
 \begin{enumerate}
-\item \todo{Define these systematically}The total curvature, e.g. in the case of \( \oo \) the value \( R^8 \).
-\item The total winding of \( X \), which will take the proof of pointedness around all faces in the domain of \( X \). Being a loop in a circle, this is an integer.
-\item A pointed version of curvature, which couples the winding of \( X \) to the transport, which is a total function, and which produces a contractible pointed map, i.e. 0.
+\item \( \tr(\ell):Tm=Tm \), the holonomy around \( \ell \).
+\item \( \flat(\ell):\tr(\ell)=_{Tm=Tm}\id_{Tm} \), the flatness structure.
+\item \( X(\ell):\tr(\ell)(Xm)=_{Tm} Xm \), the path over \( \ell \) selected by \( X \), i.e. a pointing of \( \tr(\ell) \).
 \end{enumerate}
-
-Once we have these, we will unpack how they provide a proof in HoTT of the Poincaré-Hopf theorem and the Gauss-Bonnet theorem.
 
 \subsection{Index of a vector field: subtracting curvature}
 
-Index should be an integer that computes a winding number ``of the vector field'' around a zero. Classically this is done in a local trivialization around a zero of the vector field, with a canonical flat connection associated to the trivialization (an isomorphism with a product bundle). We should therefore first look for a loop in one of our pointed fibers \( (Tm, Xm) \). Let \( \pi_1,\ldots,\pi_k:L\to\mm \) be a face enumerator with basepoint \( m:\mm \) (Definition~\ref{def:face_enumerator}) and consider the loop \( \ell\defeq\ell_{L,1} \).
-
-\( T\ell:Tm=Tm \) is the holonomy isomporphism of the loop, and it has flatness structure \( H\ell:T\ell=\id_m \). The vector field assigns a dependent path over the loop (a \emph{loopover}) \( X\ell:T\ell(Xm)=Xm \) which is not a closed loop in general. (Remember, this is the whole point of curvature: transporting around a loop does not produce a \emph{pointed} isomorphism of the fiber.)
-
-But notice that the flatness structure tells us exactly how to close the loopover and produce an honest loop in \( (Tm,Xm) \), namely by evaluating \( H\ell \) at \( Xm \), giving \( H\ell(Xm):T\ell(Xm)=Xm \), which is of the same type as \( X\ell \). Forming the concatenation \( X\ell\cdot H\ell(Xm)^{-1}:Xm=Xm \) gives a term in the loop space \( \Omega_{Xm}(Tm)\simeq\zz \). Conceptually, we have asked how much the vector field swirls as it moves around the loop \emph{not counting any swirl of the parallel transport}. The concatenation \( -\cdot H\ell(Xm)^{-1} \) is a subtraction of the effect of curvature.
-
-We have constructed a map \( \Omega_m(\mm)\to \Omega_{Xm}(Tm)\):
-\begin{mydef}
-The \defemph{index} \( \mathscr{I}_X:\Omega_m(\mm)\to \Omega_{Xm}(Tm) \) is the map \( \ell\mapsto X\ell\cdot H\ell(Xm)^{-1}:Xm=Xm\).
-\end{mydef}
-
-\begin{mydef}
-The \defemph{total index} of \( X \) is \( \mathscr{I}_X(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}) \).
-\end{mydef}
-
 \subsection{Equality of total index and total curvature}
-
-\begin{comment}
-Here we are inspired by the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
-
-\begin{mydef}
-\label{def:enumeration2}
-An \defemph{enumeration} of a principal bundle with connection and vector field on a higher combinatorial manifold consists of the following data:
-\begin{itemize}
-\item a family \( T:\mm\to\Kzt \) on some higher combinatorial manifold
-\item a nonvanishing vector field \( X:\mm\setminus Z\to P \) with isolated zeros \( Z \)
-\item a total face of the replacement \( \mm_Z \) (Definition~\ref{def:totalface}), that is 
-\begin{itemize}
-\item a basepoint \( a:\mm_Z \) 
-\item a term \( f_{\mm_Z}:\refl_a=\refl_a \) given by
-\begin{itemize}
-\item an ordering of the face constructors \( \{f_i\} \), with the sub-list of faces denoted \( \{f_{zk}\} \) refers to the replacement faces at the zeros
-\item a vertex \( v_i \) in each face
-\item terms \( a=v_i \) for each face
-\end{itemize}
-\end{itemize}
-\end{itemize}
-\end{mydef}
-
-\begin{mynote}
-An enumeration let us work both with \( \mm\setminus Z \) where the vector field is nonvanishing, while also having access to the disks that are missing from \( \mm\setminus Z \).
-\end{mynote}
-
-\begin{mylemma}
-The sub-list of faces \( \{f_i\}-\{f_{zk}\} \) obtained by skipping the replacement faces at the zeros, is an ordering of face constructors for \( \mm\setminus Z \).
-\end{mylemma}\begin{proof}
-The algorithm that visits each face in order always starts and ends at \( a \) and so we can skip any faces we wish, to obtain an ordering of face constructors for the remaining union of faces.
-\end{proof}
-
-Note that on \( \mm\setminus Z \) the vector field \( X \) trivializes the bundle by mapping into the contractible type of pointed types over \( \Kzt \). So \( X\simeq Y:\mm\setminus Z\to (Ta,a) \), the fixed pointed circle in the fiber of the basepoint \( a \). 
-
-\begin{mylemma}
-The degree of \( Y \) is minus the total index of \( X \).
-\end{mylemma}\begin{proof}
-The ordering of faces \( \{f_i\}-\{f_{zk}\} \) provides an ordering of all the edges, say \( \{e_l\} \). Each edge appears an even number of times in this list, traversed in opposite directions, except those bounding a replacement face. These replacement-bounding edges are traversed an odd number of times and can be concatenated to traverse the boundary counterclockwise. Concatenation of paths in \( S^1 \) is abelian, so  \( Y(\{e_l\}) \) cancels except on the boundary of the replacement faces, which gives a map from the disjoint union of boundary circles to \( Ta \), with each boundary circle traversed in the counterclockwise direction. The orientation gives the minus sign.
-\end{proof}
-
-Consider now the total face \( f_{\mm_Z} \) of \( \mm_Z \) and its ordering of faces \( \{f_i\} \). \( Y \) is only defined on some of these faces. We will define a new function on all the \( \{f_i\} \).
-
-\begin{mydef}
-The \defemph{coupling map} \( C:\mm_Z\to Ta \) is defined to be \( Y \) on \( \mm\setminus Z \) and on the remaining faces it is defined by \( C(f_i)\defeq\apd(X)(\partial f_i) \) where \( \partial f_i:v_i=v_i \) is the clockwise path around the face starting from the vertex supplied by the data of the total face.
-\end{mydef}
-
-Because \( \apd \) uses both transport and the value of the vector field, it couples the connection with the vector field, hence the name. Of course in HoTT this coupling is built into the definition of \( \apd \), so that's another reminder that we aren't straying far from the foundations to find these geometrical concepts. 
-
-The fact that \( C \) is defined on all the faces, by using the value of the vector field only on the 1-skeleton of \( \mm_Z \) where it was always defined, lets us make the final part of the argument.
-
-\begin{mylemma}
-\( C:\cup_i\{f_i\}\to Ta \) is equal to a constant map.
-\end{mylemma}
-\begin{proof}
-The data of the total face provides an ordering of all the edges. Each edge appears an even number of times, traversed in opposite directions, including the edges in the replacement faces. Concatenation of paths in the polygon \( Ta \) is abelian, so the paths all cancel.
-\end{proof}
-
-\( C \) is similar to \( X \) and \( Y \) except that it is a total function. On any given edge it computes a path, that is, a homotopy from the function \( \tr \) to the function \( X \), which we can call ``the difference between transport and the vector field on that edge.'' We have found a way to add all these homotopies together to get 0. We can call this total ``the difference between the total index and the total curvature.''
-
-Recall now that we made some arbitrary choices in Definition~\ref{def:enumeration} of an enumeration, and hence the function \( C \). But since \( C \) is unconditionally constant, the space of extra data is contractible.
-
-\begin{mycor}
-The total index of a vector field with isolated zeros is independent of the vector field.
-\end{mycor}
-
-\begin{mycor}
-The total curvature is an integer.
-\end{mycor}
-
-The last step is to link this value to the Euler characteristic.
-\end{comment}
 
 \subsection{Identification with Euler characteristic}
 
-\begin{comment}
-Here we only point the way. Combinatorial manifolds are intuitive objects that connect directly to the classical definition of Euler characteristic. We can argue using Morse theory, the study of smooth real-valued functions on smooth manifolds and their singularities. Classically the gradient of a Morse function is a vector field that can be used to decompose the manifold into its \emph{handlebody decomposition}. This would be an excellent story to pursue in future work.
 
-Imagine starting with a classical 2-manifold of genus \( g \) that has been triangulated. Stand it upright with the holes forming a vertical sequence. Now install a vector field that points downward whenever possible. This vector field will have a zero at the top and bottom, and one at the top and bottom of each hole. The top and bottom will have zeros of (classical) index 1, and zeros in the holes will have index --1. We include some sketches in the case of a torus (Figure~\ref{fig:torus_morse_skel}). This illustrates how we obtain the formula for genus \( g \): \( \chi(M)=2-2g \). If we choose the triangulation so that the zeros are at vertices, we should be able to import that data into \( \combmfdt \) and reproduce the computation using the tools in this note.
-
-\begin{figure}[htbp]
-\centering
-% https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJ1bGxldCJdLFswLDEsIlxcYnVsbGV0Il0sWzAsMiwiXFxidWxsZXQiXSxbMCwzLCJcXGJ1bGxldCJdLFsxLDAsIlxcbWF0aHJte3RvcH0iXSxbMSwxLCJcXG1hdGhybXt1cHBlclxcIGhvbGV9Il0sWzEsMiwiXFxtYXRocm17bG93ZXJcXCBob2xlfSJdLFsxLDMsIlxcbWF0aHJte2JvdHRvbX0iXSxbMCwxLCIiLDIseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDEsIiIsMCx7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwzLCIiLDAseyJjdXJ2ZSI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwzLCIiLDEseyJjdXJ2ZSI6LTV9XSxbMCwzLCIiLDEseyJjdXJ2ZSI6NX1dLFsxLDIsIiIsMSx7ImN1cnZlIjoyfV0sWzEsMiwiIiwxLHsiY3VydmUiOi0yfV1d
-\begin{tikzcd}[cramped]
-  \bullet & {\mathrm{top}} \\
-  \bullet & {\mathrm{upper\ hole}} \\
-  \bullet & {\mathrm{lower\ hole}} \\
-  \bullet & {\mathrm{bottom}}
-  \arrow[curve={height=-6pt}, dashed, from=1-1, to=2-1]
-  \arrow[curve={height=6pt}, dashed, from=1-1, to=2-1]
-  \arrow[curve={height=-30pt}, from=1-1, to=4-1]
-  \arrow[curve={height=30pt}, from=1-1, to=4-1]
-  \arrow[curve={height=12pt}, from=2-1, to=3-1]
-  \arrow[curve={height=-12pt}, from=2-1, to=3-1]
-  \arrow[curve={height=-6pt}, dashed, from=3-1, to=4-1]
-  \arrow[curve={height=6pt}, dashed, from=3-1, to=4-1]
-\end{tikzcd}
-\caption{Schematic of the zeros of the downward flow of a torus.}
-\label{fig:torus_morse_skel}
-\end{figure}
-\end{comment}
