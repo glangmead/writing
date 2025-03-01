@@ -1,6 +1,6 @@
 \section{Bundles, connections, and curvature}
 
-We\chcomment[id=Greg]{All new, up to section 4.1} will use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct maps by extending to each higher skeleton. We can state these definitions in the context of an arbitrary-dimensional manifold. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
+We will use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct maps by extending to each higher skeleton. We can state these definitions in the context of an arbitrary-dimensional manifold. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
 
 \begin{mydef}
 \label{def:bundle}
@@ -175,7 +175,7 @@ The purpose of this type is to probe combinatorial manifolds in an organized fas
 
 \begin{mydef}
 \label{def:face_enumerator}
-Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. A \defemph{face enumerator \added{of maximum length \( n \)}} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L_n\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \), where \( m:\mm \) is a chosen basepoint. We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise). \added{It is convenient to fix one value of \( n \) for all the lassos, even if some lassos only need a shorter tail (in which case they can repeat some values and use \( \refl \) for some of the tail).}
+Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. A \defemph{face enumerator of maximum length \( n \)} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L_n\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \), where \( m:\mm \) is a chosen basepoint. We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise). It is convenient to fix one value of \( n \) for all the lassos, even if some lassos only need a shorter tail (in which case they can repeat some values and use \( \refl \) for some of the tail).
 \end{mydef}
 
 Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{L,i}:Tm=Tm \). We can concatenate all the loops \( \ell_{L,1}\cdot\cdots\cdot\ell_{L,k} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}):Tm=Tm  \).
@@ -185,10 +185,10 @@ The total holonomy of \( T_1 \) on \( \oo \)(Definition~\ref{def:octahedron_holo
 \end{mylemma}
 
 \begin{myprop}
-For\chcomment[id=Greg]{New proposition, incomplete} a marked presented manifold \( \mm=\mrlzn(M) \) the total holonomy does not depend on the choices of the face enumerator.
+For a marked presented manifold \( \mm=\mrlzn(M) \) the total holonomy does not depend on the choices of the face enumerator.
 \end{myprop}
 \begin{proof}
-We will prove that changing the image of a point in the tail to an adjacent vertex does not affect the result. We will then prove that moving the master basepoint \( m \) to an adjacent vertex does not affect the result. The full result follows by concatenating such proofs. Figure~\ref{fig:tail_move} shows the image in \( \mm \) of two functions \( f, g \) on a segment of the tail. If \( f \) and \( g \) agree on the rest of the lasso, how is total holonomy affected? We will traverse this segment twice: left to right, then later from right to left. When moving to the right we must compare \( g(e_i)\cdot g(e_{i+1}) \) to \( f(e_i)\cdot f(e_{i+1}) \). There is a filler \( H:f(e_i)\cdot f(e_{i+1})=g(e_i)\cdot g(e_{i+1}) \) and so if the holonomy around the lasso \( f(L) \) is \[ f(e_1)\cdot\cdots\cdot f(e_i)\cdot f(e_{i+1})\cdot\cdots\cdot f(e_{i+1})^{-1}\cdot f(e_i)^{-1}\cdot\cdots f(e_1)^{-1} \] then there is a path \[ f(e_1)\cdot\cdots\cdot H\cdot\cdots\cdot H^{-1}\cdot\cdots f(e_1)^{-1} \] from \( f(L) \) to \( g(L) \).\chcomment[id=Greg]{Lost the plot a bit. This isn't quite a conjugation.}
+We will prove that changing the image of a point in the tail to an adjacent vertex does not affect the result. We will then prove that moving the master basepoint \( m \) to an adjacent vertex does not affect the result. The full result follows by concatenating such proofs. Figure~\ref{fig:tail_move} shows the image in \( \mm \) of two functions \( f, g \) on a segment of the tail. If \( f \) and \( g \) agree on the rest of the lasso, how is total holonomy affected? We will traverse this segment twice: left to right, then later from right to left. When moving to the right we must compare \( g(e_i)\cdot g(e_{i+1}) \) to \( f(e_i)\cdot f(e_{i+1}) \). There is a filler \( H:f(e_i)\cdot f(e_{i+1})=g(e_i)\cdot g(e_{i+1}) \) and so if the holonomy around the lasso \( f(L) \) is \[ f(e_1)\cdot\cdots\cdot f(e_i)\cdot f(e_{i+1})\cdot\cdots\cdot f(e_{i+1})^{-1}\cdot f(e_i)^{-1}\cdot\cdots f(e_1)^{-1} \] then there is a path \[ f(e_1)\cdot\cdots\cdot H\cdot\cdots\cdot H^{-1}\cdot\cdots f(e_1)^{-1} \] from \( f(L) \) to \( g(L) \).
 \end{proof}
 
 \begin{figure}[htbp]
