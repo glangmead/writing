@@ -9,6 +9,7 @@
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{multicol}
+\RequirePackage{shadethm}
 
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
@@ -240,7 +241,23 @@
 \renewcommand{\labelitemii}{$\bullet$}
 \renewcommand{\labelitemiii}{$\bullet$}
 \renewcommand{\labelitemiv}{$\bullet$}
+\newcommand{\myspan}[5]{{#1}\xleftarrow[]{#4}{#2}\xrightarrow[]{#5}{#3}}
 
+\newenvironment{dedication}
+{\clearpage           % we want a new page
+ \thispagestyle{empty}% no header and footer
+ \vspace*{\stretch{1}}% some space at the top
+ \itshape             % the text is in italics
+ \raggedleft          % flush to the right margin
+}
+{\par % end the paragraph
+ \vspace{\stretch{3}} % space at bottom is three times that at the top
+ \clearpage           % finish off the page
+}
+
+
+\setlength{\shadeboxsep}{10pt}
+%\setlength{\shadeboxrule}{10pt}
 \newtheoremstyle{mythmstyle}
 {5pt} % Space above
 {-4pt} % Space below
@@ -250,6 +267,17 @@
 {.} % Punctuation after theorem head
 {.5em} % Space after theorem head
 {} % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{myremarkstyle}
+{5pt} % Space above
+{-4pt} % Space below
+{\small} % Body font
+{} % Indent amount
+{\itshape\bfseries} % Theorem head font
+{.} % Punctuation after theorem head
+{.5em} % Space after theorem head
+{} % Theorem head spec (can be left empty, meaning `normal')
+
 \theoremstyle{mythmstyle}
 \newtheorem{mydef}{Definition}[section]
 \newtheorem{mythm}{Theorem}[section]
@@ -257,4 +285,5 @@
 \newtheorem{mycor}{Corollary}[section]
 \newtheorem{myprop}{Proposition}[section]
 \newtheorem{myclaim}{Claim}[section]
-\newtheorem{mynote}{Note}[section]
+\theoremstyle{myremarkstyle}
+\newshadetheorem{mynote}{Remark}

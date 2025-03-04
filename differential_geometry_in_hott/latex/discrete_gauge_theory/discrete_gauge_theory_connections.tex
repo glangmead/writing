@@ -1,32 +1,54 @@
 \section{Bundles, connections, and curvature}
-
-We will use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct maps by extending to each higher skeleton. We can state these definitions in the context of an arbitrary-dimensional manifold. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
-
-\begin{mydef}
-\label{def:bundle}
-A \defemph{bundle} on a higher combinatorial manifold \( \mm \) is a type family, i.e. a term of \( f_0:\mm_0 \to \uni \). If the type family is given by taking the link(\ref{def:link}) of a vertex then we call the bundle \defemph{the tangent bundle} of \( \mm \) and it necessarily maps \( \mm_0\to\EMzo \).
-\end{mydef}
+A map out of a higher combinatorial manifold has various components. These line up with classical definitions, and identifying those is a primary purpose of this note.
 
 \begin{mydef}
 \label{def:connection}
-A \defemph{connection} on a higher combinatorial manifold is an extension of a bundle \( f_0 \) from the 0-skeleton to the 1-skeleton: \( f_1:\mm_1\to\uni \). A connection on the tangent bundle is \defemph{orientable} if it factors through \( \Kzt \), and the factorization is called an \defemph{orientation of the tangent bundle}.
+If \( \mm \) is a higher combinatorial manifold and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
 \end{mydef}
+\begin{center}
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfV9uIl0sWzMsMCwiXFxjZG90cyJdLFsyLDEsIlxcbWF0aGNhbHtVfSJdLFswLDFdLFsxLDJdLFsyLDRdLFs0LDNdLFswLDUsImZfMCJdLFsxLDUsImZfMSJdLFsyLDUsImZfMiJdLFszLDUsImZfbiIsMl1d
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfSJdLFszLDAsIlxcY2RvdHMiXSxbMiwxLCJcXG1hdGhjYWx7VX0iXSxbMCwxXSxbMSwyXSxbMiw0XSxbNCwzXSxbMCw1LCJmXzAiXSxbMSw1LCJmXzEiXSxbMiw1LCJmXzIiXSxbMyw1LCJmIiwyXV0=
+\begin{tikzcd}
+  {\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} & \cdots & {\mathbb{M}} \\
+  && {\mathcal{U}}
+  \arrow[from=1-1, to=1-2]
+  \arrow["{f_0}", from=1-1, to=2-3]
+  \arrow[from=1-2, to=1-3]
+  \arrow["{f_1}", from=1-2, to=2-3]
+  \arrow[from=1-3, to=1-4]
+  \arrow["{f_2}", from=1-3, to=2-3]
+  \arrow[from=1-4, to=1-5]
+  \arrow["f"', from=1-5, to=2-3]
+\end{tikzcd}
+\end{center}
+and such that for each pushout defining \( \mm_k \) we have the diagram
+\begin{center}
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIk1fa1xcdGltZXMgU15rIl0sWzEsMCwiTV9rIl0sWzEsMSwiXFxtYXRoYmJ7TX1fayJdLFsxLDIsIlxcbWF0aGNhbHtVfSJdLFswLDNdLFsxLDAsIlxccGFydGlhbF97ay0xfSIsMl0sWzIsMywiKl9rIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFswLDIsImhfayIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzMsNCwiZl9rIl0sWzAsNCwiZl97ay0xfSIsMl0sWzMsMTIsIiIsMCx7InNob3J0ZW4iOnsidGFyZ2V0IjoyMH19XV0=
+\begin{tikzcd}
+  {M_k\times S^k} & {M_k} \\
+  {\mathbb{M}_{k-1}} & {\mathbb{M}_k} \\
+  & {\mathcal{U}}
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
+  \arrow["{\partial_{k-1}}"', from=1-1, to=2-1]
+  \arrow["{*_k}", from=1-2, to=2-2]
+  \arrow["{h_k}", shorten <=9pt, shorten >=9pt, Rightarrow, from=2-1, to=1-2]
+  \arrow[from=2-1, to=2-2]
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{k-1}}"', from=2-1, to=3-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow["{f_k}", from=2-2, to=3-2]
+  \arrow[shorten >=2pt, Rightarrow, from=2-2, to=0]
+\end{tikzcd}
+\end{center}
+then we say
+\begin{itemize}
+\item The map \( f_k \) is a \defemph{\( k \)-bundle} on \( \mm_k \).
+\item Given \( f_{k-1} \), the pair given by the map \( f_k \) and the proof \( f_k\circ \imath_{k-1}=f_{k-1} \) that \( f_k \) extends \( f_{k-1} \) is called a \defemph{\( k \)-connection on the bundle \( f_{k-1} \)}.
+\item For each \( k \)-face \( m_k:M_k \) the proof of commutativity of the outer square of the second diagram is called a \defemph{flatness structure for the face \( m_k \)}.
+\end{itemize}
 
-For a connection to exist, the bundle \( f_0 \) must extend to \( \mm_1 \). Given two points \( x,y:\mm_0 \) and (the realization of) an edge \( e:x=y \) there is an obstruction to the extension, namely that \( f_0(x) \) and \( f_0(y) \) must live in the same connected component of \( \uni \) (or of \( \EMzo \) in the case of a tangent bundle). The entirety of \( f_0 \) can be extended if every vertex maps to the same connected component. If the bundle is an oriented tangent bundle, and if we choose a base point \( m:\mm_1 \) and an orientation of \( \link(m) \) then transport along any loop preserves this orientation. Note that this is orientation of a \emph{link}, not orientation of a \emph{face} as in Definition~\ref{def:enumeration}.
-
-\begin{mydef}
-\label{def:curvature}
-The \defemph{curvature} on a bundle-with-connection \( f_1:\mm_1\to\uni \) at a vertex \( v \) of a 2-face \( F \) with boundary path \( p_F \) is the automorphism \( \tr(p_F):f_0v=f_0v \). An extension of \( f_1 \) to \( F \) is a \defemph{2-connection on the face \( F \)}.
-\end{mydef}
-
-For a 2-connection to exist on a face \( F \) the holonomy map \( \tr(p_F) \) must be in the connected component of the identity map \( \id_{f_0v} \).
-
-\begin{mylemma}
-A 2-connection on the face \( F \) is equivalent to a homotopy \( H_F:\tr(p_F)(f_0v)\sim\id_{f_0v} \) from the curvature of \( F \) at \( v \) to the identity. We will call \( H_F \) the \defemph{flatness structure on the face \( F \)} since it provides a path to the trivial holonomy.
-\end{mylemma}
-\begin{proof}
-The face \( F \) provides a path \( p_F=_\mm\refl_v \), i.e. a filler of the boundary path. If \( f_1 \) extends to a map \( f_2 \) on \( F \) then by functoriality we have a term \( f_2(p_F)=\refl_{f_2v} \), i.e. a term \( f_1(p_F)=\refl_{f_0v} \). We then observe that transport is given by this action on paths \( f_1(p_F) \).
-\end{proof}
+\begin{mynote}
+Another classical object we can identify here is a \emph{gauge transformation}, which is a bundle automorphism \( H:f\sim f\defeq \pit{m:\mm}f(m)=f(m) \). If we have \( ||H=\id_f||_{-1} \) then the gauge transformation is called \emph{small}, else \emph{large}.
+\end{mynote}
 
 \subsection{The function \texorpdfstring{\( T \)}{T} on \texorpdfstring{\( \oo \)}{O}}
 
@@ -42,7 +64,7 @@ We will build up a map \( T \) out of \( \oo \) which is meant to be like the ci
 We chose these orderings for the vertices in the link, by visualizing standing at the given vertex as if it were the north pole, then looking south and enumerating the link in clockwise order, starting from \( w \) if possible, else \( b \).
 \end{mydef}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \input{discrete_gauge_theory_oo_transport_tikz}
 \caption{\( \link \) for the vertices \( w, b\) and \( r \).}
@@ -118,130 +140,6 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 \end{multicols}
 where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with \( R^{-1} \). Passing through univalence we get a 2-path between \( R \) and \( \refl \) in the loop space \( C_4=_{\EMzo}C_4 \).
 \end{mydef}
-
-\subsection{Total holonomy}
-\begin{mydef}
-The \defemph{triangular lasso \( L_n:\Type \) with tail of length \( n \)} (Figure~\ref{fig:lasso}) is a 1-type given by:
-\begin{itemize}
-\item a set of tail vertices \( p_1,\ldots,p_n \)
-\item triangle vertices \( v_1, v_2, v_3 \)
-\item tail edges \( e_i:p_i=_L p_{i-1}, i=1,\ldots,n-1 \)
-\item edge \( e_n:p_n=_L v_1 \)
-\item triangle edges \( e_ij:v_i=_L v_j \)
-\end{itemize}
-The loop \( \ell_L \) determined by the lasso is the concatenation along the tail towards the triangle, then around the triangle, then backward along the tail:\[ e_1\cdot\cdots\cdot e_n\cdot e_{12}\cdot e_{23} \cdot e_{31}\cdot e_n^{-1}\cdot\cdots\cdot e_1^{-1}. \]
-Define the special case \( n=0 \) to have an empty tail with \( p_1\defeq v_1 \) and \( e_1\defeq\refl_{v_1} \), so includes only the triangle.
-\end{mydef}
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
-  \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
-    % Define coordinates for the equilateral triangle
-    \node[internal, label=above:\( v_2 \)] (A) at (1, 1.732) {}; % Top vertex
-    \node[internal, label=below:\( v_1 \)] (B) at (0, 0) {};     % Left vertex
-    \node[internal, label=below:\( v_3 \)] (C) at (2, 0) {};     % Right vertex
-
-    % Draw the equilateral triangle with black vertices
-    \draw[arrow] (A) edge["\( e_{23} \)"] (C);
-    \draw[arrow] (B) edge["\( e_{12} \)"] (A);
-    \draw[arrow] (C) edge[swap, "\( e_{31} \)"] (B);
-    
-    % Define coordinates for the three additional vertices on the line segment
-    \node[internal, label=below:\( p_n \)] (D) at (-1, 0) {}; % First vertex to the left of B
-    \node[internal, label=below:\( p_2 \)] (E) at (-2, 0) {}; % Second vertex
-    \node[internal, label=below:\( p_1 \)] (F) at (-3, 0) {}; % Third vertex
-
-    % Draw the line segment from B through D, E, F
-    \draw[arrow] (F) edge["\( e_1 \)"] (E);
-    \draw[thick, dashed] (E)--(D);
-    \draw[arrow] (D) edge["\( e_n \)"] (B);
-    
-
-    % Add black circles at each vertex of the triangle
-    \fill [black] (A) circle (2pt);
-    \fill [black] (B) circle (2pt);
-    \fill [black] (C) circle (2pt);
-    
-    % Add black circles at each additional vertex
-    \fill [black] (D) circle (2pt);
-    \fill [black] (E) circle (2pt);
-    \fill [black] (F) circle (2pt);
-\end{tikzpicture}
-\caption{The lasso \( L_n \), a triangle with a tail, for probing manifolds.}
-\label{fig:lasso}
-\end{figure}
-
-The purpose of this type is to probe combinatorial manifolds in an organized fashion, by mapping \( L \) into the type \( \mm \).
-
-\begin{mydef}
-\label{def:face_enumerator}
-Let \( M \) be a combinatorial 2-manifold with \( k=\#M_2 \) 2-faces, and \( \mm \) its realization as a marked presented type. A \defemph{face enumerator of maximum length \( n \)} for \( \mm \) is a set of \( k \) maps \( \pi_1,\ldots,\pi_k:L_n\to \mm \) such that \( \pi_i(p_1)=m \) for all \( i \), where \( m:\mm \) is a chosen basepoint. We further require that each edge in \( \mm \) is visited an even number of times, an equal number of times in each direction. This set of data is equivalent to specifying a base point \( m:\mm \), a base point \( f_i \) on the boundary of each face, fixed paths \( m=_\mm f_i \), and a uniform orientation for all faces (all clockwise or counterclockwise). It is convenient to fix one value of \( n \) for all the lassos, even if some lassos only need a shorter tail (in which case they can repeat some values and use \( \refl \) for some of the tail).
-\end{mydef}
-
-Given a face enumerator we can form the compositions \( T\circ\ell_{L,i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{L,i}:Tm=Tm \). We can concatenate all the loops \( \ell_{L,1}\cdot\cdots\cdot\ell_{L,k} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{L,1}\cdot\cdots\cdot\ell_{L,k}):Tm=Tm  \).
-
-\begin{mylemma}
-The total holonomy of \( T_1 \) on \( \oo \)(Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
-\end{mylemma}
-
-\begin{myprop}
-For a marked presented manifold \( \mm=\mrlzn(M) \) the total holonomy does not depend on the choices of the face enumerator.
-\end{myprop}
-\begin{proof}
-We will prove that changing the image of a point in the tail to an adjacent vertex does not affect the result. We will then prove that moving the master basepoint \( m \) to an adjacent vertex does not affect the result. The full result follows by concatenating such proofs. Figure~\ref{fig:tail_move} shows the image in \( \mm \) of two functions \( f, g \) on a segment of the tail. If \( f \) and \( g \) agree on the rest of the lasso, how is total holonomy affected? We will traverse this segment twice: left to right, then later from right to left. When moving to the right we must compare \( g(e_i)\cdot g(e_{i+1}) \) to \( f(e_i)\cdot f(e_{i+1}) \). There is a filler \( H:f(e_i)\cdot f(e_{i+1})=g(e_i)\cdot g(e_{i+1}) \) and so if the holonomy around the lasso \( f(L) \) is \[ f(e_1)\cdot\cdots\cdot f(e_i)\cdot f(e_{i+1})\cdot\cdots\cdot f(e_{i+1})^{-1}\cdot f(e_i)^{-1}\cdot\cdots f(e_1)^{-1} \] then there is a path \[ f(e_1)\cdot\cdots\cdot H\cdot\cdots\cdot H^{-1}\cdot\cdots f(e_1)^{-1} \] from \( f(L) \) to \( g(L) \).
-\end{proof}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
-  \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
-    % Define coordinates for the three additional vertices on the line segment
-    \node[internal, label=left:\( \begin{array}{c} \scriptstyle f(p_i)\\\scriptstyle g(p_i)\end{array} \)]  (P1)  at (-7, 0) {};
-    \node[internal, label=below:\(\scriptstyle f(p_{i+1}) \)]  (P21) at (-4, 0) {};
-    \node[internal, label=above:\( \scriptstyle g(p_{i+1}) \)] (P22) at (-4, 2) {};
-    \node[internal, label=right:\( \begin{array}{c} \scriptstyle f(p_{i+2})\\\scriptstyle g(p_{i+2})\end{array} \)]  (P3)  at (-1, 0) {};
-
-    % f
-    \draw[arrow] (P1)  edge["\( f(e_i) \)", swap] (P21);
-    \draw[arrow] (P21) edge["\( f(e_{i+1})\)", swap]  (P3);
-
-    \draw[arrow] (P1)  edge["\( g(e_i) \)"] (P22);
-    \draw[arrow] (P22) edge["\( g(e_{i+1})\)"]  (P3);
-    
-    % Add black circles at each additional vertex
-    \fill [black] (P1) circle (2pt);
-    \fill [black] (P21) circle (2pt);
-    \fill [black] (P3) circle (2pt);
-    \fill [black] (P22) circle (2pt);
-\end{tikzpicture}
-\caption{Two images of a part of the lasso tail.}
-\label{fig:tail_move}
-\end{figure}
-\begin{comment}
-\subsection{The torus}
-
-We can define a combinatorial torus as a similar HIT. This time each vertex will have six neighbors. So all the links will be merely equal to \( C_6 \) which is a hexagonal version of \( C_4 \). See Figure~\ref{fig:torus}. 
-
-To help parse this figure, imagine instead Figure~\ref{fig:flattorus}. We take this simple alternating-triangle pattern, then glue the left and right edges, then bend into Figure~\ref{fig:torus}. The fact that each column in Figure~\ref{fig:flattorus} has four dots corresponds to the torus in Figure~\ref{fig:torus} having a square in front, diamonds in the middle, and a square in back.
-
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torus_tikz}
-\caption{Torus embedded in 3-dimensional space. If you see color in your rendering then black lines trace four square-shaped paths, red ones connect the front square to the middle diamonds, and blue ones connect the back path to the middle ones.}
-\label{fig:torus}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\input{discrete_gauge_theory_torusflat_tikz}
-\caption{An inspiration for the torus. Identify the sides and then the top, definitionally, to get the actual torus.}
-\label{fig:flattorus}
-\end{figure}
-
-This somewhat arbitrary and unfamiliar model of a torus has the helpful property that it is a combinatorial manifold that is somewhat minimal while still being representable by a donut shape. But the donut-shaped version suggests a very different connection than the flat model! Starting with the flat model, we can easily see how to define \( T_1 \) by sliding a link rigidly along the page to the link of some adjacent vertex. Then we can see that transport around any loop is the identity and so \( T_2 \) is always the identity (together with the homotopy \( \refl_\id \) from the identity to itself). So if we imagine a way to visit every face like we did for the octahedron, starting and ending at some basepoint \( v \), we expect to see no net rotation at all of \( Tv \). Later we will call this ``total curvature 0.''
-
-The donut-shaped torus suggests a different connection, one determined by the embedding in 3-space that we have represented. But the easiest way to think about that bundle and its connection and curvature is to wait until we have a proof of the Poincaré-Hopf theorem, so that we can instead compute with a vector field.
-\end{comment}
 
 \subsection{Existence of connections}
 

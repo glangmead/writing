@@ -15,9 +15,9 @@ do
     --toc --number-sections --number-offset=0 --standalone --citeproc -M link-citations=true \
     -V caption-justification:centering \
     $i.tikzimg.tex -t html -o ../html/$i.html
-  cp -f *.png *.jpg ../html || :
+  cp -f *.png *.jpg *.svg ../html || :
   cd ..
-  cp -f *.png *.jpg html || :
+  cp -f *.png *.jpg *.svg html || :
   cp dense_circle.pdf triangulated_genus3.pdf triangulated_sphere.pdf html
   cat html/$i.html | sed 's/embed src="\(.*\).pdf"/img src="\1.png"/' | sed 's/0◻//g' | sed 's=<p><em><span>2</span></em></p>==g' > html/foo.html
   mv html/foo.html html/$i.html

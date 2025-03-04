@@ -58,8 +58,9 @@ In the special case of \( \EMzo \) the conditions of the theorem are met when \(
 \K(S^1, 1)\to \BAut S^1\to \K(\Aut \zz, 1)
 \] we see the automorphisms of the circle as an extension of the group of automorphisms that are homotopic to the identity (which are the torsorial actions) by the group that sends the loop in \( S^1 \) to its inverse. This is another way to see that a map \( f:M\to \BAut S^1\simeq \EMzo \) factors through \( \K(S^1, 1)\simeq \Kzt \) if and only if the composition to \( \K(\Aut\zz,1) \) is trivial. This amounts to a choice of loop-direction for all the circles, and so deserves the name ``\( f \) is \emph{oriented}.'' In addition the map \( \BAut S^1\to \K(\Aut \zz, 1) \) deserves to be called the first Stiefel-Whitney class of \( f \), and the requirement here is that it vanishes.
 
+\chcomment[id=Greg]{new remark}
 \begin{mynote}
-Reinterpreting more of the theory of characteristic classes would be an enlightening future project. Defining a Chern class and Euler class in 2 dimensions is related to the goals of this note, but the full theory is about a family of invariants in different dimensions that have various relations between each other and satisfy other properties.
+Bundles of oriented mere circles are principal, but this fact does not hold for bundles of higher-dimensional spheres. Since this note will focus on 2-dimensional oriented manifolds we will be making use of this coincidence.
 \end{mynote}
 
 \subsection{Pathovers in circle bundles}
@@ -68,7 +69,7 @@ Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}T(x) \). We adopt a con
 
 Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=200pt]{pathovers.pdf}
 \caption{A path \( \pi \) over the path \( p \) in the base involves the transport function.}

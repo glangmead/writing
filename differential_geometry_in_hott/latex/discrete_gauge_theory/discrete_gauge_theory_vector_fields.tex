@@ -1,31 +1,62 @@
 \section{Vector fields}
 
-We will again use the dimension structure of a marked presented manifold(\ref{def:marked_presented_manifold}) to construct vector fields on each skeleton. Let \( M:\simcomp \) be a combinatorial manifold and \( \mm\defeq \mrlzn(M) \) the corresponding marked presented manifold.
+Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T_1 \) of the \( \link \) function to the 1-skeleton, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
-\label{def:vector_field}
-A \defemph{nonvanishing flow} on a higher combinatorial manifold \( \mm \) is a section of the tangent bundle over the 0-skeleton, i.e. a term of \( X_0:\pit{x:\mm_0}Tx \).
+A \defemph{nonvanishing vector field} on a higher combinatorial 2-manifold \( \mm \) is a term \( X:\pit{x:\mm_1}T_1(x) \).
 \end{mydef}
 
-\begin{mydef}
-\label{def:vector_pathover}
-A \defemph{nonvanishing vector field} on \( \mm \) is an extension \( X \) of \( X_0 \) from the 0-skeleton to the 1-skeleton: \( X:\pit{x:\mm_1}Tx \).
-\end{mydef}
+\begin{mynote}
+We do not lose any classical generality by assuming we have such a nonvanishing field on the entire 1-skeleton. This corresponds to the fact that the zeros of a vector field can be perturbed to be isolated, and to live inside the faces of a triangulation.
+\end{mynote}
 
-An extension of \( X \) to the full 2-skeleton of \( \mm \) would be a trivialization of the tangent bundle, which we do not stipulate. But we do not lose any classical generality by assuming we have such a section/trivialization on the 1-skeleton. This corresponds to the fact that the zeros of a vector field can be perturbed to be isolated, and to live inside the faces of a triangulation.
+\begin{mynote}
+If \( T:\mm\to\EMzo \) is a 2-bundle on the 2-manifold \( \mm \), and if \( T \) is orientable so that it factors through \( T':\mm\to\Kzt \), then a section \( \pit{x:\mm}T'(x) \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
+\end{mynote}
 
-On 1-paths \( p:x=_{\mm_1}y \), \( X \) assigns a choice of pathover \( \pi:\tr(p)(x)=_{Ty}y \), which can also be thought of as a proof of pointedness of the transport map \( \tr(p) \). All told, given a loop \( \ell:m=_\mm m \) around a single face, we have the following constructions:
+On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T_1 y} X(y) \).
+
+\begin{mynote}Concrete pathover terms such as \( \pi \) couple together the connection (the transport) and \( X \). The transport is needed to provide a single type in which to compare the two values of \( X \). The path \( \pi \) therefore reflects both the movement of \( X \) along the path \( p \), and the moving lens that allows us to examine in a single fiber the two points \( X(x) \) and \( X(y) \) as well as \( X(p) \).\end{mynote}
+
+Consider a vertex \( x:\mm \), a face \( F \) containing vertices \( x, y, z \), and the boundary path \( \ell\defeq e_{xy}\cdot e_{yz} \cdot e_{zx} \). We can calculate \( X(\ell) \) by concatenating the data along the path:
 
 \begin{enumerate}
-\item \( \tr(\ell):Tm=Tm \), the holonomy around \( \ell \).
-\item \( \flat(\ell):\tr(\ell)=_{Tm=Tm}\id_{Tm} \), the flatness structure.
-\item \( X(\ell):\tr(\ell)(Xm)=_{Tm} Xm \), the path over \( \ell \) selected by \( X \), i.e. a pointing of \( \tr(\ell) \).
+\item In \( T_1(x) \) we have 
+\begin{enumerate}
+\item the term \( X(x) \).
+\end{enumerate}
+\item In \( T_1(y) \) we have
+\begin{enumerate}
+\item the two terms \( X(y) \) and \( \tr(e_{xy})(X(x)) \)
+\item the path that equates these two, \( X(e_{xy}):\tr(e_{xy})(X(x))=X(y) \).
+\end{enumerate}
+\item In \( T_1(z) \) we have 
+\begin{enumerate}
+\item the three terms \( X(z) \), \( \tr(e_{yz})(X(y)) \), and \( \tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
+\item the path \( X(e_{yz}):\tr(e_{yz})X(y)=X(z) \) joining the first two, and the path \( \tr(e_{yz})(X(e_{xy})) \) joining the second two
+\end{enumerate}.
+\item Then back at \( T_1(x) \) we have
+\begin{enumerate}
+\item \( X(x) \), \( \tr(e_{zx})(X(z)) \), \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \), and \( \tr(e_{zx})\circ\tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
+\item the three paths \( \tr(\ell)(X(x)) \), \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \), and \( \tr(e_{zx})(X(e_{yz})) \).
+\end{enumerate}
 \end{enumerate}
 
-\subsection{Index of a vector field: subtracting curvature}
+% https://q.uiver.app/#q=WzAsMTMsWzAsMSwiWCh4KSJdLFswLDIsIlgoeSkiXSxbMCwzLCJYKHopIl0sWzAsNCwiWCh4KSJdLFsxLDIsIlxcbWF0aHJte3RyfShlX3t4eX0pKFgoeCkpIl0sWzEsMywiXFxtYXRocm17dHJ9KGVfe3l6fSkoWCh5KSkiXSxbMSw0LCJcXG1hdGhybXt0cn0oZV97enh9KShYKHopKSJdLFsyLDMsIlxcbWF0aHJte3RyfShlX3t5en0pXFxjaXJjXFxtYXRocm17dHJ9KGVfe3h5fSkoWCh4KSkiXSxbMiw0LCJcXG1hdGhybXt0cn0oZV97enh9KVxcY2lyY1xcbWF0aHJte3RyfShlX3t5en0pKFgoeSkpIl0sWzMsNCwiXFxtYXRocm17dHJ9KGVfe3p4fSlcXGNpcmNcXG1hdGhybXt0cn0oZV97eXp9KVxcY2lyY1xcbWF0aHJte3RyfShlX3t4eX0pKFgoeCkpIl0sWzEsMCwiXFxtYXRocm17dHJ9Il0sWzIsMCwiXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9Il0sWzMsMCwiXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9Il0sWzEsNCwiWChlX3t4eX0pIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw1LCJYKGVfe3l6fSkiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDYsIlgoZV97enh9KSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsNywiXFxtYXRocm17dHJ9KGVfe3l6fSkoWChlX3t4eX0pKSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsOCwiXFxtYXRocm17dHJ9KGVfe3p4fSkoWChlX3t5en0pKSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzgsOSwiKFxcbWF0aHJte3RyfShlX3t6eH0pXFxjaXJjXFxtYXRocm17dHJ9KGVfe3l6fSkpKFgoZV97eHl9KSkiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{tikzcd}
+  & {\mathrm{tr}} & {\mathrm{tr}\circ\mathrm{tr}} & {\mathrm{tr}\circ\mathrm{tr}\circ\mathrm{tr}} \\
+  {X(x)} \\
+  {X(y)} & {\mathrm{tr}(e_{xy})(X(x))} \\
+  {X(z)} & {\mathrm{tr}(e_{yz})(X(y))} & {\mathrm{tr}(e_{yz})\circ\mathrm{tr}(e_{xy})(X(x))} \\
+  {X(x)} & {\mathrm{tr}(e_{zx})(X(z))} & {\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz})(X(y))} & {\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz})\circ\mathrm{tr}(e_{xy})(X(x))}
+  \arrow["{X(e_{xy})}", equals, from=3-1, to=3-2]
+  \arrow["{X(e_{yz})}", equals, from=4-1, to=4-2]
+  \arrow["{\mathrm{tr}(e_{yz})(X(e_{xy}))}", equals, from=4-2, to=4-3]
+  \arrow["{X(e_{zx})}", equals, from=5-1, to=5-2]
+  \arrow["{\mathrm{tr}(e_{zx})(X(e_{yz}))}", equals, from=5-2, to=5-3]
+  \arrow["{(\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz}))(X(e_{xy}))}", equals, from=5-3, to=5-4]
+\end{tikzcd}
 
-\subsection{Equality of total index and total curvature}
+Notice that the path \( \tr(\ell)(X(x)) \) is just one component of the path over \( \ell \). The path \( X(\ell) \) is the concatenation of the three paths in item 4, each one ``distorted'' by 1, 2, or 3 transport maps, respectively. And of course we know already that this may not be a closed loop in \( T_1(x) \), because there may be nontrivial holonomy.
 
-\subsection{Identification with Euler characteristic}
-
-
+But we can in fact close the loop with a fourth edge, exactly when \( T_1 \) has an extension to \( F \). The face \( F \) provides a path \( \ell=_{v=_\mm v} \refl(v) \) that fills the loop, and an extension of \( T_1 \) to \( F \) provides by functoriality a corresponding path \( T_1(\ell)=_{T_1(v)=T_1(v)}\id(T_1(v)) \), which is a homotopy between these two automorphisms of \( T_1(v) \). Evaluating this homotopy at \( X(x) \) provides another term 

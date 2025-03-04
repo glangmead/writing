@@ -38,114 +38,17 @@
 Higher inductive types can capture some concepts of differential geometry in two dimensions including connections, curvature, and vector fields. We define connections on higher inductive types. We then define tangent bundles and vector fields by looking at the special subclass of combinatorial manifolds, which are discrete in the sense of real cohesion\cite{shulman_cohesion}, drawing inspiration from the field of discrete differential geometry. We prove the Gauss-Bonnet theorem and Poincaré-Hopf theorem for combinatorial manifolds.
 \end{abstract}
 
+\begin{dedication}
+This thesis is dedicated to John Baez, Sean M. Carroll, Sabine Hossenfelder, and other communicators who are carrying the torch of science forward and sharing it in the spirit of my hero Carl Sagan. I have followed you all for many years, and you have inspired me to continue my studies alongside my quite unrelated career. Thank you!
+
 \begin{quote} 
 \centering
 ``It is always ourselves we work on, whether we realize it or not. There is no other work to be done in the world.'' --- Stephen Talbott, \emph{The Future Does Not Compute}\cite{talbott}
 \end{quote}
+\end{dedication}
 
 \listofchanges[title=Changelist]
 \listoftodos
-
-\begin{comment}
-\section*{Notes so far from Mathieu and Steve}
-\subsection{January 24, Mathieu}
-Slicing a type over \( \EMzo \) gives us the type of types together with a map to \( \EMzo \).
-
-\subsection{November 21, Mathieu and Steve}
-Constructors are present in the HIT, and the HIT is a type. The universe must be closed under inductive types.
-
-Polygons of different cardinality will tangle with transport.
-
-Greg suggests I could use an isomorphism from a combinatorial manifold to a HIT with just one 2-cell to capture ``total curvature'':
-
-\begin{verbatim}
-def S^1:
-base: S^1
-loop: base=base
-
-def S^2:
-N: S^2
-surf: refl_N = refl_N
-
-def torus:
-b:torus
-p,q:b=b
-donut:p.q=q.p
-\end{verbatim}
-
-The map \( \re \) (realization) is a lossy map. \( \re(S^2):\uni  \).
-
-``strict morphism of HITs'': map constructors to constructors. \( C_4\to S^1 \) is a strict map.
-
-\( \re(C_4) \) has an equivalence to \( \re(S^1) \). Perhaps this is \( \re \)(the map \( C_4\to S^1 \), the strict one). But \( S^1\to C_4 \) is non-strict, uses generated data, uses data from \( \re(C_4) \).
-
-Claim: we cannot see the one-notch ``90 degree'' rotation of \( C_4 \) at the level of types.
-
-\subsubsection{Extension to next dimension as obstruction theory}
-
-\begin{itemize}
-\item Consider a type \( X \) with 1-skeleton \( X_1 \).
-\item HIT gives skeletal filtration
-\item functions naturally given as per-skeleton steps
-\item there are constraints/obstructions: obstruction to extend map \( T \) from vertices \( a, b \) to path \( e:a=b \) is that \( T(a) \) and \( T(b) \) are in the same connected component.
-\item say a 2-cell \( F \) contracts a loop \( L \), i.e. \( F:L=\refl_v \) some vertex \( v \)
-\item we have a choice of \( v \) for each face \( F \)
-\item then \( T(F) \) must be in same component as \( \refl_v \) (\( \refl_v:\pi_1 X \) with basepoint \( v \))
-\item \( T(F) \) is merely \( \refl \), and holonomy is merely \( \refl \), and connection on this face \( F \) is merely flat
-\item curvature is a function from 2-cells to \( \pi_1(X,v) \)
-\end{itemize}
-
-\begin{align*}
-T(v)&:U\\
-T(L)&:T(v)=T(v)\\
-T(F)&:\refl_{T(v)}=T(L)
-\end{align*}
-
-The class \( ||T(L)||:\pi_1(U,T(v)) \) is an obstruction to having \( T(F) \), to extending \( T \) to \( F \).
-
-The hierarchy of maps extending to higher skeletons, which we call connections of dimension 1, 2, etc. This works for ANY HIT. The combinatorial manifold structure is just one special case that gives me a specific map \( T \).
-
-Then Mathieu drew on the board a patch of a combinatorial manifold with links of different vertex cardinalities. Then he wrote some maps that might help define the degree/index of a vector field.
-\includegraphics[width=400pt]{board2024.jpg}
-
-\subsection{November 27, Mathieu}
-
-An angle is: a path in \( \so \) from \( \base \), which is equiv to a path in \( \Aut\so \) from the identity to another automorphism. (automorphism is primary: aut of tangent circle).
-
-Viewed as automorphisms we can compose them.
-
-Viewed as paths, multiply path 2 by the element at the endpoint of path 1.
-
-Curvature maps a loop in the base to a path in automorphisms of the tangent circle at the base.
-
-A vector field + a trivialization (``fiducial v.f.'' in the book by Needham) maps a loop in the base to the tangent circle at the basepoint. We can take the index/degree of this.
-
-Given a loop \( L:v=v \), v.f. \( F \), take \( F(L):tr_L(F(v))=F(v) \) (\( \apd \), dependent action on paths).
-
-Type family \( f:A\to U \), \( \prod_{a:A}fa \) is the type of dependent functions. Let \( X:\prod_{a:A}fa \). We can apply \( X \) to a path \( p:a=_A b \). \( X(p) \) is a path over \( p \).
-\[ 
-X(p):tr_p(X(a))=X(b) 
-\]
-\( X(a), X(b) \) are terms of different types.
-
-Greg reminded about horizontal projection interpretation of covariant derivative: covariant derivative of \( F \) along itself: lift \( F \) to \( F' \) horizontal on \( TP (P\to M) \), take \( [F', F'] \)
-
-Tangent bundle \( TM\to M \) w/ connection \( \omega \). Covariant derivative of \( F \) in the direction of \( X \): \( \nabla_X(F)(x) \). 
-\begin{enumerate}
-\item Lift \( X \) and \( F \) to horizontal fields \( X', F' \) in \( TTM \)
-\item Compute \( [X', F'] \) to \( TTM \)
-\item Decompose \( [X', F'] = [X, F]' + \omega([X', F']) \)
-\end{enumerate}
-
-Mathieu would rather use this formulation:
-\[ 
-\nabla_X(F) = [X, F] + \omega(X)(F) 
-\]
-Now take \( X=F \):
-\[ 
-\nabla_F(F) = [F, F] + \omega(F)(F) = \omega(F)(F) 
-\]
-\end{comment}
 
 \clearpage
 \input{discrete_gauge_theory_intro}
@@ -158,8 +61,8 @@ Now take \( X=F \):
 \clearpage
 \input{discrete_gauge_theory_vector_fields}
 \clearpage
-% \input{discrete_gauge_theory_ap_is_d}
-% \clearpage
+\input{discrete_gauge_theory_totals}
+\clearpage
 
 \bibliography{connections}
 \end{document}

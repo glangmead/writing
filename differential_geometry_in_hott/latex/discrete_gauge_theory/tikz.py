@@ -36,7 +36,9 @@ def tikz2image(tikz, filetype, outfile):
         shutil.copyfile(tmpdir + '/tikz.pdf', outfile + '.pdf')
     else:
         shutil.copyfile(tmpdir + '/tikz.pdf', outfile + '.pdf')
-        call(["convert", "-density", "150", "-antialias", "-background", "white", "-alpha", "remove", "-alpha", "off", outfile + '.pdf', outfile + '.' + filetype])
+        call(["pdf2svg", outfile + '.pdf', outfile + '.small.' + filetype])
+        call(["rsvg-convert", "-z", "2", outfile + '.small.' + filetype, "-f", "svg", "-o", outfile + '.' + filetype])
+        #call(["convert", "-density", "300", "-units", "pixelsperinch", "-depth", "8", "-antialias", "-background", "white", "-alpha", "remove", "-alpha", "off", outfile + '.pdf', outfile + '.' + filetype])
 
 def log(s):
    sys.stderr.write(f"{s}\n")
@@ -60,7 +62,7 @@ def action(elem, doc):
 
         if code.strip().startswith(r"\begin{tikzcd}") or code.strip().startswith(r"\begin{tikzpicture}"):
             outfile = imagedir + '/' + sha1(code)
-            filetype = {'html': 'png', 'latex': 'png'}.get(doc.format, 'png')
+            filetype = {'html': 'svg', 'latex': 'svg'}.get(doc.format, 'svg')
             src = outfile + '.' + filetype
             if not os.path.isfile(src):
                 try:

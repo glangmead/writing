@@ -1,14 +1,10 @@
 \section{Discrete manifolds}
+We will remind ourselves of the definition of a classical simplicial complex, in sets. Then we will create a higher type from the data of a complex, using pushouts. The type will both imitate the structure of the set-based complex and will contain explicit maps into it from the sets of the complex.
 
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
 An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
-\end{mydef}
-
-\begin{mydef}
-\label{def:enumeration}
-An \defemph{enumeration} for a simplicial complex of dimension \( n \) is a choice for each top-dimensional face \( f_i:M_n \) of a total ordering of its \( n+1 \) vertices, denoted \( f_{i,E}=[f_{i,1},\ldots,f_{i,n+1}] \). This is the same as an orientation plus a starting vertex. Additionally we impose a compatibility condition: when two \( n \)-faces \( f_1,f_2 \) share an \( n-1 \)-face \( e=\{x_1,\ldots,x_n\} \), the two total orders for \( e \) inherited from \( f_1 \) and \( f_2 \) differ by an odd permutation. Equivalently, \( f_1 \) and \( f_2 \) assign opposite orientations to \( e \). 
 \end{mydef}
 
 \begin{mydef}
@@ -30,13 +26,13 @@ which attaches each \( k \)-simplex by taking the convex hull of the appropriate
 The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_{\leq 1}|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_{\leq n}|=|M| \).
 
 \begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \). We will call a total ordering of the link an \defemph{enumeration}, as we did for the faces.
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
 \label{def:link}
 \end{mydef}
 
 The link is easier to understand as all the neighboring vertices of \( v \) and the subcomplex containing these. See for example Figure~\ref{fig:link}.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \begin{tikzpicture}
   \draw
@@ -80,7 +76,7 @@ In a 2-dimensional combinatorial manifold the link is a polygon. See Figure~\ref
 
 A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. There are important examples in four dimensions of topological manifolds that do not have any smoothness structure or triangulation. These will be out of reach of the theory we are building.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \includegraphics[width=100pt]{triangulated_sphere.pdf}
 \includegraphics[width=100pt]{Torus-triang.png}
@@ -131,9 +127,7 @@ In dimension 2 we could fill in maps from \( C_3 \) into our higher type by addi
 \end{center}
 The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. 
 
-\( \partial_1 \) maps each \( (f, C_3) \) to the triangle that this face bounds. How? \( C_3 \) is itself a pushout, so to map out of it we must map from the span \( \{v_1, v_2, v_3\}\leftarrow C_{3,1}\times S^0\rightarrow C_{3, 1} \). This amounts to a choice of three points and three connecting edges. We require these to be the image under \( M_0\to\mm_1 \) of the vertices inside the set-based face \( M_2 \) itself.
- 
- The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
+The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
 
 Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be
 \begin{center}%
@@ -162,22 +156,17 @@ Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delt
 \end{tikzcd}
 \end{center}
 
-It's useful to define types that remember all or some of the data in these diagrams:
-
 \begin{mydef}
-Denote by \( \Typen \) the type of \defemph{presented types of dimension \( n \)}, which consist of a sequence \( \mm_0\to\mm_1\to\cdots\to\mm_n \) and the mere existence of \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. The diagrams also provide a map \( \rlzn:\simcomp\to\Typen \) we call \defemph{presented realization}. If \( M \) is a combinatorial manifold then we call \( \rlzn(M) \) a \defemph{presented manifold}.
+\label{def:higher_realization} 
+A \defemph{higher realization} of an abstract simplicial complex \( M:\simcomp \) consists of 
+\begin{enumerate}
+\item \( n+1 \) types \( \mm_0,\ldots,\mm_n \) where \( \mm_0\defeq M_0 \),
+\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times S^{i}}{M_{i+1}}{\partial_{i}}{\pr_1} \), \( i=1,\ldots,n \), where \( S^i \) is a HoTT \( i \)-sphere and \( \partial_i \) are called \defemph{attachment maps},
+\item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{i+1}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
+\end{enumerate}
+We can call such a higher realization a \defemph{higher simplicial complex}, of in the case where the underlying complex \( M \) is a combinatorial manifold, a \( higher combinatorial manifold \).
 \end{mydef}
-
-The name ``presented type'' is inspired by von Raumer\cite{vonraumer_nonabelian}, where he uses such a structure in dimension 2 to construct double groupoids and crossed modules in type theory.
-
-\begin{mydef}
-\label{def:marked_presented_manifold}
-Denote by \( \MTypen \) the type of \defemph{marked presented types of dimension \( n \)}, which consists of a complex \( M:\simcomp \) and maps \( \partial_i \), \( *_i \) and \( h_i \) as in the previous diagrams. We clearly have a forgetful map \( \MTypen\to\Typen \). The diagrams also provide a map \( \mrlzn:\simcomp\to\MTypen \) we call the \defemph{marked presented realization}. If \( M \) is a combinatorial manifold then we call \( \mrlzn(M) \) a \defemph{marked presented manifold}.
-\end{mydef}
-
-The maps \( *_i:M_i\to\mm_i \) pick out vertices when \( i=0 \) and hub terms for each edge, face, and so on when \( i>1 \). Each of the higher faces has a hub and a family of paths joining the hub to the entire boundary. When we work with \( \MTypen \) we may access the vertices and faces, and the explicit paths inside the pushouts.
-
-Going forward we will stick with 2-dimensional complexes, where forming the link of a vertex gives us a map \( \mm_0\to\Gon \) exactly when the complex is a combinatorial manifold, which by Corollary~\ref{cor:gon} means we have a map \( \link:\mm_0\to\EMzo \). Extending this map to all of \( \mm \) and exploring what we obtain is the main purpose of this note.
+We intend for the \( \partial_i \) to be isomorphisms between a boundary of a simplex in \( \mm_i \) and the \( i \)-sphere. To avoid spending too much time above dimension 2, we will leave the \( \partial_i \) underspecified in general. For 2-dimensional complexes we will see how the gluing can be done for triangles.
 
 \subsection{Polygons}\label{sec:polygons}
 
@@ -201,7 +190,7 @@ Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types w
 \]
 which gives a path in \( \phi(a')=\psi(a') \) by connecting dots between the terms \( \phi(a'), \phi(a), \psi(a), \psi(a') \). This relates a would-be homotopy \( \phi\sim\psi \) specified at a single point, to a point at the end of a path. We will use this to help construct such homotopies.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \begin{tikzpicture}[
 node distance = 20mm and 20mm,
@@ -321,7 +310,7 @@ With \( m_k \) we can start with a collection of pentagons and hexagons and make
 
 We will create our first combinatorial surface, an octahedron. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \begin{tikzpicture}
     \matrix (A) [matrix of math nodes, row sep=1cm, column sep=-.2cm]
@@ -423,7 +412,7 @@ We will create our first combinatorial surface, an octahedron. In \( \simcomp \)
 
 Applying the map \( \re \) to \( O_0\to O_1\to O \) gives the presented type \( \oo_0\to \oo_1\to \oo \).
 
-\begin{figure}[htbp]
+\begin{figure}[h]
 \centering
 \input{discrete_gauge_theory_oo_tikz}
 \caption{The marked presented type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
