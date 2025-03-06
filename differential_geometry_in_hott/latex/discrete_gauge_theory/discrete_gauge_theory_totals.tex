@@ -1,6 +1,6 @@
 \section{Total constructions}
-\chcomment[id=Greg]{Moved all ``totaling'' stuff into a section}
-We wish to make computations that combine contributions from every face of a combinatorial manifold. To do this we will add some structure and then prove that the definitions are independent of that structure.
+\chcomment[id=Greg]{Moved all ``totaling'' stuff into a section, all new material}
+We wish to make computations that combine contributions from every face of a combinatorial 2-manifold. To do this we will add some structure and then prove that the definitions are independent of that structure.
 
 \begin{mydef}
 A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) with underlying simplicial complex \( M=[M_0, M_1, M_2] \) consists of
@@ -8,13 +8,19 @@ A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) 
 \item A ``master basepoint'' \( m:M_0 \).
 \item For each face \( F:M_2 \) with vertices \( \{v_1, v_2, v_3\} \) an enumeration of its vertices \( [v_1, v_2, v_3] \), including the choice of the first vertex in the enumeration as the basepoint of \( F \), that is \defemph{globally compatible} with the choices for the other faces, meaning that when two faces \( F_1,F_2 \) share an edge \( \{v, w\} \), then one of the faces includes the sublist \( [v, w] \) and the other includes \( [w, v] \).
 \item An ordering of the faces \( [F_1,\ldots,F_n] \).
-\item For each face \( F \) a path \( p_F:m=_\mm F_v \). This is the only ingredient that uses the type \( \mm \). 
+\item For each face \( F \) a path \( p_F:m=_\mm F_v \) and a loop \( \ell_F\defeq p_F\cdot e_{12}\cdot e_{23}\cdot e_{31}\cdot p_F^{-1} \) where \( e_{ij}:v_i=v_j \) are the paths corresponding to the edges. 
 \end{itemize}
 \end{mydef}
 
-For example, for the octahedron we might choose \( b \) as the master basepoint, as well as the basepoint for four of the faces. For the other four faces we could choose \( g \) as the basepoint. We could choose \( br\cdot rg \) as the path between the basepoints, and we could order the faces like this: \( [bwo, brw, boy, byr, gow, gwr, gry, gyo] \).
+Note that the last bullet of the definition is the only one that uses the realization \( \mm \).
 
-For a single face \( F \), the concatenation \( \ell_F\defeq p_F\cdot e_{12}\cdot e_{23}\cdot e_{31}\cdot p_F^{-1} \) is a loop around \( F \) based at \( m \). The concatenation \( \ell_{F_1}\cdot\cdots\cdot\ell_{F_n} \) is a loop that visits each face once.
+\begin{mynote}
+For such an enumeration to exist the underlying simplicial complex must be \emph{orientable} in a classical sense. We are not going to explore this requirement internally in HoTT, nor prove any relationship between orientability of the set-based complex and orientation in the sense of factoring classifying maps through \( \Kzt\to\EMzo \).
+\end{mynote}
+
+\begin{myex}
+The octahedron: for \( \oo \) we might choose \( b \) as the master basepoint, as well as the basepoint for four of the faces. For the other four faces we could choose \( g \) as the basepoint. We could choose \( br\cdot rg \) as the path between the basepoints, and we could order the faces like this: \( [bwo, brw, boy, byr, gow, gwr, gry, gyo] \).
+\end{myex}
 
 \begin{mydef}
 Given a total enumeration of faces, the concatenation \( \elltot\defeq\ell_{F_1}\cdot\cdots\cdot\ell_{F_n} \) is called \defemph{the total loop} of the enumeration.
@@ -24,30 +30,24 @@ Given a total enumeration of faces, the concatenation \( \elltot\defeq\ell_{F_1}
 \centering
 \begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
   \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
-    % Define coordinates for the equilateral triangle
-    \node[internal, label=above:\( v_2 \)] (A) at (1, 1.732) {}; % Top vertex
-    \node[internal, label=below:\( v_1 \)] (B) at (0, 0) {};     % Left vertex
-    \node[internal, label=below:\( v_3 \)] (C) at (2, 0) {};     % Right vertex
-    \node (Face) at (1, 0.85) {\( F \)}; % Top vertex
+    \node[internal, label=above:\( v_2 \)] (V2) at (1, 1.732) {};
+    \node[internal, label=below:\( v_1 \)] (V1) at (0, 0) {};
+    \node[internal, label=below:\( v_3 \)] (V3) at (2, 0) {};
+    \node (Face) at (1, 0.85) {\( F \)};
 
-    % Draw the equilateral triangle with black vertices
-    \draw[arrow] (A) edge["\( e_{23} \)"] (C);
-    \draw[arrow] (B) edge["\( e_{12} \)"] (A);
-    \draw[arrow] (C) edge["\( e_{31} \)"] (B);
+    \draw[arrow] (V2) edge["\( e_{23} \)"] (V3);
+    \draw[arrow] (V1) edge["\( e_{12} \)"] (V2);
+    \draw[arrow] (V3) edge["\( e_{31} \)"] (V1);
     
-    \node[internal, label=left:\( m \)] (F) at (-3, 0) {};
+    \node[internal, label=left:\( m \)] (m) at (-3, 0) {};
 
-    % Draw the line segment from B through D, E, F
-    \draw[arrow] (F) edge["\( p\to \)"] (B);
-    \draw[arrow] (B) edge["\( \leftarrow p^{-1} \)"] (F);
+    \draw[arrow] (m) edge["\( p\to \)"] (V1);
+    \draw[arrow] (V1) edge["\( \leftarrow p^{-1} \)"] (m);
     
-
-    % Add black circles at each vertex of the triangle
-    \fill [black] (A) circle (2pt);
-    \fill [black] (B) circle (2pt);
-    \fill [black] (C) circle (2pt);
-    
-    \fill [black] (F) circle (2pt);
+    \fill [black] (V1) circle (2pt);
+    \fill [black] (V2) circle (2pt);
+    \fill [black] (V3) circle (2pt);
+    \fill [black] (m) circle (2pt);
 \end{tikzpicture}
 \caption{A loop \( \ell_F:m=_\mm m \) around the face \( F \).}
 \label{fig:lasso}
@@ -55,52 +55,87 @@ Given a total enumeration of faces, the concatenation \( \elltot\defeq\ell_{F_1}
 
 
 \subsection{Total holonomy}
-Given a total enumeration of faces we can form the compositions \( T\circ\ell_{F_i} \) with the associated loop to obtain transport isomorphisms \( T\circ\ell_{F_i}:Tm=Tm \). We can concatenate all the loops \( \ell_{F_1}\cdot\cdots\cdot\ell_{F_n} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{F_1}\cdot\cdots\cdot\ell_{F_n}):Tm=Tm  \).
+Given a total enumeration of faces we can form the compositions \( T\circ\ell_{F_i} \) with the associated loop to obtain holonomy isomorphisms \( T\circ\ell_{F_i}:Tm=Tm \). We can concatenate all the loops \( \ell_{F_1}\cdot\cdots\cdot\ell_{F_n} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{F_1}\cdot\cdots\cdot\ell_{F_n}):Tm=Tm  \).
+
+\begin{mydef}
+The \defemph{total holonomy} of a total enumeration of faces is the map \( T\circ(\ell_{F_1}\cdot\cdots\cdot\ell_{F_n}):Tm=Tm  \).
+\end{mydef}
 
 \begin{myprop}
-The total holonomy is conjugated if we change the paths \( p_{F_i} \) of the face enumerator, or the basepoint \( m \). In particular, if the automorphism groups of the fibers are abelian then the total holonomy is invariant. The total holonomy becomes the inverse automorphism if we change the enumeration of all the faces.
+The holonomy \( \ell_F \) around a face \( F \) is conjugated if we change the path \( p_F \) or the basepoint \( m \). The holonomy becomes the inverse automorphism if we change the enumeration of \( F \) by an odd permutation of its vertices (but keep the basepoint fixed).
 \end{myprop}
 \begin{proof}
-We will prove that changing a point in some fixed \( p_F \) to an adjacent vertex conjugates the holonomy. We will then prove that moving the master basepoint \( m \) to an adjacent vertex does not affect the result. The full result follows by concatenating such proofs. Figure~\ref{fig:tail_move} shows the image in \( \mm \) of two functions \( f, g \) on a segment of the tail. If \( f \) and \( g \) agree on the rest of the lasso, how is total holonomy affected? We will traverse this segment twice: left to right, then later from right to left. When moving to the right we must compare \( g(e_i)\cdot g(e_{i+1}) \) to \( f(e_i)\cdot f(e_{i+1}) \). There is a filler \( H:f(e_i)\cdot f(e_{i+1})=g(e_i)\cdot g(e_{i+1}) \) and so if the holonomy around the lasso \( f(L) \) is \[ f(e_1)\cdot\cdots\cdot f(e_i)\cdot f(e_{i+1})\cdot\cdots\cdot f(e_{i+1})^{-1}\cdot f(e_i)^{-1}\cdot\cdots f(e_1)^{-1} \] then there is a path \[ f(e_1)\cdot\cdots\cdot H\cdot\cdots\cdot H^{-1}\cdot\cdots f(e_1)^{-1} \] from \( f(L) \) to \( g(L) \).
+If we change the path \( p_F \) to a homotopic path \( p'_F \), then the change is made up of a finite sequence of moves like the one in Figure~\ref{fig:tail_move}, where the triangle \( xyz \) bounds a face. Then \( p_{F} \) is given by 
+\[ (p\cdot e_{xy})\cdot (q\cdot e_{12}\cdot e_{23}\cdot e_{31}\cdot q^{-1})\cdot (p\cdot e_{xy})^{-1}\] 
+where we grouped the parts that involve the change and do not involve it. So replacing \( e_{xy} \) by \( e_{xz}\cdot e_{zy} \) is definitionally equal to 
+\[ A\cdot (p\cdot e_{xy})\cdot (q\cdot e_{12}\cdot e_{23}\cdot e_{31}\cdot q^{-1})\cdot (p\cdot e_{xy})^{-1}\cdot A^{-1}\] 
+where \( A\defeq p\cdot e_{xz}\cdot e_{zy}\cdot e_{xy}^{-1}\cdot p^{-1} \) is the loop that circulates the difference between the paths. Said another way, we are making use of the observation that \( p_F \) is related to \( p'_F \) by conjugating with the loop, based at \( m \), that goes around the discrepancy. If we add more such basic changes then we add additional conjugations.
+
+If we change the basepoint \( m \) to \( m' \) then we need to make a new choice, which is a path \( \pi:m'=m \). This lengthens the path \( p_F \) to the path \( \pi\cdot p_F\cdot \pi^{-1} \). This conjugation relates two different groups, the automorphism groups \( Tm=Tm \) and \( Tm'=Tm' \). The two groups are not canonically identified because the identification relies on the choice of \( \pi \). If we change \( \pi \) by a sequence of moves like we did with \( p_F \) then again the holonomy at \( m' \) will change by a conjugation.
+
+Finally we observe that for the triangle \( F \), an odd permutation that keeps the basepoint fixed is simply a traversal of the loop in the opposite direction, sending \( \ell_F \) to \( \ell_{F^{-1}} \).
 \end{proof}
 
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
   \tikzset{internal/.style={inner sep=1, outer sep=1, line cap=rect}}
-    % Define coordinates for the three additional vertices on the line segment
-    \node[internal, label=left:\( \begin{array}{c} \scriptstyle f(p_i)\\\scriptstyle g(p_i)\end{array} \)]  (P1)  at (-7, 0) {};
-    \node[internal, label=below:\(\scriptstyle f(p_{i+1}) \)]  (P21) at (-4, 0) {};
-    \node[internal, label=above:\( \scriptstyle g(p_{i+1}) \)] (P22) at (-4, 2) {};
-    \node[internal, label=right:\( \begin{array}{c} \scriptstyle f(p_{i+2})\\\scriptstyle g(p_{i+2})\end{array} \)]  (P3)  at (-1, 0) {};
+    \node[internal, label=above:\( v_2 \)] (V2) at (1, 1.732) {};
+    \node[internal, label=below:\( v_1 \)] (V1) at (0, 0) {};
+    \node[internal, label=below:\( v_3 \)] (V3) at (2, 0) {};
+    \node (Face) at (1, 0.85) {\( F \)};
 
-    % f
-    \draw[arrow] (P1)  edge["\( f(e_i) \)", swap] (P21);
-    \draw[arrow] (P21) edge["\( f(e_{i+1})\)", swap]  (P3);
-
-    \draw[arrow] (P1)  edge["\( g(e_i) \)"] (P22);
-    \draw[arrow] (P22) edge["\( g(e_{i+1})\)"]  (P3);
+    \draw[arrow] (V2) edge["\( e_{23} \)"] (V3);
+    \draw[arrow] (V1) edge["\( e_{12} \)"] (V2);
+    \draw[arrow] (V3) edge[swap, "\( e_{31} \)"] (V1);
     
-    % Add black circles at each additional vertex
-    \fill [black] (P1) circle (2pt);
-    \fill [black] (P21) circle (2pt);
-    \fill [black] (P3) circle (2pt);
-    \fill [black] (P22) circle (2pt);
+    \node[internal, label=left:\( m \)] (m) at (-4, 0) {};
+    \node[internal, label=below:\( x \)] (x) at (-3, 0) {};
+    \node[internal, label=below:\( y \)] (y) at (-1, 0) {};
+    \node[internal, label=above:\( z \)] (z) at (-2, 1.732) {};
+
+    \draw[arrow] (m) edge["\( p \)"] (x);
+    \draw[arrow] (x) edge["\( e_{xy} \)"] (y);
+    \draw[arrow, dashed] (x) edge["\( e_{xz} \)"] (z);
+    \draw[arrow, dashed] (z) edge["\( e_{zy} \)"] (y);
+    \draw[arrow] (y) edge["\( q \)"] (V1);
+
+    \fill [black] (V1) circle (2pt);
+    \fill [black] (V2) circle (2pt);
+    \fill [black] (V3) circle (2pt);
+    \fill [black] (m) circle (2pt);
+    \fill [black] (x) circle (2pt);
+    \fill [black] (y) circle (2pt);
+    \fill [black] (z) circle (2pt);
 \end{tikzpicture}
-\caption{Two images of a part of the lasso tail.}
+\caption{Two paths to the face, from \( x \) to \( y \) directly, or through \( z \).}
 \label{fig:tail_move}
 \end{figure}
+
+\begin{mycor}
+In a bundle of mere circles \( T:\mm\to\EMzo \) the total holonomy is independent of the choice of paths \( p_{F_i} \) and the basepoint \( m \). It is inverted if we switch orientations.
+\end{mycor}
 
 \begin{myex}
 The total holonomy of \( T_1 \) on \( \oo \) (Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
 \end{myex}
 
+\subsection{Total index of a vector field}
+We defined the index on a face in Definition~\ref{def:index}. We will extend this to a total index defined with a total enumeration of faces.
 
+\subsection{The main theorem}
+\begin{mythm}
+The total index is constant on \( \pit{x:\mm_1}T_1(x) \).
+\end{mythm}
 
-\subsection{Total index of a vector field: subtracting curvature}
+This appears to be a little less than what we have classically, which is:
+\begin{enumerate}
+\item A definition of total curvature of a connection on the tangent bundle.
+\item A definition of total index, without using the connection.
+\item A definition of Euler characteristic.
+\item A proof that total index is independent of the vector field.
+\item A proof that total curvature is equal to total index.
+\end{enumerate}
+This collection of results provides enough redundancy to separately produce corollaries such as: total curvature is an integer; total curvature does not depend on the connection; a second proof that total index is independent of the vector field (since it is equal to total curvature, which does not so depend).
 
-\subsection{Equality of total index and total curvature}
-
-\subsection{Identification with Euler characteristic}
-
-
+How much of this do we have?

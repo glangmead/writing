@@ -3,7 +3,7 @@
 Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T_1 \) of the \( \link \) function to the 1-skeleton, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
-A \defemph{nonvanishing vector field} on a higher combinatorial 2-manifold \( \mm \) is a term \( X:\pit{x:\mm_1}T_1(x) \).
+A \defemph{nonvanishing vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T_1:\mm_1\to\Kzt \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). 
 \end{mydef}
 
 \begin{mynote}
@@ -11,52 +11,73 @@ We do not lose any classical generality by assuming we have such a nonvanishing 
 \end{mynote}
 
 \begin{mynote}
-If \( T:\mm\to\EMzo \) is a 2-bundle on the 2-manifold \( \mm \), and if \( T \) is orientable so that it factors through \( T':\mm\to\Kzt \), then a section \( \pit{x:\mm}T'(x) \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
+A section \( \pit{x:\mm}f(x) \) for \( f:\mm\to\Kzt \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle of a 2-manifold (which \emph{a priori} maps to \( \EMzo \)) through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
 \end{mynote}
 
 On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T_1 y} X(y) \).
 
 \begin{mynote}Concrete pathover terms such as \( \pi \) couple together the connection (the transport) and \( X \). The transport is needed to provide a single type in which to compare the two values of \( X \). The path \( \pi \) therefore reflects both the movement of \( X \) along the path \( p \), and the moving lens that allows us to examine in a single fiber the two points \( X(x) \) and \( X(y) \) as well as \( X(p) \).\end{mynote}
 
-Consider a vertex \( x:\mm \), a face \( F \) containing vertices \( x, y, z \), and the boundary path \( \ell\defeq e_{xy}\cdot e_{yz} \cdot e_{zx} \). We can calculate \( X(\ell) \) by concatenating the data along the path:
+\subsection{Swirling}
+
+Classically, vector fields are seen to swirl around between points. We can see this in HoTT as well, though in contrast to the classical explanations we always have a connection that interacts with the vector field. 
+
+Consider a vertex \( x:\mm \), a face \( F \) containing vertices \( x, y, z \), and the boundary path \( \ell\defeq e_{xy}\cdot e_{yz} \cdot e_{zx} \). We can calculate \( X(\ell) \) by concatenating the data along the path. As we visit each point we accumulate more information:
 
 \begin{enumerate}
 \item In \( T_1(x) \) we have 
 \begin{enumerate}
-\item the term \( X(x) \).
+\item the point \( X(x) \).
 \end{enumerate}
 \item In \( T_1(y) \) we have
 \begin{enumerate}
-\item the two terms \( X(y) \) and \( \tr(e_{xy})(X(x)) \)
-\item the path that equates these two, \( X(e_{xy}):\tr(e_{xy})(X(x))=X(y) \).
+\item point \( X(y) \)
+\item point \( \tr(e_{xy})(X(x)) \)
+\item the path \( X(e_{xy}):\tr(e_{xy})(X(x))=X(y) \) from (b) to (a).
 \end{enumerate}
 \item In \( T_1(z) \) we have 
 \begin{enumerate}
-\item the three terms \( X(z) \), \( \tr(e_{yz})(X(y)) \), and \( \tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
-\item the path \( X(e_{yz}):\tr(e_{yz})X(y)=X(z) \) joining the first two, and the path \( \tr(e_{yz})(X(e_{xy})) \) joining the second two
-\end{enumerate}.
+\item point \( X(z) \)
+\item point \( \tr(e_{yz})(X(y)) \)
+\item point \( \tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
+\item path \( X(e_{yz}):\tr(e_{yz})(X(y))=X(z) \) from (b) to (a)
+\item path \( \tr(e_{yz})(X(e_{xy})) \) from (c) to (b)
+\end{enumerate}
 \item Then back at \( T_1(x) \) we have
 \begin{enumerate}
-\item \( X(x) \), \( \tr(e_{zx})(X(z)) \), \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \), and \( \tr(e_{zx})\circ\tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
-\item the three paths \( \tr(\ell)(X(x)) \), \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \), and \( \tr(e_{zx})(X(e_{yz})) \).
+\item point \( X(x) \)
+\item point \( \tr(e_{zx})(X(z)) \)
+\item point \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \)
+\item point \( \tr(e_{zx})\circ\tr(e_{yz})\circ\tr(e_{xy})(X(x)) \), i.e. \( \tr(\ell)(X(x)) \)
+\item path \( X(e_{zx}): \tr(e_{zx})(X(z))=X(x) \) from (b) to (a)
+\item path \( \tr(e_{zx})(X(e_{yz})) \) from (c) to (b)
+\item path \( \tr(e_{zx})\circ\tr(e_{yz})(X(e_{xy})) \) from (d) to (c).
 \end{enumerate}
 \end{enumerate}
 
-% https://q.uiver.app/#q=WzAsMTMsWzAsMSwiWCh4KSJdLFswLDIsIlgoeSkiXSxbMCwzLCJYKHopIl0sWzAsNCwiWCh4KSJdLFsxLDIsIlxcbWF0aHJte3RyfShlX3t4eX0pKFgoeCkpIl0sWzEsMywiXFxtYXRocm17dHJ9KGVfe3l6fSkoWCh5KSkiXSxbMSw0LCJcXG1hdGhybXt0cn0oZV97enh9KShYKHopKSJdLFsyLDMsIlxcbWF0aHJte3RyfShlX3t5en0pXFxjaXJjXFxtYXRocm17dHJ9KGVfe3h5fSkoWCh4KSkiXSxbMiw0LCJcXG1hdGhybXt0cn0oZV97enh9KVxcY2lyY1xcbWF0aHJte3RyfShlX3t5en0pKFgoeSkpIl0sWzMsNCwiXFxtYXRocm17dHJ9KGVfe3p4fSlcXGNpcmNcXG1hdGhybXt0cn0oZV97eXp9KVxcY2lyY1xcbWF0aHJte3RyfShlX3t4eX0pKFgoeCkpIl0sWzEsMCwiXFxtYXRocm17dHJ9Il0sWzIsMCwiXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9Il0sWzMsMCwiXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9XFxjaXJjXFxtYXRocm17dHJ9Il0sWzEsNCwiWChlX3t4eX0pIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw1LCJYKGVfe3l6fSkiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDYsIlgoZV97enh9KSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsNywiXFxtYXRocm17dHJ9KGVfe3l6fSkoWChlX3t4eX0pKSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsOCwiXFxtYXRocm17dHJ9KGVfe3p4fSkoWChlX3t5en0pKSIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzgsOSwiKFxcbWF0aHJte3RyfShlX3t6eH0pXFxjaXJjXFxtYXRocm17dHJ9KGVfe3l6fSkpKFgoZV97eHl9KSkiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
-\begin{tikzcd}
-  & {\mathrm{tr}} & {\mathrm{tr}\circ\mathrm{tr}} & {\mathrm{tr}\circ\mathrm{tr}\circ\mathrm{tr}} \\
-  {X(x)} \\
-  {X(y)} & {\mathrm{tr}(e_{xy})(X(x))} \\
-  {X(z)} & {\mathrm{tr}(e_{yz})(X(y))} & {\mathrm{tr}(e_{yz})\circ\mathrm{tr}(e_{xy})(X(x))} \\
-  {X(x)} & {\mathrm{tr}(e_{zx})(X(z))} & {\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz})(X(y))} & {\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz})\circ\mathrm{tr}(e_{xy})(X(x))}
-  \arrow["{X(e_{xy})}", equals, from=3-1, to=3-2]
-  \arrow["{X(e_{yz})}", equals, from=4-1, to=4-2]
-  \arrow["{\mathrm{tr}(e_{yz})(X(e_{xy}))}", equals, from=4-2, to=4-3]
-  \arrow["{X(e_{zx})}", equals, from=5-1, to=5-2]
-  \arrow["{\mathrm{tr}(e_{zx})(X(e_{yz}))}", equals, from=5-2, to=5-3]
-  \arrow["{(\mathrm{tr}(e_{zx})\circ\mathrm{tr}(e_{yz}))(X(e_{xy}))}", equals, from=5-3, to=5-4]
-\end{tikzcd}
+As we traverse an edge, say \( e_{xy} \), we get a path in \( T_1(y) \) which is the image of \( e_{xy} \) under \( X \). Although this path is then transported along further edges of the triangle, it will help us to think of it as maintaining its relationship to \( e_{xy} \):
 
-Notice that the path \( \tr(\ell)(X(x)) \) is just one component of the path over \( \ell \). The path \( X(\ell) \) is the concatenation of the three paths in item 4, each one ``distorted'' by 1, 2, or 3 transport maps, respectively. And of course we know already that this may not be a closed loop in \( T_1(x) \), because there may be nontrivial holonomy.
+\begin{mydef}
+If \( e_{xy}:x=_{\mm_1} y, e_{yz}:y=_{\mm_1}z \) are paths in \( \mm_1 \) and \( X \) is a nonvanishing vector field on \( \mm_1 \), then we call \( \tr(e_{yz})(X(e_{xy})) \) \defemph{the contribution on \( e_{xy} \) of \( X \)}, even though this is a path in \( T_1(z) \).
+\end{mydef}
 
-But we can in fact close the loop with a fourth edge, exactly when \( T_1 \) has an extension to \( F \). The face \( F \) provides a path \( \ell=_{v=_\mm v} \refl(v) \) that fills the loop, and an extension of \( T_1 \) to \( F \) provides by functoriality a corresponding path \( T_1(\ell)=_{T_1(v)=T_1(v)}\id(T_1(v)) \), which is a homotopy between these two automorphisms of \( T_1(v) \). Evaluating this homotopy at \( X(x) \) provides another term 
+As we traverse an additional edge this image is simply mapped to the next vertex through the lens of transport, which acts similarly on all the points in a fiber. The image is carried first to \( \tr(e_{yz})(X(e_{xy})) \) then to \( \tr(e_{zx})\circ\tr(e_{yz})(X(x)) \).
+
+At stage 4 we have three paths, each consisting of \( X \) acting on a single edge of the triangle, mapped with some transport to \( T_1(x) \). We see that these three can be concatenated to form a path \( X(\ell):\tr(\ell)(X(x))=X(x) \).
+
+\begin{mynote}
+In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{xy}) \) is called ``the change in angle between \( X \) and \( X(x)_{||} \) along the edge \( e_{xy} \),'' where by \( X(x)_{||} \) we mean the transport of the fixed single vector \( X(x) \) to the point \( X(y) \), i.e. \( \tr(e_{xy})(X(x)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This remark is meant to help anyone intending to make further comparisons with classical results.
+\end{mynote}
+
+When \( T_1 \) has an extension to \( F \) we can obtain a second path in \( \tr(\ell)(X(x))=X(x) \)! Namely given a filler path \( \ell=_{v=_\mm v} \refl(v) \) that fills the loop, an extension of \( T_1 \) to \( F \) provides by functoriality a corresponding path \( T_1(\ell)=_{T_1(v)=T_1(v)}\id(T_1(v)) \), which is a homotopy between these two automorphisms of \( T_1(v) \) that we called the flatness structure on \( F \). Evaluating this homotopy at \( X(x) \) provides the term \( \flat(\ell)(X(x)):X(x)=\tr(\ell)(X(x)) \) (and its inverse is hence the promised second path).
+
+Concatenating \( \flat(\ell)(X(x))\cdot X(\ell)(X(x)) \) gives a loop in the pointed type \( (T_1(x), X(x)) \). This is a term in \( \zz \):
+
+\begin{mydef}
+\label{def:index}
+The \defemph{index} of \( X \) at \( x \) on the face \( F \) is \( \flat(\ell)(X(x))\cdot X(\ell)(X(x)):\zz \).
+\end{mydef}
+
+\begin{mynote}
+Intuitively, \( X(\ell) \) combines the swirling of \( X \) with the twisting of the connection, and prepending with the flatness structure erases the effect of the connection, leaving just the swirling of \( X \). This should line up with the classical definition of index, which is also an integer.
+\end{mynote}
