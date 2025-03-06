@@ -7,6 +7,8 @@ We will remind ourselves of the definition of a classical simplicial complex, in
 An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
 \end{mydef}
 
+\chcomment[id=Greg]{Postponed enumerations/orientations of complexes to section 6 (new final section)}
+
 \begin{mydef}
 Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( |M|:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{\leq k-1}| \) we form \( |M_{\leq k}| \) by the pushout in sets
 \end{mydef}
@@ -26,7 +28,7 @@ which attaches each \( k \)-simplex by taking the convex hull of the appropriate
 The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( |M_0|\xrightarrow[]{i_1}|M_{\leq 1}|\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}|M_{\leq n}|=|M| \).
 
 \begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).\chcomment[id=Greg]{removed enumeration of the link}
 \label{def:link}
 \end{mydef}
 
@@ -127,6 +129,7 @@ In dimension 2 we could fill in maps from \( C_3 \) into our higher type by addi
 \end{center}
 The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. 
 
+\chcomment[id=Greg]{removed a paragraph about how \( \partial_1 \) works}
 The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
 
 Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be
@@ -158,6 +161,7 @@ Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delt
 
 \begin{mydef}
 \label{def:higher_realization} 
+\chcomment[id=Greg]{new compact definition of realization (but I didn't go with ``CW complex'')}
 A \defemph{higher realization} of an abstract simplicial complex \( M:\simcomp \) consists of 
 \begin{enumerate}
 \item \( n+1 \) types \( \mm_0,\ldots,\mm_n \) where \( \mm_0\defeq M_0 \),
