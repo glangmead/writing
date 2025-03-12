@@ -2,12 +2,8 @@
 Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T_1 \) of the \( \link \) function to the 1-skeleton, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
-A \defemph{nonvanishing vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T_1:\mm_1\to\Kzt \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). 
+A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\Kzt \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended are called \defemph{zeros of the vector field}.
 \end{mydef}
-
-\begin{mynote}
-We do not lose any classical generality by assuming we have such a nonvanishing field on the entire 1-skeleton. This corresponds to the fact that the zeros of a vector field can be perturbed to be isolated, and to live inside the faces of a triangulation.
-\end{mynote}
 
 \begin{mynote}
 A section \( \pit{x:\mm}f(x) \) for \( f:\mm\to\Kzt \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle of a 2-manifold (which \emph{a priori} maps to \( \EMzo \)) through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.

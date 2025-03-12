@@ -279,12 +279,12 @@
 {} % Theorem head spec (can be left empty, meaning `normal')
 
 \theoremstyle{mythmstyle}
-\newtheorem{mydef}{Definition}[section]
-\newtheorem{myex}{Example}[section]
 \newtheorem{mythm}{Theorem}[section]
-\newtheorem{mylemma}{Lemma}[section]
-\newtheorem{mycor}{Corollary}[section]
-\newtheorem{myprop}{Proposition}[section]
-\newtheorem{myclaim}{Claim}[section]
+\newtheorem{mydef}[mythm]{Definition}
+\newtheorem{myex}[mythm]{Example}
+\newtheorem{mylemma}[mythm]{Lemma}
+\newtheorem{mycor}[mythm]{Corollary}
+\newtheorem{myprop}[mythm]{Proposition}
+\newtheorem{myclaim}[mythm]{Claim}
 \theoremstyle{myremarkstyle}
-\newshadetheorem{mynote}{Remark}
+\newshadetheorem{mynote}[mythm]{Remark}

@@ -3,12 +3,13 @@ We wish to make computations that combine contributions from every face of a com
 
 \begin{mydef}
 A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) with underlying simplicial complex \( M=[M_0, M_1, M_2] \) consists of
-\begin{itemize}
+\begin{enumerate}
 \item A ``master basepoint'' \( m:M_0 \).
-\item For each face \( F:M_2 \) with vertices \( \{v_1, v_2, v_3\} \) an enumeration of its vertices \( [v_1, v_2, v_3] \), including the choice of the first vertex in the enumeration as the basepoint of \( F \), that is \defemph{globally compatible} with the choices for the other faces, meaning that when two faces \( F_1,F_2 \) share an edge \( \{v, w\} \), then one of the faces includes the sublist \( [v, w] \) and the other includes \( [w, v] \).
+\item For each face \( F:M_2 \) with vertices \( \{v_1, v_2, v_3\} \) an enumeration of its vertices \( [v_1, v_2, v_3] \), including the choice of the first vertex in the enumeration as the basepoint of \( F \), which is \defemph{globally compatible} with the choices for the other faces, meaning that when two faces \( F_1,F_2 \) share an edge \( \{v, w\} \), then one of the faces includes the sublist \( [v, w] \) and the other includes \( [w, v] \).
 \item An ordering of the faces \( [F_1,\ldots,F_n] \).
 \item For each face \( F \) a path \( p_F:m=_\mm F_v \) and a loop \( \ell_F\defeq p_F\cdot e_{12}\cdot e_{23}\cdot e_{31}\cdot p_F^{-1} \) where \( e_{ij}:v_i=v_j \) are the paths corresponding to the edges. 
-\end{itemize}
+\end{enumerate}
+Two enumerations that differ only in the ordering of vertices (2.) are said to have the \defemph{same orientation} if it is true for every face that the two orderings of vertices differ by an even orientation.
 \end{mydef}
 
 Note that the last bullet of the definition is the only one that uses the realization \( \mm \).
@@ -114,9 +115,12 @@ Finally we observe that for the triangle \( F \), an odd permutation that keeps 
 \begin{mycor}
 In a bundle of mere circles \( T:\mm\to\EMzo \) the total holonomy is independent of the choice of paths \( p_{F_i} \) and the basepoint \( m \). It is inverted if we switch orientations.
 \end{mycor}
+\begin{proof}
+\todo{cite sth.}
+\end{proof}
 
 \begin{myex}
-The total holonomy of \( T_1 \) on \( \oo \) (Definition~\ref{def:octahedron_holonomy}) is \( R^8=\) which is two full rotations of \( C_4 \).
+The total holonomy of \( T_1 \) on \( \oo \) (Definition~\ref{def:octahedron_holonomy}) is \( \id \), and the flatness structure is the path \( \id=R^8 \) which is two full rotations of \( C_4 \).
 \end{myex}
 
 \subsection{Total index of a vector field}

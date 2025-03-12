@@ -79,9 +79,9 @@ A classical 1940 result of Whitehead, building on Cairn, states that every smoot
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=100pt]{triangulated_sphere.pdf}
-\includegraphics[width=100pt]{Torus-triang.png}
-\includegraphics[width=100pt]{triangulated_genus3.pdf}
+\includegraphics[width=100pt]{figs/triangulated_sphere.pdf}
+\includegraphics[width=100pt]{figs/Torus-triang.png}
+\includegraphics[width=100pt]{figs/triangulated_genus3.pdf}
 \caption{Combinatorial triangulations of a sphere, torus, and 3-holed torus. Sphere created with the tool \texttt{stripy}; torus from Wikipedia (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.); 3-holed torus from Wikipedia (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
 \label{fig:sphere_triangulation}
 \end{figure}
@@ -165,151 +165,13 @@ A \defemph{higher realization} of an abstract simplicial complex \( M:\simcomp \
 \item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times S^{i}}{M_{i+1}}{\partial_{i}}{\pr_1} \), \( i=1,\ldots,n \), where \( S^i \) is a HoTT \( i \)-sphere and \( \partial_i \) are called \defemph{attachment maps},
 \item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{i+1}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
-We can call such a higher realization a \defemph{higher simplicial complex}, of in the case where the underlying complex \( M \) is a combinatorial manifold, a \( higher combinatorial manifold \).
+We can call such a higher realization a \defemph{higher simplicial complex}, of in the case where the underlying complex \( M \) is a combinatorial manifold, a \defemph{higher combinatorial manifold}.
 \end{mydef}
 We intend for the \( \partial_i \) to be isomorphisms between a boundary of a simplex in \( \mm_i \) and the \( i \)-sphere. To avoid spending too much time above dimension 2, we will leave the \( \partial_i \) underspecified in general. For 2-dimensional complexes we will see how the gluing can be done for triangles.
 
-\subsection{Polygons}\label{sec:polygons}
+\subsection{The octahedron model of the sphere}
 
-The 1-type \( C_3 \) we created earlier by pushing out the combinatorial data of a set-based simplicial triangle is clearly an example of a type of marked presented polygons \( C_n, n:\nn \). The standard HoTT circle itself is usually given as a HIT and is a non-example of a combinatorial manifold since it lacks the second vertex of the edge:
-
-\begin{mydef}
-The higher inductive type \( \so \) which we can also call \( C_1 \):
-\begin{align*}
-\so &:\Type \\
-\mathsf{base}&:\so \\
-\mathsf{loop}&:\mathsf{base}=\mathsf{base}
-\end{align*}
-\end{mydef}
-
-Denote by \( \Gon \) the set of marked presented \( n \)-gons for some natural number \( n \). We'll see below that the realization of an \( n \)-gon is a mere circle, i.e. we have a forgetful map \( \Gon\to \EMzo \).
-
-\subsection{Adding and removing points from polygons}
-Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
-\[ 
-\tr(p)(q) = \phi(p)^{-1}\cdot q\cdot \psi(p)
-\]
-which gives a path in \( \phi(a')=\psi(a') \) by connecting dots between the terms \( \phi(a'), \phi(a), \psi(a), \psi(a') \). This relates a would-be homotopy \( \phi\sim\psi \) specified at a single point, to a point at the end of a path. We will use this to help construct such homotopies.
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}[
-node distance = 20mm and 20mm,
-V/.style = {circle, fill, draw=black, inner sep=1pt},
-every edge quotes/.style = {auto},
-arrow/.style={->,semithick}
-]
-\begin{scope}[nodes=V]
-  \node[label=above left:\( \phi(a) \)] (1) {};
-  \node[label=above right:\( \phi(a') \)] (2) [right=of 1]  {};
-  \node[label=below right:\( \psi(a') \)] (3) [below=of 2]  {};
-  \node[label=below left:\( \psi(a) \)] (4) [below=of 1]  {};
-  \node[label=below:\( a \)] (5) [below=of 4]  {};
-  \node[label=below:\( a' \)] (6) [below=of 3]  {};
-\end{scope}
-\draw[arrow]
-        (2)  edge[swap, "\( \phi(p)^{-1} \)"] (1)
-        (4)  edge["\( \psi(p) \)"] (3)
-        (1)  edge[swap, "\( q \)"] (4)
-        (5)  edge["\( p \)"] (6);
-\end{tikzpicture}
-\caption{Transport along \( p \) in the fibers of a family of paths. The fiber over \( a \) is \( \phi(a)=\psi(a) \) where \( \phi,\psi:A\to B \).}
-\label{fig:transport_family_of_paths}
-\end{figure}
-
-\begin{mylemma}\label{lem:addpoints}
-Let \( C_n \) be the marked presented polygon 1-type with \( n \) vertices. Then \( C_2\simeq C_1 \) and in fact \( C_n\simeq C_{n-1} \).
-\end{mylemma}
-\begin{proof}
-(Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( C_1 \) we will denote its constructors by \( \base \) and \( \loopo \). For \( C_2 \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( C_3 \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
-
-First we will define \( f:C_2\to C_1 \) and \( g:C_1\to C_2 \), then prove they are inverses.
-\begin{align*}
-f(v_1)=f(v_2)&=\base &\quad g(\base)&=v_1\\
-f(\ell_{12})&=\loopo&\quad g(\loopo)&=\ell_{12}\cdot r_{21}\\
-f(r_{21}) &= \refl_{\base}& & \\
-\end{align*}
-
-We need to show that \( f\circ g\sim \id_{C_1} \) and \( g\circ f\sim\id_{C_2} \).
-Think of \( f \) as sliding \( v_2 \) along \( r_{21} \) to coalesce with \( v_1 \). This may help understand why the unfortunately intricate proof is working.
-
-We need terms \( p:\pit{a:C_1}f(g(a))=a \) and \( q:\pit{a:C_2}g(f(a))=a \). We will proceed by induction, defining appropriate paths on point constructors and then checking a condition on path constructors that confirms that the built-in transport of these type families respects the definition on points.
-
-Looking first at \( g\circ f \), which shrinks \( r_{21} \), we have the following data to work with:
-\begin{align*}
-g(f(v_1))=g(f(v_2))&=v_1\\
-g(f(\ell_{12}))&=\ell_{12}\cdot r_{21}\\
-g(f(r_{21})) &= \refl_{v_1}.
-\end{align*}
-We then need to supply a homotopy from this data to \( \id_{C_2} \), which consists of a section and pathovers over \( C_2 \):
-\begin{align*}
-p_1&:g(f(v_1))=v_1\\
-p_2&:g(f(v_1))=v_2\\
-H_\ell&:\tr(\ell_{12})(p_1)=p_2\\
-H_r&:\tr(r_{21})(p_2)=p_1.
-\end{align*}
-which simplifies to
-\begin{align*}
-p_1&:v_1=v_1\\
-p_2&:v_1=v_2\\
-H_\ell&:g(f(\ell_{12}))^{-1}\cdot p_1\cdot \ell_{12}=p_2\\
-H_r&:=g(f(r_{21}))^{-1}\cdot p_2\cdot r_{21}= p_1
-\end{align*}
-and then to 
-\begin{align*}
-p_1&:v_1=v_1\\
-p_2&:v_1=v_2\\
-H_\ell&:(\ell_{12}\cdot r_{21})^{-1}\cdot p_1\cdot \ell_{12}=p_2\\
-H_r&:\refl_{v_1}\cdot p_2\cdot r_{21}= p_1
-\end{align*}
-
-To solve all of these constraints we can choose \( p_1\defeq\refl_{v_1} \), which by consulting either \( H_\ell \) or \( H_r \) requires that we take \( p_2\defeq{r_{21}}^{-1}\).
-
-Now examining \( f\circ g \), we have
-\begin{align*}
-f(g(\base))&=\base&\\
-f(g(\loopo))&=f(\ell_{12}\cdot r_{21})=\loopo
-\end{align*}
-and so we have an easy proof that this is the identity.
-
-The proof of the more general case \( C_n \simeq C_{n-1}\) is very similar. Take the maps \( f:C_n\to C_{n-1} \), \( g:C_{n-1}\to C_n \) to be
-\begin{align*}
-f(v_i)=v_i&\quad(i=1,\ldots,n-1) & g(v_i)&=v_i&\quad(i=1,\ldots,n-1)\\
-f(v_n)=v_1&\quad& g(e_{i,i+1})&=e_{i,i+1}&\quad(i=1,\ldots,n-2)\\
-f(e_{i,i+1})=e_{i,i+1}&\quad(i=1,\ldots,n-1)& g(e_{n-1,1})&=e_{n-1,n}\cdot e_{n,1}&\\
-f(e_{n-1,n})=e_{n-1,1}&&&&\\
-f(e_{n,1})=\refl_{v_1}&&&&
-\end{align*}
-where \( f \) should be thought of as shrinking \( e_{n,1} \) so that \( v_n \) coalesces into \( v_1 \).
-
-The proof that \( g\circ f\sim\id_{C_n} \) proceeds as follows: the composition is definitionally the identity except 
-\begin{align*}
-g(f(v_n))&=v_1\\
-g(f(e_{n-1,n}))&=e_{n-1,n}\cdot e_{n,1}\\
-g(f(e_{n,1}))&= \refl_{v_1}.
-\end{align*}
-Guided by our previous experience we choose \( {e_{n,1}}^{-1}:g(f(v_n))=v_n \), and define the pathovers by transport.
-
-The proof that \( f\circ g\sim\id_{C_{n-1}} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
-\end{proof}
-
-\begin{mycor}
-\label{cor:gon}
-All polygons are equivalent to \( \so \), i.e. we have a term in \( \pit{n:\nn}||C_n=S^1|| \), and hence \( \Gon \) is a subtype of \( \EMzo \).
-\end{mycor}
-\begin{proof}
-We can add \( n-1 \) points to \( S^1 \) and use Lemma~\ref{lem:addpoints}.
-\end{proof}
-
-\begin{mydef}
-For \( k:\nn \) define \( m_k:\Gon\to\Gon \) where \( m_k:C_n\to C_{kn} \) adds \( k \) vertices between each of the original verticies of \( C_n \).
-\end{mydef}
-
-With \( m_k \) we can start with a collection of pentagons and hexagons and make the collection homogeneous: by applying \( m_6 \) to the pentagons and \( m_5 \) to the hexagons we obtain a collection of 30-gons. This will be useful when we work more with the link function.
-
-\subsection{\texorpdfstring{The higher inductive type \( \oo \)}{The higher inductive type O}}
-
-We will create our first combinatorial surface, an octahedron. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
+We will create our first combinatorial surface, an octahedron. We will not prove that this type is equivalent to the sphere. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
 
 \begin{figure}[h]
 \centering
@@ -415,6 +277,6 @@ Applying the map \( \re \) to \( O_0\to O_1\to O \) gives the presented type \( 
 
 \begin{figure}[h]
 \centering
-\input{discrete_gauge_theory_oo_tikz}
+\input{figs/discrete_gauge_theory_oo_tikz}
 \caption{The marked presented type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
 \end{figure}

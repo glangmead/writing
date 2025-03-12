@@ -3,21 +3,20 @@ A map out of a higher combinatorial manifold has various components. These line 
 
 \begin{mydef}
 \label{def:connection}
-If \( \mm \) is a higher combinatorial manifold and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
+If \( \mm \) is a higher combinatorial \( n \)-manifold and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
 \end{mydef}
 \begin{center}
-% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfV9uIl0sWzMsMCwiXFxjZG90cyJdLFsyLDEsIlxcbWF0aGNhbHtVfSJdLFswLDFdLFsxLDJdLFsyLDRdLFs0LDNdLFswLDUsImZfMCJdLFsxLDUsImZfMSJdLFsyLDUsImZfMiJdLFszLDUsImZfbiIsMl1d
-% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfSJdLFszLDAsIlxcY2RvdHMiXSxbMiwxLCJcXG1hdGhjYWx7VX0iXSxbMCwxXSxbMSwyXSxbMiw0XSxbNCwzXSxbMCw1LCJmXzAiXSxbMSw1LCJmXzEiXSxbMiw1LCJmXzIiXSxbMyw1LCJmIiwyXV0=
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfSJdLFszLDAsIlxcY2RvdHMiXSxbMiwxLCJcXG1hdGhjYWx7VX0iXSxbMCwxLCJcXGltYXRoXzAiXSxbMSwyLCJcXGltYXRoXzEiXSxbMiw0LCJcXGltYXRoXzIiXSxbNCwzLCJcXGltYXRoX3tuLTF9Il0sWzAsNSwiZl8wIl0sWzEsNSwiZl8xIl0sWzIsNSwiZl8yIl0sWzMsNSwiZiIsMl1d
 \begin{tikzcd}
   {\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} & \cdots & {\mathbb{M}} \\
   && {\mathcal{U}}
-  \arrow[from=1-1, to=1-2]
+  \arrow["{\imath_0}", from=1-1, to=1-2]
   \arrow["{f_0}", from=1-1, to=2-3]
-  \arrow[from=1-2, to=1-3]
+  \arrow["{\imath_1}", from=1-2, to=1-3]
   \arrow["{f_1}", from=1-2, to=2-3]
-  \arrow[from=1-3, to=1-4]
+  \arrow["{\imath_2}", from=1-3, to=1-4]
   \arrow["{f_2}", from=1-3, to=2-3]
-  \arrow[from=1-4, to=1-5]
+  \arrow["{\imath_{n-1}}", from=1-4, to=1-5]
   \arrow["f"', from=1-5, to=2-3]
 \end{tikzcd}
 \end{center}
@@ -37,7 +36,9 @@ and such that for each pushout defining \( \mm_k \) we have the diagram
   \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
   \arrow["{f_k}", from=2-2, to=3-2]
   \arrow[shorten >=2pt, Rightarrow, from=2-2, to=0]
-\end{tikzcd}
+\end{tikzcd}\todo{Lemma: k-conn exists iff for all k there exists a flatness structure on face mk}
+\todo{draw diagram with single face \{mk\}}
+\todo{name the filler map of the outer square}
 \end{center}
 then we say
 \begin{itemize}
@@ -50,7 +51,7 @@ then we say
 Another classical object we can identify here is a \emph{gauge transformation}, which is a bundle automorphism \( H:f\sim f\defeq \pit{m:\mm}f(m)=f(m) \). If we have \( ||H=\id_f||_{-1} \) then the gauge transformation is called \emph{small}, else \emph{large}.
 \end{mynote}
 
-\subsection{The function \texorpdfstring{\( T \)}{T} on \texorpdfstring{\( \oo \)}{O}}
+\subsection{The tangent bundle of the sphere}
 
 We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
 
@@ -66,7 +67,7 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 
 \begin{figure}[h]
 \centering
-\input{discrete_gauge_theory_oo_transport_tikz}
+\input{figs/discrete_gauge_theory_oo_transport_tikz}
 \caption{\( \link \) for the vertices \( w, b\) and \( r \).}
 \label{fig:triangle_of_equators}
 \end{figure}
