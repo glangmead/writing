@@ -9,7 +9,6 @@
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{multicol}
-\RequirePackage{shadethm}
 
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
@@ -256,8 +255,6 @@
 }
 
 
-\setlength{\shadeboxsep}{10pt}
-%\setlength{\shadeboxrule}{10pt}
 \newtheoremstyle{mythmstyle}
 {5pt} % Space above
 {-4pt} % Space below
@@ -287,4 +284,5 @@
 \newtheorem{myprop}[mythm]{Proposition}
 \newtheorem{myclaim}[mythm]{Claim}
 \theoremstyle{myremarkstyle}
-\newshadetheorem{mynote}[mythm]{Remark}
+\newtheorem{mynote}[mythm]{Remark}
+\tcolorboxenvironment{mynote}{colframe=gray,before skip=10pt,after skip=10pt}
