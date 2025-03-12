@@ -19,7 +19,8 @@ do
   cd ..
   cp -f *.png *.jpg *.svg html || :
   cp figs/dense_circle.pdf figs/triangulated_genus3.pdf figs/triangulated_sphere.pdf html
-  cat html/$i.html | sed 's/embed src="\(.*\).pdf"/img src="\1.png"/' | sed 's/0◻//g' | sed 's=<p><em><span>2</span></em></p>==g' | sed 's=figs/==g' > html/foo.html
+  cat html/$i.html | sed 's:embed  *src= *"\([^"][^"]*\)\.p..":img src="\1.png":g' | sed 's/0◻//g' | sed 's=<p><em><span>2</span></em></p>==g' | sed 's=figs/==g' > html/foo.html
+  mv html/$i.html html/$i.html.bak
   mv html/foo.html html/$i.html
   open html/$i.html
 done
