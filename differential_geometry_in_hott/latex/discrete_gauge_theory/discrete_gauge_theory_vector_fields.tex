@@ -1,5 +1,5 @@
 \section{Vector fields}
-Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T_1 \) of the \( \link \) function to the 1-skeleton, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
 A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\Kzt \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended are called \defemph{zeros of the vector field}.
@@ -14,7 +14,8 @@ On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each ve
 \begin{mynote}Concrete pathover terms such as \( \pi \) couple together the connection (the transport) and \( X \). The transport is needed to provide a single type in which to compare the two values of \( X \). The path \( \pi \) therefore reflects both the movement of \( X \) along the path \( p \), and the moving lens that allows us to examine in a single fiber the two points \( X(x) \) and \( X(y) \) as well as \( X(p) \).\end{mynote}
 
 \subsection{Swirling}
-
+\todo{Prove that aut bundle is trivial}
+\todo{Write the example}
 Classically, vector fields are seen to swirl around between points. We can see this in HoTT as well, though in contrast to the classical explanations we always have a connection that interacts with the vector field. 
 
 Consider a vertex \( x:\mm \), a face \( F \) containing vertices \( x, y, z \), and the boundary path \( \ell\defeq e_{xy}\cdot e_{yz} \cdot e_{zx} \). We can calculate \( X(\ell) \) by concatenating the data along the path. As we visit each point we accumulate more information:
