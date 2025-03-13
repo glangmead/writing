@@ -12,6 +12,7 @@ MAlonzo/**
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
+*.loc
 *.lof
 *.log
 *.lot
