@@ -8,7 +8,6 @@ A map out of a higher combinatorial manifold has various components. These line 
 If \( \mm \) is a higher combinatorial \( n \)-manifold and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
 \end{mydef}
 \begin{center}
-\chcomment[id=Greg]{Labeled \( \imath_k \)}
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntNfV8wIl0sWzEsMCwiXFxtYXRoYmJ7TX1fMSJdLFsyLDAsIlxcbWF0aGJie019XzIiXSxbNCwwLCJcXG1hdGhiYntNfSJdLFszLDAsIlxcY2RvdHMiXSxbMiwxLCJcXG1hdGhjYWx7VX0iXSxbMCwxLCJcXGltYXRoXzAiXSxbMSwyLCJcXGltYXRoXzEiXSxbMiw0LCJcXGltYXRoXzIiXSxbNCwzLCJcXGltYXRoX3tuLTF9Il0sWzAsNSwiZl8wIl0sWzEsNSwiZl8xIl0sWzIsNSwiZl8yIl0sWzMsNSwiZiIsMl1d
 \begin{tikzcd}
   {\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} & \cdots & {\mathbb{M}} \\
@@ -43,7 +42,6 @@ and such that for each pushout defining \( \mm_k \) we have the diagram
 \end{center}
 the outer square of which restricts on each face to the diagram
 \begin{center}
-\chcomment[id=Greg]{Single-face diagram, outer square}
 % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIlxce21fa1xcfVxcdGltZXMgU15rIl0sWzEsMCwibV9rIl0sWzEsMSwiXFxtYXRoY2Fse1V9Il0sWzAsM10sWzEsMCwiXFxwYXJ0aWFsX3trLTF9IiwyXSxbMiwzLCJmX2tcXGNpcmMqX2siXSxbMSwyLCIhIl0sWzAsMiwiXFxmbGF0X2siLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dXQ==
 \begin{tikzcd}
   {\{m_k\}\times S^k} & {m_k} \\
@@ -59,10 +57,10 @@ then we say
 \begin{itemize}
 \item The map \( f_k \) is a \defemph{\( k \)-bundle} on \( \mm_k \).
 \item The pair given by the map \( f_k \) and the proof \( f_k\circ \imath_{k-1}=f_{k-1} \) that \( f_k \) extends \( f_{k-1} \) is called a \defemph{\( k \)-connection on the bundle \( f_{k-1} \)}.
-\item The\chcomment[id=Greg]{diagram permits new wording} filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}.
+\item The filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}.
 \end{itemize}
 
-The\chcomment[id=Greg]{new lemma} definitions can be digested to give
+The definitions can be digested to give
 \begin{mylemma}
 Given \( f_{k-1} \) as above, a \( k \)-connection exists if and only if there exists a flatness structure for each \( k \)-face.
 \end{mylemma}
@@ -72,7 +70,6 @@ Another classical object we can identify here is a \emph{gauge transformation}, 
 \end{mynote}
 
 \subsection{Connections as local trivializations}
-\chcomment[id=Greg]{Capturing our discussion}
 This section can ve viewed as an extended remark. The observation we want to make is that the data of a \( k \)-bundle is related to the construction of a trivialization: the fiber at one vertex can be extended throughout the face coherently, using the connection (the extension of the classifying map to the edges) to specify isomorphisms with the fibers at the other points, and the higher connections to establish commutativity between these.
 
 An important context for these remarks is if we imagine that the simplicial complex we started with is in fact a \emph{Cech complex} of a good open cover \( \{U_i\} \) (a cover by contractible open sets, each finite intersection of which is also contractible). This is just to say the vertices \( v_i \) would represent the combinatorial data of the set of charts \( \{U_i\} \) themselves, and the edges are formed if two charts overlap. The \( k \)-faces are the \( k \)-way overlaps, if any. For a good introduction to this point of view, see the introduction in Bott and Tu \cite{bott_tu}. It bears emphasizing: the resulting \emph{higher} types are the same ones we've been working with, it's only the origin of the combinatorial data that we're reimagining.
