@@ -23,6 +23,7 @@ If \( \mm \) is a higher combinatorial \( n \)-manifold and \( f_k:\mm_k\to\uni 
 \end{tikzcd}
 \end{center}
 and such that for each pushout defining \( \mm_k \) we have the diagram
+\todo{split the simplicial statement into the lemma}
 \begin{center}
 % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIk1fa1xcdGltZXMgU15rIl0sWzEsMCwiTV9rIl0sWzEsMSwiXFxtYXRoYmJ7TX1fayJdLFsxLDIsIlxcbWF0aGNhbHtVfSJdLFswLDNdLFsxLDAsIlxccGFydGlhbF97ay0xfSIsMl0sWzIsMywiKl9rIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFswLDIsImhfayIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzMsNCwiZl9rIl0sWzAsNCwiZl97ay0xfSIsMl0sWzMsMTIsIiIsMCx7InNob3J0ZW4iOnsidGFyZ2V0IjoyMH19XV0=
 \begin{tikzcd}
@@ -57,7 +58,7 @@ then we say
 \begin{itemize}
 \item The map \( f_k \) is a \defemph{\( k \)-bundle} on \( \mm_k \).
 \item The pair given by the map \( f_k \) and the proof \( f_k\circ \imath_{k-1}=f_{k-1} \) that \( f_k \) extends \( f_{k-1} \) is called a \defemph{\( k \)-connection on the bundle \( f_{k-1} \)}.
-\item The filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}.
+\item The filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}.\todo{add a def for holonomy}
 \end{itemize}
 
 The definitions can be digested to give
@@ -70,6 +71,9 @@ Another classical object we can identify here is a \emph{gauge transformation}, 
 \end{mynote}
 
 \subsection{Connections as local trivializations}
+\todo{introduce notation}
+\todo{emphasize local only}
+\todo{maybe triv the Aut bundle here?}
 This section can ve viewed as an extended remark. The observation we want to make is that the data of a \( k \)-bundle is related to the construction of a trivialization: the fiber at one vertex can be extended throughout the face coherently, using the connection (the extension of the classifying map to the edges) to specify isomorphisms with the fibers at the other points, and the higher connections to establish commutativity between these.
 
 An important context for these remarks is if we imagine that the simplicial complex we started with is in fact a \emph{Cech complex} of a good open cover \( \{U_i\} \) (a cover by contractible open sets, each finite intersection of which is also contractible). This is just to say the vertices \( v_i \) would represent the combinatorial data of the set of charts \( \{U_i\} \) themselves, and the edges are formed if two charts overlap. The \( k \)-faces are the \( k \)-way overlaps, if any. For a good introduction to this point of view, see the introduction in Bott and Tu \cite{bott_tu}. It bears emphasizing: the resulting \emph{higher} types are the same ones we've been working with, it's only the origin of the combinatorial data that we're reimagining.
@@ -79,7 +83,7 @@ Continuing the story, the type family \( f \) at one vertex \( v_i \), \( f(v_i)
 The classical theory of bundles on smooth manifolds is often presented in terms of just such combinatorial data, constructed from an appropriate atlas of charts and their overlaps. This is very much dual to the viewpoint where points are points, edges are paths, and so on. If one started with a cube, and covered it with six charts that each contained a different face (plus a little overlap), and formed the Cech complex of this data, you would arrive exactly at the dual polyhedron to the cube: the octahedron.
 
 \subsection{The tangent bundle of the sphere}
-
+\todo{spell out composition \( T:\mm\to\simcomp\to\EMzo \)}
 We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
 
 \begin{mydef}

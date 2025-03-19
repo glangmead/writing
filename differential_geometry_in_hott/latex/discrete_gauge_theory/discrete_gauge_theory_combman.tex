@@ -6,7 +6,7 @@ We will remind ourselves of the definition of a classical simplicial complex, in
 \begin{mydef}
 An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). 
 \end{mydef}
-
+\todo{define morphisms here as well}
 
 \begin{mydef}
 Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( |M|:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( |M_0|=M_0 \), and given \( |M_{\leq k-1}| \) we form \( |M_{\leq k}| \) by the pushout in sets
@@ -168,6 +168,8 @@ A \defemph{higher realization} of an abstract simplicial complex \( M:\simcomp \
 We can call such a higher realization a \defemph{higher simplicial complex}, of in the case where the underlying complex \( M \) is a combinatorial manifold, a \defemph{higher combinatorial manifold}.
 \end{mydef}
 We intend for the \( \partial_i \) to be isomorphisms between a boundary of a simplex in \( \mm_i \) and the \( i \)-sphere. To avoid spending too much time above dimension 2, we will leave the \( \partial_i \) underspecified in general. For 2-dimensional complexes we will see how the gluing can be done for triangles.
+\todo{define cellular types; the bare maximal-dim type}
+\todo{reinsert polygons section; notation \( [brgo], \llb brgo\rrb \)}
 
 \subsection{The octahedron model of the sphere}
 We will create our first combinatorial surface, an octahedron. We will not prove that this type is equivalent to the sphere. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
