@@ -104,16 +104,17 @@ We introduce a notation more suitable for the algebra of charts and overlaps: de
 The two middle squares commute definitionally. Call these two squares together the back face. The left triangular filler is filled by the flatness structure on the face, and the right triangular filler is trivial. There is also a filler needed for the front, i.e. the outer square. This requires proving that \( g_{ki}g_{ij}g_{jk}=\id \), which is supplied by the flatness structure. There is also a 3-cell filling the interior of this prism, mapping the back face plus the left triangle filler to the front face plus the right triangle filler. These two faces both consist of one or two identities concatenated with the flatness structure, and so the 3-cell is definitional.
 
 \subsection{The tangent bundle of the sphere}
-\todo{spell out composition \( T:\mm\to\simcomp\to\EMzo \)}
-We will build up a map \( T \) out of \( \oo \) which is meant to be like the circle bundle of a tangent bundle. And so we will begin with the intrinsic data of the link at each point: taking the link of a vertex gives us a map from vertices to polygons.
+We will build up a map \( T \) out of \( \oo_0\to\oo_1\to\oo \) which is meant to be a model of the tangent bundle of the sphere. The link function will serve as our approximation to the tangent space. Taking the link of a vertex gives us a map from vertices to polygons, so the codomain is \( \EMzo \).
 
 \begin{mydef}
 \( T_0\defeq\link:\oo_0\to\EMzo \) is given by:
 \begin{align*}
-\link(w) &= brgo & \link(r) &= wbyg \\
-\link(y) &= bogr & \link(g) &= wryo \\
-\link(b) &= woyr & \link(o) &= wgyb
+\link(w) &= \hgr{brgo}_1 & \link(r) &= \hgr{wbyg}_1 \\
+\link(y) &= \hgr{bogr}_1 & \link(g) &= \hgr{wryo}_1 \\
+\link(b) &= \hgr{woyr}_1 & \link(o) &= \hgr{wgyb}_1
 \end{align*}
+Recall that the double-brackets denote the realization via pushouts of the combinatorial data, and the subscript takes the bare type of maximal dimension, forgetting the cellular structure. So \( T_0 \) is a composition of a map into \( \simcompt \) follows by the realization map to \( \EMzo \).
+
 We chose these orderings for the vertices in the link, by visualizing standing at the given vertex as if it were the north pole, then looking south and enumerating the link in clockwise order, starting from \( w \) if possible, else \( b \).
 \end{mydef}
 
@@ -124,32 +125,30 @@ We chose these orderings for the vertices in the link, by visualizing standing a
 \label{fig:triangle_of_equators}
 \end{figure}
 
-To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have complete freedom. Defining a map by induction makes clear that the action on paths is its own structure. Two functions on the octahedron could agree on points but differ on edges. We are going to identify this 1-dimensional freedom with a connection:
-
-Continuing the example, we will do something ``tangent bundley'', imagining how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
+To extend \( T_0 \) to a function \( T_1 \) on the 1-skeleton we have some freedom. We will do something motivated by the figures we have been drawing of an octahedron embedded in 3-dimensional space. We will imagine how \( T_1 \) changes as we slide from point to point in the embedding shown in the figures. Sliding from \( w \) to \( b \) and tipping the link as we go, we see \( r\mapsto r \) and \( o\mapsto o \) because those lie on the axis of rotation. Then \( g\mapsto w \) and \( b\mapsto y \). 
 
 \begin{mydef}
 Define \( T_1:\oo_1\to\EMzo \) on just the 1-skeleton by extending \( T_0 \) as follows:
 Transport away from \( w \):
 \begin{itemize}
-\item \( T_1(wb):[b, r, g, o]\mapsto [y, r, w, o] \) (\( r, o \) fixed)
-\item \( T_1(wr):[b, r, g, o]\mapsto [b, y, g, w] \) (\( b, g \) fixed)
-\item \( T_1(wg):[b, r, g, o]\mapsto [w, r, y, o] \)
-\item \( T_1(wo):[b, r, g, o]\mapsto [b, w, g, y] \)
+\item \( T_1(wr):\hgr{brgo}_1\mapsto \hgr{bygw}_1 \) (\( b, g \) fixed)
+\item \( T_1(wg):\hgr{brgo}_1\mapsto \hgr{wryo}_1 \)
+\item \( T_1(wb):\hgr{brgo}_1\mapsto \hgr{yrwo}_1 \) (\( r, o \) fixed)
+\item \( T_1(wo):\hgr{brgo}_1\mapsto \hgr{bwgy}_1 \)
 \end{itemize}
 Transport away from \( y \):
 \begin{itemize}
-\item \( T_1(yb):[b, o, g, r]\mapsto [w, o, y, r] \)
-\item \( T_1(yr):[b, o, g, r]\mapsto [b, y, g, w] \)
-\item \( T_1(yg):[b, o, g, r]\mapsto [y, o, w, r] \)
-\item \( T_1(yo):[b, o, g, r]\mapsto [b, w, g, y] \)
+\item \( T_1(yb):\hgr{bogr}_1\mapsto \hgr{woyr}_1 \)
+\item \( T_1(yr):\hgr{bogr}_1\mapsto \hgr{bygw}_1 \)
+\item \( T_1(yg):\hgr{bogr}_1\mapsto \hgr{yowr}_1 \)
+\item \( T_1(yo):\hgr{bogr}_1\mapsto \hgr{bwgy}_1 \)
 \end{itemize}
 Transport along the equator:
 \begin{itemize}
-\item \( T_1(br):[w, o, y, r]\mapsto [w, b, y, g] \) 
-\item \( T_1(rg):[w, b, y, g]\mapsto [w, r, y, o] \)
-\item \( T_1(go):[w, r, y, o]\mapsto [w, g, y, b] \)
-\item \( T_1(ob):[w, g, y, b]\mapsto [w, o, y, r] \)
+\item \( T_1(br):\hgr{woyr}_1\mapsto \hgr{wbyg}_1 \) 
+\item \( T_1(rg):\hgr{wbyg}_1\mapsto \hgr{wryo}_1 \)
+\item \( T_1(go):\hgr{wryo}_1\mapsto \hgr{wgyb}_1 \)
+\item \( T_1(ob):\hgr{wgyb}_1\mapsto \hgr{woyr}_1 \)
 \end{itemize}
 \end{mydef}
 
