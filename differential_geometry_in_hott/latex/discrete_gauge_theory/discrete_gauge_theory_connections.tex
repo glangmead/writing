@@ -1,8 +1,8 @@
 \section{Bundles, connections, and curvature}
-A map out of a higher combinatorial manifold has various components. These line up with classical definitions, and identifying those is a primary purpose of this note.
+Bundles are simply maps into the universe. By using the extra cellular structure and the even more detailed combinatorial structure of higher realizations, we can identify inside of HoTT some additional classical definitions.
 
 \subsection{Definitions}
-Having the skeleton structure of a cellular type allows us to define bundles and connections.
+Having the cellular structure allows us to define bundles and connections.
 \begin{mydef}
 \label{def:connection}
 If \( \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a cellular type and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
@@ -77,9 +77,9 @@ Another classical object we can identify here is a \emph{gauge transformation}, 
 \end{mynote}
 
 \subsection{Connections as local trivializations}
-This section can ve viewed as an extended remark. The observation we want to make is that the data of a \( 1 \)-bundle is related to the construction of local trivializations: the fiber at one vertex can be extended throughout a single face coherently, using the connection (the extension of the classifying map to the edges) to specify isomorphisms with the fibers at the other points, and the higher connections to establish commutativity between these.
+This section can ve viewed as an extended remark. The observation we want to make is that the data of a \( 1 \)-bundle is related to the construction of local trivializations: the fiber at one vertex can be extended throughout a single face coherently, using the connection (the extension of the classifying map to the edges) to specify isomorphisms with the fibers at the other points, and the higher connections to establish commutativity between these. 
 
-We introduce a notation more suitable for the algebra of charts and overlaps: denote by \( g_{ji}:Ti\to Tj \) the isomorphism of transport along an edge \( e_{ij}:i=_\mm j \). The indices move us from right to left, which is compatible with function composition notation. Denote the inverse function with swapped indices: \( g_{ij}\defeq g_{ji}^{-1} \). Assume we have some fixed isomporphism \( T_i=S^1 \), and to avoid composing everything with this function we will assume it is \( \id \). In the diagram below we see the data arranged so that our bundle is on the left, and the data of a trivial bundle is on the right. 
+We introduce a notation more suitable for the algebra of charts and overlaps: denote by \( g_{ji}:Ti\to Tj \) the isomorphism of transport along an edge \( e_{ij}:i=_\mm j \). The indices are ordered from right to left, which is compatible with function composition notation. Denote the inverse function by swapping indices: \( g_{ij}\defeq g_{ji}^{-1} \). Assume we have some fixed isomporphism \( T_i=S^1 \), and to avoid composing everything with this function we will assume it is \( \id \). In the diagram below we see the data arranged so that our bundles fibers are on the left, and the fiber of a trivial bundle is on the right. 
 \begin{center}
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJUaSJdLFswLDEsIlRqIl0sWzAsMiwiVGsiXSxbMSwwLCJTXjEiXSxbMSwxLCJTXjEiXSxbMSwyLCJTXjEiXSxbMCwzLCJcXG1hdGhybXtpZH0iLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDEsImdfe2ppfSIsMl0sWzEsMiwiZ197a2p9IiwyXSxbMSw0LCJnX3tpan0iLDJdLFsyLDUsImdfe2lqfWdfe2prfSIsMl0sWzMsNCwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw1LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDIsImdfe2tpfSIsMix7ImN1cnZlIjozfV0sWzMsNSwiIiwxLHsiY3VydmUiOi0zLCJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDEzLCJcXGZsYXRfe2lqa30iLDIseyJzaG9ydGVuIjp7InRhcmdldCI6MjB9fV0sWzQsMTQsIiIsMSx7InNob3J0ZW4iOnsidGFyZ2V0IjoyMH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
 \begin{tikzcd}
@@ -102,6 +102,8 @@ We introduce a notation more suitable for the algebra of charts and overlaps: de
 \end{tikzcd}
 \end{center}
 The two middle squares commute definitionally. Call these two squares together the back face. The left triangular filler is filled by the flatness structure on the face, and the right triangular filler is trivial. There is also a filler needed for the front, i.e. the outer square. This requires proving that \( g_{ki}g_{ij}g_{jk}=\id \), which is supplied by the flatness structure. There is also a 3-cell filling the interior of this prism, mapping the back face plus the left triangle filler to the front face plus the right triangle filler. These two faces both consist of one or two identities concatenated with the flatness structure, and so the 3-cell is definitional.
+
+This relationship between flatness structure and local triviality of a chart can be compared to the classical result that on a paracompact, simply connected manifold (such as a single chart), a connection on a principal bundle is flat if and only if the bundle is trivial. See for example \cite{kobayashinomizu} Corollary 9.2.
 
 \subsection{The tangent bundle of the sphere}
 We will build up a map \( T \) out of \( \oo_0\to\oo_1\to\oo \) which is meant to be a model of the tangent bundle of the sphere. The link function will serve as our approximation to the tangent space. Taking the link of a vertex gives us a map from vertices to polygons, so the codomain is \( \EMzo \).

@@ -1,6 +1,6 @@
 \section{Torsors and principal bundles}
 
-The classical theory of principal bundles tells us to look for an appropriate classifying space of torsors to map into.
+Differential geometry is the study of principal bundles and their automorphisms. Principal bundles are bundles of torsors, so we start there.
 
 \subsection{Torsors}
 
@@ -29,7 +29,7 @@ The pointed type \( (BG,*) \) is a \( \K(G,1) \).\qed
 
 In particular, to classify principal \( S^1 \)-bundles we map into the space \( \K(S^1, 1) \), a type of torsors of the circle. Since \( S^1 \) is a \( \Kzo \), we have \( \K(S^1,1)\simeq\Kzt \).
 
-\subsection{Bundles of mere circles}
+\subsection{Bundles of Eilenberg-Mac Lane spaces}
 
 We find it illuminating to look also at the slightly more general classifying space of \( \Kzo \)-bundles, that is bundles whose fiber are equivalent to \( \Kzo \). We can understand very well when these are in fact bundles of circle torsors, which will in turn shed light on orientation in this setting. 
 
@@ -64,11 +64,11 @@ In the special case of \( \EMzo \) the conditions of the theorem are met when \(
 Bundles of oriented mere circles are principal, but this fact does not hold for bundles of higher-dimensional spheres. Since this note will focus on 2-dimensional oriented manifolds we will be making use of this coincidence.
 \end{mynote}
 
-\subsection{Pathovers in circle bundles}
+\subsection{Pathovers}
 \label{sec:pathovers}
-Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}T(x) \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):T(a)=T(b) \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr(p):T(a)\to T(b) \) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( T(a) \) and \( T(b) \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
+Suppose we have \( T:M\to\uni \) and \( P\defeq\sit{x:M}Tx \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):Ta=Tb \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr(p):Ta\to Tb \) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( Ta \) and \( Tb \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
 
-Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{T(b)}\beta \) between \( \alpha:T(a) \) and \( \beta:T(b) \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
+Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{Tb}\beta \) between \( \alpha:Ta \) and \( \beta:Tb \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 
 \begin{figure}[H]
 \centering
@@ -78,3 +78,19 @@ Type theory also tells us that paths in \( P \) are given by pairs of paths: a p
 \end{figure}
 
 Lastly we want to recall that in the presence of a section \( X:M\to P \) there is a dependent generalization of \( \ap \) called \( \apd \): \( \apd(X)(p):\tr(p)(X(a))=X(b) \) which is a pathover between the two values of the section over the basepoints of the path \( p \).
+
+\subsection{The bundle of automorphisms}
+\label{sec:automorphisms}
+\begin{mydef}
+Again, suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T\defeq\lambda(x:M)\to (Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
+\end{mydef}
+
+If the automorphism group of the fibers is commutative then the automorphism bundle is trivial.
+
+\begin{mylemma}
+\label{lem:gauge_triv}
+Suppose \( M \) is connected and we have a point \( m:M \). Then we have a trivialization \( \Aut P\simeq M\times (Tm=Tm) \). This is equivalent to saying the map \( \Aut T \) is equivalent to a constant map.
+\end{mylemma}
+\begin{proof}
+We will produce a term \( \tau:\pit{x:M}(Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm) \). Suppose we have a path \( p:x=_M m \), and define \( \tau x=\tr(p) \). Transport in the family \( \Aut T \) is given by concatenation (see \cite{hottbook} Theorem 2.11.3), i.e. \( \tr(p)(f)=T(p)^{-1}\cdot f\cdot T(p) \). To show that \( \tau \) is independent of the choice of \( p \), suppose we have \( p,q:x=_M m \). Then \( \tr(p\cdot q^{-1})=T(p\cdot q^{-1})^{-1}\cdot -\cdot T(p\cdot q^{-1}) \) which is conjugation in the commutative group \( Tx=Tx \), hence is the identity. This proves that \( \tr(p)=\tr(q) \).
+\end{proof}

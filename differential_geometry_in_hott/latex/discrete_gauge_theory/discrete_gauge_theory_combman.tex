@@ -164,7 +164,7 @@ A \defemph{higher realization} \( \hgr{M} \) corresponding to an abstract simpli
 \item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times S^{i}}{M_{i+1}}{\partial_{i}}{\pr_1} \), \( i=1,\ldots,n \), where \( S^i \) is a HoTT \( i \)-sphere and \( \partial_i \) are called \defemph{attachment maps},
 \item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{i+1}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
-We call the sequence \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \hgr{M} \) inducing this sequence, a \defemph{cellular type}. We define forgetful maps to the bare types with \( \hgr{M}_i\defeq \mm_i \).
+A \defemph{cellular type} is a sequence \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \hgr{M} \) inducing this sequence. We define forgetful maps to the bare types with \( \hgr{M}_i\defeq \mm_i \).
 \end{mydef}
 
 We intend for the \( \partial_i \) to be isomorphisms between a boundary of a simplex in \( \mm_i \) and the \( i \)-sphere. To avoid spending too much time above dimension 2, we will leave the \( \partial_i \) underspecified in general. For 2-dimensional complexes we will see how the gluing can be done for triangles.
@@ -190,7 +190,7 @@ Recall the 1-type \( C_3 \) that we just constructed from the triangle with vert
 
 We will use a notational shorthand for polygons:
 \begin{mydef}
-If \( C_n \) is a simplicial complex with \( C_{n,0}=\{v_1, \ldots, v_n\} \) and edges \( e_1=\{v_1,v_2\},\ldots,e_{n-1}=\{v_{n-1}, v_n\}, e_n=\{v_n, v_0\} \), we call \( C_n \) a \defemph{polygon} or \defemph{\( n \)-gon}. We can refer to \( C_n \) by \( v_1 v_2\cdots v_n \), to \( \gr{C_n} \) by \( \gr{v_1 v_2\cdots v_n} \) and to \( \hgr{C_n} \) by \( \hgr{v_1 v_2\cdots v_n} \). Forgetting the pushouts and vertices, we denote the bare 1-type by \( \hgr{v_1 v_2\cdots v_n}_1 \).
+If \( C_n \) is a simplicial complex with \( C_{n,0}=\{v_1, \ldots, v_n\} \) and edges \( e_1=\{v_1,v_2\}\), \(\ldots\), \(e_{n-1}=\{v_{n-1}, v_n\}\), and \(e_n=\{v_n, v_0\} \), we call \( C_n \) a \defemph{polygon} or \defemph{\( n \)-gon}. We can refer to \( C_n \) by \( v_1 v_2\cdots v_n \), to \( \gr{C_n} \) by \( \gr{v_1 v_2\cdots v_n} \) and to \( \hgr{C_n} \) by \( \hgr{v_1 v_2\cdots v_n} \). Forgetting the pushouts and vertices, we denote the bare 1-type by \( \hgr{v_1 v_2\cdots v_n}_1 \).
 \end{mydef}
 
 We also have the special circle type that is not the realization of a simplicial complex, but is nevertheless the natural basepoint in the type of polygons, as we shall see:
@@ -219,7 +219,7 @@ f(r_{21}) &= \refl_{\base}& & \\
 We need to show that \( f\circ g\sim \id_{\hgr{C_1}_1} \) and \( g\circ f\sim\id_{\hgr{C_2}_1} \).
 Think of \( f \) as sliding \( v_2 \) along \( r_{21} \) to coalesce with \( v_1 \). This may help understand why the unfortunately intricate proof is working.
 
-Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows, where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
+Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows (compare Lemma~\ref{lem:gauge_triv}), where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
 \[ 
 \tr(p)(q) = \phi(p)^{-1}\cdot q\cdot \psi(p)
 \]

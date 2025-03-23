@@ -1,6 +1,40 @@
-\section{Total constructions}
-We wish to make computations that combine contributions from every face of a combinatorial 2-manifold. To do this we will add some structure and then prove that the definitions are independent of that structure.
+\section{Comparing and combining constructions}
+We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove the equivalance of the total curvature of a tangent bundle, and total index of a vector field. This is the key relationship in proving both the Gauss-Bonnet theorem and the Poincaré-Hopf theorem.
 
+\subsection{Comparing the types}
+Given a polygon cellular type \( C_{n,0}\to C_{n,1}=C_n \), and map \( *_{C_n}:\unit\to\Kzt \) giving it the structure of an \( S^1 \)-torsor, we have the following general fact:
+\begin{myprop}
+\label{prop:eveq}
+Given a pointing \( b:C_n \) the evaluation map \( \ev(b):(C_n=C_n)\to C_n \) is an equivalence.
+\end{myprop}
+
+Consider the cellular type \( \mm_0\to\mm_1\to\mm \) with point \( m:\mm \). Consider a loop \( \ell:m=_\mm m \) with proof of contractibility \( f:\ell=\refl_m \). For example, we may have a face \( F \) in a combinatorial realization, with \( m \) a vertex of \( F \) and \( \ell=\partial F \) the boundary loop. We have accumulated the following constructions:
+\[\begin{aligned}
+\tr(\ell)&:Tm=Tm\\
+\flat(\ell)&:\tr(\ell)=\id\\
+X(\ell)&:\tr(\ell)(X(m))=X(m)\\
+\end{aligned}\]
+which invites us to make use of the equivalence \ref{prop:eveq} to define \( X_e(\ell)\defeq \ev(X(m))^{-1}\circ X(\ell):\tr(\ell)=\id \) (where the subscript \( e \) stands for the extension to all of \( Tm \)) to obtain
+\[\begin{aligned}
+\tr(\ell)&:Tm=Tm\\
+\flat(\ell)&:\tr(\ell)=\id\\
+X_e(\ell)&:\tr(\ell)=\id\\
+\end{aligned}\]
+If a loop is of the form \( \ell'=e\cdot \ell\cdot e^{-1} \) then what can we say about the values of \( \tr \), \( \flat \), and \( X_e \) on \( \ell' \) versus \( \ell \)?
+
+\begin{mylemma}
+Making use of the equivalence \( \tau:\pit{x:M}(Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm) \) from Lemma~\ref{lem:gauge_triv} we have \( \tau(\tr(e\cdot\ell\cdot e^{-1}))=\tau(\tr(\ell)) \).
+\end{mylemma}
+\begin{proof}
+\end{proof}
+
+\begin{mylemma}
+\(X_e(e\cdot\ell\cdot e^{-1}) = X_e(\ell)\).
+\end{mylemma}
+\begin{proof}
+\end{proof}
+
+\subsection{Total enumeration of faces}
 \begin{mydef}
 A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) with underlying simplicial complex \( M=[M_0, M_1, M_2] \) consists of
 \begin{enumerate}
@@ -52,7 +86,6 @@ Given a total enumeration of faces, the concatenation \( \elltot\defeq\ell_{F_1}
 \caption{A loop \( \ell_F:m=_\mm m \) around the face \( F \).}
 \label{fig:lasso}
 \end{figure}
-
 
 \subsection{Total holonomy}
 Given a total enumeration of faces we can form the compositions \( T\circ\ell_{F_i} \) with the associated loop to obtain holonomy isomorphisms \( T\circ\ell_{F_i}:Tm=Tm \). We can concatenate all the loops \( \ell_{F_1}\cdot\cdots\cdot\ell_{F_n} \) and obtain a \emph{total holonomy} \( T\circ(\ell_{F_1}\cdot\cdots\cdot\ell_{F_n}):Tm=Tm  \).
@@ -124,7 +157,8 @@ The total holonomy of \( T_1 \) on \( \oo \) (Definition~\ref{def:octahedron_hol
 \end{myex}
 
 \subsection{Total index of a vector field}
-We defined the index on a face in Definition~\ref{def:index}. We will extend this to a total index defined with a total enumeration of faces.
+
+%We defined the index on a face in Definition~\ref{def:index}. We will extend this to a total index defined with a total enumeration of faces.
 
 \subsection{The main theorem}
 \begin{mythm}

@@ -9,6 +9,7 @@
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{multicol}
+\RequirePackage{stmaryrd}
 
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
@@ -128,7 +129,7 @@
 \DeclareMathOperator{\ad}{ad}
 \DeclareMathOperator{\Ad}{Ad}
 \DeclareMathOperator{\link}{\mathsf{link}}
-\DeclareMathSymbol{:}{\mathbin}{operators}{"3A}
+%\DeclareMathSymbol{:}{\mathbin}{operators}{"3A}
 \newcommand{\apd}{\mathsf{apd}}
 \newcommand{\HIT}{\mathsf{HIT}}
 \newcommand{\BAuto}[1]{\BAut_1(#1)}
@@ -242,8 +243,8 @@
 \renewcommand{\labelitemiii}{$\bullet$}
 \renewcommand{\labelitemiv}{$\bullet$}
 \newcommand{\myspan}[5]{{#1}\xleftarrow[]{#4}{#2}\xrightarrow[]{#5}{#3}}
-\newcommand{\llb}{[\![}
-\newcommand{\rrb}{]\!]}
+\newcommand{\llb}{\llbracket}
+\newcommand{\rrb}{\rrbracket}
 \newcommand{\gr}[1]{[{#1}]} % geometric realization
 \newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization
 \newenvironment{dedication}
@@ -261,7 +262,7 @@
 
 \newtheoremstyle{mythmstyle}
 {5pt} % Space above
-{-4pt} % Space below
+{5pt} % Space below
 {} % Body font
 {} % Indent amount
 {\bfseries} % Theorem head font
@@ -270,11 +271,11 @@
 {} % Theorem head spec (can be left empty, meaning `normal')
 
 \newtheoremstyle{myremarkstyle}
-{5pt} % Space above
-{-4pt} % Space below
+{} % Space above
+{} % Space below
 {\small} % Body font
 {} % Indent amount
-{\itshape\bfseries} % Theorem head font
+{\bfseries} % Theorem head font
 {.} % Punctuation after theorem head
 {.5em} % Space after theorem head
 {} % Theorem head spec (can be left empty, meaning `normal')

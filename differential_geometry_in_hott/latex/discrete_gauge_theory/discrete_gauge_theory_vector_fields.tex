@@ -1,9 +1,9 @@
 \section{Vector fields}
 \subsection{Definition}
-Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional higher combinatorial manifolds, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
-A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\EMzo \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended are called \defemph{zeros of the vector field}.
+A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\EMzo \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended are called \defemph{zeros of the vector field}.\todo{prove that the index is an obstruction}
 \end{mydef}
 
 \begin{mynote}
@@ -134,19 +134,4 @@ At stage 4 we have three paths, each consisting of \( X \) acting on a single ed
 
 \begin{mynote}
 In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{xy}) \) is called ``the change in angle between \( X \) and \( X(x)_{||} \) along the edge \( e_{xy} \),'' where by \( X(x)_{||} \) we mean the transport of the fixed single vector \( X(x) \) to the point \( X(y) \), i.e. \( \tr(e_{xy})(X(x)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This remark is meant to help anyone intending to make further comparisons with classical results.
-\end{mynote}
-
-\todo{draw our big triangle, show swirl is not a loop}
-
-When\todo{make a def, refer to 4.1} \( T_1 \) has an extension to \( F \) we can obtain a second path in \( \tr(\ell)(X(x))=X(x) \)! Namely given a filler path \( \ell=_{v=_\mm v} \refl(v) \) that fills the loop, an extension of \( T_1 \) to \( F \) provides by functoriality a corresponding path \( T_1(\ell)=_{T_1(v)=T_1(v)}\id(T_1(v)) \), which is a homotopy between these two automorphisms of \( T_1(v) \) that we called the flatness structure on \( F \). Evaluating this homotopy at \( X(x) \) provides the term \( \flat(\ell)(X(x)):X(x)=\tr(\ell)(X(x)) \) (and its inverse is hence the promised second path).
-
-Concatenating \( \flat(\ell)(X(x))\cdot X(\ell)(X(x)) \) gives a loop in the pointed type \( (T_1(x), X(x)) \). This is a term in \( \zz \):
-
-\begin{mydef}
-\label{def:index}
-The \defemph{index} of \( X \) at \( x \) on the face \( F \) is \( \flat(\ell)(X(x))\cdot X(\ell)(X(x)):\zz \).
-\end{mydef}
-
-\begin{mynote}
-Intuitively, \( X(\ell) \) combines the swirling of \( X \) with the twisting of the connection, and prepending with the flatness structure erases the effect of the connection, leaving just the swirling of \( X \). This should line up with the classical definition of index, which is also an integer.
 \end{mynote}
