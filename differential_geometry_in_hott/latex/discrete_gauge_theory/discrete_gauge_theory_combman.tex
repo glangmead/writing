@@ -1,4 +1,5 @@
 \section{Discrete manifolds}
+\label{sec:discrete_man}
 We will remind ourselves of the definition of a classical simplicial complex, in sets. Then we will create a higher type from the data of a complex, using pushouts. The type will both imitate the structure of the set-based complex and will contain explicit maps into it from the sets of the complex.
 
 \subsection{Abstract simplicial complexes}
@@ -209,7 +210,7 @@ The higher inductive type \( \so \), also denoted \( \hgr{C_1}_1 \) for convenie
 \begin{mylemma}\label{lem:addpoints}
 \( \hgr{C_2}_1\simeq \hgr{C_1}_1 \) and in fact \( \hgr{C_n}_1\simeq \hgr{C_{n-1}}_1 \).
 \end{mylemma}
-\begin{proof}
+\begin{myproof}
 (Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( \hgr{C_1}_1 \) we will denote its constructors by \( \base \) and \( \loopo \). For \( \hgr{C_2}_1 \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( \hgr{C_3}_1 \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
 
 First we will define \( f:\hgr{C_2}_1\to \hgr{C_1}_1 \) and \( g:\hgr{C_1}_1\to \hgr{C_2}_1 \), then prove they are inverses.
@@ -312,23 +313,31 @@ g(f(e_{n,1}))&= \refl_{v_1}.
 Guided by our previous experience we choose \( {e_{n,1}}^{-1}:g(f(v_n))=v_n \), and define the pathovers by transport.
 
 The proof that \( f\circ g\sim\id_{\hgr{C_{n-1}}_1} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
-\end{proof}
+\end{myproof}
 
 \begin{mycor}
 \label{cor:gon}
 All polygons are equivalent to \( \so \), i.e. we have terms \( e_n:||\hgr{C_n}_1=S^1||_{-1} \), and hence we have constructed a map from the unit type \( (\hgr{C_n}_1, e_n):\unit\to \EMzo \).
 \end{mycor}
-\begin{proof}
+\begin{myproof}
 We can add \( n-1 \) points to \( S^1 \) and use Lemma~\ref{lem:addpoints}.
-\end{proof}
+\end{myproof}
 
 If we cyclically permute the vertices of a simplicial polygon, what map is induced on the realization and the bare types within? 
 
-Let \( R:\gr{v_1\cdots v_n}\to \gr{v_1\cdots v_n} \) (for ``rotation'') be the map sending \( v_i\mapsto v_{i+1} \) and \( v_n\mapsto v_0 \). This map clearly preserves the edges, and so is a map of simplicial complexes, and extends to a map \( \hgr{R}:\hgr{v_1\cdots v_n}\to \hgr{v_1\cdots v_n} \). A key point is that maps that have access to the combinatorial data are more numerous than the maps on the resulting bare types:
+\begin{mydef}
+\label{def:rotation}
+Let \( R:\gr{v_1\cdots v_n}\to \gr{v_1\cdots v_n} \) (for ``rotation'') be the map sending \( v_i\mapsto v_{i+1} \) and \( v_n\mapsto v_0 \). This map clearly preserves the edges, and so is a map of simplicial complexes, and extends to a map \( \hgr{R}:\hgr{v_1\cdots v_n}\to \hgr{v_1\cdots v_n} \).
+\end{mydef}
 
+A key point is that simplicial maps form a set, but the homotopical realization \( \hgr{R} \) has a path to the identity:
 \begin{mylemma}
-The map \( \hgr{R}_1: \hgr{v_1\cdots v_n}_1\to \hgr{v_1\cdots v_n}_1\) is \todo{compute this}.
+\label{lem:rotation}
+The map \( \hgr{R}_1: \hgr{v_1\cdots v_n}_1\to \hgr{v_1\cdots v_n}_1\) is connected to \( \refl_{\hgr{v_1\cdots v_n}_1} \) by a homotopy \( H_R:\pit{x:\hgr{v_1\cdots v_n}_1}\hgr{R}_1(x)=x \).
 \end{mylemma}
+\begin{myproof}
+If \( x \) is a vertex, take \( H_R(x) \) to be the obvious unique edge back to the starting vertex. This extends in the obvious functorial way to edges.
+\end{myproof}
 
 \subsection{The octahedron model of the sphere}
 We will create our first combinatorial surface, an octahedron. We will not prove that this type is equivalent to the sphere. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
@@ -438,10 +447,10 @@ We can realize \( O_0\to O_1\to O \) as a cellular type denoted \( \oo_0\to \oo_
 \begin{mylemma}
 There is an equivalence \( \oo\simeq S^2 \).
 \end{mylemma}
-\begin{proof}Omitted.\chcomment[id=Greg]{mentioned this}\end{proof}
+\begin{myproof}Omitted.\chcomment[id=Greg]{mentioned this}\end{myproof}
 
 \begin{figure}[h]
 \centering
 \input{figs/discrete_gauge_theory_oo_tikz}
-\caption{The marked presented type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
+\caption{The type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
 \end{figure}

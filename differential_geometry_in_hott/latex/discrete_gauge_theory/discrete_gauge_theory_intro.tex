@@ -1,22 +1,24 @@
 \section{Overview}
 
-We will define 
+The outline is that we will define \chcomment[id=Greg]{tweaked, added refs}
 \begin{itemize}
-\item combinatorial 2-manifolds
-\item circle bundles, and principal circle bundles of tangent bundles
-\item vector fields,
+\item principal bundles in Section~\ref{sec:torsors},
+\item simplicial complexes, and homotopical realizations of these in Section~\ref{sec:discrete_man},
+\item vector fields in Section~\ref{sec:vector_fields},
 \end{itemize}
-and then observe emerging from those definitions the presence of
+and observe emerging from those definitions the presence of
 \begin{itemize}
-\item connections
-\item curvature
-\item the index of a vector field,
+\item connections and curvature in Section~\ref{sec:connections},
+\item the index of a vector field in Section~\ref{sec:totals},
 \end{itemize}
-and attempt to prove
+and then define in Section~\ref{sec:totals}
 \begin{itemize}
-\item the Gauss-Bonnet theorem
-\item and the Poincaré-Hopf theorem.
+\item the total curvature, as in the Gauss-Bonnet theorem
+\item the total index of a vector field, as in Poincaré-Hopf theorem,
+\item and prove the equality of these to each other.
 \end{itemize}
+
+We will build up an example of all of these structures on an octahedron model of the sphere, and compute its Euler characteristic of 2. We will not, however, be supplying a separate definition of Euler characteristic so as to truly reproduce the Gauss-Bonnet and Poincaré-Hopf theorems.\chcomment[id=Greg]{added para.}
 
 We will consider functions \( \mm\to \EM(\zz,1) \) where \( \EM(\zz,1) \) is the connected component in the universe of the Eilenberg-MacLane space \( \K(\zz,1) \) which we will take to be \( \so \), and where \( \mm \) is a combinatorial manifold of dimension 2, which is a simplicial complex encoded in a higher inductive type, such that each vertex has a neighborhood that looks like a disk with a discrete circle boundary (i.e. a polygon). We can call terms \( C:\EM(\zz,1) \) ``mere circles.''
 
@@ -40,4 +42,5 @@ We will argue that extending \( \link \) to a function \( T \) on paths can be t
 We will then define a method for visiting all the faces of a manifold in order to form ``totals'' of local objects. We will examine the total curvature and the total index and prove that they are equal, and argue that they are equal to the usual Euler characteristic. This will simultaneously prove the Poincaré-Hopf theorem and Gauss-Bonnet theorem in 2 dimensions, for combinatorial manifolds. This is similar to the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.\chcomment[id=Greg]{fresh edits}
 
 \subsection{Future work}
+\todo{move to the end? expand.}
 The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 

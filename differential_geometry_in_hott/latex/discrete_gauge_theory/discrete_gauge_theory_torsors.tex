@@ -1,5 +1,5 @@
 \section{Torsors and principal bundles}
-
+\label{sec:torsors}
 Differential geometry is the study of principal bundles and their automorphisms. Principal bundles are bundles of torsors, so we start there.
 
 \subsection{Torsors}
@@ -91,6 +91,6 @@ If the automorphism group of the fibers is commutative then the automorphism bun
 \label{lem:gauge_triv}
 Suppose \( M \) is connected and we have a point \( m:M \). Then we have a trivialization \( \Aut P\simeq M\times (Tm=Tm) \). This is equivalent to saying the map \( \Aut T \) is equivalent to a constant map.
 \end{mylemma}
-\begin{proof}
+\begin{myproof}
 We will produce a term \( \tau:\pit{x:M}(Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm) \). Suppose we have a path \( p:x=_M m \), and define \( \tau x=\tr(p) \). Transport in the family \( \Aut T \) is given by concatenation (see \cite{hottbook} Theorem 2.11.3), i.e. \( \tr(p)(f)=T(p)^{-1}\cdot f\cdot T(p) \). To show that \( \tau \) is independent of the choice of \( p \), suppose we have \( p,q:x=_M m \). Then \( \tr(p\cdot q^{-1})=T(p\cdot q^{-1})^{-1}\cdot -\cdot T(p\cdot q^{-1}) \) which is conjugation in the commutative group \( Tx=Tx \), hence is the identity. This proves that \( \tr(p)=\tr(q) \).
-\end{proof}
+\end{myproof}

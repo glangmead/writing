@@ -1,64 +1,67 @@
 \section{Vector fields}
+\label{sec:vector_fields}
 \subsection{Definition}
 Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 \begin{mydef}
-A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\EMzo \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended are called \defemph{zeros of the vector field}.\todo{prove that the index is an obstruction}
+A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\EMzo \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended \defemph{zeros of the vector field}.\todo{prove that the index is an obstruction}
 \end{mydef}
 
 \begin{mynote}
-A section \( \pit{x:\mm}f(x) \) for \( f:\mm\to\Kzt \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle of a 2-manifold (which \emph{a priori} maps to \( \EMzo \)) through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
+A section \( \pit{x:\mm}T(x) \) for \( T:\mm\to\Kzt \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle of a 2-manifold (which \emph{a priori} maps to \( \EMzo \)) through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
 \end{mynote}
 
-On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T_1 y} X(y) \).
+On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T y} X(y) \).
 
 \begin{mynote}Concrete pathover terms such as \( \pi \) couple together the connection (the transport) and \( X \). The transport is needed to provide a single type in which to compare the two values of \( X \). The path \( \pi \) therefore reflects both the movement of \( X \) along the path \( p \), and the moving lens that allows us to examine in a single fiber the two points \( X(x) \) and \( X(y) \) as well as \( X(p) \).\end{mynote}
 
 \subsection{Swirling}
-Classically, vector fields are seen to swirl around between points. We can see this in HoTT as well, though in contrast to the classical explanations we always have a connection that interacts with the vector field. 
+Classically, vector fields are seen to swirl around between points. We can see this in HoTT as well. 
 
-Consider a vertex \( x:\mm \), a face \( F \) containing vertices \( x, y, z \), and the boundary path \( \ell\defeq e_{xy}\cdot e_{yz} \cdot e_{zx} \). We can calculate \( X(\ell) \) by concatenating the data along the path. As we visit each point we accumulate more information:
+See Figure~\ref{fig:swirling}. Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_2, v_3 \), and the boundary path \( \ell\defeq e_{12}\cdot e_{23} \cdot e_{31} \). We can calculate \( X(\ell) \) by concatenating the data along the path. We will imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page.\chcomment[id=Greg]{aligned the notation with the figure}
+
+As we visit each point we accumulate more information:
 
 \begin{enumerate}
-\item In \( T_1(x) \) we have 
+\item In \( T_1(v_1) \) we have 
 \begin{enumerate}
-\item the point \( X(x) \).
+\item the point \( X(v_1)\defeq v_{11} \).
 \end{enumerate}
-\item In \( T_1(y) \) we have
+\item In \( T_1(v_2) \) we have
 \begin{enumerate}
-\item point \( X(y) \)
-\item point \( \tr(e_{xy})(X(x)) \)
-\item the path \( X(e_{xy}):\tr(e_{xy})(X(x))=X(y) \) from (b) to (a).
+\item point \( X(v_2)\defeq v_{24} \)
+\item point \( \tr(e_{12})(X(v_1)) \)
+\item the path \( X(e_{12}):\tr(e_{12})(X(v_1))=X(v_2) \) from (b) to (a).
 \end{enumerate}
-\item In \( T_1(z) \) we have 
+\item In \( T_1(v_3) \) we have 
 \begin{enumerate}
-\item point \( X(z) \)
-\item point \( \tr(e_{yz})(X(y)) \)
-\item point \( \tr(e_{yz})\circ\tr(e_{xy})(X(x)) \)
-\item path \( X(e_{yz}):\tr(e_{yz})(X(y))=X(z) \) from (b) to (a)
-\item path \( \tr(e_{yz})(X(e_{xy})) \) from (c) to (b)
+\item point \( X(v_3)\defeq v_{32} \)
+\item point \( \tr(e_{23})(X(v_2)) \)
+\item point \( \tr(e_{23})\circ\tr(e_{12})(X(v_1)) \)
+\item path \( X(e_{23}):\tr(e_{23})(X(v_2))=X(v_3) \) from (b) to (a)
+\item path \( \tr(e_{23})(X(e_{12})) \) from (c) to (b)
 \end{enumerate}
-\item Then back at \( T_1(x) \) we have
+\item Then back at \( T_1(v_1) \) we have
 \begin{enumerate}
-\item point \( X(x) \)
-\item point \( \tr(e_{zx})(X(z)) \)
-\item point \( \tr(e_{zx})\circ\tr(e_{yz})(X(y)) \)
-\item point \( \tr(e_{zx})\circ\tr(e_{yz})\circ\tr(e_{xy})(X(x)) \), i.e. \( \tr(\ell)(X(x)) \)
-\item path \( X(e_{zx}): \tr(e_{zx})(X(z))=X(x) \) from (b) to (a)
-\item path \( \tr(e_{zx})(X(e_{yz})) \) from (c) to (b)
-\item path \( \tr(e_{zx})\circ\tr(e_{yz})(X(e_{xy})) \) from (d) to (c).
+\item point \( X(v_1) \)
+\item point \( \tr(e_{31})(X(v_3)) \)
+\item point \( \tr(e_{31})\circ\tr(e_{23})(X(v_2)) \)
+\item point \( \tr(e_{31})\circ\tr(e_{23})\circ\tr(e_{12})(X(v_1)) \), i.e. \( \tr(\ell)(X(v_1)) \)
+\item path \( X(e_{31}): \tr(e_{31})(X(v_3))=X(v_1) \) from (b) to (a)
+\item path \( \tr(e_{31})(X(e_{23})) \) from (c) to (b)
+\item path \( \tr(e_{31})\circ\tr(e_{23})(X(e_{12})) \) from (d) to (c).
 \end{enumerate}
 \end{enumerate}
 
-As we traverse an edge, say \( e_{xy} \), we get a path in \( T_1(y) \) which is the image of \( e_{xy} \) under \( X \). Although this path is then transported along further edges of the triangle, it will help us to think of it as maintaining its relationship to \( e_{xy} \):
+As we traverse an edge, say \( e_{12} \), we get a path in \( T_1(v_2) \) which is the image of \( e_{12} \) under \( X \). Although this path is then transported along further edges of the triangle, it will help us to think of it as maintaining its relationship to \( e_{12} \):
 
 \begin{mydef}
-If \( e_{xy}:x=_{\mm_1} y, e_{yz}:y=_{\mm_1}z \) are paths in \( \mm_1 \) and \( X \) is a nonvanishing vector field on \( \mm_1 \), then we call \( \tr(e_{yz})(X(e_{xy})) \) \defemph{the contribution on \( e_{xy} \) of \( X \)}, even though this is a path in \( T_1(z) \).
+If \( e_{12}:v_1=_{\mm_1} v_2, e_{23}:v_2=_{\mm_1}v_3 \) are paths in \( \mm_1 \) and \( X \) is a nonvanishing vector field on \( \mm_1 \), then we call \( \tr(e_{23})(X(e_{12})) \) \defemph{the contribution on \( e_{12} \) of \( X \)}, even though this is a path in \( T_1(v_3) \).
 \end{mydef}
 
-As we traverse an additional edge this image is simply mapped to the next vertex through the lens of transport, which acts similarly on all the points in a fiber. The image is carried first to \( \tr(e_{yz})(X(e_{xy})) \) then to \( \tr(e_{zx})\circ\tr(e_{yz})(X(x)) \).
+As we traverse an additional edge this image is simply mapped to the next vertex through the lens of transport, which acts similarly on all the points in a fiber. The image is carried first to \( \tr(e_{23})(X(e_{12})) \) then to \( \tr(e_{31})\circ\tr(e_{23})(X(v_1)) \).
 
-At stage 4 we have three paths, each consisting of \( X \) acting on a single edge of the triangle, mapped with some transport to \( T_1(x) \). We see that these three can be concatenated to form a path \( X(\ell):\tr(\ell)(X(x))=X(x) \).
+At stage 4 we have three paths, each consisting of \( X \) acting on a single edge of the triangle, mapped with some transport to \( T_1(v_1) \). We see that these three can be concatenated to form a path \( X(\ell):\tr(\ell)(X(v_1))=X(v_1) \).
 
 \begin{figure}[h]
 \centering
@@ -133,6 +136,7 @@ At stage 4 we have three paths, each consisting of \( X \) acting on a single ed
 \end{figure}
 \chcomment[id=Greg]{new figure, needs a little more explanation}
 
-\begin{mynote}
-In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{xy}) \) is called ``the change in angle between \( X \) and \( X(x)_{||} \) along the edge \( e_{xy} \),'' where by \( X(x)_{||} \) we mean the transport of the fixed single vector \( X(x) \) to the point \( X(y) \), i.e. \( \tr(e_{xy})(X(x)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This remark is meant to help anyone intending to make further comparisons with classical results.
-\end{mynote}
+In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{12}) \) is called ``the change in angle between \( X \) and \( X(v_1)_{||} \) along the edge \( e_{12} \),'' where by \( X(v_1)_{||} \) we mean the transport of the fixed single vector \( X(v_1) \) to the point \( X(v_2) \), i.e. \( \tr(e_{12})(X(v_1)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This terminology will inspire our definition of angles in the next section.\chcomment[id=Greg]{no longer a skippable remark}
+
+\subsection{An example vector field on the sphere}
+\todo{define the example I worked out, compute swirling}

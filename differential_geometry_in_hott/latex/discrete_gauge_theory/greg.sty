@@ -10,6 +10,8 @@
 \RequirePackage{tikz-3dplot}
 \RequirePackage{multicol}
 \RequirePackage{stmaryrd}
+\RequirePackage{stmaryrd}
+\RequirePackage{thmtools}
 
 \RequirePackage{agda}
 % tipa is redefining the semicolon and bang
@@ -262,7 +264,7 @@
 
 \newtheoremstyle{mythmstyle}
 {5pt} % Space above
-{5pt} % Space below
+{1pt} % Space below
 {} % Body font
 {} % Indent amount
 {\bfseries} % Theorem head font
@@ -279,6 +281,16 @@
 {.} % Punctuation after theorem head
 {.5em} % Space after theorem head
 {} % Theorem head spec (can be left empty, meaning `normal')
+
+\declaretheoremstyle[%
+  spaceabove=-6pt,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  qed=\qedsymbol%
+]{mystyle} 
+\declaretheorem[name={Proof},style=mystyle,unnumbered,
+]{myproof}
 
 \theoremstyle{mythmstyle}
 \newtheorem{mythm}{Theorem}[section]

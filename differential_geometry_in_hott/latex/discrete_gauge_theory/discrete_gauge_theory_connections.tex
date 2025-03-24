@@ -1,4 +1,5 @@
 \section{Bundles, connections, and curvature}
+\label{sec:connections}
 Bundles are simply maps into the universe. By using the extra cellular structure and the even more detailed combinatorial structure of higher realizations, we can identify inside of HoTT some additional classical definitions.
 
 \subsection{Definitions}
@@ -72,12 +73,9 @@ then we say the filler \( \flat_k \) is called a \defemph{flatness structure for
 
 The definitions can be digested to give
 \begin{mylemma}
+\label{lem:extend_faces}
 Given \( f_{k-1} \) as above, a \( k \)-connection exists if and only if there exists a flatness structure for each \( k \)-face.
 \end{mylemma}
-
-\begin{mynote}
-Another classical object we can identify here is a \emph{gauge transformation}, which is a bundle automorphism \( H:f\sim f\defeq \pit{m:\mm}f(m)=f(m) \). If we have \( ||H=\id_f||_{-1} \) then the gauge transformation is called \emph{small}, else \emph{large}.
-\end{mynote}
 
 \subsection{Connections as local trivializations}
 \label{sec:localtriv}
@@ -162,32 +160,13 @@ Transport along the equator:
 \end{mydef}
 \chcomment[id=Greg]{new notation}
 
-It's very important to be able to visualize what \( T_1 \) does to triangular paths such as \( wb\cdot br\cdot rw \) (which circulates around the boundary of face \( wbr \)). You can see it if you imagine Figure~\ref{fig:triangle_of_equators} as the frames of a short movie. Or you can place your palm over the top of a cube and note where your fingers are pointing, then slide your hand to an equatorial face, then along the equator, then back to the top. The answer is: you come back rotated clockwise by a quarter-turn. 
-
-\begin{mydef}
-\label{def:octahedron_holonomy}
-The map \( R:C_4\to C_4 \) rotates by one quarter turn, one ``click":
-\begin{multicols}{2}
-\begin{itemize}
-\item \( R(c_1) = c_2 \)
-\item \( R(c_2) = c_3 \)
-\item \( R(c_3) = c_4 \)
-\item \( R(c_4) = c_1 \)
-\item \( R(c_1c_2) = c_2c_3 \)
-\item \( R(c_2c_3) = c_3c_4 \)
-\item \( R(c_3c_4) = c_4c_1 \)
-\item \( R(c_4c_1) = c_1c_2 \)
-\end{itemize}
-\end{multicols}
-\end{mydef}
-
-Note by univalence the equivalence \( R \) gives a loop in the universe, a term of \( C_4=_{\EMzo}C_4 \).
+It's very important to be able to visualize what \( T_1 \) does to triangular paths such as \( wb\cdot br\cdot rw \) (which circulates around the boundary of face \( wbr \)). You can see it if you imagine Figure~\ref{fig:triangle_of_equators} as the frames of a short movie. Or you can place your palm over the top of a cube and note where your fingers are pointing, then slide your hand to an equatorial face, then along the equator, then back to the top. The answer is: you come back rotated clockwise by a quarter-turn, which we saw in Definition~\ref{def:rotation} where it is called \( \hgr{R} \).
 
 Now let's extend \( T_1 \) to all of \( \oo \) by providing values for the eight faces. The face \( wbr \) is a path from \( \refl_w \) to the concatenation \( wb\cdot br\cdot rw \), and so the image of \( wbr \) under the extended version of \( T_1 \) must be a homotopy from \( \refl_{T_1(w)} \) to \( T_1(wb\cdot br\cdot rw) \). Here \emph{there is no additional freedom}.
 
 \begin{mydef}
 \label{def:octahedron_curvature}
-Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
+Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows (making use of \( H_R \) from Lemma~\ref{lem:rotation}):
 \begin{multicols}{2}
 \begin{itemize}
 \item \( T_2(wbr)=H_R \) 
@@ -200,12 +179,12 @@ Define \( T_2:\oo\to\EMzo \) by extending \( T_1 \) to the faces as follows:
 \item \( T_2(ybo)=H_R \)
 \end{itemize}
 \end{multicols}
-where \( H_R:R=\refl_{C_4} \) is the obvious homotopy given by composition with \( R^{-1} \). Passing through univalence we get a 2-path between \( R \) and \( \refl \) in the loop space \( C_4=_{\EMzo}C_4 \).
+Defining these flatness structures suffices to define \( T_2 \) by Lemma~\ref{lem:extend_faces}.
 \end{mydef}
 
 \subsection{Existence of connections}
 
-How confident can we be that we can always define a connection on an arbitrary combinatorial manifold? Two things make the octahedron example special: the link is a 4-gon at every vertex, and every edge extends to a symmetry of the entire octahedron, embedded in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
+How confident can we be that we can always define a connection on an arbitrary combinatorial manifold? Two things make the octahedron example special: the link is a 4-gon at every vertex (as opposed to having a variable number of vertices), and every transport map extends to a rotation of the entire octahedron in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
 
 We know as a fact outside of HoTT that any combinatorial surface that has been realized as a triangulated surface embedded in 3-dimensional euclidean space can inherit the parallel transport entailed in the embedding. We could then approximate that data to arbitrary precision with enough subdivision of the fibers of \( T \).
 
