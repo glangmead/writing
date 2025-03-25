@@ -66,7 +66,7 @@ Bundles of oriented mere circles are principal, but this fact does not hold for 
 
 \subsection{Pathovers}
 \label{sec:pathovers}
-Suppose\chcomment[id=Greg]{this section is general, not just circles} we have \( T:M\to\uni \) and \( P\defeq\sit{x:M}Tx \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):Ta=Tb \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr(p):Ta\to Tb \) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( Ta \) and \( Tb \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
+Suppose we have \( T:M\to\uni \) and \( P\defeq\sit{x:M}Tx \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):Ta=Tb \). This is a path in the codomain, which in this case is a type of types. Type theory also provides a function called \emph{transport}, denoted \( \tr(p):Ta\to Tb \) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( Ta \) and \( Tb \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
 
 Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{Tb}\beta \) between \( \alpha:Ta \) and \( \beta:Tb \) in the fibers. We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 
@@ -82,7 +82,7 @@ Lastly we want to recall that in the presence of a section \( X:M\to P \) there 
 \subsection{The bundle of automorphisms}
 \label{sec:automorphisms}
 \begin{mydef}
-Again\chcomment[id=Greg]{discussion of gauge group added here}, suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T\defeq\lambda(x:M)\to (Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
+Again, suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T\defeq\lambda(x:M)\to (Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
 \end{mydef}
 
 If the automorphism group of the fibers is commutative then the automorphism bundle is trivial.

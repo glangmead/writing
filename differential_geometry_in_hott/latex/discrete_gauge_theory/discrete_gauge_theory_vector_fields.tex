@@ -18,7 +18,7 @@ On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each ve
 \subsection{Swirling}
 Classically, vector fields are seen to swirl around between points. We can see this in HoTT as well. 
 
-See Figure~\ref{fig:swirling}. Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_2, v_3 \), and the boundary path \( \ell\defeq e_{12}\cdot e_{23} \cdot e_{31} \). We can calculate \( X(\ell) \) by concatenating the data along the path. We will imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page.\chcomment[id=Greg]{aligned the notation with the figure}
+See Figure~\ref{fig:swirling}. Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_2, v_3 \), and the boundary path \( \ell\defeq e_{12}\cdot e_{23} \cdot e_{31} \). We can calculate \( X(\ell) \) by concatenating the data along the path. We will imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page.
 
 As we visit each point we accumulate more information:
 
@@ -134,9 +134,8 @@ At stage 4 we have three paths, each consisting of \( X \) acting on a single ed
 \caption{A vector field swirling around a face, in a bundle of squares. Thick black vectors are the value at the point. Thin vectors are transported once, dashed twice, and dotted three times. The vertices \( v_{ij} \) are in the tangent fibers. The colors of the arrows correspond: the red edge produced the red edge in the fibers.}
 \label{fig:swirling}
 \end{figure}
-\chcomment[id=Greg]{new figure, needs a little more explanation}
 
-In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{12}) \) is called ``the change in angle between \( X \) and \( X(v_1)_{||} \) along the edge \( e_{12} \),'' where by \( X(v_1)_{||} \) we mean the transport of the fixed single vector \( X(v_1) \) to the point \( X(v_2) \), i.e. \( \tr(e_{12})(X(v_1)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This terminology will inspire our definition of angles in the next section.\chcomment[id=Greg]{no longer a skippable remark}
+In Hopf \cite{hopf} and in Needham \cite{needham}, the value \( X(e_{12}) \) is called ``the change in angle between \( X \) and \( X(v_1)_{||} \) along the edge \( e_{12} \),'' where by \( X(v_1)_{||} \) we mean the transport of the fixed single vector \( X(v_1) \) to the point \( X(v_2) \), i.e. \( \tr(e_{12})(X(v_1)) \). The concatenation \( X(\ell) \) is called ``the sum of the changes in angle along each edge.'' This terminology will inspire our definition of angles in the next section.
 
 \subsection{An example vector field on the sphere}
 \todo{define the example I worked out, compute swirling}

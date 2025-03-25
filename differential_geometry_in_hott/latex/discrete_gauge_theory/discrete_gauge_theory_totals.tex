@@ -1,6 +1,5 @@
 \section{The total construction}
 \label{sec:totals}
-\chcomment[id=Greg]{All new}
 We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove the equivalance of the total curvature of a tangent bundle, and total index of a vector field. This is the key relationship in proving both the Gauss-Bonnet theorem and the Poincaré-Hopf theorem.
 
 \subsection{Index of the vector field}
@@ -10,7 +9,7 @@ Given a polygon cellular type \( C_{n,0}\to C_{n,1}=C_n \), and map \( *_{C_n}:\
 Given a pointing \( b:C_n \) the evaluation map \( \ev(b):(C_n=C_n)\to C_n \) is an equivalence.
 \end{myprop}
 \begin{myproof}
-See \cite{buchholtz2023central}.\chcomment[id=Greg]{added citation}
+See \cite{buchholtz2023central}.
 \end{myproof}
 
 Consider the cellular type \( \mm_0\to\mm_1\to\mm \) with point \( m:\mm \). Consider a loop \( \ell:m=_\mm m \) with proof of contractibility \( f:\ell=\refl_m \). For example, we may have a face \( F \) in a combinatorial realization, with \( m \) a vertex of \( F \) and \( \ell=\partial F \) the boundary loop. We have accumulated the following constructions:
@@ -105,7 +104,7 @@ A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) 
 \begin{enumerate}
 \item A ``master basepoint'' \( m:M_0 \).
 \item For each face \( F:M_2 \) with vertices \( \{v_{F,1}, v_{F,2}, v_{F,3}\} \) an enumeration of its vertices \( [v_{F,1}, v_{F,2}, v_{F,3}] \), including the choice of the first vertex in the enumeration as the basepoint of \( F \), which is \defemph{globally compatible} with the choices for the other faces, meaning that when two faces \( F_1,F_2 \) share an edge \( \{v, w\} \), then one of the faces includes the sublist \( [v, w] \) and the other includes \( [w, v] \).
-\item An ordering of the faces \( [F_1,\ldots,F_n] \).\chcomment[id=Greg]{Removed the tail of the lasso}
+\item An ordering of the faces \( [F_1,\ldots,F_n] \).
 \end{enumerate}
 Two enumerations that differ only in the ordering of vertices (2.) are said to have the \defemph{same orientation} if it is true for every face that the two orderings of vertices differ by an even orientation.
 \end{mydef}

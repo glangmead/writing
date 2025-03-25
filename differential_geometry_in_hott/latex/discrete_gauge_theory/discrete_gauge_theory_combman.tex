@@ -5,12 +5,12 @@ We will remind ourselves of the definition of a classical simplicial complex, in
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \).\chcomment[id=Greg]{added morphisms}
+An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \).
 
 \end{mydef}
 
 \begin{mydef}
-Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( \gr{M}:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( [M_0]=M_0 \), and given \( [M_{\leq k-1}] \) we form \( [M_{\leq k}] \) by the pushout in sets\chcomment[id=Greg]{bracket notation}
+Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( \gr{M}:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( [M_0]=M_0 \), and given \( [M_{\leq k-1}] \) we form \( [M_{\leq k}] \) by the pushout in sets
 
 \end{mydef}
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
@@ -167,7 +167,7 @@ A \defemph{higher realization} \( \hgr{M} \) corresponding to an abstract simpli
 \item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times S^{i}}{M_{i+1}}{\partial_{i}}{\pr_1} \), \( i=1,\ldots,n \), where \( S^i \) is a HoTT \( i \)-sphere and \( \partial_i \) are called \defemph{attachment maps},
 \item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{i+1}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
-A \defemph{cellular type} is a sequence \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \hgr{M} \) inducing this sequence. We define forgetful maps to the bare types with \( \hgr{M}_i\defeq \mm_i \).\chcomment[id=Greg]{cellular type, [[]] notation}
+A \defemph{cellular type} is a sequence \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \hgr{M} \) inducing this sequence. We define forgetful maps to the bare types with \( \hgr{M}_i\defeq \mm_i \).
 
 \end{mydef}
 
@@ -176,7 +176,7 @@ We intend for the \( \partial_i \) to be isomorphisms between a boundary of a si
 \subsection{Polygons}
 \label{sec:polygons}
 
-Recall\chcomment[id=Greg]{restored section} the 1-type \( C_3 \) that we just constructed from the triangle with vertex set \( \{v_1, v_2, v_3\} \) and edge set \( \{e_{12}, e_{23}, e_{31}\} \):
+Recall the 1-type \( C_3 \) that we just constructed from the triangle with vertex set \( \{v_1, v_2, v_3\} \) and edge set \( \{e_{12}, e_{23}, e_{31}\} \):
 \begin{center}
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzEsMiwiQ18zIl0sWzAsMiwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFswLDEsIlxcbWF0aHJte3ByXzF9Il0sWzAsMywiXFxzdWJzdGFja3tlX3sxMn1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMSx2XzJcXH0gXFxcXGVfezIzfVxcdGltZXNcXHtOLFNcXH1cXG1hcHN0byBcXHt2XzIsdl8zXFx9XFxcXGVfezMxfVxcdGltZXNcXHsgTixTXFx9XFxtYXBzdG8gXFx7dl8zLHZfMVxcfX0iLDJdLFsxLDJdLFszLDJdLFsyLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzMsMSwiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
@@ -447,7 +447,7 @@ We can realize \( O_0\to O_1\to O \) as a cellular type denoted \( \oo_0\to \oo_
 \begin{mylemma}
 There is an equivalence \( \oo\simeq S^2 \).
 \end{mylemma}
-\begin{myproof}Omitted.\chcomment[id=Greg]{mentioned this}\end{myproof}
+\begin{myproof}Omitted.\end{myproof}
 
 \begin{figure}[h]
 \centering
