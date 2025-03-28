@@ -113,5 +113,37 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 \label{fig:swirling}
 \end{figure}
 
+We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove our main theorem~\ref{thm:total_index_total_curvature}.
+
+First we will choose a specific group that acts on all the fibers of \( T \). Fix a point \( m:\mm \), and recall the map \( \tau:\pit{x:M}((Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm)) \) from Lemma~\ref{lem:gauge_triv}. This map is among other things an action of \( Tm=Tm \) on each \( Tx \) (or in our case \( T_i \)), so that is our choice. Denote the action of \( Tm=Tm \) on the torsor \( T_i \) by \( \rho:(Tm=Tm)\times T_i\to T_i \). This induces an equivalence \( (\rho, \pr_2):(Tm=Tm)\times T_i\simto T_i\times T_i \).
+
+\begin{mydef}
+The map \( \pr_1\circ (\rho, \pr_2)^{-1}:T_i\times T_i\to (Tm=Tm) \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \alpha:Tm=Tm \) such that \( \rho(\alpha, x)=y \). For brevity we denote \( \pr_1\circ (\rho, \pr_2)^{-1}(x,y) \) by \( y-x \).
+\end{mydef}
+
+\begin{mylemma} The following diagram is well-typed and commutes, and therefore \( \rho_{ij}=-\rho_{ji} \).
+\[% https://q.uiver.app/#q=WzAsNCxbMCwwLCIoWF9qPV97VF9qfVRfe2ppfVhfaSlcXHRpbWVzKFhfaT1fe1RfaX1UX3tpan1YX2opIl0sWzAsMSwiKFxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tqaX0pXFx0aW1lcyhcXG1hdGhybXtpZH09X3tUbT1UbX1cXHJob197aWp9KSJdLFsxLDEsIlxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tpan0rXFxyaG9fe2ppfSJdLFsxLDAsIlhfaj1fe1Rfan1YX2oiXSxbMSwyLCIoXFx0ZXh0ey19KSsoXFxyaG9fe2ppfSsoXFx0ZXh0ey19KSkiLDJdLFswLDMsIihcXHRleHR7LX0pXFxjZG90IFRfe2ppfShcXHRleHR7LX0pIl0sWzMsMiwiKFxcdGV4dHstfSktWF9qIl0sWzAsMSwiLVhfalxcdGltZXMgLVhfaSIsMl1d
+\begin{tikzcd}
+  {(X_j=_{T_j}T_{ji}X_i)\times(X_i=_{T_i}T_{ij}X_j)} & {X_j=_{T_j}X_j} \\
+  {(\mathrm{id}=_{Tm=Tm}\rho_{ji})\times(\mathrm{id}=_{Tm=Tm}\rho_{ij})} & {\mathrm{id}=_{Tm=Tm}\rho_{ij}+\rho_{ji}}
+  \arrow["{(\text{-})\cdot T_{ji}(\text{-})}", from=1-1, to=1-2]
+  \arrow["{-X_j\times -X_i}"', from=1-1, to=2-1]
+  \arrow["{(\text{-})-X_j}", from=1-2, to=2-2]
+  \arrow["{(\text{-})+(\rho_{ji}+(\text{-}))}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{mylemma}
+\begin{proof}
+The top map has the given codomain because \( T_{ji}T_{ij}=\id \). To prove commutativity we need \( -X_j\circ T_{ji}=+\rho_{ji} \).
+The proof of commutativity of the right-hand square of types shows that the maps \( -X_i \) and \( -X_j \) map pathovers to paths with endpoints that are inverses in \( Tm=Tm \), i.e. that \( p_{ij}=-p_{ji} \). 
+\end{proof}
+
+Given this fact we now know that \( -X_j \) maps \( X_{ij}\cdot X_{ji} \) to \( \id=\id \), and we can ask if the image is \( \refl \). We have
+\begin{alignat*}{2}
+-X_j(X_{ij}\cdot X_{ji}) &= -X_j(X(e_{ji}\cdot e_{ij}))&&\quad\text{(by definition of dependent paths)}\\
+&= -X_j(X(\refl))&&\quad\text{}\\
+&= -X_j(\refl)&&\quad\text{(by path induction)}\\
+&= \refl&&\quad\text{}
+\end{alignat*}
+
 \subsection{An example vector field on the sphere}
 \todo{define the example I worked out, compute swirling}
