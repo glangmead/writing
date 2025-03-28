@@ -124,7 +124,7 @@ The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to (Tm=Tm) \) is called
 Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}(Tm=Tm) \), and then give a name to the special term \( \rho_{ji}\defeq T_{ji}X_j - X_i \) which is the image in \( Tm=Tm \) of the vector \( X_j \) in a neighboring vertex after transporting it to \( T_i \).
 
 \begin{mylemma} The following diagram is well-typed and commutes, and therefore \( \rho_{ij}=-\rho_{ji} \).
-\end{mylemma}
+\label{lem:subtraction}\end{mylemma}
 \begin{center}
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoWF9qPV97VF9qfVRfe2ppfVhfaSlcXHRpbWVzKFhfaT1fe1RfaX1UX3tpan1YX2opIl0sWzAsMSwiKFxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tqaX0pXFx0aW1lcyhcXG1hdGhybXtpZH09X3tUbT1UbX1cXHJob197aWp9KSJdLFsxLDEsIlxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tpan0rXFxyaG9fe2ppfSJdLFsxLDAsIlhfaj1fe1Rfan1YX2oiXSxbMSwyLCIoXFx0ZXh0ey19KSsoXFxyaG9fe2ppfSsoXFx0ZXh0ey19KSkiLDJdLFswLDMsIihcXHRleHR7LX0pXFxjZG90IFRfe2ppfShcXHRleHR7LX0pIl0sWzMsMiwiLVhfaiJdLFswLDEsIi1YX2pcXHRpbWVzIC1YX2kiLDJdXQ==
 \begin{tikzcd}
@@ -140,13 +140,26 @@ Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xr
 The top map has the given codomain because \( T_{ji}T_{ij}=\id \). The upper-right composition is \( ((\text{-})\cdot(T_{ji}(\text{-}))-X_j \), and the lower-left composition is \( ((\text{-})-X_j)+(\rho_{ji}+((\text{-})-X_i)) \), so commutativity follows from the definition of \( \rho_{ji} \). The final statement follows from comparing the types on the right.
 \end{proof}
 
-Given this fact we now know that \( -X_j \) maps \( X_{ij}\cdot X_{ji} \) to \( \id=\id \), and we can ask if the image is \( \refl \). We have
+We now know that the type in the bottom-right is \( \id=_{Tm=Tm}\id \), so the vertical map \( -X_j \) maps the path \( X_{ij}\cdot X_{ji} \) to a path in \( \id=_{Tm=Tm}\id \) and we can ask if the image is \( \refl \).
+
+\begin{mylemma}
+\( (X_{ij}\cdot X_{ji})-X_j=\refl \).
+\end{mylemma}
+\begin{proof}
+We have
 \begin{alignat*}{2}
 -X_j(X_{ij}\cdot X_{ji}) &= -X_j(X(e_{ji}\cdot e_{ij}))&&\quad\text{(by definition of dependent paths)}\\
 &= -X_j(X(\refl))&&\quad\text{}\\
 &= -X_j(\refl)&&\quad\text{(by path induction)}\\
 &= \refl&&\quad\text{}
 \end{alignat*}
+\end{proof}
+
+\begin{mylemma}The group operation along the bottom of Lemma~\ref{lem:subtraction} is abelian, and the vertical maps form a homomorphism from the groupoid of dependent paths to the commutative group of paths in \( Tm=Tm \).
+\end{mylemma}
+\begin{proof}
+Not entirely sure what remains here.\todo{By induction from 5.4, building up a long concat of dep. paths.}
+\end{proof}
 
 \subsection{An example vector field on the sphere}
 \todo{define the example I worked out, compute swirling}
