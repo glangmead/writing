@@ -61,6 +61,12 @@
 \newcommand{\pit}[1]{\prod_{#1}} % pi-type
 \newcommand{\pitxa}{\pit{x:A}}
 \newcommand{\sit}[1]{\sum_{#1}} % sigma-type
+\newcommand{\loopy}{\Omega} % todo: mathsf
+\newcommand{\susp}{\Sigma} % todo: mathsf
+\newcommand{\simplex}{\Delta} % todo: mathsf
+\newcommand{\simplexn}[1]{\simplex^{#1}}
+\newcommand{\bdsimplex}{\partial\simplex}
+\newcommand{\bdsimplexn}[1]{\partial\simplex^{#1}}
 \newcommand{\ent}{\vdash}
 \newcommand{\adj}{\dashv}
 \newcommand{\re}{\mathcal{R}}%realization
@@ -70,6 +76,7 @@
 \newcommand{\loopo}{\ensuremath{\mathsf{loop}}}
 \newcommand{\refl}{\ensuremath{\mathsf{refl}}}
 \newcommand{\ap}{\ensuremath{\mathsf{ap}}}
+\newcommand{\reg}[1]{\ensuremath{{#1}_\mathrm{reg}}}
 \newcommand{\pr}{\ensuremath{\mathrm{pr}}}
 \newcommand{\ind}{\ensuremath{\mathsf{ind}}}
 \newcommand{\lift}{\ensuremath{\mathsf{lift}}}
@@ -86,7 +93,6 @@
 \newcommand{\reflfx}{\ensuremath{\refl_{f(x)}}}
 \newcommand{\pathm}{\ensuremath{\mathcal{P}_1 (M)}}
 \newcommand{\pp}{\ensuremath{\mathcal{P}_1}}
-\newcommand{\two}{\ensuremath{\mathbb{2}}}
 \newcommand{\oo}{\ensuremath{\mathbb{O}}}
 \newcommand{\mm}{\ensuremath{\mathbb{M}}}
 \newcommand{\const}{\ensuremath{\mathrm{const}}}
@@ -107,9 +113,9 @@
 \newcommand{\combmfd}{\mathsf{CombMfd_n}}
 \newcommand{\combmfdset}{\mathsf{CombMfdSet_n}}
 \newcommand{\combmfdsett}{\mathsf{CombMfdSet_2}}
-\newcommand{\simcomp}{\mathsf{SimpCompSet_n}}
-\newcommand{\simcompt}{\mathsf{SimpCompSet_2}}
-\newcommand{\simcompk}{\mathsf{SimpCompSet_k}}
+\newcommand{\simcomp}{\mathsf{SimCom_n}}
+\newcommand{\simcompt}{\mathsf{SimCom_2}}
+\newcommand{\simcompk}{\mathsf{SimCom_k}}
 \newcommand{\smfd}{\mathsf{SmoothMfd}}
 \newcommand{\calg}{\mathsf{CAlg}_{\rr}}
 \newcommand{\cart}{\mathsf{CartSp}}
@@ -144,8 +150,7 @@
 \newcommand{\LAut}{\mathrm{LAut}}
 \newcommand{\im}{\mathrm{im}}
 \newcommand{\Fin}{\mathrm{Fin}}
-\newcommand{\unit}{\mathbb{1}}
-\newcommand{\loopy}{\mathsf{\Omega}}
+\newcommand{\unit}{\mathsf{\mathbf{1}}}
 \newcommand{\xbox}{\mathsf{xbox}}
 \newcommand{\disk}{\mathsf{disk}}
 \newcommand{\xdisk}{\mathsf{xdisk}}
@@ -225,6 +230,8 @@
 \newcommand{\Id}{\mathrm{Id}}
 \newcommand{\kk}{\mathbb{K}}
 \newcommand{\vv}{\mathbb{V}}
+\newcommand{\ccc}{\mathbb{C}}
+\newcommand{\aaa}{\mathbb{A}}
 \newcommand{\Set}{\mathsf{Set}}
 \newcommand{\Binn}{\mathsf{Binn}}
 \newcommand{\CartSp}{\mathsf{CartSp}}
@@ -249,7 +256,7 @@
 \newcommand{\llb}{\llbracket}
 \newcommand{\rrb}{\rrbracket}
 \newcommand{\gr}[1]{[{#1}]} % geometric realization
-\newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization
+\newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization of anonymous data
 \newenvironment{dedication}
 {\clearpage           % we want a new page
  \thispagestyle{empty}% no header and footer
@@ -284,8 +291,8 @@
 {} % Theorem head spec (can be left empty, meaning `normal')
 
 \declaretheoremstyle[%
-  spaceabove=-6pt,%
-  spacebelow=6pt,%
+  spaceabove=5pt,%
+  spacebelow=5pt,%
   headfont=\normalfont\itshape,%
   postheadspace=1em,%
   qed=\qedsymbol%

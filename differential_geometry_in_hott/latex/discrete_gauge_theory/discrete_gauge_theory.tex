@@ -1,6 +1,6 @@
 \documentclass[12pt,fleqn]{article}
 \usepackage{greg}
-%\usepackage[vvarbb]{newtx}
+%\usepackage[vvarbb,libertinus]{newtx}
 \usepackage{fontspec}
 \usepackage{titlesec}
 \usepackage{titling}
@@ -24,8 +24,8 @@
 \titleformat*{\subsection}{\normalsize\bfseries}
 \titleformat*{\subsubsection}{\normalsize\sffamily}
 \titleformat{\chapter}[hang]{\LARGE\sffamily}{\LARGE\thechapter}{1ex}{}[]
-\titleformat{name=\chapter,numberless}[hang]{\LARGE\sffamily}{}{0ex}{}[]
-\renewcommand{\maketitlehooka}{\large\sffamily}
+\titleformat{name=\chapter,numberless}[hang]{\LARGE\bfseries}{}{0ex}{}[]
+\renewcommand{\maketitlehooka}{\large\bfseries}
 
 \title{Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
@@ -34,7 +34,7 @@
 \maketitle
 
 \begin{abstract}
-Type families on higher inductive types such as pushouts can capture the homotopical properties of differential geometric constructions including connections, curvature, gauge transformations, and vector fields. We define a class of combinatorial pushouts, then define principal bundles, tangent bundles, connections, curvature, and vector fields on these. We draw inspiration in part from the young field of discrete differential geometry, and in part from the original classical proofs, which often make use of triangulations and other discrete arguments. We prove an equality relating the Gauss-Bonnet theorem to the Poincaré-Hopf theorem. We also attempt to map out future directions.
+Type families on higher inductive types such as pushouts can capture the homotopical properties of differential geometric constructions including connections, curvature, gauge transformations, and vector fields. We define a class of combinatorial pushouts, then define principal bundles, connections, and curvature on these. We provide an example of a tangent bundle but do not prove when these must exist. We draw inspiration in part from the young field of discrete differential geometry, and in part from the original classical proofs, which often make use of triangulations and other discrete arguments. We prove an equality relating the Gauss-Bonnet theorem to the Poincaré-Hopf theorem. We also attempt to map out future directions.
 \end{abstract}
 
 \begin{dedication}

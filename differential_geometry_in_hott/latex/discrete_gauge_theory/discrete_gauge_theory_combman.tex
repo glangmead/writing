@@ -1,35 +1,39 @@
 \section{Discrete manifolds}
 \label{sec:discrete_man}
-We will remind ourselves of the definition of a classical simplicial complex, in sets. Then we will create a higher type from the data of a complex, using pushouts. The type will both imitate the structure of the set-based complex and will contain explicit maps into it from the sets of the complex.
+We will remind ourselves of the definition of a classical simplicial complex, in sets. Then we will create a type that realizes the data of a complex, using pushouts.
 
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-An \defemph{abstract simplicial complex \( M\defeq[M_0,\ldots,M_n] \) of dimension \( n \)} is an ordered list consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that any \( (j+1) \)-element subset of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \) (where the suffix \( \mathsf{Set} \) reminds us that this is a type of sets). Let \( M_{\leq k}= [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \). A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \).
-
+An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} is an ordered list \( M\defeq[M_0,\ldots,M_n] \) consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that for any \( j<k \), any \( (j+1) \)-element subset of an element of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \). Let \( M_{\leq k}\defeq [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \). \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \), which are simply inclusions of lists.
 \end{mydef}
+
+We can imagine constructing a simplicial complex dimension by dimension.
 
 \begin{mydef}
-Let \( \Delta^n \) be the standard \( n \)-simplex in \( \rr^n \) given by \( \{x_1,\ldots,x_n|\sum_i x_i\leq 1\} \). Let \( M:\simcomp \). The \defemph{geometric realization} \( \gr{M}:\Topcat \) of \( M \) in the category of topological spaces is given inductively as follows: \( [M_0]=M_0 \), and given \( [M_{\leq k-1}] \) we form \( [M_{\leq k}] \) by the pushout in sets
-
+Denote by \( P(n) \) the simplicial complex obtained by taking the set of all subsets of the standard \( (n+1) \)-element set \( P(n)_0\defeq\{0,\ldots,n\} \). We call \( P(n) \) the \defemph{complete \( n \)-simplex}. We will refer to the \( (n-1) \)-skeleton \( P(n)_{\leq(n-1)} \) with the suggestive notation \( \partial P(n) \).
 \end{mydef}
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJ8TV97a318Il0sWzEsMCwifE1fe2stMX18Il0sWzAsMCwiTV97a31cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzAsMSwiTV97a31cXHRpbWVzXFxEZWx0YV5rIl0sWzIsMSwiXFxtYXRocm17YXR0YWNofSJdLFsyLDMsIlxcbWF0aHJte2lkfVxcdGltZXNcXG1hdGhybXtpbmNsfSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsMF0sWzEsMCwiaV9rIl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
-\begin{center}
+
+Note that \( P(n)_{(n-1)} \) has \( n+1 \) elements. For example, \( P(2)_1 \) consists of the three 2-element subsets of \( \{0, 1, 2\} \). 
+
+Given \( M=[M_0,\ldots,M_n] \) and \( k\leq n \), a face \( f_k:M_k \) is the union of \( (k+1) \) faces in \( M_{k-1} \), and so the \( k \)-skeleton is obtained from the \( (k-1) \)-skeleton by forming the following pushout of sets:
+\begin{equation}
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJNX2siXSxbMCwwLCJNX2tcXHRpbWVzXFxwYXJ0aWFsIFAoaykiXSxbMCwxLCJNX3tcXGxlcSAoay0xKX0iXSxbMSwxLCJNX3tcXGxlcSBrfSJdLFsxLDAsIlxcbWF0aHJte3ByfV8xIl0sWzEsMiwiYV9rIiwyXSxbMCwzXSxbMiwzXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
 \begin{tikzcd}
-  {M_{k}\times\partial\Delta^k} & {[M_{\leq k-1}]} \\
-  {M_{k}\times\Delta^k} & {[M_{\leq k}]}
-  \arrow["{\mathrm{attach}}", from=1-1, to=1-2]
-  \arrow["{\mathrm{id}\times\mathrm{incl}}"', hook, from=1-1, to=2-1]
-  \arrow["{i_k}", from=1-2, to=2-2]
+  {M_k\times\partial P(k)} & {M_k} \\
+  {M_{\leq (k-1)}} & {M_{\leq k}}
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
+  \arrow["{a_k}"', from=1-1, to=2-1]
+  \arrow[from=1-2, to=2-2]
   \arrow[from=2-1, to=2-2]
   \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
 \end{tikzcd}
-\end{center}
-which attaches each \( k \)-simplex by taking the convex hull of the appropriate \( k+1 \) points in \( [M_{\leq k-1}] \).
-The collection of vertical maps on the right gives a sequence of inclusion maps of skeleta \( [M_0]\xrightarrow[]{i_1}[M_{\leq 1}]\xrightarrow[]{i_2}\cdots\xrightarrow[]{i_n}[M_{\leq n}]=\gr{M} \).
+\label{eq:attach}
+\end{equation}
+where the vertical ``attach'' map \( a_k(f_k, -) \) picks out the \( k+1 \) subsets of \( f_k \).
 
 \begin{mydef}
-In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( n-1 \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
+In an abstract simplicial complex \( M \) of dimension \( n \), the \defemph{link} of a vertex \( v \) is the \( (n-1) \)-dimensional subcomplex containing every face \( m\in M_{n-1} \) such that \( v\notin m \) and \( m\cup v \) is an \( n \)-face of \( M \).
 \label{def:link}
 \end{mydef}
 
@@ -44,15 +48,12 @@ The link is easier to understand as all the neighboring vertices of \( v \) and 
     (0, 1) -- (2, 3)
     (0, 0) -- (3, 3)
     (1, 0) -- (3, 2)
-    (2, 0) -- (3, 1)
-  ;
+    (2, 0) -- (3, 1);
   \fill[radius=3pt]
     \foreach \x in {0, ..., 3} {
       \foreach \y in {0, ..., 3} {
         (\x, \y) circle[]
-      }
-    }
-  ;
+    }};
   \path[above left]
     \foreach \p/\v in {
       {1, 3}/a,
@@ -64,142 +65,178 @@ The link is easier to understand as all the neighboring vertices of \( v \) and 
       {1, 1}/d%
     } {
       (\p) node {$\v$}
-    }
-  ;
+    };
 \end{tikzpicture}
 \caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \), forming a hexagon.}
 \label{fig:link}
 \end{figure}
 
-\begin{mydef}
-A \defemph{combinatorial manifold} (or \defemph{combinatorial triangulation}) of dimension \( n \) is a simplicial complex of dimension \( n \) such that the link of every vertex is a \defemph{simplicial sphere} of dimension \( n-1 \) (meaning its geometric realization is homeomorphic to an \( n-1 \)-sphere). Denote by \( \combmfdset \) the type of combinatorial manifolds of dimension \( n \) (which the notation again reminds us are sets).
-\end{mydef}
-
-In a 2-dimensional combinatorial manifold the link is a polygon. See Figure~\ref{fig:sphere_triangulation} for some examples of 2-dimensional combinatorial manifolds of genus 0, 1, and 3.
-
-A classical 1940 result of Whitehead, building on Cairn, states that every smooth manifold admits a combinatorial triangulation\cite{whitehead_triangulation}. So it appears reasonably well motivated to study this class of objects. See for example the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}. There are important examples in four dimensions of topological manifolds that do not have any smoothness structure or triangulation. These will be out of reach of the theory we are building.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=100pt]{figs/triangulated_sphere.pdf}
-\includegraphics[width=100pt]{figs/Torus-triang.png}
-\includegraphics[width=100pt]{figs/triangulated_genus3.pdf}
-\caption{Combinatorial triangulations of a sphere, torus, and 3-holed torus. Sphere created with the tool \texttt{stripy}; torus from Wikipedia (\href{https://commons.wikimedia.org/w/index.php?curid=30856793}{By Ag2gaeh} - Own work, CC BY-SA 3.0.); 3-holed torus from Wikipedia (\href{https://commons.wikimedia.org/wiki/File:Tri-brezel.svg}{By Ag2gaeh} - Own work, CC BY-SA 3.0.)}
-\label{fig:sphere_triangulation}
-\end{figure}
+\begin{mynote}
+The \emph{geometric realization} of a complex uses the combinatorial data to form pushouts of standard simplices inside the category of topological spaces. A \emph{simplicial sphere} is a simplicial complex whose geometric realization is homeomorphic to a sphere. A classical 1940 result of Whitehead, building on Cairn, states that every smooth \( n \)-manifold is the geometric realization of a simplicial complex of dimension \( n \) such that the link is the geometric realization of an \( (n-1) \)-sphere\cite{whitehead_triangulation}. For more of this theory see the classic book by Kirby and Siebenmann\cite{kirby_siebenmann}.
+\end{mynote}
 
 \subsection{Higher inductive combinatorial manifolds}
 
-Instead of building a set \( \gr{M}:\Topcat \), we can realize the simplicial complex as a (higher) type by forming a sequence of \emph{homotopy} pushouts. For example in dimension 1 we could take the triangle with vertices \( \{v_1, v_2, v_3\} \) and edges \( \{e_{12}, e_{23}, e_{31}\} \) and form a polygon \( C_3 \):
+% I think you should define \partial ∆^n and ∆^n as realisation of explicit combinatorial manifold. (you have defined everything to do it)
+% 
+% and that would let you defined explicitely the maps
+% M_k x \partial ∆^k --> \MM_{n-1}
+% as induced by maps of of Comb Manifolds
+% M_k x \partial ∆^k --> M_≤k
+% 
+% of course this has to be done at the same time as the definition of realization of a general comb. manifold
+% 
+% you could proceed inductively as such
+% - define realisation of CM of dim 0
+% - define the realization of S^0 = \partial ∆^1
+% - define realisation of CM of dim n+1
+% in terms of realization of CM of dim n
+% - define the realization of S^n+1 = \partial ∆^n+2
+
+We will realize a simplicial complex as a higher inductive type by forming a sequence of pushouts. We will work upward by dimension so as to define the appropriate standard sphere that we need in the next dimension.
+
+\begin{mydef}
+The \defemph{realization \( \mm_0 \) of a 0-dimensional simplicial complex} \( M_0 \) is simply the set \( M_0 \).
+\end{mydef}
+
+\begin{mydef}
+The \defemph{simplicial 0-sphere} \( \bdsimplexn{1} \) is the realization of \( \partial P(1) \).
+\end{mydef}
+
+\begin{mydef}
+The \defemph{realization \( \mm_1 \) of a 1-dimensional simplicial complex} \( [M_0, M_1] \) is the pushout
+\end{mydef}
 \begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzEsMiwiQ18zIl0sWzAsMiwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFswLDEsIlxcbWF0aHJte3ByXzF9Il0sWzAsMywiXFxzdWJzdGFja3tlX3sxMn1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMSx2XzJcXH0gXFxcXGVfezIzfVxcdGltZXNcXHtOLFNcXH1cXG1hcHN0byBcXHt2XzIsdl8zXFx9XFxcXGVfezMxfVxcdGltZXNcXHsgTixTXFx9XFxtYXBzdG8gXFx7dl8zLHZfMVxcfX0iLDJdLFsxLDJdLFszLDJdLFsyLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzMsMSwiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJNXzA9XFxtYXRoYmJ7TX1fMCJdLFsxLDEsIlxcbWF0aGJie019XzEiXSxbMSwwLCJNXzEiXSxbMCwwLCJNXzFcXHRpbWVzIFxcYmRzaW1wbGV4bnsxfSJdLFswLDFdLFszLDAsImFfMCIsMl0sWzMsMiwiXFxtYXRocm17cHJ9XzEiXSxbMiwxLCIqX3tcXG1hdGhiYntNfV8xfSJdLFsxLDMsIiIsMix7Im9mZnNldCI6Mywic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMCwyLCJoXzEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dXQ==
 \begin{tikzcd}
-  {C_{3,1}\times S^0=\{e_{12},e_{23},e_{31}\}\times \{N, S\}} & {C_{3,1}} \\
-  \\
-  {C_{3,0}=\{v_1,v_2,v_3\}} & {C_3}
-  \arrow["{\mathrm{pr_1}}", from=1-1, to=1-2]
-  \arrow["\begin{array}{c} \substack{e_{12}\times\{ N,S\}\mapsto \{v_1,v_2\} \\e_{23}\times\{N,S\}\mapsto \{v_2,v_3\}\\e_{31}\times\{ N,S\}\mapsto \{v_3,v_1\}} \end{array}"', from=1-1, to=3-1]
-  \arrow["{*_1}", from=1-2, to=3-2]
-  \arrow["{h_1}"', shorten <=40pt, shorten >=40pt, Rightarrow, from=3-1, to=1-2]
-  \arrow[from=3-1, to=3-2]
-  \arrow["\ulcorner"{pos=0.05, rotate=180}, draw=none, from=3-2, to=1-1]
+  {M_1\times \bdsimplexn{1}} & {M_1} \\
+  {M_0=\mathbb{M}_0} & {\mathbb{M}_1}
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
+  \arrow["{a_0}"', from=1-1, to=2-1]
+  \arrow["{*_{\mathbb{M}_1}}", from=1-2, to=2-2]
+  \arrow["{h_1}"', shorten <=14pt, shorten >=14pt, Rightarrow, from=2-1, to=1-2]
+  \arrow[from=2-1, to=2-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, shift right=3, draw=none, from=2-2, to=1-1]
 \end{tikzcd}
 \end{center}
-The left vertical map expresses the connectivity between the edges and vertices in the set-based complex. The right vertical map \( *_1 \) provides a hub point for each edge, and the homotopy \( h_1 \) provides the spokes that connect the hub to the vertices. So in contrast to a geometric realization, the 1-dimensional cells in the HoTT sense are generated by the filler homotopy.
+where \( a_k \) is the attachment data of the edges in \( M_1 \), as in diagram~\ref{eq:attach}. The right vertical map \( *_1 \) provides a hub point for each edge, and the homotopy \( h_1 \) provides the spokes that connect the hub to the vertices.
 
-In dimension 2 we could fill in maps from \( C_3 \) into our higher type by adding faces (hence reusing the object we just built above):
+\begin{mydef}
+The \defemph{simplicial 1-sphere} \( \bdsimplexn{2} \) is the realization of \( \partial P(2) \).
+\end{mydef}
 \begin{center}
-% https://q.uiver.app/#q=WzAsNyxbMCwyLCJNXzFcXHRpbWVzIFNeMCJdLFswLDEsIk1fMD1cXG1hdGhiYntNfV8wIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFsxLDIsIk1fMSJdLFsxLDAsIk1fMlxcdGltZXMgQ18zIl0sWzIsMCwiTV8yIl0sWzIsMSwiXFxtYXRoYmJ7TX1fMiJdLFswLDEsIlxccGFydGlhbF8wIl0sWzEsMl0sWzAsMywiXFxtYXRocm17cHJ9XzEiLDJdLFszLDIsIipfMSIsMl0sWzIsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMiw2XSxbNCwyLCJcXHBhcnRpYWxfMSIsMl0sWzUsNiwiKl8yIl0sWzQsNSwiXFxtYXRocm17cHJ9XzEiXSxbNiw0LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsyLDUsImhfMiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzEsMywiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHBhcnRpYWwgUCgxKSJdLFsxLDEsIlxccGFydGlhbCBcXERlbHRhXjIiXSxbMSwwLCJcXHBhcnRpYWwgUCgyKSJdLFswLDAsIlxccGFydGlhbCBQKDIpXFx0aW1lcyBcXHBhcnRpYWwgXFxEZWx0YV4xIl0sWzAsMV0sWzMsMCwiYV8wIiwyXSxbMywyLCJcXG1hdGhybXtwcn1fMSJdLFsyLDEsIipfe1xccGFydGlhbFxcRGVsdGFeMn0iXSxbMSwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFswLDIsImhfMSIsMix7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV1d
 \begin{tikzcd}
-  & {M_2\times C_3} & {M_2} \\
-  {M_0=\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} \\
-  {M_1\times S^0} & {M_1}
-  \arrow["{\mathrm{pr}_1}", from=1-2, to=1-3]
-  \arrow["{\partial_1}"', from=1-2, to=2-2]
-  \arrow["{*_2}", from=1-3, to=2-3]
+  {\partial P(2)\times \partial \Delta^1} & {\partial P(2)} \\
+  {\partial P(1)} & {\partial \Delta^2}
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
+  \arrow["{a_0}"', from=1-1, to=2-1]
+  \arrow["{*_{\partial\Delta^2}}", from=1-2, to=2-2]
+  \arrow["{h_1}"', shorten <=11pt, shorten >=11pt, Rightarrow, from=2-1, to=1-2]
   \arrow[from=2-1, to=2-2]
-  \arrow["{h_1}"', shorten <=11pt, shorten >=11pt, Rightarrow, from=2-1, to=3-2]
-  \arrow["{h_2}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=1-3]
-  \arrow[from=2-2, to=2-3]
-  \arrow["\ulcorner"{anchor=center, above, pos=0.1, rotate=-90}, draw=none, from=2-2, to=3-1]
-  \arrow["\ulcorner"{anchor=center, below, pos=-0.05, rotate=180}, draw=none, from=2-3, to=1-2]
-  \arrow["{\partial_0}", from=3-1, to=2-1]
-  \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
-  \arrow["{*_1}"', from=3-2, to=2-2]
-\end{tikzcd}
-\end{center}
-The types \( C_3 \) and \( \mm_1 \) are 1-types, \( \mm_2 \) is a 2-type, and the rest are sets. The map \( \partial_0 \) maps each pair \( (e, S^0) \) to the pair of points this edge connects. 
-
-The \( h_i \) are the proofs of commutativity, and the two squares are also both homotopy pushouts. Note that the pushouts could be re-expressed as HIT constructors.
-
-Whereas in geometric realization we use both \( \Delta^i \) and \( \partial\Delta^i \) to attach simplices, in this homotopy picture we need an explicit construction of ``\( \partial\Delta^i \)'' as a type equivalent to an \( i-1 \)-dimensional sphere and the filling of this sphere with \( i \)-dimensional stuff has moved into the proof of commutativity. So in dimension \( n \) the picture would be
-\begin{center}%
-% https://q.uiver.app/#q=WzAsMTAsWzIsMSwiXFxtYXRoYmJ7TX1fe24tMX0iXSxbMiwwLCJNX25cXHRpbWVzIFNee24tMX0iXSxbMywwLCJNX24iXSxbMywxLCJcXG1hdGhiYntNfV9uIl0sWzEsMSwiXFxtYXRoYmJ7TX1fe24tMn0iXSxbMSwwLCJNX3tuLTJ9Il0sWzIsMiwiTV97bi0xfSJdLFsxLDIsIlxcY2RvdHMiXSxbMCwwLCJcXGNkb3RzIl0sWzAsMSwiXFxjZG90cyJdLFswLDNdLFsxLDAsIlxccGFydGlhbF97bi0xfSIsMl0sWzIsMywiKl9uIl0sWzEsMiwiXFxtYXRocm17cHJ9XzEiXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFswLDIsImhfbiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzQsMF0sWzUsNCwiKl97bi0yfSJdLFs2LDAsIipfe24tMX0iLDJdLFs4LDVdLFs5LDRdLFs3LDZdLFswLDcsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsOCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbOSw1LCJoX3tuLTJ9IiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCw2LCJoX3tuLTF9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
-\begin{tikzcd}
-  \cdots & {M_{n-2}} & {M_n\times S^{n-1}} & {M_n} \\
-  \cdots & {\mathbb{M}_{n-2}} & {\mathbb{M}_{n-1}} & {\mathbb{M}_n} \\
-  & {M_{n-1}\times S^{n-2}} & {M_{n-1}}
-  \arrow["{\partial_{n-2}}"', swap, from=3-2, to=2-2]
-  \arrow[from=1-1, to=1-2]
-  \arrow["{*_{n-2}}", from=1-2, to=2-2]
-  \arrow["{\mathrm{pr}_1}", from=1-3, to=1-4]
-  \arrow["{\partial_{n-1}}"', from=1-3, to=2-3]
-  \arrow["{*_n}", from=1-4, to=2-4]
-  \arrow["{h_{n-2}}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-1, to=1-2]
-  \arrow[from=2-1, to=2-2]
-  \arrow["\ulcorner"{pos=-0.01, rotate=180}, draw=none, from=2-2, to=1-1]
-  \arrow[from=2-2, to=2-3]
-  \arrow["{h_{n-1}}"', shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=3-3]
-  \arrow["{h_n}", swap, shorten <=10pt, shorten >=10pt, Rightarrow, from=2-3, to=1-4]
-  \arrow[from=2-3, to=2-4]
-  \arrow["\ulcorner"{pos=-0.15, rotate=-90}, draw=none, from=2-3, to=3-2]
-  \arrow["\ulcorner"{pos=0.01, rotate=180}, draw=none, from=2-4, to=1-3]
-  \arrow["{\mathrm{pr}_1}", swap, from=3-2, to=3-3]
-  \arrow["{*_{n-1}}"', from=3-3, to=2-3]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
 \end{tikzcd}
 \end{center}
 
 \begin{mydef}
+A \defemph{realization \( \mm_2 \) of a 2-dimensional simplicial complex} \( [M_0, M_1, M_2] \) is the pushout
+\end{mydef}
+\begin{center}
+% https://q.uiver.app/#q=WzAsNyxbMCwyLCJNXzFcXHRpbWVzIFxcYmRzaW1wbGV4bnsxfSJdLFswLDEsIlxcbWF0aGJie019XzAiXSxbMSwxLCJcXG1hdGhiYntNfV8xIl0sWzEsMiwiTV8xIl0sWzEsMCwiTV8yXFx0aW1lcyBcXGJkc2ltcGxleG57Mn0iXSxbMiwwLCJNXzIiXSxbMiwxLCJcXG1hdGhiYntNfV8yIl0sWzAsMSwiYV8wIl0sWzEsMl0sWzAsMywiXFxtYXRocm17cHJ9XzEiLDJdLFszLDIsIipfe1xcbWF0aGJie019XzF9IiwyXSxbMiwwLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsyLDZdLFs0LDIsIlxcbWF0aGJie0F9XzEiLDJdLFs1LDYsIipfe1xcbWF0aGJie019XzJ9Il0sWzQsNSwiXFxtYXRocm17cHJ9XzEiXSxbNiw0LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsyLDUsImhfMiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV0sWzEsMywiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
+\begin{tikzcd}
+  & {M_2\times \bdsimplexn{2}} & {M_2} \\
+  {\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} \\
+  {M_1\times \bdsimplexn{1}} & {M_1}
+  \arrow["{\mathrm{pr}_1}", from=1-2, to=1-3]
+  \arrow["{\mathbb{A}_1}"', from=1-2, to=2-2]
+  \arrow["{*_{\mathbb{M}_2}}", from=1-3, to=2-3]
+  \arrow[from=2-1, to=2-2]
+  \arrow["{h_1}"', shorten <=27pt, shorten >=27pt, Rightarrow, from=2-1, to=3-2]
+  \arrow["{h_2}", shorten <=17pt, shorten >=17pt, Rightarrow, from=2-2, to=1-3]
+  \arrow[from=2-2, to=2-3]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-135}, draw=none, from=2-2, to=3-1]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-3, to=1-2]
+  \arrow["{a_0}", from=3-1, to=2-1]
+  \arrow["{\mathrm{pr}_1}"', from=3-1, to=3-2]
+  \arrow["{*_{\mathbb{M}_1}}"', from=3-2, to=2-2]
+\end{tikzcd}
+\end{center}
+where \( \aaa_1 \) is such that this additional diagram commutes
+\begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJNXzJcXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV4yIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFswLDAsIk1fMlxcdGltZXNcXHBhcnRpYWwgUCgyKSJdLFswLDEsIk1fe1xcbGVxIDF9Il0sWzAsMSwiXFxtYXRoYmJ7QX1fMSJdLFsyLDAsIlxcbWF0aHJte2lkfVxcdGltZXMgKl97XFxwYXJ0aWFsXFxEZWx0YV4yfSJdLFszLDEsIipfe1xcbWF0aGJie019X3tcXGxlcSAxfX0iLDJdLFsyLDMsImFfMSIsMl1d
+\begin{tikzcd}
+  {M_2\times\partial P(2)} & {M_2\times\partial\Delta^2} \\
+  {M_{\leq 1}} & {\mathbb{M}_1}
+  \arrow["{\mathrm{id}\times *_{\partial\Delta^2}}", from=1-1, to=1-2]
+  \arrow["{a_1}"', from=1-1, to=2-1]
+  \arrow["{\mathbb{A}_1}", from=1-2, to=2-2]
+  \arrow["{*_{\mathbb{M}_{\leq 1}}}"', from=2-1, to=2-2]
+\end{tikzcd}
+\end{center}
+In this diagram \( a_1 \) is the simplicial attaching map from \ref{eq:attach}, and \( *_{\mathbb{M}_{\leq 1}} \) simply gathers the hub maps from \( M_0 \) and \( M_1 \) into \( \mm_1 \). The commutativity then says that \( \aaa_1 \) reflects the attachment data.
+\begin{mydef}
+Given a notion of realization in dimension \( n-1 \), a \defemph{realization \( \mm_n \) of an \( n \)-dimensional simplicial complex} \( [M_0, \ldots, M_n] \) is the pushout
+\end{mydef}
+\begin{center}%
+% https://q.uiver.app/#q=WzAsMTAsWzIsMSwiXFxtYXRoYmJ7TX1fe24tMX0iXSxbMiwwLCJNX25cXHRpbWVzIFxccGFydGlhbFxcRGVsdGFebiJdLFszLDAsIk1fbiJdLFszLDEsIlxcbWF0aGJie019X24iXSxbMSwxLCJcXG1hdGhiYntNfV97bi0yfSJdLFsxLDAsIk1fe24tMn0iXSxbMiwyLCJNX3tuLTF9Il0sWzEsMiwiXFxjZG90cyJdLFswLDAsIlxcY2RvdHMiXSxbMCwxLCJcXGNkb3RzIl0sWzAsM10sWzEsMCwiXFxtYXRoYmJ7QX1fe24tMX0iLDJdLFsyLDMsIipfe1xcbWF0aGJie019X3tufX0iXSxbMSwyLCJcXG1hdGhybXtwcn1fMSJdLFszLDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzAsMiwiaF9uIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCwwXSxbNSw0LCIqX3tcXG1hdGhiYntNfV97bi0yfX0iXSxbNiwwLCIqX3tcXG1hdGhiYntNfV97bi0xfX0iLDJdLFs4LDVdLFs5LDRdLFs3LDZdLFswLDcsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsOCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbOSw1LCJoX3tuLTJ9IiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCw2LCJoX3tuLTF9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
+\begin{tikzcd}
+  \cdots & {M_{n-2}} & {M_n\times \partial\Delta^n} & {M_n} \\
+  \cdots & {\mathbb{M}_{n-2}} & {\mathbb{M}_{n-1}} & {\mathbb{M}_n} \\
+  & \cdots & {M_{n-1}}
+  \arrow[from=1-1, to=1-2]
+  \arrow["{*_{\mathbb{M}_{n-2}}}", from=1-2, to=2-2]
+  \arrow["{\mathrm{pr}_1}", from=1-3, to=1-4]
+  \arrow["{\mathbb{A}_{n-1}}"', from=1-3, to=2-3]
+  \arrow["{*_{\mathbb{M}_{n}}}", from=1-4, to=2-4]
+  \arrow["{h_{n-2}}", shorten <=8pt, shorten >=8pt, Rightarrow, from=2-1, to=1-2]
+  \arrow[from=2-1, to=2-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow[from=2-2, to=2-3]
+  \arrow["{h_{n-1}}"', shorten <=10pt, shorten >=10pt, Rightarrow, from=2-2, to=3-3]
+  \arrow["{h_n}", shorten <=10pt, shorten >=10pt, Rightarrow, from=2-3, to=1-4]
+  \arrow[from=2-3, to=2-4]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-4, to=1-3]
+  \arrow[from=3-2, to=3-3]
+  \arrow["{*_{\mathbb{M}_{n-1}}}"', from=3-3, to=2-3]
+\end{tikzcd}
+\end{center}
+where \( \aaa_n \) is such that the following commutes
+\begin{center}
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJNX25cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5uIl0sWzEsMSwiXFxtYXRoYmJ7TX1fbiJdLFswLDAsIk1fblxcdGltZXNcXHBhcnRpYWwgUChuKSJdLFswLDEsIk1fe1xcbGVxIG59Il0sWzAsMSwiXFxtYXRoYmJ7QX1fbiJdLFsyLDAsIlxcbWF0aHJte2lkfVxcdGltZXMgKl97XFxwYXJ0aWFsXFxEZWx0YV5ufSJdLFszLDEsIipfe1xcbWF0aGJie019X3tcXGxlcSBufX0iLDJdLFsyLDMsImFfMSIsMl1d
+\begin{tikzcd}
+  {M_n\times\partial P(n)} & {M_n\times\partial\Delta^n} \\
+  {M_{\leq n}} & {\mathbb{M}_n}
+  \arrow["{\mathrm{id}\times *_{\partial\Delta^n}}", from=1-1, to=1-2]
+  \arrow["{a_1}"', from=1-1, to=2-1]
+  \arrow["{\mathbb{A}_n}", from=1-2, to=2-2]
+  \arrow["{*_{\mathbb{M}_{\leq n}}}"', from=2-1, to=2-2]
+\end{tikzcd}
+\end{center}
+Gathering some of the inductive process into one definition, we have
+\begin{mydef}
 \label{def:higher_realization} 
-A \defemph{higher realization} \( \hgr{M} \) corresponding to an abstract simplicial complex \( M:\simcomp \) consists of 
+A \defemph{realization} \( \mm \) corresponding to an abstract simplicial complex \( M:\simcomp \) consists of 
 \begin{enumerate}
 \item \( n+1 \) types \( \mm_0,\ldots,\mm_n \) where \( \mm_0\defeq M_0 \),
-\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times S^{i}}{M_{i+1}}{\partial_{i}}{\pr_1} \), \( i=1,\ldots,n \), where \( S^i \) is a HoTT \( i \)-sphere and \( \partial_i \) are called \defemph{attachment maps},
-\item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{i+1}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
+\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times \partial\Delta^{i+1}}{M_{i+1}}{\aaa_{i}}{\pr_1} \), \( i=0,\ldots,n-1 \), where \( \partial\Delta^{i+1} \) is the realization of the boundary of a standard simplex and \( \aaa_i \) are called \defemph{attachment maps},
+\item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{\mm_{i+1}}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
-A \defemph{cellular type} is a sequence \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \hgr{M} \) inducing this sequence. We define forgetful maps to the bare types with \( \hgr{M}_i\defeq \mm_i \).
-
+A \defemph{cellular type} is a sequence of types \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some \( \mm \) inducing this sequence.
 \end{mydef}
-
-We intend for the \( \partial_i \) to be isomorphisms between a boundary of a simplex in \( \mm_i \) and the \( i \)-sphere. To avoid spending too much time above dimension 2, we will leave the \( \partial_i \) underspecified in general. For 2-dimensional complexes we will see how the gluing can be done for triangles.
 
 \subsection{Polygons}
 \label{sec:polygons}
 
-Recall the 1-type \( C_3 \) that we just constructed from the triangle with vertex set \( \{v_1, v_2, v_3\} \) and edge set \( \{e_{12}, e_{23}, e_{31}\} \):
-\begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3szLDF9XFx0aW1lcyBTXjA9XFx7ZV97MTJ9LGVfezIzfSxlX3szMX1cXH1cXHRpbWVzIFxce04sIFNcXH0iXSxbMSwwLCJDX3szLDF9Il0sWzEsMiwiQ18zIl0sWzAsMiwiQ197MywwfT1cXHt2XzEsdl8yLHZfM1xcfSJdLFswLDEsIlxcbWF0aHJte3ByXzF9Il0sWzAsMywiXFxzdWJzdGFja3tlX3sxMn1cXHRpbWVzXFx7IE4sU1xcfVxcbWFwc3RvIFxce3ZfMSx2XzJcXH0gXFxcXGVfezIzfVxcdGltZXNcXHtOLFNcXH1cXG1hcHN0byBcXHt2XzIsdl8zXFx9XFxcXGVfezMxfVxcdGltZXNcXHsgTixTXFx9XFxtYXBzdG8gXFx7dl8zLHZfMVxcfX0iLDJdLFsxLDJdLFszLDJdLFsyLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzMsMSwiaF8xIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
-\begin{tikzcd}
-  {C_{3,1}\times S^0=\{e_{12},e_{23},e_{31}\}\times \{N, S\}} & {C_{3,1}} \\
-  \\
-  {C_{3,0}=\{v_1,v_2,v_3\}} & {C_3}
-  \arrow["{\mathrm{pr_1}}", from=1-1, to=1-2]
-  \arrow["\begin{array}{c} \substack{e_{12}\times\{ N,S\}\mapsto \{v_1,v_2\} \\e_{23}\times\{N,S\}\mapsto \{v_2,v_3\}\\e_{31}\times\{ N,S\}\mapsto \{v_3,v_1\}} \end{array}"', from=1-1, to=3-1]
-  \arrow["{*_1}", from=1-2, to=3-2]
-  \arrow["{h_1}"', shorten <=40pt, shorten >=40pt, Rightarrow, from=3-1, to=1-2]
-  \arrow[from=3-1, to=3-2]
-  \arrow["\ulcorner"{pos=0.05, rotate=180}, draw=none, from=3-2, to=1-1]
-\end{tikzcd}
-\end{center}
+The 1-type \( \bdsimplexn{2} \) has three vertices. In order to define the link of an arbitrary realization, we will need to have \( n \)-gons for \( n\geq 3 \). And since \( S^1 \) could be called a 1-gon, we will also define a 2-gon.
 
-We will use a notational shorthand for polygons:
 \begin{mydef}
-If \( C_n \) is a simplicial complex with \( C_{n,0}=\{v_1, \ldots, v_n\} \) and edges \( e_1=\{v_1,v_2\}\), \(\ldots\), \(e_{n-1}=\{v_{n-1}, v_n\}\), and \(e_n=\{v_n, v_0\} \), we call \( C_n \) a \defemph{polygon} or \defemph{\( n \)-gon}. We can refer to \( C_n \) by \( v_1 v_2\cdots v_n \), to \( \gr{C_n} \) by \( \gr{v_1 v_2\cdots v_n} \) and to \( \hgr{C_n} \) by \( \hgr{v_1 v_2\cdots v_n} \). Forgetting the pushouts and vertices, we denote the bare 1-type by \( \hgr{v_1 v_2\cdots v_n}_1 \).
+Define \( C(n) \), \( n\geq 3 \) to be a simplicial complex with \( C(n)_{0}=\{v_1, \ldots, v_n\} \) and edges \( e_1=\{v_1,v_2\}\), \(\ldots\), \(e_{n-1}=\{v_{n-1}, v_n\}\), and \(e_n=\{v_n, v_0\} \). We call \( C(n) \) a \defemph{polygon} or \defemph{\( n \)-gon}. The realization of \( C(n) \) will be denoted \( \ccc(n) \). When it is convenient we may refer to an \( n \)-gon by \( \gr{v_1\cdots v_n} \) and to its realization by \( \hgr{v_1\cdots v_n} \).
 \end{mydef}
 
-We also have the special circle type that is not the realization of a simplicial complex, but is nevertheless the natural basepoint in the type of polygons, as we shall see:
+We also have two special polygons:
 \begin{mydef}
-The higher inductive type \( \so \), also denoted \( \hgr{C_1}_1 \) for convenience, despite \( C_1 \) not being a simplicial complex, has constructors:
+The higher inductive type \( \so \), also denoted \( \ccc(1) \), has constructors:
 \begin{align*}
 \so &:\Type \\
 \mathsf{base}&:\so \\
@@ -207,55 +244,51 @@ The higher inductive type \( \so \), also denoted \( \hgr{C_1}_1 \) for convenie
 \end{align*}
 \end{mydef}
 
+\begin{mydef}
+The higher inductive type \(\ccc(2) \), has constructors:
+\begin{align*}
+\ccc(2) &:\Type \\
+v_1, v_2&:\ccc(2) \\
+\ell_{12}, r_{21}&:v_1=v_2\\
+\end{align*}
+\end{mydef}
+
 \begin{mylemma}\label{lem:addpoints}
-\( \hgr{C_2}_1\simeq \hgr{C_1}_1 \) and in fact \( \hgr{C_n}_1\simeq \hgr{C_{n-1}}_1 \).
+\( \ccc(2)\simeq \ccc(1) \) and in fact \( \ccc(n)\simeq \ccc(n-1) \).
 \end{mylemma}
 \begin{myproof}
-(Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( \hgr{C_1}_1 \) we will denote its constructors by \( \base \) and \( \loopo \). For \( \hgr{C_2}_1 \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( \hgr{C_3}_1 \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
+(Compare to \cite{hottbook} Lemma 6.5.1.) In the case of \( \ccc(1) \) we will denote its constructors by \( \base \) and \( \loopo \). For \( \ccc(2) \) we will denote the points by \( v_1, v_2 \) and the edges by \( \ell_{12}, r_{21} \). For \( \ccc(3) \) and higher we will denote the points by \( v_1,\ldots,v_n \) and the edges by \( e_{i,j}:v_i=v_j \) where \( j=i+1 \) except for \( e_{n,1} \). 
 
-First we will define \( f:\hgr{C_2}_1\to \hgr{C_1}_1 \) and \( g:\hgr{C_1}_1\to \hgr{C_2}_1 \), then prove they are inverses.
+First we will define \( f:\ccc(2)\to \ccc(1) \) and \( g:\ccc(1)\to \ccc(2) \), then prove they are inverses.
 \begin{align*}
 f(v_1)=f(v_2)&=\base &\quad g(\base)&=v_1\\
 f(\ell_{12})&=\loopo&\quad g(\loopo)&=\ell_{12}\cdot r_{21}\\
 f(r_{21}) &= \refl_{\base}& & \\
 \end{align*}
 
-We need to show that \( f\circ g\sim \id_{\hgr{C_1}_1} \) and \( g\circ f\sim\id_{\hgr{C_2}_1} \).
-Think of \( f \) as sliding \( v_2 \) along \( r_{21} \) to coalesce with \( v_1 \). This may help understand why the unfortunately intricate proof is working.
-
-Recall that given functions \( \phi,\psi:A\to B \) between two arbitrary types we can form a type family of paths \( \alpha:A\to\uni \) by \( \alpha(a)\defeq(\phi(a)=_B\psi(a)) \). Transport in this family is given by concatenation as follows (compare Lemma~\ref{lem:gauge_triv}), where \( p:a=_A a' \) and \( q:\phi(a)=\psi(a) \) (see Figure~\ref{fig:transport_family_of_paths}):
-\[ 
-\tr(p)(q) = \phi(p)^{-1}\cdot q\cdot \psi(p)
-\]
-which gives a path in \( \phi(a')=\psi(a') \) by connecting dots between the terms \( \phi(a'), \phi(a), \psi(a), \psi(a') \). This relates a would-be homotopy \( \phi\sim\psi \) specified at a single point, to a point at the end of a path. We will use this to help construct such homotopies.
+We need to show that \( f\circ g\sim \id_{\ccc(1)} \) and \( g\circ f\sim\id_{\ccc(2)} \).
+Think of \( f \) as sliding \( v_2 \) along \( r_{21} \) to coalesce with \( v_1 \), as in Figure~\ref{fig:shrink}. This may help understand why the somewhat intricate proof is working.
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[
-node distance = 20mm and 20mm,
-V/.style = {circle, fill, draw=black, inner sep=1pt},
-every edge quotes/.style = {auto},
-arrow/.style={->,semithick}
-]
-\begin{scope}[nodes=V]
-  \node[label=above left:\( \phi(a) \)] (1) {};
-  \node[label=above right:\( \phi(a') \)] (2) [right=of 1]  {};
-  \node[label=below right:\( \psi(a') \)] (3) [below=of 2]  {};
-  \node[label=below left:\( \psi(a) \)] (4) [below=of 1]  {};
-  \node[label=below:\( a \)] (5) [below=of 4]  {};
-  \node[label=below:\( a' \)] (6) [below=of 3]  {};
-\end{scope}
-\draw[arrow]
-        (2)  edge[swap, "\( \phi(p)^{-1} \)"] (1)
-        (4)  edge["\( \psi(p) \)"] (3)
-        (1)  edge[swap, "\( q \)"] (4)
-        (5)  edge["\( p \)"] (6);
+\begin{tikzpicture}
+\tikzset{arrow/.style={-{Stealth[scale=1.1]}}}
+\tikzset{oo/.style={circle, scale=0.25, fill=black}}
+\tikzset{ooo/.style={circle, scale=0.25, fill=none}}
+\node[oo, label=above:\( v_1 \)] (V1) at (0, 2) {};
+\node[oo, label=below:\( v_2 \)] (V2) at (0, 0) {};
+\node[ooo] (V21) at (0.3, 1.75) {};
+\node[ooo] (V22) at (0.3, 0.25) {};
+\draw (V1) edge[bend right=60, swap, "\( \ell_{12} \)"] (V2);
+\draw (V1) edge[bend left=60, "\( r_{21} \)"] (V2);
+\draw[arrow] (V1) edge[bend left=5] (V21);
+\draw[arrow] (V2) edge[bend right=5] (V22);
 \end{tikzpicture}
-\caption{Transport along \( p \) in the fibers of a family of paths. The fiber over \( a \) is \( \phi(a)=\psi(a) \) where \( \phi,\psi:A\to B \).}
-\label{fig:transport_family_of_paths}
+\caption{We imagine shrinking \( r_{21} \) down to become \( \refl_\base \) in \( S^1 \).}
+\label{fig:shrink}
 \end{figure}
 
-We need terms \( p:\pit{a:\hgr{C_1}_1}f(g(a))=a \) and \( q:\pit{a:\hgr{C_2}_1}g(f(a))=a \). We will proceed by induction, defining appropriate paths on point constructors and then checking a condition on path constructors that confirms that the built-in transport of these type families respects the definition on points.
+We need terms \( p:\pit{a:\ccc(1)}f(g(a))=a \) and \( q:\pit{a:\ccc(2)}g(f(a))=a \). We will proceed by induction, defining appropriate paths on point constructors and then checking a condition on path constructors that confirms that the built-in transport of these type families respects the definition on points.
 
 Looking first at \( g\circ f \), which shrinks \( r_{21} \), we have the following data to work with:
 \begin{align*}
@@ -263,7 +296,7 @@ g(f(v_1))=g(f(v_2))&=v_1\\
 g(f(\ell_{12}))&=\ell_{12}\cdot r_{21}\\
 g(f(r_{21})) &= \refl_{v_1}.
 \end{align*}
-We then need to supply a homotopy from this data to \( \id_{\hgr{C_2}_1} \), which consists of a section and pathovers over \( \hgr{C_2}_1 \):
+We then need to supply a homotopy from this data to \( \id_{\ccc(2)} \), which consists of a section and pathovers over \( \ccc(2) \):
 \begin{align*}
 p_1&:g(f(v_1))=v_1\\
 p_2&:g(f(v_1))=v_2\\
@@ -294,7 +327,7 @@ f(g(\loopo))&=f(\ell_{12}\cdot r_{21})=\loopo
 \end{align*}
 and so we have an easy proof that this is the identity.
 
-The proof of the more general case \( \hgr{C_n}_1 \simeq \hgr{C_{n-1}}_1\) is very similar. Take the maps \( f:\hgr{C_n}_1\to \hgr{C_{n-1}}_1 \), \( g:\hgr{C_{n-1}}_1\to \hgr{C_n}_1 \) to be
+The proof of the more general case \( \ccc(n) \simeq \ccc(n-1)\) is very similar. Take the maps \( f:\ccc(n)\to \ccc(n-1) \), \( g:\ccc(n-1)\to \ccc(n) \) to be
 \begin{align*}
 f(v_i)=v_i&\quad(i=1,\ldots,n-1) & g(v_i)&=v_i&\quad(i=1,\ldots,n-1)\\
 f(v_n)=v_1&\quad& g(e_{i,i+1})&=e_{i,i+1}&\quad(i=1,\ldots,n-2)\\
@@ -304,7 +337,7 @@ f(e_{n,1})=\refl_{v_1}&&&&
 \end{align*}
 where \( f \) should be thought of as shrinking \( e_{n,1} \) so that \( v_n \) coalesces into \( v_1 \).
 
-The proof that \( g\circ f\sim\id_{\hgr{C_n}_1} \) proceeds as follows: the composition is definitionally the identity except 
+The proof that \( g\circ f\sim\id_{\ccc(n)} \) proceeds as follows: the composition is definitionally the identity except 
 \begin{align*}
 g(f(v_n))&=v_1\\
 g(f(e_{n-1,n}))&=e_{n-1,n}\cdot e_{n,1}\\
@@ -312,18 +345,16 @@ g(f(e_{n,1}))&= \refl_{v_1}.
 \end{align*}
 Guided by our previous experience we choose \( {e_{n,1}}^{-1}:g(f(v_n))=v_n \), and define the pathovers by transport.
 
-The proof that \( f\circ g\sim\id_{\hgr{C_{n-1}}_1} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
+The proof that \( f\circ g\sim\id_{\ccc(n-1)} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
 \end{myproof}
 
 \begin{mycor}
 \label{cor:gon}
-All polygons are equivalent to \( \so \), i.e. we have terms \( e_n:||\hgr{C_n}_1=S^1||_{-1} \), and hence we have constructed a map from the unit type \( (\hgr{C_n}_1, e_n):\unit\to \EMzo \).
+All polygons are equivalent to \( \so \), i.e. we have terms \( e_n:\ccc(n)=S^1 \), and hence we have constructed a map from the unit type \( (\ccc(n), ||e_n||_{-1}):\unit\to \EMzo \).
 \end{mycor}
 \begin{myproof}
-We can add \( n-1 \) points to \( S^1 \) and use Lemma~\ref{lem:addpoints}.
+The proofs in Lemma~\ref{lem:addpoints} can be concatenated to give \( \ccc(n)\to\ccc(n-1)\to\cdots\to\ccc(2)\to S^1 \).
 \end{myproof}
-
-If we cyclically permute the vertices of a simplicial polygon, what map is induced on the realization and the bare types within? 
 
 \begin{mydef}
 \label{def:rotation}
@@ -333,7 +364,7 @@ Let \( R:\gr{v_1\cdots v_n}\to \gr{v_1\cdots v_n} \) (for ``rotation'') be the m
 A key point is that simplicial maps form a set, but the homotopical realization \( \hgr{R} \) has a path to the identity:
 \begin{mylemma}
 \label{lem:rotation}
-The map \( \hgr{R}_1: \hgr{v_1\cdots v_n}_1\to \hgr{v_1\cdots v_n}_1\) is connected to \( \refl_{\hgr{v_1\cdots v_n}_1} \) by a homotopy \( H_R:\pit{x:\hgr{v_1\cdots v_n}_1}\hgr{R}_1(x)=x \).
+The map \( \hgr{R}: \hgr{v_1\cdots v_n}\to \hgr{v_1\cdots v_n}\) is connected to \( \refl_{\hgr{v_1\cdots v_n}} \) by a homotopy \( H_R:\pit{x:\hgr{v_1\cdots v_n}}\hgr{R}(x)=x \).
 \end{mylemma}
 \begin{myproof}
 If \( x \) is a vertex, take \( H_R(x) \) to be the obvious unique edge back to the starting vertex. This extends in the obvious functorial way to edges.
