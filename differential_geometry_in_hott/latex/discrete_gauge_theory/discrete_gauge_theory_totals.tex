@@ -3,155 +3,63 @@
 We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove the equivalance of the total curvature of a tangent bundle, and total index of a vector field. This is the key relationship in proving both the Gauss-Bonnet theorem and the Poincaré-Hopf theorem.
 
 \subsection{Index of the vector field}
-Given a polygon cellular type \( C_{n,0}\to C_{n,1}=C_n \), and map \( *_{C_n}:\unit\to\Kzt \) giving it the structure of an \( S^1 \)-torsor, we have the following general fact:
 \begin{myprop}
 \label{prop:eveq}
-Given a pointing \( b:C_n \) the evaluation map \( \ev(b):(C_n=C_n)\to C_n \) is an equivalence.
+Given a polygon \( \ccc(n):\Kzt \) and a point \( b:\ccc(n) \) the evaluation map \( \ev(b):\ccc(n)=_{\Kzt}\ccc(n))\to \ccc(n) \) is an equivalence.
 \end{myprop}
 \begin{myproof}
 See \cite{buchholtz2023central}.
 \end{myproof}
 
-Consider the cellular type \( \mm_0\to\mm_1\to\mm \) with point \( m:\mm \). Consider a loop \( \ell:m=_\mm m \) with proof of contractibility \( f:\ell=\refl_m \). For example, we may have a face \( F \) in a combinatorial realization, with \( m \) a vertex of \( F \) and \( \ell=\partial F \) the boundary loop. We have accumulated the following constructions:
+Consider a 2-dimensional simplicial complex \( M \), its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
 \[\begin{aligned}
-\tr(\ell)&:Tm=Tm\\
-\flat(\ell)&:\tr(\ell)=_{Tm=Tm}\id\\
-X(\ell)&:\tr(\ell)(X(m))=_{Tm=Tm}X(m)\\
+\tr_F&\defeq \tr(\partial F)&&:Tm=Tm\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)\\
+X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m).\\
 \end{aligned}\]
-which invites us to make use of the equivalence \ref{prop:eveq} to define \( X_E(\ell)\defeq \ev(X(m))^{-1}\circ X(\ell):\tr(\ell)=\id \) (where the subscript \( E \) stands for the extension to all of \( Tm \)) to obtain
-\[
-\begin{aligned}
-\tr(\ell)&:Tm=Tm\\
-\flat(\ell)&:\tr(\ell)=_{Tm=Tm}\id\\
-X_E(\ell)&:\tr(\ell)=_{Tm=Tm}\id\\
-\end{aligned}
-\]
-These last two can be concatenated to make a loop.
+Define \( \sigma^X_F\defeq\ev(X(m))^{-1}(X_F) \), which is the automorphism of \( Tm \) that performs the same total swirling that \( X_F \) does, giving us
+\[\begin{aligned}
+\tr_F&:Tm=Tm\\
+\flat_F&:\id=_{Tm=Tm}\tr_F\\
+\sigma^X_F&:\tr_F=_{Tm=Tm}\id.\\
+\end{aligned}\]
+These last two can be concatenated to make a loop. We can then obtain an integer by using the fact that \( \loopy_{Tm}(\Kzt)\simeq S^1 \), plus the well known formula \( \loopy(S^1,\base)\simeq\zz \) (e.g. \cite{hottbook} Corollary 8.1.10).
 \begin{mydef}
-The \defemph{index of the vector field \( X \) around the loop \( \ell \)} is the integer \( I_X(\ell)\defeq\flat(\ell)^{-1}\cdot X_E:\id=_{Tm=Tm}\id \).
+The \defemph{index of the vector field \( X \) around the face \( F \)} is the integer \( I^X_F\defeq\flat_F\cdot \sigma^X_F:\id=_{Tm=Tm}\id \).
 \end{mydef}
-\begin{mynote}
-Classically the index around a loop makes use of a trivialization of the tangent bundle, and does not take place in the presence of a connection. We know from section~\ref{sec:localtriv} that the connection can serve as such a trivialization. Taking that point of view, the formula constitutes the difference between the swirling of the vector field inside the chart, and the twisting of the chart itself. 
-\end{mynote}
-We now have the following list of ingredients given the loop \( \ell \):
+We now have the following list of ingredients at a single face:
 \begin{equation}
 \label{eq:face_elements}
 \begin{aligned}
-\tr(\ell)&:Tm=Tm\\
-\flat(\ell)&:\tr(\ell)=_{Tm=Tm}\id\\
-X_E(\ell)&:\tr(\ell)=_{Tm=Tm}\id\\
-I_X(\ell)&:\id=_{Tm=Tm}\id\\
+\tr_F&:Tm=Tm&&\text{the curvature}\\
+\flat_F&:\id=_{Tm=Tm}\tr_F&&\text{the flatness}\\
+\sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{the swirling}\\
+I^X_F&:\id=_{Tm=Tm}\id&&\text{the index}.
 \end{aligned}
 \end{equation}
-
-\subsection{Cancellations}
-The next observation is that we can relate the quantities in Equation~\ref{eq:face_elements} at different points around a cellular surface by making use of the automorphism bundle \( \sit{x:\mm}(Tx=Tx) \) and its trivialization \( \tau:\pit{x:M}(Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm) \) as in Lemma~\ref{lem:gauge_triv}. We will use the action on paths of \( \tau \) to better understand \( \flat \) and \( X_E \) as \emph{angles}.
-
-\begin{mydef}
-Consider the contractible type \( \sit{\alpha:Tm=Tm}\alpha=\id \) with the addition law \( (\alpha, p)+(\beta, q) = (\alpha\cdot\beta, p\cdot \alpha(q)) \) where \( \alpha(q):\alpha=\alpha\cdot\beta \) (using concatenation notation instead of function composition). This is a commutative group with identity \( \refl_\id \) which we call the \defemph{type of angles of \( Tm \)}.
-\end{mydef}
-
-\begin{mylemma}
-\( \tau\circ X \) maps concatenation of paths to the commutative operation \( + \) in the type of angles \( \sit{\alpha:Tm=Tm}\alpha=\id \).
-\end{mylemma}
-\begin{myproof}
-Suppose we have \( p:x=_\mm y \) and \( q:y=_\mm z \). Then \( X(p\cdot q)=\tr(q)(X(p))\cdot X(q) \) which is exactly the operation \( + \) but in the group \( \sit{\alpha:Tz=Tz}\alpha=\id \). We can then transport the result to \( m \) by an arbitrary path.
-\end{myproof}
-
-\begin{mycor}
-\label{cor:x_cancel}
-With \( e, p, \ell \) as in Figure~\ref{fig:lasso}, we have \(\tau(X_E(e\cdot\ell\cdot e^{-1})) = \tau(X_E(\ell))\).
-\end{mycor}
-
-So under \( \tau \) we can cancel the contributions to \( X \) from the edge \( e \) after traversing it once in each direction. Meanwhile we have something similar for the transport automorphisms:
-
-\begin{mylemma}
-With \( e, p, \ell \) as in Figure~\ref{fig:lasso}, we have \( \tau(\tr(e\cdot\ell\cdot e^{-1}))=\tau(\tr(\ell)) \).
-\end{mylemma}
-\begin{myproof}
-Recall that \( \tau \) conjugates automorphisms by transport along some arbitrary path to \( m \). To transport automorphisms from \( x \) to \( p \), choose a path \( p:m=_\mm x \). Then make the specific choice \( p\cdot e:m=_\mm y \) to transport automorphisms from \( y \) to \( p \). Then \( \tau(\tr(e\cdot\ell\cdot e^{-1})) \) and \( \tau(\tr(\ell)) \) both compute to \( \tr((p\cdot e)\cdot\ell\cdot(p\cdot e)^{-1}) \). 
-\end{myproof}
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}[arrow/.style={-{Stealth[scale=1.1]}}]
-  \tikzstyle{internal}=[inner sep=0, outer sep=0, line cap=rect]
-    \coordinate (V2) at (1, 1.732) {};
-    \node[label=below:\( y \)] (y) at (0, 0) {};
-    \coordinate (V3) at (2, 0) {};
-
-    \draw (V2) edge["\( \ell \)"] (V3);
-    \draw (y) -- (V2);
-    \draw[arrow] (V3) -- (y);
-    
-    \node[label=below:\( m \)] (m) at (-3, 0) {};
-    \node[label=below:\( x \)] (x) at (-1.5, 0) {};
-
-    \draw[arrow] (m) edge["\( p\)"] (x);
-    \draw[arrow] (x) edge["\( e\)"] (y);
-    
-    \fill [black] (y) circle (2pt);
-    \fill [black] (m) circle (2pt);
-    \fill [black] (x) circle (2pt);
-\end{tikzpicture}
-\caption{Comparing maps on the edge \( e \) at the master point \( m \) with and without traversing \( \ell \).}
-\label{fig:lasso}
-\end{figure}
-
-\subsection{Total enumeration of faces}
-\begin{mydef}
-A \defemph{total enumeration of faces} for a combinatorial 2-manifold \( \mm \) with underlying simplicial complex \( M=[M_0, M_1, M_2] \) consists of
-\begin{enumerate}
-\item A ``master basepoint'' \( m:M_0 \).
-\item For each face \( F:M_2 \) with vertices \( \{v_{F,1}, v_{F,2}, v_{F,3}\} \) an enumeration of its vertices \( [v_{F,1}, v_{F,2}, v_{F,3}] \), including the choice of the first vertex in the enumeration as the basepoint of \( F \), which is \defemph{globally compatible} with the choices for the other faces, meaning that when two faces \( F_1,F_2 \) share an edge \( \{v, w\} \), then one of the faces includes the sublist \( [v, w] \) and the other includes \( [w, v] \).
-\item An ordering of the faces \( [F_1,\ldots,F_n] \).
-\end{enumerate}
-Two enumerations that differ only in the ordering of vertices (2.) are said to have the \defemph{same orientation} if it is true for every face that the two orderings of vertices differ by an even orientation.
-\end{mydef}
-
-\begin{mynote}
-For such an enumeration to exist the underlying simplicial complex must be \emph{orientable} in a classical sense. We are not going to explore this requirement internally in HoTT, nor prove any relationship between orientability of the set-based complex and orientation in the sense of factoring classifying maps through \( \Kzt\to\EMzo \).
-\end{mynote}
-
-\begin{myex}
-The octahedron: for \( \oo \) we might choose \( b \) as the master basepoint, as well as the basepoint for four of the faces. For the other four faces we could choose \( g \) as the basepoint. We could choose \( br\cdot rg \) as the path between the basepoints, and we could order the faces like this: \( [bwo, brw, boy, byr, gow, gwr, gry, gyo] \).
-\end{myex}
-
-\begin{mydef}
-The \defemph{total path} of an enumeration is the list \( \ell_{F_1},\ldots,\ell_{F_n} \) of loops where \( \ell_{F_i}:v_{F_i,1}=v_{F_i,1} \) is the loop around \( F_i \) connecting vertices \( v_{F,1}, v_{F,2}, v_{F,3} \).
-\end{mydef}
-
-\begin{mydef}
-Using Equation~\ref{eq:face_elements} we can define the \defemph{total curvature}, \defemph{total swirling} and \defemph{total index} of a total path as follows:
-\begin{equation}
-\label{eq:total_elements}
-\begin{aligned}
-\flat_\mathrm{tot}&=\tau(\flat(\ell_{F_1}))+\cdots+\tau(\flat(\ell_{F_n}))\\
-X_\mathrm{tot}&=\tau(X(\ell_{F_1}))+\cdots+\tau(X(\ell_{F_n}))\\
-I_\mathrm{tot}&=\flat_\mathrm{tot}^{-1}\cdot X_\mathrm{tot}
-\end{aligned}
-\end{equation}
-where the sums are taken in the group of angles \( \sit{\alpha:Tm=Tm}\alpha=\id \).
-\end{mydef}
-
-\begin{mylemma}
-\label{lem:edges_cancel}
-The total path of an enumeration visits each edge an even number of times, equally in each direction.
-\end{mylemma}
-
-\begin{mythm}
-\( \tau(X(\ell_{F_1}))\cdots\tau(X(\ell_{F_n}))=\refl \) in \( \sit{\alpha:Tm=Tm}\alpha=\id \). 
-\end{mythm}
-\begin{myproof}
-Immediate from Lemma~\ref{lem:edges_cancel} and Corollary~\ref{cor:x_cancel}.
-\end{myproof}
-
-\begin{mycor}
-\label{thm:total_index_total_curvature}
-The total index is equal to the opposite of the total curvature. The total curvature is an integer.
-\end{mycor}
 
 \subsection{Total curvature and index on the sphere}
+We have seen in Lemma~\ref{lem:multpath} how to sum paths in a commutative group such as \( Tm=Tm \).
+\begin{equation}
+\label{eq:tot_elements}
+\begin{aligned}
+\flat_\tot    & \defeq \sum_F\flat_F &&:\id=_{Tm=Tm}\tr_\tot\\
+\sigma^X_\tot & \defeq \sum_F\sigma^X_F &&:\tr_\tot=_{Tm=Tm}\id\\
+I^X_\tot      & \defeq \sum_F I^X_F &&:\id=_{Tm=Tm}\id.
+\end{aligned}
+\end{equation}
+The assumption that the simplicial complex is oriented\todo{make this assumption!} implies that each edge appears twice when traversing each path \( \partial F \), once in each direction. So Lemma \ref{lem:cancellation} proves the following
+\begin{myprop}The total swirling is 0.\label{prop:total_swirling}
+\end{myprop}
+\begin{myproof}
+\(\sum_F\sigma^X_F=\sum_{\mathrm{edge\ }e}\sigma(e)+\sigma(e^{-1})=_{Tm=Tm}\refl_0\)
+\end{myproof}
+\begin{mythm}The total flatness equals the total index.
+\end{mythm}
+\begin{myproof}
+Follows directly from \( I^X_\tot\defeq\flat_\tot\cdot \sigma^X_\tot \) and Proposition~\ref{prop:total_swirling}.\todo{need another equation about the totals}
+\end{myproof}
+
 
 \subsection{Future directions}
 Euler characteristic. Chern-Weil theory. Atiyah bundle. Space of connections is contractible. Formalization.

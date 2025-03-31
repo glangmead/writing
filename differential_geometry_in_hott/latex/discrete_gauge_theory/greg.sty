@@ -86,6 +86,7 @@
 %\renewcommand{\sec}{\ensuremath{\mathsf{sec}}}
 \newcommand{\retr}{\ensuremath{\mathsf{retr}}}
 \newcommand{\total}{\ensuremath{\mathsf{total}}}
+\newcommand{\tot}{\mathrm{tot}}
 \newcommand{\isequiv}{\ensuremath{\mathsf{is\_equiv}}}
 \newcommand{\fib}{\ensuremath{\mathsf{fib}}}
 \newcommand{\id}{\ensuremath{\text{id}}}
@@ -257,6 +258,7 @@
 \newcommand{\rrb}{\rrbracket}
 \newcommand{\gr}[1]{[{#1}]} % geometric realization
 \newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization of anonymous data
+\newcommand{\joinrell}{\mathrel{\mkern-3mu}}
 \newenvironment{dedication}
 {\clearpage           % we want a new page
  \thispagestyle{empty}% no header and footer
@@ -292,7 +294,7 @@
 
 \declaretheoremstyle[%
   spaceabove=5pt,%
-  spacebelow=5pt,%
+  spacebelow=0pt,%
   headfont=\normalfont\itshape,%
   postheadspace=1em,%
   qed=\qedsymbol%

@@ -1,20 +1,22 @@
 \section{Vector fields}
 \label{sec:vector_fields}
 \subsection{Definition}
-Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton. But \emph{given} an extension \( T \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton. But if \( \mm\defeq\mm_o\to\mm_1\to\mm_1 \) is a cellular type, and \emph{given} an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+
+In this section and for the remainder of the note, we will assume that the bundle is oriented, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors.
 
 \begin{mydef}
-A \defemph{vector field} on a higher combinatorial 2-manifold \( \mm \) equipped with type family \( T:\mm\to\EMzo \) that extends \( \link \) is a term \( X:\pit{x:\mm_1}T_1(x) \). It may be possible to extend \( X \) to one or more faces of \( \mm \), but we call faces for which \( X \) cannot be extended \defemph{zeros of the vector field}.\todo{prove that the index is an obstruction}
+Given a 2-dimensional cellular type \( \mm\defeq\mm_o\to\mm_1\to\mm_1 \) equipped with type family \( T:\mm\to\Kzt \) extending \( \link \), a \defemph{vector field} on \( \mm \) is a term \( X:\pit{x:\mm_1}T_1(x) \).
 \end{mydef}
 
 \begin{mynote}
-A section \( \pit{x:\mm}T(x) \) for \( T:\mm\to\Kzt \) is a trivialization of the bundle. The fact that an orientation suffices to factor the tangent bundle of a 2-manifold (which \emph{a priori} maps to \( \EMzo \)) through a principal bundle classifier is special to dimension 2. For higher dimensional manifolds the tangent bundle is a bundle of spheres, and even if the bundle is oriented it is not necessarily a principal bundle. On the other hand, the \( n \)-truncation modal operator maps the type of \( n \)-spheres to the classifying space \( \K(\zz,n) \), and so another way to phrase this remark is that \( S^1 \) is the only \( n \)-sphere which is \( n \)-truncated.
+The circle bundle extending \( \link \) captures the \emph{unit spheres} of the classical tangent bundle. A section of this bundle is therefore analogous to a classical \emph{nonvanishing} vector field. To allow for classical vector fields \emph{with zeroes}, we are limiting the section \( X \) to the 1-skeleton of \( \mm \).
 \end{mynote}
 
 On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T y} X(y) \). We are very interested in working with the concatenation operation on dependent paths, which we call \emph{swirling}.
 
-\subsection{Swirling}
-Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_2, v_3 \), and the boundary path \( \ell\defeq e_{12}\cdot e_{23} \cdot e_{31} \). For brevity, denote \( T(v_i) \) by \( T_i \) and \( T(e_{ij}) \) by \( T_{ji} \). The indices are swapped so that we can have expressions that respect function-composition order, such as \( T_{32}T_{21}(X_1):T_3 \). Figure~\ref{fig:vector_transport} shows in tabular form how we concatenate the dependent paths over \( e_{12}\cdot e_{23}\cdot e_{31} \). Figure~\ref{fig:swirling} shows visually a possible example.
+\subsection{Swirling of dependent paths}
+Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_2, v_3 \), and the boundary path \( \ell\defeq e_{12}\cdot e_{23} \cdot e_{31} \). As we did in Section~\ref{sec:localtriv}, denote \( T(v_i) \) by \( T_i \) and \( T(e_{ij}) \) by \( T_{ji} \). The indices are swapped so that we can have expressions that respect function-composition order, such as \( T_{32}T_{21}(X_1):T_3 \). We retain the opposite convention (which we can call path-concatenation order) for the vector field, e.g. \( X_{ij} \) which is a path in \( T_j \), as these are paths. Figure~\ref{fig:vector_transport} shows in tabular form how we concatenate the dependent paths over \( e_{12}\cdot e_{23}\cdot e_{31} \). Figure~\ref{fig:swirling} shows visually a possible example.
 
 \begin{figure}[h]
 \centering
@@ -107,59 +109,78 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 
     \draw[arrow] (V3) edge[vec] (V32);
     \draw[arrow] (V1) edge[vectr] (V12);
-
 \end{tikzpicture}
-\caption{A vector field swirling around a face, in a bundle of squares. Imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page. Thick black vectors are the vector field at a point. Thin vectors are transported once, dashed twice, and dotted three times. The vertices \( v_{ij} \) are in the tangent fibers. If you see color, the colors of the arrows correspond: the red edge produced the red edge in the fibers.}
+\caption{A vector field swirling counterclockwise around a face, in a bundle of squares. Imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page. Thick black vectors are the vector field at a point. Thin vectors are transported once, dashed twice, and dotted three times. The vertices \( v_{ij} \) are in the tangent fibers. If you have a colorized version of the document, the colors of the arrows correspond: the red edge produced the red edge in the fibers.}
 \label{fig:swirling}
 \end{figure}
 
 We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove our main theorem~\ref{thm:total_index_total_curvature}.
 
-First we will choose a specific group that acts on all the fibers of \( T \). Fix a point \( m:\mm \), and recall the map \( \tau:\pit{x:M}((Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm)) \) from Lemma~\ref{lem:gauge_triv}. This map is a trivialization of the automorphism bundle, so in particular provides an action of \( Tm=Tm \) on each \( Tx \) (or in our case \( T_i \)). Denote the action of \( Tm=Tm \) on the torsor \( T_i \) by \( \alpha:(Tm=Tm)\times T_i\to T_i \). This induces an equivalence \( (\alpha, \pr_2):(Tm=Tm)\times T_i\simto T_i\times T_i \).
+First we will choose a specific group that acts on all the fibers of \( T \). Recall from Section~\ref{subsec:torsors} that given some basepoint \( b:\Kzt \) and a type \( T_i:\Kzt \), the group \( b=_{\Kzt}b \) acts on \( T_i \). Suppose we have a master basepoint \( m:\mm \), and choose \( T_m:\Kzt \) as the basepoint, so that all the fibers of \( T \) are now equipped with an action of \( T_m=_{\Kzt}T_m \).
 
+We will give this group a nickname for brevity. Recall the bundle \( \Aut T \) from Section~\ref{sec:automorphisms}.
 \begin{mydef}
-The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to (Tm=Tm) \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:Tm=Tm \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
+Define \( \Gg\defeq \Aut T \), so that \( \Gg(m)=(T_m=_{\Kzt}T_m) \). Since this group is commutative, we'll denote the group operation by \( +:\Gg(m)\times\Gg(m)\to\Gg(m) \).
 \end{mydef}
 
-Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}(Tm=Tm) \), and then give a name to the special term \( \rho_{ji}\defeq T_{ji}X_j - X_i \) which is the image in \( Tm=Tm \) of the vector \( X_j \) in a neighboring vertex after transporting it to \( T_i \).
+We need to derive two operations from the action \( \Gg(m) \).
 
-\begin{mylemma} The following diagram is well-typed and commutes, and therefore \( \rho_{ij}=-\rho_{ji} \).
-\label{lem:subtraction}\end{mylemma}
-\begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCIoWF9qPV97VF9qfVRfe2ppfVhfaSlcXHRpbWVzKFhfaT1fe1RfaX1UX3tpan1YX2opIl0sWzAsMSwiKFxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tqaX0pXFx0aW1lcyhcXG1hdGhybXtpZH09X3tUbT1UbX1cXHJob197aWp9KSJdLFsxLDEsIlxcbWF0aHJte2lkfT1fe1RtPVRtfVxccmhvX3tpan0rXFxyaG9fe2ppfSJdLFsxLDAsIlhfaj1fe1Rfan1YX2oiXSxbMSwyLCIoXFx0ZXh0ey19KSsoXFxyaG9fe2ppfSsoXFx0ZXh0ey19KSkiLDJdLFswLDMsIihcXHRleHR7LX0pXFxjZG90IFRfe2ppfShcXHRleHR7LX0pIl0sWzMsMiwiLVhfaiJdLFswLDEsIi1YX2pcXHRpbWVzIC1YX2kiLDJdXQ==
-\begin{tikzcd}
-  {(X_j=_{T_j}T_{ji}X_i)\times(X_i=_{T_i}T_{ij}X_j)} & {X_j=_{T_j}X_j} \\
-  {(\mathrm{id}=_{Tm=Tm}\rho_{ji})\times(\mathrm{id}=_{Tm=Tm}\rho_{ij})} & {\mathrm{id}=_{Tm=Tm}\rho_{ij}+\rho_{ji}}
-  \arrow["{(\text{-})\cdot T_{ji}(\text{-})}", from=1-1, to=1-2]
-  \arrow["{-X_j\times -X_i}"', from=1-1, to=2-1]
-  \arrow["{-X_j}", from=1-2, to=2-2]
-  \arrow["{(\text{-})+(\rho_{ji}+(\text{-}))}"', from=2-1, to=2-2]
-\end{tikzcd}
-\end{center}
-\begin{proof}
-The top map has the given codomain because \( T_{ji}T_{ij}=\id \). The upper-right composition is \( ((\text{-})\cdot(T_{ji}(\text{-}))-X_j \), and the lower-left composition is \( ((\text{-})-X_j)+(\rho_{ji}+((\text{-})-X_i)) \), so commutativity follows from the definition of \( \rho_{ji} \). The final statement follows from comparing the types on the right.
-\end{proof}
-
-We now know that the type in the bottom-right is \( \id=_{Tm=Tm}\id \), so the vertical map \( -X_j \) maps the path \( X_{ij}\cdot X_{ji} \) to a path in \( \id=_{Tm=Tm}\id \) and we can ask if the image is \( \refl \).
+\begin{mydef}
+The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to \Gg(m) \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\Gg(m) \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
+\end{mydef}
 
 \begin{mylemma}
-\( (X_{ij}\cdot X_{ji})-X_j=\refl \).
+\label{lem:multpath}
+If \( G \) is a higher group with multiplication \( \mu:G\times G\to G \) and proof of commutativity \( \mathsf{is\_comm}:\pit{a,b:G}\mu(a, b)=\mu(b, a) \) then \( \mu \) induces a function \( \mu_=:(x=_G y)\times (x'=_G y')\to (\mu(x, x')=_G\mu(y,y')) \).
 \end{mylemma}
-\begin{proof}
-We have
-\begin{alignat*}{2}
--X_j(X_{ij}\cdot X_{ji}) &= -X_j(X(e_{ji}\cdot e_{ij}))&&\quad\text{(by definition of dependent paths)}\\
-&= -X_j(X(\refl))&&\quad\text{}\\
-&= -X_j(\refl)&&\quad\text{(by path induction)}\\
-&= \refl&&\quad\text{}
-\end{alignat*}
-\end{proof}
+\begin{myproof}
+If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) by concatenating the three paths 
+\begin{align*} 
+\mu(x',p)&:\mu(x', x)=_G\mu(x', y)\\
+\mathsf{is\_comm}(x',y)&:\mu(x',y)=_G\mu(y,x')\\
+\mu(y, p')&:\mu(y, x')=_G\mu(y, y').
+\end{align*}
+\end{myproof}
 
-\begin{mylemma}The group operation along the bottom of Lemma~\ref{lem:subtraction} is abelian, and the vertical maps form a homomorphism from the groupoid of dependent paths to the commutative group of paths in \( Tm=Tm \).
+Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}\Gg(m) \), and then give a name to the special term \( \rho_{ij}\defeq T_{ij}X_j - X_i \). 
+
+\begin{mylemma} \( \rho_{ij}+\rho_{ji}=_{\Gg(m)}0 \).
+\label{lem:subtraction}\end{mylemma}
+\begin{myproof}
+\begin{align*}
+(X_i + \rho_{ij})+\rho_{ji} &=_{T_i} T_{ij}X_j + \rho_{ji}&&\text{by definition of }\rho_{ij}\\
+&=_{T_i} T_{ij}(X_j + \rho_{ji})&&\text{by equivariance of transport} \\
+&=_{T_i} T_{ij}(T_{ji}(X_i))&&\text{by definition of }\rho_{ji}\\
+&=_{T_i} X_i&&\text{by definition of }T
+\end{align*}
+\end{myproof}
+Now we want to make use of the fact that dependent functions such as our vector field send \( \refl_{v_i} \) to \( \refl_{X_i} \) (by path induction, see for example \cite{hottbook} Lemma 2.3.4), but mapped from \( X_i=_{T_i}X_i \) to the non-dependent type \( 0=_{\Gg(m)}0 \).
+
+We can obtain a path in \( \Gg(m) \) from a dependent path by again subtracing the basepoint, e.g. \( \sigma_{ij}\defeq X_{ij}-X_j:0=_{\Gg(m)}T_{ji}X_i-X_j \), which type also has the name \( 0=_{\Gg(m)}\rho_{ji} \). Notice the reversal in indices between \( \sigma_{ij} \) and \( \rho_{ji} \), which reflects our opposite conventions for \( X_{ij} \) and \( T_{ji} \).
+
+\begin{mylemma}
+\label{lem:cancellation}
+With the notation \( \sigma_{ij}\defeq X_{ij}-X_j \), and with addition of paths as in Lemma~\ref{lem:multpath}, we have \( \sigma_{ij}+\sigma_{ji}=_{0=_{\Gg(m)}0}\refl_0 \).
 \end{mylemma}
-\begin{proof}
-Not entirely sure what remains here.\todo{By induction from 5.4, building up a long concat of dep. paths.}
-\end{proof}
+\begin{myproof}
+First we need to show that the sum is a loop, then we can prove that it is \( \refl_0 \). The terms have these types:
+\begin{align*}
+\sigma_{ij}&:0=_{\Gg(m)}\rho_{ji}\\
+\sigma_{ji}&:0=_{\Gg(m)}\rho_{ij}
+\end{align*}
+so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{ji}:0=_{\Gg(m)} \rho_{ji}+\rho_{ij} \) which by Lemma~\ref{lem:subtraction} is \( 0=_{\Gg(m)}0 \). We compute \( + \) using the concatenations in Lemma~\ref{lem:multpath}, which gives
+\begin{align*}
+\sigma_{ij}+\sigma_{ji} &: (0+0) \overset{\sigma_{ij}}{=\joinrell=} (0+\rho_{ji}) \overset{\mathsf{is\_comm}}{=\joinrell=}(\rho_{ji}+0) \overset{\rho_{ji}+\sigma_{ji}}{=\joinrell=}(\rho_{ji}+\rho_{ij})\,\,\big[\overset{\mathrm{Lemma~\ref{lem:subtraction}}}{=\joinrell=}0\big]\\
+\sigma_{ij}+\sigma_{ji}&=_{0=_{\Gg(m)}0} (X_{ij}-X_j)\cdot (\rho_{ji} + (X_{ji} - X_i))\\
+&=_{0=_{\Gg(m)}0} (X_{ij}-X_j)\cdot (T_{ji}(X_{ji} - X_i))\\
+&=_{0=_{\Gg(m)}0} \\
+&=_{0=_{\Gg(m)}0} \refl_0
+\end{align*}%
+\end{myproof}%
+
+\begin{mynote}
+The classical argument of Hopf \cite{hopf}, which is presented in more detail in the more readily available \cite{needham}, makes an implicit assumption that we can concatenate two terms of different type such as \( X_{ij} \) and \( X_{kl} \). The authors name such terms ``change in angle across an edge.'' The extra work we are doing in this section amounts to a partial formalization of this idea.
+\end{mynote}
 
 \subsection{An example vector field on the sphere}
 \todo{define the example I worked out, compute swirling}
