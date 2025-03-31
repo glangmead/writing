@@ -9,8 +9,6 @@
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
 \RequirePackage{multicol}
-\RequirePackage{stmaryrd}
-\RequirePackage{stmaryrd}
 \RequirePackage{thmtools}
 
 \RequirePackage{agda}
@@ -87,6 +85,7 @@
 \newcommand{\retr}{\ensuremath{\mathsf{retr}}}
 \newcommand{\total}{\ensuremath{\mathsf{total}}}
 \newcommand{\tot}{\mathrm{tot}}
+\newcommand{\underscore}{\raisebox{0.5pt}{\underline{\phantom{t}}}}
 \newcommand{\isequiv}{\ensuremath{\mathsf{is\_equiv}}}
 \newcommand{\fib}{\ensuremath{\mathsf{fib}}}
 \newcommand{\id}{\ensuremath{\text{id}}}
@@ -210,6 +209,7 @@
 %\newcommand{\gc}[1]{}
 \newcommand{\simto}{\stackrel{\sim}{\to}}
 \newcommand{\defeq}{\stackrel{\mathrm{def}}{=}}
+\newcommand{\overeq}[1]{\overset{#1}{=\joinrell=}}
 \newcommand{\defemph}[1]{\textbf{#1}}
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\BG}{\mathsf{B}G}
@@ -254,8 +254,8 @@
 \renewcommand{\labelitemiii}{$\bullet$}
 \renewcommand{\labelitemiv}{$\bullet$}
 \newcommand{\myspan}[5]{{#1}\xleftarrow[]{#4}{#2}\xrightarrow[]{#5}{#3}}
-\newcommand{\llb}{\llbracket}
-\newcommand{\rrb}{\rrbracket}
+\newcommand{\llb}{[\![}
+\newcommand{\rrb}{]\!]}
 \newcommand{\gr}[1]{[{#1}]} % geometric realization
 \newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization of anonymous data
 \newcommand{\joinrell}{\mathrel{\mkern-3mu}}

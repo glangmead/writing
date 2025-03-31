@@ -1,1 +1,11 @@
-\section{Appendix}
+\section{Appendix: the program ahead}
+
+Euler characteristic. Chern-Weil theory. Atiyah bundle. Space of connections is contractible. Formalization.
+
+The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 
+
+\subsection{The bundle of automorphisms}
+\label{sec:automorphisms}
+\begin{mydef}
+Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T(x)\defeq(Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
+\end{mydef}

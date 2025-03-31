@@ -17,6 +17,7 @@ header-includes: |
   </style>
   $\newcommand{\textesh}{∫}$
   $\newcommand{\ensuremath}{}$
+
 title:
 summary: In-progress masters thesis defining connections, curvature, and Chern-Weil theory in the discrete setting of homotopy type theory.
 date: 2025-03-12

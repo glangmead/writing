@@ -2,66 +2,86 @@
 \label{sec:totals}
 We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove the equivalance of the total curvature of a tangent bundle, and total index of a vector field. This is the key relationship in proving both the Gauss-Bonnet theorem and the Poincaré-Hopf theorem.
 
-\subsection{Index of the vector field}
+\subsection{Index of the vector field on a face}
+The index of a vector field is derived from other data that we have. Consider a 2-dimensional simplicial complex \( M \) and its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
+\[\begin{aligned}
+\tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{holonomy/curvature}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)&&\text{flatness}\\
+X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m)&&\text{swirling.}\\
+\end{aligned}\]
+The flatness is a path in automorphisms of \( Tm \) whereas the swirling is a path in \( Tm \), but we can view the latter it as a path in automorphisms as well:
 \begin{myprop}
 \label{prop:eveq}
-Given a polygon \( \ccc(n):\Kzt \) and a point \( b:\ccc(n) \) the evaluation map \( \ev(b):\ccc(n)=_{\Kzt}\ccc(n))\to \ccc(n) \) is an equivalence.
+Given a polygon \( \ccc(n):\Kzt \) and a point \( b:\ccc(n) \) the evaluation map \( \ev(b):(\ccc(n)=_{\Kzt}\ccc(n))\to \ccc(n) \) is an equivalence.
 \end{myprop}
 \begin{myproof}
 See \cite{buchholtz2023central}.
 \end{myproof}
 
-Consider a 2-dimensional simplicial complex \( M \), its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
+Now \( \sigma^X_F\defeq\ev(X(m))^{-1}(X_F) \) is the automorphism of \( Tm \) that corresponds to the swirling. We now have:
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:Tm=Tm\\
-\flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)\\
-X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m).\\
+\tr_F&:Tm=Tm&&\text{curvature on }F\\
+\flat_F&:\id=_{Tm=Tm}\tr_F&&\text{flatness on }F\\
+\sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{swirling on }F.\\
 \end{aligned}\]
-Define \( \sigma^X_F\defeq\ev(X(m))^{-1}(X_F) \), which is the automorphism of \( Tm \) that performs the same total swirling that \( X_F \) does, giving us
-\[\begin{aligned}
-\tr_F&:Tm=Tm\\
-\flat_F&:\id=_{Tm=Tm}\tr_F\\
-\sigma^X_F&:\tr_F=_{Tm=Tm}\id.\\
-\end{aligned}\]
-These last two can be concatenated to make a loop. We can then obtain an integer by using the fact that \( \loopy_{Tm}(\Kzt)\simeq S^1 \), plus the well known formula \( \loopy(S^1,\base)\simeq\zz \) (e.g. \cite{hottbook} Corollary 8.1.10).
+These last two can be concatenated to make a loop. We can then obtain an integer by using the fact that the automorphisms are a circle \( \loopy_{Tm}(\Kzt)\simeq S^1 \), plus the well known formula that loops in the circle are integers: \( \loopy(S^1,\base)\simeq\zz \) (e.g. \cite{hottbook} Corollary 8.1.10).
 \begin{mydef}
-The \defemph{index of the vector field \( X \) around the face \( F \)} is the integer \( I^X_F\defeq\flat_F\cdot \sigma^X_F:\id=_{Tm=Tm}\id \).
+The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F\cdot \sigma^X_F):\loopy(\id=_{Tm=Tm}\id) \).
 \end{mydef}
-We now have the following list of ingredients at a single face:
+We now have the following final list of ingredients at a single face:
 \begin{equation}
 \label{eq:face_elements}
 \begin{aligned}
-\tr_F&:Tm=Tm&&\text{the curvature}\\
-\flat_F&:\id=_{Tm=Tm}\tr_F&&\text{the flatness}\\
-\sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{the swirling}\\
-I^X_F&:\id=_{Tm=Tm}\id&&\text{the index}.
+\tr_F&:Tm=Tm&&\text{curvature on }F\\
+\flat_F&:\id=_{Tm=Tm}\tr_F&&\text{flatness on }F\\
+\sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{swirling on }F\\
+I^X_F&:\zz&&\text{index on }F.
 \end{aligned}
 \end{equation}
 
 \subsection{Total curvature and index on the sphere}
-We have seen in Lemma~\ref{lem:multpath} how to sum paths in a commutative group such as \( Tm=Tm \).
+Now we wish to compute a sum over all faces of the data. To do this we need the following.
+
+\begin{mydef}
+An \defemph{oriented set of pointed faces} of a realization \( \mm \) of an oriented 2-dimensional simplicial complex \( M=[M_0,M_1,M_2] \), is a choice \( v_F:F \) of a vertex in each face \( F:M_2 \), and a choice of boundary path \( \ell_F:v_F=v_F \) on each face, satisfying the \defemph{cancellation property}: for each face the boundary path is a concatenation of three edge paths, and for each edge \( e=\{x,y\} \) in \( M_1 \), whose image under realization is denoted \( p_e:x=y \), the path \( p_e \) appears as a concatenation term in exactly one loop, say \( \ell_F \), and \( p_e^{-1} \) appears in exactly one loop \( \ell_{F'} \).
+\end{mydef}
+
+We have seen in Lemma~\ref{lem:multpath} how to perform the required sum.
+\begin{mydef}
+The \defemph{total flatness}, \defemph{total swirling}, and \defemph{total index} on an oriented set of pointed faces is
 \begin{equation}
 \label{eq:tot_elements}
 \begin{aligned}
+\tr_\tot      & \defeq \sum_F\tr_F &&:Tm=Tm\\
 \flat_\tot    & \defeq \sum_F\flat_F &&:\id=_{Tm=Tm}\tr_\tot\\
 \sigma^X_\tot & \defeq \sum_F\sigma^X_F &&:\tr_\tot=_{Tm=Tm}\id\\
-I^X_\tot      & \defeq \sum_F I^X_F &&:\id=_{Tm=Tm}\id.
+I^X_\tot      & \defeq \sum_F I^X_F &&:\zz.
 \end{aligned}
 \end{equation}
-The assumption that the simplicial complex is oriented\todo{make this assumption!} implies that each edge appears twice when traversing each path \( \partial F \), once in each direction. So Lemma \ref{lem:cancellation} proves the following
-\begin{myprop}The total swirling is 0.\label{prop:total_swirling}
+\end{mydef}
+
+The assumption about edges appearing twice, once in each direction, together with Lemma \ref{lem:subtraction} proves the following
+\begin{myprop}The total transport is \( 0 \) in \( Tm=Tm \).\label{prop:total_rotation}
 \end{myprop}
 \begin{myproof}
-\(\sum_F\sigma^X_F=\sum_{\mathrm{edge\ }e}\sigma(e)+\sigma(e^{-1})=_{Tm=Tm}\refl_0\)
+With a vector field \( X \) chosen, we can compute \[ \sum_F\tr_F=\sum_{(\mathrm{edges\ }e_{ij})} \rho_{ij}+\rho_{ji}=_{Tm=Tm}0 \] and note that the result does not depend on \( X \).
 \end{myproof}
-\begin{mythm}The total flatness equals the total index.
+
+And making use of Lemma \ref{lem:cancellation} we obtain
+\begin{myprop}The total swirling is \( \refl_0 \) in \( Tm=Tm \).\label{prop:total_swirling}
+\end{myprop}
+\begin{myproof}
+\(\sum_F\sigma^X_F=\sum_{(\mathrm{edges\ }e_{ij})}\sigma_{ij}+\sigma_{ji}=_{Tm=Tm}\refl_0\)
+\end{myproof}
+
+\begin{mycor}
+Total flatness is a loop: \( \flat_\tot:\id=_{Tm=Tm}\id \).
+\end{mycor}\begin{myproof}Follows from Corollary~\ref{prop:total_rotation}.\end{myproof}
+
+And finally, if we give the loop map \( \loopy \) the nickname ``winding number'':
+
+\begin{mythm}\label{thm:total_index_total_curvature}The winding number of total flatness equals the total index.
 \end{mythm}
 \begin{myproof}
-Follows directly from \( I^X_\tot\defeq\flat_\tot\cdot \sigma^X_\tot \) and Proposition~\ref{prop:total_swirling}.\todo{need another equation about the totals}
+Follows directly from \( I^X_\tot\defeq\loopy(\flat_\tot\cdot \sigma^X_\tot) \) and Proposition~\ref{prop:total_swirling}.
 \end{myproof}
-
-
-\subsection{Future directions}
-Euler characteristic. Chern-Weil theory. Atiyah bundle. Space of connections is contractible. Formalization.
-
-The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 

@@ -111,19 +111,3 @@ arrow/.style={->,semithick}
 \end{figure}
 
 Finally, recall that in the presence of a section \( X:M\to P \) there is a dependent generalization of \( \ap \) called \( \apd \): \( \apd(X)(p):\tr(p)(X(a))=X(b) \) which is a pathover between the two values of the section over the basepoints of the path \( p \) (\cite{hottbook} Lemma 2.3.4).
-
-\subsection{The bundle of automorphisms}
-\label{sec:automorphisms}
-\begin{mydef}
-Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T(x)\defeq(Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
-\end{mydef}
-
-If the automorphism group of the fibers is commutative then the automorphism bundle is trivial.
-
-\begin{mylemma}
-\label{lem:gauge_triv}
-Suppose \( M \) is connected and we have a point \( m:M \). Then we have a trivialization \( \Aut P\simeq M\times (Tm=Tm) \). This is equivalent to saying the map \( \Aut T \) is equivalent to a constant map.
-\end{mylemma}
-\begin{myproof}
-We will produce a term \( \tau:\pit{x:M}((Tx=Tx)\xrightarrow[]{\simeq}(Tm=Tm)) \). First note that \( (Tx=Tx) \) is a commutative group, as it is merely isomorphic to \( S^1=\Kzo \). Suppose we have a path \( p:x=_M m \) (which exists by connectedness), and define \( \tau x=\tr(p) \). Transport in the family \( \Aut T \) is given by concatenation (as explained in Section~\ref{sec:pathovers}), i.e. \( \tr(p)(f)=T(p)^{-1}\cdot f\cdot T(p) \). To show that \( \tau \) is independent of the choice of \( p \), suppose we have \( p,q:x=_M m \). Then \( \tr(p\cdot q^{-1})=T(p\cdot q^{-1})^{-1}\cdot -\cdot T(p\cdot q^{-1}) \) which is conjugation in the commutative group \( Tx=Tx \), hence is the identity. This proves that \( \tr(p)=\tr(q) \).\todo{is there a gap?}
-\end{myproof}
