@@ -7,7 +7,7 @@ for i in discrete_gauge_theory
 do
   latexpand $i.tex > tmp/$i.copyincludes.tex
   cd tmp
-  cp ../greg.sty ../agda.sty ../quiver.sty ../$i.yml ../ima.csl ../connections.bib ../tikz.py .
+  cp ../greg.sty ../agda.sty ../quiver.sty ../$i.yml ../aims-mathematics.csl ../connections.bib ../tikz.py .
   ../pandoc-3.1.13-arm64/bin/pandoc --wrap=none --filter tikz.py --from latex+raw_tex $i.copyincludes.tex -o $i.tikzimg.tex
   echo "\usepackage{greg}" > foo && cat $i.tikzimg.tex >> foo && mv foo $i.tikzimg.tex
   ../pandoc-3.1.13-arm64/bin/pandoc --wrap=none --from latex+latex_macros --mathjax \

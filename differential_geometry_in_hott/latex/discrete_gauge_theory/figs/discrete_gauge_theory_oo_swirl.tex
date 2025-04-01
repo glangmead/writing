@@ -1,0 +1,46 @@
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  back/.style={loosely dotted, thin},
+  edge/.style={black, thick},
+  arrow/.style={black, very thick, solid, -{Stealth[scale=1.1]}},
+  facet/.style={fill=blue!95!black,fill opacity=0.1},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0) (b)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4) (y)    {};
+\node[label=above:\( w \)] at (0, 0, 1.4)  (w)   {};
+\node[label=above left:\( g \)] at (1, -1, 0) (g)    {};
+\node[label=above left:\( r \)] at (1, 1, 0)  (r)   {};
+\node[label=above right:\( o \)] at (-1, -1, 0) (o)    {};
+\end{scope}
+%% Drawing edges in the back
+%%
+\draw[edge,back,arrow] (o) -- (b);
+\draw[edge,back,arrow] (y) -- (o);
+\draw[edge,back] (o) -- (w);
+\draw[edge,back] (o) -- (g);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (o)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[edge,arrow] (b) -- (y);
+\draw[edge] (b) -- (w);
+\draw[edge] (b) -- (r);
+\draw[edge] (y) -- (g);
+\draw[edge] (y) -- (r);
+\draw[edge,arrow] (g) -- (w);
+\draw[edge,arrow] (w) -- (r);
+\draw[edge,arrow] (r) -- (g);
+\end{tikzpicture}

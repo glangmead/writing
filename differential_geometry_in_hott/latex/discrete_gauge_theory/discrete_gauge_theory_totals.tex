@@ -1,15 +1,15 @@
 \section{The total construction}
 \label{sec:totals}
-We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove the equivalance of the total curvature of a tangent bundle, and total index of a vector field. This is the key relationship in proving both the Gauss-Bonnet theorem and the Poincaré-Hopf theorem.
+We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove a relation between the total curvature of a tangent bundle, and total index of a vector field. This is the key step in the simultaneous proof of the Gauss-Bonnet theorem and the Poincaré-Hopf theorem, lacking only the relationship with the Euler characteristic.
 
 \subsection{Index of the vector field on a face}
-The index of a vector field is derived from other data that we have. Consider a 2-dimensional simplicial complex \( M \) and its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
+The index of a vector field is derived from other data that we have. Consider a 2-dimensional simplicial complex \( M \) and its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \), and a principal circle bundle \( T:\mm\to\Kzt \) extending \( \link \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{holonomy/curvature}\\
+\tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{holonomy}\\
 \flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)&&\text{flatness}\\
 X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m)&&\text{swirling.}\\
 \end{aligned}\]
-The flatness is a path in automorphisms of \( Tm \) whereas the swirling is a path in \( Tm \), but we can view the latter it as a path in automorphisms as well:
+The flatness is a path in automorphisms of \( Tm \) whereas the swirling is a path in \( Tm \), but we can view the latter as a path in automorphisms as well:
 \begin{myprop}
 \label{prop:eveq}
 Given a polygon \( \ccc(n):\Kzt \) and a point \( b:\ccc(n) \) the evaluation map \( \ev(b):(\ccc(n)=_{\Kzt}\ccc(n))\to \ccc(n) \) is an equivalence.
@@ -20,35 +20,44 @@ See \cite{buchholtz2023central}.
 
 Now \( \sigma^X_F\defeq\ev(X(m))^{-1}(X_F) \) is the automorphism of \( Tm \) that corresponds to the swirling. We now have:
 \[\begin{aligned}
-\tr_F&:Tm=Tm&&\text{curvature on }F\\
+\tr_F&:Tm=Tm&&\text{holonomy on }F\\
 \flat_F&:\id=_{Tm=Tm}\tr_F&&\text{flatness on }F\\
 \sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{swirling on }F.\\
 \end{aligned}\]
-These last two can be concatenated to make a loop. We can then obtain an integer by using the fact that the automorphisms are a circle \( \loopy_{Tm}(\Kzt)\simeq S^1 \), plus the well known formula that loops in the circle are integers: \( \loopy(S^1,\base)\simeq\zz \) (e.g. \cite{hottbook} Corollary 8.1.10).
+These last two can be concatenated to make a loop. We can then obtain an integer by noting that the automorphisms are a circle \( \loopy_{Tm}(\Kzt)\simeq S^1 \), and recalling the well known fact that loops in the circle are integers: \( \loopy(S^1,\base)\simeq\zz \) (e.g. \cite{hottbook} Corollary 8.1.10).
 \begin{mydef}
+\label{def:index}
 The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F\cdot \sigma^X_F):\loopy(\id=_{Tm=Tm}\id) \).
 \end{mydef}
-We now have the following final list of ingredients at a single face:
+We now have the final list of ingredients at a single face:
 \begin{equation}
 \label{eq:face_elements}
 \begin{aligned}
-\tr_F&:Tm=Tm&&\text{curvature on }F\\
+\tr_F&:Tm=Tm&&\text{holonomy on }F\\
 \flat_F&:\id=_{Tm=Tm}\tr_F&&\text{flatness on }F\\
 \sigma^X_F&:\tr_F=_{Tm=Tm}\id&&\text{swirling on }F\\
 I^X_F&:\zz&&\text{index on }F.
 \end{aligned}
 \end{equation}
 
-\subsection{Total curvature and index on the sphere}
-Now we wish to compute a sum over all faces of the data. To do this we need the following.
+\subsection{Total flatness, total index}
+Now we wish to compute a sum over all faces of the data. To do this we need all of our definitions plus two new ones that help us organize the sum and make a key assumption about cancellation of edges.
 
 \begin{mydef}
-An \defemph{oriented set of pointed faces} of a realization \( \mm \) of an oriented 2-dimensional simplicial complex \( M=[M_0,M_1,M_2] \), is a choice \( v_F:F \) of a vertex in each face \( F:M_2 \), and a choice of boundary path \( \ell_F:v_F=v_F \) on each face, satisfying the \defemph{cancellation property}: for each face the boundary path is a concatenation of three edge paths, and for each edge \( e=\{x,y\} \) in \( M_1 \), whose image under realization is denoted \( p_e:x=y \), the path \( p_e \) appears as a concatenation term in exactly one loop, say \( \ell_F \), and \( p_e^{-1} \) appears in exactly one loop \( \ell_{F'} \).
+A 2-dimensional simplicial complex \( M^+=[M_0, M_1, M_2] \) with orientation \( \mathscr{O} \) is \defemph{without boundary} if every edge is a subset of exactly two faces, and if the orderings induced by the two inclusions differ by a swap of vertices.
 \end{mydef}
+
+Some of the assumptions in these definitions are unnecessary because they are entailed in other assumptions, but we will not attempt to eliminate them.
+
+\begin{mydef}
+An \defemph{oriented set of pointed faces} of a realization \( \mm \) of a 2-dimensional simplicial complex \( M=[M_0,M_1,M_2] \) with orientation \( \mathscr{O} \) is a choice \( v_F:F \) of a vertex in each face \( F:M_2 \), and the boundary path \( \ell_F:v_F=v_F \) that concatenates the three edges of the face in the order determined by the orientation.
+\end{mydef}
+
+For the rest of the note we will equip our simplicial complex \( M \) with an orientation \( \mathscr{O} \), and our realization \( \mm \) with an oriented set of pointed faces.
 
 We have seen in Lemma~\ref{lem:multpath} how to perform the required sum.
 \begin{mydef}
-The \defemph{total flatness}, \defemph{total swirling}, and \defemph{total index} on an oriented set of pointed faces is
+The \defemph{net holonomy}, \defemph{total flatness}, \defemph{total swirling}, and \defemph{total index} on an oriented set of pointed faces is
 \begin{equation}
 \label{eq:tot_elements}
 \begin{aligned}
@@ -61,22 +70,22 @@ I^X_\tot      & \defeq \sum_F I^X_F &&:\zz.
 \end{mydef}
 
 The assumption about edges appearing twice, once in each direction, together with Lemma \ref{lem:subtraction} proves the following
-\begin{myprop}The total transport is \( 0 \) in \( Tm=Tm \).\label{prop:total_rotation}
+\begin{myprop}The net holonomy is \( 0 \) in \( Tm=Tm \).\label{prop:total_rotation}
 \end{myprop}
 \begin{myproof}
-With a vector field \( X \) chosen, we can compute \[ \sum_F\tr_F=\sum_{(\mathrm{edges\ }e_{ij})} \rho_{ij}+\rho_{ji}=_{Tm=Tm}0 \] and note that the result does not depend on \( X \).
-\end{myproof}
-
-And making use of Lemma \ref{lem:cancellation} we obtain
-\begin{myprop}The total swirling is \( \refl_0 \) in \( Tm=Tm \).\label{prop:total_swirling}
-\end{myprop}
-\begin{myproof}
-\(\sum_F\sigma^X_F=\sum_{(\mathrm{edges\ }e_{ij})}\sigma_{ij}+\sigma_{ji}=_{Tm=Tm}\refl_0\)
+With a vector field \( X \) chosen, we can compute \[ \sum_F\tr_F=\left[\sum_{(\mathrm{edges\ }e_{ij})} \rho_{ij}+\rho_{ji}\right]=_{Tm=Tm}0 \] and note that the result does not depend on \( X \).
 \end{myproof}
 
 \begin{mycor}
 Total flatness is a loop: \( \flat_\tot:\id=_{Tm=Tm}\id \).
 \end{mycor}\begin{myproof}Follows from Corollary~\ref{prop:total_rotation}.\end{myproof}
+
+And making use of Lemma \ref{lem:cancellation} we obtain
+\begin{myprop}The total swirling is \( \refl_0 \) in \( Tm=Tm \).\label{prop:total_swirling}
+\end{myprop}
+\begin{myproof}We can compute
+\[\sum_F\sigma^X_F=\left[\sum_{(\mathrm{edges\ }e_{ij})}\sigma_{ij}+\sigma_{ji}\right]=_{Tm=Tm}\refl_0.\]
+\end{myproof}
 
 And finally, if we give the loop map \( \loopy \) the nickname ``winding number'':
 
@@ -85,3 +94,19 @@ And finally, if we give the loop map \( \loopy \) the nickname ``winding number'
 \begin{myproof}
 Follows directly from \( I^X_\tot\defeq\loopy(\flat_\tot\cdot \sigma^X_\tot) \) and Proposition~\ref{prop:total_swirling}.
 \end{myproof}
+
+\begin{mynote}
+The Gauss-Bonnet theorem is often stated in the form \[\frac{1}{2\pi}\int_M K\,dA=\chi(M)\] and although we won't attempt an exhaustive translation between this and our approach, we want to point out that the factor of \( \frac{1}{2\pi} \) is doing exactly what \( \loopy \) is doing for us, which is converting an angle into a winding number. It seems likely that attending fully to constant coefficients in other important formulas can yield conceptual fruit.
+\end{mynote}
+
+\subsection{Calculation on the sphere}
+The flatness structures on the eight faces of \( \oo \) in Definition~\ref{def:octahedron_curvature} are all identical and equal to \( H_R:\id=_{\ccc(4)=\ccc(4)}R \) on a fixed 4-gon. Composing \( R \) 8 times gives the identity, as required by Proposition~\ref{prop:total_rotation}. Adding the flatness structures gives \( 8H_R:\id=_{\ccc(4)=\ccc(4)}\id \) whose winding number is 2.
+
+Next we want to compute the total index of the vector field \( \xso \) from Section~\ref{sec:octahedron_vector_field}. We saw that on the four faces in the northern hemisphere the swirling gave us these four paths in \( Tw \): \( gobr, gr, gr, gr \). The flatness structures on each of these faces is \( H_R:\id=_{Tw=Tw}R \) where \( R \) rotates by one vertex clockwise. Using Definition~\ref{def:index} for the index we see that we first need to convert \( gobr \) and \( gr \) into paths of rotations, which give
+\begin{align*}
+\sigma^{\xso}_{wrgw}=H_R^3   &:R^{-3}=id \\
+\sigma^{\xso}_{wgow}=H_R^{-1}&:R=id \\
+\sigma^{\xso}_{wobw}=H_R^{-1}&:R=id \\
+\sigma^{\xso}_{wbrw}=H_R^{-1}&:R=id \\
+\end{align*}
+Now forming the concatenation of \( H_R \) with each of these gives \( H_R^4, \refl_\id, \refl_\id, \refl_\id \) respectively. The winding numbers are \( 1, 0, 0, 0 \). So the index around the face that has all the swirling in Figure~\ref{fig:octahedron_vector_field} is 1 and around the other three is 0. We haven't written out the computation for the southern hemisphere but it will provide another 1 and three 0s, giving a total index of 2.

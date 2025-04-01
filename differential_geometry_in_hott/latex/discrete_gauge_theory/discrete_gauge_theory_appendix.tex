@@ -1,11 +1,19 @@
 \section{Appendix: the program ahead}
 
-Euler characteristic. Chern-Weil theory. Atiyah bundle. Space of connections is contractible. Formalization.
+Follow-up work could remove the need to assume that maps from the realization of oriented simplicial complexes factor through \( \Kzt \), instead proving that this is the case. This would unify two assumptions of orientability into one. The assumption that edges appear twice, once with each orientation, could also be deduced from presumably standard material.
 
-The results of this note can be extended in many directions. There are higher-dimensional generalizations of Gauss-Bonnet, including the theory of characteristic classes and Chern-Weil theory (which links characteristic classes to connections and curvature). These would involve working with nonabelian groups like \( SO(n) \) and sphere bundles. Results from gauge theory could be imported into HoTT, as well as results from surgery theory and other topological constructions that may be especially amenable to this discrete setting. Relationships with computer graphics and discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored. Finally, a theory that reintroduces smoothness could allow more formal versions of the analogies explored here. 
+An internal definition of Euler characteristic is needed to provide the relationship between total index and the classic invariant.
 
-\subsection{The bundle of automorphisms}
-\label{sec:automorphisms}
+More relationships with discrete differential geometry\cite{crane_ddg}\cite{crane_connections} could be explored.
+
+The results could be formalized. A good starting point is Lemma~\ref{lem:octahedron_sphere} that the octahedron is equivalent to the 2-sphere.
+
+Our hope is that this note can form the starting point for a complete formulation of the homotopical results of gauge theory and Chern-Weil theory. Classically we know the space of connections is contractible, and the group of based gauge transformations (see below) acts freely on it. Those statements should be easy to make in our framework. In \cite{atiyah1983yang} connections are presented as a splitting of a short exact sequence of bundles. The community has grappled with this picture (see the nLab at \cite{urs_atiyah}), and it deserves clarification in HoTT.
+
+The paper of Freed and Hopkins\cite{freed2013chernweil} seeks a classifying space for the space of connections on a principal bundle. Their paper served as a primary motivation for this work, and we hope we have taken a step in that direction. Its focus on homotopy theory, model structures, and groupoids should make it accessible to many HoTT theoreticians. We conjecture that the theory of Koszul complexes that arises is the infinitesimal shadow of the higher groupid structure of the relevant HoTT classifying space.
+
+\subsection{Gauge transformations}
 \begin{mydef}
-Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T(x)\defeq(Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}.
+\label{sec:automorphisms}
+Suppose we have \( T:M\to\EMzo \) and \( P\defeq\sit{x:M}Tx \). Then we can form the type family \( \Aut T:M\to\uni \) given by \( \Aut T(x)\defeq(Tx=Tx) \). The total space \( \Aut P\defeq\sit{x:M}(Tx=Tx) \), which is a bundle of groups, is called the \defemph{automorphism bundle} or the \defemph{gauge bundle} and sections \( \pit{x:M}(Tx=Tx) \), which are homotopies \( T\sim T \), are called \defemph{automorphisms of \( P \)} or \defemph{gauge transformations}. If \( m:M \) is a basepoint and if \( p:Tm \) is a basepoint in the fiber at \( m \), then the \defemph{pointed automorphisms of \( P \)} or \defemph{based gauge transformations}.
 \end{mydef}

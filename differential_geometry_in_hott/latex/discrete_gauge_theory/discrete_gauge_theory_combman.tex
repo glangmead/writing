@@ -356,6 +356,13 @@ If \( x \) is a vertex, take \( H_R(x) \) to be the obvious unique edge back to 
 
 We wrote the homotopy \( H_R(x) \) as starting at \( x \) because it feels like a record of a time-based process of applying \( R \). We will rely on this convention when we define flatness.
 
+\subsection{Surfaces}
+We will eventually focus on 2-dimensional simplicial complexes in this note, and our running example which begins in the next section is 2-dimensional. We have a simple way to define an orientation in this dimension, which we provide here. We will touch on the relationship between this classical definition and the definition of our HoTT classifying space when we discuss vector fields in Section~\ref{sec:vector_field_def}.
+
+\begin{mydef}
+An \defemph{orientation} \( \mathscr{O} \) of a 2-dimensional simplicial complex \( M=[M_0, M_1, M_2] \) is an equivalence class of ordering maps \( O:M_2\to \mathsf{List} \) to the type of ordered lists, where \( O \) orders the vertices of every 2-face. If \( F:M_2 \) is a face and \( F=\{a, b, c\} \) are its vertices, then \( O(F) \) is a list of all the vertices, e.g. \( [b, c, a] \). Two orderings \( O, O' \) are said to have the \defemph{same orientation} if it is true for every face \( F \) that \( O(F) \) and \( O'(F) \) differ by a cyclic permutation. The inclusion \( e\subset F \) of an edge in a face induces an ordering of the vertices of the edge, called \defemph{the induced order of \( e\subset F \)}.
+\end{mydef}
+
 \subsection{The octahedron model of the sphere}
 We will create our first combinatorial surface, an octahedron. We will not prove that this type is equivalent to the sphere. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
 
@@ -462,6 +469,7 @@ We will create our first combinatorial surface, an octahedron. We will not prove
 We can realize \( O_0\to O_1\to O \) as a cellular type denoted \( \oo_0\to \oo_1\to \oo \).
 
 \begin{mylemma}
+\label{lem:octahedron_sphere}
 There is an equivalence \( \oo\simeq S^2 \).
 \end{mylemma}
 \begin{myproof}Omitted.\end{myproof}

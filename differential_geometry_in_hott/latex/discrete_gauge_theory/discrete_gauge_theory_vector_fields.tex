@@ -1,9 +1,10 @@
 \section{Vector fields}
 \label{sec:vector_fields}
 \subsection{Definition}
+\label{sec:vector_field_def}
 Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton (see Section~\ref{sec:existence}). But if \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) is a cellular type, and \emph{given} an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
-In this section and for the remainder of the note, we will assume that the bundle is principal, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors.
+In this section and for the remainder of the note, we will assume that the bundle is principal, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors. This assumption is in principle not needed if \( M \) is equipped with an orientation \( \mathscr{O} \), but we are omitting a proof that such an \( \mathscr{O} \) provides a factorization of \( T \).
 
 \begin{mydef}
 Given a 2-dimensional cellular type \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) equipped with type family \( T:\mm\to\Kzt \) extending \( \link \), a \defemph{vector field} on \( \mm \) is a section on the 1-skeleton, i.e. a term \( X:\pit{x:\mm_1}T(x) \).
@@ -209,4 +210,111 @@ The classical argument of Hopf \cite{hopf}, which is presented in more detail in
 \end{mynote}
 
 \subsection{An example vector field on the sphere}
-\todo{define the example I worked out, compute swirling}
+\label{sec:octahedron_vector_field}
+Figure~\ref{fig:octahedron_vector_field} shows an example of a vector field \( \xso \) (\( s \) for ``spin'') on the octahedron \( \oo \). The picture can really only convey the value of \( \xso \) on vertices, which it does by displaying it as an arrow on the surface itself, for example as an arrow from \( w \) to \( r \), instead of trying to draw the fiber at \( w \) which is where \( r:\link(w) \) actually lives. But hopefully there is a net gain in clarity.
+\begin{figure}[h]
+\centering
+\input{figs/discrete_gauge_theory_oo_swirl}
+\caption{A vector field on \( \oo \), which extends to a rotation of the octahedron in space.}
+\label{fig:octahedron_vector_field}
+\end{figure}
+
+We will define \( \xso \) on edges, and then compute the swirling around each face. These calculations will then be cited later when we discuss the total swirling on a realization. Here is all the data for \( \xso \), which includes values when traversing an edge in either direction:
+\[\begin{array}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{\xso\text{ on vertices}} \\
+\hline
+v & \xso(v) \\
+\hline
+w & r \\
+r & g \\
+g & w \\
+\hline
+o & b \\
+b & y \\
+y & o \\
+\hline
+\end{array}\,
+\begin{array}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{\xso\text{ on north edges}} \\
+\hline
+e & \xso(e) \\
+\hline
+wr & yg \\
+wg & rw \\
+wo & wb \\
+wb & ry \\
+\hline
+rw & gr \\
+gw & br \\
+ow & br \\
+bw & br \\
+\hline
+\end{array}\,
+\begin{array}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{\xso\text{ on south edges}} \\
+\hline
+e & \xso(e) \\
+\hline
+yr & yg \\
+yg & ow \\
+yo & wb \\
+yb & oy \\
+\hline
+ry & go \\
+gy & go \\
+oy & bo \\
+by & go \\
+\hline
+\end{array}\,
+\begin{array}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{\xso\text{ on equator edges}} \\
+\hline
+e & \xso(e) \\
+\hline
+br & yg \\
+rg & ow \\
+go & wb \\
+ob & ry \\
+\hline
+rb & ry \\
+gr & wg \\
+og & ow \\
+bo & yb \\
+\hline
+\end{array}\]
+How do we read the tables for the edges? For example, \( \xso(wr) \) should be a term of type \( \tr(wr)\xso(w)=_{Tr}\xso(r) \). Looking up \( \xso \) on vertices means this type is \( \tr(wr)(r)=_{Tr}g \), and looking up \( \tr \) in Definition~\ref{def:transport_oo} means the type is \( y=_{Tr}g \). We can choose \( \xso(wr) \) to be any path from \( y \) to \( g \) and we choose the short path \( yg \).
+
+Next we want to compute \( \xso \) around a face. We will do this for the four north faces only. In this calculation we will denote paths by listing the vertices, so \( rg\cdot gw \) is denoted \( rgw \) and \( wrgw \) is a loop at \( w \).
+\begin{align*}
+\xso(wrgw) &= \tr(rgw)\xso(wr)\cdot\tr(gw)\xso(rg)\cdot\xso(gw)\\
+&= \tr(rgw)(yg)\cdot\tr(gw)(ow)\cdot(br)\\
+&= (yg\mapsto yo\mapsto \boxed{go})\cdot(ow\mapsto \boxed{ob})\cdot \boxed{br}\\
+&= \boxed{gobr}
+\end{align*}
+To help follow along, in the third line we are showing the results of intermediate transports, and put a box around the result. The other three faces give
+\begin{align*}
+\xso(wgow) &= \tr(gow)\xso(wg)\cdot\tr(ow)\xso(go)\cdot\xso(ow)\\
+&= \tr(gow)(rw)\cdot\tr(ow)(wb)\cdot(br)\\
+&= (rw\mapsto gw\mapsto \boxed{gr})\cdot(wb\mapsto \boxed{rb})\cdot \boxed{br}\\
+&= \boxed{gr}
+\end{align*}
+
+\begin{align*}
+\xso(wobw) &= \tr(obw)\xso(wo)\cdot\tr(bw)\xso(ob)\cdot\xso(bw)\\
+&= \tr(obw)(wb)\cdot\tr(bw)(ry)\cdot(br)\\
+&= (wb\mapsto wr\mapsto \boxed{gr})\cdot(ry\mapsto \boxed{rb})\cdot \boxed{br}\\
+&= \boxed{gr}
+\end{align*}
+
+\begin{align*}
+\xso(wbrw) &= \tr(brw)\xso(wb)\cdot\tr(rw)\xso(br)\cdot\xso(rw)\\
+&= \tr(brw)(ry)\cdot\tr(rw)(yg)\cdot(gr)\\
+&= (ry\mapsto gy\mapsto \boxed{gr})\cdot(yg\mapsto \boxed{rg})\cdot \boxed{gr}\\
+&= \boxed{gr}
+\end{align*}
+
+So we have these four edges in \( Tw \), which is pointed at \( \xso(w)=r \): \( gobr, gr, gr, gr \). Lemma~\ref{lem:multpath} tells us we can add these by transporting them so as to be concatenatable. This gives \( gobr\cdot rb\cdot bo\cdot og=\refl_g \) in \( Tw \). So the total swirling in the northern hemisphere is trivial. We leave the computation in the southern hemisphere as an exercise, but it is very symmetrical with the northern hemisphere, and gives \( \refl_o \) in \( Ty \).
