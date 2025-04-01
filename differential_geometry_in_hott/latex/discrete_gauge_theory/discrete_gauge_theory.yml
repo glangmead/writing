@@ -21,6 +21,6 @@ header-includes: |
 
 title:
 summary: In-progress masters thesis defining connections, curvature, and Chern-Weil theory in the discrete setting of homotopy type theory.
-date: 2025-03-12
+date: 2025-04-01
 bibliography: connections.bib
 csl: aims-mathematics.csl
