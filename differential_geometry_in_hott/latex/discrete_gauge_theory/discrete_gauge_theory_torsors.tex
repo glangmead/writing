@@ -1,6 +1,5 @@
 \section{Torsors and principal bundles}
 \label{sec:torsors}
-Differential geometry is the study of principal bundles and their automorphisms. Principal bundles are bundles of torsors, so we start there.
 
 \subsection{Torsors}
 \label{subsec:torsors}
@@ -9,11 +8,11 @@ We will review some definitions and facts, drawing on the excellent resource \ci
 \begin{mydef}
 Let \( G \) be a group with identity element \( e \) (with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If in addition we have a term of type
 \[ 
-\mathsf{is\_torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\_equiv}(\phi(-,x):(G,e)\to (X,x))
+\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
 \] then we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \). Denote the \( G \)-torsor given by \( G \) itself under right-multiplication by \( \reg{G} \).
 \end{mydef}
 
-A \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
+A \( G \)-equivariant map from \( (X,\phi) \) to \( (Y,\psi) \) is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
 
 \begin{mylemma}
 (\cite{buchholtz2023central} Lemma 5.2). If \( (X,\phi),(Y,\psi):BG \) then there is a natural equivalence \( (X=_{BG}Y) \simeq (X\to_G Y) \).\qed
@@ -23,25 +22,27 @@ A \( G \)-equivariant map is a function \( f:X\to Y \) such that \( f(\phi(g,x))
 (\cite{buchholtz2023central} Proposition 5.4). A \( G \)-set \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exists a \( G \)-equivariant equivalence \( \reg{G}\to_G X \).\qed
 \end{mylemma}
 
+These lemmas lead to
+
 \begin{mycor}
-(\cite{buchholtz2023central} Corollary 5.5). The pointed type \( (BG,*) \) is a \( \K(G,1) \).\qed
+(\cite{buchholtz2023central} Corollary 5.5). The pointed type \( (BG,*) \) is a \( \K(G,1) \), that is \( BG \) is connected and has a pointed equivalence \( \loopy BG\simeq_* G \).\qed
 \end{mycor}
 
-In particular, to classify principal \( S^1 \)-bundles we map into the space \( \K(S^1, 1) \), a type of torsors of the circle. Since \( S^1 \) is a \( \Kzo \), we have \( \K(S^1,1)\simeq\Kzt \).
+We call types \( X \) such that \( \loopy X\simeq_* G \) a \emph{delooping} of \( G \). So the type of \( G \)-torsors \( BG \) is a delooping of \( G \).
 
-Suppose we have a basepoint \( b:\Kzt \). A logical one to choose would be \( S^1:\Kzt \) itself. Following \cite{buchholtz2023central} Section~4.3, a term \( X : \Kzt \) is a torsor for the higher group \( \loopy_b(\Kzt)\defeq (b=_{\Kzt} b) \). In particular there is an action \( \alpha:(b=_{\Kzt}b)\times X\to X \), and an equivalence \( (\alpha, \pr_2) : (b=_{\Kzt}b)\times X\simto (X\times X)\).
+Suppose we have a basepoint \( b:BG \). Following \cite{buchholtz2023central} Section~4.3, another term \( X:BG \) is a torsor for the higher group \( \loopy_b(BG)\defeq (b=_{BG} b) \). In particular there is an action \( \alpha:(b=_{BG}b)\times X\to X \), and an equivalence \( (\alpha, \pr_2) : (b=_{BG}b)\times X\simto (X\times X)\).
 
-%Given a map \( f:M\to\Kzt \) from some type \( M \), the action exists over \( M \) as \( \pit{x:M}((b=_{\Kzt}b)\times f(x)\to f(x)) \).
+If \( G \) is abelian then \( \K(G,1) \) can be delooped, and in fact can be delooped in a unique way, any number of times. In the next section we will learn how to proceed from a construction of \( \K(G, 1) \) to obtain \( \K(G, n) \).
 
 \subsection{Bundles of Eilenberg-Mac Lane spaces}
 
 To construct maps into \( \Kzt \) we will follow Scoccola\cite{sco}. When can a map into a connected component of the universe be factored through an Eilenberg-Mac Lane space?
 
 \begin{mydef}
-Let \( G \) be a group. Let \( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\) be the connected component of \( \uni \) containing \( \K(G,n) \). A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( M\to\EM(G,n) \).
+Let \( G \) be a group. Let \[ \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1}\] be the connected component of \( \uni \) containing \( \K(G,n) \). A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( M\to\EM(G,n) \).
 \end{mydef}
 
-Scoccola uses 
+Scoccola constructs a map by composing 
 \begin{itemize}
 \item suspension \( \susp:\EM(G,n)\to\EM_{\bullet\bullet}(G,n) \) (see \cite{hottbook} §6.5), which maps into types with two points (denoted by the bullets),
 \item \( (n+1) \)-truncation (see \cite{hottbook} §7.3),
@@ -51,7 +52,7 @@ to form the composition
 \[ 
 \EM(G,n)\xrightarrow[]{||\susp||_{n+1}} \EM_{\bullet\bullet}(G,n+1)\xrightarrow[]{F_\bullet}\EMp(G,n+1)
 \]
-from types to types with two points (north and south), then to pointed types (by forgetting the south point).
+to types with two points (north and south), then to pointed types (by forgetting the south point).
 
 \begin{mydef}
 Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)}, denoted by \( f_\bullet \) is defined to be \( f_\bullet=F_\bullet\circ||\susp||_{n+1}\circ f \).
@@ -62,13 +63,15 @@ Given \( f:M\to\EM(G,n) \), the \defemph{associated action of \( M \) on \( G \)
 (Scoccola\cite{sco} Proposition 2.39). A \( \K(G,n) \) bundle \( f:M\to\EM(G,n) \) factors through a map \( M\to\K(G,n+1) \), and so is a principal fibration, if and only if the associated action \( f_\bullet \) is merely homotopic to a constant map.
 \end{mythm}
 
+The above theory of classifying spaces should be relevant to any future project to bring the study of gauge theory into homotopy type theory. In this note we will be focused on the special case \( G=\zz \) and \( \EMzo \) and \( \Kzt \).
+
 \begin{mynote}
 Iterating the loop map gives the isomorphism \( \loopy^{(n+1)}:\EMp(G,n+1)\simeq \K(\Aut G,1) \) (see \cite{sco} Lemma 2.7). Theorem~\ref{thm:sco} therefore says that the map \( f \) factors through \( \K(G,n+1) \) if and only if the map into \( \K(\Aut G,1) \) is homotopic to a constant. In the case of \( G=\zz \), the map \( f_\bullet:M\to \K(\Aut \zz, 1) \) deserves to be called the first Stiefel-Whitney class of \( f \) and one can interpret its triviality as \emph{orientability}. . This point of view is discussed in Schreiber\cite{dcct} (starting with Example 1.2.138) and in Myers\cite{myersgood}.
 \end{mynote}
 
 \subsection{Pathovers}
 \label{sec:pathovers}
-Here we will recall basic facts from homotopy type theory. See for example \cite{hottbook} or \cite{egbert}. Suppose we have \( T:M\to\uni \) and \( P\defeq\sit{x:M}Tx \). We adopt a convention of naming objects in \( M \) with Latin letters, and the corresponding structures in \( P \) with Greek letters. Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):Ta=Tb \) (\cite{hottbook} §2.2). This is a path in the codomain \( \uni \) of \( T \). Type theory also provides a function called \emph{transport}, denoted \( \tr(p):Ta\to Tb \) (\cite{hottbook} §2.3) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( Ta \) and \( Tb \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
+Here we will recall basic facts from homotopy type theory. See for example \cite{hottbook} or \cite{egbert}. Suppose we have \( T:M\to\uni \) and \( P\defeq\sit{x:M}Tx \). Recall that if \( p:a=_M b \) then \( T \) acts on \( p \) with what's called the \emph{action on paths}, denoted \( \ap(T)(p):Ta=Tb \) (\cite{hottbook} §2.2). This is a path in the codomain \( \uni \) of \( T \). Type theory also provides a function called \emph{transport}, denoted \( \tr(p):Ta\to Tb \) (\cite{hottbook} §2.3) which acts on the fibers of \( P \). \( \tr(p) \) is a function, acting on the terms of the types \( Ta \) and \( Tb \), and univalence tells us this is the isomorphism corresponding to \( \ap(T)(p) \).
 
 Type theory also tells us that paths in \( P \) are given by pairs of paths: a path \( p:a=_M b \) in the base, and a pathover \( \pi:\tr(p)(\alpha)=_{Tb}\beta \) between \( \alpha:Ta \) and \( \beta:Tb \) in the fibers (\cite{hottbook} §2.7). We can't directly compare \( \alpha \) and \( \beta \) since they are of different types, so we apply transport to one of them. We say \( \pi \) lies over \( p \). See Figure~\ref{fig:pathovers}.
 

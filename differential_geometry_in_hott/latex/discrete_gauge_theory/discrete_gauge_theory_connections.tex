@@ -1,6 +1,6 @@
 \section{Bundles, connections, and curvature}
 \label{sec:connections}
-Bundles are simply maps into the universe. By using the extra cellular structure and the even more detailed combinatorial structure of higher realizations, we can identify inside of HoTT some additional classical definitions.
+Bundles are simply maps into the universe. By using the extra cellular structure and the even more detailed combinatorial structure of realizations, we can identify inside of HoTT some additional classical definitions.
 
 \subsection{Definitions}
 Having the cellular structure allows us to define bundles and connections.
@@ -30,7 +30,7 @@ then we say
 \end{itemize}
 
 
-Having the additional structure of a simplicial complex allows us to further define curvature, which is a local concept.
+Having the additional structure of a simplicial complex allows us to define curvature, which is a local concept.
 
 \begin{mydef}
 If \( \mm \) is the realization of a simplicial complex, such that for each pushout defining \( \mm_k \) we have the diagram
@@ -56,18 +56,20 @@ If \( \mm \) is the realization of a simplicial complex, such that for each push
 the outer square of which restricts on each face to the diagram
 
 \begin{center}
-% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIlxce21fa1xcfVxcdGltZXMgU15rIl0sWzEsMCwibV9rIl0sWzEsMSwiXFxtYXRoY2Fse1V9Il0sWzAsM10sWzEsMCwiXFxwYXJ0aWFsX3trLTF9IiwyXSxbMiwzLCJmX2tcXGNpcmMqX2siXSxbMSwyLCIhIl0sWzAsMiwiXFxmbGF0X2siLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dXQ==
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIlxce21fa1xcfVxcdGltZXMgXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzEsMCwiXFx1bml0Il0sWzEsMSwiXFxtYXRoY2Fse1V9Il0sWzAsM10sWzEsMCwiXFxtYXRoYmJ7QX1fe2stMX0iLDJdLFsyLDMsIipfe1xcbWF0aGJie019X2t9Il0sWzEsMiwiISJdLFswLDIsIlxcZmxhdF9rIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
-  {\{m_k\}\times S^k} & {\unit} \\
-  {\mm_{k-1}} & {\mathcal{U}}
+  {\{m_k\}\times \partial\Delta^k} & \unit \\
+  {\mathbb{M}_{k-1}} & {\mathcal{U}}
   \arrow["{!}", from=1-1, to=1-2]
-  \arrow["{\partial_{k-1}}"', from=1-1, to=2-1]
-  \arrow["{f_k\circ*_k}", from=1-2, to=2-2]
-  \arrow["{\flat_k}", shorten <=10pt, shorten >=10pt, Rightarrow, from=1-2, to=2-1]
+  \arrow["{\mathbb{A}_{k-1}}"', from=1-1, to=2-1]
+  \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
+  \arrow["{\flat_k}", shorten <=11pt, shorten >=11pt, Rightarrow, from=2-1, to=1-2]
   \arrow[from=2-1, to=2-2]
 \end{tikzcd}
 \end{center}
 then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
+
+Although all the pushout diagrams are introducing hub points for each edge and face, in practice we will ignore those. But in the case of flatness, which we will use extensively, we should clarify what its type is when we are ignoring hubs. If we have a face \( F \) with vertices \( v_1, v_2, v_3 \) and paths \( e_{ij}:v_i=v_j \) that are realizations of edges, and the loop \( \ell_F\defeq e_{12}\cdot e_{23}\cdot e_{31}\) then we will write \(\flat(\ell_F):\id_{f_0(v_1)}=f_1(\ell_F)\) for a 2-path filling this loop.
 
 The definitions can be digested to give
 \begin{mylemma}
@@ -107,7 +109,7 @@ This relationship between flatness structure and local triviality of a chart can
 \subsection{The tangent bundle of the sphere}
 We will build up a map \( T \) out of \( \oo_0\to\oo_1\to\oo \) which is meant to be a model of the tangent bundle of the sphere. The link function will serve as our approximation to the tangent space. Taking the link of a vertex gives us a map from vertices to polygons, so the codomain is \( \EMzo \).
 
-If \( \{b, r, g, o\} \) are four vertices in \( \oo \), the notation \( \hgr{brgo} \) refers to the 4-gon spanned by these four vertices and the edges between them.
+If \( \{b, r, g, o\} \) are four vertices in \( \oo \), the notation \( \hgr{brgo} \) refers to the 4-gon spanned by these four vertices and the edges of \( \oo \) that connect them to each other.
 
 \begin{mydef}
 \( T_0\defeq\link:\oo_0\to\EMzo \) is given by:
@@ -178,8 +180,8 @@ Defining these flatness structures suffices to define \( T_2 \) by Lemma~\ref{le
 \end{mydef}
 
 \subsection{Existence of connections}
-
-How confident can we be that we can always define a connection on an arbitrary combinatorial manifold? Two things make the octahedron example special: the link is a 4-gon at every vertex (as opposed to having a variable number of vertices), and every transport map extends to a rotation of the entire octahedron in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
+\label{sec:existence}
+How confident can we be that we can always define a connection on the realization of an arbitrary simplicial complex? Two things make the octahedron example special: the link is a 4-gon at every vertex (as opposed to having a variable number of vertices), and every transport map extends to a rotation of the entire octahedron in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
 
 We know as a fact outside of HoTT that any combinatorial surface that has been realized as a triangulated surface embedded in 3-dimensional euclidean space can inherit the parallel transport entailed in the embedding. We could then approximate that data to arbitrary precision with enough subdivision of the fibers of \( T \).
 

@@ -1,16 +1,16 @@
 \section{Vector fields}
 \label{sec:vector_fields}
 \subsection{Definition}
-Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton. But if \( \mm\defeq\mm_o\to\mm_1\to\mm_1 \) is a cellular type, and \emph{given} an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton (see Section~\ref{sec:existence}). But if \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) is a cellular type, and \emph{given} an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
-In this section and for the remainder of the note, we will assume that the bundle is oriented, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors.
+In this section and for the remainder of the note, we will assume that the bundle is principal, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors.
 
 \begin{mydef}
-Given a 2-dimensional cellular type \( \mm\defeq\mm_o\to\mm_1\to\mm_1 \) equipped with type family \( T:\mm\to\Kzt \) extending \( \link \), a \defemph{vector field} on \( \mm \) is a term \( X:\pit{x:\mm_1}T_1(x) \).
+Given a 2-dimensional cellular type \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) equipped with type family \( T:\mm\to\Kzt \) extending \( \link \), a \defemph{vector field} on \( \mm \) is a section on the 1-skeleton, i.e. a term \( X:\pit{x:\mm_1}T(x) \).
 \end{mydef}
 
 \begin{mynote}
-The circle bundle extending \( \link \) captures the \emph{unit spheres} of the classical tangent bundle. A section of this bundle is therefore analogous to a classical \emph{nonvanishing} vector field. To allow for classical vector fields \emph{with zeroes}, we are limiting the section \( X \) to the 1-skeleton of \( \mm \).
+The circle bundle extending \( \link \) captures the \emph{unit spheres} of the classical tangent bundle. A section of this bundle is therefore analogous to a classical \emph{nonvanishing} vector field. To allow for classical vector fields \emph{with zeros}, we are limiting the section \( X \) to the 1-skeleton of \( \mm \).
 \end{mynote}
 
 On the 0-skeleton \( X \) picks a point in each link, i.e. a neighbor of each vertex. On a path \( p:x=_\mm y \), \( X \) assigns a dependent path over \( p \), which as we know is a term \( \pi:\tr(p)(X(x))=_{T y} X(y) \). We are very interested in working with the concatenation operation on dependent paths, which we call \emph{swirling}.
@@ -20,24 +20,24 @@ Consider the vertex \( v_1:\mm \), a face \( F \) containing vertices \( v_1, v_
 
 \begin{figure}[h]
 \centering
-% https://q.uiver.app/#q=WzAsMTQsWzAsMSwiWF8xIl0sWzEsMSwiWF8yIl0sWzIsMSwiWF8zIl0sWzEsMiwiVF97MjF9WF8xIl0sWzIsMiwiVF97MzJ9WF8yIl0sWzIsMywiVF97MzJ9VF97MjF9WF8xIl0sWzMsMSwiWF8xIl0sWzMsMiwiVF97MTN9WF8zIl0sWzMsMywiVF97MTN9VF97MzJ9WF8yIl0sWzMsNCwiVF97MTN9VF97MzJ9VF97MjF9WF8xIl0sWzAsMCwiVF8xIl0sWzEsMCwiVF8yIl0sWzIsMCwiVF8zIl0sWzMsMCwiVF8xIl0sWzEwLDExLCJUX3syMX0iXSxbMTEsMTIsIlRfezMyfSJdLFsxMiwxMywiVF97MTN9Il0sWzEsMywiWF97MTJ9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNCwiWF97MjN9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNywiWF97MzF9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiVF97MzJ9WF97MTJ9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsOCwiVF97MTN9WF97MjN9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzgsOSwiVF97MTN9VF97MzJ9WF97MTJ9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+% https://q.uiver.app/#q=WzAsMTQsWzIsNCwiWF8zIl0sWzIsMywiVF97MzJ9WF8yIl0sWzIsMiwiVF97MzJ9VF97MjF9WF8xIl0sWzMsNCwiWF8xIl0sWzMsMywiVF97MTN9WF8zIl0sWzMsMiwiVF97MTN9VF97MzJ9WF8yIl0sWzMsMSwiVF97MTN9VF97MzJ9VF97MjF9WF8xIl0sWzAsMCwiVF8xIl0sWzEsMCwiVF8yIl0sWzIsMCwiVF8zIl0sWzMsMCwiVF8xIl0sWzAsNCwiWF8xIl0sWzEsNCwiWF8yIl0sWzEsMywiVF97MjF9WF8xIl0sWzcsOCwiVF97MjF9Il0sWzgsOSwiVF97MzJ9Il0sWzksMTAsIlRfezEzfSJdLFswLDEsIlhfezIzfToiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDQsIlhfezMxfToiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDIsIlRfezMyfVhfezEyfToiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsIlRfezEzfVhfezIzfToiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDYsIlRfezEzfVRfezMyfVhfezEyfToiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxMywxMiwiWF97MTJ9OiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
 \begin{tikzcd}
   {T_1} & {T_2} & {T_3} & {T_1} \\
-  {X_1} & {X_2} & {X_3} & {X_1} \\
-  & {T_{21}X_1} & {T_{32}X_2} & {T_{13}X_3} \\
+  &&& {T_{13}T_{32}T_{21}X_1} \\
   && {T_{32}T_{21}X_1} & {T_{13}T_{32}X_2} \\
-  &&& {T_{13}T_{32}T_{21}X_1}
+  & {T_{21}X_1} & {T_{32}X_2} & {T_{13}X_3} \\
+  {X_1} & {X_2} & {X_3} & {X_1}
   \arrow["{T_{21}}", from=1-1, to=1-2]
   \arrow["{T_{32}}", from=1-2, to=1-3]
   \arrow["{T_{13}}", from=1-3, to=1-4]
-  \arrow["{X_{12}:}"', equals, from=2-2, to=3-2]
-  \arrow["{X_{23}:}"', equals, from=2-3, to=3-3]
-  \arrow["{X_{31}:}"', equals, from=2-4, to=3-4]
-  \arrow["{T_{32}X_{12}:}"', equals, from=3-3, to=4-3]
-  \arrow["{T_{13}X_{23}:}"', equals, from=3-4, to=4-4]
-  \arrow["{T_{13}T_{32}X_{12}:}"', equals, from=4-4, to=5-4]
+  \arrow["{T_{13}T_{32}X_{12}:}", equals, from=3-4, to=2-4]
+  \arrow["{X_{12}:}"', equals, from=4-2, to=5-2]
+  \arrow["{T_{32}X_{12}:}", equals, from=4-3, to=3-3]
+  \arrow["{T_{13}X_{23}:}", equals, from=4-4, to=3-4]
+  \arrow["{X_{23}:}", equals, from=5-3, to=4-3]
+  \arrow["{X_{31}:}", equals, from=5-4, to=4-4]
 \end{tikzcd}
-\caption{The data in each fiber as we move around a triangle with vertices indexed 1, 2, and 3. Double-lines indicate identity types between two types, and their labels are terms of this type. Items with one index are terms of some type at a vertex, and items with two indices are terms of a type on an edge.}
+\caption{The data in each fiber as we move around a triangle with vertices indexed 1, 2, and 3. Double lines indicate identity types between two types, and their labels are terms of this type (reading downwards, for example in the second column we have \( X_{12}:T_{21}X_1=X_2\)). Items with one index are terms of some type at a vertex, and items with two indices are terms of a type on an edge.}
 \label{fig:vector_transport}
 \end{figure}
 
@@ -61,20 +61,20 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
     \draw[arrow] (V1) edge[very thick, color=magenta, "\( e_{12} \)"] (V2);
     \draw[arrow] (V3) edge[very thick, color=blue, "\( e_{31} \)"] (V1);
     
-    \node [ii, above=\mylin of V1.north, label=above:\( v_{11} \)] (V11) {};
-    \node [ii, right=\mylin of V1.east,  label=below right:\( v_{12} \)] (V12) {};
-    \node [ii, below=\mylin of V1.south, label=below:\( v_{13} \)] (V13) {};
-    \node [ii, left= \mylin of V1.west,  label=left: \( v_{14} \)] (V14) {};
+    \node [ii, above right=\mylin of V1,  label=above right:\( v_{11} \)] (V11) {};
+    \node [ii, below right=\mylin of V1,  label=below right:\( v_{12} \)] (V12) {};
+    \node [ii, below left=\mylin of  V1,  label=below left:\( v_{13} \)] (V13) {};
+    \node [ii, above left= \mylin of V1,  label=above left: \( v_{14} \)] (V14) {};
 
-    \node [ii, above=\mylin of V2.north, label=above:\( v_{21} \)] (V21) {};
-    \node [ii, right=\mylin of V2.east,  label=right:\( v_{22} \)] (V22) {};
-    \node [ii, below=\mylin of V2.south, label=below:\( v_{23} \)] (V23) {};
-    \node [ii, left= \mylin of V2.west,  label=below left: \( v_{24} \)] (V24) {};
+    \node [ii, above right=\mylin of V2, label=above right:\( v_{21} \)] (V21) {};
+    \node [ii, below right=\mylin of V2,  label=below right:\( v_{22} \)] (V22) {};
+    \node [ii, below left=\mylin of  V2, label=below left:\( v_{23} \)] (V23) {};
+    \node [ii, above left= \mylin of V2,  label=above left: \( v_{24} \)] (V24) {};
 
-    \node [ii, above=\mylin of V3.north, label=above:\( v_{31} \)] (V31) {};
-    \node [ii, right=\mylin of V3.east,  label=right:\( v_{32} \)] (V32) {};
-    \node [ii, below=\mylin of V3.south, label=below:\( v_{33} \)] (V33) {};
-    \node [ii, left= \mylin of V3.west,  label=left: \( v_{34} \)] (V34) {};
+    \node [ii, above right=\mylin of V3, label=above right:\( v_{31} \)] (V31) {};
+    \node [ii, below right=\mylin of V3,  label=below right:\( v_{32} \)] (V32) {};
+    \node [ii, below left=\mylin of  V3, label=below left:\( v_{33} \)] (V33) {};
+    \node [ii, above left= \mylin of V3,  label=above left: \( v_{34} \)] (V34) {};
 
     \draw[dashed] (V11) -- (V12);
     \draw[dashed] (V12) -- (V13);
@@ -114,7 +114,7 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 \label{fig:swirling}
 \end{figure}
 
-We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove our main theorem~\ref{thm:total_index_total_curvature}.
+We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove Theorem~\ref{thm:total_index_total_curvature}.
 
 First we will choose a specific group that acts on all the fibers of \( T \). Recall from Section~\ref{subsec:torsors} that given some basepoint \( b:\Kzt \) and a type \( T_i:\Kzt \), the group \( b=_{\Kzt}b \) acts on \( T_i \). Suppose we have a master basepoint \( m:\mm \), and choose \( T_m:\Kzt \) as the basepoint, so that all the fibers of \( T \) are now equipped with an action of \( T_m=_{\Kzt}T_m \).
 
@@ -123,7 +123,7 @@ We will give this group a nickname for brevity. Recall the bundle \( \Aut T \) f
 Define \( \Gg\defeq \Aut T \), so that \( \Gg(m)=(T_m=_{\Kzt}T_m) \). Since this group is commutative, we'll denote the group operation by \( +:\Gg(m)\times\Gg(m)\to\Gg(m) \).
 \end{mydef}
 
-We need to derive two operations from the action \( \Gg(m) \).
+We need to derive two operations from \( \Gg(m) \).
 
 \begin{mydef}
 The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to \Gg(m) \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\Gg(m) \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
@@ -142,9 +142,12 @@ If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) b
 \end{align*}
 \end{myproof}
 
-Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}\Gg(m) \), and then give a name to the special term \( \rho_{ij}\defeq T_{ij}X_j - X_i \). It fits into a diagram
+Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}\Gg(m) \), and then give a name to the special term \( T_{ij}X_j - X_i \).
+
+\begin{mydef}
+We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j - X_i \). The map \( +\rho_{ij}:\Gg(m)\to\Gg(m) \) makes the following diagram commute%
+\end{mydef}%
 \begin{equation}
-\label{eq:action_of_rho}
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJUX2kiXSxbMSwwLCJUX2oiXSxbMCwxLCJcXG1hdGhzY3J7R30obSkiXSxbMSwxLCJcXG1hdGhzY3J7R30obSkiXSxbMCwxLCJUX3tqaX0iXSxbMSwzLCIoXFx0ZXh0ey19KS1YX2oiXSxbMCwyLCIoXFx0ZXh0ey19KS1YX2kiLDJdLFsyLDMsIihcXHRleHR7LX0pK1xccmhvX3tqaX0iLDJdXQ==
 \begin{tikzcd}
   {T_i} & {T_j} \\
@@ -154,6 +157,7 @@ Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xr
   \arrow["{(\text{-})-X_j}", from=1-2, to=2-2]
   \arrow["{(\text{-})+\rho_{ji}}"', from=2-1, to=2-2]
 \end{tikzcd}
+\label{eq:action_of_rho}
 \end{equation}
 
 \begin{mylemma} \( \rho_{ij}+\rho_{ji}=_{\Gg(m)}0 \).
@@ -166,9 +170,14 @@ Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xr
 &=_{T_i} X_i&&\text{by definition of }T
 \end{align*}
 \end{myproof}
-We can obtain a path in \( \Gg(m) \) from a dependent path by again subtracing the basepoint, e.g. \( \sigma_{ij}\defeq X_{ij}-X_j:T_{ji}X_i-X_j=_{\Gg(m)}0 \), which type also has the name \( \rho_{ji}=_{\Gg(m)}0 \). Notice the reversal in indices between \( \sigma_{ij} \) and \( \rho_{ji} \), which reflects our opposite conventions for \( X_{ij} \) and \( T_{ji} \).
+We can obtain a path in \( \Gg(m) \) from a dependent path by again subtracing the basepoint:
+\begin{align*}
+\sigma_{ij}\defeq X_{ij}-X_j&:T_{ji}X_i-X_j=_{\Gg(m)}0 \\
+&:\rho_{ji}=_{\Gg(m)}0.
+\end{align*}
+Notice the reversal in indices between \( \sigma_{ij} \) and \( \rho_{ji} \), which reflects our opposite conventions for \( X_{ij} \) which we view as a path, and \( T_{ji} \) which we view as a function.
 
-The key technical lemma is the following. Recall that dependent functions such as our vector field \( X \) send \( \refl_{v_i} \) to \( \refl_{X_i} \) (by path induction, see for example \cite{hottbook} Lemma 2.3.4). As stated, this can only be used when we have a path that is \( \refl \), for example when traversing \( e_{ij}\cdot e_{ji} \), i.e. an edge followed by its inverse. We will use subtraction together with the operation of Lemma~\ref{lem:multpath} to lift this requirement, by obtaining two paths in \( \Gg(m) \) that can be added without needing to be concatenated directly.
+The key technical lemma is the following. Recall that dependent functions such as our vector field \( X \) send \( \refl_{v_i} \) to \( \refl_{X_i} \) (by path induction, see for example \cite{hottbook} Lemma 2.3.4). As stated, this can only be used when we have a path that is \( \refl \), for example when traversing \( e_{ij}\cdot e_{ji} \), i.e. an edge followed by its inverse. We will use subtraction together with the operation of Lemma~\ref{lem:multpath} to lift this requirement, by obtaining paths in \( \Gg(m) \) that can be added without needing to be concatenated directly.
 
 \begin{mylemma}
 \label{lem:cancellation}
@@ -196,7 +205,7 @@ so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{
 \end{align*}%
 \end{myproof}%
 \begin{mynote}
-The classical argument of Hopf \cite{hopf}, which is presented in more detail in the more readily available \cite{needham}, makes an implicit assumption that we can concatenate two terms of different type such as \( X_{ij} \) and \( X_{kl} \). The authors name such terms ``change in angle across an edge.'' The extra work we are doing in this section amounts to a partial formalization of this idea.
+The classical argument of Hopf \cite{hopf}, which is presented in more detail in the more readily available \cite{needham}, makes an implicit assumption that we can concatenate two terms of different type such as \( X_{ij} \) and \( X_{kl} \) by saying. The authors name such terms ``change in angle across an edge'' and stipulate that this is a function ``defined on edges.'' The extra work we are doing in this section amounts to a partial formalization of this idea.
 \end{mynote}
 
 \subsection{An example vector field on the sphere}
