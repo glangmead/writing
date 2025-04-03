@@ -1,5 +1,5 @@
-\documentclass[14pt,aspectratio=169]{beamer}
-\usetheme{Frankfurt}
+\documentclass[14pt,aspectratio=169,compress]{beamer}
+\usetheme{default}
 % something tries to renewcommand these but beamer must break the assumption that they are defined so I am defining them
 \newcommand{\labelitemi}{}
 \newcommand{\labelitemii}{}
@@ -8,6 +8,8 @@
 
 \usepackage{greg}
 
+\useoutertheme[subsection=false]{miniframes}
+\useinnertheme{circles}
 \setbeamertemplate{navigation symbols}{}
 \setbeamercovered{transparent}
 \definecolor{cmu_red}{RGB}{153,0,0} % #990000
@@ -16,48 +18,90 @@
 \usecolortheme[named=cmu_red]{structure}
 \setbeamercolor{palette secondary}{bg=cmu_dark_grey,fg=white}
 \setbeamercolor{palette tertiary}{bg=cmu_dark_red,fg=white}
-\setbeamercolor{section in head/foot}{bg=cmu_dark_grey,fg=white}
-% \setbeamercolor{structure}{fg=cmu_red,bg=white}
-%\setbeamercolor{footline}{fg=cmu_dark_grey,bg=cmu_dark_grey}
+\setbeamercolor{section in head/foot}{bg=cmu_red,fg=white}
 
 \title[Geometry in HoTT]{Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \institute[CMU]{Carnegie Mellon University}
+\logo{\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}}
 \date{April 2025}
+
 \begin{document}
-\maketitle
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+% \begin{frame}
+% \begin{itemize}
+% \item 
+% \item 
+% \end{itemize}
+% \end{frame}
+
 \section{Intro}
+
 \begin{frame}{Motivation}
+Chern-Weil theory is an algorithm for manifold \( M \), Lie group \( G \)
 \begin{enumerate}
-\item<1-> Because 3D
-\item<2-> Because 4D
+\item<2-> Form \( BG \), study maps \( I:BG\to B\rr \) (invariant polynomials such as det, trace)
+\item<3-> Fix a principal bundle \( P:M\to BG \)
+\item<4-> Choose a connection \( A \) on \( P \), compute curvature \( F_A \)
+\item<5-> Compose \( I\circ F_A \) (cohomology class)
+\item<6-> \( I \) guarantees independence of class on connection
 \end{enumerate}
 \end{frame}
-\section{Domain}
-\begin{frame}{Domain 1}
-Domain 1\end{frame}
-\begin{frame}{Domain 2}
-Domain 1\end{frame}
-\begin{frame}{Domain 3}
-Domain 1\end{frame}
-\begin{frame}{Domain 4}
-Domain 1\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item What is \( BG\to B\rr \) in HoTT?
+\item What are bundles, connections, and curvature in HoTT?
+\item What is cohomology; what are exact forms?
+\end{itemize}
+\end{frame}
+
+\section{Motivation}
+
+\begin{frame}{Questions}
+Where is the Bianchi identity?
+What is ``the space of connections?''
+\end{frame}
+
+\section{Discrete manifolds}
+
+\begin{frame}{Simplicial complexes}
+\input{figs/realization_dim1_tikz.tex}
+\end{frame}
+
+\begin{frame}{Simplicial complexes}
+\input{figs/realization_1sphere.tex}
+\end{frame}
+
+\begin{frame}{Simplicial complexes}
+\input{figs/realization_dim2_tikz.tex}
+\end{frame}
+
 \section{Codomain}
-\begin{frame}{Codomain 1}
-Domain 1\end{frame}
-\begin{frame}{Codomain 2}
-Domain 1\end{frame}
-\begin{frame}{Codomain 3}
-Domain 1\end{frame}
+
+\begin{frame}{Codomain}
+\( \EMzo \), \( \Kzt \)
+\end{frame}
 
 \section{Results}
-\begin{frame}{Results 1}
-Domain 1\end{frame}
-\begin{frame}{Results 2}
-Domain 1\end{frame}
-\begin{frame}{Results 3}
-Domain 1\end{frame}
-\begin{frame}{Results 4}
-Domain 1\end{frame}
+\begin{frame}{Classical proof}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{figs/needham_triangle.pdf}
+\caption{Tristan Needham, \emph{Visual Differential Geometry and Forms}}
+\end{figure}
+\column{0.5\textwidth}
+Every aspect was informed by the classical proof, which is already discrete-flavored. The ``\( \angle Fw_{||} \)'' looked a lot like a pathover.
+\end{columns}
+\end{frame}
+
 
 \end{document}
