@@ -41,32 +41,7 @@ The link is easier to understand as all the neighboring vertices of \( v \) and 
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}
-  \draw
-    (0, 0) grid[step=1cm] (3, 3)
-    (0, 2) -- (1, 3)
-    (0, 1) -- (2, 3)
-    (0, 0) -- (3, 3)
-    (1, 0) -- (3, 2)
-    (2, 0) -- (3, 1);
-  \fill[radius=3pt]
-    \foreach \x in {0, ..., 3} {
-      \foreach \y in {0, ..., 3} {
-        (\x, \y) circle[]
-    }};
-  \path[above left]
-    \foreach \p/\v in {
-      {1, 3}/a,
-      {2, 3}/b,
-      {0, 2}/f,
-      {1, 2}/v,
-      {2, 2}/c,
-      {0, 1}/e,
-      {1, 1}/d%
-    } {
-      (\p) node {$\v$}
-    };
-\end{tikzpicture}
+\input{figs/link_tikz.tex}
 \caption{The link of \( v \) in this complex consists of the vertices \( \{a,b,c,d,e,f\} \) and the edges \( \{ab,bc,cd,de,ef,fa\} \), forming a hexagon.}
 \label{fig:link}
 \end{figure}

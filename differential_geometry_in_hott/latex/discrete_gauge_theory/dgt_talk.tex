@@ -21,7 +21,9 @@
 \setbeamercolor{palette tertiary}{bg=cmu_dark_red,fg=white}
 \setbeamercolor{section in head/foot}{bg=cmu_red,fg=white}
 
-\title[Geometry in HoTT]{Discrete differential geometry in homotopy type theory}
+%\setlength{\parskip}{\baselineskip} 
+
+\title[Geometry in HoTT]{DRAFT: Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \institute[CMU]{Carnegie Mellon University}
 \logo{\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}}
@@ -46,7 +48,7 @@
 \section{Introduction}
 
 \begin{frame}{Motivation}
-The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil theory} by finding \alert{connections} and \alert{curvature} in everyday \alert{principal bundles}.
+The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil theory} by finding \alert{connections} and \alert{curvature} in HoTT \alert{principal bundles}.
 \end{frame}
 
 % {
@@ -75,25 +77,63 @@ The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil 
 \begin{frame}{Simplicial complexes}
 \begin{columns}
 \begin{column}{0.5\textwidth}
-\resizebox{210pt}{!}{%
+\vspace{-0.5cm}\resizebox{200pt}{!}{
 \begin{tikzpicture}[scale=0.1]
 \input{figs/hasse_octahedron_tikz.tex}
-\end{tikzpicture}}
+\end{tikzpicture}%
+}
+\resizebox{90pt}{!}{%
+\input{figs/discrete_gauge_theory_oo_tikz}
+}
+\quad
+\includegraphics[width=60pt]{figs/hungarian_cube.pdf}
 \end{column}
 \begin{column}{0.5\textwidth}
-A \alert{Hasse diagram} presents a poset of simplicial complex inclusions (named for the colors on a Hungarian Cube)
-\input{figs/discrete_gauge_theory_oo_tikz}
-\includegraphics[width=80pt]{figs/hungarian_cube.pdf}
+A \alert{Hasse diagram} of a simplicial complex (vertices named for the colors on a Hungarian Cube)
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Higher realization}
-\input{figs/realization_dim1_tikz.tex}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\input{figs/link_tikz.tex}
+\end{column}
+\begin{column}{0.5\textwidth}
+The \defemph{link} of a vertex \( v \) in an \( n \)-complex is the \( (n-1) \)-subcomplex of faces not containing \( v \) but whose union with \( v \) is a face.\\~\\
+
+This will be our model of the tangent space.
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Higher realization}
+\begin{frame}[c]{Higher realization}
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+\begin{minipage}[t][0.7\textheight]{\textwidth}
+\input{figs/realization_dim1_tikz.tex}
+
+\vspace{\fill}
+Form a pushout of edges to create a 1-type.
+\end{minipage}
+\end{column}
+\begin{column}{0.6\textwidth}
+\begin{minipage}[t][0.7\textheight]{\textwidth}
 \input{figs/realization_dim2_tikz.tex}
+
+\vspace{\fill}
+Then push out maps from a 1-type triangle to from a 2-dim type.
+\end{minipage}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\input{figs/realization_dim2_tikz.tex}
+
+\( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}.
+
+\( h_1, h_2 \) provide \alert{spokes}.
 \end{frame}
 
 \section{Classifying space}
