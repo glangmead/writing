@@ -20,7 +20,7 @@ header-includes: |
   $\newcommand{\raisebox}[2]{}$
 
 title:
-summary: In-progress masters thesis defining connections, curvature, and Chern-Weil theory in the discrete setting of homotopy type theory.
+summary: My masters thesis defining connections, curvature, and vector fields in the discrete setting of homotopy type theory.
 date: 2025-04-01
 bibliography: connections.bib
 csl: aims-mathematics.csl

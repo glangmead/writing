@@ -14,6 +14,7 @@
 \setbeamercovered{transparent}
 \definecolor{cmu_red}{RGB}{153,0,0} % #990000
 \definecolor{cmu_dark_red}{RGB}{100,0,0} % #990000
+\definecolor{classical}{RGB}{240, 250, 240} % #464646
 \definecolor{cmu_dark_grey}{RGB}{70, 70, 70} % #464646
 \usecolortheme[named=cmu_red]{structure}
 \setbeamercolor{palette secondary}{bg=cmu_dark_grey,fg=white}
@@ -42,51 +43,62 @@
 % \end{itemize}
 % \end{frame}
 
-\section{Intro}
+\section{Introduction}
 
 \begin{frame}{Motivation}
-Chern-Weil theory is an algorithm for manifold \( M \), Lie group \( G \)
-\begin{enumerate}
-\item<2-> Form \( BG \), study maps \( I:BG\to B\rr \) (invariant polynomials such as det, trace)
-\item<3-> Fix a principal bundle \( P:M\to BG \)
-\item<4-> Choose a connection \( A \) on \( P \), compute curvature \( F_A \)
-\item<5-> Compose \( I\circ F_A \) (cohomology class)
-\item<6-> \( I \) guarantees independence of class on connection
-\end{enumerate}
+The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil theory} by finding \alert{connections} and \alert{curvature} in everyday \alert{principal bundles}.
 \end{frame}
 
+% {
+% \setbeamercolor{background canvas}{bg=classical}
+% }
+
+\section{The plan}
 \begin{frame}
 \begin{itemize}
-\item What is \( BG\to B\rr \) in HoTT?
-\item What are bundles, connections, and curvature in HoTT?
-\item What is cohomology; what are exact forms?
+\item Construct a type of manifolds
+\item Construct a classifying space of principal bundles
+\item Identify connections and curvature
+\item Put these to use in 2-d to prove that total curvature is an integer
 \end{itemize}
-\end{frame}
-
-\section{Motivation}
-
-\begin{frame}{Questions}
-Where is the Bianchi identity?
-What is ``the space of connections?''
 \end{frame}
 
 \section{Discrete manifolds}
 
+\begin{frame}
+\begin{itemize}
+\item The classical theory of \alert{simplicial complexes}
+\item A \alert{realization} functor via higher inductive types (pushouts)
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Simplicial complexes}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\resizebox{210pt}{!}{%
+\begin{tikzpicture}[scale=0.1]
+\input{figs/hasse_octahedron_tikz.tex}
+\end{tikzpicture}}
+\end{column}
+\begin{column}{0.5\textwidth}
+A \alert{Hasse diagram} presents a poset of simplicial complex inclusions (named for the colors on a Hungarian Cube)
+\input{figs/discrete_gauge_theory_oo_tikz}
+\includegraphics[width=80pt]{figs/hungarian_cube.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Higher realization}
 \input{figs/realization_dim1_tikz.tex}
 \end{frame}
 
-\begin{frame}{Simplicial complexes}
-\input{figs/realization_1sphere.tex}
-\end{frame}
-
-\begin{frame}{Simplicial complexes}
+\begin{frame}{Higher realization}
 \input{figs/realization_dim2_tikz.tex}
 \end{frame}
 
-\section{Codomain}
+\section{Classifying space}
 
-\begin{frame}{Codomain}
+\begin{frame}{Torsors}
 \( \EMzo \), \( \Kzt \)
 \end{frame}
 
@@ -96,10 +108,14 @@ What is ``the space of connections?''
 \column{0.5\textwidth}
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{figs/needham_triangle.pdf}
-\caption{Tristan Needham, \emph{Visual Differential Geometry and Forms}}
+\caption{from Tristan Needham, \emph{Visual Differential Geometry and Forms}}
 \end{figure}
 \column{0.5\textwidth}
-Every aspect was informed by the classical proof, which is already discrete-flavored. The ``\( \angle Fw_{||} \)'' looked a lot like a pathover.
+\begin{itemize}
+\item The classical proof is discrete-flavored.
+\item ``\( \angle Fw_{||} \)'' looked a lot like a pathover.
+\item Hopf's \( \Phi \) is defined on edges, not loops. We imitated that too.
+\end{itemize}
 \end{columns}
 \end{frame}
 
