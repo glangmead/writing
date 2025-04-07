@@ -25,7 +25,7 @@ def tikz2image(tikz, filetype, outfile):
     f = open('tikz.tex', 'w')
     f.write("""\\documentclass{standalone}
              \\usepackage{greg}
-             \\usepackage[baskerville,vvarbb]{newtxmath}
+             \\geometry{margin=1in}
              \\begin{document}
              """)
     f.write(tikz)

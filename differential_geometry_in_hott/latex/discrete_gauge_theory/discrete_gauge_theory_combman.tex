@@ -175,9 +175,9 @@ v_1, v_2&:\ccc(2) \\
 \begin{mylemma}\label{lem:addpoints}
 \( \ccc(2)\simeq \ccc(1) \) and in fact \( \ccc(n)\simeq \ccc(n-1) \).
 \end{mylemma}
-\begin{myproof}
+\begin{myproofnonqed}
 (Compare to \cite{hottbook} Lemma 6.5.1.)
-
+\end{myproofnonqed}
 First we will define \( f:\ccc(2)\to \ccc(1) \) and \( g:\ccc(1)\to \ccc(2) \), then prove they are inverses.
 \begin{align*}
 f(v_1)=f(v_2)&=\base &\quad g(\base)&=v_1\\
@@ -264,8 +264,7 @@ g(f(e_{n,1}))&= \refl_{v_1}.
 \end{align*}
 Guided by our previous experience we choose \( {e_{n,1}}^{-1}:g(f(v_n))=v_n \), and define the pathovers by transport.
 
-The proof that \( f\circ g\sim\id_{\ccc(n-1)} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).
-\end{myproof}
+The proof that \( f\circ g\sim\id_{\ccc(n-1)} \) requires only noting that \( f(g(e_{n-1,1}))=f(e_{n-1,n}\cdot e_{n,1})=e_{n-1,1}\cdot\refl_{v_1}=e_{n-1,1} \).\qed
 
 \begin{mycor}
 \label{cor:gon}
@@ -306,7 +305,8 @@ We will create our first combinatorial surface, an octahedron. We will not prove
 \begin{tikzpicture}
 \input{figs/hasse_octahedron_tikz.tex}
 \end{tikzpicture}
-\caption{Hasse diagram of an octahedron \( O \). The row of singletons is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
+\input{figs/discrete_gauge_theory_oo_tikz}
+\caption{The Hasse diagram of the simplicial complex \( \oo \), and a possible realization. The row of singletons in the Hasse diagram is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
 \label{fig:hasse_octohedron}
 \end{figure}
 
@@ -317,9 +317,3 @@ We can realize \( O_0\to O_1\to O \) as a cellular type denoted \( \oo_0\to \oo_
 There is an equivalence \( \oo\simeq S^2 \).
 \end{mylemma}
 \begin{myproof}Omitted.\end{myproof}
-
-\begin{figure}[h]
-\centering
-\input{figs/discrete_gauge_theory_oo_tikz}
-\caption{The type \( \oo \) which has 6 points, 12 1-paths, 8 2-paths.}
-\end{figure}

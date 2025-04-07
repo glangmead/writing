@@ -35,8 +35,6 @@
 %\RequirePackage{pgfplots}
 %\pgfplotsset{compat=1.15}
 
-\newcommand{\hideFromPandoc}[1]{#1}
-
 \usetikzlibrary{arrows.meta,positioning,quotes,cd,calc,shapes,decorations.pathreplacing}
 %%\tikzset{every picture/.append style={line cap=round, line width=1.5pt, {Latex-Latex}}}
 %%\tikzset{arrows={-Latex[angle=40:2.5mm]}}
@@ -302,6 +300,16 @@
 ]{mystyle} 
 \declaretheorem[name={Proof},style=mystyle,unnumbered,
 ]{myproof}
+
+\declaretheoremstyle[%
+  spaceabove=5pt,%
+  spacebelow=0pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  qed={}%
+]{mystyle} 
+\declaretheorem[name={Proof},style=mystyle,unnumbered,
+]{myproofnonqed}
 
 \theoremstyle{mythmstyle}
 \newtheorem{mythm}{Theorem}[section]

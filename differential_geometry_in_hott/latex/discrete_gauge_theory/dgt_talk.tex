@@ -1,5 +1,5 @@
 \documentclass[14pt,aspectratio=169,compress]{beamer}
-\usetheme{default}
+\usetheme{Copenhagen}
 % something tries to renewcommand these but beamer must break the assumption that they are defined so I am defining them
 \newcommand{\labelitemi}{}
 \newcommand{\labelitemii}{}
@@ -21,6 +21,8 @@
 \setbeamercolor{palette tertiary}{bg=cmu_dark_red,fg=white}
 \setbeamercolor{section in head/foot}{bg=cmu_red,fg=white}
 
+% \setbeamercolor{corollary title}{use=structure,fg=white,bg=structure.fg!75!black}
+% \setbeamercolor{corollary body}{parent=normal text,use=block title,bg=blue}
 %\setlength{\parskip}{\baselineskip} 
 
 \title[Geometry in HoTT]{DRAFT: Discrete differential geometry in homotopy type theory}
@@ -38,13 +40,6 @@
 \tableofcontents
 \end{frame}
 
-% \begin{frame}
-% \begin{itemize}
-% \item 
-% \item 
-% \end{itemize}
-% \end{frame}
-
 \section{Introduction}
 
 \begin{frame}{Motivation}
@@ -58,26 +53,50 @@ The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil 
 \section{The plan}
 \begin{frame}
 \begin{itemize}
-\item Construct a type of manifolds
 \item Construct a classifying space of principal bundles
+\item Construct a type of manifolds
 \item Identify connections and curvature
 \item Put these to use in 2-d to prove that total curvature is an integer
 \end{itemize}
 \end{frame}
 
-\section{Discrete manifolds}
+\section{Classifying space}
 
 \begin{frame}
+\begin{definition}
+Let \( G \) be a group with identity element \( e \). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If we have
+\[ 
+\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
+\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \).
+\end{definition}
+\begin{lemma}
+Point \( BG \) at \( \reg{G} \), the \( G \)-torsor \( G \) acting on itself on the right. Then \( \loopy_{\reg{G}} BG \simeq G \), so \( BG \) is a \( \K(G,1) \).
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{definition}
+\( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \)
+\end{definition}
+\begin{definition}
+A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( f:M\to \EM(G,n) \).
+\end{definition}
+We further assume \( f \) factors through \( \K(G,n+1) \) and so is principal.
+\end{frame}
+
+\section{Discrete manifolds}
+
+\begin{frame}{Discrete manifolds in HoTT}
 \begin{itemize}
-\item The classical theory of \alert{simplicial complexes}
-\item A \alert{realization} functor via higher inductive types (pushouts)
+\item Recall the classical theory of \alert{simplicial complexes}
+\item Define a \alert{realization} functor via higher inductive types (pushouts)
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Simplicial complexes}
 \begin{columns}
 \begin{column}{0.5\textwidth}
-\vspace{-0.5cm}\resizebox{200pt}{!}{
+\!\!\!\!\!\vspace{-0.5cm}\resizebox{220pt}{!}{
 \begin{tikzpicture}[scale=0.1]
 \input{figs/hasse_octahedron_tikz.tex}
 \end{tikzpicture}%
@@ -128,7 +147,7 @@ Then push out maps from a 1-type triangle to from a 2-dim type.
 \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Higher realization}
 \input{figs/realization_dim2_tikz.tex}
 
 \( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}.
@@ -136,13 +155,108 @@ Then push out maps from a 1-type triangle to from a 2-dim type.
 \( h_1, h_2 \) provide \alert{spokes}.
 \end{frame}
 
-\section{Classifying space}
+\begin{frame}
+\begin{definition}
+An \defemph{\( n \)-gon} \( \ccc(n) \) is the realization of a complex \( C(n) \):
+\vspace{-10pt}\begin{align*}
+C(n)_0 &= \{v_1,\ldots,v_n\} \\
+C(n)_1 &= \{e_1=\{v_1,v_2\}, \ldots, e_{n-1}=\{v_{n-1}, v_n\}, e_n=\{v_n, v_0\}\}
+\end{align*}
+\end{definition}
+\vspace{-10pt}Toss in the non-complexes \vspace{-20pt}
+\[ \ccc(1)\defeq S^1,\quad \ccc(2)\defeq \begin{tikzpicture}[scale=0.5, baseline=3.5mm]
+\tikzset{arrow/.style={-{Stealth[scale=1.1]}}}
+\tikzset{oo/.style={circle, scale=0.25, fill=black}}
+\tikzset{ooo/.style={circle, scale=0.25, fill=none}}
+\node[oo, label=above:\( v_1 \)] (V1) at (0, 2) {};
+\node[oo, label=below:\( v_2 \)] (V2) at (0, 0) {};
+\node[ooo] (V21) at (0.3, 1.75) {};
+\node[ooo] (V22) at (0.3, 0.25) {};
+\draw (V1) edge[bend right=60, swap, "\( \ell_{12} \)"] (V2);
+\draw (V1) edge[bend left=60, "\( r_{21} \)"] (V2);
+\end{tikzpicture}\]
+We sometimes denote a polygon with vertices \( \{a, b, c\} \) with \( \gr{abc} \), its realization with \( \hgr{abc} \).
+\end{frame}
 
-\begin{frame}{Torsors}
-\( \EMzo \), \( \Kzt \)
+\begin{frame}
+\begin{lemma}
+\( \ccc(2)\simeq \ccc(1) \) and in general \( \ccc(n)\simeq\ccc(n-1) \).
+\end{lemma}
+\begin{corollary}
+All \( n \)-gons are equivalent to \( S^1 \) and so provide terms in \( \EMzo \).
+\end{corollary}
+\end{frame}
+
+\begin{frame}{Rotation}
+Let \( R:\gr{abcd}\to\gr{abcd} \) send \( a\mapsto b , b\mapsto c , c\mapsto d, d\mapsto a \). \\~\\
+
+Extend \( R \) to edges.
+
+\begin{lemma}
+\( \hgr{R}:\hgr{abcd}\to\hgr{abcd} \) is homotopic to the identity, i.e. we have \( \pit{x:\hgr{abcd}}x=\hgr{R}(x) \).
+\end{lemma}
+\begin{proof}
+Use edges.
+\end{proof}
+\end{frame}
+
+\section{Connections and curvature}
+\begin{frame}
+\begin{definition}
+If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a cellular type and all the triangles commute in the diagram:\vspace{-10pt}
+\[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+  {\mm_0} \& {\mm_1} \& {\mm_2} \& \cdots \& {\mm_n} \\
+\&\& {\mathcal{U}}
+\arrow["{\imath_0}", from=1-1, to=1-2]
+\arrow["{f_0}", from=1-1, to=2-3]
+\arrow["{\imath_1}", from=1-2, to=1-3]
+\arrow["{f_1}", from=1-2, to=2-3]
+\arrow["{\imath_2}", from=1-3, to=1-4]
+\arrow["{f_2}", from=1-3, to=2-3]
+\arrow["{\imath_{n-1}}", from=1-4, to=1-5]
+\arrow["f_n"', from=1-5, to=2-3]
+\end{tikzcd}\]\vspace{-15pt}
+\begin{itemize}
+\item The map \( f_k \) is a \defemph{\( k \)-bundle} on \( \mm \).
+\item The pair given by the map \( f_k \) and the proof \( f_k\circ \imath_{k-1}=f_{k-1} \), i.e. that \( f_k \) extends \( f_{k-1} \) is called a \defemph{\( k \)-connection on the \( (k-1) \)-bundle \( f_{k-1} \)}.
+\end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\begin{mydef}
+If \( \mm \) is the realization of a simplicial complex and we have 
+\begin{center}
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small]
+  {M_k\times \partial\Delta^k} \& {M_k} \\
+  {\mathbb{M}_{k-1}} \& {\mathbb{M}_k} \\
+  \& {\mathcal{U}}
+  \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
+  \arrow["{\mathbb{A}_{k-1}}"', from=1-1, to=2-1]
+  \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
+  \arrow["{h_k}", shorten <=10pt, shorten >=10pt, Rightarrow, from=2-1, to=1-2]
+  \arrow["{\imath_{k-1}}", from=2-1, to=2-2]
+  \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{k-1}}"', from=2-1, to=3-2]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow["{f_k}", from=2-2, to=3-2]
+  \arrow[shorten >=3pt, Rightarrow, from=2-2, to=0]
+\end{tikzcd}
+\begin{tikzcd}[ampersand replacement=\&]
+  {\{m_k\}\times \partial\Delta^k} \& \unit \\
+  {\mathbb{M}_{k-1}} \& {\mathcal{U}}
+  \arrow["{!}", from=1-1, to=1-2]
+  \arrow["{\mathbb{A}_{k-1}}"', from=1-1, to=2-1]
+  \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
+  \arrow["{\flat_k}", shorten <=11pt, shorten >=11pt, Rightarrow, from=1-2, to=2-1]
+  \arrow[from=2-1, to=2-2]
+\end{tikzcd}
+\end{center}
+then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
+\end{mydef}
 \end{frame}
 
 \section{Results}
+
 \begin{frame}{Classical proof}
 \begin{columns}
 \column{0.5\textwidth}
@@ -158,6 +272,8 @@ Then push out maps from a 1-type triangle to from a 2-dim type.
 \end{itemize}
 \end{columns}
 \end{frame}
+
+
 
 
 \end{document}
