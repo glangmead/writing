@@ -1,5 +1,5 @@
-\documentclass[14pt,aspectratio=169,compress]{beamer}
-\usetheme{Copenhagen}
+\documentclass[14pt,aspectratio=169]{beamer}
+\usetheme{default}
 % something tries to renewcommand these but beamer must break the assumption that they are defined so I am defining them
 \newcommand{\labelitemi}{}
 \newcommand{\labelitemii}{}
@@ -36,52 +36,53 @@
 \titlepage
 \end{frame}
 
-\begin{frame}
-\tableofcontents
-\end{frame}
+% \begin{frame}
+% \tableofcontents
+% \end{frame}
 
 \section{Introduction}
 
 \begin{frame}{Motivation}
-The motivation is to provide \alert{a deeper explanation} for \alert{Chern-Weil theory} by finding \alert{connections} and \alert{curvature} in HoTT \alert{principal bundles}.
-\end{frame}
-
-% {
-% \setbeamercolor{background canvas}{bg=classical}
-% }
-
-\section{The plan}
-\begin{frame}
+To use HoTT to study \alert{connections} and \alert{explain} their applicability to algebraic topology, via
 \begin{itemize}
-\item Construct a classifying space of principal bundles
-\item Construct a type of manifolds
-\item Identify connections and curvature
-\item Put these to use in 2-d to prove that total curvature is an integer
+\item the Gauss-Bonnet theorem
+\item its vast generalization, Chern-Weil theory
 \end{itemize}
 \end{frame}
 
-\section{Classifying space}
+% \begin{frame}
+% I was guided by these pseudo-methods:
+% \begin{itemize}
+% \item<2-> Infinitesimals are not core to differential geometry
+% \item<3-> The action on paths \( \ap f \) is the derivative of \( f \)
+% \item<4-> HoTT transport is parallel transport
+% \end{itemize}
+% \onslide<5->{and therefore}
+% \begin{itemize}
+% \item<6-> A connection is a derivative of a classifying map: a choice of connection on a bundle \( P:M\to\uni \) is a choice of action on paths
+% \end{itemize}
+% \onslide<7->{How can this be? The derivative of \( f \) is calculated from the data of \( f \), it's not a free choice!}
+% \end{frame}
 
-\begin{frame}
-\begin{definition}
-Let \( G \) be a group with identity element \( e \). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If we have
-\[ 
-\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
-\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \).
-\end{definition}
-\begin{lemma}
-Point \( BG \) at \( \reg{G} \), the \( G \)-torsor \( G \) acting on itself on the right. Then \( \loopy_{\reg{G}} BG \simeq G \), so \( BG \) is a \( \K(G,1) \).
-\end{lemma}
+\begin{frame}{Plan}
+\begin{itemize}
+\item Manifolds
+\item Classifying maps
+\item Connections and curvature
+\item Theorems
+\end{itemize}
 \end{frame}
 
-\begin{frame}
-\begin{definition}
-\( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \)
-\end{definition}
-\begin{definition}
-A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( f:M\to \EM(G,n) \).
-\end{definition}
-We further assume \( f \) factors through \( \K(G,n+1) \) and so is principal.
+\begin{frame}{HoTT background}
+\begin{enumerate}
+\item Bezem, M., Buchholtz, U., Cagne, P., Dundas, B.~I., and Grayson, D.~R.,
+  (2021-) Symmetry. \url{https://github.com/UniMath/SymmetryBook}.
+
+\item Buchholtz, U., Christensen, J.~D. , Flaten, J.~G.~T., and Rijke, E. (2023) Central
+  H-spaces and banded types. arXiv:2301.02636
+
+\item Scoccola, L. (2020) Nilpotent types and fracture squares in homotopy type theory, MSCS 30(5). arXiv:1903.03245
+\end{enumerate}
 \end{frame}
 
 \section{Discrete manifolds}
@@ -114,48 +115,11 @@ A \alert{Hasse diagram} of a simplicial complex (vertices named for the colors o
 \end{frame}
 
 \begin{frame}{Higher realization}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\input{figs/link_tikz.tex}
-\end{column}
-\begin{column}{0.5\textwidth}
-The \defemph{link} of a vertex \( v \) in an \( n \)-complex is the \( (n-1) \)-subcomplex of faces not containing \( v \) but whose union with \( v \) is a face.\\~\\
-
-This will be our model of the tangent space.
-\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}[c]{Higher realization}
-\begin{columns}[T]
-\begin{column}{0.4\textwidth}
-\begin{minipage}[t][0.7\textheight]{\textwidth}
-\input{figs/realization_dim1_tikz.tex}
-
-\vspace{\fill}
 Form a pushout of edges to create a 1-type.
-\end{minipage}
-\end{column}
-\begin{column}{0.6\textwidth}
-\begin{minipage}[t][0.7\textheight]{\textwidth}
-\input{figs/realization_dim2_tikz.tex}
-
-\vspace{\fill}
-Then push out maps from a 1-type triangle to from a 2-dim type.
-\end{minipage}
-\end{column}
-\end{columns}
+\[\input{figs/realization_dim1_tikz.tex}\]
 \end{frame}
 
 \begin{frame}{Higher realization}
-\input{figs/realization_dim2_tikz.tex}
-
-\( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}.
-
-\( h_1, h_2 \) provide \alert{spokes}.
-\end{frame}
-
-\begin{frame}
 \begin{definition}
 An \defemph{\( n \)-gon} \( \ccc(n) \) is the realization of a complex \( C(n) \):
 \vspace{-10pt}\begin{align*}
@@ -175,16 +139,40 @@ C(n)_1 &= \{e_1=\{v_1,v_2\}, \ldots, e_{n-1}=\{v_{n-1}, v_n\}, e_n=\{v_n, v_0\}\
 \draw (V1) edge[bend right=60, swap, "\( \ell_{12} \)"] (V2);
 \draw (V1) edge[bend left=60, "\( r_{21} \)"] (V2);
 \end{tikzpicture}\]
-We sometimes denote a polygon with vertices \( \{a, b, c\} \) with \( \gr{abc} \), its realization with \( \hgr{abc} \).
+%We sometimes denote a polygon with vertices \( \{a, b, c\} \) with \( \gr{abc} \), its realization with \( \hgr{abc} \).
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Higher realization}
 \begin{lemma}
 \( \ccc(2)\simeq \ccc(1) \) and in general \( \ccc(n)\simeq\ccc(n-1) \).
 \end{lemma}
 \begin{corollary}
-All \( n \)-gons are equivalent to \( S^1 \) and so provide terms in \( \EMzo \).
+All \( n \)-gons are equivalent to \( S^1 \).
 \end{corollary}
+\end{frame}
+
+\begin{frame}{Higher realization}
+Then push out maps from a 1-type triangle to from a 2-dim type.
+\[\input{figs/realization_dim2_tikz.tex}\]
+\end{frame}
+
+\begin{frame}{Higher realization}
+\( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}. \( h_1, h_2 \) provide \alert{spokes}.
+\[\input{figs/realization_dim2_tikz.tex}\]
+\end{frame}
+
+
+\begin{frame}{Higher realization}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\input{figs/link_tikz.tex}
+\end{column}
+\begin{column}{0.5\textwidth}
+The \defemph{link} of a vertex \( v \) in an \( n \)-complex is the \( (n-1) \)-subcomplex of faces not containing \( v \) but whose union with \( v \) is a face.\\~\\
+
+This will be our model of the tangent space.
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Rotation}
@@ -198,6 +186,30 @@ Extend \( R \) to edges.
 \begin{proof}
 Use edges.
 \end{proof}
+\end{frame}
+
+\section{Torsors}
+
+\begin{frame}
+\begin{definition}
+Let \( G \) be a group with identity element \( e \). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If we have
+\[ 
+\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
+\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \).
+\end{definition}
+\begin{lemma}
+Point \( BG \) at \( \reg{G} \), the \( G \)-torsor \( G \) acting on itself on the right. Then \( \loopy_{\reg{G}} BG \simeq G \), so \( BG \) is a \( \K(G,1) \).
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{definition}
+\( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \)
+\end{definition}
+\begin{definition}
+A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( f:M\to \EM(G,n) \).
+\end{definition}
+We further assume \( f \) factors through \( \K(G,n+1) \) and so is principal.
 \end{frame}
 
 \section{Connections and curvature}
@@ -272,7 +284,6 @@ then we say the filler \( \flat_k \) is called a \defemph{flatness structure for
 \end{itemize}
 \end{columns}
 \end{frame}
-
 
 
 
