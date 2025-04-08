@@ -7,14 +7,12 @@
 \newcommand{\labelitemiv}{}
 
 \usepackage{greg}
-
+\renewcommand{\defemph}[1]{\alert{#1}}
 \useoutertheme[subsection=false]{miniframes}
 \useinnertheme{circles}
 \setbeamertemplate{navigation symbols}{}
 \setbeamercovered{transparent}
-\definecolor{cmu_red}{RGB}{153,0,0} % #990000
-\definecolor{cmu_dark_red}{RGB}{100,0,0} % #990000
-\definecolor{classical}{RGB}{240, 250, 240} % #464646
+\definecolor{cmu_red}{RGB}{176,28,51} % #990000
 \definecolor{cmu_dark_grey}{RGB}{70, 70, 70} % #464646
 \definecolor{mygrey}{RGB}{100, 100, 100}
 \definecolor{steveblue}{RGB}{51, 51, 172}
@@ -193,14 +191,14 @@ This will be our model of the tangent space.
 \end{frame}
 
 \begin{frame}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-0}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-10}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-21}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-41}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-47}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-70}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-80}
-  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-90}
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-0}}} \!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-10}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-21}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-41}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-47}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-70}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-80}}}\!\!\to\!\! \)
+  \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube-90}}} \)
 \end{frame}
 
 
@@ -229,6 +227,15 @@ Let \( G \) be a group with identity element \( e \). A \defemph{\( G \)-set} is
 \begin{lemma}
 Point \( BG \) at \( \reg{G} \), the \( G \)-torsor \( G \) acting on itself on the right. Then \( \loopy_{\reg{G}} BG \simeq G \), so \( BG \) is a \( \K(G,1) \).
 \end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item \( S^1:\uni \) is not an \( \Aut S^1 \)-torsor.
+\item It's a torsor for \( (S^1=S^1)_{(\id)} \), the identity component.
+\item This omits the flip, the reversal of \alert{orientation}.
+\item See the Buchholtz et. al. H-spaces paper for more.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -266,9 +273,7 @@ If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\
 
 \begin{frame}
 \begin{mydef}
-If \( \mm \) is the realization of a simplicial complex and we have 
-\begin{center}
-\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+\[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {M_k\times \partial\Delta^k} \& {M_k} \\
   {\mathbb{M}_{k-1}} \& {\mathbb{M}_k} \\
   \& {\mathcal{U}}
@@ -290,26 +295,81 @@ If \( \mm \) is the realization of a simplicial complex and we have
   \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
   \arrow["{\flat_k}", shorten <=11pt, shorten >=11pt, Rightarrow, from=1-2, to=2-1]
   \arrow[from=2-1, to=2-2]
-\end{tikzcd}
-\end{center}
-then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
+\end{tikzcd}\]
+the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
 \end{mydef}
 \end{frame}
 
 \section{Vector fields}
-\begin{frame}
+\begin{frame}{Vector fields}
 \begin{columns}
-\begin{column}{0.5\textwidth}
-\input{figs/discrete_gauge_theory_oo_swirl}
+\begin{column}{0.7\textwidth}
+Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on an oriented 2-dim cellular type
+\begin{itemize}
+\item A \alert{vector field} is a term \( X:\pit{m:\mm_1}Tm \).
+\item It's a \alert{nonvanishing} vector field on the 1-skeleton.
+\item We model classical zeros by omitting the faces.
+\end{itemize}
 \end{column}
-\begin{column}{0.5\textwidth}
-\input{figs/face_swirl_tikz.tex}
+\begin{column}{0.3\textwidth}
+\input{figs/discrete_gauge_theory_oo_swirl}
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item \( \partial F\defeq e_{12}\cdot e_{23}\cdot e_{31}  \)
+\item We access pathovers asymmetrically: \( X_{12}:T_{12}X_1=X_2 \)
+\item \( X(\partial F) \) is 3-sided inside a square
+\item To make a loop we cat with \( \flat(\partial F) \)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
 
+\begin{frame}
+\[\begin{aligned}
+\tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{\alert{holonomy}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)&&\text{\alert{flatness}}\\
+X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m)&&\text{\alert{swirling}}\\
+\end{aligned}\]
+\onslide<2->{
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+\begin{mydef}
+The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F(X(m))\cdot X_F):\loopy(X(m)=_{Tm}X(m)) \).
+\end{mydef}
+\end{column}
+\begin{column}{0.3\textwidth}
+\begin{tikzpicture}
+  [arrow/.style={-{Stealth[scale=1.1]}}, .style={scale=0.7}]
+  \tikzset{oo/.style={circle, scale=0.6, fill=black}}
+  \tikzset{ii/.style={circle, scale=0.3, fill=gray}}
+  \setlength{\mylen}{2cm}
+  \setlength{\mylin}{1cm}
+  \node[label=center:\( Tv_1 \)] (V1) at (0, 0) {};
+  \node [ii, above right=\mylin of V1,  label=right:\( v_{11} \)] (V11) {};
+  \node [ii, below right=\mylin of V1,  label=right:\( v_{12} \)] (V12) {};
+  \node [ii, below left=\mylin of  V1,  label=left:\( v_{13} \)] (V13) {};
+  \node [ii, above left= \mylin of V1,  label=left: \( v_{14} \)] (V14) {};
+
+  \draw[dashed] (V11) edge[ultra thick, solid, arrow, swap, "\( \flat_F(X_1) \)"] (V14);
+  \draw[arrow] (V14) edge[thick, swap, color=magenta, "\( X_{12} \)"] (V13);
+  \draw[arrow] (V13) edge[thick, swap, color=teal, "\( X_{23} \)"] (V12);
+  \draw[arrow] (V12) edge[thick, swap, color=blue, "\( X_{31} \)"] (V11);
+\end{tikzpicture}
+\end{column}
+\end{columns}}
 \end{frame}
 
 \section{Results}
@@ -317,11 +377,13 @@ then we say the filler \( \flat_k \) is called a \defemph{flatness structure for
 \begin{frame}{Classical proof}
 \begin{columns}
 \column{0.5\textwidth}
+\vspace{12pt}
 \begin{figure}
-\includegraphics[width=0.9\textwidth]{figs/needham_triangle.pdf}
-\caption{from Tristan Needham, \emph{Visual Differential Geometry and Forms}}
+\includegraphics[width=0.9\textwidth]{figs/needham_triangle_circ.pdf}
+\caption{{Needham,~T. (2021) Visual Differential Geometry and Forms.}}
 \end{figure}
 \column{0.5\textwidth}
+\vspace{-12pt}
 \begin{itemize}
 \item The classical proof is discrete-flavored.
 \item ``\( \angle Fw_{||} \)'' looked a lot like a pathover.
@@ -329,7 +391,6 @@ then we say the filler \( \flat_k \) is called a \defemph{flatness structure for
 \end{itemize}
 \end{columns}
 \end{frame}
-
 
 
 \end{document}
