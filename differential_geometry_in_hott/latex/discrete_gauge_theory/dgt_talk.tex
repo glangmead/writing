@@ -16,19 +16,34 @@
 \definecolor{cmu_dark_red}{RGB}{100,0,0} % #990000
 \definecolor{classical}{RGB}{240, 250, 240} % #464646
 \definecolor{cmu_dark_grey}{RGB}{70, 70, 70} % #464646
+\definecolor{mygrey}{RGB}{100, 100, 100}
+\definecolor{steveblue}{RGB}{51, 51, 172}
 \usecolortheme[named=cmu_red]{structure}
-\setbeamercolor{palette secondary}{bg=cmu_dark_grey,fg=white}
-\setbeamercolor{palette tertiary}{bg=cmu_dark_red,fg=white}
-\setbeamercolor{section in head/foot}{bg=cmu_red,fg=white}
+\setbeamercolor{palette secondary}{bg=steveblue,fg=white}
+\setbeamercolor{palette tertiary}{bg=steveblue,fg=white}
+\setbeamercolor{section in head/foot}{bg=mygrey,fg=white}
+\setbeamercolor{alerted text}{fg=cmu_red}
 
 % \setbeamercolor{corollary title}{use=structure,fg=white,bg=structure.fg!75!black}
 % \setbeamercolor{corollary body}{parent=normal text,use=block title,bg=blue}
 %\setlength{\parskip}{\baselineskip} 
 
+\commentout{
+The thesis reads like this:
+The type of torsors and Eilenberg-Mac Lane spaces is the background in HoTT of our theory. 
+Manifolds are simplicial complexes, made into pushouts in an obvious way, with hubs and spokes.
+Extending a map from the k-skel to the (k+1)-skel is called a connection.
+Extending a map to a single face is a flatness structure.
+Focus on 2-dimensions, oriented, tangent bundles:
+Vector fields! Sections on the 1-skel.
+Define swirling and index on a face.
+Define totaling.
+}
+
 \title[Geometry in HoTT]{DRAFT: Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \institute[CMU]{Carnegie Mellon University}
-\logo{\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}}
+\logo{\vspace{-4pt}\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}\quad}
 \date{April 2025}
 
 \begin{document}
@@ -75,13 +90,13 @@ To use HoTT to study \alert{connections} and \alert{explain} their applicability
 
 \begin{frame}{HoTT background}
 \begin{enumerate}
-\item Bezem, M., Buchholtz, U., Cagne, P., Dundas, B.~I., and Grayson, D.~R.,
+\item Bezem,~M., Buchholtz,~U., Cagne,~P., Dundas,~B.~I., and Grayson,~D.~R.,
   (2021-) Symmetry. \url{https://github.com/UniMath/SymmetryBook}.
 
-\item Buchholtz, U., Christensen, J.~D. , Flaten, J.~G.~T., and Rijke, E. (2023) Central
+\item Buchholtz,~U., Christensen,~J.~D. , Flaten,~J.~G.~T., and Rijke,~E. (2023) Central
   H-spaces and banded types. arXiv:2301.02636
 
-\item Scoccola, L. (2020) Nilpotent types and fracture squares in homotopy type theory, MSCS 30(5). arXiv:1903.03245
+\item Scoccola,~L. (2020) Nilpotent types and fracture squares in homotopy type theory, MSCS 30(5). arXiv:1903.03245
 \end{enumerate}
 \end{frame}
 
@@ -90,7 +105,7 @@ To use HoTT to study \alert{connections} and \alert{explain} their applicability
 \begin{frame}{Discrete manifolds in HoTT}
 \begin{itemize}
 \item Recall the classical theory of \alert{simplicial complexes}
-\item Define a \alert{realization} functor via higher inductive types (pushouts)
+\item Define a \alert{realization} functor to turn them into homotopy pushouts
 \end{itemize}
 \end{frame}
 
@@ -117,17 +132,18 @@ A \alert{Hasse diagram} of a simplicial complex (vertices named for the colors o
 \begin{frame}{Higher realization}
 Form a pushout of edges to create a 1-type.
 \[\input{figs/realization_dim1_tikz.tex}\]
+\( \partial\Delta^1 \) is a 0-sphere: the set \( \{a, b\} \).
 \end{frame}
 
 \begin{frame}{Higher realization}
-\begin{definition}
+\vspace{5pt}\begin{definition}
 An \defemph{\( n \)-gon} \( \ccc(n) \) is the realization of a complex \( C(n) \):
-\vspace{-10pt}\begin{align*}
+\begin{align*}
 C(n)_0 &= \{v_1,\ldots,v_n\} \\
 C(n)_1 &= \{e_1=\{v_1,v_2\}, \ldots, e_{n-1}=\{v_{n-1}, v_n\}, e_n=\{v_n, v_0\}\}
 \end{align*}
 \end{definition}
-\vspace{-10pt}Toss in the non-complexes \vspace{-20pt}
+\vspace{-15pt}Toss in two non-complexes \vspace{-20pt}
 \[ \ccc(1)\defeq S^1,\quad \ccc(2)\defeq \begin{tikzpicture}[scale=0.5, baseline=3.5mm]
 \tikzset{arrow/.style={-{Stealth[scale=1.1]}}}
 \tikzset{oo/.style={circle, scale=0.25, fill=black}}
@@ -143,6 +159,12 @@ C(n)_1 &= \{e_1=\{v_1,v_2\}, \ldots, e_{n-1}=\{v_{n-1}, v_n\}, e_n=\{v_n, v_0\}\
 \end{frame}
 
 \begin{frame}{Higher realization}
+Then push out faces o from a 2-dim type.
+\[\input{figs/realization_dim2_alt_tikz.tex}\]
+\( \partial\Delta^2 \) is a 1-sphere, i.e. \( \ccc(3) \).
+\end{frame}
+
+\begin{frame}{Higher realization}
 \begin{lemma}
 \( \ccc(2)\simeq \ccc(1) \) and in general \( \ccc(n)\simeq\ccc(n-1) \).
 \end{lemma}
@@ -152,13 +174,8 @@ All \( n \)-gons are equivalent to \( S^1 \).
 \end{frame}
 
 \begin{frame}{Higher realization}
-Then push out maps from a 1-type triangle to from a 2-dim type.
-\[\input{figs/realization_dim2_tikz.tex}\]
-\end{frame}
-
-\begin{frame}{Higher realization}
 \( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}. \( h_1, h_2 \) provide \alert{spokes}.
-\[\input{figs/realization_dim2_tikz.tex}\]
+\[\input{figs/realization_dim2_alt_tikz.tex}\]
 \end{frame}
 
 
@@ -168,12 +185,24 @@ Then push out maps from a 1-type triangle to from a 2-dim type.
 \input{figs/link_tikz.tex}
 \end{column}
 \begin{column}{0.5\textwidth}
-The \defemph{link} of a vertex \( v \) in an \( n \)-complex is the \( (n-1) \)-subcomplex of faces not containing \( v \) but whose union with \( v \) is a face.\\~\\
+The \defemph{link} of a vertex \( v \) in a 2-complex is the polygon of edges not containing \( v \) but whose union with \( v \) is a face.\\~\\
 
 This will be our model of the tangent space.
 \end{column}
 \end{columns}
 \end{frame}
+
+\begin{frame}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-0}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-10}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-21}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-41}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-47}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-70}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-80}
+  \includegraphics[width=30mm]{figs/curved_cube/curved_cube-90}
+\end{frame}
+
 
 \begin{frame}{Rotation}
 Let \( R:\gr{abcd}\to\gr{abcd} \) send \( a\mapsto b , b\mapsto c , c\mapsto d, d\mapsto a \). \\~\\
@@ -239,7 +268,7 @@ If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\
 \begin{mydef}
 If \( \mm \) is the realization of a simplicial complex and we have 
 \begin{center}
-\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small]
+\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {M_k\times \partial\Delta^k} \& {M_k} \\
   {\mathbb{M}_{k-1}} \& {\mathbb{M}_k} \\
   \& {\mathcal{U}}
@@ -249,7 +278,7 @@ If \( \mm \) is the realization of a simplicial complex and we have
   \arrow["{h_k}", shorten <=10pt, shorten >=10pt, Rightarrow, from=2-1, to=1-2]
   \arrow["{\imath_{k-1}}", from=2-1, to=2-2]
   \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{k-1}}"', from=2-1, to=3-2]
-  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+  \arrow["\ulcorner"{pos=-0.05, rotate=180}, shift left=1.5, draw=none, from=2-2, to=1-1]
   \arrow["{f_k}", from=2-2, to=3-2]
   \arrow[shorten >=3pt, Rightarrow, from=2-2, to=0]
 \end{tikzcd}
@@ -265,6 +294,22 @@ If \( \mm \) is the realization of a simplicial complex and we have
 \end{center}
 then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
 \end{mydef}
+\end{frame}
+
+\section{Vector fields}
+\begin{frame}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\input{figs/discrete_gauge_theory_oo_swirl}
+\end{column}
+\begin{column}{0.5\textwidth}
+\input{figs/face_swirl_tikz.tex}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+
 \end{frame}
 
 \section{Results}

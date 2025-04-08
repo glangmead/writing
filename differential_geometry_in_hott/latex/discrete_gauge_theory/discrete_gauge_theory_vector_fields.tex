@@ -46,71 +46,7 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}
-  [arrow/.style={-{Stealth[scale=1.1]}}, vec/.style={ultra thick, color=black}, vectr/.style={thick, color=black}, vectrtr/.style={thick, dashed, color=black}, vectrtrtr/.style={thick, dotted, color=black}]
-  \tikzset{oo/.style={circle, scale=0.6, fill=black}}
-  \tikzset{ii/.style={circle, scale=0.3, fill=gray}}
-\newlength{\mylen}
-  \setlength{\mylen}{3cm}
-  \newlength{\mylin}
-  \setlength{\mylin}{1.2cm}
-    \node[oo, label=below right:\( v_1 \)] (V1) at (0, 0) {};
-    \node[oo, label=below:\( v_2 \)] (V2) at (2*\mylen, 0) {};
-    \node[oo, label=above:\( v_3 \)] (V3) at (\mylen, 1.732*\mylen) {};
-
-    \draw[arrow] (V2) edge[very thick, color=teal, "\( e_{23} \)"] (V3);
-    \draw[arrow] (V1) edge[very thick, color=magenta, "\( e_{12} \)"] (V2);
-    \draw[arrow] (V3) edge[very thick, color=blue, "\( e_{31} \)"] (V1);
-    
-    \node [ii, above right=\mylin of V1,  label=above right:\( v_{11} \)] (V11) {};
-    \node [ii, below right=\mylin of V1,  label=below right:\( v_{12} \)] (V12) {};
-    \node [ii, below left=\mylin of  V1,  label=below left:\( v_{13} \)] (V13) {};
-    \node [ii, above left= \mylin of V1,  label=above left: \( v_{14} \)] (V14) {};
-
-    \node [ii, above right=\mylin of V2, label=above right:\( v_{21} \)] (V21) {};
-    \node [ii, below right=\mylin of V2,  label=below right:\( v_{22} \)] (V22) {};
-    \node [ii, below left=\mylin of  V2, label=below left:\( v_{23} \)] (V23) {};
-    \node [ii, above left= \mylin of V2,  label=above left: \( v_{24} \)] (V24) {};
-
-    \node [ii, above right=\mylin of V3, label=above right:\( v_{31} \)] (V31) {};
-    \node [ii, below right=\mylin of V3,  label=below right:\( v_{32} \)] (V32) {};
-    \node [ii, below left=\mylin of  V3, label=below left:\( v_{33} \)] (V33) {};
-    \node [ii, above left= \mylin of V3,  label=above left: \( v_{34} \)] (V34) {};
-
-    \draw[dashed] (V11) -- (V12);
-    \draw[dashed] (V12) -- (V13);
-    \draw[dashed] (V13) -- (V14);
-    \draw[dashed] (V14) -- (V11);
-
-    \draw[dashed] (V21) -- (V22);
-    \draw[dashed] (V22) -- (V23);
-    \draw[dashed] (V23) -- (V24);
-    \draw[dashed] (V24) -- (V21);
-    
-    \draw[dashed] (V31) -- (V32);
-    \draw[dashed] (V32) -- (V33);
-    \draw[dashed] (V33) -- (V34);
-    \draw[dashed] (V34) -- (V31);
-    
-    \draw[arrow] (V1) edge[vec] (V11);
-    \draw[arrow] (V2) edge[vectr] (V21);
-    \draw[arrow] (V3) edge[vectrtr] (V34);
-    \draw[arrow] (V1) edge[vectrtrtr] (V14);
-
-    \draw[arrow] (V2) edge[vec] (V24);
-    \draw[arrow] (V3) edge[vectr] (V33);
-    \draw[arrow] (V1) edge[vectrtr] (V13);
-
-    \draw[arrow] (V21) edge[thick, color=magenta] (V24);
-    \draw[arrow] (V34) edge[thick, color=magenta] (V33);
-    \draw[arrow] (V14) edge[thick, color=magenta] (V13);
-    \draw[arrow] (V33) edge[thick, color=teal] (V32);
-    \draw[arrow] (V13) edge[thick, color=teal] (V12);
-    \draw[arrow] (V12) edge[thick, color=blue] (V11);
-
-    \draw[arrow] (V3) edge[vec] (V32);
-    \draw[arrow] (V1) edge[vectr] (V12);
-\end{tikzpicture}
+\input{figs/face_swirl_tikz.tex}
 \caption{A vector field swirling counterclockwise around a face, in a bundle of squares. Imagine that transport along \( e_{12} \) does not rotate along the page, that transport along \( e_{23} \) rotates counterclockwise by 90 degrees, and that transport along \( e_{31} \) again does not rotate along the page. Thick black vectors are the vector field at a point. Thin vectors are transported once, dashed twice, and dotted three times. The vertices \( v_{ij} \) are in the tangent fibers. If you have a colorized version of the document, the colors of the arrows correspond: the red edge produced the red edge in the fibers.}
 \label{fig:swirling}
 \end{figure}
