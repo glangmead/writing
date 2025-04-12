@@ -3,10 +3,11 @@
   y={(0.508996cm, -0.205391cm)},
   z={(-0.000053cm, 0.971107cm)},
   scale=1,
-  eqback/.style={->, very thick},
+  eqback/.style={very thick},
   back/.style={loosely dotted, thin},
-  eqedge/.style={->, very thick},
+  eqedge/.style={very thick},
   edge/.style={black, thin},
+  r/.style={red},
   facet/.style={fill=blue!95!black,fill opacity=0.0},
   vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
 \coordinate (-1, -1, 0) at (-1, -1, 0);
@@ -39,7 +40,7 @@
 \draw[edge] (0, 0, -1.4) -- (1, 1, 0);
 \draw[edge] (0, 0, 1.4) -- (1, -1, 0);
 \draw[edge] (0, 0, 1.4) -- (1, 1, 0);
-\draw[eqedge] (1, 1, 0) -- (1, -1, 0);
+\draw[r,eqedge] (1, 1, 0) -- (1, -1, 0);
 %% Drawing the vertices in the front
 %%
 \begin{scope}[nodes=vertex]
@@ -51,15 +52,15 @@
 \node[label=above right:\( o \)] at (-1, -1, 0)     {};
 \end{scope}
 \end{tikzpicture}
-
 \begin{tikzpicture}%
   [x={(-0.860769cm, -0.121512cm)},
   y={(0.508996cm, -0.205391cm)},
   z={(-0.000053cm, 0.971107cm)},
   scale=1,
-  eqback/.style={->, very thick},
+  eqback/.style={very thick},
   back/.style={loosely dotted, thin},
-  eqedge/.style={->, very thick},
+  eqedge/.style={very thick},
+  r/.style={red},
   edge/.style={black, thin},
   facet/.style={fill=blue!95!black,fill opacity=0.0},
   vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
@@ -92,7 +93,7 @@
 \draw[edge] (0, 0, -1.4) -- (1, -1, 0);
 \draw[eqedge] (0, 0, -1.4) -- (1, 1, 0);
 \draw[edge] (0, 0, 1.4) -- (1, -1, 0);
-\draw[eqedge] (1, 1, 0) -- (0, 0, 1.4) ;
+\draw[r,eqedge] (1, 1, 0) -- (0, 0, 1.4) ;
 \draw[edge] (1, 1, 0) -- (1, -1, 0);
 %% Drawing the vertices in the front
 %%
@@ -105,15 +106,15 @@
 \node[label=above right:\( o \)] at (-1, -1, 0)     {};
 \end{scope}
 \end{tikzpicture}
-
 \begin{tikzpicture}%
   [x={(-0.860769cm, -0.121512cm)},
   y={(0.508996cm, -0.205391cm)},
   z={(-0.000053cm, 0.971107cm)},
   scale=1,
-  eqback/.style={->, very thick},
+  eqback/.style={very thick},
   back/.style={loosely dotted, thin},
-  eqedge/.style={->, very thick},
+  eqedge/.style={very thick},
+  r/.style={red},
   edge/.style={black, thin},
   facet/.style={fill=blue!95!black,fill opacity=0.0},
   vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
@@ -145,9 +146,63 @@
 \draw[edge] (-1, 1, 0) -- (1, 1, 0);
 \draw[eqedge] (0, 0, -1.4) -- (1, -1, 0);
 \draw[edge] (0, 0, -1.4) -- (1, 1, 0);
-\draw[eqedge] (1, -1, 0) -- (0, 0, 1.4);
+\draw[r,eqedge] (1, -1, 0) -- (0, 0, 1.4);
 \draw[edge] (0, 0, 1.4) -- (1, 1, 0);
 \draw[edge] (1, 1, 0) -- (1, -1, 0);
+%% Drawing the vertices in the front
+%%
+\begin{scope}[nodes=vertex]
+\node[label=above right:\( b \)] at (-1, 1, 0)     {};
+\node[label=below:\( y \)] at (0, 0, -1.4)     {};
+\node[label=above:\( w \)] at (0, 0, 1.4)     {};
+\node[label=above left:\( g \)] at (1, -1, 0)     {};
+\node[label=above left:\( r \)] at (1, 1, 0)     {};
+\node[label=above right:\( o \)] at (-1, -1, 0)     {};
+\end{scope}
+\end{tikzpicture}
+\begin{tikzpicture}%
+  [x={(-0.860769cm, -0.121512cm)},
+  y={(0.508996cm, -0.205391cm)},
+  z={(-0.000053cm, 0.971107cm)},
+  scale=1,
+  eqback/.style={very thick},
+  back/.style={loosely dotted, thin},
+  eqedge/.style={very thick},
+  edge/.style={black, thin},
+  r/.style={red},
+  facet/.style={fill=blue!95!black,fill opacity=0.0},
+  vertex/.style={inner sep=1pt,circle,draw=green!25!black,fill=black,thick}]
+\coordinate (-1, -1, 0) at (-1, -1, 0);
+\coordinate (-1, 1, 0) at (-1, 1, 0);
+\coordinate (0, 0, -1) at (0, 0, -1);
+\coordinate (0, 0, 1) at (0, 0, 1);
+\coordinate (1, -1, 0) at (1, -1, 0);
+\coordinate (1, 1, 0) at (1, 1, 0);
+%% Drawing edges in the back
+%%
+\draw[edge,eqback] (-1, -1, 0) -- (-1, 1, 0);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, -1.4);
+\draw[edge,back] (-1, -1, 0) -- (0, 0, 1.4);
+\draw[edge,eqback,r] (1, -1, 0) -- (-1, -1, 0);
+%% Drawing vertices in the back
+%%
+\node[vertex] at (-1, -1, 0)     {};
+%% Drawing the facets
+%%
+\fill[facet] (1, 1, 0) -- (0, 0, -1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (0, 0, 1.4) -- (1, -1, 0) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, 1.4) -- cycle {};
+\fill[facet] (1, 1, 0) -- (-1, 1, 0) -- (0, 0, -1.4) -- cycle {};
+%% Drawing edges in the front
+%%
+\draw[edge] (-1, 1, 0) -- (0, 0, -1.4);
+\draw[edge] (-1, 1, 0) -- (0, 0, 1.4);
+\draw[eqedge] (-1, 1, 0) -- (1, 1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, -1.4) -- (1, 1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, -1, 0);
+\draw[edge] (0, 0, 1.4) -- (1, 1, 0);
+\draw[eqedge] (1, 1, 0) -- (1, -1, 0);
 %% Drawing the vertices in the front
 %%
 \begin{scope}[nodes=vertex]
