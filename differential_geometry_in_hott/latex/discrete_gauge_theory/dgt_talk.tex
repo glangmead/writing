@@ -392,24 +392,29 @@ We further assume \( f \) factors through \( \K(G,n+1) \) and so is principal.
 \end{frame}
 
 \begin{frame}
+Extend \alert{\( \link \)} from vertices to edges of the octahedron, by imagining \alert{tipping}:
+
 \begingroup
 \tikzset{every picture/.style={scale=0.85}}
 \input{figs/discrete_gauge_theory_oo_transport_tikz}
 \endgroup
+We obtain \( \tr(\partial(wbr)):Tw=Tw \). 
+
+Extend to the face \( wbr \) via \alert{homotopy} \( \flat(wbr):\id=\tr(\partial(wbr)) \).
 \end{frame}
 
-\begin{frame}{Rotation}
-Let \( R:\gr{abcd}\to\gr{abcd} \) send \( a\mapsto b , b\mapsto c , c\mapsto d, d\mapsto a \). \\~\\
-
-Extend \( R \) to edges.
-
-\begin{lemma}
-\( \hgr{R}:\hgr{abcd}\to\hgr{abcd} \) is homotopic to the identity, i.e. we have \( \pit{x:\hgr{abcd}}x=\hgr{R}(x) \).
-\end{lemma}
-\begin{proof}
-Use edges.
-\end{proof}
-\end{frame}
+% \begin{frame}{Rotation}
+% Let \( R:\gr{abcd}\to\gr{abcd} \) send \( a\mapsto b , b\mapsto c , c\mapsto d, d\mapsto a \). \\~\\
+% 
+% Extend \( R \) to edges.
+% 
+% \begin{lemma}
+% \( \hgr{R}:\hgr{abcd}\to\hgr{abcd} \) is homotopic to the identity, i.e. we have \( \pit{x:\hgr{abcd}}x=\hgr{R}(x) \).
+% \end{lemma}
+% \begin{proof}
+% Use edges.
+% \end{proof}
+% \end{frame}
 
 \begin{frame}
 \begin{definition}
@@ -553,6 +558,16 @@ The \defemph{index of the vector field \( X \) on the face \( F \)} is the integ
 \end{itemize}
 \end{columns}
 \end{frame}
+
+\begin{frame}
+We must \alert{sum} index, flatness, and swirling over faces.
+\begin{align*}
+\sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA \\
+\sum_F I^X_F &\leftrightsquigarrow \sum_{i=1}^{n} \mathrm{index}_{x_i}
+\end{align*}
+\( I^X_F\defeq\loopy(\flat_F(X(m))\cdot X_F):\loopy(X(m)=_{Tm}X(m)) \)
+\end{frame}
+
 
 \begin{frame}
 Thank you.
