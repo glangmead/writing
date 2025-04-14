@@ -5,7 +5,7 @@
 \newcommand{\labelitemii}{}
 \newcommand{\labelitemiii}{}
 \newcommand{\labelitemiv}{}
-
+\renewcommand{\mathrm}[1]{\mathsf{#1}}
 \usepackage{greg}
 \renewcommand{\defemph}[1]{\alert{#1}}
 \useoutertheme[subsection=false]{miniframes}
@@ -34,8 +34,9 @@ Extending a map from the k-skel to the (k+1)-skel is called a connection.
 Extending a map to a single face is a flatness structure.
 Focus on 2-dimensions, oriented, tangent bundles:
 Vector fields! Sections on the 1-skel.
-Define swirling and index on a face.
-Define totaling.
+Vector fields do the ice cream scoop thing to paths.
+Index on a face: swirling after factoring in the flatness.
+Flatness and index on two faces.
 }
 
 \title[Geometry in HoTT]{DRAFT: Discrete differential geometry in homotopy type theory}
@@ -71,7 +72,7 @@ Let \( M \) be a compact 2-manifold without boundary, equipped with a Riemannian
 
 \begin{frame}
 \vspace{10pt}\begin{theorem}[Poincaré-Hopf]
-Let \( M \) be a compact smooth manifold without boundary. Let \( X \) be a vector field on \( M \) with isolated zeroes \( x_1,\ldots,x_n \). Then \[\sum_{i=1}^{n} \mathrm{index}_{x_i}=\chi(M).\]
+Let \( M \) be a compact smooth manifold without boundary. Let \( X \) be a vector field on \( M \) with isolated zeroes \( x_1,\ldots,x_n \). Then \[\sum_{i=1}^{n} \mathsf{index}_{x_i}=\chi(M).\]
 \end{theorem}
 \vspace{-40pt}
 % RADIAL OUTWARD
@@ -284,7 +285,7 @@ Next construct a 1-sphere \( \partial\Delta^2\defeq \)
 \end{tikzpicture} as the realization of \( \partial P(2) \):
 \[% https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXHBhcnRpYWwgUCgyKV8xIl0sWzEsMSwiXFxwYXJ0aWFsXFxEZWx0YV4yIl0sWzAsMCwiXFxwYXJ0aWFsIFAoMilfMVxcdGltZXMgXFxwYXJ0aWFsXFxEZWx0YV4wIl0sWzAsMSwiXFxwYXJ0aWFsIFAoMilfMCJdLFsyLDBdLFsyLDNdLFszLDFdLFswLDFdLFsxLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
 \begin{tikzcd}[ampersand replacement=\&]
-  {\partial P(2)_1\times \partial\Delta^0} \& {\partial P(2)_1} \\
+  {\partial P(2)_1\times \partial\Delta^1} \& {\partial P(2)_1} \\
   {\partial P(2)_0} \& {\partial\Delta^2}
   \arrow[from=1-1, to=1-2]
   \arrow[from=1-1, to=2-1]
@@ -341,7 +342,7 @@ This will be our model of the tangent space.
 
 \begin{frame}
 \begin{theorem}[Whitehead (1940)]
-Every smooth manifold has a compatible structure of a \alert{combinatorial manifold}: a simplicial complex of dimension \( n \) such that the link is the geometric realization of an \( (n-1) \)-sphere.
+Every smooth \( n \)-manifold has a compatible structure of a \alert{combinatorial manifold}: a simplicial complex of dimension \( n \) such that the link is a combinatorial \( (n-1) \)-sphere, i.e. its geometric realization is an \( (n-1) \)-sphere.
 \end{theorem}
 \url{https://ncatlab.org/nlab/show/triangulation+theorem}
 \end{frame}
@@ -496,7 +497,7 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on an oriented 2-dim cell
 \begin{column}{0.4\textwidth}
 \begin{itemize}
 \item \( \partial F\defeq e_{12}\cdot e_{23}\cdot e_{31}  \)
-\item We access pathovers asymmetrically: \( X_{12}:T_{12}X_1=X_2 \)
+\item We access pathovers asymmetrically: \( X_{12}:T_{12}X_1=_{T_2}X_2 \)
 \item \( X(\partial F) \) is 3-sided inside a square
 \item To make a loop we cat with \( \flat(\partial F) \)
 \end{itemize}
@@ -541,6 +542,25 @@ The \defemph{index of the vector field \( X \) on the face \( F \)} is the integ
 
 \section{Results}
 
+\begin{frame}
+How do we make these happen?
+\begin{align*}
+\sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA  \\
+\sum_F I^X_F &\leftrightsquigarrow  \sum_{i=1}^{n} \mathsf{index}_{x_i} \\
+? &\leftrightsquigarrow \frac{1}{2\pi}\int_M K\,dA + \sum_{i=1}^{n} \mathsf{index}_{x_i} = 0 
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\onslide<1->{Observation 1: Use the torsor structure. If we choose \( m:\mm \) then \( T_m=T_m \) acts on all fibers. We can define subtraction \( T_i\times T_i\to(T_m=T_m) \).}
+
+\onslide<2->{Observation 2: Use the vector field. Given \( X_i:T_i \) we can form subtraction \( -X_i:T_i\to (T_m=T_m) \). \( X_{ij}-X_j:T_{ji}X_i-X_j=_{T_m=T_m}0 \).}
+
+\onslide<3->{Observation 3: Use \( \ap \) of addition. We can add \( \alpha:a=_{\ccc(4)}0 \) and \( \beta:b=_{\ccc(4)}0 \) to form \( \alpha+\beta:(a+b)=_{\ccc(4)}0 \).}
+
+\onslide<4->{Together these remove the dependency. We can compute \( \flat, I, X \) on each face independently and total them in \( T_m=T_m \).}
+\end{frame}
+
 \begin{frame}{Classical proof}
 \begin{columns}
 \column{0.5\textwidth}
@@ -557,15 +577,6 @@ The \defemph{index of the vector field \( X \) on the face \( F \)} is the integ
 \item Hopf's \( \Phi \) is defined on edges, not loops. We imitated that too.
 \end{itemize}
 \end{columns}
-\end{frame}
-
-\begin{frame}
-We must \alert{sum} index, flatness, and swirling over faces.
-\begin{align*}
-\sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA \\
-\sum_F I^X_F &\leftrightsquigarrow \sum_{i=1}^{n} \mathrm{index}_{x_i}
-\end{align*}
-\( I^X_F\defeq\loopy(\flat_F(X(m))\cdot X_F):\loopy(X(m)=_{Tm}X(m)) \)
 \end{frame}
 
 
