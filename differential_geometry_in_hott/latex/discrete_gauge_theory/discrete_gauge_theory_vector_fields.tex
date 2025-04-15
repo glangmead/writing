@@ -75,7 +75,7 @@ If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) b
 \begin{align*} 
 \mu(x',p)&:\mu(x', x)=_G\mu(x', y)\\
 \mathsf{is\underscore comm}(x',y)&:\mu(x',y)=_G\mu(y,x')\\
-\mu(y, p')&:\mu(y, x')=_G\mu(y, y').
+\mu(y, p')&:\mu(y, x')=_G\mu(y, y').\qedhere
 \end{align*}
 \end{myproof}
 
@@ -104,7 +104,7 @@ We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j
 (X_i + \rho_{ij})+\rho_{ji} &=_{T_i} T_{ij}X_j + \rho_{ji}&&\text{by definition of }\rho_{ij}\\
 &=_{T_i} T_{ij}(X_j + \rho_{ji})&&\text{by equivariance of transport} \\
 &=_{T_i} T_{ij}(T_{ji}(X_i))&&\text{by definition of }\rho_{ji}\\
-&=_{T_i} X_i&&\text{by definition of }T
+&=_{T_i} X_i&&\text{by definition of }T\qedhere
 \end{align*}
 \end{myproof}
 We can obtain a path in \( \Gg(m) \) from a dependent path by again subtracting the basepoint:
@@ -138,11 +138,11 @@ so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{
 &=_{0=_{\Gg(m)}0} ((X_{ij}-X_j)+\rho_{ij})\cdot (X_{ji} - X_i)&&\text{definition of }\sigma s\\
 &=_{0=_{\Gg(m)}0} (T_{ij}(X_{ij})-X_i)\cdot (X_{ji} - X_i)&&\text{action of }\rho_{ij}\text{ (see (\ref{eq:action_of_rho}))} \\
 &=_{0=_{\Gg(m)}0} \refl_{X_i}-X_i&&\text{path induction for }X\\
-&=_{0=_{\Gg(m)}0} \refl_0&&
-\end{align*}%
-\end{myproof}%
+&=_{0=_{\Gg(m)}0} \refl_0&&\qedhere
+\end{align*}
+\end{myproof}
 \begin{mynote}
-The classical argument of Hopf \cite{hopf}, which is presented in more detail in the more readily available \cite{needham}, makes an implicit assumption that we can concatenate two terms of different type such as \( X_{ij} \) and \( X_{kl} \) by saying. The authors name such terms ``change in angle across an edge'' and stipulate that this is a function ``defined on edges.'' The extra work we are doing in this section amounts to a partial formalization of this idea.
+The classical argument of Hopf \cite{hopf}, which is presented in more detail in the more readily available \cite{needham}, makes an implicit assumption that we can concatenate two terms of different type such as \( X_{ij} \) and \( X_{kl} \). The authors name such terms ``change in angle across an edge'' and stipulate that this is a function ``defined on edges.'' The extra work we are doing in this section amounts to a partial formalization of this idea.
 \end{mynote}
 
 \subsection{An example vector field on the sphere}

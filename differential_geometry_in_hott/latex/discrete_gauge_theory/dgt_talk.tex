@@ -580,6 +580,45 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on a 2-dim cellular type
 \end{columns}
 \end{frame}
 
+\begin{frame}{Angle}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\input{figs/discrete_gauge_theory_oo_swirl}
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{itemize}
+\item We want to extract from each \( X_{ij} \) just the \alert{angle}, a non-dependent quantity.
+\item e.g. in this example: 3 copies of ``+1 notch'' and 3 of ``--1 notch.''
+\item The total swirled angle is 0.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Angle}
+\onslide<1->{Observation 1: Use the torsor structure. If we choose \( m:\mm \) then \( T_m=T_m \) acts on all fibers. We can define subtraction \( T_i\times T_i\to(T_m=T_m) \).}
+
+\onslide<2->{Observation 2: Use the vector field. Given \( X_i:T_i \) we can form subtraction \( -X_i:T_i\to (T_m=T_m) \). \( X_{ij}-X_j:T_{ji}X_i-X_j=_{T_m=T_m}0 \).}
+
+\onslide<3->{Observation 3: Use \( \ap \) of addition. We can add \( \alpha:a=_{\ccc(4)}0 \) and \( \beta:b=_{\ccc(4)}0 \) to form \( \alpha+\beta:(a+b)=_{\ccc(4)}0 \).}
+
+\onslide<4->{Together these remove the dependency. We can compute \( \flat, I, X \) on each face independently and total them in \( T_m=T_m \).}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}
+If \( G \) is a higher group with multiplication \( \mu:G\times G\to G \) and proof of commutativity \( \mathsf{is\underscore comm}:\pit{a,b:G}\mu(a, b)=\mu(b, a) \) then \( \mu \) induces a function \( \mu_=:(x=_G y)\times (x'=_G y')\to (\mu(x, x')=_G\mu(y,y')) \).
+\end{lemma}
+\begin{proof}
+If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) by concatenating the three paths 
+\begin{align*} 
+\mu(x',p)&:\mu(x', x)=_G\mu(x', y)\\
+\mathsf{is\underscore comm}(x',y)&:\mu(x',y)=_G\mu(y,x')\\
+\mu(y, p')&:\mu(y, x')=_G\mu(y, y').\qedhere
+\end{align*}
+\end{proof}
+\end{frame}
+
 \begin{frame}
 \[\begin{aligned}
 \tr_F&\defeq \tr(\partial F)&&:T_1=_{\Kzt}T_1&&\text{\alert{holonomy}}\\
@@ -617,23 +656,24 @@ The \defemph{index of the vector field \( X \) on the face \( F \)} is the integ
 
 \section{Results}
 
-\begin{frame}
-How do we make these happen?
-\begin{align*}
-\sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA  \\
-\sum_F I^X_F &\leftrightsquigarrow  \sum_{i=1}^{n} \mathsf{index}_{x_i} \\
-? &\leftrightsquigarrow \frac{1}{2\pi}\int_M K\,dA - \sum_{i=1}^{n} \mathsf{index}_{x_i} = 0 
-\end{align*}
-\end{frame}
+% \begin{frame}
+% How do we make these happen?
+% \begin{align*}
+% \sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA  \\
+% \sum_F I^X_F &\leftrightsquigarrow  \sum_{i=1}^{n} \mathsf{index}_{x_i} \\
+% ? &\leftrightsquigarrow \frac{1}{2\pi}\int_M K\,dA - \sum_{i=1}^{n} \mathsf{index}_{x_i} = 0 
+% \end{align*}
+% \end{frame}
 
 \begin{frame}
-\onslide<1->{Observation 1: Use the torsor structure. If we choose \( m:\mm \) then \( T_m=T_m \) acts on all fibers. We can define subtraction \( T_i\times T_i\to(T_m=T_m) \).}
-
-\onslide<2->{Observation 2: Use the vector field. Given \( X_i:T_i \) we can form subtraction \( -X_i:T_i\to (T_m=T_m) \). \( X_{ij}-X_j:T_{ji}X_i-X_j=_{T_m=T_m}0 \).}
-
-\onslide<3->{Observation 3: Use \( \ap \) of addition. We can add \( \alpha:a=_{\ccc(4)}0 \) and \( \beta:b=_{\ccc(4)}0 \) to form \( \alpha+\beta:(a+b)=_{\ccc(4)}0 \).}
-
-\onslide<4->{Together these remove the dependency. We can compute \( \flat, I, X \) on each face independently and total them in \( T_m=T_m \).}
+\begin{itemize}
+\item On a single face we have \( I^X_F=\loopy(\flat_F(X_1)\cdot X_F) \).
+\item Map \( \flat_F(X_1) \) and \( X_F \) to angles in \( T_m=T_m \).
+\item Sum over faces can be performed in \( T_m=T_m \).
+\item Assume that each edge is traversed twice, once in each direction.
+\item Prove that the total angle \( \sum_F X_F=0 \).
+\item Leaving us \( I_\mathrm{tot}=\loopy(\flat_{\mathrm{tot}}) \).
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Classical proof}
