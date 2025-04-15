@@ -427,16 +427,16 @@ It is a property of a map \( f:A\to\EM(G,n) \) to factor through \( \K(G,n+1) \)
   \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube8}}} \)
 \end{frame}
 
-\begin{frame}
-Extend \alert{\( \link \)} from vertices to edges of the octahedron, by imagining \alert{tipping}:
+\begin{frame}{\( T:\mm\to\EMzo \) extending \( \link \)}
+We define \( T \) on edges by imaginging \alert{tipping}:
 
 \begingroup
 \tikzset{every picture/.style={scale=0.85}}
 \input{figs/discrete_gauge_theory_oo_transport_tikz}
 \endgroup
-We obtain \( \tr(\partial(wbr)):Tw=Tw \). 
+\( \tr(\partial(wbr)):Tw=Tw \) is clockwise rotation by one notch.
 
-Extend to the face \( wbr \) via \alert{homotopy} \( \flat(wbr):\id=\tr(\partial(wbr)) \).
+We define \( T \) on the face \( wbr \) by the shortest homotopy \( T(wbr):\id=\tr(\partial(wbr)) \).
 \end{frame}
 
 % \begin{frame}{Rotation}
@@ -454,7 +454,7 @@ Extend to the face \( wbr \) via \alert{homotopy} \( \flat(wbr):\id=\tr(\partial
 
 \begin{frame}
 \begin{definition}
-If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a cellular type and all the triangles commute in the diagram:\vspace{-10pt}
+If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a realization and all the triangles commute in the diagram:\vspace{-10pt}
 \[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {\mm_0} \& {\mm_1} \& {\mm_2} \& \cdots \& {\mm_n} \\
 \&\& {\mathcal{U}}
@@ -475,7 +475,7 @@ If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\
 \end{frame}
 
 \begin{frame}
-\begin{mydef}
+\begin{mydef}[cont.]
 \[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {M_k\times \partial\Delta^k} \& {M_k} \\
   {\mathbb{M}_{k-1}} \& {\mathbb{M}_k} \\
@@ -488,28 +488,34 @@ If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\
   \arrow[""{name=0, anchor=center, inner sep=0}, "{f_{k-1}}"', from=2-1, to=3-2]
   \arrow["\ulcorner"{pos=-0.05, rotate=180}, shift left=1.5, draw=none, from=2-2, to=1-1]
   \arrow["{f_k}", from=2-2, to=3-2]
-  \arrow[shorten >=3pt, Rightarrow, from=2-2, to=0]
 \end{tikzcd}
 \begin{tikzcd}[ampersand replacement=\&]
-  {\{m_k\}\times \partial\Delta^k} \& \unit \\
+  {\{F\}\times \partial\Delta^2} \& \unit \\
   {\mathbb{M}_{k-1}} \& {\mathcal{U}}
   \arrow["{!}", from=1-1, to=1-2]
   \arrow["{\mathbb{A}_{k-1}}"', from=1-1, to=2-1]
   \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
-  \arrow["{\flat_k}", shorten <=11pt, shorten >=11pt, Rightarrow, from=1-2, to=2-1]
+  \arrow["{\flat_F}", shorten <=11pt, shorten >=11pt, Rightarrow, from=1-2, to=2-1]
   \arrow[from=2-1, to=2-2]
 \end{tikzcd}\]
-the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
+the filler \( \flat_F \) is called a \defemph{flatness structure for the face \( F \)}, and its ending path (the holonomy around the boundary) is called \defemph{the \( k \)-curvature at the face \( F \)}.
 \end{mydef}
+\end{frame}
+\begin{frame}
+With these definitions we have now achieved one of our main goals.
+
+Without a definition of Euler characterisitc we can't prove Gauss-Bonnet.
+
+But once we add vector fields there is a lot more to say.
 \end{frame}
 
 \section{Vector fields}
 \begin{frame}{Vector fields}
 \begin{columns}
 \begin{column}{0.7\textwidth}
-Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on an oriented 2-dim cellular type
+Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on a 2-dim cellular type
 \begin{itemize}
-\item A \alert{vector field} is a term \( X:\pit{m:\mm_1}Tm \).
+\item A \alert{vector field} is a term \alert{\( X:\pit{m:\mm_1}Tm \)}.
 \item It's a \alert{nonvanishing} vector field on the 1-skeleton.
 \item We model classical zeros by omitting the faces.
 \end{itemize}
@@ -520,21 +526,55 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on an oriented 2-dim cell
 \end{columns}
 \end{frame}
 
+\begin{frame}{Pathovers}
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\includegraphics[width=30ex]{figs/pathovers.pdf}
+\end{column}
+\begin{column}{0.45\textwidth}
+\begin{itemize}
+\item Recall pathovers (dependent paths).
+\item There is an asymmetry: we pick a fiber to display it.
+\item Dependent functions map paths to pathovers (\( \apd \)).
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Building up a triangle-over}
+\begin{tikzcd}[ampersand replacement=\&, row sep=small]
+  {T_1} \& {T_2} \& {T_3} \& {T_1} \\
+  \&\&\& {T_{13}T_{32}T_{21}X_1} \\
+  \&\& {T_{32}T_{21}X_1} \& {T_{13}T_{32}X_2} \\
+  \& {T_{21}X_1} \& {T_{32}X_2} \& {T_{13}X_3} \\
+  {X_1} \& {X_2} \& {X_3} \& {X_1}
+  \arrow["{T_{21}}", from=1-1, to=1-2]
+  \arrow["{T_{32}}", from=1-2, to=1-3]
+  \arrow["{T_{13}}", from=1-3, to=1-4]
+  \arrow["{\alert{T_{13}T_{32}X_{12}}:}", equals, from=3-4, to=2-4]
+  \arrow["{\alert{X_{12}}:}"', equals, from=4-2, to=5-2]
+  \arrow["{\alert{T_{32}X_{12}}:}", equals, from=4-3, to=3-3]
+  \arrow["{\alert{T_{13}X_{23}}:}", equals, from=4-4, to=3-4]
+  \arrow["{\alert{X_{23}}:}", equals, from=5-3, to=4-3]
+  \arrow["{\alert{X_{31}}:}", equals, from=5-4, to=4-4]
+\end{tikzcd}
+\end{frame}
+
 \begin{frame}
 \begin{columns}
-\begin{column}{0.6\textwidth}
+\begin{column}{0.65\textwidth}
 \vspace{12pt}
 \begingroup
 \tikzset{every picture/.style={scale=0.85}}
 \input{figs/face_swirl_tikz.tex}
 \endgroup
 \end{column}
-\begin{column}{0.4\textwidth}
+\begin{column}{0.35\textwidth}
 \begin{itemize}
-\item \( \partial F\defeq e_{12}\cdot e_{23}\cdot e_{31}  \)
-\item We access pathovers asymmetrically: \( X_{12}:T_{12}X_1=_{T_2}X_2 \)
-\item \( X(\partial F) \) is 3-sided inside a square
-\item To make a loop we cat with \( \flat(\partial F) \)
+\item \( \partial F\defeq e_{12}\cdot e_{23}\cdot e_{31}.  \)
+\item \( \tr \) thins out arrows.
+\item \( X \) on a path is drawn in the path's color.
+\item \( X(\partial F) \) traces 3 sides of a square.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -542,15 +582,15 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on an oriented 2-dim cell
 
 \begin{frame}
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{\alert{holonomy}}\\
-\flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)&&\text{\alert{flatness}}\\
-X_F&\defeq X(\partial F)&&:\tr(\partial F)(X(m))=_{Tm}X(m)&&\text{\alert{swirling}}\\
+\tr_F&\defeq \tr(\partial F)&&:T_1=_{\Kzt}T_1&&\text{\alert{holonomy}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{T_1=T_1}\tr_F&&\text{\alert{flatness}}\\
+X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
 \onslide<2->{
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
-The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F(X(m))\cdot X_F):\loopy(X(m)=_{Tm}X(m)) \).
+The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F(X_1)\cdot X_F):\loopy(X_1=_{T_1}X_1) \).
 \end{mydef}
 \end{column}
 \begin{column}{0.3\textwidth}
@@ -582,7 +622,7 @@ How do we make these happen?
 \begin{align*}
 \sum_F \flat_F &\leftrightsquigarrow \int_M K\,dA  \\
 \sum_F I^X_F &\leftrightsquigarrow  \sum_{i=1}^{n} \mathsf{index}_{x_i} \\
-? &\leftrightsquigarrow \frac{1}{2\pi}\int_M K\,dA + \sum_{i=1}^{n} \mathsf{index}_{x_i} = 0 
+? &\leftrightsquigarrow \frac{1}{2\pi}\int_M K\,dA - \sum_{i=1}^{n} \mathsf{index}_{x_i} = 0 
 \end{align*}
 \end{frame}
 
