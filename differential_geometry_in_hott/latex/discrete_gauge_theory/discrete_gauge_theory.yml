@@ -2,13 +2,12 @@ header-includes: |
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Quattrocento:wght@400">
   <style>
   body {
-    font-family: Baskerville, 'Libre Baskerville', serif;
+    font-family: -apple-system-ui-serif, ui-serif, serif;
   }
   h1, h2, h3, h4, h5, h6, .abstract-title {
-    font-family: Quattrocento, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica', sans-serif;
     font-weight: bold;
     text-align: center;
-  }
   img {
     display: block;
     margin-left: auto;

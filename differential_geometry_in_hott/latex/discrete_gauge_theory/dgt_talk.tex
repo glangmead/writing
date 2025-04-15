@@ -191,7 +191,7 @@ Let \( M \) be a compact smooth manifold without boundary. Let \( X \) be a vect
 \begin{frame}{Discrete manifolds in HoTT}
 \begin{itemize}
 \item Recall the classical theory of \alert{simplicial complexes}
-\item Define a \alert{realization} procedure to turn them into homotopy pushouts
+\item Define a \alert{realization} procedure to construct types
 \end{itemize}
 \end{frame}
 
@@ -209,9 +209,26 @@ We call the truncated list \( M_{\leq k}\defeq [M_0,\ldots,M_k] \) \alert{the \(
 
 \begin{frame}{Simplicial complexes}
 \begin{example}
-The \defemph{complete simplex of dimension \( n \)}, denoted \( P(n), \) is the set \( \{1,\ldots,n+1\} \) and its power set. The \( (n-1) \)-skeleton \( P(n)_{\leq (n-1)} \) is denoted \alert{\( \partial P(n) \)} and will serve as a combinatorial \( (n-1) \)-sphere.
+The \defemph{complete simplex of dimension \( n \)}, denoted \alert{\( P(n), \)} is the set \( \{1,\ldots,n+1\} \) and its power set. The \( (n-1) \)-skeleton \( P(n)_{\leq (n-1)} \) is denoted \alert{\( \partial P(n) \)} and will serve as a combinatorial \( (n-1) \)-sphere.
 \end{example}
-e.g., \( \partial P(2) \) is an abstract triangle with 3 vertices and 3 edges (lacks its face).
+e.g., \( P(2) \) is
+\begin{tikzpicture}[baseline=3mm]
+\tikzset{oo/.style={circle, scale=0.25, fill=black}}
+\node[oo, label=left:\( 1 \)] at (-0.7, 0) (a) {};
+\node[oo, label=right:\( 2 \)] at  (0, 1) (b) {};
+\node[oo, label=right:\( 3 \)] at  (0.7, 0) (c) {};
+\draw[fill=blue!95!black,fill opacity=0.1] (-0.7, 0)--(0, 1)--(0.7, 0)--(a);
+\end{tikzpicture}, 
+\( \partial P(2) \) is
+\begin{tikzpicture}[baseline=3mm]
+\tikzset{oo/.style={circle, scale=0.25, fill=black}}
+\node[oo, label=left:\( 1 \)] at (-0.7, 0) (a) {};
+\node[oo, label=right:\( 2 \)] at  (0, 1) (b) {};
+\node[oo, label=right:\( 3 \)] at  (0.7, 0) (c) {};
+\draw (a) -- (b);
+\draw (b) -- (c);
+\draw (c) -- (a);
+\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Simplicial complexes}
@@ -234,7 +251,7 @@ Here is a \alert{Hasse diagram} of an abstract octahedron (vertices named for th
 \end{columns}
 \end{frame}
 
-\begin{frame}{Homotopy realization}
+\begin{frame}{Homotopy realization: dimension 0}
 We will \alert{realize} simplicial complexes as pushouts.
 
 The realization of a 0-dimensional complex \( M_0 \) is the set \( M_0 \).
@@ -242,7 +259,7 @@ The realization of a 0-dimensional complex \( M_0 \) is the set \( M_0 \).
 In particular the 0-sphere \( \partial\Delta^1\defeq \partial P(1) \).
 \end{frame}
 
-\begin{frame}{Homotopy realization}
+\begin{frame}{Homotopy realization: dimension 1}
 For a 1-dim complex \( M\defeq [M_0,M_1] \) form
 \[\input{figs/realization_dim1_tikz.tex}
 \]
@@ -272,9 +289,9 @@ For a 1-dim complex \( M\defeq [M_0,M_1] \) form
 % %We sometimes denote a polygon with vertices \( \{a, b, c\} \) with \( \gr{abc} \), its realization with \( \hgr{abc} \).
 % \end{frame}
 
-\begin{frame}
+\begin{frame}{Homotopy realization: dimension 1}
 Next construct a 1-sphere \( \partial\Delta^2\defeq \)
-\begin{tikzpicture}[baseline=3mm]
+\begin{tikzpicture}[baseline=3mm, scale=0.7]
 \tikzset{oo/.style={circle, scale=0.25, fill=black}}
 \node[oo, label=left:\( a \)] at (-0.7, 0) (a) {};
 \node[oo, label=right:\( b \)] at  (0, 1) (b) {};
@@ -282,7 +299,7 @@ Next construct a 1-sphere \( \partial\Delta^2\defeq \)
 \draw (a) -- (b);
 \draw (b) -- (c);
 \draw (c) -- (a);
-\end{tikzpicture} as the realization of \( \partial P(2) \):
+\end{tikzpicture}:
 \[% https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXHBhcnRpYWwgUCgyKV8xIl0sWzEsMSwiXFxwYXJ0aWFsXFxEZWx0YV4yIl0sWzAsMCwiXFxwYXJ0aWFsIFAoMilfMVxcdGltZXMgXFxwYXJ0aWFsXFxEZWx0YV4wIl0sWzAsMSwiXFxwYXJ0aWFsIFAoMilfMCJdLFsyLDBdLFsyLDNdLFszLDFdLFswLDFdLFsxLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
 \begin{tikzcd}[ampersand replacement=\&]
   {\partial P(2)_1\times \partial\Delta^1} \& {\partial P(2)_1} \\
@@ -294,7 +311,7 @@ Next construct a 1-sphere \( \partial\Delta^2\defeq \)
   \arrow["\ulcorner"{pos=-0, rotate=180}, draw=none, from=2-2, to=1-1]
 \end{tikzcd}\]
 \[% https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXHtcXHthLCBiXFx9LCBcXHtiLCBjXFx9LCBcXHtjLCBhXFx9XFx9Il0sWzEsMSwiXFxwYXJ0aWFsXFxEZWx0YV4yIl0sWzAsMCwiXFx7XFx7YSwgYlxcfSwgXFx7YiwgY1xcfSwgXFx7YywgYVxcfVxcfVxcdGltZXMgXFx7MCwgMVxcfSJdLFswLDEsIlxce1xce2FcXH0sIFxce2JcXH0sIFxce2NcXH1cXH0iXSxbMiwwXSxbMiwzXSxbMywxXSxbMCwxXSxbMSwyLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
-\begin{tikzcd}[ampersand replacement=\&]
+\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {\{\{a, b\}, \{b, c\}, \{c, a\}\}\times \{0, 1\}} \& {\{\{a, b\}, \{b, c\}, \{c, a\}\}} \\
   {\{\{a\}, \{b\}, \{c\}\}} \& {\partial\Delta^2}
   \arrow[from=1-1, to=1-2]
@@ -305,8 +322,8 @@ Next construct a 1-sphere \( \partial\Delta^2\defeq \)
 \end{tikzcd}\]
 \end{frame}
 
-\begin{frame}{Homotopy realization}
-Then use \(  \partial\Delta^1, \partial\Delta^2 \) to realize \( M\defeq[M_0, M_1, M_2] \).
+\begin{frame}{Homotopy realization: dimension 2}
+To realize \( M\defeq[M_0, M_1, M_2] \) use \(  \partial\Delta^1, \partial\Delta^2 \):
 \[\input{figs/realization_dim2_alt_tikz.tex}\]
 \end{frame}
 
@@ -321,10 +338,10 @@ Then use \(  \partial\Delta^1, \partial\Delta^2 \) to realize \( M\defeq[M_0, M_
 % \end{corollary}
 % \end{frame}
 
-\begin{frame}{Homotopy realization}
-\( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}. \( h_1, h_2 \) provide \alert{spokes}.
-\[\input{figs/realization_dim2_alt_tikz.tex}\]
-\end{frame}
+% \begin{frame}{Homotopy realization}
+% \( *_{\mm_1}, *_{\mm_2} \) provide \alert{hubs}. \( h_1, h_2 \) provide \alert{spokes}.
+% \[\input{figs/realization_dim2_alt_tikz.tex}\]
+% \end{frame}
 
 
 \begin{frame}{Homotopy realization}
@@ -335,12 +352,12 @@ Then use \(  \partial\Delta^1, \partial\Delta^2 \) to realize \( M\defeq[M_0, M_
 \begin{column}{0.5\textwidth}
 The \defemph{link} of a vertex \( v \) in a 2-complex is the polygon of edges not containing \( v \) but whose union with \( v \) is a face.\\~\\
 
-This will be our model of the tangent space.
+This will be our model of the \alert{tangent space}.
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Smoothness}
 \begin{theorem}[Whitehead (1940)]
 Every smooth \( n \)-manifold has a compatible structure of a \alert{combinatorial manifold}: a simplicial complex of dimension \( n \) such that the link is a combinatorial \( (n-1) \)-sphere, i.e. its geometric realization is an \( (n-1) \)-sphere.
 \end{theorem}
@@ -350,38 +367,56 @@ Every smooth \( n \)-manifold has a compatible structure of a \alert{combinatori
 \section{Torsors}
 
 \begin{frame}
-\begin{definition}
-Let \( G \) be a group with identity element \( e \). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If we have
-\[ 
-\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
-\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \).
-\end{definition}
-\begin{lemma}
-Point \( BG \) at \( \reg{G} \), the \( G \)-torsor \( G \) acting on itself on the right. Then \( \loopy_{\reg{G}} BG \simeq G \), so \( BG \) is a \( \K(G,1) \).
-\end{lemma}
+What type families \( \mm\to\uni \) will we consider? Families of torsors, called \alert{principal bundles}.
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Torsors}
+\begin{definition}
 \begin{itemize}
-\item \( S^1:\uni \) is not an \( \Aut S^1 \)-torsor.
-\item It's a torsor for \( (S^1=S^1)_{(\id)} \), the identity component.
-\item This omits the flip, the reversal of \alert{orientation}.
+\item Let \( G \) be a group with identity element \( e \).
+\item A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \).
+\item If we have a proof of
+\[ 
+\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x))
+\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \alert{\( BG \)}.
+\item Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
+\end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Facts}
+\begin{itemize}
+\item \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
+\item \( BG \) is connected.
+\item Previous 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
+\item \( \ev(e):(\reg{G}=_{BG} X)\to X \) is an equivalence.
 \item See the Buchholtz et. al. H-spaces paper for more.
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{A connected component of \( \uni \)?}
 \begin{definition}
-\( \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \)
+The \alert{type of Eilenberg-Mac Lane spaces \( \EM(G,n) \)} is the connected component of \( \K(G,n) \):
+\[ \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \]
 \end{definition}
-\begin{definition}
-A \defemph{\( \K(G,n) \)-bundle} on a type \( M \) is a map \( f:M\to \EM(G,n) \).
-\end{definition}
-We further assume \( f \) factors through \( \K(G,n+1) \) and so is principal.
+It is a property of a map \( f:A\to\EM(G,n) \) to factor through \( \K(G,n+1) \). See the Scoccola paper.
 \end{frame}
 
+\begin{frame}{Coincidences of 2 dimensions}
+\begin{itemize}
+\item \( S^1 \) is a \( \Kzo \) since \( \loopy(S^1, \base)\simeq \zz \).
+\item So \( \EMzo \) is a type of \alert{mere circles}.
+\item But \( S^1=_{\EMzo}S^1 \) contains an order 2 \alert{flip}, so \( \not\simeq S^1 \).
+\item For a map \( f:A\to\EMzo \) to factor through  \( \Kzt \), it must somehow avoid flips.
+\item This deserves to be called \alert{orientability}.
+\item \( \link:\mm_0\to\EMzo \) is a great starting point.
+\end{itemize}
+\end{frame}
+
+
 \section{Connections and curvature}
-\begin{frame}
+
+\begin{frame}{What we hope to capture and explain}
   \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube1}}} \!\!\to\!\! \)
   \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube2}}}\!\!\to\!\! \)
   \( \vcenter{\hbox{\includegraphics[width=30mm]{figs/curved_cube/curved_cube3}}}\!\!\to\!\! \)
