@@ -62,7 +62,7 @@
 \newcommand{\simplex}{\Delta} % todo: mathsf
 \newcommand{\simplexn}[1]{\simplex^{#1}}
 \newcommand{\bdsimplex}{\partial\simplex}
-\newcommand{\bdsimplexn}[1]{\partial\simplex^{#1}}
+\newcommand{\bdsimplexn}[1]{\partial\simplex({#1})}
 \newcommand{\ent}{\vdash}
 \newcommand{\adj}{\dashv}
 \newcommand{\re}{\mathcal{R}}%realization
@@ -258,6 +258,8 @@
 \newcommand{\gr}[1]{[{#1}]} % geometric realization
 \newcommand{\hgr}[1]{\llb{#1}\rrb} % higher geometric realization of anonymous data
 \newcommand{\joinrell}{\mathrel{\mkern-3mu}}
+\newcommand{\Dd}{\Delta\!\!\!\!{\scalebox{0.7}{$\Delta$}}}
+
 \newenvironment{dedication}
 {\clearpage           % we want a new page
  \thispagestyle{empty}% no header and footer

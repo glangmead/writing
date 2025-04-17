@@ -1,17 +1,17 @@
-% https://q.uiver.app/#q=WzAsNyxbMCwwLCJNXzFcXHRpbWVzIFxcYmRzaW1wbGV4bnsxfSJdLFswLDEsIk1fMD1cXG1hdGhiYntNfV8wIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFsxLDAsIk1fMSJdLFsxLDIsIk1fMlxcdGltZXMgXFxiZHNpbXBsZXhuezJ9Il0sWzIsMiwiTV8yIl0sWzIsMSwiXFxtYXRoYmJ7TX1fMiJdLFswLDEsIlxcbWF0aGJie0F9XzAiLDJdLFsxLDJdLFswLDMsIlxcbWF0aHJte3ByfV8xIl0sWzMsMiwiKl97XFxtYXRoYmJ7TX1fMX0iXSxbMiwwLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFsyLDZdLFs0LDIsIlxcbWF0aGJie0F9XzEiXSxbNSw2LCIqX3tcXG1hdGhiYntNfV8yfSIsMl0sWzQsNSwiXFxtYXRocm17cHJ9XzEiLDJdLFs2LDQsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzIsNSwiaF8yIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbMSwzLCJoXzEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dXQ==
-\begin{tikzcd}
-  {M_1\times \bdsimplexn{1}} & {M_1} \\
-  {M_0=\mathbb{M}_0} & {\mathbb{M}_1} & {\mathbb{M}_2} \\
-  & {M_2\times \bdsimplexn{2}} & {M_2}
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJNXzFcXHRpbWVzIFxccGFydGlhbFxcRGQoMSkiXSxbMCwxLCJNXzA9XFxtYXRoYmJ7TX1fMCJdLFsxLDEsIlxcbWF0aGJie019XzEiXSxbMSwwLCJNXzEiXSxbMSwyLCJNXzJcXHRpbWVzIFxccGFydGlhbFxcRGQoMikiXSxbMiwyLCJNXzIiXSxbMiwxLCJcXG1hdGhiYntNfV8yIl0sWzAsMSwiXFxtYXRoYmJ7QX1fMCIsMl0sWzEsMl0sWzAsMywiXFxtYXRocm17cHJ9XzEiXSxbMywyLCIqX3tcXG1hdGhiYntNfV8xfSJdLFsyLDAsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzIsNl0sWzQsMiwiXFxtYXRoYmJ7QX1fMSJdLFs1LDYsIipfe1xcbWF0aGJie019XzJ9IiwyXSxbNCw1LCJcXG1hdGhybXtwcn1fMSIsMl0sWzYsNCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbMiw1LCJoXzIiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dLFsxLDMsImhfMSIsMix7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyfV1d
+\begin{tikzcd}[ampersand replacement=\&]
+  {M_1\times \partial\Dd(1)} \& {M_1} \\
+  {M_0=\mathbb{M}_0} \& {\mathbb{M}_1} \& {\mathbb{M}_2} \\
+  \& {M_2\times \partial\Dd(2)} \& {M_2}
   \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
   \arrow["{\mathbb{A}_0}"', from=1-1, to=2-1]
   \arrow["{*_{\mathbb{M}_1}}", from=1-2, to=2-2]
-  \arrow["{h_1}"', shorten <=23pt, shorten >=23pt, Rightarrow, from=2-1, to=1-2]
+  \arrow["{h_1}"', shorten <=17pt, shorten >=17pt, Rightarrow, from=2-1, to=1-2]
   \arrow[from=2-1, to=2-2]
-  \arrow["\ulcorner"{pos=0.05, rotate=180}, shift left=1, draw=none, from=2-2, to=1-1]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
   \arrow[from=2-2, to=2-3]
-  \arrow["{h_2}", shorten <=17pt, shorten >=17pt, Rightarrow, from=2-2, to=3-3]
-  \arrow["\ulcorner"{pos=-0.2, rotate=-90}, draw=none, from=2-3, to=3-2]
+  \arrow["{h_2}", shorten <=13pt, shorten >=13pt, Rightarrow, from=2-2, to=3-3]
+  \arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
   \arrow["{\mathbb{A}_1}", from=3-2, to=2-2]
   \arrow["{\mathrm{pr}_1}"', from=3-2, to=3-3]
   \arrow["{*_{\mathbb{M}_2}}"', from=3-3, to=2-3]

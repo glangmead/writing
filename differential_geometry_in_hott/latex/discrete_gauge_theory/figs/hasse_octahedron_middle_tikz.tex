@@ -1,0 +1,76 @@
+\begin{tikzpicture}
+    \matrix (A) [matrix of math nodes, row sep=1cm, column sep=-.2cm]
+    { 
+  ~ &  ~ & \scriptstyle\{w, b, r\} & \scriptstyle\{w, r, g\}  & \scriptstyle\{w, g, o\} & \scriptstyle\{w, o, b\} & \scriptstyle\{y, b, r\} & \scriptstyle\{y, r, g\}  & \scriptstyle\{y, g, o\} & \scriptstyle\{y, o, b\}\\
+  \scriptstyle\{w, b\} & \scriptstyle\{w,r\}  & \scriptstyle\{w,g\} & \scriptstyle\{w,o\} & \scriptstyle\{b, r\} & \scriptstyle\{r, g\}  & \scriptstyle\{g, o\} & \scriptstyle\{o, b\} & \scriptstyle\{y, b\} & \scriptstyle\{y,r\}  & \scriptstyle\{y,g\} & \scriptstyle\{y,o\}\\
+  ~ & ~ & ~ &  \scriptstyle w  & \scriptstyle b & \scriptstyle r & \scriptstyle g & \scriptstyle o & \scriptstyle y\\
+    };
+
+    \draw (A-1-3.south)--(A-2-1.north);
+    \draw (A-1-3.south)--(A-2-2.north);
+    \draw (A-1-3.south)--(A-2-5.north);
+
+    \draw (A-1-4.south)--(A-2-2.north);
+    \draw (A-1-4.south)--(A-2-3.north);
+    \draw (A-1-4.south)--(A-2-6.north);
+
+    \draw (A-1-5.south)--(A-2-3.north);
+    \draw (A-1-5.south)--(A-2-4.north);
+    \draw (A-1-5.south)--(A-2-7.north);
+
+    \draw (A-1-6.south)--(A-2-4.north);
+    \draw (A-1-6.south)--(A-2-1.north);
+    \draw (A-1-6.south)--(A-2-8.north);
+
+    \draw (A-1-7.south)--(A-2-5.north);
+    \draw (A-1-7.south)--(A-2-10.north);
+    \draw (A-1-7.south)--(A-2-9.north);
+
+    \draw (A-1-8.south)--(A-2-6.north);
+    \draw (A-1-8.south)--(A-2-11.north);
+    \draw (A-1-8.south)--(A-2-10.north);
+
+    \draw (A-1-9.south)--(A-2-7.north);
+    \draw (A-1-9.south)--(A-2-12.north);
+    \draw (A-1-9.south)--(A-2-11.north);
+
+    \draw (A-1-10.south)--(A-2-8.north);
+    \draw (A-1-10.south)--(A-2-9.north);
+    \draw (A-1-10.south)--(A-2-12.north);
+
+    \draw (A-2-1.south)--(A-3-4.north);
+    \draw (A-2-1.south)--(A-3-5.north);
+
+    \draw (A-2-2.south)--(A-3-4.north);
+    \draw (A-2-2.south)--(A-3-6.north);
+
+    \draw (A-2-3.south)--(A-3-4.north);
+    \draw (A-2-3.south)--(A-3-7.north);
+
+    \draw (A-2-4.south)--(A-3-4.north);
+    \draw (A-2-4.south)--(A-3-8.north);
+
+    \draw (A-2-5.south)--(A-3-5.north);
+    \draw (A-2-5.south)--(A-3-6.north);
+
+    \draw (A-2-6.south)--(A-3-6.north);
+    \draw (A-2-6.south)--(A-3-7.north);
+
+    \draw (A-2-7.south)--(A-3-7.north);
+    \draw (A-2-7.south)--(A-3-8.north);
+
+    \draw (A-2-8.south)--(A-3-8.north);
+    \draw (A-2-8.south)--(A-3-5.north);
+
+    \draw (A-2-9.south)--(A-3-9.north);
+    \draw (A-2-9.south)--(A-3-5.north);
+
+    \draw (A-2-10.south)--(A-3-9.north);
+    \draw (A-2-10.south)--(A-3-6.north);
+
+    \draw (A-2-11.south)--(A-3-9.north);
+    \draw (A-2-11.south)--(A-3-7.north);
+
+    \draw (A-2-12.south)--(A-3-9.north);
+    \draw (A-2-12.south)--(A-3-8.north);
+\end{tikzpicture}

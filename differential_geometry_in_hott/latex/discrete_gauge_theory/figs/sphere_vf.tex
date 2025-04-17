@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{asymptote}
+
+\begin{document}
+
+\begin{asy}[width=10cm,height=10cm]
+import three;
+
+// 1st field
+triple X(triple p) {
+  return (-p.y, p.x, 0 );
+}
+
+// 2nd field
+triple Y(triple p) {
+  return (p.x*p.z, p.y*p.z, -(p.x*p.x + p.y*p.y));
+}
+
+// unit sphere S2
+material mat = material(diffusepen=gray(0.4),emissivepen=gray(0.6));
+draw(unitsphere,mat);
+
+// draw fields
+int ni = 20;
+int nj = 20;
+real sc = 0.16;
+for(int i=0; i<ni; ++i) {
+  for(int j=0; j<nj; ++j) {
+    real ph = (2*pi/ni)*i;
+    real th = (pi/nj)*j;
+
+    triple a = (cos(ph)*sin(th), sin(ph)*sin(th), cos(th));
+    triple xx = a + sc*X(a);
+    triple yy = a + sc*Y(a);
+
+    % draw(a--xx,black,Arrow3);
+    % draw(a--yy,black,Arrow3);
+  }
+}
+\end{asy}
+\end{document}

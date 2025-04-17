@@ -1,0 +1,50 @@
+\section{Torsors}
+
+\begin{frame}
+What type families \( \mm\to\uni \) will we consider? Families of torsors, called \alert{principal bundles}.
+\end{frame}
+
+\begin{frame}{Torsors}
+Let \( G \) be a (higher) group.
+\begin{definition}
+\begin{itemize}
+\item A right \defemph{\( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \).
+\item If we have a proof of
+\[ 
+\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x))
+\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \alert{\( BG \)}.
+\item Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
+\end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Facts}
+\begin{itemize}
+\item \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
+\item \( BG \) is connected.
+\item Previous 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
+\item \( \ev(e):(\reg{G}=_{BG} X)\to X \) is an equivalence.
+\item See the Buchholtz et. al. H-spaces paper for more.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A connected component of \( \uni \)?}
+\begin{definition}
+The \alert{type of Eilenberg-Mac Lane spaces \( \EM(G,n) \)} is the connected component of \( \K(G,n) \):
+\[ \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \]
+\end{definition}
+It is a property of a map \( f:A\to\EM(G,n) \) to factor through \( \K(G,n+1) \). See the Scoccola paper.
+\end{frame}
+
+\begin{frame}{Coincidences of 2 dimensions}
+\begin{itemize}
+\item \( S^1 \) is a \( \Kzo \) since \( \loopy(S^1, \base)\simeq \zz \).
+\item So \( \EMzo \) is a type of \alert{mere circles}.
+\item But \( S^1=_{\EMzo}S^1 \) contains an order 2 \alert{flip}, so \( \not\simeq S^1 \).
+\item For a map \( f:A\to\EMzo \) to factor through  \( \Kzt \), it must somehow avoid flips.
+\item This deserves to be called \alert{orientability}.
+\item \( \link:\mm_0\to\EMzo \) is a great starting point.
+\end{itemize}
+\end{frame}
+
+
