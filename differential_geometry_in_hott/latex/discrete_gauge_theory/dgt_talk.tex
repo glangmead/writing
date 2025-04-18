@@ -22,6 +22,17 @@
 \setbeamercolor{section in head/foot}{bg=mygrey,fg=white}
 \setbeamercolor{alerted text}{fg=cmu_red}
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
 % \setbeamercolor{corollary title}{use=structure,fg=white,bg=structure.fg!75!black}
 % \setbeamercolor{corollary body}{parent=normal text,use=block title,bg=blue}
 %\setlength{\parskip}{\baselineskip} 
@@ -52,15 +63,15 @@ Flatness and index on two faces.
 
 \input{dgt_talk_intro.tex}
 \input{dgt_talk_combman.tex}
-\input{dgt_talk_connections.tex}
 \input{dgt_talk_torsors.tex}
+\input{dgt_talk_connections.tex}
 \input{dgt_talk_vector_fields.tex}
 \input{dgt_talk_totals.tex}
 
 
-
 \begin{frame}
-Thank you.
+\begin{center}
+\alert{\huge{Thank you!}}
+\end{center}
 \end{frame}
-
 \end{document}

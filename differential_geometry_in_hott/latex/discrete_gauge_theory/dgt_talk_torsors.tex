@@ -1,50 +1,69 @@
 \section{Torsors}
 
 \begin{frame}
-What type families \( \mm\to\uni \) will we consider? Families of torsors, called \alert{principal bundles}.
+What type families \( \mm\to\uni \) will we consider? Families of \alert{torsors}, also called \alert{principal bundles}.
 \end{frame}
 
 \begin{frame}{Torsors}
 Let \( G \) be a (higher) group.
-\begin{definition}
+\onslide<2->{\begin{definition}
 \begin{itemize}
-\item A right \defemph{\( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \).
-\item If we have a proof of
-\[ 
-\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x))
-\] we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \alert{\( BG \)}.
-\item Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
+\item<2-> A \defemph{right \( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \).
+\item<3-> \( X \) is a \alert{torsor} if it is inhabited and the map \( (\phi, \pr_1):X\times G\to X\times X \) is an equivalence.
+\item<4-> Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
 \end{itemize}
-\end{definition}
+\end{definition}}
 \end{frame}
 
 \begin{frame}{Facts}
+\begin{enumerate}
+\item<2-> \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
+\item<3-> \( BG \) is connected.
+\item<4-> 1 \& 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
+\end{enumerate}
+\onslide<5->{See the Buchholtz et. al. H-spaces paper for more.}
+\end{frame}
+
+\begin{frame}{How to map into \( BS^1 \)}
+To construct maps into \( BS^1 \) we \alert{lift} a family of mere circles. (Remark: the lift is a choice of \alert{orientation}.)
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJCU14xIl0sWzIsMCwiXFxCQXV0IChTXjEpIl0sWzMsMCwiXFx1bmkiXSxbMiwyLCJcXG1tIl0sWzAsMSwiXFx0ZXh0e2ZhbWlsaWVzIG9mOn0iXSxbMywwLCJcXG1hdGhybXt0b3Jzb3JzfSJdLFszLDEsIlxcc3Vic3RhY2t7XFxtYXRocm17bWVyZX1cXFxcIFxcbWF0aHJte2NpcmNsZXN9fSIsMV0sWzMsMiwiXFxtYXRocm17dHlwZXN9IiwyXSxbMCwxXSxbMSwyXV0=
+\[\begin{tikzcd}[ampersand replacement=\&, row sep=small]
+  \& {BS^1} \& {\BAut (S^1)} \& \uni \\
+  {\text{families of:}} \\
+  \&\& \mm
+  \arrow[from=1-2, to=1-3]
+  \arrow[from=1-3, to=1-4]
+  \arrow["{\mathrm{torsors}}", from=3-3, to=1-2]
+  \arrow["\begin{array}{c} \substack{\mathrm{mere}\\ \mathrm{circles}} \end{array}"{description}, from=3-3, to=1-3]
+  \arrow["{\mathrm{types}}"', from=3-3, to=1-4]
+\end{tikzcd}\]
+We will assume we have such a lift when we need it.
+
+\onslide<2->{
+Other names:
 \begin{itemize}
-\item \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
-\item \( BG \) is connected.
-\item Previous 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
-\item \( \ev(e):(\reg{G}=_{BG} X)\to X \) is an equivalence.
-\item See the Buchholtz et. al. H-spaces paper for more.
-\end{itemize}
+\item \( \BAut (S^1)=BO(2)=\EMzo \) (where \( \EM(G,n)\defeq \BAut(\K(G,n)) \))
+\item \( BS^1=BSO(2)=\Kzt \)
+\end{itemize}}
 \end{frame}
 
-\begin{frame}{A connected component of \( \uni \)?}
-\begin{definition}
-The \alert{type of Eilenberg-Mac Lane spaces \( \EM(G,n) \)} is the connected component of \( \K(G,n) \):
-\[ \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \]
-\end{definition}
-It is a property of a map \( f:A\to\EM(G,n) \) to factor through \( \K(G,n+1) \). See the Scoccola paper.
-\end{frame}
+% \begin{frame}{A connected component of \( \uni \)?}
+% \begin{definition}
+% The \alert{type of Eilenberg-Mac Lane spaces \( \EM(G,n) \)} is the connected component of \( \K(G,n) \):
+% \[ \EM(G,n)\defeq \BAut(\K(G,n))\defeq \sit{Y:\uni}||Y\simeq \K(G,n)||_{-1} \]
+% \end{definition}
+% It is a property of a map \( f:A\to\EM(G,n) \) to factor through \( \K(G,n+1) \). See the Scoccola paper.
+% \end{frame}
 
-\begin{frame}{Coincidences of 2 dimensions}
-\begin{itemize}
-\item \( S^1 \) is a \( \Kzo \) since \( \loopy(S^1, \base)\simeq \zz \).
-\item So \( \EMzo \) is a type of \alert{mere circles}.
-\item But \( S^1=_{\EMzo}S^1 \) contains an order 2 \alert{flip}, so \( \not\simeq S^1 \).
-\item For a map \( f:A\to\EMzo \) to factor through  \( \Kzt \), it must somehow avoid flips.
-\item This deserves to be called \alert{orientability}.
-\item \( \link:\mm_0\to\EMzo \) is a great starting point.
-\end{itemize}
-\end{frame}
-
+% \begin{frame}{Coincidences of 2 dimensions}
+% \begin{itemize}
+% \item \( S^1 \) is a \( \Kzo \) since \( \loopy(S^1, \base)\simeq \zz \).
+% \item So \( \EMzo \) is a type of \alert{mere circles}.
+% \item But \( S^1=_{\EMzo}S^1 \) contains an order 2 \alert{flip}, so \( \not\simeq S^1 \).
+% \item For a map \( f:A\to\EMzo \) to factor through  \( \Kzt \), it must somehow avoid flips.
+% \item This deserves to be called \alert{orientability}.
+% \item \( \link:\mm_0\to\EMzo \) is a great starting point.
+% \end{itemize}
+% \end{frame}
+% 
 

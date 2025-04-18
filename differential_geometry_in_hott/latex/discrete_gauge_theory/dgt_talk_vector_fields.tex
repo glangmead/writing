@@ -1,13 +1,22 @@
 \section{Vector fields}
+
 \begin{frame}{Vector fields}
 \begin{columns}
 \begin{column}{0.7\textwidth}
-Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on a 2-dim cellular type
+Let \( T:\mm\to\Kzt \) be an oriented tangent bundle on a 2-dim combinatorial manifold.
 \begin{itemize}
-\item A \alert{vector field} is a term \alert{\( X:\pit{m:\mm_1}Tm \)}.
-\item It's a \alert{nonvanishing} vector field on the 1-skeleton.
-\item We model classical zeros by omitting the faces.
+\item Bundles of circles can only model \alert{nonzero} tangent vectors.
+\item  A global section would be a trivialization of \( T \), so there is an obstruction.
 \end{itemize}
+\quad\\~\\
+\onslide<2->{
+Our solution:
+\begin{itemize}
+\item<3-> A \alert{vector field} is a term \alert{\( X:\pit{m:\mm_1}Tm \)}.
+\item<4-> It's a \alert{nonvanishing} vector field on the 1-skeleton.
+\item<5-> We model classical zeros by omitting the faces.
+\end{itemize}
+}
 \end{column}
 \begin{column}{0.3\textwidth}
 \input{figs/discrete_gauge_theory_oo_swirl}
@@ -15,22 +24,126 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on a 2-dim cellular type
 \end{columns}
 \end{frame}
 
-\begin{frame}{Pathovers}
+\begin{frame}{Reminder: pathovers}
 \begin{columns}
-\begin{column}{0.55\textwidth}
+\begin{column}{0.35\textwidth}
 \includegraphics[width=30ex]{figs/pathovers.pdf}
 \end{column}
-\begin{column}{0.45\textwidth}
+\begin{column}{0.65\textwidth}
 \begin{itemize}
 \item Recall pathovers (dependent paths).
-\item There is an asymmetry: we pick a fiber to display it.
-\item Dependent functions map paths to pathovers (\( \apd \)).
+\item There is an asymmetry: we pick a fiber to display \( \pi \), the path over \( p \).
+\item Dependent functions map paths to pathovers: \( \apd (X)(p):\tr_p(X(a))=X(b) \) (simply denoted \( X(p) \)).
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Building up a triangle-over}
+\begin{frame}
+Next goal: define the index of a vector field on a face.
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_bare_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+We will try to show the \alert{three} ingredients of \( X \) on this face:
+\begin{itemize}
+\item The value of \( X \) on vertices.
+\item The value of \( X \) on edges.
+\item The transport between vertices, interacting with \( X \).
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_singlevec1_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{itemize}
+\item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
+\item<1-> \phantom{Say \( T_{12} \) is trivial. Denote the transported vector as thinner.}
+\item<1-> \phantom{Say \( T_{23} \) rotates counterclockwise. Denote the twice-transported vector as dashed.}
+\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_singlevec2_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{itemize}
+\item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
+\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
+\item<1-> \phantom{Say \( T_{23} \) rotates counterclockwise. Denote the twice-transported vector as dashed.}
+\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_singlevec3_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{itemize}
+\item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
+\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
+\item<1-> Say \( T_{23} \) rotates counterclockwise. Denote the twice-transported vector as dashed.
+\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_singlevec4_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{itemize}
+\item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
+\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
+\item<1-> Say \( T_{23} \) rotates counterclockwise. Denote the twice-transported vector as dashed.
+\item<1-> Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Symbolic version}
 \begin{tikzcd}[ampersand replacement=\&, row sep=small]
   {T_1} \& {T_2} \& {T_3} \& {T_1} \\
   \&\&\& {T_{13}T_{32}T_{21}X_1} \\
@@ -69,48 +182,9 @@ Let \( T:\mm_2\to\Kzt \) be an oriented tangent bundle on a 2-dim cellular type
 \end{columns}
 \end{frame}
 
-\begin{frame}{Angle}
-\begin{columns}
-\begin{column}{0.3\textwidth}
-\input{figs/discrete_gauge_theory_oo_swirl}
-\end{column}
-\begin{column}{0.7\textwidth}
-\begin{itemize}
-\item We want to extract from each \( X_{ij} \) just the \alert{angle}, a non-dependent quantity.
-\item e.g. in this example: 3 copies of ``+1 notch'' and 3 of ``--1 notch.''
-\item The total swirled angle is 0.
-\end{itemize}
-\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Angle}
-\onslide<1->{Observation 1: Use the torsor structure. If we choose \( m:\mm \) then \( T_m=T_m \) acts on all fibers. We can define subtraction \( T_i\times T_i\to(T_m=T_m) \).}
-
-\onslide<2->{Observation 2: Use the vector field. Given \( X_i:T_i \) we can form subtraction \( -X_i:T_i\to (T_m=T_m) \). \( X_{ij}-X_j:T_{ji}X_i-X_j=_{T_m=T_m}0 \).}
-
-\onslide<3->{Observation 3: Use \( \ap \) of addition. We can add \( \alpha:a=_{\ccc(4)}0 \) and \( \beta:b=_{\ccc(4)}0 \) to form \( \alpha+\beta:(a+b)=_{\ccc(4)}0 \).}
-
-\onslide<4->{Together these remove the dependency. We can compute \( \flat, I, X \) on each face independently and total them in \( T_m=T_m \).}
-\end{frame}
-
-\begin{frame}
-\begin{lemma}
-If \( G \) is a higher group with multiplication \( \mu:G\times G\to G \) and proof of commutativity \( \mathsf{is\underscore comm}:\pit{a,b:G}\mu(a, b)=\mu(b, a) \) then \( \mu \) induces a function \( \mu_=:(x=_G y)\times (x'=_G y')\to (\mu(x, x')=_G\mu(y,y')) \).
-\end{lemma}
-\begin{proof}
-If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) by concatenating the three paths 
-\begin{align*} 
-\mu(x',p)&:\mu(x', x)=_G\mu(x', y)\\
-\mathsf{is\underscore comm}(x',y)&:\mu(x',y)=_G\mu(y,x')\\
-\mu(y, p')&:\mu(y, x')=_G\mu(y, y').\qedhere
-\end{align*}
-\end{proof}
-\end{frame}
-
-\begin{frame}
+\begin{frame}{Index}
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:T_1=_{\Kzt}T_1&&\text{\alert{holonomy}}\\
+\tr_F&\defeq \tr(\partial F)&&:T_1=_{\Kzt}T_1&&\text{\alert{curvature}}\\
 \flat_F&\defeq \flat(\partial F)&&:\id=_{T_1=T_1}\tr_F&&\text{\alert{flatness}}\\
 X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
@@ -118,26 +192,31 @@ X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
-The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \( I^X_F\defeq\loopy(\flat_F(X_1)\cdot X_F):\loopy(X_1=_{T_1}X_1) \).
+The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \[ I^X_F\defeq\alert{\loopy(\flat_F(X_1)\cdot X_F)}:\loopy(X_1=_{T_1}X_1). \]
 \end{mydef}
 \end{column}
 \begin{column}{0.3\textwidth}
 \begin{tikzpicture}
-  [arrow/.style={-{Stealth[scale=1.1]}}, .style={scale=0.7}]
+  [arrow/.style={-{Stealth[scale=1.1]}}, .style={scale=0.7}, vec/.style={ultra thick, color=black}, vectr/.style={thick, color=black}, vectrtr/.style={thick, dashed, color=black}, vectrtrtr/.style={thick, dotted, color=black}]
   \tikzset{oo/.style={circle, scale=0.6, fill=black}}
   \tikzset{ii/.style={circle, scale=0.3, fill=gray}}
   \setlength{\mylen}{2cm}
   \setlength{\mylin}{1cm}
-  \node[label=center:\( Tv_1 \)] (V1) at (0, 0) {};
-  \node [ii, above right=\mylin of V1,  label=right:\( v_{11} \)] (V11) {};
-  \node [ii, below right=\mylin of V1,  label=right:\( v_{12} \)] (V12) {};
-  \node [ii, below left=\mylin of  V1,  label=left:\( v_{13} \)] (V13) {};
-  \node [ii, above left= \mylin of V1,  label=left: \( v_{14} \)] (V14) {};
+  %\node[label=center:\( Tv_1 \)] (V1) at (0, 0) {};
+  \node [ii, above right=\mylin of V1] (V11) {};
+  \node [ii, below right=\mylin of V1] (V12) {};
+  \node [ii, below left=\mylin of  V1] (V13) {};
+  \node [ii, above left= \mylin of V1] (V14) {};
+  \node[oo, label=right:\( v_1 \)] (V1) at (0, 0) {};
 
   \draw[dashed] (V11) edge[ultra thick, solid, arrow, swap, "\( \flat_F(X_1) \)"] (V14);
   \draw[arrow] (V14) edge[thick, swap, color=magenta, "\( X_{12} \)"] (V13);
   \draw[arrow] (V13) edge[thick, swap, color=teal, "\( X_{23} \)"] (V12);
   \draw[arrow] (V12) edge[thick, swap, color=blue, "\( X_{31} \)"] (V11);
+  \draw[arrow] (V1) edge[vec] (V11);
+    \draw[arrow] (V1) edge[vectrtrtr] (V14);
+    \draw[arrow] (V1) edge[vectrtr] (V13);
+    \draw[arrow] (V1) edge[vectr] (V12);
 \end{tikzpicture}
 \end{column}
 \end{columns}}
