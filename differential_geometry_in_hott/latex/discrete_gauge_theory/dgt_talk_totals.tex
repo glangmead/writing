@@ -1,82 +1,50 @@
 \section{Main theorem}
 
-\begin{frame}{Outline}
-On a single face we have \( I^X_F\defeq\loopy(\flat_F(X_1)\cdot X_F)\).\\~\\
-
-\onslide<2->{We will show}
-\begin{itemize}
-\item<3-> how to sum this over faces
-\item<4-> that \( X_F \) adds up to zero, by a cancellation argument
-\end{itemize}
-\onslide<5->{and the theorem \( I^X_{\mathrm{tot}}=\loopy(\flat_\mathrm{tot}) \) will follow.}\\~\\
-
-\onslide<6->{We will \alert{remove the dependency} on \( \mm \), by using our materials in new ways.}
-\end{frame}
-
-% \begin{frame}{Angle}
-% \begin{columns}
-% \begin{column}{0.3\textwidth}
-% \input{figs/discrete_gauge_theory_oo_swirl}
-% \end{column}
-% \begin{column}{0.7\textwidth}
-% \begin{itemize}
-% \item We want to extract from each \( X_{ij} \) just the \alert{angle}, a non-dependent quantity.
-% \item e.g. in this example: 3 copies of ``+1 notch'' and 3 of ``--1 notch.''
-% \item The total swirled angle is 0.
-% \end{itemize}
-% \end{column}
-% \end{columns}
-% \end{frame}
-
 \begin{frame}
-Fix a point \( m:\mm \) and fix the group \( \Gg\defeq (Tm=_{BS^1}Tm)\).
-
-Recall we have an equivalence \( (\phi, \pr_1):X\times \Gg\to X\times X \).
-
-Call the inverse \( (\pr_1, s) \) where \( s \) is \alert{subtraction}.
-
-Every fiber \( T_i \) is pointed by \( X_i \).
-
-Define the \( \Gg \)-equivariant equivalence \( \alpha_i\defeq s(-,X_i):T_i\to \Gg \).
-
-We will compose \( X_F \) and \( \flat_F \) with \( \alpha_i \).
+The main lemma we need is that the total swirling is 0. We will use four facts:
+\begin{itemize}
+\item The fibers \( T_i \) are torsors and they are pointed.
+\item A sum over faces is a sum over edges, and each edge is appears once in each direction.
+\item \( S^1 \) is commutative.
+\item Hence there is total cancellation.
+\end{itemize}
 \end{frame}
 
-% 
-% \begin{frame}{Angle}
-% \onslide<1->{Observation 1: Use the torsor structure. If we choose \( m:\mm \) then \( T_m=T_m \) acts on all fibers. We can define subtraction \( T_i\times T_i\to(T_m=T_m) \).}
-% 
-% \onslide<2->{Observation 2: Use the vector field. Given \( X_i:T_i \) we can form subtraction \( -X_i:T_i\to (T_m=T_m) \). \( X_{ij}-X_j:T_{ji}X_i-X_j=_{T_m=T_m}0 \).}
-% 
-% \onslide<3->{Observation 3: Use \( \ap \) of addition. We can add \( \alpha:a=_{\ccc(4)}0 \) and \( \beta:b=_{\ccc(4)}0 \) to form \( \alpha+\beta:(a+b)=_{\ccc(4)}0 \).}
-% 
-% \onslide<4->{Together these remove the dependency. We can compute \( \flat, I, X \) on each face independently and total them in \( T_m=T_m \).}
-% \end{frame}
-% 
-% \begin{frame}
-% \begin{lemma}
-% If \( G \) is a higher group with multiplication \( \mu:G\times G\to G \) and proof of commutativity \( \mathsf{is\underscore comm}:\pit{a,b:G}\mu(a, b)=\mu(b, a) \) then \( \mu \) induces a function \( \mu_=:(x=_G y)\times (x'=_G y')\to (\mu(x, x')=_G\mu(y,y')) \).
-% \end{lemma}
-% \begin{proof}
-% If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) by concatenating the three paths 
-% \begin{align*} 
-% \mu(x',p)&:\mu(x', x)=_G\mu(x', y)\\
-% \mathsf{is\underscore comm}(x',y)&:\mu(x',y)=_G\mu(y,x')\\
-% \mu(y, p')&:\mu(y, x')=_G\mu(y, y').\qedhere
-% \end{align*}
-% \end{proof}
-% \end{frame}
-% 
-% \begin{frame}
-% \begin{itemize}
-% \item On a single face we have \( I^X_F=\loopy(\flat_F(X_1)\cdot X_F) \).
-% \item Map \( \flat_F(X_1) \) and \( X_F \) to angles in \( T_m=T_m \).
-% \item Sum over faces can be performed in \( T_m=T_m \).
-% \item Assume that each edge is traversed twice, once in each direction.
-% \item Prove that the total angle \( \sum_F X_F=0 \).
-% \item Leaving us \( I_\mathrm{tot}=\loopy(\flat_{\mathrm{tot}}) \).
-% \end{itemize}
-% \end{frame}
+\begin{frame}{Vector fields when the tangent bundle is principal}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+  \&\& \& {T_1} \\
+  \&\&\& {T_{13}T_{32}T_{21}X_1} \\
+  \&\& \& {T_{13}T_{32}X_2} \\
+  \&  \&  \& {T_{13}X_3} \\
+  \&\& \& {X_1}
+  \arrow["{\alert{T_{13}T_{32}X_{21}}:}", equals, from=3-4, to=2-4]
+  \arrow["{\alert{T_{13}X_{32}}:}", equals, from=4-4, to=3-4]
+  \arrow["{\alert{X_{13}}:}", equals, from=5-4, to=4-4]
+\end{tikzcd}
+\end{column}
+\begin{column}{0.8\textwidth}
+\begin{itemize}
+\item Def: \( \alpha_i\defeq s(-,X_i):T_i\simto S^1 \) (\alert{trivialization on 0-skeleton}).
+\item Def: \( \rho_{ji}\defeq \alpha(T_{ji}(X_i)) \) is \alert{the rotation of \( T_{ji} \)}.
+\item Lemma: \( \rho_{ij}=\rho_{ji}^{-1} \) because \( \rho_{ij}\cdot\rho_{ji}\cdot X_j=_{T_j}\rho_{ij}\cdot T_{ji}X_i=_{T_j}T_{ji}(\rho_{ij}\cdot X_i)=_{T_j}T_{ji} T_{ij} X_j=_{T_j}X_j \).
+\item Now to paths:
+\item Define \( \sigma_{ji}\defeq s(X_{ji}, X_j):\rho_{ji}=_{S^1}\base, \) a path from a rotation to the identity.
+\item Paths of the form \( a=_{S^1}\base \) can be multiplied: \( \mu:(a=\base)\times (b=base)\to \mu(a, b)=base \), \( \mu(p, q)=\mu(p, b)\cdot q. \)
+\item So if \( X_\tot = X_{21}\cdot X_{32}\cdot\cdots \) then \( \alpha(X_\tot)=\sigma_{21}\cdot\sigma_{32}\cdot\cdots \).
+\item Lemma: \( \apd(\refl)=\refl\implies X_{ij}\cdot T_{ij}X_{ji}=\refl_{X_i}\implies\sigma_{ij}\cdot\sigma_{ji}=\refl_{\base} \).
+\item We assume that summing over faces visits every edge once in each direction.
+\item \( S^1 \) is commutative, hence complete cancellation.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Consequence}
+Yeah.
+\end{frame}
 
 \begin{frame}{Classical proof}
 \begin{columns}

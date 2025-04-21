@@ -9,8 +9,9 @@ Let \( G \) be a (higher) group.
 \onslide<2->{\begin{definition}
 \begin{itemize}
 \item<2-> A \defemph{right \( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \).
-\item<3-> \( X \) is a \alert{torsor} if it is inhabited and the map \( (\phi, \pr_1):X\times G\to X\times X \) is an equivalence.
-\item<4-> Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
+\item<3-> \( X \) is a \alert{torsor} if it is inhabited and the map \( (\pr_1, \phi):X\times G\to X\times X \) is an equivalence.
+\item<4-> The inverse is \( (\pr_1, s) \) where \( s:X\times X\to G \) is called \alert{subtraction} (when \( G \) is commutative).
+\item<5-> Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
 \end{itemize}
 \end{definition}}
 \end{frame}
@@ -20,6 +21,7 @@ Let \( G \) be a (higher) group.
 \item<2-> \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
 \item<3-> \( BG \) is connected.
 \item<4-> 1 \& 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
+\item<5-> \( \ev(e):(\reg{G}=_{BG} X)\to X \) is an equivalence (needed when we have vector fields).
 \end{enumerate}
 \onslide<5->{See the Buchholtz et. al. H-spaces paper for more.}
 \end{frame}

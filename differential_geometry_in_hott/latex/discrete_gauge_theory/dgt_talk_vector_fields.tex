@@ -3,7 +3,7 @@
 \begin{frame}{Vector fields}
 \begin{columns}
 \begin{column}{0.7\textwidth}
-Let \( T:\mm\to\Kzt \) be an oriented tangent bundle on a 2-dim combinatorial manifold.
+Let \( T:\mm\to BS^1 \) be an oriented tangent bundle on a 2-dim combinatorial manifold.
 \begin{itemize}
 \item Bundles of circles can only model \alert{nonzero} tangent vectors.
 \item  A global section would be a trivialization of \( T \), so there is an obstruction.
@@ -143,6 +143,25 @@ We will try to show the \alert{three} ingredients of \( X \) on this face:
 \end{columns}
 \end{frame}
 
+\begin{frame}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\vspace{12pt}
+\begingroup
+\tikzset{every picture/.style={scale=0.85}}
+\input{figs/face_swirl_tikz.tex}
+\endgroup
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{itemize}
+\item<1-> \( X \) on \( e_{12} \) is red, etc.
+\item<2-> We translated all results to the end of the loop.
+\item<3-> (Reminds me of scooping ice cream towards the last fiber.)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
 \begin{frame}{Symbolic version}
 \begin{tikzcd}[ampersand replacement=\&, row sep=small]
   {T_1} \& {T_2} \& {T_3} \& {T_1} \\
@@ -162,37 +181,19 @@ We will try to show the \alert{three} ingredients of \( X \) on this face:
 \end{tikzcd}
 \end{frame}
 
-\begin{frame}
-\begin{columns}
-\begin{column}{0.65\textwidth}
-\vspace{12pt}
-\begingroup
-\tikzset{every picture/.style={scale=0.85}}
-\input{figs/face_swirl_tikz.tex}
-\endgroup
-\end{column}
-\begin{column}{0.35\textwidth}
-\begin{itemize}
-\item \( \partial F\defeq e_{12}\cdot e_{23}\cdot e_{31}.  \)
-\item \( \tr \) thins out arrows.
-\item \( X \) on a path is drawn in the path's color.
-\item \( X(\partial F) \) traces 3 sides of a square.
-\end{itemize}
-\end{column}
-\end{columns}
-\end{frame}
-
 \begin{frame}{Index}
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:T_1=_{\Kzt}T_1&&\text{\alert{curvature}}\\
-\flat_F&\defeq \flat(\partial F)&&:\id=_{T_1=T_1}\tr_F&&\text{\alert{flatness}}\\
+\tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
 X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
-\onslide<2->{
+\onslide<2->{Recall that \( T_1 \) being an \( S^1 \)-torsor means we can use subtraction to obtain an equivalence \( s(-,X_1):T_1\xrightarrow[]{x\mapsto x\alert{-X_1}} S^1 \).
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
-The \defemph{index of the vector field \( X \) on the face \( F \)} is the integer \[ I^X_F\defeq\alert{\loopy(\flat_F(X_1)\cdot X_F)}:\loopy(X_1=_{T_1}X_1). \]
+The \defemph{flattened swirling} of the vector field \( X \) on the face \( F \) is the loop \[ L^X_F\defeq\flat_F(X_1)\cdot X_F:(X_1=_{T_1}X_1). \]
+
+The \defemph{index} of the vector field \( X \) on the face \( F \) is the integer \( I^X_F \) such that \( \loopo^{I^X_F}=_{S^1}(L^X_F)-X_1 \).
 \end{mydef}
 \end{column}
 \begin{column}{0.3\textwidth}
