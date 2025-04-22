@@ -1,41 +1,75 @@
 \section{Main theorem}
+\newcommand{\Xij}{X_{ij}}
+\newcommand{\Xji}{X_{ji}}
+\newcommand{\Tij}{T_{ij}}
+\newcommand{\Tji}{T_{ji}}
+\newcommand{\sij}{\sigma_{ij}}
+\newcommand{\sji}{\sigma_{ji}}
+\newcommand{\rij}{\rho_{ij}}
+\newcommand{\rji}{\rho_{ji}}
+\newcommand{\dotcirc}{\odot}
 
-\begin{frame}
-The main lemma we need is that the total swirling is 0. We will use four facts:
-\begin{itemize}
-\item The fibers \( T_i \) are torsors and they are pointed.
-\item A sum over faces is a sum over edges, and each edge is appears once in each direction.
-\item \( S^1 \) is commutative.
-\item Hence there is total cancellation.
-\end{itemize}
+\begin{frame}{Simplifying swirling}
+Swirling involves concatenating dependent paths. Can we simplify that?
 \end{frame}
 
-\begin{frame}{Vector fields when the tangent bundle is principal}
+\begin{frame}{Pay off all our assumptions 1: torsor structure, vector field}
 \begin{columns}
-\begin{column}{0.2\textwidth}
-\begin{tikzcd}[ampersand replacement=\&, column sep=small]
-  \&\& \& {T_1} \\
-  \&\&\& {T_{13}T_{32}T_{21}X_1} \\
-  \&\& \& {T_{13}T_{32}X_2} \\
-  \&  \&  \& {T_{13}X_3} \\
-  \&\& \& {X_1}
-  \arrow["{\alert{T_{13}T_{32}X_{21}}:}", equals, from=3-4, to=2-4]
-  \arrow["{\alert{T_{13}X_{32}}:}", equals, from=4-4, to=3-4]
-  \arrow["{\alert{X_{13}}:}", equals, from=5-4, to=4-4]
-\end{tikzcd}
+\begin{column}{0.15\textwidth}
+\input{figs/swirl_matrix_lastcolumn_tikz}
 \end{column}
-\begin{column}{0.8\textwidth}
+\begin{column}{0.85\textwidth}
 \begin{itemize}
-\item Def: \( \alpha_i\defeq s(-,X_i):T_i\simto S^1 \) (\alert{trivialization on 0-skeleton}).
-\item Def: \( \rho_{ji}\defeq \alpha(T_{ji}(X_i)) \) is \alert{the rotation of \( T_{ji} \)}.
-\item Lemma: \( \rho_{ij}=\rho_{ji}^{-1} \) because \( \rho_{ij}\cdot\rho_{ji}\cdot X_j=_{T_j}\rho_{ij}\cdot T_{ji}X_i=_{T_j}T_{ji}(\rho_{ij}\cdot X_i)=_{T_j}T_{ji} T_{ij} X_j=_{T_j}X_j \).
-\item Now to paths:
-\item Define \( \sigma_{ji}\defeq s(X_{ji}, X_j):\rho_{ji}=_{S^1}\base, \) a path from a rotation to the identity.
-\item Paths of the form \( a=_{S^1}\base \) can be multiplied: \( \mu:(a=\base)\times (b=base)\to \mu(a, b)=base \), \( \mu(p, q)=\mu(p, b)\cdot q. \)
-\item So if \( X_\tot = X_{21}\cdot X_{32}\cdot\cdots \) then \( \alpha(X_\tot)=\sigma_{21}\cdot\sigma_{32}\cdot\cdots \).
-\item Lemma: \( \apd(\refl)=\refl\implies X_{ij}\cdot T_{ij}X_{ji}=\refl_{X_i}\implies\sigma_{ij}\cdot\sigma_{ji}=\refl_{\base} \).
-\item We assume that summing over faces visits every edge once in each direction.
-\item \( S^1 \) is commutative, hence complete cancellation.
+\item<2-> Def: \( \alpha_i\defeq s(-,X_i):T_i\simto S^1 \) (\alert{trivialization on 0-skeleton}).
+\item<3-> Def: \( \rji\defeq \alpha_j(\Tji(X_i)) \) is \alert{the rotation of \( \Tji \)}.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUX2kiXSxbMSwwLCJUX2oiXSxbMCwxLCJTXjEiXSxbMSwxLCJTXjEiXSxbMCwxLCJUX3tqaX0iXSxbMCwyLCJcXGFscGhhX2kiLDJdLFsxLDMsIlxcYWxwaGFfaiJdLFsyLDMsIigtKVxcY2RvdFxccmhvX3tqaX0iLDJdLFszLDEsIlxcbWF0aHNme2Jhc2V9XFxtYXBzdG8gWF9qIiwyLHsib2Zmc2V0IjozLCJjdXJ2ZSI6MX1dLFsyLDAsIlxcbWF0aHNme2Jhc2V9XFxtYXBzdG8gWF9pIiwwLHsib2Zmc2V0IjotMywiY3VydmUiOi0xfV1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+  {T_i} \& {T_j} \\
+  {S^1} \& {S^1}
+  \arrow["{T_{ji}}", from=1-1, to=1-2]
+  \arrow["{\alpha_i}"', from=1-1, to=2-1]
+  \arrow["{\alpha_j}", from=1-2, to=2-2]
+  \arrow["{\mathsf{base}\mapsto X_i}", shift left=3, curve={height=-6pt}, from=2-1, to=1-1]
+  \arrow["{(-)\dotcirc\rho_{ji}}"', from=2-1, to=2-2]
+  \arrow["{\mathsf{base}\mapsto X_j}"', shift right=3, curve={height=6pt}, from=2-2, to=1-2]
+\end{tikzcd}\]
+\item<4-> Lemma: \( \rij=\rji^{-1} \) because \alert{in \( T_j \)}: \( \rij\dotcirc\rji\dotcirc X_j=\rij\dotcirc \Tji X_i=\Tji(\rij\dotcirc X_i)=\Tji \Tij X_j=X_j \).
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Pay off all our assumptions 1: torsor structure, vector field (cont.)}
+\begin{columns}
+\begin{column}{0.15\textwidth}
+\input{figs/swirl_matrix_lastcolumn_tikz}
+\end{column}
+\begin{column}{0.85\textwidth}
+\begin{itemize}
+\item<2-> Define \( \sji\defeq s(\Xji, X_j):\rji=_{S^1}\base, \).
+\item<3-> Paths of the form \( (a=_{S^1}\base) \) can be multiplied: 
+\begin{itemize}
+\item \( \dotcirc:(a=\base)\times (b=base)\to (a\dotcirc b=base) \).
+\item \( p\dotcirc q=(p\dotcirc b)\cdot q. \)
+\end{itemize}
+\item<4-> Lemma: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij\dotcirc\sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xji \)).
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Pay off all our assumptions 2: no boundary, commutativity}
+\begin{columns}
+\begin{column}{0.15\textwidth}
+\input{figs/swirl_matrix_lastcolumn_tikz}
+\end{column}
+\begin{column}{0.85\textwidth}
+\begin{mydef}
+Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), and \( \partial F_1,\ldots,\partial F_n \) be the triangular boundaries. The \alert{total swirling} is \[ X_\tot \defeq \sigma_{\partial F_1}\dotcirc\cdots\dotcirc\sigma_{\partial F_n} \].
+\end{mydef}
+\begin{itemize}
+\item<2-> We assume that this expression involves \alert{every edge once in each direction}.
+\item<3-> \( S^1 \) is commutative, hence \alert{complete cancellation}.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -43,7 +77,27 @@ The main lemma we need is that the total swirling is 0. We will use four facts:
 
 
 \begin{frame}{Consequence}
-Yeah.
+\[\begin{aligned}
+\tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
+X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
+L^X_F&\defeq\flat_F(X_1)\cdot X_F&&:(X_1=_{T_1}X_1)&&\text{\alert{flattened swirling}}
+\end{aligned}\]
+These can all be totaled in \( S^1 \) to give
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\[\begin{aligned}
+\tr_\tot&\defeq \bigodot_i \rho_{\partial F} = \base\\
+\flat_\tot&\defeq \bigodot_i\flat_{\partial F}\\
+\end{aligned}\]
+\end{column}
+\begin{column}{0.5\textwidth}
+\[\begin{aligned}
+X_\tot&\defeq \bigodot_i \sigma_{\partial F} = \refl_\base\\
+L^X_\tot&\defeq \bigodot_i \flat_{\partial F} \dotcirc \sigma_{\partial F} = \bigodot_i \flat_{\partial F}
+\end{aligned}\]
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Classical proof}
