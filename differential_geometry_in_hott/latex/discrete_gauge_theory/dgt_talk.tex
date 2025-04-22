@@ -1,14 +1,16 @@
-\documentclass[13pt,aspectratio=169]{beamer}
+\documentclass[handout,13pt,aspectratio=169]{beamer}
 \usetheme{default}
+
 % something tries to renewcommand these but beamer must break the assumption that they are defined so I am defining them
 \newcommand{\labelitemi}{}
 \newcommand{\labelitemii}{}
 \newcommand{\labelitemiii}{}
 \newcommand{\labelitemiv}{}
+
 \renewcommand{\mathrm}[1]{\mathsf{#1}}
 \usepackage{greg}
 \renewcommand{\defemph}[1]{\alert{#1}}
-\useoutertheme[subsection=false]{miniframes}
+
 \useinnertheme{circles}
 \setbeamertemplate{navigation symbols}{}
 %\setbeamercovered{transparent}
@@ -20,7 +22,6 @@
 \setbeamercolor{palette secondary}{bg=steveblue,fg=white}
 \setbeamercolor{palette tertiary}{bg=steveblue,fg=white}
 \setbeamercolor{section in head/foot}{bg=mygrey,fg=white}
-\setbeamercolor{alerted text}{fg=cmu_red}
 
 \AtBeginSection[]{
   \begin{frame}
@@ -37,23 +38,23 @@
 % \setbeamercolor{corollary body}{parent=normal text,use=block title,bg=blue}
 %\setlength{\parskip}{\baselineskip} 
 
-\commentout{
-The thesis reads like this:
-The type of torsors and Eilenberg-Mac Lane spaces is the background in HoTT of our theory. 
-Manifolds are simplicial complexes, made into pushouts in an obvious way, with hubs and spokes.
-Extending a map from the k-skel to the (k+1)-skel is called a connection.
-Extending a map to a single face is a flatness structure.
-Focus on 2-dimensions, oriented, tangent bundles:
-Vector fields! Sections on the 1-skel.
-Vector fields do the ice cream scoop thing to paths.
-Index on a face: swirling after factoring in the flatness.
-Flatness and index on two faces.
-}
+%%
+%% FOR PRINTING, COMMENT THESE
+%%
+% \logo{\vspace{-4pt}\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}\quad}
+% \useoutertheme[subsection=false]{miniframes}
+% \setbeamercolor{alerted text}{fg=cmu_red}
 
-\title[Geometry in HoTT]{DRAFT: Discrete differential geometry in homotopy type theory}
+%%
+%% FOR PRINTING, UNCOMMENT THESE AND ADD "handout" to beamer options in line 1
+%%
+\setbeamercolor{alerted text}{fg=black}
+\setbeamerfont{alerted text}{series=\ifmmode\else\bfseries\fi}
+
+
+\title[Geometry in HoTT]{Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \institute[CMU]{Carnegie Mellon University}
-\logo{\vspace{-4pt}\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}\quad}
 \date{April 2025}
 
 \begin{document}

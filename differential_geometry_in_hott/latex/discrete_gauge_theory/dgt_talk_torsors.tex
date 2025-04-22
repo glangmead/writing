@@ -9,8 +9,9 @@ Let \( G \) be a (higher) group.
 \onslide<2->{\begin{definition}
 \begin{itemize}
 \item<2-> A \defemph{right \( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \).
-\item<3-> \( X \) is a \alert{torsor} if it is inhabited and the map \( (\pr_1, \phi):X\times G\to X\times X \) is an equivalence.
+\item<3-> \( X \) is furthermore a \alert{\( G \)-torsor} if it is inhabited and the map \( (\pr_1, \phi):X\times G\to X\times X \) is an equivalence.
 \item<4-> The inverse is \( (\pr_1, s) \) where \( s:X\times X\to G \) is called \alert{subtraction} (when \( G \) is commutative).
+\item<5-> Let \alert{\( BG \)} be the type of \( G \)-torsors.
 \item<5-> Let \( \reg{G} \) be the \( G \)-torsor consisting of \( G \) acting on itself on the right.
 \end{itemize}
 \end{definition}}
@@ -21,16 +22,15 @@ Let \( G \) be a (higher) group.
 \item<2-> \( \loopy(BG,\reg{G}) \simeq G \) and composition of loops corresponds to multiplication in \( G \).
 \item<3-> \( BG \) is connected.
 \item<4-> 1 \& 2 \( \implies \) \( BG \) is a \( \K(G,1) \).
-\item<5-> \( \ev(e):(\reg{G}=_{BG} X)\to X \) is an equivalence (needed when we have vector fields).
 \end{enumerate}
 \onslide<5->{See the Buchholtz et. al. H-spaces paper for more.}
 \end{frame}
 
 \begin{frame}{How to map into \( BS^1 \)}
-To construct maps into \( BS^1 \) we \alert{lift} a family of mere circles. (Remark: the lift is a choice of \alert{orientation}.)
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJCU14xIl0sWzIsMCwiXFxCQXV0IChTXjEpIl0sWzMsMCwiXFx1bmkiXSxbMiwyLCJcXG1tIl0sWzAsMSwiXFx0ZXh0e2ZhbWlsaWVzIG9mOn0iXSxbMywwLCJcXG1hdGhybXt0b3Jzb3JzfSJdLFszLDEsIlxcc3Vic3RhY2t7XFxtYXRocm17bWVyZX1cXFxcIFxcbWF0aHJte2NpcmNsZXN9fSIsMV0sWzMsMiwiXFxtYXRocm17dHlwZXN9IiwyXSxbMCwxXSxbMSwyXV0=
+To construct maps into \( BS^1 \) we \alert{lift} a family of \alert{mere circles}.
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJCU14xIl0sWzIsMCwiXFxCQXV0IChTXjEpXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fXs9fVxcc3VtX3tZOlxcdW5pfXx8WT1TXjF8fF97LTF9Il0sWzMsMCwiXFx1bmkiXSxbMiwyLCJcXG1tIl0sWzAsMSwiXFx0ZXh0e2ZhbWlsaWVzIG9mOn0iXSxbMywwLCJcXG1hdGhybXt0b3Jzb3JzfSJdLFszLDEsIlxcc3Vic3RhY2t7XFxtYXRocm17bWVyZX1cXFxcIFxcbWF0aHJte2NpcmNsZXN9fSIsMV0sWzMsMiwiXFxtYXRocm17dHlwZXN9IiwyXSxbMCwxXSxbMSwyXV0=
 \[\begin{tikzcd}[ampersand replacement=\&, row sep=small]
-  \& {BS^1} \& {\BAut (S^1)} \& \uni \\
+  \& {BS^1} \& {\alert{\BAut (S^1)}\stackrel{\mathrm{def}}{=}\sum_{Y:\uni}||Y=S^1||_{-1}} \& \uni \\
   {\text{families of:}} \\
   \&\& \mm
   \arrow[from=1-2, to=1-3]
@@ -39,7 +39,7 @@ To construct maps into \( BS^1 \) we \alert{lift} a family of mere circles. (Rem
   \arrow["\begin{array}{c} \substack{\mathrm{mere}\\ \mathrm{circles}} \end{array}"{description}, from=3-3, to=1-3]
   \arrow["{\mathrm{types}}"', from=3-3, to=1-4]
 \end{tikzcd}\]
-We will assume we have such a lift when we need it.
+We will assume we have such a lift when we need it. (Remark: the lift is a choice of \alert{orientation}.)
 
 \onslide<2->{
 Other names:

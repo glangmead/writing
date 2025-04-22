@@ -16,16 +16,17 @@ Connections are extensions of the bundle to higher skeleta.
 The \defemph{link} of a vertex \( w \) in a 2-complex is: the sets not containing \( w \) but whose union with \( w \) is a face.\\~\\
 \end{column}
 \end{columns}
+Define \alert{the tangent bundle} on a combinatorial manifold to be \( T_0\defeq\link:\mm_0\to\BAut(S^1) \).
 \end{frame}
 
 \begin{frame}{Connections on the tangent bundle}
-An extension \( T_1 \) of \( \link \) to \( \mm_1 \) is called \alert{a connection on the tangent bundle}.
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXEJBdXQoU14xKSJdLFswLDAsIlxcbW1fMCJdLFsxLDAsIlxcbW1fMSJdLFsyLDAsIlxcbW1fMiJdLFsxLDAsIlxcbGluayIsMl0sWzIsMCwiVF8xIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMCwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMl0sWzIsM11d
+An extension \( T_1 \) of \( T_0 \) to \( \mm_1 \) is called \alert{a connection on the tangent bundle}.
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXEJBdXQoU14xKSJdLFswLDAsIlxcbW1fMCJdLFsxLDAsIlxcbW1fMSJdLFsyLDAsIlxcbW1fMiJdLFsxLDAsIlRfMFxcZGVmZXFcXGxpbmsiLDJdLFsyLDAsIlRfMSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDAsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDJdLFsyLDNdXQ==
 \[\begin{tikzcd}[ampersand replacement=\&]
   {\mm_0} \& {\mm_1} \& {\mm_2} \\
   \& {\BAut(S^1)}
   \arrow[from=1-1, to=1-2]
-  \arrow["\link"', from=1-1, to=2-2]
+  \arrow["{T_0\defeq\link}"', from=1-1, to=2-2]
   \arrow[from=1-2, to=1-3]
   \arrow["{T_1}", dashed, from=1-2, to=2-2]
   \arrow[dashed, from=1-3, to=2-2]
@@ -62,6 +63,7 @@ Let \( H_{wbr}:\refl_{w}=_{w=_{\mm}w}\partial(wbr) \) be the filler homotopy of 
 
 \tikzset{every picture/.style={scale=0.85}}
 \[\input{figs/discrete_gauge_theory_oo_transport_tikz}\]
+(Subtle remark: \( R \) and \( H_R \) are constructed at the HIT level. The HoTT path is the \alert{realization} of \( H_R \).)
 \end{frame}
 
 % \begin{frame}{Rotation}
@@ -86,7 +88,7 @@ Let \( H_{wbr}:\refl_{w}=_{w=_{\mm}w}\partial(wbr) \) be the filler homotopy of 
 
 \begin{frame}{The definition of a connection}
 \begin{definition}
-If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a combinatorial manifold and all the triangles commute in the diagram:
+If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is the realization of a combinatorial manifold and all the triangles commute in the diagram:
 \[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {\mm_0} \& {\mm_1} \& {\mm_2} \& \cdots \& {\mm_n} \\
 \&\& {\mathcal{U}}
@@ -110,7 +112,7 @@ If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\
 \begin{mydef}[cont.]
 \begin{columns}[t]
 \begin{column}{0.55\textwidth}
-The pushout consists of \( M_2 \)-many extensions:
+An extension consists of \( M_2 \)-many extensions to faces:
 \[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
   {M_2\times \partial\Dd(2)} \& {M_2} \\
   {\mathbb{M}_{1}} \& {\mathbb{M}_2} \\

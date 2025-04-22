@@ -46,7 +46,7 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \end{column}
 \begin{column}{0.85\textwidth}
 \begin{itemize}
-\item<2-> Define \( \sji\defeq s(\Xji, X_j):\rji=_{S^1}\base, \).
+\item<2-> Define \( \sji\defeq \alpha_j(\Xji):\rji=_{S^1}\base, \).
 \item<3-> Paths of the form \( (a=_{S^1}\base) \) can be multiplied: 
 \begin{itemize}
 \item \( \dotcirc:(a=\base)\times (b=base)\to (a\dotcirc b=base) \).
@@ -83,6 +83,7 @@ Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), and \( \partial F_1,\ldots,\
 X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 L^X_F&\defeq\flat_F(X_1)\cdot X_F&&:(X_1=_{T_1}X_1)&&\text{\alert{flattened swirling}}
 \end{aligned}\]
+\onslide<2->{
 These can all be totaled in \( S^1 \) to give
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
@@ -98,6 +99,9 @@ L^X_\tot&\defeq \bigodot_i \flat_{\partial F} \dotcirc \sigma_{\partial F} = \bi
 \end{aligned}\]
 \end{column}
 \end{columns}
+}\onslide<3->{
+So in our lingo: the total flatness equals the total flattened swirling.\qed
+}
 \end{frame}
 
 \begin{frame}{Classical proof}
