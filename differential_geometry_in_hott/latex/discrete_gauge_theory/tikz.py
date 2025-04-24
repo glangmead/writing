@@ -27,6 +27,8 @@ def tikz2image(tikz, filetype, outfile):
              \\usepackage{greg}
              \\geometry{margin=1in}
              \\begin{document}
+             \\newlength{\\mylen}
+             \\newlength{\\mylin}
              """)
     f.write(tikz)
     f.write("\n\\end{document}\n")

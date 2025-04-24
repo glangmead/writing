@@ -7,7 +7,8 @@
 \newcommand{\sji}{\sigma_{ji}}
 \newcommand{\rij}{\rho_{ij}}
 \newcommand{\rji}{\rho_{ji}}
-\newcommand{\dotcirc}{\odot}
+\newcommand{\dotcirc}{+}
+\newcommand{\bigdotcirc}{\sum}
 
 \begin{frame}{Simplifying swirling}
 Swirling involves concatenating dependent paths. Can we simplify that?
@@ -44,7 +45,7 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \begin{column}{0.15\textwidth}
 \input{figs/swirl_matrix_lastcolumn_tikz}
 \end{column}
-\begin{column}{0.85\textwidth}
+\begin{column}{0.5\textwidth}
 \begin{itemize}
 \item<2-> Define \( \sji\defeq \alpha_j(\Xji):\rji=_{S^1}\base, \).
 \item<3-> Paths of the form \( (a=_{S^1}\base) \) can be multiplied: 
@@ -55,17 +56,20 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \item<4-> Lemma: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij\dotcirc\sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xji \)).
 \end{itemize}
 \end{column}
+\begin{column}{0.35\textwidth}
+\onslide<5->{\includegraphics[width=30ex]{figs/pathovers_inverse.pdf}}
+\end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Pay off all our assumptions 2: no boundary, commutativity}
 \begin{columns}
 \begin{column}{0.15\textwidth}
-\input{figs/swirl_matrix_lastcolumn_tikz}
+\includegraphics{figs/oo_orientation.pdf}
 \end{column}
 \begin{column}{0.85\textwidth}
 \begin{mydef}
-Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), and \( \partial F_1,\ldots,\partial F_n \) be the triangular boundaries. The \alert{total swirling} is \[ X_\tot \defeq \sigma_{\partial F_1}\dotcirc\cdots\dotcirc\sigma_{\partial F_n} \].
+Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), \( v_i:F_i \) be designated vertices, and \( \partial F_i:v_i=v_i \) be the triangular boundaries. The \alert{total swirling} is \[ X_\tot \defeq \sigma_{\partial F_1}\dotcirc\cdots\dotcirc\sigma_{\partial F_n} \].
 \end{mydef}
 \begin{itemize}
 \item<2-> We assume that this expression involves \alert{every edge once in each direction}.
@@ -75,8 +79,8 @@ Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), and \( \partial F_1,\ldots,\
 \end{columns}
 \end{frame}
 
-
 \begin{frame}{Consequence}
+\vspace{-6ex}
 \[\begin{aligned}
 \tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
 \flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
@@ -88,20 +92,35 @@ These can all be totaled in \( S^1 \) to give
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \[\begin{aligned}
-\tr_\tot&\defeq \bigodot_i \rho_{\partial F} = \base\\
-\flat_\tot&\defeq \bigodot_i\flat_{\partial F}\\
+\tr_\tot&\defeq \bigdotcirc_i \rho_{\partial F} = \base\\
+\flat_\tot&\defeq \bigdotcirc_i\flat_{\partial F}\\
 \end{aligned}\]
 \end{column}
 \begin{column}{0.5\textwidth}
 \[\begin{aligned}
-X_\tot&\defeq \bigodot_i \sigma_{\partial F} = \refl_\base\\
-L^X_\tot&\defeq \bigodot_i \flat_{\partial F} \dotcirc \sigma_{\partial F} = \bigodot_i \flat_{\partial F}
+X_\tot&\defeq \bigdotcirc_i \sigma_{\partial F} = \refl_\base\\
+L^X_\tot&\defeq \bigdotcirc_i \flat_{\partial F} \dotcirc \sigma_{\partial F} = \bigdotcirc_i \flat_{\partial F}
 \end{aligned}\]
 \end{column}
 \end{columns}
 }\onslide<3->{
 So in our lingo: the total flatness equals the total flattened swirling.\qed
 }
+\end{frame}
+
+\begin{frame}{Examples}
+\tikzset{every picture/.style={scale=0.65}}
+\[\input{figs/discrete_gauge_theory_oo_transport_tikz}\]
+Each face contributes \( \flat_F=H_R \), a 1/4-rotation. Total: 2.
+\onslide<2->{
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\input{figs/discrete_gauge_theory_oo_swirl.tex}
+\end{column}
+\begin{column}{0.8\textwidth}
+This is what it looks like: +1 from \( F_{wrg} \), +1 from \( F_{ybo} \), +0 from others.
+\end{column}
+\end{columns}}
 \end{frame}
 
 \begin{frame}{Classical proof}

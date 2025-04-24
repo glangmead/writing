@@ -3,10 +3,10 @@
 \begin{frame}{Vector fields}
 \begin{columns}
 \begin{column}{0.7\textwidth}
-Let \( T:\mm\to BS^1 \) be an oriented tangent bundle on a 2-dim combinatorial manifold.
+Let \( T:\mm\to BS^1 \) be an oriented tangent bundle on a 2-dim realization of a combinatorial manifold.
 \begin{itemize}
 \item Our bundles of mere circles can only model \alert{nonzero} tangent vectors.
-\item  A global section would be a trivialization of \( T \), so there is an obstruction.
+\item  A global section of this family would be a trivialization of \( T \), so that's not a good definition.
 \end{itemize}
 \quad\\~\\
 \onslide<2->{
@@ -19,7 +19,15 @@ Our solution:
 }
 \end{column}
 \begin{column}{0.3\textwidth}
-\input{figs/discrete_gauge_theory_oo_swirl}
+% https://q.uiver.app/#q=WzAsMyxbMSwxLCJCU14xIl0sWzEsMCwiKiJdLFswLDEsIlxcbW0iXSxbMiwwLCJUIiwyXSxbMiwxLCJYIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMCwie1NeMX0iXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+  \& {*} \\
+  \mm \& {BS^1}
+  \arrow["{{S^1}}", from=1-2, to=2-2]
+  \arrow["X", dashed, from=2-1, to=1-2]
+  \arrow["T"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\onslide<2->{\input{figs/discrete_gauge_theory_oo_swirl}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -71,9 +79,9 @@ An example of \alert{swirling} and \alert{index} at this face.
 An example of \alert{swirling} and \alert{index} at this face.
 \begin{itemize}
 \item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
-\item<1-> \phantom{Say \( T_{12} \) is trivial. Denote the transported vector as thinner.}
-\item<1-> \phantom{Say \( T_{23} \) rotates clockwise. Denote the twice-transported vector as dashed.}
-\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\item<1-> \phantom{Say \( T_{21} \) is trivial. Denote the transported vector as thinner.}
+\item<1-> \phantom{Say \( T_{32} \) rotates clockwise. Denote the twice-transported vector as dashed.}
+\item<1-> \phantom{Say \( T_{13} \) is trivial. The thrice-transported vecor is dotted.}
 \end{itemize}
 \end{column}
 \end{columns}
@@ -92,9 +100,9 @@ An example of \alert{swirling} and \alert{index} at this face.
 An example of \alert{swirling} and \alert{index} at this face.
 \begin{itemize}
 \item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
-\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
-\item<1-> \phantom{Say \( T_{23} \) rotates clockwise. Denote the twice-transported vector as dashed.}
-\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\item<1-> Say \( T_{21} \) is trivial. Denote the transported vector as thinner.
+\item<1-> \phantom{Say \( T_{32} \) rotates clockwise. Denote the twice-transported vector as dashed.}
+\item<1-> \phantom{Say \( T_{13} \) is trivial. The thrice-transported vecor is dotted.}
 \end{itemize}
 \end{column}
 \end{columns}
@@ -113,9 +121,9 @@ An example of \alert{swirling} and \alert{index} at this face.
 An example of \alert{swirling} and \alert{index} at this face.
 \begin{itemize}
 \item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
-\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
-\item<1-> Say \( T_{23} \) rotates clockwise. Denote the twice-transported vector as dashed.
-\item<1-> \phantom{Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.}
+\item<1-> Say \( T_{21} \) is trivial. Denote the transported vector as thinner.
+\item<1-> Say \( T_{32} \) rotates clockwise. Denote the twice-transported vector as dashed.
+\item<1-> \phantom{Say \( T_{13} \) is trivial. The thrice-transported vecor is dotted.}
 \end{itemize}
 \end{column}
 \end{columns}
@@ -134,9 +142,9 @@ An example of \alert{swirling} and \alert{index} at this face.
 An example of \alert{swirling} and \alert{index} at this face.
 \begin{itemize}
 \item<1-> Denote by \( X_1 \) this vector \( X(v_1):T_1 \).
-\item<1-> Say \( T_{12} \) is trivial. Denote the transported vector as thinner.
-\item<1-> Say \( T_{23} \) rotates clockwise. Denote the twice-transported vector as dashed.
-\item<1-> Say \( T_{31} \) is trivial. The thrice-transported vecor is dotted.
+\item<1-> Say \( T_{21} \) is trivial. Denote the transported vector as thinner.
+\item<1-> Say \( T_{32} \) rotates clockwise. Denote the twice-transported vector as dashed.
+\item<1-> Say \( T_{13} \) is trivial. The thrice-transported vecor is dotted.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -154,9 +162,9 @@ An example of \alert{swirling} and \alert{index} at this face.
 \begin{column}{0.35\textwidth}
 \begin{itemize}
 \item<1-> \( X \) on \( e_{12} \) is red, etc.
-\item<2-> We translated all results to the end of the loop.
+\item<2-> We translated all pathover data to the end of the loop.
 \item<3-> (Reminds me of scooping ice cream towards the last fiber.)
-\item<4-> The total pathover is called \alert{the swirling \( X_F \)} of \( X \) at the face \( F \).
+\item<4-> The total pathover \( X(\partial F) \) is called \alert{the swirling \( X_F \)} of \( X \) at the face \( F \).
 \end{itemize}
 \end{column}
 \end{columns}
@@ -172,12 +180,12 @@ An example of \alert{swirling} and \alert{index} at this face.
   \arrow["{T_{21}}", from=1-1, to=1-2]
   \arrow["{T_{32}}", from=1-2, to=1-3]
   \arrow["{T_{13}}", from=1-3, to=1-4]
-  \arrow["{\alert{T_{13}T_{32}X_{12}}:}", equals, from=3-4, to=2-4]
-  \arrow["{\alert{X_{12}}:}"', equals, from=4-2, to=5-2]
-  \arrow["{\alert{T_{32}X_{12}}:}", equals, from=4-3, to=3-3]
-  \arrow["{\alert{T_{13}X_{23}}:}", equals, from=4-4, to=3-4]
-  \arrow["{\alert{X_{23}}:}", equals, from=5-3, to=4-3]
-  \arrow["{\alert{X_{31}}:}", equals, from=5-4, to=4-4]
+  \arrow["{\alert{T_{13}T_{32}X_{21}}:}", equals, from=3-4, to=2-4]
+  \arrow["{\alert{X_{21}}:}"', equals, from=4-2, to=5-2]
+  \arrow["{\alert{T_{32}X_{21}}:}", equals, from=4-3, to=3-3]
+  \arrow["{\alert{T_{13}X_{32}}:}", equals, from=4-4, to=3-4]
+  \arrow["{\alert{X_{32}}:}", equals, from=5-3, to=4-3]
+  \arrow["{\alert{X_{13}}:}", equals, from=5-4, to=4-4]
 \end{tikzcd}
 \end{frame}
 
@@ -187,7 +195,8 @@ An example of \alert{swirling} and \alert{index} at this face.
 \flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
 X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
-\onslide<2->{Recall that \( T_1 \) being an \( S^1 \)-torsor means we can use subtraction to obtain an equivalence \( s(-,X_1):T_1\xrightarrow[]{x\mapsto x\alert{-X_1}} S^1 \).
+\onslide<3->{({\itshape Recall that \( T_1 \) being an \( S^1 \)-torsor means we can use subtraction to obtain an equivalence \( s(-,X_1):T_1\xrightarrow[]{x\mapsto x\alert{-X_1}} S^1 \).})}
+\onslide<2->{
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
@@ -205,15 +214,15 @@ The \defemph{index} of the vector field \( X \) on the face \( F \) is the integ
   \setlength{\mylin}{1cm}
   %\node[label=center:\( Tv_1 \)] (V1) at (0, 0) {};
   \node [ii, above right=\mylin of V1] (V11) {};
-  \node [ii, below right=\mylin of V1] (V12) {};
+  \node [ii, below right=\mylin of V1] (V14) {};
   \node [ii, below left=\mylin of  V1] (V13) {};
-  \node [ii, above left= \mylin of V1] (V14) {};
+  \node [ii, above left= \mylin of V1] (V12) {};
   \node[oo, label=right:\( v_1 \)] (V1) at (0, 0) {};
 
-  \draw[dashed] (V11) edge[ultra thick, solid, arrow, swap, "\( \flat_F(X_1) \)"] (V14);
-  \draw[arrow] (V14) edge[thick, swap, color=magenta, "\( X_{12} \)"] (V13);
-  \draw[arrow] (V13) edge[thick, swap, color=teal, "\( X_{23} \)"] (V12);
-  \draw[arrow] (V12) edge[thick, swap, color=blue, "\( X_{31} \)"] (V11);
+  \draw[dashed] (V11) edge[ultra thick, color=brown, solid, arrow, "\( \flat_F(X_1) \)"] (V14);
+  \draw[arrow] (V14) edge[thick, color=magenta, "\( X_{21} \)"] (V13);
+  \draw[arrow] (V13) edge[thick, color=teal, "\( X_{32} \)"] (V12);
+  \draw[arrow] (V12) edge[thick, color=blue, "\( X_{13} \)"] (V11);
   \draw[arrow] (V1) edge[vec] (V11);
     \draw[arrow] (V1) edge[vectrtrtr] (V14);
     \draw[arrow] (V1) edge[vectrtr] (V13);

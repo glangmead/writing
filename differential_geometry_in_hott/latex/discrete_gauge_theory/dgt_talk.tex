@@ -51,7 +51,7 @@
 \setbeamercolor{alerted text}{fg=black}
 \setbeamerfont{alerted text}{series=\ifmmode\else\bfseries\fi}
 
-
+\newcommand{\nologo}{\setbeamertemplate{logo}{}}
 \title[Geometry in HoTT]{Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \institute[CMU]{Carnegie Mellon University}
@@ -61,6 +61,9 @@
 \begin{frame}
 \titlepage
 \end{frame}
+
+\newlength{\mylen}
+\newlength{\mylin}
 
 \input{dgt_talk_intro.tex}
 \input{dgt_talk_combman.tex}
