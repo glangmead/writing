@@ -34,7 +34,7 @@ Swirling involves concatenating dependent paths. Can we simplify that?
   \arrow["{(-)\dotcirc\rho_{ji}}"', from=2-1, to=2-2]
   \arrow["{\mathsf{base}\mapsto X_j}"', shift right=3, curve={height=6pt}, from=2-2, to=1-2]
 \end{tikzcd}\]
-\item<4-> Lemma: \( \rij=\rji^{-1} \) because \alert{in \( T_j \)}: \( \rij\dotcirc\rji\dotcirc X_j=\rij\dotcirc \Tji X_i=\Tji(\rij\dotcirc X_i)=\Tji \Tij X_j=X_j \).
+\item<4-> Lemma: \( \rij=-\rji \) because \alert{in \( T_j \)}: \( \rij\dotcirc\rji\dotcirc X_j=\rij\dotcirc \Tji X_i=\Tji(\rij\dotcirc X_i)=\Tji \Tij X_j=X_j \).
 \end{itemize}
 \end{column}
 \end{columns}
@@ -48,16 +48,17 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \begin{column}{0.5\textwidth}
 \begin{itemize}
 \item<2-> Define \( \sji\defeq \alpha_j(\Xji):\rji=_{S^1}\base, \).
-\item<3-> Paths of the form \( (a=_{S^1}\base) \) can be multiplied: 
+\item<3-> Paths of the form \( (a=_{S^1}\base) \) can be added: 
 \begin{itemize}
 \item \( \dotcirc:(a=\base)\times (b=base)\to (a\dotcirc b=base) \).
 \item \( p\dotcirc q=(p\dotcirc b)\cdot q. \)
 \end{itemize}
-\item<4-> Lemma: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij\dotcirc\sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xji \)).
+\item<4-> Lemma: \( \sij\dotcirc\sji=\refl_{\base} \).
+\item<5-> Proof: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij\dotcirc\sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xji \)).
 \end{itemize}
 \end{column}
 \begin{column}{0.35\textwidth}
-\onslide<5->{\includegraphics[width=30ex]{figs/pathovers_inverse.pdf}}
+\onslide<6->{\includegraphics[width=30ex]{figs/pathovers_inverse.pdf}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -118,7 +119,7 @@ Each face contributes \( \flat_F=H_R \), a 1/4-rotation. Total: 2.
 \input{figs/discrete_gauge_theory_oo_swirl.tex}
 \end{column}
 \begin{column}{0.8\textwidth}
-This is what it looks like: +1 from \( F_{wrg} \), +1 from \( F_{ybo} \), +0 from others.
+For total index one obtains +1 from \( F_{wrg} \), +1 from \( F_{ybo} \), +0 from others. Total: 2.
 \end{column}
 \end{columns}}
 \end{frame}
