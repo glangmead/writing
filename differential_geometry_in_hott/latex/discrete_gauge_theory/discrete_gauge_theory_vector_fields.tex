@@ -53,17 +53,10 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 
 We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove Theorem~\ref{thm:total_index_total_curvature}.
 
-First we will choose a specific group that acts on all the fibers of \( T \). Recall from Section~\ref{subsec:torsors} that given some basepoint \( b:\Kzt \) and a type \( T_i:\Kzt \), the group \( b=_{\Kzt}b \) acts on \( T_i \). Suppose we have a master basepoint \( m:\mm \), and choose \( T_m:\Kzt \) as the basepoint, so that all the fibers of \( T \) are now equipped with an action of \( T_m=_{\Kzt}T_m \).
-
-We will give this group a nickname for brevity. Recall the bundle \( \Aut T \) from Section~\ref{sec:automorphisms}.
-\begin{mydef}
-Define \( \Gg\defeq \Aut T \), so that \( \Gg(m)=(T_m=_{\Kzt}T_m) \). Since this group is commutative, we'll denote the group operation by \( +:\Gg(m)\times\Gg(m)\to\Gg(m) \).
-\end{mydef}
-
-We need to derive two operations from \( \Gg(m) \).
+Recall that \( \so \) acts on all the fibers of \( T \). We will derive two operations involving \( \so \).
 
 \begin{mydef}
-The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to \Gg(m) \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\Gg(m) \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
+The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to \so \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\so \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
 \end{mydef}
 
 \begin{mylemma}
@@ -79,16 +72,16 @@ If \( p:x=_G y \) and \( p':x'=_G y' \), then we can define \( \mu_=(p, p') \) b
 \end{align*}
 \end{myproof}
 
-Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}\Gg(m) \), and then give a name to the special term \( T_{ij}X_j - X_i \).
+Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xrightarrow[]{-X_i}\so \), and then give a name to the special term \( T_{ij}X_j - X_i \).
 
 \begin{mydef}
-We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j - X_i \). The map \( +\rho_{ij}:\Gg(m)\to\Gg(m) \) makes the following diagram commute%
+We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j - X_i \). The map \( +\rho_{ij}:\so\to\so \) makes the following diagram commute%
 \end{mydef}%
 \begin{equation}
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJUX2kiXSxbMSwwLCJUX2oiXSxbMCwxLCJcXG1hdGhzY3J7R30obSkiXSxbMSwxLCJcXG1hdGhzY3J7R30obSkiXSxbMCwxLCJUX3tqaX0iXSxbMSwzLCIoXFx0ZXh0ey19KS1YX2oiXSxbMCwyLCIoXFx0ZXh0ey19KS1YX2kiLDJdLFsyLDMsIihcXHRleHR7LX0pK1xccmhvX3tqaX0iLDJdXQ==
 \begin{tikzcd}
   {T_i} & {T_j} \\
-  {\mathscr{G}(m)} & {\mathscr{G}(m)}
+  {\so} & {\so}
   \arrow["{T_{ji}}", from=1-1, to=1-2]
   \arrow["{(\text{-})-X_i}"', from=1-1, to=2-1]
   \arrow["{(\text{-})-X_j}", from=1-2, to=2-2]
@@ -97,7 +90,7 @@ We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j
 \label{eq:action_of_rho}
 \end{equation}
 
-\begin{mylemma} \( \rho_{ij}+\rho_{ji}=_{\Gg(m)}0 \).
+\begin{mylemma} \( \rho_{ij}+\rho_{ji}=_{\so}0 \).
 \label{lem:subtraction}\end{mylemma}
 \begin{myproof}
 \begin{align*}
@@ -107,26 +100,26 @@ We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j
 &=_{T_i} X_i&&\text{by definition of }T\qedhere
 \end{align*}
 \end{myproof}
-We can obtain a path in \( \Gg(m) \) from a dependent path by again subtracting the basepoint:
+We can obtain a path in \( \so \) from a dependent path by again subtracting the basepoint:
 \begin{align*}
-\sigma_{ij}\defeq X_{ij}-X_j&:T_{ji}X_i-X_j=_{\Gg(m)}0 \\
-&:\rho_{ji}=_{\Gg(m)}0.
+\sigma_{ij}\defeq X_{ij}-X_j&:T_{ji}X_i-X_j=_{\so}0 \\
+&:\rho_{ji}=_{\so}0.
 \end{align*}
 Notice the reversal in indices between \( \sigma_{ij} \) and \( \rho_{ji} \), which reflects our opposite conventions for \( X_{ij} \) which we view as a path, and \( T_{ji} \) which we view as a function.
 
-The key technical lemma is the following. Recall that dependent functions such as our vector field \( X \) send \( \refl_{v_i} \) to \( \refl_{X_i} \) (by path induction, see for example \cite{hottbook} Lemma 2.3.4). As stated, this can only be used when we have a path that is \( \refl \), for example when traversing \( e_{ij}\cdot e_{ji} \), i.e. an edge followed by its inverse. We will use subtraction together with the operation of Lemma~\ref{lem:multpath} to lift this requirement, by obtaining paths in \( \Gg(m) \) that can be added without needing to be concatenated directly.
+The key technical lemma is the following. Recall that dependent functions such as our vector field \( X \) send \( \refl_{v_i} \) to \( \refl_{X_i} \) (by path induction, see for example \cite{hottbook} Lemma 2.3.4). As stated, this can only be used when we have a path that is \( \refl \), for example when traversing \( e_{ij}\cdot e_{ji} \), i.e. an edge followed by its inverse. We will use subtraction together with the operation of Lemma~\ref{lem:multpath} to lift this requirement, by obtaining paths in \( \so \) that can be added without needing to be concatenated directly.
 
 \begin{mylemma}
 \label{lem:cancellation}
-With the notation \( \sigma_{ij}\defeq X_{ij}-X_j \), and with addition of paths as in Lemma~\ref{lem:multpath}, we have \( \sigma_{ij}+\sigma_{ji}=_{0=_{\Gg(m)}0}\refl_0 \).
+With the notation \( \sigma_{ij}\defeq X_{ij}-X_j \), and with addition of paths as in Lemma~\ref{lem:multpath}, we have \( \sigma_{ij}+\sigma_{ji}=_{0=_{\so}0}\refl_0 \).
 \end{mylemma}
 \begin{myproof}
 First we need to show that the sum is a loop, then we can prove that it is \( \refl_0 \). The terms have these types:
 \begin{align*}
-\sigma_{ij}&:\rho_{ji}=_{\Gg(m)}0\\
-\sigma_{ji}&:\rho_{ij}=_{\Gg(m)}0
+\sigma_{ij}&:\rho_{ji}=_{\so}0\\
+\sigma_{ji}&:\rho_{ij}=_{\so}0
 \end{align*}
-so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{ji}:\rho_{ji}+\rho_{ij}=_{\Gg(m)} 0 \) which by Lemma~\ref{lem:subtraction} is \( 0=_{\Gg(m)}0 \). We compute \( + \) using the concatenations in Lemma~\ref{lem:multpath}, which gives
+so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{ji}:\rho_{ji}+\rho_{ij}=_{\so} 0 \) which by Lemma~\ref{lem:subtraction} is \( 0=_{\so}0 \). We compute \( + \) using the concatenations in Lemma~\ref{lem:multpath}, which gives
 \begin{align*}
 \sigma_{ij}+\sigma_{ji} &: 
   (0+0) \overeq{\mathrm{Lemma~}\ref{lem:subtraction}}
@@ -134,11 +127,11 @@ so when we add these paths with \( + \) we obtain a path \( \sigma_{ij}+\sigma_{
   (0+\rho_{ij}) &&\overeq{\mathsf{is\underscore comm}}
   (\rho_{ij}+0) \overeq{\sigma_{ji}}
   (0+0)\\
-\sigma_{ij}+\sigma_{ji}&=_{0=_{\Gg(m)}0} (\sigma_{ij}+\rho_{ij})\cdot \sigma_{ji}&& \\
-&=_{0=_{\Gg(m)}0} ((X_{ij}-X_j)+\rho_{ij})\cdot (X_{ji} - X_i)&&\text{definition of }\sigma s\\
-&=_{0=_{\Gg(m)}0} (T_{ij}(X_{ij})-X_i)\cdot (X_{ji} - X_i)&&\text{action of }\rho_{ij}\text{ (see (\ref{eq:action_of_rho}))} \\
-&=_{0=_{\Gg(m)}0} \refl_{X_i}-X_i&&\text{path induction for }X\\
-&=_{0=_{\Gg(m)}0} \refl_0&&\qedhere
+\sigma_{ij}+\sigma_{ji}&=_{0=_{\so}0} (\sigma_{ij}+\rho_{ij})\cdot \sigma_{ji}&& \\
+&=_{0=_{\so}0} ((X_{ij}-X_j)+\rho_{ij})\cdot (X_{ji} - X_i)&&\text{definition of }\sigma s\\
+&=_{0=_{\so}0} (T_{ij}(X_{ij})-X_i)\cdot (X_{ji} - X_i)&&\text{action of }\rho_{ij}\text{ (see (\ref{eq:action_of_rho}))} \\
+&=_{0=_{\so}0} \refl_{X_i}-X_i&&\text{path induction for }X\\
+&=_{0=_{\so}0} \refl_0&&\qedhere
 \end{align*}
 \end{myproof}
 \begin{mynote}

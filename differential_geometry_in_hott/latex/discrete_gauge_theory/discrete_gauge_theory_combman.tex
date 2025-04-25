@@ -11,16 +11,16 @@ An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} is an orde
 We can imagine constructing a simplicial complex dimension by dimension.
 
 \begin{mydef}
-Denote by \( P(n) \) the simplicial complex obtained by taking the set of all subsets of the standard \( (n+1) \)-element set \( P(n)_0\defeq\{0,\ldots,n\} \). We call \( P(n) \) the \defemph{complete \( n \)-simplex}. We will refer to the \( (n-1) \)-skeleton \( P(n)_{\leq(n-1)} \) with the suggestive notation \( \partial P(n) \).
+Denote by \( \Delta(n) \) the simplicial complex obtained by taking the set of all subsets of the standard \( (n+1) \)-element set \( \Delta(n)_0\defeq\{0,\ldots,n\} \). We call \( \Delta(n) \) the \defemph{complete \( n \)-simplex}. We will refer to the \( (n-1) \)-skeleton \( \Delta(n)_{\leq(n-1)} \) with the suggestive notation \( \partial \Delta(n) \).
 \end{mydef}
 
-Note that \( P(n)_{(n-1)} \) has \( n+1 \) elements. For example, \( P(2)_1 \) consists of the three 2-element subsets of \( \{0, 1, 2\} \). 
+Note that \( \Delta(n)_{(n-1)} \) has \( n+1 \) elements. For example, \( \Delta(2)_1 \) consists of the three 2-element subsets of \( \{0, 1, 2\} \). 
 
 Given \( M=[M_0,\ldots,M_n] \) and \( k\leq n \), a face \( f_k:M_k \) is the union of \( (k+1) \) faces in \( M_{k-1} \), and so the \( k \)-skeleton is obtained from the \( (k-1) \)-skeleton by forming the following pushout of sets:
 \begin{equation}
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJNX2siXSxbMCwwLCJNX2tcXHRpbWVzXFxwYXJ0aWFsIFAoaykiXSxbMCwxLCJNX3tcXGxlcSAoay0xKX0iXSxbMSwxLCJNX3tcXGxlcSBrfSJdLFsxLDAsIlxcbWF0aHJte3ByfV8xIl0sWzEsMiwiYV9rIiwyXSxbMCwzXSxbMiwzXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
 \begin{tikzcd}
-  {M_k\times\partial P(k)} & {M_k} \\
+  {M_k\times\partial \Delta(k)} & {M_k} \\
   {M_{\leq (k-1)}} & {M_{\leq k}}
   \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
   \arrow["{a_k}"', from=1-1, to=2-1]
@@ -59,7 +59,7 @@ The \defemph{realization \( \mm_0 \) of a 0-dimensional simplicial complex} \( M
 \end{mydef}
 
 \begin{mydef}
-The \defemph{simplicial 0-sphere} \( \bdsimplexn{1} \) is the realization of \( \partial P(1) \).
+The \defemph{simplicial 0-sphere} \( \bdsimplexn{1} \) is the realization of \( \partial \Delta(1) \).
 \end{mydef}
 
 \begin{mydef}
@@ -70,7 +70,7 @@ The \defemph{realization \( \mm_1 \) of a 1-dimensional simplicial complex} \( [
 where \( a_k \) is the attachment data of the edges in \( M_1 \), as in diagram~\ref{eq:attach}. The right vertical map \( *_{\mm_1} \) provides a hub point for each edge, and the homotopy \( h_1 \) provides the spokes that connect the hub to the vertices.
 
 \begin{mydef}
-The \defemph{simplicial 1-sphere} \( \bdsimplexn{2} \) is the realization of \( \partial P(2) \).
+The \defemph{simplicial 1-sphere} \( \bdsimplexn{2} \) is the realization of \( \partial \Delta(2) \).
 \end{mydef}
 \begin{center}\input{figs/realization_1sphere.tex}\end{center}
 
@@ -84,9 +84,9 @@ where \( \aaa_1 \) is such that this additional diagram commutes
 \begin{center}
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJNXzJcXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV4yIl0sWzEsMSwiXFxtYXRoYmJ7TX1fMSJdLFswLDAsIk1fMlxcdGltZXNcXHBhcnRpYWwgUCgyKSJdLFswLDEsIk1fe1xcbGVxIDF9Il0sWzAsMSwiXFxtYXRoYmJ7QX1fMSJdLFsyLDAsIlxcbWF0aHJte2lkfVxcdGltZXMgKl97XFxwYXJ0aWFsXFxEZWx0YV4yfSJdLFszLDEsIipfe1xcbWF0aGJie019X3tcXGxlcSAxfX0iLDJdLFsyLDMsImFfMSIsMl1d
 \begin{tikzcd}
-  {M_2\times\partial P(2)} & {M_2\times\partial\Delta^2} \\
+  {M_2\times\partial \Delta(2)} & {M_2\times\bdsimplexn{2}} \\
   {M_{\leq 1}} & {\mathbb{M}_1}
-  \arrow["{\mathrm{id}\times *_{\partial\Delta^2}}", from=1-1, to=1-2]
+  \arrow["{\mathrm{id}\times *_{\bdsimplexn{2}}}", from=1-1, to=1-2]
   \arrow["{a_1}"', from=1-1, to=2-1]
   \arrow["{\mathbb{A}_1}", from=1-2, to=2-2]
   \arrow["{*_{\mathbb{M}_{\leq 1}}}"', from=2-1, to=2-2]
@@ -99,7 +99,7 @@ Given a notion of realization in dimension \( n-1 \), a \defemph{realization \( 
 \begin{center}%
 % https://q.uiver.app/#q=WzAsMTAsWzIsMSwiXFxtYXRoYmJ7TX1fe24tMX0iXSxbMiwwLCJNX25cXHRpbWVzIFxccGFydGlhbFxcRGVsdGFebiJdLFszLDAsIk1fbiJdLFszLDEsIlxcbWF0aGJie019X24iXSxbMSwxLCJcXG1hdGhiYntNfV97bi0yfSJdLFsxLDAsIk1fe24tMn0iXSxbMiwyLCJNX3tuLTF9Il0sWzEsMiwiXFxjZG90cyJdLFswLDAsIlxcY2RvdHMiXSxbMCwxLCJcXGNkb3RzIl0sWzAsM10sWzEsMCwiXFxtYXRoYmJ7QX1fe24tMX0iLDJdLFsyLDMsIipfe1xcbWF0aGJie019X3tufX0iXSxbMSwyLCJcXG1hdGhybXtwcn1fMSJdLFszLDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzAsMiwiaF9uIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCwwXSxbNSw0LCIqX3tcXG1hdGhiYntNfV97bi0yfX0iXSxbNiwwLCIqX3tcXG1hdGhiYntNfV97bi0xfX0iLDJdLFs4LDVdLFs5LDRdLFs3LDZdLFswLDcsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsOCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbOSw1LCJoX3tuLTJ9IiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCw2LCJoX3tuLTF9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
-  \cdots & {M_{n-2}} & {M_n\times \partial\Delta^n} & {M_n} \\
+  \cdots & {M_{n-2}} & {M_n\times \bdsimplexn{n}} & {M_n} \\
   \cdots & {\mathbb{M}_{n-2}} & {\mathbb{M}_{n-1}} & {\mathbb{M}_n} \\
   & \cdots & {M_{n-1}}
   \arrow[from=1-1, to=1-2]
@@ -124,9 +124,9 @@ where \( \aaa_n \) is such that the following commutes
 \begin{center}
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJNX25cXHRpbWVzXFxwYXJ0aWFsXFxEZWx0YV5uIl0sWzEsMSwiXFxtYXRoYmJ7TX1fbiJdLFswLDAsIk1fblxcdGltZXNcXHBhcnRpYWwgUChuKSJdLFswLDEsIk1fe1xcbGVxIG59Il0sWzAsMSwiXFxtYXRoYmJ7QX1fbiJdLFsyLDAsIlxcbWF0aHJte2lkfVxcdGltZXMgKl97XFxwYXJ0aWFsXFxEZWx0YV5ufSJdLFszLDEsIipfe1xcbWF0aGJie019X3tcXGxlcSBufX0iLDJdLFsyLDMsImFfMSIsMl1d
 \begin{tikzcd}
-  {M_n\times\partial P(n)} & {M_n\times\partial\Delta^n} \\
+  {M_n\times\partial \Delta(n)} & {M_n\times\bdsimplexn{n}} \\
   {M_{\leq n}} & {\mathbb{M}_n}
-  \arrow["{\mathrm{id}\times *_{\partial\Delta^n}}", from=1-1, to=1-2]
+  \arrow["{\mathrm{id}\times *_{\bdsimplexn{n}}}", from=1-1, to=1-2]
   \arrow["{a_1}"', from=1-1, to=2-1]
   \arrow["{\mathbb{A}_n}", from=1-2, to=2-2]
   \arrow["{*_{\mathbb{M}_{\leq n}}}"', from=2-1, to=2-2]
@@ -138,7 +138,7 @@ Gathering some of the inductive process into one definition, we have
 A \defemph{realization} \( \mm \) of an abstract simplicial complex \( M:\simcomp \) consists of 
 \begin{enumerate}
 \item \( n+1 \) types \( \mm_0,\ldots,\mm_n \) where \( \mm_0\defeq M_0 \),
-\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times \partial\Delta^{i+1}}{M_{i+1}}{\aaa_{i}}{\pr_1} \), \( i=0,\ldots,n-1 \), where \( \partial\Delta^{i+1} \) is the realization of the boundary of a standard simplex and \( \aaa_i \) are called \defemph{attachment maps},
+\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times \bdsimplexn{i+1}}{M_{i+1}}{\aaa_{i}}{\pr_1} \), \( i=0,\ldots,n-1 \), where \( \partial\Delta^{i+1} \) is the realization of the boundary of a standard simplex and \( \aaa_i \) are called \defemph{attachment maps},
 \item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{\mm_{i+1}}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
 A \defemph{cellular type} \( \mm \) is a sequence of types \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some simplicial complex \( M \) and a realization inducing this sequence.
