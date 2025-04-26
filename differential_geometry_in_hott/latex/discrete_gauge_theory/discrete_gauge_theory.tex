@@ -32,13 +32,29 @@
 \title{Discrete differential geometry in homotopy type theory}
 \author{Greg Langmead}
 \begin{document}
-
+\begin{titlepage}
 \maketitle
+\thispagestyle{empty}
 
-\begin{abstract}
-Type families on higher inductive types such as pushouts can capture homotopical properties of differential geometric constructions including connections, curvature, and vector fields. We define a class of pushouts based on simplicial complexes, then define principal bundles, connections, and curvature on these. We provide an example of a tangent bundle but do not prove when these must exist. We define vector fields, and the index of a vector field. Our main result is a theorem relating total curvature and total index, a key step to proving the Gauss-Bonnet theorem and the Poincaré-Hopf theorem, but without an existing definition of Euler characteristic to compare them to. We draw inspiration in part from the young field of discrete differential geometry, and in part from the original classical proofs, which often make use of triangulations and other discrete arguments.
-\end{abstract}
+\begin{center}
+Department of Philosophy\\
+Carnegie Mellon University\\
+Pittsburgh, PA 15213
+\vspace{1in}
 
+Submitted in partial fulfillment of the requirements for the degree of\\
+Master of Science in Logic, Computation and Methodology
+\vspace{1in}
+
+\textbf{Thesis Committee}
+
+Steven M. Awodey, chair\\
+Mathieu Anel
+
+\end{center}
+\end{titlepage}
+
+\thispagestyle{empty}
 \begin{dedication}
 This thesis is dedicated to John Baez, Sean M. Carroll, Sabine Hossenfelder, and other communicators who are carrying the torch of science forward in the spirit of my hero Carl Sagan. I have followed you all for many years, and you have inspired me to continue my studies alongside my career. Thank you.
 \end{dedication}
@@ -46,11 +62,20 @@ This thesis is dedicated to John Baez, Sean M. Carroll, Sabine Hossenfelder, and
 %\listoftodos
 \clearpage
 
+\thispagestyle{empty}
+\begin{abstract}
+Type families on higher inductive types such as pushouts can capture homotopical properties of differential geometric constructions including connections, curvature, and vector fields. We define a class of pushouts based on simplicial complexes, then define principal bundles, connections, and curvature on these. We provide an example of a tangent bundle but do not prove when these must exist. We define vector fields, and the index of a vector field. Our main result is a theorem relating total curvature and total index, a key step to proving the Gauss-Bonnet theorem and the Poincaré-Hopf theorem, but without an existing definition of Euler characteristic to compare them to. We draw inspiration in part from the young field of discrete differential geometry, and in part from the original classical proofs, which often make use of triangulations and other discrete arguments.
+\end{abstract}
+\clearpage
+
 \newlength{\mylen}
 \newlength{\mylin}
 
+\thispagestyle{empty}
 \tableofcontents 
 \clearpage
+\setcounter{page}{5}
+\pagestyle{plain}
 \input{discrete_gauge_theory_intro}
 \clearpage
 \input{discrete_gauge_theory_torsors}

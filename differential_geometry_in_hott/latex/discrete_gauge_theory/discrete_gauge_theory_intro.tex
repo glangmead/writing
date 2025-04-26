@@ -1,10 +1,10 @@
-\section{Overview}
 
 \begin{quote} 
-\centering
 ``It is always ourselves we work on, whether we realize it or not. There is no other work to be done in the world.''
  --- Stephen Talbott, \emph{The Future Does Not Compute}\cite{talbott}
 \end{quote}
+
+\section{Overview}
 
 We will define 
 \begin{itemize}
@@ -26,7 +26,7 @@ and then define in Section~\ref{sec:totals}, for a 2-dimensional simplicial comp
 
 We will build up an example of all of these structures on an octahedron model of the sphere. We will not, however, be supplying a separate definition of Euler characteristic so as to truly reproduce the Gauss-Bonnet and Poincaré-Hopf theorems.
 
-Once we have defined homotopical realizations of simplicial complexes in Section~\ref{sec:discrete_man}, we will focus on dimensions 1 and 2. In dimension 1 we define polygons, which we prove are equivalent to \( S^1 \), and so give terms in the type \( \EMzo\defeq \sit{A:\uni}||A\simeq S^1||_1 \). We can call this component of the universe ``mere circles.'' In dimension 2 we will focus on a subset of complexes where the neighboring vertices and edges of each vertex (the vertex's ``link'') form a polygon. The homotopical realization \( \mm \) of such a complex then has a map \( \link \) from each vertex to a homotopical polygon, i.e. a map to \( \EMzo \). We do not know under what conditions this map necessarily extends to the higher cells of the realization.
+Once we have defined homotopical realizations of simplicial complexes in Section~\ref{sec:discrete_man}, we will focus on dimensions 1 and 2. In dimension 1 we define polygons, which we prove are equivalent to \( S^1 \), and so give terms in the type \( \EMzo\defeq \sit{A:\uni}||A\simeq S^1||_1 \). We can call this component of the universe ``mere circles.'' In dimension 2 we will focus on a subset of complexes where the neighboring vertices and edges of each vertex (the vertex's ``link'') form a polygon. The homotopical realization \( \mm \) of such a complex then has a map \( \link \) from each vertex to a homotopical polygon, i.e. a map to \( \EMzo \). 
 
 Given a map \( \mm\to\EMzo \) we can form the pullback
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJQXFxzdGFja3JlbHtcXG1hdGhybXtkZWZ9fXs9fVxcc3VtX3tDOlRNfUMiXSxbMSwwLCJcXG1hdGhybXtFTX1fXFxidWxsZXQoXFxtYXRoYmJ7Wn0sMSkiXSxbMSwxLCJcXG1hdGhybXtFTX0oXFxtYXRoYmJ7Wn0sMSkiXSxbMCwxLCJNIl0sWzAsMywiXFxtYXRocm17cHJ9XzEiLDJdLFsxLDIsIlxcbWF0aHJte3ByfV8xIiwyXSxbMCwxLCJcXG92ZXJsaW5le1R9Il0sWzMsMiwiVCJdLFswLDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
@@ -47,5 +47,6 @@ Then in Section~\ref{sec:connections} we will name various elements of the above
 
 In Section~\ref{sec:vector_fields} we will define vector fields, which require a tangent bundle. We will introduce a method for decomposing a vector field along a concatenation of paths.
 
-Finally, in Section~\ref{sec:totals} we will define a method for visiting all the faces of a manifold in order to form ``totals'' of local objects. We will examine the total curvature and the total index and prove that they are equal. Our proof tracks very closely with the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}. In their case they can go on to prove that these values are both equal to the Euler characteristic, but we would need an independent definition to prove agreement with, which we do not currently have.
+Finally, in Section~\ref{sec:totals} we will define a method for visiting all the faces of a manifold in order to form ``totals'' of local objects. We will examine the total curvature and the total index and prove that they are equal. Our proof tracks very closely with the classical proof of Hopf\cite{hopf}, presented in detail in Needham\cite{needham}.
 
+This work is appearing while other researchers are actively exploring and exploiting the related notion of CW complexes in HoTT, for example \cite{ljungstrom_cellular}. Combining and organizing these approaches would likely provide additional visibility into a program for importing more of 20th century topology and gauge theory into HoTT.

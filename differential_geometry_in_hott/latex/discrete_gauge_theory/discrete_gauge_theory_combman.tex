@@ -5,10 +5,10 @@ We will remind ourselves of the definition of a classical simplicial complex, in
 \subsection{Abstract simplicial complexes}
 
 \begin{mydef}
-An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} is an ordered list \( M\defeq[M_0,\ldots,M_n] \) consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that for any \( j<k \), any \( (j+1) \)-element subset of an element of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \). Let \( M_{\leq k}\defeq [M_0,\ldots,M_k] \) and note that \( M_{\leq n}=M \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \). \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \), which are simply the inclusions of lists into longer lists.
+An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} is an ordered list \( M\defeq[M_0,\ldots,M_n] \) consisting of a set \( M_0 \) of vertices, and for each \( 0<k\leq n \) a set \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \), such that for any \( j<k \), any \( (j+1) \)-element subset of an element of \( M_k \) is an element of \( M_j \). The elements of \( M_k \) are called \defemph{\( k \)-faces}. A \defemph{morphism} \( f \) from \( M=[M_0,\ldots,M_m] \) to \( N=[N_0,\ldots,N_n] \) is a function on vertices \( f:M_0\to N_0 \) such that for any face of \( M \) the image under \( f \) is a face of \( N \). Denote by \( \simcomp \) the type of abstract simplicial complexes of dimension \( n \). Let \( M_{\leq k}\defeq [M_0,\ldots,M_k] \). We call \( M_{\leq k} \) the \defemph{\( k \)-skeleton} of \( M \), and it is a (\( k \)-)complex in its own right. \( M \) is automatically equipped with a chain of inclusions of the skeleta \( M_0\hookrightarrow M_{\leq 1}\hookrightarrow\cdots\hookrightarrow M_{\leq n}=M \), which are simply the inclusions of lists into longer lists.
 \end{mydef}
 
-We can imagine constructing a simplicial complex dimension by dimension.
+We can imagine constructing a simplicial complex dimension by dimension with a simple procedure of taking unions. This will parallel the realization construction that follows.
 
 \begin{mydef}
 Denote by \( \Delta(n) \) the simplicial complex obtained by taking the set of all subsets of the standard \( (n+1) \)-element set \( \Delta(n)_0\defeq\{0,\ldots,n\} \). We call \( \Delta(n) \) the \defemph{complete \( n \)-simplex}. We will refer to the \( (n-1) \)-skeleton \( \Delta(n)_{\leq(n-1)} \) with the suggestive notation \( \partial \Delta(n) \).
@@ -55,7 +55,7 @@ The \emph{geometric realization} of a complex uses the combinatorial data to for
 We will realize a simplicial complex as a higher inductive type by forming a sequence of pushouts. We will work upward by dimension so as to define a standard sphere that we need in the next dimension.
 
 \begin{mydef}
-The \defemph{realization \( \mm_0 \) of a 0-dimensional simplicial complex} \( M_0 \) is simply the set \( M_0 \).
+The \defemph{realization \( \mm \) of a 0-dimensional simplicial complex} \( M \) is simply the set \( M_0 \).
 \end{mydef}
 
 \begin{mydef}
@@ -63,7 +63,7 @@ The \defemph{simplicial 0-sphere} \( \bdsimplexn{1} \) is the realization of \( 
 \end{mydef}
 
 \begin{mydef}
-The \defemph{realization \( \mm_1 \) of a 1-dimensional simplicial complex} \( [M_0, M_1] \) is the pushout
+The \defemph{realization \( \mm \) of a 1-dimensional simplicial complex} \( M=[M_0, M_1] \) is the pushout
 \end{mydef}
 \begin{center}
 \input{figs/realization_dim1_tikz.tex}\end{center}
@@ -75,7 +75,7 @@ The \defemph{simplicial 1-sphere} \( \bdsimplexn{2} \) is the realization of \( 
 \begin{center}\input{figs/realization_1sphere.tex}\end{center}
 
 \begin{mydef}
-A \defemph{realization \( \mm_2 \) of a 2-dimensional simplicial complex} \( [M_0, M_1, M_2] \) is the pushout
+A \defemph{realization \( \mm \) of a 2-dimensional simplicial complex} \( [M_0, M_1, M_2] \) is the pushout
 \end{mydef}
 \begin{center}
 \input{figs/realization_dim2_tikz.tex}
@@ -94,7 +94,7 @@ where \( \aaa_1 \) is such that this additional diagram commutes
 \end{center}
 In this diagram \( a_1 \) is the simplicial attaching map from \ref{eq:attach}, and \( *_{\mathbb{M}_{\leq 1}} \) simply gathers the hub maps from \( M_0 \) and \( M_1 \) into \( \mm_1 \). The commutativity then says that \( \aaa_1 \) reflects the attachment data.
 \begin{mydef}
-Given a notion of realization in dimension \( n-1 \), a \defemph{realization \( \mm_n \) of an \( n \)-dimensional simplicial complex} \( [M_0, \ldots, M_n] \) is the pushout
+Given a notion of realization in dimension \( n-1 \), a \defemph{realization \( \mm \) of an \( n \)-dimensional simplicial complex} \( M=[M_0, \ldots, M_n] \) is the pushout
 \end{mydef}
 \begin{center}%
 % https://q.uiver.app/#q=WzAsMTAsWzIsMSwiXFxtYXRoYmJ7TX1fe24tMX0iXSxbMiwwLCJNX25cXHRpbWVzIFxccGFydGlhbFxcRGVsdGFebiJdLFszLDAsIk1fbiJdLFszLDEsIlxcbWF0aGJie019X24iXSxbMSwxLCJcXG1hdGhiYntNfV97bi0yfSJdLFsxLDAsIk1fe24tMn0iXSxbMiwyLCJNX3tuLTF9Il0sWzEsMiwiXFxjZG90cyJdLFswLDAsIlxcY2RvdHMiXSxbMCwxLCJcXGNkb3RzIl0sWzAsM10sWzEsMCwiXFxtYXRoYmJ7QX1fe24tMX0iLDJdLFsyLDMsIipfe1xcbWF0aGJie019X3tufX0iXSxbMSwyLCJcXG1hdGhybXtwcn1fMSJdLFszLDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzAsMiwiaF9uIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCwwXSxbNSw0LCIqX3tcXG1hdGhiYntNfV97bi0yfX0iXSxbNiwwLCIqX3tcXG1hdGhiYntNfV97bi0xfX0iLDJdLFs4LDVdLFs5LDRdLFs3LDZdLFswLDcsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsOCwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbOSw1LCJoX3tuLTJ9IiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbNCw2LCJoX3tuLTF9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
@@ -138,7 +138,7 @@ Gathering some of the inductive process into one definition, we have
 A \defemph{realization} \( \mm \) of an abstract simplicial complex \( M:\simcomp \) consists of 
 \begin{enumerate}
 \item \( n+1 \) types \( \mm_0,\ldots,\mm_n \) where \( \mm_0\defeq M_0 \),
-\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times \bdsimplexn{i+1}}{M_{i+1}}{\aaa_{i}}{\pr_1} \), \( i=0,\ldots,n-1 \), where \( \partial\Delta^{i+1} \) is the realization of the boundary of a standard simplex and \( \aaa_i \) are called \defemph{attachment maps},
+\item \( n \) spans \( \myspan{\mm_{i}}{M_{i+1}\times \bdsimplexn{i+1}}{M_{i+1}}{\aaa_{i}}{\pr_1} \), \( i=0,\ldots,n-1 \), where \( \bdsimplexn{i+1} \) is the realization of the boundary of a standard simplex and \( \aaa_i \) are called \defemph{attachment maps},
 \item \( n \) pushout squares from each span to \( \mm_{i+1} \), with induced maps \( \imath_i:\mm_i\to\mm_{i+1} \), \( *_{\mm_{i+1}}:M_{i+1}\to\mm_{i+1} \) and proof of commutativity \( h_{i+1} \).
 \end{enumerate}
 A \defemph{cellular type} \( \mm \) is a sequence of types \( \mm_0\xrightarrow[]{\imath_0}\mm_1\xrightarrow[]{\imath_1}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \), together with a proof of existence of some simplicial complex \( M \) and a realization inducing this sequence.
@@ -294,11 +294,11 @@ We wrote the homotopy \( H_R(x) \) as starting at \( x \) because it feels like 
 We will eventually focus on 2-dimensional simplicial complexes in this note, and our running example which begins in the next section is 2-dimensional. We have a simple way to define an orientation in this dimension, which we provide here. We will touch on the relationship between this classical definition and the definition of our HoTT classifying space when we discuss vector fields in Section~\ref{sec:vector_field_def}.
 
 \begin{mydef}
-An \defemph{orientation} \( \mathscr{O} \) of a 2-dimensional simplicial complex \( M=[M_0, M_1, M_2] \) is an equivalence class of ordering maps \( O:M_2\to \mathsf{List} \) to the type of ordered lists, where \( O \) orders the vertices of every 2-face. If \( F:M_2 \) is a face and \( F=\{a, b, c\} \) are its vertices, then \( O(F) \) is a list of all the vertices, e.g. \( [b, c, a] \). Two orderings \( O, O' \) are said to have the \defemph{same orientation} if it is true for every face \( F \) that \( O(F) \) and \( O'(F) \) differ by a cyclic permutation. The inclusion \( e\subset F \) of an edge in a face induces an ordering of the vertices of the edge, called \defemph{the induced order of \( e\subset F \)}.
+An \defemph{orientation} \( \mathscr{O} \) of a 2-dimensional simplicial complex \( M=[M_0, M_1, M_2] \) is an equivalence class of ordering maps \( V:M_2\to \mathsf{List} \) to the type of ordered lists, where \( V \) orders the vertices of every 2-face. If \( F:M_2 \) is a face and \( F=\{a, b, c\} \) are its vertices, then \( V(F) \) is a list of all the vertices, e.g. \( [b, c, a] \). Two orderings \( V, V' \) are said to have the \defemph{same orientation} if it is true for every face \( F \) that \( V(F) \) and \( V'(F) \) differ by a cyclic permutation. The inclusion \( e\subset F \) of an edge in a face induces an ordering of the vertices of the edge, called \defemph{the induced order of \( e\subset F \)}.
 \end{mydef}
 
 \subsection{The octahedron model of the sphere}
-We will create our first combinatorial surface, an octahedron. We will not prove that this type is equivalent to the sphere. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. We give an octahedron in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
+We will create our first combinatorial surface, an octahedron. In \( \simcomp \) the combinatorial data of the faces can be represented with a \emph{Hasse diagram}, which shows the poset of inclusions in a graded manner, with a special top and bottom element. The top element is part of the diagram only, and not part of the simplicial complex, else it would provide a filling cell. We give an octahedron \( O=[O_0, O_1, O_2] \) in Figure~\ref{fig:hasse_octohedron}. The names of the vertices are short for white, yellow, blue, red, green, and orange, the colors of the faces of a Rubik's cube. The octahedron is the dual of the cube, with each vertex corresponding to a face.
 
 \begin{figure}[h]
 \centering
@@ -306,14 +306,14 @@ We will create our first combinatorial surface, an octahedron. We will not prove
 \input{figs/hasse_octahedron_tikz.tex}
 \end{tikzpicture}
 \input{figs/discrete_gauge_theory_oo_tikz}
-\caption{The Hasse diagram of the simplicial complex \( \oo \), and a possible realization. The row of singletons in the Hasse diagram is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
+\caption{The Hasse diagram of the simplicial complex \( O \), and a possible realization. The row of singletons in the Hasse diagram is \( O_0 \) and above it are \( O_1 \) and \( O_2 \).}
 \label{fig:hasse_octohedron}
 \end{figure}
 
-We can realize \( O_0\to O_1\to O \) as a cellular type denoted \( \oo_0\to \oo_1\to \oo \).
+We can realize \( O=[O_0, O_1, O_2] \) as a cellular type \( \oo \).
 
 \begin{mylemma}
 \label{lem:octahedron_sphere}
-There is an equivalence \( \oo\simeq S^2 \).
+There is an equivalence \( \oo_2\simeq S^2 \).
 \end{mylemma}
 \begin{myproof}Omitted.\end{myproof}

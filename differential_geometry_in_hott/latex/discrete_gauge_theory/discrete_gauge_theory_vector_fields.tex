@@ -2,7 +2,7 @@
 \label{sec:vector_fields}
 \subsection{Definition}
 \label{sec:vector_field_def}
-Vector fields are sections of the tangent bundle of a manifold. We do not have a general theory of tangent bundles, even for 2-dimensional cellular types, since we cannot yet prove that connections always exist on the 1-skeleton (see Section~\ref{sec:existence}). But if \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) is a cellular type, and \emph{given} an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
+Vector fields are sections of the tangent bundle of a manifold. If \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) is a cellular type, and given an extension \( T:\mm\to\EMzo \) of the \( \link \) function, we can consider the type of sections \( \pit{x:\mm_1}T_1(x) \).
 
 In this section and for the remainder of the note, we will assume that the bundle is principal, that is that the bundle is in fact a map \( T:\mm\to\Kzt \), the type of \( S^1 \)-torsors. This assumption is in principle not needed if \( M \) is equipped with an orientation \( \mathscr{O} \), but we are omitting a proof that such an \( \mathscr{O} \) provides a factorization of \( T \).
 
@@ -53,10 +53,10 @@ As we traverse an edge, say \( e_{12} \), we get a path in \( T_2 \) which is th
 
 We wish to simplify expressions such as \( T_{13}T_{32}X_{12}\cdot T_{13}X_{23}\cdot X_{31} \), which take place in a particular fiber (\( T_1 \) in this case), and which depend on arranging for the endpoint of one segment to agree with the start of another. The simplification will empower us to easily perform calculations over the whole manifold, and to prove Theorem~\ref{thm:total_index_total_curvature}.
 
-Recall that \( \so \) acts on all the fibers of \( T \). We will derive two operations involving \( \so \).
+Recall that \( \so \) acts on all the fibers of \( T \), and we have equivalences \( (\pr_1,\phi):T_i\times S^1\simto T_i\times T_i \) where \( \phi \) is the action.
 
 \begin{mydef}
-The map \( \pr_1\circ (\alpha, \pr_2)^{-1}:T_i\times T_i\to \so \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\so \) such that \( \alpha(\delta, x)=y \). For brevity we denote \( \pr_1\circ (\alpha, \pr_2)^{-1}(x,y) \) by \( y-x \).
+If \( (\pr_1,s) \) is the inverse of \( (\pr_1,\phi) \), the map \( s:T_i\times T_i\to S^1 \) is called \defemph{subtraction}. It maps \( (x,y) \) to the unique term \( \delta:\so \) such that \( \phi(x, \delta)=y \). We denote \( s(x,y) \) by \( y-x \).
 \end{mydef}
 
 \begin{mylemma}
@@ -78,14 +78,16 @@ Each fiber \( T_i \) is pointed by \( X_i \), so we can define the map \( T_i\xr
 We define the \defemph{rotation} of \( T_{ij} \) by \( \rho_{ij}\defeq T_{ij}X_j - X_i \). The map \( +\rho_{ij}:\so\to\so \) makes the following diagram commute%
 \end{mydef}%
 \begin{equation}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUX2kiXSxbMSwwLCJUX2oiXSxbMCwxLCJcXG1hdGhzY3J7R30obSkiXSxbMSwxLCJcXG1hdGhzY3J7R30obSkiXSxbMCwxLCJUX3tqaX0iXSxbMSwzLCIoXFx0ZXh0ey19KS1YX2oiXSxbMCwyLCIoXFx0ZXh0ey19KS1YX2kiLDJdLFsyLDMsIihcXHRleHR7LX0pK1xccmhvX3tqaX0iLDJdXQ==
-\begin{tikzcd}
-  {T_i} & {T_j} \\
-  {\so} & {\so}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUX2kiXSxbMSwwLCJUX2oiXSxbMCwxLCJTXjEiXSxbMSwxLCJTXjEiXSxbMCwxLCJUX3tqaX0iXSxbMCwyLCJcXGFscGhhX2kiLDJdLFsxLDMsIlxcYWxwaGFfaiJdLFsyLDMsIigtKVxcY2RvdFxccmhvX3tqaX0iLDJdLFszLDEsIlxcbWF0aHNme2Jhc2V9XFxtYXBzdG8gWF9qIiwyLHsib2Zmc2V0IjozLCJjdXJ2ZSI6MX1dLFsyLDAsIlxcbWF0aHNme2Jhc2V9XFxtYXBzdG8gWF9pIiwwLHsib2Zmc2V0IjotMywiY3VydmUiOi0xfV1d
+\begin{tikzcd}[ampersand replacement=\&]
+  {T_i} \& {T_j} \\
+  {S^1} \& {S^1}
   \arrow["{T_{ji}}", from=1-1, to=1-2]
-  \arrow["{(\text{-})-X_i}"', from=1-1, to=2-1]
-  \arrow["{(\text{-})-X_j}", from=1-2, to=2-2]
-  \arrow["{(\text{-})+\rho_{ji}}"', from=2-1, to=2-2]
+  \arrow["{\alpha_i}"', from=1-1, to=2-1]
+  \arrow["{\alpha_j}", from=1-2, to=2-2]
+  \arrow["{\mathsf{base}\mapsto X_i}", shift left=3, curve={height=-6pt}, from=2-1, to=1-1]
+  \arrow["{(-)+\rho_{ji}}"', from=2-1, to=2-2]
+  \arrow["{\mathsf{base}\mapsto X_j}"', shift right=3, curve={height=6pt}, from=2-2, to=1-2]
 \end{tikzcd}
 \label{eq:action_of_rho}
 \end{equation}

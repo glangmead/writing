@@ -3,7 +3,7 @@
 Bundles are simply maps into the universe. By using the extra cellular structure and the even more detailed combinatorial structure of realizations, we can identify inside of HoTT some additional classical definitions.
 
 \subsection{Definitions}
-Having the cellular structure allows us to define bundles and connections.
+Having the cellular structure allows us to define connections.
 \begin{mydef}
 \label{def:connection}
 If \( \mm\defeq \mm_0\xrightarrow[]{\imath_0}\cdots\xrightarrow[]{\imath_{n-1}}\mm_n \) is a cellular type and \( f_k:\mm_k\to\uni \) are type families on each skeleton such that all the triangles commute in the diagram:
@@ -38,7 +38,7 @@ If \( \mm \) is the realization of a simplicial complex, such that for each push
 \begin{center}
 % https://q.uiver.app/#q=WzAsNSxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIk1fa1xcdGltZXMgXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzEsMCwiTV9rIl0sWzEsMSwiXFxtYXRoYmJ7TX1fayJdLFsxLDIsIlxcbWF0aGNhbHtVfSJdLFswLDMsIlxcaW1hdGhfe2stMX0iXSxbMSwwLCJcXG1hdGhiYntBfV97ay0xfSIsMl0sWzIsMywiKl97XFxtYXRoYmJ7TX1fa30iXSxbMSwyLCJcXG1hdGhybXtwcn1fMSJdLFszLDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzAsMiwiaF9rIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XSxbMyw0LCJmX2siXSxbMCw0LCJmX3trLTF9IiwyXSxbMywxMiwiIiwwLHsic2hvcnRlbiI6eyJ0YXJnZXQiOjIwfX1dXQ==
 \begin{tikzcd}
-  {M_k\times \partial\Delta^k} & {M_k} \\
+  {M_k\times \bdsimplexn{k}} & {M_k} \\
   {\mathbb{M}_{k-1}} & {\mathbb{M}_k} \\
   & {\mathcal{U}}
   \arrow["{\mathrm{pr}_1}", from=1-1, to=1-2]
@@ -58,18 +58,18 @@ the outer square of which restricts on each face to the diagram
 \begin{center}
 % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhiYntNfV97ay0xfSJdLFswLDAsIlxce21fa1xcfVxcdGltZXMgXFxwYXJ0aWFsXFxEZWx0YV5rIl0sWzEsMCwiXFx1bml0Il0sWzEsMSwiXFxtYXRoY2Fse1V9Il0sWzAsM10sWzEsMCwiXFxtYXRoYmJ7QX1fe2stMX0iLDJdLFsyLDMsIipfe1xcbWF0aGJie019X2t9Il0sWzEsMiwiISJdLFswLDIsIlxcZmxhdF9rIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjJ9XV0=
 \begin{tikzcd}
-  {\{m_k\}\times \partial\Delta^k} & \unit \\
+  {\{F\}\times \bdsimplexn{k}} & \{F\} \\
   {\mathbb{M}_{k-1}} & {\mathcal{U}}
-  \arrow["{!}", from=1-1, to=1-2]
+  \arrow["{\pr_1}", from=1-1, to=1-2]
   \arrow["{\mathbb{A}_{k-1}}"', from=1-1, to=2-1]
   \arrow["{*_{\mathbb{M}_k}}", from=1-2, to=2-2]
   \arrow["{\flat_k}", shorten <=11pt, shorten >=11pt, Rightarrow, from=1-2, to=2-1]
   \arrow[from=2-1, to=2-2]
 \end{tikzcd}
 \end{center}
-then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( m_k \)}.
+then we say the filler \( \flat_k \) is called a \defemph{flatness structure for the face \( m_k \)}, and its ending path is called \defemph{curvature at the face \( F \)}.
 
-Although all the pushout diagrams are introducing hub points for each edge and face, in practice we will ignore those. But in the case of flatness, which we will use extensively, we should clarify what its type is when we are ignoring hubs. If we have a face \( F \) with vertices \( v_1, v_2, v_3 \) and paths \( e_{ij}:v_i=v_j \) that are realizations of edges, and the loop \( \ell_F\defeq e_{12}\cdot e_{23}\cdot e_{31}\) then we will write \(\flat(\ell_F):\id_{f_0(v_1)}=f_1(\ell_F)\) for a 2-path filling this loop.
+Although all the pushout diagrams are introducing hub points for each edge and face, in practice we will ignore those. But in the case of flatness, which we will use extensively, we should clarify what its type is when we are ignoring hubs. If we have a face \( F \) with vertices \( v_1, v_2, v_3 \) and paths \( e_{ij}:v_i=v_j \) that are realizations of edges, and the loop \( \ell_F\defeq e_{12}\cdot e_{23}\cdot e_{31}\) then we will write \(\flat(\ell_F):\id_{f_1(v_1)}=f_1(\ell_F)\) for a 2-path filling this loop.
 
 The definitions can be digested to give
 \begin{mylemma}
@@ -77,7 +77,7 @@ The definitions can be digested to give
 Given \( f_{k-1} \) as above, a \( k \)-connection exists if and only if there exists a flatness structure for each \( k \)-face.
 \end{mylemma}
 
-On a 2-dimensional cellular type \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) the terminology works out as follows: a 0-bundle on \( \mm \) is a map \( T_0:\mm_0\to\uni \). A 1-connection on \( T_0 \) is an extension \( T_1:\mm_1\to\uni \). A 2-connection on \( T_1 \) is an extension \( T_2:\mm_2\to\uni \). Classically, a 1-extension that extends to a 2-connection is called \emph{flat}.
+On a 2-dimensional cellular type \( \mm\defeq\mm_0\to\mm_1\to\mm_2 \) the terminology works out as follows: a 0-bundle on \( \mm \) is a map \( T_0:\mm_0\to\uni \). A 1-connection on \( T_0 \) is an extension \( T_1:\mm_1\to\uni \). A 2-connection on \( T_1 \) is an extension \( T_2:\mm_2\to\uni \). Classically, a 1-connection that extends to a 2-connection is called \emph{flat}.
 
 \subsection{Flat connections as local trivializations}
 \label{sec:localtriv}
@@ -107,7 +107,7 @@ The two middle squares commute definitionally. Call these two squares together t
 This relationship between flatness structure and local triviality of a chart can be compared to the classical result that on a paracompact, simply connected manifold (such as a single chart), a connection on a principal bundle is flat if and only if the bundle is trivial. See for example \cite{kobayashinomizu} Corollary 9.2.
 
 \subsection{The tangent bundle of the sphere}
-We will build up a map \( T \) out of \( \oo_0\to\oo_1\to\oo \) which is meant to be a model of the tangent bundle of the sphere. The link function will serve as our approximation to the tangent space. Taking the link of a vertex gives us a map from vertices to polygons, so the codomain is \( \EMzo \).
+We will build up a map \( T \) out of \( \oo_0\to\oo_1\to\oo_2 \) which is meant to be a model of the tangent bundle of the sphere. The link function will serve as our approximation to the tangent space. Taking the link of a vertex gives us a map from vertices to polygons, so the codomain is \( \EMzo \).
 
 If \( \{b, r, g, o\} \) are four vertices in \( \oo \), the notation \( \hgr{brgo} \) refers to the 4-gon spanned by these four vertices and the edges of \( \oo \) that connect them to each other.
 
@@ -182,7 +182,7 @@ Defining these flatness structures suffices to define \( T_2 \) by Lemma~\ref{le
 
 \subsection{Existence of connections}
 \label{sec:existence}
-How confident can we be that we can always define a connection on the realization of an arbitrary simplicial complex? Two things make the octahedron example special: the link is a 4-gon at every vertex (as opposed to having a variable number of vertices), and every transport map extends to a rotation of the entire octahedron in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
+How confident can we be that we can always define a connection on the tangent bundle of an arbitrary simplicial complex? Two things make the octahedron example special: the link is a 4-gon at every vertex (as opposed to having a variable number of vertices), and every transport map extends to a rotation of the entire octahedron in 3-dimensional space. This imposed a coherence on the interactions of all the choices we made for the connection, which we can worry may not exist for more complex combinatorial data.
 
 We know as a fact outside of HoTT that any combinatorial surface that has been realized as a triangulated surface embedded in 3-dimensional euclidean space can inherit the parallel transport entailed in the embedding. We could then approximate that data to arbitrary precision with enough subdivision of the fibers of \( T \).
 

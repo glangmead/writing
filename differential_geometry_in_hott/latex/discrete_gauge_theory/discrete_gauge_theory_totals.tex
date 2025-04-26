@@ -3,7 +3,7 @@
 We will place holonomy, flatness, and vector fields on the same footing, and combine them. We will prove a relation between the total curvature of a tangent bundle, and total index of a vector field. This is the key step in the simultaneous proof of the Gauss-Bonnet theorem and the Poincaré-Hopf theorem, lacking only the relationship with the Euler characteristic.
 
 \subsection{Index of the vector field on a face}
-The index of a vector field is derived from other data that we have. Consider a 2-dimensional simplicial complex \( M \) and its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \), and a principal circle bundle \( T:\mm\to\Kzt \) extending \( \link \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:\partial\Delta^2\to\mm \) the boundary loop of the face. We have accumulated the following constructions:
+The index of a vector field is derived from other data that we have. Consider a 2-dimensional simplicial complex \( M \) and its 2-dimensional realization \( \mm=\mm_0\to\mm_1\to\mm_2 \), and a principal circle bundle \( T:\mm\to\Kzt \) extending \( \link \). Consider a face \( F:M_2 \), with \( m:\mm \) a vertex of \( F \) and \( \partial F:m=m \) the boundary loop of the face. We have accumulated the following constructions:
 \[\begin{aligned}
 \tr_F&\defeq \tr(\partial F)&&:Tm=Tm&&\text{holonomy}\\
 \flat_F&\defeq \flat(\partial F)&&:\id=_{Tm=Tm}\tr(\partial F)&&\text{flatness}\\
@@ -55,7 +55,7 @@ An \defemph{oriented set of pointed faces} of a realization \( \mm \) of a 2-dim
 
 For the rest of the note we will equip our simplicial complex \( M \) with an orientation \( \mathscr{O} \), and our realization \( \mm \) with an oriented set of pointed faces.
 
-We have seen in Lemma~\ref{lem:multpath} how to perform the required sum.
+We have seen in Lemma~\ref{lem:multpath} how to perform the required sum, namely by using subtraction to map all \( T_{v_F} \) to \( S^1 \) by subtracting \( X(v_F) \).
 \begin{mydef}
 The \defemph{net holonomy}, \defemph{total flatness}, \defemph{total swirling}, and \defemph{total index} on an oriented set of pointed faces is
 \begin{equation}
@@ -87,7 +87,7 @@ And making use of Lemma \ref{lem:cancellation} we obtain
 \[\sum_F\sigma^X_F=\left[\sum_{(\mathrm{edges\ }e_{ij})}\sigma_{ij}+\sigma_{ji}\right]=_{\so}\refl_0.\qedhere\]
 \end{myproof}
 
-And finally, if we refer to the passage from a loop \( \ell:\base=_{\so} \base \) to the corresopnding integer in \( \loopy\so \) as ``winding number'':
+And finally, if we refer to the passage from a loop \( \ell:\base=_{\so} \base \) to the corresponding integer in \( \loopy\so \) as ``winding number'':
 
 \begin{mythm}\label{thm:total_index_total_curvature}The winding number of total flatness equals the total index.
 \end{mythm}

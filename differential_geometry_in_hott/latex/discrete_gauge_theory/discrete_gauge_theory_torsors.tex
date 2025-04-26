@@ -3,13 +3,9 @@
 
 \subsection{Torsors}
 \label{subsec:torsors}
-We will review some definitions and facts, drawing on the excellent resource \cite{buchholtz2023central}.
-
+We will review some definitions and facts, drawing on the excellent resource \cite{buchholtz2023central}. Let \( G \) be a group, possibly a higher group.
 \begin{mydef}
-Let \( G \) be a group with identity element \( e \) (with the usual classical structure and properties). A \defemph{\( G \)-set} is a set \( X \) equipped with a homomorphism \( \phi:(G,e)\to\Aut(X) \). If in addition we have a term of type
-\[ 
-\mathsf{is\underscore torsor}(X,\phi)\defeq ||X||_{-1}\times \pit{x:X}\mathsf{is\underscore equiv}(\phi(-,x):(G,e)\to (X,x))
-\] then we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \). Denote the \( G \)-torsor given by \( G \) itself under right-multiplication by \( \reg{G} \).
+A \defemph{right \( G \)-object} is a type \( X \) equipped with a homomorphism \( \phi:G^{\mathrm{op}}\to\Aut(X) \). If in addition the map \( (\pr_1,\phi):X\times G\to X\times X \) is an equivalence then we say \( (X,\phi) \) is a \defemph{\( G \)-torsor}. Denote the type of \( G \)-torsors by \( BG \). Denote the \( G \)-torsor given by \( G \) itself under right-multiplication by \( \reg{G} \).
 \end{mydef}
 
 A \( G \)-equivariant map from \( (X,\phi) \) to \( (Y,\psi) \) is a function \( f:X\to Y \) such that \( f(\phi(g,x))=\psi(g,f(x)) \). Denote the type of \( G \)-equivariant maps by \( X\to_G Y \).
@@ -19,18 +15,16 @@ A \( G \)-equivariant map from \( (X,\phi) \) to \( (Y,\psi) \) is a function \(
 \end{mylemma}
 
 \begin{mylemma}
-(\cite{buchholtz2023central} Proposition 5.4). A \( G \)-set \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exists a \( G \)-equivariant equivalence \( \reg{G}\to_G X \).\qed
+(\cite{buchholtz2023central} Proposition 5.4). A \( G \)-object \( (X,\phi) \) is a \( G \)-torsor if and only if there merely exists a \( G \)-equivariant equivalence \( \reg{G}\to_G X \).\qed
 \end{mylemma}
 
 These lemmas lead to
 
 \begin{mycor}
-(\cite{buchholtz2023central} Corollary 5.5). The pointed type \( (BG,\reg{G}) \) is a \( \K(G,1) \), that is \( BG \) is connected and has a pointed equivalence \( \loopy BG\simeq_* G \).\qed
+(\cite{buchholtz2023central} Corollary 5.5). The pointed type \( (BG,\reg{G}) \) is a \( \K(G,1) \), i.e. \( BG \) is connected and has a pointed equivalence \( \loopy BG\simeq_* G \).\qed
 \end{mycor}
 
 We call types \( X \) such that \( \loopy X\simeq_* G \) a \emph{delooping} of \( G \). So the type of \( G \)-torsors \( BG \) is a delooping of \( G \).
-
-Suppose we have a basepoint \( b:BG \). Following \cite{buchholtz2023central} Section~4.3, another term \( X:BG \) is a torsor for the higher group \( \loopy_b(BG)\defeq (b=_{BG} b) \). In particular there is an action \( \alpha:(b=_{BG}b)\times X\to X \), and an equivalence \( (\alpha, \pr_2) : (b=_{BG}b)\times X\simto (X\times X)\).
 
 If \( G \) is abelian then \( \K(G,1) \) can be delooped, and in fact can be delooped in a unique way, any number of times. In the next section we will learn how to proceed from a construction of \( \K(G, 1) \) to obtain \( \K(G, n) \).
 
