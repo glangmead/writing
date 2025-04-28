@@ -17,6 +17,9 @@ header-includes: |
   $\newcommand{\textesh}{∫}$
   $\newcommand{\ensuremath}{}$
   $\newcommand{\raisebox}[2]{}$
+  $\newcommand{\scalebox}[2]{#2}$
+  $\newcommand{\qedhere}{\square}$
+  $\renewcommand{\Dd}{\mathbf{\Delta}}$
 
 title:
 summary: My masters thesis defining connections, curvature, and vector fields in the discrete setting of homotopy type theory.
