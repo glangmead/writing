@@ -1,4 +1,4 @@
-\documentclass[13pt,aspectratio=169,hyperref={hypertexnames = false}]{beamer}
+\documentclass[13pt,aspectratio=169,hyperref={hypertexnames = false},handout]{beamer}
 \usetheme{default}
 
 % something tries to renewcommand these but beamer must break the assumption that they are defined so I am defining them
@@ -42,15 +42,15 @@
 %%
 %% FOR PRINTING, COMMENT THESE
 %%
-\logo{\vspace{-4pt}\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}\quad}
-\useoutertheme[subsection=false]{miniframes}
-\setbeamercolor{alerted text}{fg=cmu_red}
+% \logo{\vspace{-4pt}\includegraphics[width=100pt]{figs/cmu-wordmark-horizontal-r.pdf}\quad}
+% \useoutertheme[subsection=false]{miniframes}
+% \setbeamercolor{alerted text}{fg=cmu_red}
 
 %%
 %% FOR PRINTING, UNCOMMENT THESE AND ADD "handout" to beamer options in line 1
 %%
-% \setbeamercolor{alerted text}{fg=black}
-% \setbeamerfont{alerted text}{series=\ifmmode\else\bfseries\fi}
+\setbeamercolor{alerted text}{fg=black}
+\setbeamerfont{alerted text}{series=\ifmmode\else\bfseries\fi}
 
 \newcommand{\nologo}{\setbeamertemplate{logo}{}}
 \title[Geometry in HoTT]{Discrete differential geometry in homotopy type theory}
@@ -80,42 +80,43 @@
 \end{center}
 \end{frame}
 
-\section{Appendix}
-\begin{frame}{Dictionary}
-\begin{tabular}{|p{18em}|p{18em}|}
+\section{Appendix: Conjectural dictionary}
+\renewcommand{\arraystretch}{1.4}
+\begin{frame}{Conjectionary}
+\begin{tabular}{|p{17em}|p{17em}|}
 \hline
-Connections are 1-forms on \( P \) not on \( M \) & \( T(e_{ij}):T_i=T_j \), which is not a loop. \\ \hline
-Space of connections for a given \( P \) is contractible. & \\ \hline
-Euler class & \\ \hline
+Connections are 1-forms on \( P \) not on \( M \). & \( T(e_{ij}):T_i=T_j \) is a torsor and not a group. \\ \hline
+Space of connections for a given \( P \) is contractible. & Two extensions to \( \oo_1 \)...\\ \hline
+Zeros of \( X = \) Poincare dual of the Euler class. & \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Dictionary}
-\begin{tabular}{|p{18em}|p{18em}|}
+\begin{frame}{Conjectionary}
+\begin{tabular}{|p{17em}|p{17em}|}
 \hline
-Poincare dual & \\ \hline
-Leibniz rule & \\ \hline
-Transport is not infinitesimal & \\ \hline
+Covariant derivative. & \( \apd \).\\ \hline
+Leibniz rule. & \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Dictionary}
-\begin{tabular}{|p{18em}|p{18em}|}
-\hline
-State a thm like: if \( w_1, w_2 \) and \( c_1 \) are equal on \( P_1, P_2 \) then \( P_1=P_2 \) & \\ \hline
-Is cohomology about the type of maps, and \( F \) gives a term? & \\ \hline
-Hopf fibration should give another map \( \oo_2\to\EMzo \). & \\ \hline
-\end{tabular}
-\end{frame}
-
-\begin{frame}{Dictionary}
-\begin{tabular}{|p{18em}|p{18em}|}
+\begin{frame}{Conjectionary}
+\begin{tabular}{|p{17em}|p{17em}|}
 \hline
 Maurer-Cartan form. & \\ \hline
 Gauge transformations acting on connections and maybe functions (YM) of connections. & \\ \hline
 The based gauge group acts freely on connections. & \\ \hline
 \end{tabular}
 \end{frame}
+
+\begin{frame}{Conjectionary}
+\begin{tabular}{|p{17em}|p{17em}|}
+\hline
+Characteristic classes. & \( B\so\to B^n\zz \).\\ \hline
+Chern-Weil theory. & \( \oo\xrightarrow[]{T}B\so\to B^n\zz \). \\ \hline
+Hopf fibration. & \( \oo\xrightarrow[]{?}\EMzo \).  \\ \hline
+\end{tabular}
+\end{frame}
+
 \end{document}
 
 
