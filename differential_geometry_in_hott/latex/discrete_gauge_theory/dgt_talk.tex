@@ -66,13 +66,12 @@
 \newlength{\mylen}
 \newlength{\mylin}
 
-\input{dgt_talk_intro.tex}
-\input{dgt_talk_combman.tex}
-\input{dgt_talk_torsors.tex}
-\input{dgt_talk_connections.tex}
-\input{dgt_talk_vector_fields.tex}
-\input{dgt_talk_totals.tex}
-
+% \input{dgt_talk_intro.tex}
+% \input{dgt_talk_combman.tex}
+% \input{dgt_talk_torsors.tex}
+% \input{dgt_talk_connections.tex}
+% \input{dgt_talk_vector_fields.tex}
+% \input{dgt_talk_totals.tex}
 
 \begin{frame}
 \begin{center}
@@ -83,37 +82,67 @@
 \section{Appendix: Conjectural dictionary}
 \renewcommand{\arraystretch}{1.4}
 \begin{frame}{Conjectionary}
-\begin{tabular}{|p{17em}|p{17em}|}
+
+Homotopy realization likely amounts to the shape operator.
+\bigskip
+
+\begin{quote}
+[G]iven a ``cell complex'' presentation of a classical topological space, if we can convert it into both a specification for a HIT and a colimit decomposition of that space that issufficiently ``cofibrant'', then \( \shape \) will preserve that colimit and take the space to the HIT.
+\end{quote}
+\begin{flushright}
+— Mike Shulman, \emph{Brouwer's Fixed Point Theorem in Real-Cohesive HoTT}
+\end{flushright}
+\end{frame}
+
+\begin{frame}{Conjectionary}
+Homotopy realization (and/or \( \shape \)) may provide the following relationships.
+
+\begin{tabular}{p{17em}|p{17em}}
 \hline
-Connections are 1-forms on \( P \) not on \( M \). & \( T(e_{ij}):T_i=T_j \) is a torsor and not a group. \\ \hline
+Classical octahedron & Homotopy realization, e.g. \( \oo \) \\ \hline
+Classical combinatorial manifold \( M \) & \( \shape M \) \\ \hline
+Derivative & \( \ap \)\\ \hline
+Leibniz rule for \( f,g:M\to\rr \) & Given H-space \( (A,*) \), \( f,g:X\to A \), \( p:x=_X y \) then \( \ap(f * g)(p)=\ap (f)(p) * (g a)\cdot (f b) * \ap (g)(p) \). Because in \( A\times A \), \( (f p, g p) = (f p, \refl)\cdot(\refl, g p) \) \\ \hline
+The sphere is not flat, as a \alert{pointwise} statement & Nontrivial flatness on each face
+\end{tabular}
+\commentout{
+"The connection provides a 1-form on the total space P of the principal bundle, but on the base M only a difference of two connections is a 1-form."
+
+The connection T in this paper maps paths in M to paths in EM(Z,1). P is a pullback of this. So what does it mean to look at the connection _on_ P? Well, we could look at a specific path p' over a path p:x=_M y. It therefore has by hypothesis a starting point x':Tx, and is a term p':tr(p)(x')=y'. It has points, hence has groupified the fibers! It furthermore supplies a path to the point, in Ty.
+
+Two connections is two transports. I can subtract these with s to get s(tr_1, tr_2):Tx\to G
+
+The relationship between zeros and the "Euler class" should be explained by my theorem. Study that, buddy frat.
+}
+\end{frame}
+
+\begin{frame}{Conjectionary}
+\begin{tabular}{p{17em}|p{17em}}
+\hline
+Connections being ``affine'', and not (quite) 1-forms & \( T_{ji}:T_i=T_j \) being a torsor and not (quite) a group \\ \hline
 Space of connections for a given \( P \) is contractible. & Two extensions to \( \oo_1 \)...\\ \hline
-Zeros of \( X = \) Poincare dual of the Euler class. & \\ \hline
 \end{tabular}
 \end{frame}
 
 \begin{frame}{Conjectionary}
-\begin{tabular}{|p{17em}|p{17em}|}
+\begin{tabular}{p{17em}|p{17em}}
 \hline
-Covariant derivative. & \( \apd \).\\ \hline
-Leibniz rule. & \\ \hline
-\end{tabular}
-\end{frame}
-
-\begin{frame}{Conjectionary}
-\begin{tabular}{|p{17em}|p{17em}|}
-\hline
-Maurer-Cartan form. & \\ \hline
+Maurer-Cartan form. & Hmm, consider the trivial connection on \( M\times G \) or \( G\to * \).\\ \hline
 Gauge transformations acting on connections and maybe functions (YM) of connections. & \\ \hline
 The based gauge group acts freely on connections. & \\ \hline
 \end{tabular}
+\commentout{
+Maurer-Cartan is pretty torsorial. It doesn't care where the identity is, it will make this point's tangent space be that one. It's pretty empty at the level of points. If you were to supply an identity, it'd send this point to that?
+}
 \end{frame}
 
 \begin{frame}{Conjectionary}
-\begin{tabular}{|p{17em}|p{17em}|}
+\begin{tabular}{p{17em}|p{17em}}
 \hline
 Characteristic classes. & \( B\so\to B^n\zz \).\\ \hline
 Chern-Weil theory. & \( \oo\xrightarrow[]{T}B\so\to B^n\zz \). \\ \hline
 Hopf fibration. & \( \oo\xrightarrow[]{?}\EMzo \).  \\ \hline
+Zeros of \( X = \) Poincare dual of the Euler class. & \\ \hline
 \end{tabular}
 \end{frame}
 
