@@ -190,20 +190,21 @@ An example of \alert{swirling} and \alert{index} at this face.
 \end{frame}
 
 \begin{frame}{Index}
+\vspace{-6ex}
 \[\begin{aligned}
 \tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
 \flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
 X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
-\onslide<3->{({\itshape Recall that \( T_1 \) being an \( S^1 \)-torsor means we can use subtraction to obtain an equivalence \( s(-,X_1):T_1\xrightarrow[]{x\mapsto x\alert{-X_1}} S^1 \). TODO: prep this earlier.})}
 \onslide<2->{
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
 The \defemph{flattened swirling} of the vector field \( X \) on the face \( F \) is the loop \[ L^X_F\defeq\flat_F(X_1)\cdot X_F:(X_1=_{T_1}X_1). \]
 
-The \defemph{index} of the vector field \( X \) on the face \( F \) is the integer \( I^X_F \) such that \( \loopo^{I^X_F}=_{S^1}(L^X_F)-X_1 \).
+The \defemph{index} of the vector field \( X \) on the face \( F \) is the integer \( I^X_F \) such that \( \loopo^{I^X_F}=_{S^1}\alpha(L^X_F) \) for some iso \( \alpha:T_1\simeq S^1 \).
 \end{mydef}
+\onslide<3->{The classical index uses a trivial local connection in a chart. We use the given type family and then subtract the effect of curvature.}
 \end{column}
 \begin{column}{0.3\textwidth}
 \begin{tikzpicture}
