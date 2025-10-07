@@ -14,7 +14,7 @@ Our solution:
 \begin{itemize}
 \item<3-> A \alert{vector field} is a term \alert{\( X:\pit{m:\mm_1}Tm \)}.
 \item<4-> It models a classical \alert{nonvanishing} vector field on the 1-skeleton.
-\item<5-> We model classical zeros by omitting the faces.
+\item<6-> We model classical zeros by omitting the faces.
 \end{itemize}
 }
 \end{column}
@@ -27,7 +27,7 @@ Our solution:
   \arrow["X", dashed, from=2-1, to=1-2]
   \arrow["T"', from=2-1, to=2-2]
 \end{tikzcd}\]
-\onslide<2->{\input{figs/discrete_gauge_theory_oo_swirl}}
+\onslide<5->{\input{figs/discrete_gauge_theory_oo_swirl}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -192,17 +192,17 @@ An example of \alert{swirling} and \alert{index} at this face.
 \begin{frame}{Index}
 \vspace{-6ex}
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
-\flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
-X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
+\tr_F&\defeq \tr(\partial F)&&:T_1=_\lgt{BS^1}T_1&&\text{\alert{curvature}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_\lgt{(T_1=_\lgt{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
+X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_\lgt{T_1}X_1&&\text{\alert{swirling}}\\
 \end{aligned}\]
 \onslide<2->{
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{mydef}
-The \defemph{flattened swirling} of the vector field \( X \) on the face \( F \) is the loop \[ L^X_F\defeq\flat_F(X_1)\cdot X_F:(X_1=_{T_1}X_1). \]
+The \defemph{flattened swirling} of the vector field \( X \) on the face \( F \) is the loop \[ L^X_F\defeq\flat_F(X_1)\cdot X_F:X_1=_\lgt{T_1}X_1. \]
 
-The \defemph{index} of the vector field \( X \) on the face \( F \) is the integer \( I^X_F \) such that \( \loopo^{I^X_F}=_{S^1}\alpha(L^X_F) \) for some iso \( \alpha:T_1\simeq S^1 \).
+The \defemph{index} of the vector field \( X \) on the face \( F \) is the integer \( I^X_F \) such that \( \loopo^{I^X_F}=_\lgt{S^1}\alpha(L^X_F) \) for some iso \( \alpha:T_1\simeq S^1 \).
 \end{mydef}
 \onslide<3->{The classical index uses a trivial local connection in a chart. We use the given type family and then subtract the effect of curvature.}
 \end{column}

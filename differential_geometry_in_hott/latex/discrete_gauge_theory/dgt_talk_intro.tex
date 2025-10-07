@@ -1,7 +1,7 @@
 \section{Summary}
 
 \begin{frame}{Summary}
-This work brings to HoTT
+We make some constructions in HoTT that deserve to be called \alert{geometry}:
 \begin{itemize}
 \item connections, curvature, and vector fields
 \item the index of a vector field
@@ -10,7 +10,9 @@ This work brings to HoTT
 \end{frame}
 
 \begin{frame}{Classical \( \to \) HoTT}
-Let \( M \) be a smooth, oriented 2-manifold without boundary, \( F_A \) the curvature of a connection \( A \) on the tangent bundle, and \( X \) a vector field with isolated zeroes \( x_1,\ldots,x_n \).
+Let \( M \) be a compact, smooth, oriented 2-manifold without boundary, \( F_A \) the curvature of a connection \( A \) on the tangent bundle, and \( X \) a vector field with isolated zeroes \( x_1,\ldots,x_n \).
+\begin{columns}
+\begin{column}{0.4\textwidth}
 % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXGRpc3BsYXlzdHlsZXtcXGZyYWN7MX17MlxccGl9XFxpbnRfTSBGX0F9Il0sWzEsMCwiXFxkaXNwbGF5c3R5bGV7XFxzdW1fe2k9MX1ebiBcXG1hdGhybXtpbmRleH1fWCh4X2kpfSJdLFswLDEsIlxcZGlzcGxheXN0eWxle1xcT21lZ2FcXGxlZnQoXFxzdW1fe1xcbWF0aHJte2ZhY2VzfVxcIGZ9XFxmbGF0X2ZcXHJpZ2h0KX0iXSxbMSwxLCJcXGRpc3BsYXlzdHlsZXtcXHN1bV97XFxtYXRocm17ZmFjZXN9fUleWF9mfSJdLFsyLDAsIlxcY2hpKE0pIl0sWzAsMSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwyXSxbMSwzXSxbMiwzLCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDQsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
 \[\begin{tikzcd}[ampersand replacement=\&,column sep=tiny]
   {\displaystyle{\frac{1}{2\pi}\int_M F_A}} \& {\displaystyle{\sum_{i=1}^n \mathrm{index}_X(x_i)}} \& {\chi(M)} \\
@@ -21,6 +23,16 @@ Let \( M \) be a smooth, oriented 2-manifold without boundary, \( F_A \) the cur
   \arrow[from=1-2, to=2-2]
   \arrow[equals, from=2-1, to=2-2]
 \end{tikzcd}\]
+\end{column}
+\begin{column}{0.4\textwidth}
+
+\( \leftarrow  \) Gauss-Bonnet/Poincaré-Hopf
+
+\vspace{9ex}
+
+\( \leftarrow  \) our theorem
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Classical index}

@@ -14,7 +14,7 @@
 An \defemph{abstract simplicial complex \( M \) of dimension \( n \)} is an ordered list of sets \( M\defeq[M_0,\ldots,M_n] \) consisting of 
 \begin{itemize}
 \item a set \( M_0 \) of vertices
-\item sets \( M_k \) of subsets of \( M_0 \) of cardinality \( k+1 \)
+\item sets \( M_k \) of \alert{\( k \)-faces}: subsets of \( M_0 \) of cardinality \( k+1 \)
 \item downward closed: if \( F\in M_k \) and \( G\subseteq F \), \( |G|=j+1 \) then \( G\in M_j \)
 \end{itemize}
 We call the truncated list \( M_{\leq k}\defeq [M_0,\ldots,M_k] \) \alert{the \( k \)-skeleton of \( M \)}.
@@ -192,11 +192,11 @@ The full octahedron \( \oo \):
 \( \leftarrow\link(w) \)
 \end{column}
 \begin{column}{0.6\textwidth}
-The \defemph{link} of a vertex \( w \) in a 2-complex is: the sets not containing \( w \) but whose union with \( w \) is a face.\\~\\
+The \defemph{link} of a vertex \( w \) in a 2-complex is: the faces not containing \( w \) but whose union with \( w \) is a face.\\~\\
 
-A \alert{combinatorial manifold} is a simplicial complex all of whose links are\( ^* \) simplicial spheres.\\~\\
+A \alert{combinatorial \( n \)-manifold} is a simplicial complex all of whose links are\( ^* \) simplicial \( (n-1) \)-spheres.\\~\\
 
-This will be our model of the \alert{tangent space}.\\~\\
+Links will be our model of the \alert{tangent space}.\\~\\
 \end{column}
 \end{columns}
 \vspace{5ex}

@@ -10,8 +10,8 @@
 \newcommand{\dotcirc}{+}
 \newcommand{\bigdotcirc}{\sum}
 
-\begin{frame}{Simplifying swirling}
-Swirling involves concatenating dependent paths. Can we simplify that?
+\begin{frame}{Towards totaling}
+``Total swirling'' is some complicated pathover. But the vector field removes some dependency.
 \end{frame}
 
 \begin{frame}{Pay off all our assumptions 1: torsor structure, vector field}
@@ -47,14 +47,17 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \end{column}
 \begin{column}{0.5\textwidth}
 \begin{itemize}
-\item<2-> Define \( \sji\defeq \alpha_j(\Xji):\rji=_{S^1}\base, \).
-\item<3-> Paths of the form \( (a=_{S^1}\base) \) can be added: 
+\item<2-> Define \( \sji\defeq \alpha_j(\Xji):\rji=_\lgt{S^1}\base, \).
+
+(compare \( \Xji:T_{ji}X_i =_\lgt{T_j} X_j \))
+
+\item<3-> Paths of the form \( (a=_\lgt{S^1}\base) \) can be added: 
 \begin{itemize}
-\item \( \dotcirc:(a=\base)\times (b=base)\to (a\dotcirc b=base) \).
-\item \( p\dotcirc q=(p\dotcirc b)\cdot q. \)
+\item \( +':(a=\base)\times (b=base)\to (a\dotcirc b=base) \).
+\item \( p+' q=(p + b)\cdot q. \)
 \end{itemize}
-\item<4-> Lemma: \( \sij\dotcirc\sji=\refl_{\base} \).
-\item<5-> Proof: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij\dotcirc\sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xij \)).
+\item<4-> Lemma: \( \sij +' \sji=\refl_{\base} \).
+\item<5-> Proof: \( \apd(X)(\refl)=\refl\) \(\implies \Xij\cdot \Tij\Xji=\refl_{X_i}\) \(\implies\sij +' \sji=\refl_{\base} \) (\( \Tij \) just translates \( \Xji \) to cat with \( \Xij \)).
 \end{itemize}
 \end{column}
 \begin{column}{0.35\textwidth}
@@ -70,7 +73,7 @@ Swirling involves concatenating dependent paths. Can we simplify that?
 \end{column}
 \begin{column}{0.85\textwidth}
 \begin{mydef}
-Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), \( v_i:F_i \) be designated vertices, and \( \partial F_i:v_i=v_i \) be the triangular boundaries. The \alert{total swirling} is \[ X_\tot \defeq \sigma_{\partial F_1}\dotcirc\cdots\dotcirc\sigma_{\partial F_n} \].
+Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), \( v_i:F_i \) be designated vertices, and \( \partial F_i:v_i=v_i \) be the triangular boundaries. The \alert{total swirling} is \[ X_\tot \defeq \sigma_{\partial F_1}+'\cdots+'\sigma_{\partial F_n} \].
 \end{mydef}
 \begin{itemize}
 \item<2-> We assume that this expression involves \alert{every edge once in each direction}.
@@ -83,10 +86,10 @@ Let \( F_1,\ldots,F_n \) be the faces of \( \mm \), \( v_i:F_i \) be designated 
 \begin{frame}{Consequence}
 \vspace{-6ex}
 \[\begin{aligned}
-\tr_F&\defeq \tr(\partial F)&&:T_1=_{BS^1}T_1&&\text{\alert{curvature}}\\
-\flat_F&\defeq \flat(\partial F)&&:\id=_{(T_1=_{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
-X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_{T_1}X_1&&\text{\alert{swirling}}\\
-L^X_F&\defeq\flat_F(X_1)\cdot X_F&&:(X_1=_{T_1}X_1)&&\text{\alert{flattened swirling}}
+\tr_F&\defeq \tr(\partial F)&&:T_1=_\lgt{BS^1}T_1&&\text{\alert{curvature}}\\
+\flat_F&\defeq \flat(\partial F)&&:\id=_\lgt{(T_1=_\lgt{BS^1}T_1)}\tr_F&&\text{\alert{flatness}}\\
+X_F&\defeq X(\partial F)&&:\tr_F(X_1)=_\lgt{T_1}X_1&&\text{\alert{swirling}}\\
+L^X_F&\defeq\flat_F(X_1)\cdot X_F&&:X_1=_\lgt{T_1}X_1&&\text{\alert{flattened swirling}}
 \end{aligned}\]
 \onslide<2->{
 These can all be totaled in \( S^1 \) to give

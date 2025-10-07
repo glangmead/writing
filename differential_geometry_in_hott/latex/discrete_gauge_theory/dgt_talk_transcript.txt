@@ -1,0 +1,598 @@
+Hello, I wanted to share with you today some work that I recently finished for a masters in the department of philosophy at Carnegie Melon University and it involves homotopy type theory and identifying structures from differential geometry inside of there.
+So we bring into homotopy type theory in this work connections and curvature on bundles also vector fields and the index of a vector field and we use all those elements to prove a theorem in two dimensions that the total curvature is equal to the total index.
+Now where does that come from?
+That's part of this classical story where if we have a two-dimensional smooth manifold without boundary and we add either of two different structures on top of that either a connection on the tangent bundle with curvature F or a vector field with isolated zeros.
+Then we can do these either of these two computations uh in the upper left the total curvature and the total index and either of those is equal to the oiler characteristic.
+So what we're doing in this talk is bringing in the concept of curvature and the total curvature the concept of vector field and index and this total index and we'll prove they're equal to each other but we're not at this time figuring out how to bring in the oiler characteristic.
+So we'll miss that piece.
+So the classical story of vector fields and index is that near a zero of a vector field a place where the vector field vanishes there's only three possibilities that there's an index of 0 + one or minus one.
+There are such things as higher index but they can always be perturbed to split into uh nearby points that fall into one of these classes here.
+So the way you visualize what the index is is you consider the winding number of the red vector as you move around the zero.
+So if you move around this zero, the vectors at 1:00 the whole time.
+So that's an index zero.
+Whereas here, the vector at the top starts at 12:00 and turns all the way around the clock face clockwise as you move clockwise.
+And that's true for these next three as well.
+They all actually rotate clockwise.
+Even though at first glance maybe you like me thought that one of these pictures should be index negative 1 intuitively but in all cases we just start at either 6 or 9 or 3:00 and wind around clockwise and then to get a negative index you have to do something like this where you wind the opposite direction.
+So those are the cases that can happen and the total index of a vector field which is to visit all of the zeros of that global vector field and count up the index and you you obtain the oiler characteristic.
+That's the Poincaré-Hopf theorem.
+So for example on this sphere you could look at the vector field that points east which has a zero at the top and the bottom and we just saw those they're index one.
+Same thing with this vector field that's like a height function or a morse function on the sphere.
+There's a zero at the top and the bottom and both of those are instances of um plus one index.
+So both of these vector fields are computing that total index of two um that we know the sphere to have.
+So on the other hand we had the gaspay theorem.
+Galpin theorem says that total curvature divided by 2 pi is also the oiler characteristic.
+And in the case of two dimensions, you could think of curvature just as a function, a real valued function.
+It varies from point to point on the manifold.
+So unlike the index which is at these discrete finite number of points, this is something point-wise all over the manifold.
+And this integral just sums the value at every point like an integral.
+So in the case of this Taurus, it has some places on it where it's where the curvature is negative and some where it's positive.
+And this ends up all cancelling and you get that um global value of zero total curvature which is the oiler characteristic of a Taurus.
+So we're good there.
+And then in the case of a sphere which just imagine it has constant curvature one, you're just computing the area of the sphere which is 4 pi.
+So it's important to divide by that 2 pi and then you get two.
+In terms of the homotopy type theory background, this is about the level that we will need here.
+The symmetry book central h spaces uh paper and skull's nil potent types paper which won't figure as prominently in this talk version but in the formal paper version of this thesis uh it's important for constructing examples of maps into eenberg mlan spaces.
+So here's our class of manifold objects.
+They are combinatorial manifolds.
+So the idea is we'll use the classical theory of simplicial complexes including just them living in the in the type of sets and we'll define a realization procedure in homotopy type theory to construct actual higher types out of those.
+So recall the classical definition of a simplicial complex.
+It's an ordered list of sets.
+There are n plus one of them for dimension n. The zeroth set is a collection of vertices and then all of the other MKs are subsets of vertices.
+If you're in MK, then you have cardality K plus one and it's downward close.
+So if you're in MK, if F is a set in MK and we have any subset, then it's in the appropriate MJ depending on its cardality.
+We can also truncate this ordered list at dimension K and and not all the way up to N. And that's called the K skeleton.
+And we denote it like this with the less than or equal to.
+So an example on the upper right here would be um just to emphasize the abstract nature as opposed to the pictures below.
+It's uh m0 in the case of the diagram in the upper right.
+I've got six elements and then m1 consists of certain two element subsets and m2 consists of certain three element subsets.
+and the edges I've drawn between them are not not necessarily needed since the there's an entailment.
+If you read WBR in M2, then of course WB is a subset of that.
+The edges uh that I'm drawing here though are establishing or or diagramming the post set relationship between these.
+And this is this a diagram like this you may find it out in the wild is called a hassa diagram.
+And it's commonly used to denote like polytopes and shapes like that.
+Um this one when you render it with a geometric realization which is a classical set topological space uh idea you get the ocahedron you see below and the name scheme for the W and Y and so on is coming from the faces of a Rubik's cube where it's like white on top yellow on the bottom blue red green orange going around and this will be our running example in this talk another example would be the complete simplex uh denoted with this delta of n. So it's an n- dimensional simplex but it's complete meaning it consists of n plus one vertices and then the power set of that all of the sets.
+So this is like a ball a contractable type space.
+The n minus one truncation the n minus one skeleton of this uh simplex we're going to give a special notation to with this boundary of delta of n and that'll serve as our combinatorial n minus one sphere.
+So for example delta of one is two points and the power set of that.
+So it looks like this interval object and its boundary is the zero sphere.
+these two points zero and one.
+So that's a example of how we're getting a sphere out of this.
+Delta of two is this ball that's this triangle filled in and it's uh one skeleton is the triangle not filled in and that's boundary delta of two.
+So we'll make use of these as we uh inductively build up um the combinatorial manifolds in type theory.
+So the homotopy realization is the procedure we're going to define here.
+Um, I hadn't seen this done elsewhere, but it's really just geometric realization, but performed with homotopy pushouts.
+We're going to work our way up by dimension, like I said, because in each dimension, we're going to sort of bank the sphere.
+We need to uh which forms then part of the definition of the next level up.
+So in dimension zero we will just simply take the realization bold m blackboard bold will be our notation for a type uh of a zero dimensional complex m is just it set of vertices m0.
+So in particular the zero sphere which will be written with this blackboard bold delta is just the set of those two points in boundary of delta of one.
+So boundary of delta of one or delta of one was the interval.
+Its boundary is a zero sphere with two points and that's all it is as a um higher type as well.
+It's just a set in dimension one.
+We will use that sphere and we will form a push out.
+So if we have a one-dimensional simplicial complex M, it's got the two sets M0 and M1, then the realization is given by this homotopy push out where the span we're pushing out is this uh cominatorial data that's telling us here are the edges and here is a zero sphere and the map down here will encode which vertices this edge is supposed to connect to.
+Okay, standard way to form a push out and this is a projection.
+So we declare that we fill this in and form its push out which means that this M1 down here is made by declaring path objects creating like a higher inductive type uh um generating paths between each pair of vertices that were connected in the complex.
+It comes equipped with this map down on the right here which is uh M1 at the top is a set.
+So what this map, this vertical map is doing is providing hubs.
+So each edge in M1 from these generating edges actually also has a hub and then that's glued to the two end points through the push out.
+So the the higher uh data here, the actual uh homotopy paths um are provided by the filler here and then it comes with these hubs.
+Now we're going to ignore these hubs.
+They may be useful for some applications.
+I'm not sure yet, but um we're not going to be making use of them.
+So we'll just ignore them and just imagine the original vertices with direct paths between them.
+So now we need our sphere in this dimension and then we'll go to dimension two and then we'll we'll stop there for now.
+So the simplicial higher one sphere.
+So blackboard bold is going to take this data of this triangle and we'll actually build it with push outs.
+So here it is uh symbolically with the the notation we've been using for boundaries of um these complete simplexes.
+But here it is written out, you know, explicitly with the set.
+So we got the three vertices of the triangle.
+Here's the three edges.
+And so maybe 01 time 0 will go to the zero, one of the points in the vertex 01 or one of the vertices in the edge 01.
+And maybe 0 1 * 1 will go to the one.
+We don't have to do it in that order.
+This is a sort of unordered construction, but that's one way to think of it.
+And then when we push that out, we'll get something who's who that deserves to have a picture like this.
+Um, but it's a one type now.
+Or we can form the one skeleton of our ocahedron.
+So here are the ver, you know, the six vertices are here.
+There's 12 edges listed here.
+And we push them all out and we get something we can call bold 01.
+And it's this without the blue faces.
+Now in dimension two, we'll make use of the one sphere to build ourselves up.
+And now so this this part of the push out um this push out is the one we saw.
+But now M is a um two-dimensional uh simplicial complex.
+So it has a set of faces M2.
+So what we can do in this other push out and and note we have this sort of spine here.
+We have bold m0 mapping to bold M1 mapping to bold M2 because they're they form part of each other's pushouts.
+So we obtain these maps and I've just drawn the push out that takes us from M1 to M2 underneath to make room.
+Here are the faces indexing a set of triangles and the map here into M1 will be the map that encodes the combinatorial data of the simplex.
+So for each face this triangle will map to the triangle that that face is bounding and we'll do a push out.
+And again here this map from non-bold M2 into M2 will give us a collection of hubs if we want to make use of them one for each face a point for each face which is then filled in with a homotopy to the entire bounding triangle.
+So for our ocahedron the full story would be this.
+Here's the two push outs.
+So all we did is is recapitulate.
+So here's one of the faces.
+White, green, red.
+So here it is in the picture.
+white, green, red.
+Now, this picture over here is a reuse of our geometric realization, right?
+As a topological space, but I think we can still use it to drive our intuition about what we get out of this.
+We should get something that's equivalent to the two sphere in Hobotopi type theory.
+Last piece of terminology we'll need from the world of simplicial complexes is the link.
+This is a totally classical idea.
+The link of a vertex is the sets not containing W. Let me move myself here.
+There we go.
+The sets not containing W but whose union with W is a face.
+Now that language is meant to just give you um the faces that are nearby to W so that when you union any one of those faces with W, you get another face.
+So in the case of a two complex you'll get this ring um this circle polygon that are the neighbors of the vertex in question the neighbors of W and the edges joining them to each other because after all the edge GR if you union it with W you get this face so that's that's how that language works and classically again classical from the 20th century a combinatorial manifold is a simplicial complex all of whose links are simplicial like this one like the ocahedron they're all circles and when I say rometric realization is homeomorphic to a sphere uh that's the fine print there so this will form our model of the tangent space in addition to restricting our class of objects so we restrict class of objects so that they have a link everybody every vertex has a link and that will be our model of its tangent space so instead of being an infinite decimal um object at that vertex.
+It's a finitary object of neighbors around that surface.
+Let me move myself back here.
+Okie do.
+So this justification for why this is a reasonable class of objects to consider uh comes from this big theorem from 1940 which is that every smooth n manifold all dimensions has a compatible structure of a combinatorial manifold which we just defined a simplicial complex of dimension n such that the link is a commonatorial n minus one sphere and you can read more about that at this nlab page if you would like.
+So basically what we're dealing with here at least includes uh finitary discrete combinatorial representations of smooth manifolds.
+So what's a not cominatorial manifold?
+Well, here's something that according to Wikipedia is a simplicial complex.
+It's got it meets the definition, but of course it has this uh dimensionality problem.
+It's got some two cells, but it's got some one cells sticking out.
+It's not coherently a two-dimensional thing.
+So, obviously, that will fail the link condition because some of these points on like this this arm, this one, the link there, the two neighbors, they're not connected to each other.
+So, it fails.
+I don't know what all else can go wrong.
+Maybe there's something where it looks at GL at first glance like a twodimensional surface, but there's something technically going wrong with the links.
+I'm not quite sure.
+So where will we be mapping these objects?
+Well, we want families of tors.
+Those are what are also called principal bundles.
+So we're going to look at spaces of tors.
+What is a torser?
+If g is a group including the case where g is a higher group like say s1 that'll be a fundamental use case for us.
+Then first of all we have the idea of an object being acted on by G. A right G object is just some type and an a homorphism from the opposite of G to the automorphisms of X. And it's the opposite because we're acting on the right.
+And then so if you're a G object you might be a Gtorser.
+You are in fact furthermore a Gtorser if X is inhabited and if the following map is an equivalence.
+So this map is a packaging of x * a copy of g to x * x. So the second uh coordinate of that map is the group action phi.
+So in other words, x * g to x is just the group action.
+And we add the projection as well.
+And this packages together some of our fun intuition like that x is almost a copy of g once you pick a base point.
+We can give a name to the inverse of this function though.
+So we said it's an equivalence.
+If we call the inverse first projection and a function s then that s is a map from x * x to g which we can call subtraction which is a intuitive good name if g is commutive which it will be in our case.
+But in other words it takes two points in x and tells you the unique element from g that sends one of them to the other.
+The type of these we call BG.
+That's a common notation because it's it's use has G in the name and we think of it as a dlooping of G. So speaking of which, if we pick a base point in this space BG, this type this um universe of tors, then we can have the special case of the torser of G acting on itself on the right.
+And we can call that Greg regular, not meant to be my name.
+I didn't pick this notation.
+Then we have some facts such that the loop space of this type uh type of tors bg at that base point is equivalent to G itself.
+So we've dlooped G. And in this loop space composition of loops corresponds to multiplication in G. So that loop uh that group loop group uh is G. We've dlooped G. BG is also connected and therefore one and two together prove that BG is a KG1 an islandber mlan space for G. The H spaces paper has a lot more about this these constructions.
+So how are we going to map into the type of circle tors S1 tors?
+One way to construct it is to think about lifting a family of mere circles because we have a sequence like this where B1 maps to B ought S1 which is a connected component of the universe.
+So B ought is a hopefully standard notation for the connected component of types merely equal to that one.
+So the the pairs of Y a type and a proof um of inhabitation that Y is equivalent to the circle.
+So those we can call mirror circles beyond S1.
+Uh so we can start there and have a family of circles and then think about or prove theorems about what it takes to uh lift that or prove that it factors through BS1.
+And we'll just assume during the talk here that we have such a lift when we need it.
+And in fact in two dimensions um where where the link is circles it corresponds to a choice of orientation or in general if we're mapping to some other family of mirror circles that isn't meant to be the tangent bundle some other family again that bundle can be oriented and then it'll lift.
+So some other names for some of these objects that might may or may not um help you understand what what's going on here.
+B S1 which is the automorphisms to the circle can also be thought of as BO2 where O2 is the is transformations of the plane like rotations and the flip.
+So just like B S1 includes some kind of rotations of S1 but also the flip that reverses the direction.
+It can also be called EMZ1 and that's what I call it in the companion paper to this talk um because that's the skull notation the paper I mentioned earlier where uh this EMZ1 is meant to be the type of Emberg Mlan mere Eisenberg Mlan spaces the thing you know types equivalent to merely equivalent to KGN and that's called EMGN meanwhile BS1 uh we could think of as BSO2 so there where we've removed the flip from O2 and we just have rotations which is of course a copy of the circle and that's the point is that a torser is a copy of the group and that's also KZ2 it's a dlooping um the dlooping of S1 is a dlooping of KZ1 and it's a KZ2 so as I promised we're going to be able to just see in what we've defined so far maps into these types of tors uh we're supposed to observe uh we will be observing in there that connections and curvature are there and that will just emerge from the fact that we have this simplicial complex structure dimension-wise structure to deal with.
+So simply put connections are extensions of a bundle to higher skeleton.
+So we have some kind of definition inductively up to some skeleton and if we extend it that deserves to be called a connection and we'll see why.
+So for example the link of the vertex W uh in this two complex um which we talked about right the set the sets not containing W but whose union with W is a face uh is a polygon associated to W and so we can define the tangent bundle on a combinatorial manifold to just be the link now this is defined only so far on vertices on the zero skeleton so we'll call it with the instead of just calling it link we'll call it T0 because we're going to build up and extend it to the higher skeleton and see where connections come in so like I said A connection is an extension.
+So an extension of T0 called T1 to the one skeleton of M uh of M which is M1, we'll call a connection on the tangent bundle.
+So M0 maps to mere circles, we call that T0.
+And if we extend it to M1 so that this is commutative um then we're calling that a connection on the tangent level.
+So what's that look like?
+So let's let's use the ocahedron and we will extend link to edges.
+So let's start by just defining uh T1 the extension of link on one edge WB.
+If we want to uh define T1 on an edge, we need a term.
+We need a path between link of W and link of B, right?
+T0 maps W to link of W, B to link of B, and we need an isomeorphism between those two, these two squares.
+We can do that by visualizing tipping the the equator square into this vertical line of longitude square.
+Now, we have a choice here.
+We're This is a choice we're making.
+This tipping concept is our way of saying this is intuitive.
+We're leveraging the fact that we're thinking of this as a picture embedded in threedimensional space, and we're going to map um we're going to use this as a rule, but we actually have to write down all the data.
+So, below we we see if you were to start to write down all the data, we would define T1 on this edge needs to map that whole square.
+G O B R to this one.
+So what does this T1 of WB edge do to G?
+It maps it to W. So it takes G and the link of W. Here's a link of W. Takes G there to W at the top of the link of B. Okay?
+And so on.
+You can see that it will take O to O, R to R. And then it'll take B in the link of W to Y in the link of B. And then we can use this same method, this tipping visualization to do this for all the edges.
+It's pretty intuitive.
+And in fact, catch this.
+Uh let's look at T1 on a whole closed path.
+Okay, we're going to build up to T2, right?
+Where we want to extend it to the face.
+But let's just think about still paths.
+So think about concatenating WB with BR with RW and going around this loop so that we should get um an automorphism of TWW in so doing.
+So let's denote this path by boundary WBR where WBR is meant to represent this face and here's its boundary happens to be um pointed at W. So we want to define T1 on that.
+Well, we already defined T1 on all the edges.
+So, we're going to compute T1 on this from what we know, which is that it tips it up.
+On its way from W to B, it tips to here.
+On the way from B to R, it will turn to sort of face us here.
+And then, by the way, the red edge is just here to help us sort of see what's going on to identify the one one of the edges to follow it as it moves.
+And then finally, it sort of tips itself backwards like this.
+So we observe here we've come back rotated by a quarter turn.
+So this is a discrete capturing of non-trivial holomi around a loop.
+We've tipped up around and down.
+And so we've some geometry has taken place.
+This polygon has rotated.
+We'll name that quarter uh turn rotation R. And it's an automorphism now of link of W. In fact, it lives in BS1 because it is an orientation preserving rotation.
+But we're punting worrying too much about the distinction and when our maps lift in this talk.
+Now that we've looked at the loop, we can look at the face.
+So if we were to extend T1 to this one face WBR, then we would need uh to think like the following.
+First of all, the face is a filler of some kind, right?
+It's a path, a two path from refle to the loop.
+Let's let's give that the name H WBR, H for homotopy.
+So, it's a two path that fills this in.
+So therefore, T2 if it's to extend T1, then it has to be like a, you know, a natural transformation.
+has to take us from T1 of this point to T1 of that.
+T1 of this path to T1 of that path.
+T1 of this path is the identity and T1 of this path loop is R. Right?
+So T2 would have to be a homotopy.
+Let's call it H big R from the identity to R. So that will be a homotopy between identity and rotation.
+So it's a path in the automorphisms of link of W. Well, that's that's pretty easy to construct.
+Again, though, we have some freedom here.
+We're going to pick the minimal thing.
+So that what this homotopy does to say the point G, I need to provide a path from identity of G to R of G. So identity of G is G, R of G is O. I will choose the edge go to do that.
+So there's not that much difference uh between big R and H subR to me at least I get confused.
+R is this rotation and HR is just sort of intuitively the connection to the identity the path from the identity.
+So it's like the it's like having a a movie of R being performed and we're going to choose the one that um where R is the landing place.
+We're going to choose the minimal clockwise one that implements it.
+The path from identity to there.
+The original inspiration for in fact this whole project was you think about the Rubik's cube which is the duel of the ocahedron right?
+So instead of a white vertex we have a white face on top and we have instead of four vertices around the equator we have four faces.
+But it's totally it's a dual because they're barely different.
+The face moves to the blue face, sliding in the most sort of parsimmonious way possible.
+And then it goes from blue to red just by sliding and then back up.
+But and yet it comes back rotated by 90 degrees clockwise.
+And if you imagine when that happened, it happened here as it moved from the blue to the red face because white to blue and white to red or red to white really don't do much.
+But with respect to white, imagining being based at white, moving from blue to red is a rotation.
+So that's where it kind of happened.
+That's just how I think of it.
+So the formal definition of a connection for any dimension is that if we have a realization like we defined this higher realization of a cominatorial manifold of dimension n and here I've named the sort of what we were calling the spine of the maps that that map the skele between the skele.
+So if m is a realization here it is all spelled out here in skele and all the triangles commute in this diagram.
+So we've got a type family that keeps you know that it's extend we can extend f0 to f1 or we have extended it and so on meaning these all commute then we can give some names to this and identify some classical stuff.
+So we can call fk a k bundle on m. So it's just on the k skeleton and we can call the pair given by the map fk and the proof that it's there's a commutive triangle with fk minus one i.e. E that FK extends FK minus one then we call that map FK and that proof a K connection on the K minus one bundle.
+So you know it's like I said so a K connection is just an extension to the K skeleton of something a type family defined on the K minus one skeleton.
+So we have enough data around to uh also talk about curvature.
+So now let's get down to the individual push out level where we have say a face some faces here and we're claiming that T1 extends to T2.
+So that's our two connection that we claim exists.
+The data of this uh is an extension to T2, an extension T2 of T1 on each face.
+So let's just pick one face that's in this non-bold M2 and let's look at the outer square.
+And that's what I've drawn on the right, the outer square, single face.
+So this is declaring something like that at this hub point, right?
+That the T1 on the hub point there's a filler to T1 on the triangle.
+So the the filling of that face like we just defined for the ocahedron.
+We can call T1 of the triangle triangular boundary of the face.
+We can call that holomi the curvature at the face f. So if if you like me are often confused between uh holomi and curvature holomi is defined in more generality it's on arbitrary paths okay but something about curvature is very local so for us it's defined only at one face so holomi while more general can be also computed just around a face locally that's called the curvature and then this filler of this diagram which is a a proof that that curvature is trivial uh is called a flatness structure for the face.
+So we we we have something rather liinal here.
+We we do have a flat a proof of flatness of this a proof of no geometry but we also have our hands through all of this um inductive structure of the simplicial complex and all these push outs.
+If we remember all that data um then we actually have access to a a specific proof that flatness is true on this face.
+So we kind of know that there is a non-trivial holomi but we have a path to the identity.
+So for someone like me who's been struggling for a long time to find uh curvature in a homotopical setting, uh this is one way to square that circle, so to speak.
+Yeah, the distinction between the path and its end point, it's like I was saying with R and HR, is small enough to be confusing to me. So if you're confused, you can join the club.
+Let us now talk about vector fields.
+the last piece of new construction that we'll need.
+Okay, so the setup is like we had before.
+Let's say we have t uh an extension of link.
+So it's very important for vector fields that they're defined on the tangent bundle.
+So this is uh t is an oriented tangent bundle.
+So now we're declaring that we have that lift from mere circles to s1 tors on a two-dimensional realization of a cominatorial manifold.
+So we are not doing vector fields in general dimension here just two right um well note the following this seemed like a problem our bundles of mere circles can only model nonzero tangent vectors right so we our model of the tangent space is those neighbors and the circular you know the polygon that that joins them together so we don't have a zero vector analog in that um so a global section of this family.
+In other words, a global section, a global non-vanishing vector field would be a trivialization of T. It's literally like you see on the right, a lift to ES1 to the point.
+Um, so that's not a good definition of a vector field because we we literally can't have that a lot of the time.
+So this was a conundrum.
+So the solution that that is in our paper here is that a vector field is a section but only on the one skeleton.
+So we cannot extend it to the all the faces.
+That would be a that would be a complete trivialization of the bundle.
+So a vector field is a nonvanishing um vector field on you know thinking classically it's a non-vanishing vector field but only on the one skeleton.
+So the fact that uh a general vector field classically has vanishing, we have modeled by omitting faces.
+So in other words, it's like saying that classically we're going to assume in order to get into this picture that let's say we started with a classical manifold and a and a vector field on it, we're going to have to push the zeros um into the faces.
+So let's say we have a a sphere and we're going to triangulate it into an ocahedron like this.
+We're going to have to move the zeros into uh faces.
+And in fact, uh the punchline of a lot of this is that if you go reread some of your classical proofs like in a book by Tristan Needam I'm going to cite later.
+Uh that's literally how they how they go.
+they say let's triangulate the manifold and then let's assume we did that so that the edges of all our triangles and the vertices miss the zeros so that they're on the interior.
+So we're going to just take that seriously.
+Now I've drawn a sample vector field here and we're going to use this as our example on the ocahedron to get to you know compute total index and whatnot.
+Um, I've drawn it a little deceptively because I've drawn arrows on the manifold.
+But of course, the vector at say W is a choice of one of its neighbors in its link.
+So, right, it's a section.
+So, it's a choice of a point in the link for each for each.
+And I've gone ahead and drawn it as an arrow from W to R because intuitively R is is in the link of W not in a bundle but it's it is literally because it's its neighbor on the manifold.
+So I go ahead and draw it as a path to its neighbor in the manifold.
+Hope that makes sense.
+So this uh particular vector field which swirls around the wg face and it swirls around the yob face um is um uh is given by or in fact extends to a full um movement in three space of this um you know if you have like a a d8 dice you can turn it in this way you can move it in space.
+This vector field extends to an automorphism of the whole ocahedron in space spatially.
+So that's why this one I don't know that there's very many that can be pictured like that but here's one just a quick reminder then right so we have now sections of our bundle and um so we we're going to look at what those do to paths.
+So we're going to talk about pathovers.
+So let's recall here quickly some stuff about uh pathovers dependent paths and recall that there's an asymmetry in their definition right so if we have a type m along the bottom here and a path in it from a to b and here's a type family above it and let's call that uh let's say that type family is um the total space of that is called p then given a point alpha over a and a point beta over b the type of path Pathovers that lie over P are the type of paths from the transport of alpha transport using P to beta.
+Okay, so we sometimes get to blur that and think of it as a path directly from alpha to beta.
+But since alpha and beta live in different types and they're so this is a heterogeneous type family, right?
+We don't have paths like that.
+theory doesn't have paths between points in two different types.
+But we can transport alpha to the same fiber that beta is in.
+And look at the paths there.
+That's the asymmetry.
+So we have to use like a lens uh of transport through P either from alpha to beta or beta to alpha or B's fiber to A's fiber or A's fiber to B's fiber and look at paths in one fiber.
+So make a choice.
+So the last point here is that dependent functions which are maps up right.
+So there's sections from M up into the total space P. They map paths to pathovers.
+They choose they make a provide a choice of a a path over for each path.
+So we call that APD dependent action on paths.
+So APD if we had X a section a vector field of a path P then that would be a particular uh term in this type transport X of A equals X of B. So X of A would be our alpha and X of B would be the beta in this picture.
+And we can just call that X of P like what X does like like AP regular axon paths.
+So our next goal is to define the index of a vector field on a face by computing X of the boundary path.
+That's what we're going to do.
+We'll use some pictures here.
+So I think I might have to move again.
+Let us do that.
+I'll move over here.
+Good.
+So here's an example face.
+It's got the vertices V1, V2, V3.
+And then there's the three tangent spaces, the three links T1, T2, T3.
+And I've named the edges ei.
+And we'll look at an example of what we're going to call swirling.
+And then index on this face.
+So here is a representation in gray, these outlined squares of the three links, the three tangent spaces at each of these three vertices.
+And we'll denote the value of the vector field x at the first vertex v1 with that thick black arrow there.
+Okay?
+And we'll call it x1.
+So we'll give it a nickname.
+Instead of saying x of v1 all the time, we'll just say x1.
+So x1 is a term in t1.
+Now, in order to do the path over thing, we're going to want to transport it around these edges, this one vector, because we're going to need to pick a single fiber to do our computation of x of the full cycle.
+And we will pick this t1 to do that.
+But we're going to need to transport x1 all the way around the triangle uh among other data.
+But let's just think about this part of the data first.
+So let's say T21, which I'm using the notation T21.
+It's a little backwards, but it it's meant to be function notation.
+So T21 is the transport along edge E12.
+So T21 takes terms in T1 and turns them into terms in T2.
+So if we think of them as input, you know, they eat terms on the right and spit out on the left, then T21 kind of is meant to show that things move right to left.
+Anyway, let's say that T21 from from this corner of the triangle to the top is trivial on our screen here.
+So that it's it's just a rigid rotation.
+And then we will draw the transported vector as a little bit thinner.
+So that we see that this this isn't the value of X here.
+This is a transport of X from somewhere else.
+So let's say then that T32, right?
+goes again from T2 to T3.
+Then it rotates clockwise by one quarter turn.
+So now I've drawn it as dashed to show that it's a little more faded out.
+It's been transported twice by the time it got here.
+That's what the thinness and then dashedness is supposed to show.
+And then it turned um to the you know whatever uh um 430 position on the clock.
+Okay.
+Finally, let's say that T13 along the bottom, the blue edge, is trivial again.
+So, it just slides over.
+So, that dashed arrow slides from right to left to become dotted.
+So, this is our representation of this very same thick black vector after it's been transported around the whole triangle.
+Comes back like this.
+Now, that's just part of X of the loop, right?
+That's X of uh V1 then transported around.
+But there's x of at other vertices and then we want to look at x on the edges.
+So in order to do x on say e12 we need two more pieces of data.
+We need to pick we need to finally choose a value of x at t2 and then we need to choose a path between the transport of x from v1 and that.
+So that looks like this.
+So let's say that we've now got um uh exit v2 is this thick one.
+Here's the thin one we had transport v1.
+And it is on us to pick pathover style a path from the transported one to the x the native one.
+So that's this we're coloring it the same color as the edge that put it there.
+So in a way we're we're taking this this path in the manifold and we're looking at paths in a fiber that that it generated.
+Okay.
+Now meanwhile, so moving to V2, we had to introduce two new pieces of data, the X and the path.
+When we move to V3, all of these three pieces of data, these two black vectors in the red will turn 90°.
+So here they are, and their vectors got thinner and the red is now here.
+But it's sort of rigid, right?
+It's still one clockwise notch from here to there.
+But then uh now of course we've got X at V3.
+We'll choose this corner of the square.
+And then the cyan greenish edge of the triangle appears in this way.
+So again transport of the this black thick one which is this thin one.
+We need a path from there to the thick.
+So there it is.
+And then that picture which is now three points, two edges, three vectors.
+gets transported trivially over to here, meaning no more rotation.
+So here's the cyan and the red still.
+And here's those three vectors.
+Here's our original vector.
+And again, in order to define the path over over E31, we need a path from X of the transport of the most recent thick guy to the new to the to the X of native to this fiber.
+So that's this blue line.
+All right.
+So, all in all, we've visited every edge of the triangle and pushed all of the data we encountered along the way to this final fiber.
+And we've got this three-sided thing because this was a triangle, but it's a three-sided thing in a square.
+So, that's kind of funny.
+It's a square because it's like the ocahedron has square lengths.
+Um, so it didn't close.
+It isn't a closed shape.
+And of course the gap between where it ended and where it started is due to the fact that there was a non-trivial holom around here because there was a rotation by 90 degrees.
+Okay.
+So we translated all the path over data to the end of the loop and and to me it just vividly made me think of scooping the ice cream from the triangle.
+So, I moved an ice cream scoop and it moved the ice cream from lying across the top of the, you know, the ice cream container to being vertical in my ice cream scoop.
+And by the end, I've got this tall, I don't know, Neapolitan ice cream in this fiber vertically now.
+So, the total path over that this this path red catted with green catted with blue is called the swirling of X at the phase F. We'll call it XF.
+It's really just x of the boundary, right?
+Uh that's called swirling.
+And we need this intermediate concept for a couple of reasons, including our big proof.
+So that's why we're defining that here.
+Here's that story we just told, but sort of symbolically where I have the fibers T1, T2, T3 back to T1.
+And as I moved along the triangle, I added more and more data.
+So each time I added a new value for the vector and a a path over so that by the end we've got three um extra vertic additional vertices.
+So four and three paths.
+Okay, let me uh move myself back.
+So here's what we've defined so far.
+We've got transport around a face.
+We can call that TRF and we call that curvature.
+Then we've got the flatness structure on the face which is a path from the identity to the thing above right to the holomi to the curvature.
+And then we've got swirling which is x of uh the boundary path around the face.
+And that's a path from the transport around the face of x1 to x1.
+So notice the um the relationship between these two.
+This if you were to plug x1 into flatness, you'd get a path from x1 to transport of x1.
+And this is a path from transport of x1 to x1.
+So these two can be catted to make a loop.
+So that's what we'll call the flattened swirling.
+So the flattened swirling of the vector field on the face is this loop lxf.
+So it is the concatenation of flatness of x1 with xf.
+And that's a path from x1 to itself.
+So what's up with that?
+So, uh, how does that appear?
+Um, in our in our example that we worked through, we had, remember, the red, the cyan, and the blue.
+And so, now we've got a path that starts at x1 and goes to its transport, which is lovely because then the transport came around like this back to x1.
+So, that's what the flatten swirling is.
+It's a loop.
+So, that's why it's an L. And it starts and ends at X1.
+and the index will be the winding number of that.
+Very similar to the classical definition.
+It's the integer such that right?
+So if you're happy with that, if you're intuitively like I see what winding number is in this square, then you're good.
+But you know, if you want some fine print, we're going to only really be able to do uh integers as the loop space of the circle s1 itself.
+So we need to map this square to that circle.
+So I've just written some fine print that is the integer such that in the circle the circle has of course base and loop loop is its path loop to that integer is this loop and this whole minus x1 business we will dwell on on on much more but that's because we can recall that t1 or this fiber being an s1 torser means that we can use subtraction to obtain an equivalence with s1 remember that we can take two points and say what's the unique S1 that maps one to the other.
+Well, not only do we have that torso structure, we have a point.
+We have X1 in the fiber.
+So, we can say what is the um given any other point in T1, what's the unique S1 uh group element that maps that to X1.
+So now we have an isomeorphism between T1 and S1.
+And that's where we can define the index to be a literal integer.
+Uh but if like me you're happy to think about things swirling once around the square then um this is just a a pre a preview of this subtraction isomeorphism that we're going to get to for our proof.
+Okay.
+So we have all these ingredients curvature flatness swirling and flattened swirling.
+So now we're ready to state and prove the main theorem.
+So we can think of this as a procedure of simplifying swirling Swirling involves concatenating dependent paths.
+They're dependent paths.
+So we we had to be very careful about lining them up head to tail in one fiber by transporting them there together.
+Can we simplify that?
+Can we stop doing that?
+So we got to pay off all our assumptions we've made.
+So for example, the tors structure and the vector field like I said we can use subtraction.
+Okay.
+So here is the final column from our symbolic representation of our our example around the triangle uh right where we had x1 and then we transported x3 to x1 and then we transported x2 to three and then one and we transported x1 around the whole loop and then these are the the uh three paths we got.
+We can define now for each fiber ti an isomorphism with s1 because we have a torser structure and a point x gave us a point.
+So subtraction of whatever uh you know taking whatever minus x i is an isomeorphism between ti and s1.
+It's like saying we we trivialize the bundle on the zero skeleton.
+there all the fibers have a is a a given isomeorphism with S1 and we're using the torser structure and the vector field.
+So now that we have that alpha I that equivalence we can start to push different things we've defined all of our structures um into just S1 we're going to remove the dependency in that way.
+So for example, row ji will be what tji does but now looked at in s1.
+It's the rotation that tji performs.
+So you can think of it with this commutive diagram.
+You've got tji which we defined a while back.
+Each of these T uh um fibers is equivalent to S1 with each with their own private alpha alpha I alpha J such that whatever um the the map from TI TJ does we can ask what it does in S1 like this by going around the other three edges and that'll be adding the angle row ji it's a rotation so intuitively we know this that that transport around in a two manifold is just going going to perform some kind of rotation.
+Now there's there's maps up too, right?
+We can take the base point in S1 and map it to X I. That's the inverse of alpha I. Same thing over here.
+A lema here is that the angle we obtain from looking at what TIJ does is opposite to the angle when we look at what TJI does.
+And that that may be intuitively quite obvious but just to spell it out um here it is spelled out sort of algebraically but let's look also at the diagram.
+So TJI goes this direction and tig right the definition of tig is that it is transport along the edge that goes from i to j. That is the inverse edge to edge from j to i. EJI EI J those edges from our simplicial complex.
+So those two are inverses.
+So um the fact that going from TJ to TI is the inverse of this map that's the identity.
+But to do it down here to go down and over and up first that must also be the identity.
+Therefore the angle that we get going from right to left must be the opposite of this angle.
+That's that's that's how to look at it.
+continued.
+So we've now pushed um the fibers to S1.
+We've pushed transport as um angles in S1.
+And now we're going to push the pathovers as paths in S1.
+So we're going to call sigma with the same indices as X. So Xji is the path over, right?
+like these ones x13 x32 x21 we can now subtract xj from that by that's just our isomeorphism of the fiber that this is in to so this is now be going to be a path in s1 and in fact it's a path to base because remember it's a path to x natively in that fiber that's the one that we're subtracting by so that's base and then this is the rotation of x from a neighboring um fiber into this fiber and we just gave that a name.
+It's the angle roji.
+So sigma ji is a path from roji to base.
+So now we've got somehow we've taken all the edges in the manifold and we've decoupled them and we've mapped them all and we have this sort of family of a whole bunch of of paths ending at base living in S1.
+So paths of that form something equals base.
+These can be directly added.
+This is the dependency now truly eliminated.
+How do you add two things that end in base in a group S1?
+It's a general thing you can do with a group.
+We have a plus operation from a path like this and a path like this to a path from a plus b. Now these are terms in S1.
+We already knew how to add them to base.
+And the way you do that is you just uh you just do what we were doing in the in the type family is we shift one of the paths a in a equals base.
+So that p is a path from a to base by b. We just add b to it which is like a like a whiskering type of operation.
+This is now a path from a plus b to b. And then q is a path from b to base by assumption.
+So we cat them together.
+So that's how we get a path from a plus b to base.
+So it's so similar to that path over idea of well let's transport it to some fiber that's what plus b is and then add them there.
+So that's that's what we've done.
+And now we have um another lema about the inver invertability of this.
+So that passing over edge i from i to j or the edge from j to i the sigas um give us paths that cat to ruffle.
+So this plus operation is our new one, right?
+So sigma J is a path from something to base.
+Sigma ji is a path from something else to base.
+And when we add them together, it's not even clear a priori that we should get something from base equals base.
+But we know that it is because the rows cancel.
+So here's the full proof.
+We know that APD dependent action on paths of refle has to be refle.
+That's how the path induction gets started.
+And that's the same as this statement that getting XJI into the same fiber with XIG which is done with transport and catting them is ruffle and that's the same as saying now if we map these if we use alpha to map the x's to the sigas then we get ruffle in other words because tig right this this operator here is just translating xji so as to to be catible headtotail with X. Uh this should say I J. Okay.
+So it's just unraveling that definition and saying that cats duffled.
+Uh so so like this.
+So for example, um I don't know if this picture helps.
+It's a little busy, but let's say that here's our path P and we're talking about traversing P and then P inverse and and the fact that we get refle by doing X on that, right?
+Moving from left to right, we get a picture like this in this fiber of X of P goes from transport XA to XB.
+And then we can get two different paths on the left here.
+Either we can start over in this fiber and transport through P inverse and that's what this downward one is.
+No, sorry.
+It's what this upward one is.
+Or we can take the one we built over here and transport it back which is this downward one.
+Okay.
+The point is those cat to ruffle.
+So now there's more assumptions that we can pay off.
+That was the main gist of what's going on.
+That's that was peak complexity for this talk.
+Now we want to cash in that our manifold has no boundary and that S1 is commutative.
+So if we enumerate the faces of M f1 through fn and if we designate a base vertex for each face's boundary.
+So we pick a vi for each fi.
+Then all of the loops around each face boundary fi right they're all loops now.
+paths from VI to VI.
+Let those be all the triangular boundaries.
+We can now define the total swirling.
+So now we're starting to total things up.
+Up to now everything was just in one face.
+Now we're totaling all the faces to be the swirling with sigas like we just defined, right?
+We have to map them now with to S1.
+So this is an equation in S1 of a bunch of paths added together.
+Total swirling.
+call that x tote.
+We're going to assume that this expression involves every edge once in each direction.
+That's a two manifold with no boundary.
+And if we started with a simplicial complex um that used simplicial complexy language to declare itself to have no boundary or something like this, then probably we wouldn't have to make a fresh copy of that assumption here.
+we would prove this um but don't we're not too worried about it.
+The fact is that we will traverse each edge once in each direction.
+And because we just proved that each of those sigma delta fi, right, which is a concatenation of three sigma on three edges because we proved cancellation.
+This is a this completely cancels this x tote.
+X tote is just um ruffle ruffle you know ruffle of base.
+S1 is communive.
+So remember all our constructions on one face.
+We've got the curvature, they got the flatness, we got the swirling and the flattened swirling.
+Then we can total all of them in S1.
+We can get the total transport, which is the sum of all the angles across all the edges.
+And that's just the base point of S1.
+zero in our in our group because all those rows cancel and then in the upper right we've got x tote which is the total swirling which we just proved also all the sigma js cancel with sigma jis so those paths all cancel and we get ruffle base and then we have the total flatness and the total flattened swirling the total flattened swirling um which remember The flattened swirling is the flatness structure plus the swirling.
+So it's a sum over faces of the flatness plus the swirling.
+Everything's commutive.
+So we can reorganize and sum over the sigas which we know cancel.
+And what remains is the sum of the flatnesses.
+So there we see it the bottom left bottom right that the total flatness structure is the total flattened swirling.
+So that's it.
+That's how we say it in our lingo.
+The total flatness equals the total flattened swirling.
+And that's our main result.
+So on the ocahedron, remember back that we had this capital R and the homotopy um that goes from identity to R. So each face contributes an exactly identical copy of HR.
+And that HR is a path that's a quarter rotation.
+It goes from the identity to quarter rotation.
+So when we sum up eight copies of a quarter rotation, we get two rotations.
+So there's the two oiler characteristic in terms of um total curvature.
+Meanwhile, this example we showed of the um swirling was in fact the um what we were computing earlier with our large triangle and went around it and got a one winding number around the square was exactly um the journey around this face and we get a similar result going around this face.
+So the total index you get a plus one from the WRG face, a plus one from the YBO face and a plus zero from all the other faces.
+So we get two copies of plus one for another total of two.
+And then like I was mentioning the classical arguments if you look at this picture this is straight from a recent textbook on differential geometry.
+um he's computing the he's proving the equality of um you know gals bonet pon hop the equality of total curvature with total index but he has to triangulate the manifold and have the zero fall inside of the face and then there's this you know we don't have to get too much into this but this capital phi which is the notation that hop used in mid 20th century to make this argument um is the angle the change in angle from uh the vector field and a parallel transported vector on along the edge.
+So we have like a vector field that varies along the edge and transport along the edge and the change in angle between those two is this function on the edge.
+And to me that looked a whole lot like pathover which is like hey do the transport and subtract from what was natively there.
+Anyway, that's Hop's argument is that this function fi, which we called swirling, it's defined on edges, not loops.
+It doesn't need loops like a lot of the other stuff does, right?
+Like holomi and and and um around an arbitrary loop.
+So, we imitated that here.
+It's all sort of inspired by the classical proof.
+Thank you very much.
+
+
